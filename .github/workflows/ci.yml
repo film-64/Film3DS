@@ -29,7 +29,7 @@ jobs:
       - name: Build and inspect 3DSX
         run: |
           make -j2 3ds
-          arm-none-eabi-readelf -h Film3DS.elf
+          "${DEVKITARM:-${DEVKITPRO}/devkitARM}/bin/arm-none-eabi-readelf" -h Film3DS.elf
           python3 tools/verify_3dsx.py Film3DS.3dsx
           "${DEVKITPRO}/tools/bin/3dsxdump" Film3DS.3dsx build-3ds/executable.dump
           sha256sum Film3DS.3dsx > Film3DS.3dsx.sha256
