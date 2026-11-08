@@ -195,7 +195,7 @@ static void export_photo(void)
         film_ui_apply_look(&frame.recipe, app.ui.look, strength);
         if (app.ui.look == 3) {
             status = load_look(&lut, &frame.recipe.profile);
-            frame.recipe.profile.strength = strength;
+            frame.recipe.profile.strength *= strength;
             memcpy(frame.recipe.lut_id, "look.cube", sizeof "look.cube");
         }
     }
@@ -337,6 +337,8 @@ int main(void)
 
     uint64_t next_preview = 0;
     while (aptMainLoop()) {
+        FilmPage previous_page = app.ui.page;
+        unsigned previous_photo = app.ui.selection;
         hidScanInput();
         u32 keys = hidKeysDown();
         if (keys & KEY_START) break;
@@ -352,6 +354,10 @@ int main(void)
                 app.live = status == FILM_OK;
                 update_status("CAM init", status, app.camera.last_result);
             }
+        }
+        if (keys & KEY_SELECT) {
+            app.ui.recipe.filter = app.ui.recipe.filter == FILM_BILINEAR ? FILM_BICUBIC : FILM_BILINEAR;
+            update_status(app.ui.recipe.filter == FILM_BILINEAR ? "Bilinear" : "Bicubic", FILM_OK, 0);
         }
         if (keys & KEY_Y) y2r_check();
         if (keys & KEY_X) film_ui_key(&app.ui, UI_NEXT_PAGE);
@@ -369,6 +375,18 @@ int main(void)
         }
         if (action == UI_CAPTURE || (keys & KEY_R)) capture_photo();
         else if (action == UI_EXPORT) export_photo();
+        if ((app.ui.page != previous_page || app.ui.selection != previous_photo) &&
+            app.ui.page != FILM_VIEW && app.count) {
+            char path[64];
+            roll_path(path, app.photos[app.ui.selection]);
+            FilmStatus status = film_frame_read(path, &preview);
+            if (status == FILM_OK) show_image(&preview.source, preview.recipe.yuv);
+            else update_status("Photo preview", status, 0);
+            film_frame_free(&preview);
+        } else if (app.ui.page == FILM_VIEW && previous_page != FILM_VIEW && !app.live) {
+            if (film_mock_capture(&preview) == FILM_OK) show_image(&preview.source, FILM_601_FULL);
+            film_frame_free(&preview);
+        }
         if (app.live && app.ui.page == FILM_VIEW && osGetTime() >= next_preview) {
             FilmStatus status = take(&preview);
             if (status == FILM_OK) show_image(&preview.source, preview.recipe.yuv);

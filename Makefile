@@ -18,6 +18,7 @@ build/unit: $(CORE) $(HEADERS) tests/unit.c
 test: host build/unit
 	./build/unit
 	python3 tests/integration.py
+	python3 tests/simulator_http.py
 sanitize:
 	$(MAKE) clean
 	$(MAKE) test CFLAGS="-O1 -g -std=c11 -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer -fno-pie" LDFLAGS="$(LDFLAGS) -fsanitize=address,undefined -no-pie"
@@ -27,4 +28,4 @@ bench: host
 3ds:
 	$(MAKE) -f Makefile.3ds
 clean:
-	rm -rf build build-3ds Film3DS.3dsx Film3DS.elf Film3DS.smdh
+	rm -rf build build-3ds Film3DS.3dsx Film3DS.elf Film3DS.smdh Film3DS.map

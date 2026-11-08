@@ -80,8 +80,10 @@ FilmStatus film_lut_load(FILE *file, FilmLut *out, unsigned *error_line)
                 have_title = true;
             } else if (directive(&line, "LUT_3D_SIZE")) {
                 char *end;
+                if (!isdigit((unsigned char)*line)) goto fail;
+                errno = 0;
                 unsigned long n = strtoul(line, &end, 10);
-                if (lut.size || end == line || *skip_space(end)) goto fail;
+                if (lut.size || errno == ERANGE || *skip_space(end)) goto fail;
                 if (n != 17 && n != 33 && n != 65) {
                     status = FILM_UNSUPPORTED;
                     goto fail;

@@ -1,0 +1,42 @@
+name: Film3DS CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  host:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install host dependencies
+        run: sudo apt-get update && sudo apt-get install -y libjpeg-dev python3-pil
+      - name: Run native tests
+        run: PATH=/usr/bin:/bin make -j2 test
+      - name: Run AddressSanitizer and UndefinedBehaviorSanitizer
+        run: PATH=/usr/bin:/bin make sanitize
+
+  arm11:
+    runs-on: ubuntu-24.04
+    container:
+      image: devkitpro/devkitarm@sha256:15b79ce75822c289538d8153da5fa7aafe5e6adc32ad8a575a197beca0f0761b
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and inspect 3DSX
+        run: |
+          make -j2 3ds
+          arm-none-eabi-readelf -h Film3DS.elf
+          python3 tools/verify_3dsx.py Film3DS.3dsx
+          "${DEVKITPRO}/tools/bin/3dsxdump" Film3DS.3dsx build-3ds/executable.dump
+          sha256sum Film3DS.3dsx > Film3DS.3dsx.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Film3DS-ARM11
+          path: |
+            Film3DS.3dsx
+            Film3DS.3dsx.sha256
+          if-no-files-found: error
