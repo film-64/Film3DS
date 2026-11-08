@@ -1,0 +1,39 @@
+.SUFFIXES:
+ifeq ($(strip $(DEVKITPRO)),)
+$(error Set DEVKITPRO to the devkitPro root)
+endif
+DEVKITARM ?= $(DEVKITPRO)/devkitARM
+include $(DEVKITARM)/3ds_rules
+export PATH := $(DEVKITPRO)/tools/bin:$(PATH)
+
+APP_TITLE := Film3DS
+APP_DESCRIPTION := Film camera and darkroom
+APP_AUTHOR := Film3DS
+ARCH := -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
+CFLAGS = -std=gnu11 -O2 -g -Wall -Wextra -mword-relocations -ffunction-sections -fdata-sections $(ARCH) $(INCLUDE) -D__3DS__
+LDFLAGS = -specs=3dsx.specs $(ARCH) -g -Wl,--gc-sections,-Map,$(OUTPUT).map
+LIBS := -lcitro2d -lcitro3d -lctru -ljpeg -lm
+LIBDIRS := $(CTRULIB) $(PORTLIBS)
+LD := $(CC)
+
+ifneq ($(notdir $(CURDIR)),build-3ds)
+SOURCES := $(wildcard source/*)
+export TOPDIR := $(CURDIR)
+export OUTPUT := $(CURDIR)/Film3DS
+export INCLUDE := -I$(CURDIR)/include $(foreach dir,$(LIBDIRS),-I$(dir)/include)
+export LIBPATHS := $(foreach dir,$(LIBDIRS),-L$(dir)/lib)
+export OFILES := $(notdir $(foreach dir,$(SOURCES),$(patsubst %.c,%.o,$(wildcard $(dir)/*.c))))
+export VPATH := $(foreach dir,$(SOURCES),$(CURDIR)/$(dir))
+export DEPSDIR := $(CURDIR)/build-3ds
+.PHONY: all
+all:
+	@mkdir -p build-3ds
+	$(MAKE) --no-print-directory -C build-3ds -f $(TOPDIR)/Makefile.3ds
+else
+_3DSXFLAGS := --smdh=$(OUTPUT).smdh
+.PHONY: all
+all: $(OUTPUT).3dsx
+$(OUTPUT).3dsx: $(OUTPUT).elf $(OUTPUT).smdh
+$(OUTPUT).elf: $(OFILES) $(TOPDIR)/Makefile.3ds
+-include $(OFILES:.o=.d)
+endif
