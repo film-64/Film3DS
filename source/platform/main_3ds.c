@@ -160,6 +160,14 @@ static void capture_photo(void)
     FilmFrame frame = {0};
     FilmStatus status = app.next_number > MAX_PHOTOS ? FILM_STATE : take(&frame);
     if (status == FILM_OK) {
+        float strength = frame.recipe.profile.strength;
+        film_ui_apply_look(&frame.recipe, app.ui.look, strength);
+        if (app.ui.look == 3) {
+            FilmStatus profile = film_profile_read(ROOT "look.f3p", &frame.recipe.profile);
+            if (profile == FILM_OK) frame.recipe.profile.strength *= strength;
+            else film_log(app.log, "Capture profile", profile, 0);
+            memcpy(frame.recipe.lut_id, "look.cube", sizeof "look.cube");
+        }
         char path[64];
         roll_path(path, app.next_number);
         status = film_frame_write(path, &frame);

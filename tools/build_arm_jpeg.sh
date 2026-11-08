@@ -24,3 +24,5 @@ fi
     -DCMAKE_BUILD_TYPE=Release -DWITH_SIMD=OFF -DWITH_TURBOJPEG=OFF \
     -DENABLE_STATIC=ON -DENABLE_SHARED=OFF
 "${CMAKE:-cmake}" --build "$object_dir" --target jpeg-static --parallel 4
+test -s "$object_dir/libjpeg.a"
+touch "$object_dir/libjpeg.a"
