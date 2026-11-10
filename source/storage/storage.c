@@ -5,7 +5,8 @@
 #include <string.h>
 #include <unistd.h>
 
-enum { PROFILE_BYTES = 172, FRAME_HEADER = 304, VERSION = 1 };
+enum { PROFILE_BYTES = 172, FRAME_HEADER = 304, FRAME_HEADER_V2 = 308, VERSION = 1 };
+enum { FRAME_HEADER_V3 = FRAME_HEADER_V2 + 4 * FILM_TONE_COUNT };
 _Static_assert(sizeof(float) == 4 && FLT_RADIX == 2 && FLT_MANT_DIG == 24,
                "Film format requires binary32");
 
@@ -157,9 +158,13 @@ FilmStatus film_frame_write(const char *path, const FilmFrame *frame)
     FilmRect rect;
     if (!bytes || film_scaled_dims(image->width, image->height, r->scale, &w, &h) != FILM_OK ||
         film_crop_rect(w, h, r->aspect, &rect) != FILM_OK) return FILM_INVALID;
-    uint8_t header[FRAME_HEADER] = {'F', '3', 'S', 'R'};
-    put32(header + 4, VERSION);
-    put32(header + 8, FRAME_HEADER);
+    unsigned version = r->base_saturation != 0 ? 2 : VERSION;
+    for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
+        if (r->tone.value[i] != 0) version = 3;
+    size_t header_size = version == 3 ? FRAME_HEADER_V3 : version == 2 ? FRAME_HEADER_V2 : FRAME_HEADER;
+    uint8_t header[FRAME_HEADER_V3] = {'F', '3', 'S', 'R'};
+    put32(header + 4, version);
+    put32(header + 8, header_size);
     put32(header + 12, (uint32_t)bytes);
     put32(header + 16, image->width);
     put32(header + 20, image->height);
@@ -178,23 +183,29 @@ FilmStatus film_frame_write(const char *path, const FilmFrame *frame)
     put32(header + 60, r->jpeg_quality);
     memcpy(header + 64, r->lut_id, strlen(r->lut_id) + 1);
     put_profile(header + 128, &r->profile);
-    uint32_t crc = crc32(UINT32_MAX, header, FRAME_HEADER - 4);
-    put32(header + FRAME_HEADER - 4, ~crc32(crc, image->pixels, bytes));
+    if (version >= 2) put_float(header + FRAME_HEADER - 4, r->base_saturation);
+    if (version == 3)
+        for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
+            put_float(header + FRAME_HEADER_V2 - 4 + 4 * i, r->tone.value[i]);
+    uint32_t crc = crc32(UINT32_MAX, header, header_size - 4);
+    put32(header + header_size - 4, ~crc32(crc, image->pixels, bytes));
     FilmWrite write;
     status = film_write_begin(&write, path);
     if (status != FILM_OK) return status;
-    if (fwrite(header, 1, sizeof header, write.file) != sizeof header ||
+    if (fwrite(header, 1, header_size, write.file) != header_size ||
         fwrite(image->pixels, 1, bytes, write.file) != bytes) status = FILM_IO;
     return film_write_end(&write, status);
 }
 
 static FilmStatus read_frame(FILE *file, FilmFrame *frame)
 {
-    uint8_t h[FRAME_HEADER];
+    uint8_t h[FRAME_HEADER_V3];
     if (fread(h, 1, 8, file) != 8 || memcmp(h, "F3SR", 4)) return FILM_CORRUPT;
-    if (get32(h + 4) != VERSION) return FILM_UNSUPPORTED;
-    if (fread(h + 8, 1, sizeof h - 8, file) != sizeof h - 8 ||
-        get32(h + 8) != FRAME_HEADER) return FILM_CORRUPT;
+    uint32_t version = get32(h + 4);
+    if (version < VERSION || version > 3) return FILM_UNSUPPORTED;
+    size_t header_size = version == 3 ? FRAME_HEADER_V3 : version == 2 ? FRAME_HEADER_V2 : FRAME_HEADER;
+    if (fread(h + 8, 1, header_size - 8, file) != header_size - 8 ||
+        get32(h + 8) != header_size) return FILM_CORRUPT;
     unsigned w = get32(h + 16), height = get32(h + 20);
     FilmPixelFormat format = get32(h + 24);
     size_t bytes = film_image_bytes(w, height, format);
@@ -205,8 +216,8 @@ static FilmStatus read_frame(FILE *file, FilmFrame *frame)
     if (fread(frame->source.pixels, 1, bytes, file) != bytes) return FILM_CORRUPT;
     status = end_of_record(file);
     if (status != FILM_OK) return status;
-    uint32_t crc = crc32(UINT32_MAX, h, FRAME_HEADER - 4);
-    if (get32(h + FRAME_HEADER - 4) != ~crc32(crc, frame->source.pixels, bytes)) return FILM_CORRUPT;
+    uint32_t crc = crc32(UINT32_MAX, h, header_size - 4);
+    if (get32(h + header_size - 4) != ~crc32(crc, frame->source.pixels, bytes)) return FILM_CORRUPT;
 
     frame->captured_at = get32(h + 28) | (uint64_t)get32(h + 32) << 32;
     frame->exposure_us = get32(h + 36);
@@ -216,6 +227,10 @@ static FilmStatus read_frame(FILE *file, FilmFrame *frame)
     r->aspect = h[48]; r->scale = h[49]; r->filter = h[50]; r->yuv = h[51];
     r->grain_seed = get32(h + 52);
     r->grain_amount = get_float(h + 56);
+    if (version >= 2) r->base_saturation = get_float(h + FRAME_HEADER - 4);
+    if (version == 3)
+        for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
+            r->tone.value[i] = get_float(h + FRAME_HEADER_V2 - 4 + 4 * i);
     r->jpeg_quality = get32(h + 60);
     memcpy(r->lut_id, h + 64, sizeof r->lut_id);
     r->profile = get_profile(h + 128);

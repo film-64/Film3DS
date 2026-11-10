@@ -10,12 +10,17 @@ typedef struct {
     FilmPage page;
     FilmRecipe recipe;
     unsigned selection, photos;
-    unsigned look;
+    unsigned look, looks;
+    bool aspect_selected;
 } FilmUi;
 
 FilmUi film_ui_new(unsigned photos);
 FilmAction film_ui_key(FilmUi *ui, FilmKey key);
 FilmAction film_ui_touch(FilmUi *ui, unsigned x, unsigned y);
 void film_ui_apply_look(FilmRecipe *recipe, unsigned look, float strength);
+void film_ui_select_look(FilmRecipe *recipe, const FilmRecipe *saved, const char *id,
+                         const FilmProfile *preset);
 void film_ui_add_photo(FilmUi *ui);
+FilmAspect film_ui_output_aspect(const FilmUi *ui, FilmAspect saved);
+void film_ui_change_aspect(FilmUi *ui, FilmAspect current, bool next);
 #endif

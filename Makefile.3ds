@@ -35,10 +35,10 @@ all: $(ARM_JPEG)
 $(ARM_JPEG): tools/build_arm_jpeg.sh Makefile.3ds
 	sh tools/build_arm_jpeg.sh "$(JPEG_BUILD)" "$(DEVKITARM)"
 else
-_3DSXFLAGS := --smdh=$(OUTPUT).smdh
+_3DSXFLAGS := --smdh=$(OUTPUT).smdh --romfs=$(TOPDIR)/romfs
 .PHONY: all
 all: $(OUTPUT).3dsx
-$(OUTPUT).3dsx: $(OUTPUT).elf $(OUTPUT).smdh
+$(OUTPUT).3dsx: $(OUTPUT).elf $(OUTPUT).smdh $(wildcard $(TOPDIR)/romfs/grain/*.f3g)
 $(OUTPUT).elf: $(OFILES) $(ARM_JPEG) $(TOPDIR)/Makefile.3ds
 $(OFILES): $(TOPDIR)/Makefile.3ds
 jpeg.o: $(ARM_JPEG)

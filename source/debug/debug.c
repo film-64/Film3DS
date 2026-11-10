@@ -115,6 +115,7 @@ static FilmStatus execute(FilmDebug *d, const char *cmd, const char *arg, const 
         const FilmLut *lut = arg && !strcmp(arg, "PLAIN") ? NULL : d->lut;
         if (arg && !strcmp(arg, "LUT") && !lut) return FILM_STATE;
         FilmFrame frame = d->frame;
+        frame.recipe.aspect = film_ui_output_aspect(&d->ui, frame.recipe.aspect);
         if (arg && !strcmp(arg, "PLAIN")) frame.recipe.lut_id[0] = 0;
         if (arg && (!strcmp(arg, "MONO") || !strcmp(arg, "WARM"))) {
             film_ui_apply_look(&frame.recipe, !strcmp(arg, "MONO") ? 1 : 2,

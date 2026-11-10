@@ -28,7 +28,7 @@ def check(base):
         assert image.size == (640, 480)
     assert json.loads(get("/state"))["count"] == 3
     assert json.loads(get("/state", [3]))["aspect"] == 1
-    assert json.loads(get("/state", [4]))["scale"] == 1
+    assert json.loads(get("/state", [4]))["scale"] == 2
     captured = json.loads(get("/state", [160, 171]))
     assert (captured["count"], captured["selected"]) == (4, 3)
     assert json.loads(get("/state", [160, 220]))["page"] == 1
@@ -37,7 +37,7 @@ def check(base):
     assert json.loads(get("/state", [6]))["revision"] == 1
     with Image.open(BytesIO(get("/export.jpg"))) as image:
         image.load()
-        assert image.size == (960, 640)
+        assert image.size == (1278, 852)
         pixel = image.getpixel((400, 100))
         assert max(pixel) - min(pixel) <= 1
     try:

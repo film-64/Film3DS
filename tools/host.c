@@ -73,11 +73,35 @@ static FilmStatus bench(const char *path)
     return FILM_OK;
 }
 
+static FilmStatus calibration_rgb(const char *source, const char *target)
+{
+    FilmFrame frame = {0};
+    FilmImage image = {0};
+    FilmStatus status = film_frame_read(source, &frame);
+    if (status == FILM_OK) status = film_rgb24(&frame.source, frame.recipe.yuv, &image);
+    if (status == FILM_OK) {
+        FILE *file = fopen(target, "wbx");
+        if (!file) status = FILM_IO;
+        else {
+            size_t bytes = film_image_bytes(image.width, image.height, image.format);
+            if (fprintf(file, "P6\n%u %u\n255\n", image.width, image.height) < 0 ||
+                fwrite(image.pixels, 1, bytes, file) != bytes) status = FILM_IO;
+            if (fclose(file)) status = FILM_IO;
+            if (status != FILM_OK) remove(target);
+        }
+    }
+    film_image_free(&image);
+    film_frame_free(&frame);
+    return status;
+}
+
 int main(int argc, char **argv)
 {
     FilmStatus status;
     if ((argc == 4 || argc == 6) && !strcmp(argv[1], "develop")) {
         status = develop(argc, argv);
+    } else if (argc == 4 && !strcmp(argv[1], "calibration-rgb")) {
+        status = calibration_rgb(argv[2], argv[3]);
     } else if (argc == 3 && !strcmp(argv[1], "bench")) {
         status = bench(argv[2]);
     } else if (argc == 3 && !strcmp(argv[1], "profile")) {
@@ -103,6 +127,7 @@ int main(int argc, char **argv)
     } else {
         fprintf(stderr, "filmctl mock out.jpg out.f3s [look.cube look.f3p]\n"
                         "filmctl develop input.f3s out.jpg [look.cube look.f3p]\n"
+                        "filmctl calibration-rgb input.f3s out.ppm\n"
                         "filmctl profile look.f3p\nfilmctl bench look.cube\n");
         return 2;
     }

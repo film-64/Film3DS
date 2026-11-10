@@ -18,10 +18,20 @@ def verify(path):
         raise ValueError("invalid segment lengths")
     if icon < header + relocation * 3 + code + rodata + writable - bss:
         raise ValueError("SMDH overlaps executable segments")
-    if icon_size != 0x36C0 or icon + icon_size != len(data) or romfs:
-        raise ValueError("unexpected SMDH length or RomFS")
+    icon_end = icon + icon_size
+    if icon_size != 0x36C0 or icon_end != (romfs or len(data)):
+        raise ValueError("unexpected SMDH length or RomFS offset")
     if data[icon:icon + 4] != b"SMDH":
         raise ValueError("missing SMDH")
+    if romfs:
+        if romfs + 40 > len(data):
+            raise ValueError("truncated RomFS header")
+        header_size, *sections, file_data = struct.unpack_from("<10I", data, romfs)
+        if header_size != 40 or file_data < header_size or file_data > len(data) - romfs:
+            raise ValueError("invalid RomFS header")
+        for offset, size in zip(sections[::2], sections[1::2]):
+            if offset < header_size or offset + size > file_data:
+                raise ValueError("invalid RomFS metadata bounds")
     return len(data), hashlib.sha256(data).hexdigest()
 
 

@@ -8,6 +8,7 @@ import struct
 import zlib
 
 TRANSFERS = {"srgb": 0, "linear-srgb": 1, "rec709": 3}
+INPUT_TRANSFERS = {**TRANSFERS, "f-log2c": 4}
 
 
 def bounded(value, minimum, maximum):
@@ -21,7 +22,7 @@ def bounded(value, minimum, maximum):
 def encode(profile):
     if set(profile) - {"input", "output", "strength", "exposure", "global", "zones"}:
         raise ValueError("unknown profile field")
-    transfers = [TRANSFERS[profile[key]] for key in ("input", "output")]
+    transfers = [INPUT_TRANSFERS[profile["input"]], TRANSFERS[profile["output"]]]
     values = [bounded(profile.get("strength", 1), 0, 1),
               bounded(profile.get("exposure", 0), -8, 8)]
     zones = profile.get("zones", [[0, 0, 0]] * 12)

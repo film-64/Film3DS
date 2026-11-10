@@ -19,6 +19,7 @@ test: host build/unit
 	./build/unit
 	python3 tests/integration.py
 	python3 tests/simulator_http.py
+	python3 tests/hardware_qa_report.py
 sanitize:
 	$(MAKE) clean
 	$(MAKE) test CFLAGS="-O1 -g -std=c11 -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer -fno-pie" LDFLAGS="$(LDFLAGS) -fsanitize=address,undefined -no-pie"
