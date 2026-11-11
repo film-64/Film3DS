@@ -43,6 +43,10 @@ def fixture(mode):
     if mode == "no_image":
         for f in frames:
             f["y_mean"] = "100"
+    if mode == "unexpected_direction":
+        for f in frames:
+            if f["phase"] == "2":
+                f["y_mean"] = "150"
     if mode == "no_physical_baseline":
         reads = [r for r in reads if r["phase"] != "1"]
     phases = {str(p): report.phase_summary([r for r in reads if r["phase"] == str(p)],
@@ -57,7 +61,7 @@ def main():
     assert fixture("missing_frame")["status"] == "restore_unconfirmed_or_incomplete"
     assert fixture("restore_drift")["status"] == "restore_unconfirmed_or_incomplete"
     assert fixture("write_denied")["status"] == "write_failed_or_partial"
-    for mode in ("no_image", "other_gain", "failed_read", "no_physical_baseline"):
+    for mode in ("no_image", "other_gain", "failed_read", "no_physical_baseline", "unexpected_direction"):
         assert fixture(mode)["status"] == "register_control_observed_image_inconclusive", mode
     assert report.success({"result": "00000001"})
     assert not report.success({"result": "80000000"})
