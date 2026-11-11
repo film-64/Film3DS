@@ -98,8 +98,8 @@ def direct_summary(calls, reads, phases):
                 and all(y is not None for y in (base_y, target_y, restore_y))):
             tolerance = max(2.0, abs(base_y) * 0.05)
             reversible = abs(restore_y - base_y) <= tolerance
-            response = abs(target_y - base_y) > tolerance
-            image = "changed_and_returned" if response and reversible else "no_clear_reversible_response"
+            response = target_y < base_y - tolerance  # all current trials lower exposure/gain/target
+            image = "changed_and_returned" if response and reversible else "unexpected_direction" if target_y > base_y + tolerance else "no_clear_reversible_response"
         if not accepted:
             status = "write_failed_or_partial"
         elif not immediate:
