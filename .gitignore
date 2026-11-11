@@ -6,3 +6,8 @@
 /Film3DS.map
 /Film3DS.cia
 __pycache__/
+/build-probe/
+/FilmProbe.3dsx
+/FilmProbe.elf
+/FilmProbe.smdh
+/FilmProbe.map

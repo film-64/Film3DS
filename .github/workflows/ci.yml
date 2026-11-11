@@ -35,12 +35,15 @@ jobs:
       - name: Build and inspect 3DSX
         run: |
           make -j2 3ds
+          make -j2 -f Makefile.probe
           arm="${DEVKITARM:-${DEVKITPRO}/devkitARM}/bin/arm-none-eabi-"
           "${arm}readelf" -h Film3DS.elf
           sh tools/verify_arm11.sh Film3DS.elf "$arm"
           python3 tools/verify_3dsx.py Film3DS.3dsx
+          python3 tools/verify_3dsx.py FilmProbe.3dsx
           "${DEVKITPRO}/tools/bin/3dsxdump" Film3DS.3dsx build-3ds/executable.dump
           sha256sum Film3DS.3dsx > Film3DS.3dsx.sha256
+          sha256sum FilmProbe.3dsx > FilmProbe.3dsx.sha256
           mkdir -p build-3ds/notices
           cp build-3ds/jpeg-arm11/source/LICENSE.md build-3ds/notices/libjpeg-turbo-LICENSE.md
           cp build-3ds/jpeg-arm11/source/README.ijg build-3ds/notices/libjpeg-turbo-README.ijg
@@ -50,5 +53,7 @@ jobs:
           path: |
             Film3DS.3dsx
             Film3DS.3dsx.sha256
+            FilmProbe.3dsx
+            FilmProbe.3dsx.sha256
             build-3ds/notices/
           if-no-files-found: error
