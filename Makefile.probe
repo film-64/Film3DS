@@ -1,0 +1,36 @@
+.DEFAULT_GOAL := all
+.SUFFIXES:
+ifeq ($(strip $(DEVKITPRO)),)
+$(error Set DEVKITPRO to the devkitPro root)
+endif
+DEVKITARM ?= $(DEVKITPRO)/devkitARM
+include $(DEVKITARM)/3ds_rules
+export PATH := $(DEVKITPRO)/tools/bin:$(PATH)
+APP_TITLE := FilmProbe
+APP_DESCRIPTION := Camera register and exposure experiments
+APP_AUTHOR := Film3DS
+ARCH := -march=armv6k -mtune=mpcore -mfpu=vfp -mfloat-abi=hard -mtp=soft
+CFLAGS = -std=gnu11 -O2 -g -Wall -Wextra -Werror -mword-relocations -ffunction-sections -fdata-sections $(ARCH) $(INCLUDE) -D__3DS__ -DPROBE_REVISION='"$(REVISION)"'
+LDFLAGS = -specs=3dsx.specs $(ARCH) -Wl,--gc-sections,-Map,$(OUTPUT).map
+LIBS := -lctru -lm
+LD := $(CC)
+ifneq ($(notdir $(CURDIR)),build-probe)
+export TOPDIR := $(CURDIR)
+export OUTPUT := $(CURDIR)/FilmProbe
+export REVISION := $(shell git rev-parse --short=12 HEAD)
+export INCLUDE := -I$(CTRULIB)/include
+export LIBPATHS := -L$(CTRULIB)/lib
+export OFILES := main.o
+export VPATH := $(CURDIR)/probes/exposure
+export DEPSDIR := $(CURDIR)/build-probe
+.PHONY: all
+all:
+	@mkdir -p build-probe
+	$(MAKE) --no-print-directory -C build-probe -f $(TOPDIR)/Makefile.probe
+else
+_3DSXFLAGS := --smdh=$(OUTPUT).smdh
+all: $(OUTPUT).3dsx
+$(OUTPUT).3dsx: $(OUTPUT).elf $(OUTPUT).smdh
+$(OUTPUT).elf: $(OFILES)
+-include $(OFILES:.o=.d)
+endif

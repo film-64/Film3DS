@@ -50,3 +50,8 @@ python3 tools/profile.py profile.json look.f3p
 - [兼容性矩阵](docs/COMPATIBILITY.md)
 - [技术决策](docs/DECISIONS.md)
 - [调试协议](docs/DEBUG_PROTOCOL.md)
+# 实机曝光探针
+
+新增独立 `FilmProbe.3dsx`：检查 CAM 接口返回码、积分时间及增益寄存器，
+对比写入、逐帧回读、恢复与图像变化，结果直接写入 SD 卡。
+构建、操作和报告格式见 [EXPOSURE_PROBE.md](docs/EXPOSURE_PROBE.md)。
