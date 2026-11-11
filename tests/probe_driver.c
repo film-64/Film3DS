@@ -6,7 +6,7 @@
 
 static u16 values[65536];
 static unsigned writes, receives, closed_events, stops;
-static bool cancel_after_write, timeout_capture, fail_restore, deny_read;
+static bool cancel_after_write, timeout_capture, fail_restore, deny_read, fail_stop;
 static bool ae, awb;
 static u8 *dma;
 void hidScanInput(void) {}
@@ -30,7 +30,7 @@ Result GSPGPU_InvalidateDataCache(const void *b,u32 n) { return 0; }
 Result CAMU_SetReceiving(Handle *e,void *b,u32 p,u32 n,s16 t)
 { ++receives; *e=7; dma=b; memset(dma,100,n); return 0; }
 Result CAMU_StartCapture(u32 p) { return 0; }
-Result CAMU_StopCapture(u32 p) { ++stops; return 0; }
+Result CAMU_StopCapture(u32 p) { ++stops; return fail_stop ? -1 : 0; }
 Result CAMU_ClearBuffer(u32 p) { return 0; }
 Result CAMU_IsFinishedReceiving(bool *v,u32 p) { *v=true; return 0; }
 Result svcWaitSynchronization(Handle e,s64 t) { return timeout_capture ? -1 : 0; }
@@ -47,7 +47,7 @@ static Probe setup(void)
     strcpy(p.directory,".");
     values[0x3012]=100;
     writes=receives=closed_events=stops=0;
-    cancel_after_write=timeout_capture=fail_restore=deny_read=false;
+    cancel_after_write=timeout_capture=fail_restore=deny_read=fail_stop=false;
     return p;
 }
 static void cleanup(Probe *p)
@@ -68,6 +68,12 @@ int main(void)
     assert(!direct_trial(&p,"integration",&addr,&base,1,false));
     assert(values[addr]==base && writes==2 && closed_events==1 && stops==1);
     assert(p.failures==1 && !p.phase_success);
+    cleanup(&p);
+
+    p=setup(); timeout_capture=fail_stop=true;
+    assert(!direct_trial(&p,"integration",&addr,&base,1,false));
+    assert(values[addr]==base && !p.capture_ready && p.streaming);
+    assert(!capture(&p,"must_not_reuse_dma",0,false,false) && receives==1);
     cleanup(&p);
 
     p=setup(); fail_restore=true; cancel_after_write=true;

@@ -106,9 +106,12 @@ static void snapshot(Probe *p, const char *label, int frame, const char *when)
 
 static void stop(Probe *p, const char *label)
 {
-    record_call(p,label,"StopCapture",0,0,CAMU_StopCapture(p->port));
-    record_call(p,label,"ClearBuffer",0,0,CAMU_ClearBuffer(p->port));
-    p->streaming=false;
+    Result stopped=record_call(p,label,"StopCapture",0,0,CAMU_StopCapture(p->port));
+    Result cleared=record_call(p,label,"ClearBuffer",0,0,CAMU_ClearBuffer(p->port));
+    p->streaming=R_FAILED(stopped);
+    /* Do not reuse a DMA buffer after an unsuccessful stop/clear. The remaining
+     * interface queries can continue, then close_camera finalizes the driver. */
+    if (R_FAILED(stopped) || R_FAILED(cleared)) p->capture_ready=false;
 }
 
 static uint32_t crc32(const u8 *bytes, unsigned count)
