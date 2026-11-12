@@ -1,0 +1,1 @@
+Code-first handoff. Complete measurement files are being pushed separately to codex/exposure-handoff-20261112 in the SAME film-64/Film3DS repository. Full local commit: becd02c5dfa3d2f5b6537fae27583cf10ad2a56f. No model is certified calibrated.

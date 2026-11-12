@@ -91,3 +91,28 @@ cp build/test-look.f3p "$FILM_SD/3ds/Film3DS/look.f3p"
 ```
 
 检查 `info registers`、`info files`，对照映射地址后再设 `break film_camera_capture` 或 `break film_develop`。3DSX 的装载地址可能与链接地址不同，需按实机映射重定位符号。按 R 或执行暗房导出，检查断点、调用栈和返回状态，最后 detach 并禁用 GDB stub。协议测试完成后将 SD 上的 `commands.txt` 移到日志目录，后续启动即回到正常 UI。 [Rosalina GDB 文档](https://github.com/LumaTeam/Luma3DS/wiki/Rosalina#GDB-Stub) · [hbmenu Netloader](https://github.com/devkitPro/3ds-hbmenu#netloader)
+
+## H07 离线冲洗画质
+
+用 LV8 QA 版进入 DARKROOM，等写卡结束后按住 SELECT 再按 ZL。下屏 `Develop quality` 跑固定素材，不需要拍照或回传 SD 文件。拍下整个结果页即可。
+
+- GPU 双线性使用同一张 640×480 非对称斜坡与棋盘测试图，与 CPU 逐通道对照。分别记录 960×720 和 1280×960 的最大、P99、拼接边最大和平均绝对误差，另记录任一通道误差大于 4 的像素数和最大误差坐标。暂用 P99 ≤ 1、最大与拼接边 ≤ 2 个 8 位通道码值作为验收线。超出时显示 `CHECK`。若未完成读回，显示失败阶段和已完成块数。耗时只记录。正式导出走 CPU。
+- LV6 已用固定种子 42 和 50% 强度验证明度 48、128、224 的颗粒覆盖率。主机结果同时记录亮度扰动 RMS 和相邻像素相关，0% 对照逐像素保持原值。
+- `90 QA Portra 33` 和 `91 QA Portra 65` 由同一 Portra 400 / Endura 模型分别生成，曝光补偿一致。在电脑上对模型直接输出测量 ΔE00 和 RGB 误差。实机需要做观感对照时，用同一张 F3S、同一画幅及输出尺寸、LUT 100%、颗粒 0%，各导出一次。然后固定 65³ 色表再导出一张颗粒 30% 的图，观察暗部团簇、肤色和高光。对照图保留原始 JPEG 和对应 F3S。
+
+无色卡可用时，实拍选择一张同时包含有纹理的暗部、灰或白物体、肤色或暖色物体、饱和红蓝的照片，并保留当时的光源和相机设置。该实拍用于判断观感和差异，模型误差以电脑上的固定输入为基准。
+
+## H08 LV9 输入映射、颗粒与 GPU 合成
+
+在暗房对同一张 F3S 先关闭颗粒和 Halation，比较 `91 QA Portra 65` 与 `92 QA Portra 65 Dark`，两个预设的曝光补偿相同。然后固定同一色表，按 Y 进入颗粒，左右切 Fine、Medium、Coarse，上下独立调整强度。首轮以 30% 比粒径，再用同一粒径比 20% 和 70%。ZR 单按切换高光晕染，使用带点光源和暗背景的照片做开／关对照。以上都从原始 F3S 冲洗。
+
+暗房按住 SELECT 再按 ZR 测 PICA200 的三层 alpha 合成。底图、暖色光晕、明度遮罩控制的颗粒各占一张 256×256 RGBA 纹理。分别以 256×256 和 512×512 输出记录最大误差、P99、MAE、CPU 纹理准备、GPU 合成与读回、CPU 对照时间。SELECT+ZL 仍测全尺寸 GPU 缩放。这两页使用合成数据，正式导出暂走 CPU。
+
+每颗镜头可配置独立的输入矩阵，文件放在 `/3ds/Film3DS/rear1.rgbmat`、`rear2.rgbmat`、`front.rgbmat`。在相同稳定光线下让 3DS 和可信参考相机拍同一组哑光色块，固定白平衡、曝光及中性设定，避开高光和饱和剪切。没有标准色卡时，结果只用于匹配参考相机。参考图先转为 sRGB 并保存为无损图像。每个镜头分别执行：
+
+```sh
+./build/filmctl calibration-rgb ROLL0001.F3S rear1.ppm
+python3 tools/fit_camera.py rear1.ppm reference.png patches.csv rear1.rgbmat
+```
+
+`patches.csv` 的表头为 `src_x,src_y,ref_x,ref_y,split`。至少六个不同颜色的色块用于 `fit`，另留至少三个 `check`。工具对色块区域取中位数，在假定的 sRGB 线性空间拟合，并要求留出色块的 RGB RMS 下降才输出矩阵。保留配对图片、照明、镜头和白平衡设置。矩阵缺失时沿用现有解码，日志标记 `absent`。
