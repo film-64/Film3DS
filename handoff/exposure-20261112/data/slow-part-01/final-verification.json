@@ -1,0 +1,11 @@
+{
+  "run": "run-1293851798-000",
+  "files": 26,
+  "bytes": 17155502,
+  "all_local_hashes_lengths_verified": true,
+  "csv_records_and_ipc_widths_complete": true,
+  "measurements_complete": true,
+  "verified_measured_frames": 168,
+  "cadence_mean_ms": 199.95238095238096,
+  "cadence_median_ms": 200
+}

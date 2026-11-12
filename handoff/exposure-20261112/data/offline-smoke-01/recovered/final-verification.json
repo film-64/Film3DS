@@ -1,0 +1,11 @@
+{
+  "files": 13,
+  "all_local_hashes_verified": true,
+  "measurement_scope": "smoke",
+  "valid_measured_frames": 12,
+  "pgm_matches_last_frame_mean": true,
+  "frame19_mean": 147.16926432291666,
+  "central_mean": 172.59025065104166,
+  "high_fraction": 0.0,
+  "low_fraction": 0.0
+}

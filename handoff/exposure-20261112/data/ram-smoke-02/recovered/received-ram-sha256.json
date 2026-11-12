@@ -1,0 +1,93 @@
+[
+  {
+    "id": 0,
+    "name": "calls.csv",
+    "bytes": 22306,
+    "crc32": "f62a1e76",
+    "sha256": "f4b1ac19c878c6c77f1514b5c5fe8207570663fe3a8a7b69c874d78f403aef53"
+  },
+  {
+    "id": 1,
+    "name": "reads.csv",
+    "bytes": 87357,
+    "crc32": "ee1a06dd",
+    "sha256": "6772e75a737cf10b6ace9419fed3b65674568f948a45c51254bdac51c355e8c3"
+  },
+  {
+    "id": 2,
+    "name": "frames.csv",
+    "bytes": 2477,
+    "crc32": "6bb48f8f",
+    "sha256": "2b3a8e83f7497439a6dda6462239fcda4403225b3b07198446d5809c38648f4a"
+  },
+  {
+    "id": 3,
+    "name": "manifest.txt",
+    "bytes": 2313,
+    "crc32": "bd20c51f",
+    "sha256": "dd2920322d3610a9d6a9234029a8fe753f93d92a6f03df4c503139d370d4f6d8"
+  },
+  {
+    "id": 4,
+    "name": "ipc.csv",
+    "bytes": 817466,
+    "crc32": "6f193e91",
+    "sha256": "290ee31bbae2bbcffc2581ff6a4bbd09454bc183bd4233e11191fba3651ffcfc"
+  },
+  {
+    "id": 5,
+    "name": "lifecycle.txt",
+    "bytes": 0,
+    "crc32": "00000000",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "id": 6,
+    "name": "s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "crc32": "11821761",
+    "sha256": "87de28a83f2cd7ca2c1f11e8b0520df731f4514b33928f0906a76e08d4ca0f19"
+  },
+  {
+    "id": 7,
+    "name": "calibration_plan.csv",
+    "bytes": 147,
+    "crc32": "2ea52780",
+    "sha256": "e44d29797cdecd0cb3bf104f078559341bdbbbc96e3d56e1858612846d0a641c"
+  },
+  {
+    "id": 8,
+    "name": "frame_burst.csv",
+    "bytes": 75,
+    "crc32": "15605318",
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "id": 9,
+    "name": "roi.csv",
+    "bytes": 7914,
+    "crc32": "5b92a8c4",
+    "sha256": "97496afc81ba3c94b8c51f000e697db8fadb1fc6032b9e2e70630b989827635e"
+  },
+  {
+    "id": 10,
+    "name": "noise.csv",
+    "bytes": 139,
+    "crc32": "09a1c577",
+    "sha256": "9fe207eed1a02e56649e12c6cf497d695e8b001aa03d32b55faa95742ab55acb"
+  },
+  {
+    "id": 11,
+    "name": "execution.csv",
+    "bytes": 1462,
+    "crc32": "52b88346",
+    "sha256": "663211cdac741a0602eb65b8929b839ce5d10435a9c992353dbce4c77bc52780"
+  },
+  {
+    "id": 12,
+    "name": "s1-p003-cal_r8_auto.pgm",
+    "bytes": 307215,
+    "crc32": "9a36fa07",
+    "sha256": "6f10cccd9f1373d449495198c817495abedd6c84fc0c92f5f61ca9f24c29fb58"
+  }
+]

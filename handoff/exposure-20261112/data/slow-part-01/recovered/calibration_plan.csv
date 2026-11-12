@@ -1,0 +1,15 @@
+sensor,phase,label,kind,settle,measured,baseline_phase,write_mask,coarse,gain_gr,gain_b,gain_r,gain_gb,locked
+1,3,cal_r5_auto,seed,8,12,0,0,,,,,,0
+1,4,cal_r5_baseline,normalize,8,12,0,30,264,544,596,548,544,1
+1,5,cal_r5_t1,integration,8,12,4,1,1,544,596,548,544,1
+1,6,cal_restore,restore,8,12,4,1,264,544,596,548,544,1
+1,7,cal_r5_t4,integration,8,12,6,1,4,544,596,548,544,1
+1,8,cal_restore,restore,8,12,6,1,264,544,596,548,544,1
+1,9,cal_r5_t16,integration,8,12,8,1,16,544,596,548,544,1
+1,10,cal_restore,restore,8,12,8,1,264,544,596,548,544,1
+1,11,cal_r5_t64,integration,8,12,10,1,64,544,596,548,544,1
+1,12,cal_restore,restore,8,12,10,1,264,544,596,548,544,1
+1,13,cal_r5_t528,integration,8,12,12,1,528,544,596,548,544,1
+1,14,cal_restore,restore,8,12,12,1,264,544,596,548,544,1
+1,15,cal_r5_t1585,integration,8,12,14,1,1585,544,596,548,544,1
+1,16,cal_restore,restore,8,12,14,1,264,544,596,548,544,1

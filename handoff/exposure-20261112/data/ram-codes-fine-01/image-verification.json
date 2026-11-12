@@ -1,0 +1,66 @@
+{
+  "files": 15,
+  "all_pgm_lengths_and_last_frame_means_match": true,
+  "images": [
+    {
+      "file": "s1-p002-preflight_single.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p003-cal_codes_auto.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p004-cal_codes_baseline.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p005-cal_code_0210.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p006-cal_restore.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p007-cal_code_0218.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p008-cal_restore.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p009-cal_code_0220.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p010-cal_restore.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p011-cal_code_0228.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p012-cal_restore.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p013-cal_code_0230.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p014-cal_restore.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p015-cal_code_023c.pgm",
+      "pixel_mean_matches_frame_log": true
+    },
+    {
+      "file": "s1-p016-cal_restore.pgm",
+      "pixel_mean_matches_frame_log": true
+    }
+  ]
+}

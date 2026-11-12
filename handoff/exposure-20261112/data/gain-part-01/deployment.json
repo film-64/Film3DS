@@ -1,0 +1,16 @@
+{
+  "device": "192.168.0.26",
+  "netloader_port": 17491,
+  "binary_sha256": "76e3b36bbe2dc64e72d2faa9c02d64e05233085330b82204e9d243085c58d79e",
+  "bytes": 297880,
+  "arguments": [
+    "--auto",
+    "--calibrate",
+    "--offline",
+    "--sensor=1",
+    "--calibration-part=gain"
+  ],
+  "scope": "gain 14 stages / 168 measured frames; SD-only; no compression/network during sampling",
+  "request_unix": 1794412599.9425201,
+  "deployed": true
+}

@@ -1,0 +1,15 @@
+{"path": "/file/12", "range": "bytes=122880-126975", "attempt": 1, "error": "ConnectionResetError", "unix": 1794464814.980505}
+{"path": "/file/12", "range": "bytes=282624-286719", "attempt": 1, "error": "ConnectionResetError", "unix": 1794464820.659125}
+{"path": "/file/12", "range": "bytes=286720-290815", "attempt": 1, "error": "ConnectionResetError", "unix": 1794464822.344976}
+{"path": "/file/12", "range": "bytes=294912-299007", "attempt": 1, "error": "ConnectionResetError", "unix": 1794464824.563491}
+{"path": "/file/12", "range": "bytes=294912-299007", "attempt": 2, "error": "ConnectionResetError", "unix": 1794464825.645639}
+{"path": "/file/12", "range": "bytes=294912-299007", "attempt": 3, "error": "ConnectionResetError", "unix": 1794464826.728349}
+{"path": "/file/12", "range": "bytes=303104-307199", "attempt": 1, "error": "ConnectionResetError", "unix": 1794464827.939852}
+{"path": "/file/25", "range": "bytes=143360-147455", "attempt": 1, "error": "ConnectionResetError", "unix": 1794464885.874753}
+{"path": "/file/4", "range": "bytes=1724416-1728511", "attempt": 1, "error": "ConnectionResetError", "unix": 1794464905.237344}
+{"path": "/file/4", "range": "bytes=6569984-6574079", "attempt": 1, "error": "ConnectionResetError", "unix": 1794464979.3003788}
+{"path": "/file/4", "range": "bytes=6725632-6729727", "attempt": 1, "error": "ConnectionResetError", "unix": 1794464982.4343848}
+{"path": "/file/4", "range": "bytes=9867264-9871359", "attempt": 1, "error": "ConnectionResetError", "unix": 1794465031.910274}
+{"path": "/file/4", "range": "bytes=9904128-9908223", "attempt": 1, "error": "ConnectionResetError", "unix": 1794465034.826582}
+{"path": "/file/4", "range": "bytes=10276864-10280959", "attempt": 1, "error": "ConnectionResetError", "unix": 1794465047.034123}
+{"path": "/file/4", "range": "bytes=10678272-10682367", "attempt": 1, "error": "ConnectionResetError", "unix": 1794465057.400602}

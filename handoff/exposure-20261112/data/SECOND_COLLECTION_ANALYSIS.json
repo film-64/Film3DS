@@ -1,0 +1,272 @@
+{
+  "schema": "film3ds-second-collection-review-1",
+  "latest_ram_originals": {
+    "files": 26,
+    "bytes": 17210889,
+    "all_native_crc32_host_sha256_and_lengths_independently_reverified": true,
+    "complete_native_file_id_set": true,
+    "illumination_batch": "meter-02",
+    "ram_status": {
+      "run": "ram:/run-1293901506",
+      "complete": "1",
+      "failed": "0",
+      "count": "26"
+    },
+    "recovery_only_no_measurement_rerun": true
+  },
+  "new_measurements": [
+    {
+      "dataset": "offline-full-01",
+      "purpose": "58\u9636\u6bb5\u539f\u8ba1\u5212",
+      "illumination": "meter-01 not synchronized",
+      "sensor": "1",
+      "verified_stages": 30,
+      "verified_measured_frames": 360,
+      "measurements_complete": false,
+      "incomplete_phases": [
+        33
+      ],
+      "missing_phases": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ]
+    },
+    {
+      "dataset": "gain-part-01",
+      "purpose": "\u540d\u4e49\u6a21\u62df\u589e\u76ca",
+      "illumination": "meter-01 not synchronized",
+      "sensor": "1",
+      "verified_stages": 9,
+      "verified_measured_frames": 108,
+      "measurements_complete": false,
+      "incomplete_phases": [
+        11
+      ],
+      "missing_phases": [
+        13,
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "dataset": "digital-part-01",
+      "purpose": "\u72ec\u7acb\u6570\u5b57\u500d\u7387",
+      "illumination": "meter-01 not synchronized",
+      "sensor": "1",
+      "verified_stages": 6,
+      "verified_measured_frames": 72,
+      "measurements_complete": true,
+      "incomplete_phases": [],
+      "missing_phases": []
+    },
+    {
+      "dataset": "slow-part-01",
+      "purpose": "5fps\u79ef\u5206",
+      "illumination": "meter-01 not synchronized",
+      "sensor": "1",
+      "verified_stages": 14,
+      "verified_measured_frames": 168,
+      "measurements_complete": true,
+      "incomplete_phases": [],
+      "missing_phases": []
+    },
+    {
+      "dataset": "ram-limits-01",
+      "purpose": "FFFF\u8fb9\u754c",
+      "illumination": "meter-01 not synchronized",
+      "sensor": "1",
+      "verified_stages": 4,
+      "verified_measured_frames": 48,
+      "measurements_complete": false,
+      "incomplete_phases": [
+        5,
+        6,
+        9,
+        10
+      ],
+      "missing_phases": []
+    },
+    {
+      "dataset": "ram-limits-fffe-01",
+      "purpose": "FFFE\u8fb9\u754c",
+      "illumination": "meter-01 not synchronized",
+      "sensor": "1",
+      "verified_stages": 2,
+      "verified_measured_frames": 24,
+      "measurements_complete": false,
+      "incomplete_phases": [
+        5,
+        6
+      ],
+      "missing_phases": [
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "dataset": "ram-codes-fine-01",
+      "purpose": "\u539f\u59cb\u4f4e\u4f4d\u589e\u76ca",
+      "illumination": "meter-02",
+      "sensor": "1",
+      "verified_stages": 14,
+      "verified_measured_frames": 168,
+      "measurements_complete": true,
+      "incomplete_phases": [],
+      "missing_phases": []
+    }
+  ],
+  "fine_control_lut_observations": [
+    {
+      "phase": 5,
+      "input_code_hex": "0210",
+      "coarse": 7,
+      "core_302a": 4,
+      "center_y_median": 9.13252767,
+      "center_y_span": 0.2277831999999993,
+      "processed_y_temporal_sigma": 0.54798037,
+      "high_threshold_fraction": 0.0,
+      "reference_y_before": 30.21114095,
+      "reference_y_after": 28.51977539,
+      "register_brackets_held": true
+    },
+    {
+      "phase": 7,
+      "input_code_hex": "0218",
+      "coarse": 7,
+      "core_302a": 6,
+      "center_y_median": 18.159830725,
+      "center_y_span": 1.33089193,
+      "processed_y_temporal_sigma": 0.95639755,
+      "high_threshold_fraction": 0.0,
+      "reference_y_before": 28.51977539,
+      "reference_y_after": 28.850952145,
+      "register_brackets_held": true
+    },
+    {
+      "phase": 9,
+      "input_code_hex": "0220",
+      "coarse": 7,
+      "core_302a": 8,
+      "center_y_median": 25.9613444,
+      "center_y_span": 2.82918295,
+      "processed_y_temporal_sigma": 1.23536153,
+      "high_threshold_fraction": 0.0,
+      "reference_y_before": 28.850952145,
+      "reference_y_after": 28.416463215,
+      "register_brackets_held": true
+    },
+    {
+      "phase": 11,
+      "input_code_hex": "0228",
+      "coarse": 7,
+      "core_302a": 10,
+      "center_y_median": 37.287841795000006,
+      "center_y_span": 0.41813151000000204,
+      "processed_y_temporal_sigma": 0.96410616,
+      "high_threshold_fraction": 0.0,
+      "reference_y_before": 28.416463215,
+      "reference_y_after": 28.90360514,
+      "register_brackets_held": true
+    },
+    {
+      "phase": 13,
+      "input_code_hex": "0230",
+      "coarse": 7,
+      "core_302a": 12,
+      "center_y_median": 45.709594725,
+      "center_y_span": 1.3425292900000017,
+      "processed_y_temporal_sigma": 1.03729106,
+      "high_threshold_fraction": 0.0,
+      "reference_y_before": 28.90360514,
+      "reference_y_after": 29.763549805,
+      "register_brackets_held": true
+    },
+    {
+      "phase": 15,
+      "input_code_hex": "023c",
+      "coarse": 7,
+      "core_302a": 14,
+      "center_y_median": 56.22607422,
+      "center_y_span": 0.4210611999999969,
+      "processed_y_temporal_sigma": 0.95662991,
+      "high_threshold_fraction": 0.0,
+      "reference_y_before": 29.763549805,
+      "reference_y_after": 29.58500163,
+      "register_brackets_held": true
+    }
+  ],
+  "physical_multiplier_calibrated": false,
+  "absolute_iso_calibrated": false,
+  "optical_shutter_seconds_calibrated": false,
+  "bulb_proven": false,
+  "nominal_aperture_candidate": {
+    "source_url": "https://pdfcoffee.com/3ds-programming-manual-pdf-free.html",
+    "document_title": "3DS Programming Manual: System, Version 1.6",
+    "attributed_author": "Nintendo",
+    "section": "2.8.5 Cameras",
+    "document_identifier": "CTR-06-0019-002-F",
+    "short_specification": "F2.8 (fixed).",
+    "nominal_f_number": 2.8,
+    "evidence_kind": "third-party public mirror of attributed manufacturer documentation, not a direct optical measurement",
+    "scope_note": "manual covers CTR and SNAKE system differences; camera paragraph names CTR; applicability to this exact New3DS module remains to be cross-checked",
+    "transmission_t_stop": null,
+    "absolute_iso_calibrated": false,
+    "next_use": "candidate nominal aperture for external-meter effective exposure index cross-check; do not retroactively mark older runs as physically calibrated"
+  },
+  "latest_external_meter": {
+    "source": "user updated meter reading after environment change",
+    "illumination_batch": "meter-02",
+    "iso": 100,
+    "f_number": 2.8,
+    "shutter_seconds": 0.008,
+    "reported_ev100": 10,
+    "computed_ev100": 9.936637939002571,
+    "app_for_this_reading": "not specified",
+    "target": "MBP trackpad carried forward from ongoing setup",
+    "field_of_view": "approximately matching 3DS per prior user confirmation",
+    "use": "new reference only; no cross-batch noise/absolute sensitivity assumption"
+  },
+  "critical_findings": [
+    "SetExposure modifies sensor sequencer after disabling AE; high-level getter alone is insufficient.",
+    "Nominal gain arithmetic disagrees with actual register/brightness behavior; raw low-code LUT is stable but not an absolute ISO table.",
+    "Independent digital factors 1/2/4 retained and altered brightness;4x output clipping is not analog gain/ISO ceiling.",
+    "FFFF collides with existing driver error sentinel;FFFE readable but no frame within30s at30fps.",
+    "Post-timeout coarse-only restoration is insufficient; other controls changed. Existing strict reports reject those phases.",
+    "Need controlled frame_length_lines versus coarse experiment, rather than infer long exposure from16bit width."
+  ],
+  "next_minimal_missing_evidence": [
+    "Raw boost-bit response and quantization mapping (prepared; not deployed).",
+    "Digital multiplier comparison with sufficient highlight headroom (prepared; not deployed).",
+    "Explicit coupled frame-length/integration trial with full-control restoration and per-frame proof.",
+    "Paired fixed-gain shutter sweep in the same metered illumination and a declared output-brightness criterion for reference exposure index.",
+    "Continuous-preview lock verification during eventual app integration."
+  ]
+}

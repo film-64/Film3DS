@@ -1,0 +1,14 @@
+{
+  "files": 26,
+  "bytes": 17210889,
+  "all_native_crc32_host_sha256_and_lengths_independently_reverified": true,
+  "complete_native_file_id_set": true,
+  "illumination_batch": "meter-02",
+  "ram_status": {
+    "run": "ram:/run-1293901506",
+    "complete": "1",
+    "failed": "0",
+    "count": "26"
+  },
+  "recovery_only_no_measurement_rerun": true
+}

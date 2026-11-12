@@ -1,0 +1,18 @@
+{
+  "prepared": true,
+  "deployed": false,
+  "device": "192.168.0.26",
+  "netloader_port": 17491,
+  "binary_sha256": "64d0d99d8ff145c13dca4d92121738cb5192cbfb90df8791f5c004021efa457e",
+  "bytes": 307508,
+  "arguments": [
+    "--auto",
+    "--calibrate",
+    "--offline",
+    "--sensor=1",
+    "--calibration-part=digital-headroom",
+    "--ram"
+  ],
+  "illumination_batch": "meter-02",
+  "meter_reference": "../external-meter-reference-02.json"
+}

@@ -1,0 +1,100 @@
+[
+  {
+    "id": 0,
+    "name": "calls.csv",
+    "bytes": 45353,
+    "crc32": "474b4962",
+    "sha256": "e4758f87fd6d00f3c04cfde903323fa30e76c38af9395ab8744cb40a67e45aab"
+  },
+  {
+    "id": 1,
+    "name": "reads.csv",
+    "bytes": 196787,
+    "crc32": "d9ff260f",
+    "sha256": "862325129d400d88667e8de31ef8ba4dba0ab9a758d4b24860a577222ebfbd92"
+  },
+  {
+    "id": 2,
+    "name": "frames.csv",
+    "bytes": 4674,
+    "crc32": "8529da68",
+    "sha256": "5260dc5d45cf0deb2726aee3f8cb10bfeeeecddc37ab281914c1b8cd756f57a6"
+  },
+  {
+    "id": 3,
+    "name": "manifest.txt",
+    "bytes": 2735,
+    "crc32": "a3eaac39",
+    "sha256": "e00ae5ff7ede3a089b2ff9fa89cfc15849da5360664b4cc586f52a93c31b3714"
+  },
+  {
+    "id": 4,
+    "name": "ipc.csv",
+    "bytes": 1652286,
+    "crc32": "b1e86a0f",
+    "sha256": "78e43915ef72686f965d9b9585b8b23df45f17309a82c79254aa45adf19129c8"
+  },
+  {
+    "id": 5,
+    "name": "lifecycle.txt",
+    "bytes": 0,
+    "crc32": "00000000",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "id": 6,
+    "name": "s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "crc32": "c5727e0b",
+    "sha256": "2db39fca54e8a3fbe693aaaa22bdb9dcec983d02125f3397b85cf7dfd51fed2c"
+  },
+  {
+    "id": 7,
+    "name": "calibration_plan.csv",
+    "bytes": 347,
+    "crc32": "53e41c32",
+    "sha256": "312e47dbad77e843afca9373117a885d0d6f8c07049111e6992e468af3b8b8e9"
+  },
+  {
+    "id": 8,
+    "name": "frame_burst.csv",
+    "bytes": 75,
+    "crc32": "15605318",
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "id": 9,
+    "name": "roi.csv",
+    "bytes": 17678,
+    "crc32": "7dc00b0a",
+    "sha256": "7bd5b4ee41e226dfc355e639ccf555972f0b89a857a22dd071dd207dc64f6917"
+  },
+  {
+    "id": 10,
+    "name": "noise.csv",
+    "bytes": 215,
+    "crc32": "c845e599",
+    "sha256": "8cf364645dc736da518b6ad7eaef0f820931b8fb8eaa5d4546dce1bb38b10846"
+  },
+  {
+    "id": 11,
+    "name": "execution.csv",
+    "bytes": 3662,
+    "crc32": "0cd45a8c",
+    "sha256": "6a6cb7a8a2f76478e0204b6f3418018667a25962be2e8fbd963a441707ee1f31"
+  },
+  {
+    "id": 12,
+    "name": "s1-p003-cal_r8_limit_auto.pgm",
+    "bytes": 307215,
+    "crc32": "eee3d3ef",
+    "sha256": "a5f9e78f6bf857c1ab96035c1587d28a6ff1e29aed2886f0460f7b550275e715"
+  },
+  {
+    "id": 13,
+    "name": "s1-p004-cal_r8_limit_baseline.pgm",
+    "bytes": 307215,
+    "crc32": "0b80729b",
+    "sha256": "c7382edb20ec6f9a44079b1f8d95c68fb17e7da0e5da0279f83ea4a6fac78ce0"
+  }
+]

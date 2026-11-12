@@ -1,0 +1,107 @@
+gcc -O2 -g -std=c11 -Wall -Wextra -Wpedantic -Wno-unused-parameter -Itests/probe_shim -ffunction-sections -fdata-sections tests/probe_driver.c  -Wl,--gc-sections -o build/probe-driver -lm
+tests/probe_driver.c: In function ‘main’:
+tests/probe_driver.c:282:5: warning: a label can only be part of a statement and a declaration is not a statement [-Wpedantic]
+  282 |     FieldLabel curve[]={{1,.125},{2,.5},{4,2},{8,8},{16,32}};
+      |     ^~~~~~~~~~
+In file included from tests/../probes/exposure/main.c:623,
+                 from tests/probe_driver.c:3:
+tests/../probes/exposure/ram_http.h: At top level:
+tests/../probes/exposure/ram_http.h:60:13: warning: ‘ram_http_finish’ defined but not used [-Wunused-function]
+   60 | static void ram_http_finish(int fd)
+      |             ^~~~~~~~~~~~~~~
+tests/../probes/exposure/ram_http.h:25:13: warning: ‘ram_http_request’ defined but not used [-Wunused-function]
+   25 | static void ram_http_request(int fd,const char *run,bool complete)
+      |             ^~~~~~~~~~~~~~~~
+In file included from tests/../probes/exposure/main.c:616:
+tests/../probes/exposure/field_store.h:41:13: warning: ‘field_save_reference’ defined but not used [-Wunused-function]
+   41 | static bool field_save_reference(FieldRun *run,double seconds)
+      |             ^~~~~~~~~~~~~~~~~~~~
+gcc -O2 -g -std=c11 -Wall -Wextra -Wpedantic tests/probe_plan.c -o build/probe-plan
+[12;0HSensor 1 phase 3: field_seed                  
+B: stop after current operation
+[12;0HSensor 1 phase 4: field_normal_base           
+B: stop after current operation
+[12;0HSensor 1 phase 5: field_normal_0              
+B: stop after current operation
+[12;0HSensor 1 phase 6: field_lower                 
+B: stop after current operation
+[12;0HSensor 1 phase 7: field_upper                 
+B: stop after current operation
+[12;0HSensor 1 phase 8: field_normal_check          
+B: stop after current operation
+[12;0HSensor 1 phase 3: field_seed                  
+B: stop after current operation
+[12;0HSensor 1 phase 4: field_normal_base           
+B: stop after current operation
+
+CONTROL_DRIFT phase=4 addr=32d6 expected=128 actual=129
+[12;0HSensor 1 phase 3: field_seed                  
+B: stop after current operation
+[12;0HSensor 1 phase 3: auto_seed                   
+B: stop after current operation
+[12;0HSensor 1 phase 4: auto_normal_base            
+B: stop after current operation
+[8;0HPreview: NORMAL C=100 held during exploration
+[12;0HSensor 1 phase 5: auto_normal_0               
+B: stop after current operation
+[8;0HPreview: NORMAL C=119 held during exploration
+[12;0HSensor 1 phase 6: auto_response_short         
+B: stop after current operation
+[12;0HSensor 1 phase 7: auto_reference_mid          
+B: stop after current operation
+[12;0HSensor 1 phase 8: auto_gain_base              
+B: stop after current operation
+[12;0HSensor 1 phase 9: auto_gain_0210              
+B: stop after current operation
+[12;0HSensor 1 phase 10: auto_gain_0218              
+B: stop after current operation
+[12;0HSensor 1 phase 11: auto_gain_0220              
+B: stop after current operation
+[12;0HSensor 1 phase 12: auto_gain_0228              
+B: stop after current operation
+[12;0HSensor 1 phase 13: auto_gain_0230              
+B: stop after current operation
+[12;0HSensor 1 phase 14: auto_gain_023c              
+B: stop after current operation
+[12;0HSensor 1 phase 15: auto_digital_2              
+B: stop after current operation
+[12;0HSensor 1 phase 16: auto_digital_4              
+B: stop after current operation
+[12;0HSensor 1 phase 17: auto_reference_end          
+B: stop after current operation
+[12;0HSensor 1 phase 18: auto_restore                
+B: stop after current operation
+[12;0HSensor 1 phase 3: auto_seed                   
+B: stop after current operation
+[12;0HSensor 1 phase 4: auto_normal_base            
+B: stop after current operation
+
+CONTROL_DRIFT phase=4 addr=32d6 expected=128 actual=129
+[12;0HSensor 1 phase 3: auto_seed                   
+B: stop after current operation
+PASS actual probe driver and calibration: registered auto feedback, ISP drift/write failure stop and restoration, raw RAM profile, legacy scopes
+PASS explicit diagnostic scope and invalid request rejection
+make --no-print-directory -C build-exposure-field -f /src/Makefile.probe
+main.c
+In file included from /src/probes/exposure/main.c:662:
+/src/probes/exposure/field_ui.h: In function 'field_entry':
+/src/probes/exposure/field_ui.h:64:76: error: '%s' directive output may be truncated writing up to 255 bytes into a region of size 231 [-Werror=format-truncation=]
+   64 |         char path[256];snprintf(path,sizeof path,"sdmc:/3ds/Film3DS/probes/%s/exposure.csv",entry->d_name);
+      |                                                                            ^~
+In function 'field_export',
+    inlined from 'field_entry' at /src/probes/exposure/field_ui.h:122:26:
+/src/probes/exposure/field_ui.h:64:24: note: 'snprintf' output between 39 and 294 bytes into a destination of size 256
+   64 |         char path[256];snprintf(path,sizeof path,"sdmc:/3ds/Film3DS/probes/%s/exposure.csv",entry->d_name);
+      |                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/src/probes/exposure/field_ui.h: In function 'field_entry':
+/src/probes/exposure/field_ui.h:66:33: error: '%s' directive output may be truncated writing up to 255 bytes into a region of size 65 [-Werror=format-truncation=]
+   66 |         snprintf(names[n++],65,"%s",entry->d_name);
+      |                                 ^~
+In function 'field_export',
+    inlined from 'field_entry' at /src/probes/exposure/field_ui.h:122:26:
+/src/probes/exposure/field_ui.h:66:9: note: 'snprintf' output between 1 and 256 bytes into a destination of size 65
+   66 |         snprintf(names[n++],65,"%s",entry->d_name);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+make[1]: *** [/opt/devkitpro/devkitARM//base_rules:40: main.o] Error 1
+make: *** [Makefile.probe:33: all] Error 2

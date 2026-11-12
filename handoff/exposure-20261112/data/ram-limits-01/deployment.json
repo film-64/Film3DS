@@ -1,0 +1,17 @@
+{
+  "device": "192.168.0.26",
+  "netloader_port": 17491,
+  "binary_sha256": "2a59e79dbf29477ab36892623918f34628753fda7dc5769ab060cb9c63919ce7",
+  "bytes": 307044,
+  "arguments": [
+    "--auto",
+    "--calibrate",
+    "--offline",
+    "--sensor=1",
+    "--calibration-part=limits",
+    "--ram"
+  ],
+  "scope": "ram-evidence-1 limits 8 stages / 78 measured frames; finite 65535 coarse at30/5fps; restore; no SD writes",
+  "request_unix": 1794416743.679059,
+  "deployed": true
+}

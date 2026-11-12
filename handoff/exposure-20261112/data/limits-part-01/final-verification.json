@@ -1,0 +1,12 @@
+{
+  "run": "run-1293852469-000",
+  "files": 7,
+  "bytes": 102832,
+  "all_local_hashes_lengths_verified": true,
+  "source_pgm_bytes": 47104,
+  "expected_pgm_bytes": 307215,
+  "formal_measurement_frames": 0,
+  "long_exposure_attempted": false,
+  "limits_not_established": true,
+  "stopping_evidence": "preflight PGM truncated and manifest/call log stops during preflight; SD persistence failed before formal measurements; no reliable saved final errno"
+}

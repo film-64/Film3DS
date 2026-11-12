@@ -1,0 +1,30 @@
+{
+  "files": 21,
+  "bytes": 11194485,
+  "local_lengths_hashes_reverified": true,
+  "all_csv_rows_and_terminal_newlines_complete": true,
+  "verified_measured_frames": 108,
+  "complete_measurement_stages": 9,
+  "incomplete_phases": [
+    11
+  ],
+  "missing_phases": [
+    13,
+    14,
+    15,
+    16
+  ],
+  "io_error": false,
+  "seed_restored": true,
+  "control_rejection": {
+    "phase": 11,
+    "channel": "blue",
+    "register": "3058",
+    "requested_hex": "03cf",
+    "actual_hex": "02cf",
+    "write_result": "00000000",
+    "read_result": "00000000",
+    "ae_mode": 0,
+    "awb_mode": 0
+  }
+}

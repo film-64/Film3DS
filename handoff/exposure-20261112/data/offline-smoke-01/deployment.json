@@ -1,0 +1,69 @@
+{
+  "device": "192.168.0.22",
+  "request": [
+    "--auto",
+    "--calibrate",
+    "--sensor=1",
+    "--smoke",
+    "--offline"
+  ],
+  "expected_stages": 1,
+  "valid_measured_frames": 12,
+  "capture_frames": 20,
+  "transfer": "SD only; no compression, socket initialization or readiness polling",
+  "source": [
+    {
+      "name": "probes/exposure/calibration.h",
+      "sha256": "64e8f7d8ef326121c8ba97800c83662e3f4190e9369bcb5f699c190f8312cfb9"
+    },
+    {
+      "name": "probes/exposure/calibration_contract.h",
+      "sha256": "7277b32a9436137fbcfc02dd64a30bb449ac682e39873fdeddc08b84bb0a8fd0"
+    },
+    {
+      "name": "probes/exposure/calibration_image.h",
+      "sha256": "6cbfc2b87ee5b4ba6ed592031e051b04b0d78eb60c4790dcbb6c44678c9f7cd7"
+    },
+    {
+      "name": "probes/exposure/crash_collect.h",
+      "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+    },
+    {
+      "name": "probes/exposure/deep_ipc.h",
+      "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+    },
+    {
+      "name": "probes/exposure/fault_capture.h",
+      "sha256": "ebf503f46c05ba33405a959decae95058b711b35d7f1d479740d3263f447cb47"
+    },
+    {
+      "name": "probes/exposure/ipc_decode.h",
+      "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+    },
+    {
+      "name": "probes/exposure/main.c",
+      "sha256": "41f79ec30a9cbbc752a25151fb597141d8d337273568839b792c8a9671542ff1"
+    },
+    {
+      "name": "probes/exposure/probe_plan.h",
+      "sha256": "5058b4035331bfdc3b670ce4b707f23a28fce3fb01b4efaddd28fe26002d1ac1"
+    },
+    {
+      "name": "probes/exposure/remote_upload.h",
+      "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+    },
+    {
+      "name": "probes/recovery/main.c",
+      "sha256": "89d346861ac92340eb7c76e775339948bf96ad563742e8e394f2d6ac077ccccb"
+    },
+    {
+      "name": "Makefile.probe",
+      "sha256": "b02b8fce37fc94957db98638360d308e21b48a473b4a9322593d31fc1df57e28"
+    },
+    {
+      "name": "FilmProbe.3dsx",
+      "sha256": "03ce0e0bb553526146794b9e94693105f5e225e7d5792fcd77c977a62678e06f"
+    }
+  ],
+  "started_unix": 1794408266.72384
+}

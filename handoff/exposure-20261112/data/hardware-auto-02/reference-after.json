@@ -1,0 +1,12 @@
+{
+  "source": "user reported after quick capture",
+  "received_unix": 1794475356.815163,
+  "illumination_batch": "auto-20261112-02",
+  "iso": 100,
+  "f_number": 2.8,
+  "shutter_seconds_interval": [
+    0.25,
+    0.5
+  ],
+  "note": "user marked position between 1/4 and 1/2; no exact value invented"
+}

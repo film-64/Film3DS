@@ -1,0 +1,227 @@
+{
+  "tool": "OpenCV CalibrateDebevec",
+  "version": "4.12.0",
+  "training": [
+    "auto_gain_base",
+    "auto_normal_base",
+    "auto_normal_1",
+    "auto_normal_2"
+  ],
+  "holdout": "auto_normal_0",
+  "roi_xyxy": [
+    304,
+    196,
+    368,
+    280
+  ],
+  "samples": 100,
+  "lambda": 10,
+  "random": false,
+  "source_analysis_sha256": "b4f8687b642b7ad2fb463444167bfc0a4cb22e071cf9e95ef018883072d550c4",
+  "channels": [
+    {
+      "channel": "B",
+      "holdout_error_ev": -0.3550845682621002,
+      "passed_0125ev": false,
+      "trained_code_interval": [
+        5,
+        33
+      ]
+    },
+    {
+      "channel": "G",
+      "holdout_error_ev": 0.010238343849778175,
+      "passed_0125ev": true,
+      "trained_code_interval": [
+        15,
+        97
+      ]
+    },
+    {
+      "channel": "R",
+      "holdout_error_ev": 0.07047459483146667,
+      "passed_0125ev": true,
+      "trained_code_interval": [
+        15,
+        93
+      ]
+    }
+  ],
+  "gain_rows": [
+    {
+      "label": "auto_gain_0210",
+      "channel": "B",
+      "in_domain_fraction": 0.9992559523809523,
+      "effective_gain": null,
+      "status": "rejected_domain_or_holdout"
+    },
+    {
+      "label": "auto_gain_0210",
+      "channel": "G",
+      "in_domain_fraction": 0.0,
+      "effective_gain": null,
+      "status": "rejected_domain_or_holdout"
+    },
+    {
+      "label": "auto_gain_0210",
+      "channel": "R",
+      "in_domain_fraction": 0.0,
+      "effective_gain": null,
+      "status": "rejected_domain_or_holdout"
+    },
+    {
+      "label": "auto_gain_0218",
+      "channel": "B",
+      "in_domain_fraction": 1.0,
+      "effective_gain": null,
+      "status": "rejected_domain_or_holdout"
+    },
+    {
+      "label": "auto_gain_0218",
+      "channel": "G",
+      "in_domain_fraction": 0.03794642857142857,
+      "effective_gain": null,
+      "status": "rejected_domain_or_holdout"
+    },
+    {
+      "label": "auto_gain_0218",
+      "channel": "R",
+      "in_domain_fraction": 0.03794642857142857,
+      "effective_gain": null,
+      "status": "rejected_domain_or_holdout"
+    },
+    {
+      "label": "auto_gain_0220",
+      "channel": "B",
+      "in_domain_fraction": 1.0,
+      "effective_gain": null,
+      "status": "rejected_domain_or_holdout"
+    },
+    {
+      "label": "auto_gain_0220",
+      "channel": "G",
+      "in_domain_fraction": 0.9998139880952381,
+      "effective_gain": 0.9933374524116516,
+      "status": "crosschecked"
+    },
+    {
+      "label": "auto_gain_0220",
+      "channel": "R",
+      "in_domain_fraction": 0.9998139880952381,
+      "effective_gain": 0.9950573444366455,
+      "status": "crosschecked"
+    },
+    {
+      "label": "auto_gain_0228",
+      "channel": "B",
+      "in_domain_fraction": 1.0,
+      "effective_gain": null,
+      "status": "rejected_domain_or_holdout"
+    },
+    {
+      "label": "auto_gain_0228",
+      "channel": "G",
+      "in_domain_fraction": 1.0,
+      "effective_gain": 1.1978120803833008,
+      "status": "crosschecked"
+    },
+    {
+      "label": "auto_gain_0228",
+      "channel": "R",
+      "in_domain_fraction": 1.0,
+      "effective_gain": 1.193342685699463,
+      "status": "crosschecked"
+    },
+    {
+      "label": "auto_gain_0230",
+      "channel": "B",
+      "in_domain_fraction": 1.0,
+      "effective_gain": null,
+      "status": "rejected_domain_or_holdout"
+    },
+    {
+      "label": "auto_gain_0230",
+      "channel": "G",
+      "in_domain_fraction": 1.0,
+      "effective_gain": 1.5185221433639526,
+      "status": "crosschecked"
+    },
+    {
+      "label": "auto_gain_0230",
+      "channel": "R",
+      "in_domain_fraction": 1.0,
+      "effective_gain": 1.5841054916381836,
+      "status": "crosschecked"
+    },
+    {
+      "label": "auto_gain_023c",
+      "channel": "B",
+      "in_domain_fraction": 1.0,
+      "effective_gain": null,
+      "status": "rejected_domain_or_holdout"
+    },
+    {
+      "label": "auto_gain_023c",
+      "channel": "G",
+      "in_domain_fraction": 1.0,
+      "effective_gain": 1.8782778978347778,
+      "status": "crosschecked"
+    },
+    {
+      "label": "auto_gain_023c",
+      "channel": "R",
+      "in_domain_fraction": 1.0,
+      "effective_gain": 1.9466420412063599,
+      "status": "crosschecked"
+    },
+    {
+      "label": "auto_digital_2",
+      "channel": "B",
+      "in_domain_fraction": 1.0,
+      "effective_gain": null,
+      "status": "rejected_domain_or_holdout"
+    },
+    {
+      "label": "auto_digital_2",
+      "channel": "G",
+      "in_domain_fraction": 1.0,
+      "effective_gain": 1.9992589950561523,
+      "status": "crosschecked"
+    },
+    {
+      "label": "auto_digital_2",
+      "channel": "R",
+      "in_domain_fraction": 1.0,
+      "effective_gain": 2.0216224193573,
+      "status": "crosschecked"
+    },
+    {
+      "label": "auto_digital_4",
+      "channel": "B",
+      "in_domain_fraction": 0.9782366071428571,
+      "effective_gain": null,
+      "status": "rejected_domain_or_holdout"
+    },
+    {
+      "label": "auto_digital_4",
+      "channel": "G",
+      "in_domain_fraction": 1.0,
+      "effective_gain": 3.7961342334747314,
+      "status": "crosschecked"
+    },
+    {
+      "label": "auto_digital_4",
+      "channel": "R",
+      "in_domain_fraction": 0.9983258928571429,
+      "effective_gain": 3.7844812870025635,
+      "status": "crosschecked"
+    }
+  ],
+  "all_channels_passed": false,
+  "absolute_ev100_calibrated": false,
+  "limitations": [
+    "same scene/staticness and stable processing required",
+    "inverse response has relative scale, not an independent scene EV100",
+    "post-run external meter does not prove natural light remained constant"
+  ]
+}

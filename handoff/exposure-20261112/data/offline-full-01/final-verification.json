@@ -1,0 +1,61 @@
+{
+  "source_run": "run-1293847704-000",
+  "files": 42,
+  "bytes": 36411592,
+  "all_local_lengths_and_sha256_recomputed_match_receipts": true,
+  "csv_status": {
+    "ipc.csv": {
+      "bytes": 23415898,
+      "ends_with_newline": false,
+      "invalid_rows": [
+        37587
+      ]
+    },
+    "reads.csv": {
+      "bytes": 2563169,
+      "ends_with_newline": false,
+      "invalid_rows": [
+        34799
+      ]
+    },
+    "calibration_plan.csv": {
+      "bytes": 1865,
+      "ends_with_newline": true,
+      "invalid_rows": []
+    },
+    "frame_burst.csv": {
+      "bytes": 2119,
+      "ends_with_newline": true,
+      "invalid_rows": []
+    },
+    "noise.csv": {
+      "bytes": 1916,
+      "ends_with_newline": true,
+      "invalid_rows": []
+    },
+    "frames.csv": {
+      "bytes": 54916,
+      "ends_with_newline": true,
+      "invalid_rows": []
+    },
+    "execution.csv": {
+      "bytes": 43950,
+      "ends_with_newline": true,
+      "invalid_rows": []
+    },
+    "roi.csv": {
+      "bytes": 237409,
+      "ends_with_newline": true,
+      "invalid_rows": []
+    },
+    "calls.csv": {
+      "bytes": 558318,
+      "ends_with_newline": true,
+      "invalid_rows": []
+    }
+  },
+  "measurements_complete": false,
+  "verified_stages": 30,
+  "verified_measured_frames": 360,
+  "not_validated": "Settings restoration after I/O failure; remaining stages; absolute ISO/shutter/aperture"
+}

@@ -1,0 +1,38 @@
+{
+  "illumination_batch": "auto-20261112-04",
+  "timing": "after_capture",
+  "readings": [
+    {
+      "meter": "A",
+      "iso": 100,
+      "f_number": 2.8,
+      "shutter_seconds_interval": [
+        0.25,
+        0.5
+      ],
+      "cct_kelvin": 3400
+    },
+    {
+      "meter": "B",
+      "iso": 100,
+      "f_number": 2.8,
+      "shutter_seconds": 0.5,
+      "cct_kelvin": 4100
+    }
+  ],
+  "notes": [
+    "User reports normal preview appears somewhat overexposed and low contrast.",
+    "Do not average meter readings or infer an exact midpoint."
+  ],
+  "calibration_meter": "A",
+  "selected_exposure_reference": {
+    "meter": "A",
+    "iso": 100,
+    "f_number": 2.8,
+    "shutter_seconds_approx": 0.3333333333333333,
+    "ev100_approx": 4.5,
+    "precision": "user approximate reading; not an exact shutter measurement",
+    "timing": "after_capture",
+    "future_illumination_policy": "Use a new contemporaneous A reading for each changed illumination; do not reuse this batch anchor."
+  }
+}

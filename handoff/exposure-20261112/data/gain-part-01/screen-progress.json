@@ -1,0 +1,9 @@
+{
+  "source": "user screen transcription",
+  "phase": 12,
+  "captures": 185,
+  "failures": 1,
+  "previous_status_interpretation": "running; exact error category and frame completeness await raw logs",
+  "status": "likely stopped: native binary only displays Captures/failures in final summary; awaiting user confirmation and raw log recovery",
+  "correction": "phase alone did not establish live progress; prior running interpretation withdrawn"
+}

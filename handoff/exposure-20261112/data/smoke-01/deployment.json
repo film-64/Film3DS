@@ -1,0 +1,30 @@
+{
+  "device": "192.168.0.22",
+  "binary_sha256": "4d170a84273228bba6a9a3a602a7ea2c6cf3ff2543d6c38f6fdec344ed159845",
+  "source_sha256": {
+    "probes/exposure/calibration.h": "64e8f7d8ef326121c8ba97800c83662e3f4190e9369bcb5f699c190f8312cfb9",
+    "probes/exposure/calibration_contract.h": "7277b32a9436137fbcfc02dd64a30bb449ac682e39873fdeddc08b84bb0a8fd0",
+    "probes/exposure/calibration_image.h": "6cbfc2b87ee5b4ba6ed592031e051b04b0d78eb60c4790dcbb6c44678c9f7cd7",
+    "probes/exposure/crash_collect.h": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018",
+    "probes/exposure/deep_ipc.h": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec",
+    "probes/exposure/fault_capture.h": "ebf503f46c05ba33405a959decae95058b711b35d7f1d479740d3263f447cb47",
+    "probes/exposure/ipc_decode.h": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73",
+    "probes/exposure/main.c": "ebbf0715c3fb907058a167e3cb99364eba8d38ea36dc6b89abc209f15366b065",
+    "probes/exposure/probe_plan.h": "7d0ccf97e639c22210b50648c8c1909842113131c5a12dd2accfe7e7f1ce27b0",
+    "probes/exposure/remote_upload.h": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15",
+    "probes/recovery/main.c": "89d346861ac92340eb7c76e775339948bf96ad563742e8e394f2d6ac077ccccb",
+    "Makefile.probe": "b02b8fce37fc94957db98638360d308e21b48a473b4a9322593d31fc1df57e28"
+  },
+  "request": [
+    "--auto",
+    "--calibrate",
+    "--sensor=1",
+    "--smoke"
+  ],
+  "contract": "calibration-1",
+  "expected_stages": 1,
+  "transfer": "device SD gzip, PC-initiated HTTP ranges",
+  "readiness_poll_seconds": 30,
+  "readiness_deadline_seconds": 7200,
+  "started_unix": 1794400721.538507
+}

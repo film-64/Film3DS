@@ -1,0 +1,9 @@
+{
+  "main_base": "3f01442c509c2040a7ec37d9ecb6338947a40491",
+  "probe_base": "5a1e62d9d7436c594776716fdbd723855209c53d",
+  "data_files": 830,
+  "data_bytes": 150095012,
+  "probe_source_root": "diagnostics/camera-deep-probe",
+  "model_status": "WITHDRAWN: field/v1 equivalent-shutter predictions are not calibrated",
+  "data_exclusions": 12
+}

@@ -1,0 +1,7 @@
+{
+  "contract": "frozen-evidence-resume-1",
+  "started_unix": 1794472466.469829,
+  "chunk_bytes": 65536,
+  "request_gap_seconds": 0.2,
+  "capture_repeated": false
+}

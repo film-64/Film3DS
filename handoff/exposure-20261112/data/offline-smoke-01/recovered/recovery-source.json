@@ -1,0 +1,8 @@
+{
+  "device": "192.168.0.26",
+  "source": "/3ds/Film3DS/probes/run-1293846085-000",
+  "method": "FTP read-only",
+  "chunk_bytes": 16384,
+  "persistent_control": true,
+  "started_unix": 1794409339.277895
+}

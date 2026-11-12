@@ -1,0 +1,32 @@
+FILMRAM 2
+run ram:/run-1293909713
+complete 1
+failed 0
+count 27
+0 calls.csv 275137 18d1abe7
+1 reads.csv 1323550 d884060f
+2 frames.csv 29378 cf07602a
+3 manifest.txt 5830 86cd9d7b
+4 ipc.csv 11739902 e725885c
+5 lifecycle.txt 0 00000000
+6 s1-p002-preflight_single.pgm 307215 43e93e12
+7 calibration_plan.csv 978 eef5f84c
+8 frame_burst.csv 1097 aaccdfc1
+9 roi.csv 125929 aaf0b6b0
+10 noise.csv 1025 2c93c769
+11 execution.csv 23670 dd9da727
+12 s1-p003-auto_seed.pgm 307215 3ed3fb30
+13 s1-p004-auto_normal_base.yuyv 614400 386aeecf
+14 s1-p005-auto_normal_0.yuyv 614400 a2002af8
+15 s1-p006-auto_normal_1.yuyv 614400 116a9d2f
+16 s1-p007-auto_normal_2.yuyv 614400 59bf9127
+17 s1-p008-auto_gain_base.yuyv 614400 ba2cbfb7
+18 s1-p009-auto_gain_0210.yuyv 614400 3645019d
+19 s1-p010-auto_gain_0218.yuyv 614400 0f1a4ba5
+20 s1-p011-auto_gain_0220.yuyv 614400 a3928ac0
+21 s1-p012-auto_gain_0228.yuyv 614400 46a4d5b4
+22 s1-p013-auto_gain_0230.yuyv 614400 48a79459
+23 s1-p014-auto_gain_023c.yuyv 614400 b3c6e35a
+24 s1-p015-auto_digital_2.yuyv 614400 526d302c
+25 s1-p016-auto_digital_4.yuyv 614400 d72089f5
+26 s1-p017-auto_restore.yuyv 614400 299e3fe1

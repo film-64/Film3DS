@@ -1,0 +1,13 @@
+{
+  "source": "user updated meter reading after environment change",
+  "illumination_batch": "meter-02",
+  "iso": 100,
+  "f_number": 2.8,
+  "shutter_seconds": 0.008,
+  "reported_ev100": 10,
+  "computed_ev100": 9.936637939002571,
+  "app_for_this_reading": "not specified",
+  "target": "MBP trackpad carried forward from ongoing setup",
+  "field_of_view": "approximately matching 3DS per prior user confirmation",
+  "use": "new reference only; no cross-batch noise/absolute sensitivity assumption"
+}

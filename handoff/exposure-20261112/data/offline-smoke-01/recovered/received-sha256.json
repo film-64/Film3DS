@@ -1,0 +1,67 @@
+[
+  {
+    "name": "manifest.txt",
+    "bytes": 2260,
+    "sha256": "1bdb01fe6639cdeca10a3535e696d2bf0bad3b4bbb1e521a9ed24adfbf72d094"
+  },
+  {
+    "name": "frames.csv",
+    "bytes": 2473,
+    "sha256": "bca5685ff2f6afca244c37b6c4f01702f4ce534ee9bfc97c7288ab1d691e4670"
+  },
+  {
+    "name": "calls.csv",
+    "bytes": 23812,
+    "sha256": "58fcb17bfabe2a397049a312997dff0382c2d16c0ddc341eb2395db4140c42dd"
+  },
+  {
+    "name": "reads.csv",
+    "bytes": 87357,
+    "sha256": "f7f3e86b8fa072f43062d3091afb2610aa5450ae342888e5210febabb2e9947e"
+  },
+  {
+    "name": "calibration_plan.csv",
+    "bytes": 147,
+    "sha256": "e44d29797cdecd0cb3bf104f078559341bdbbbc96e3d56e1858612846d0a641c"
+  },
+  {
+    "name": "crash_dump_00000008.dmp",
+    "bytes": 3144,
+    "sha256": "7660df5ba72468627eee7185a0a21a5aaefb7b76113f8342df18d4cb8a94e464"
+  },
+  {
+    "name": "execution.csv",
+    "bytes": 1462,
+    "sha256": "663211cdac741a0602eb65b8929b839ce5d10435a9c992353dbce4c77bc52780"
+  },
+  {
+    "name": "frame_burst.csv",
+    "bytes": 75,
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "name": "noise.csv",
+    "bytes": 138,
+    "sha256": "0813c429fc64d47203fe10b4e008a49552115df8a56c8a0cd3f5d73a2508b5d1"
+  },
+  {
+    "name": "roi.csv",
+    "bytes": 7918,
+    "sha256": "bdb5198e73b6a24e7f99ea7a52eb47a0eb4381091660537f94fc47bfdd1fef3d"
+  },
+  {
+    "name": "s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "80a27d6622393e760fd28487d013503ea391129ee1584ba5d86def499d9f88fe"
+  },
+  {
+    "name": "s1-p003-cal_r8_auto.pgm",
+    "bytes": 307215,
+    "sha256": "50b9227042eca71b89186be8dafeb57eac9c85c2ba2df6dbb6ff2a3b102a03c6"
+  },
+  {
+    "name": "ipc.csv",
+    "bytes": 817466,
+    "sha256": "30ea0c432484fd0f20fecb56fa6e0f5fe273930846f3bec65be21155aa2c1d0f"
+  }
+]

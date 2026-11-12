@@ -1,0 +1,980 @@
+{
+  "schema": "sensor1-normal-photo-center-y-inverse-cubic-v1",
+  "boundary": "offline_analysis_only_no_camera_or_runtime_mutation",
+  "sensor": 1,
+  "response": {
+    "equation": "Ceq15 = a0 + a1*u + a2*u^2 + a3*u^3; u=center_Y/255",
+    "coefficients": [
+      3.36242852336696,
+      138.87753535986718,
+      33.769154578397604,
+      665.7970983585049
+    ],
+    "valid_y": [
+      20.59838867,
+      212.53177897
+    ],
+    "training_points_coarse_y_phase": [
+      [
+        4,
+        2.075561525,
+        21
+      ],
+      [
+        16,
+        20.59838867,
+        23
+      ],
+      [
+        64,
+        75.400512695,
+        25
+      ],
+      [
+        176,
+        131.6640625,
+        27
+      ],
+      [
+        528,
+        212.53177897,
+        29
+      ]
+    ],
+    "scope": "normal-photo measured center-ROI response, original meter01 scene; not universal radiometry"
+  },
+  "fixed_gain_exposure_decision": {
+    "formula": "Cnext=Ccurrent*Ceq15(Ytarget)/Ceq15(Yobserved)",
+    "requirements": "unchanged complete four-channel gain vector, digital gain, mode and output response",
+    "result_kind": "predicted coarse integration, not newly hardware-tested setting",
+    "no_hardware_actions": true
+  },
+  "timing": {
+    "15fps_period_seconds": 0.06666666666666667,
+    "30fps_period_seconds": 0.03328571428571429,
+    "15fps_row_seconds": 9.46969696969697e-05,
+    "30fps_row_seconds": 6.425813568670712e-05,
+    "formula": "t_coarse=C*measured_DMA_frame_period/frame_lines",
+    "absolute_optical_time_verified": false,
+    "fine_3014": 633,
+    "fine_offset_included": false
+  },
+  "meter02_reference": {
+    "source": "user updated meter reading after environment change",
+    "illumination_batch": "meter-02",
+    "iso": 100,
+    "f_number": 2.8,
+    "shutter_seconds": 0.008,
+    "reported_ev100": 10,
+    "computed_ev100": 9.936637939002571,
+    "app_for_this_reading": "not specified",
+    "target": "MBP trackpad carried forward from ongoing setup",
+    "field_of_view": "approximately matching 3DS per prior user confirmation",
+    "use": "new reference only; no cross-batch noise/absolute sensitivity assumption"
+  },
+  "reference_ei_model": {
+    "formula": "EI=100*(0.008/t_coarse)*Ceq15(Y)/Ceq15(118)",
+    "nominal_aperture": 2.8,
+    "target_y_convention": 118.0,
+    "absolute_iso_verified": false,
+    "cross_illumination_transfer_verified": false,
+    "assumptions": [
+      "nominal f/2.8 and the supplied meter02 reference apply",
+      "meter02 scan uses same output-response function as the calibrated meter01 curve",
+      "center-mean response may be used as a scalar exposure proxy",
+      "Y118 is the chosen output criterion; it is not a measured gray-card reflectance"
+    ],
+    "fine_plus_scenario": "EI adjusted by 7/(7+633/843); sensitivity only, not an optical calibration",
+    "baseline_0220_ei_repeats": [
+      183.36291487358721,
+      173.52103918718984,
+      175.43254132664504,
+      172.92626174945696,
+      175.73713634840374,
+      180.73900041952444,
+      179.69623984673453
+    ],
+    "baseline_0220_ei_span_ev": 0.08454490051902694,
+    "0220_target_vs_baseline_median_ev": -0.14440097351071227,
+    "gain_rows": [
+      {
+        "code": "0x0210",
+        "core_302a": 4,
+        "phase": 5,
+        "center_y": 9.13252767,
+        "model_domain_supported": false,
+        "nominal_reference_ei": null,
+        "fine_plus_sensitivity_ei": null,
+        "status": "rejected_dark_domain",
+        "relative_effective_gain_to_0220": null,
+        "relative_ev_to_0220": null
+      },
+      {
+        "code": "0x0218",
+        "core_302a": 6,
+        "phase": 7,
+        "center_y": 18.159830725,
+        "model_domain_supported": false,
+        "nominal_reference_ei": null,
+        "fine_plus_sensitivity_ei": null,
+        "status": "rejected_dark_domain",
+        "relative_effective_gain_to_0220": null,
+        "relative_ev_to_0220": null
+      },
+      {
+        "code": "0x0220",
+        "core_302a": 8,
+        "phase": 9,
+        "center_y": 25.9613444,
+        "model_domain_supported": true,
+        "nominal_reference_ei": 158.9990468353879,
+        "fine_plus_sensitivity_ei": 143.59555790872727,
+        "status": "conditional_meter02_EI_not_absolute_ISO",
+        "relative_effective_gain_to_0220": 1.0,
+        "relative_ev_to_0220": 0.0
+      },
+      {
+        "code": "0x0228",
+        "core_302a": 10,
+        "phase": 11,
+        "center_y": 37.287841795000006,
+        "model_domain_supported": true,
+        "nominal_reference_ei": 226.86768864094248,
+        "fine_plus_sensitivity_ei": 204.8892302831652,
+        "status": "conditional_meter02_EI_not_absolute_ISO",
+        "relative_effective_gain_to_0220": 1.4268493626620236,
+        "relative_ev_to_0220": 0.5128330326329682
+      },
+      {
+        "code": "0x0230",
+        "core_302a": 12,
+        "phase": 13,
+        "center_y": 45.709594725,
+        "model_domain_supported": true,
+        "nominal_reference_ei": 284.3066829790089,
+        "fine_plus_sensitivity_ei": 256.7636572174979,
+        "status": "conditional_meter02_EI_not_absolute_ISO",
+        "relative_effective_gain_to_0220": 1.7881030650036052,
+        "relative_ev_to_0220": 0.8384298948457694
+      },
+      {
+        "code": "0x023C",
+        "core_302a": 14,
+        "phase": 15,
+        "center_y": 56.22607422,
+        "model_domain_supported": true,
+        "nominal_reference_ei": 366.45984320251773,
+        "fine_plus_sensitivity_ei": 330.95799429722325,
+        "status": "conditional_meter02_EI_not_absolute_ISO",
+        "relative_effective_gain_to_0220": 2.3047927047129693,
+        "relative_ev_to_0220": 1.2046369991009285
+      }
+    ]
+  },
+  "observed_complete_controls": [
+    {
+      "dataset": "integrations",
+      "phase": 4,
+      "label": "cal_r8_baseline",
+      "coarse": 390,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 518,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 161.266194665,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 5,
+      "label": "cal_r8_t1",
+      "coarse": 1,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 518,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 0.0,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 7,
+      "label": "cal_r8_t4",
+      "coarse": 4,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 518,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 0.579996745,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 9,
+      "label": "cal_r8_t16",
+      "coarse": 16,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 518,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 10.53922526,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 11,
+      "label": "cal_r8_t64",
+      "coarse": 64,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 518,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 57.326049805,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 13,
+      "label": "cal_r8_t129",
+      "coarse": 129,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 518,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 88.677205405,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 15,
+      "label": "cal_r8_t388",
+      "coarse": 388,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 518,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 157.12080892,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 18,
+      "label": "cal_r0_baseline",
+      "coarse": 264,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 157.433024085,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 19,
+      "label": "cal_r0_t1",
+      "coarse": 1,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 0.0,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 21,
+      "label": "cal_r0_t4",
+      "coarse": 4,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 2.075561525,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 23,
+      "label": "cal_r0_t16",
+      "coarse": 16,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 20.59838867,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 25,
+      "label": "cal_r0_t64",
+      "coarse": 64,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 75.400512695,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 27,
+      "label": "cal_r0_t176",
+      "coarse": 176,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 131.6640625,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "integrations",
+      "phase": 29,
+      "label": "cal_r0_t528",
+      "coarse": 528,
+      "four_channel_codes": [
+        544,
+        586,
+        549,
+        544
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 212.53177897,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "gain",
+      "phase": 5,
+      "label": "cal_code_0210",
+      "coarse": 7,
+      "four_channel_codes": [
+        528,
+        528,
+        528,
+        528
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 9.13252767,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "gain",
+      "phase": 7,
+      "label": "cal_code_0218",
+      "coarse": 7,
+      "four_channel_codes": [
+        536,
+        536,
+        536,
+        536
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 18.159830725,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "gain",
+      "phase": 9,
+      "label": "cal_code_0220",
+      "coarse": 7,
+      "four_channel_codes": [
+        544,
+        544,
+        544,
+        544
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 25.9613444,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "gain",
+      "phase": 11,
+      "label": "cal_code_0228",
+      "coarse": 7,
+      "four_channel_codes": [
+        552,
+        552,
+        552,
+        552
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 37.287841795000006,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "gain",
+      "phase": 13,
+      "label": "cal_code_0230",
+      "coarse": 7,
+      "four_channel_codes": [
+        560,
+        560,
+        560,
+        560
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 45.709594725,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "gain",
+      "phase": 15,
+      "label": "cal_code_023c",
+      "coarse": 7,
+      "four_channel_codes": [
+        572,
+        572,
+        572,
+        572
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 56.22607422,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "slow",
+      "phase": 4,
+      "label": "cal_r5_baseline",
+      "coarse": 264,
+      "four_channel_codes": [
+        544,
+        596,
+        548,
+        544
+      ],
+      "frame_lines": 2114,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 162.12980143,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "slow",
+      "phase": 5,
+      "label": "cal_r5_t1",
+      "coarse": 1,
+      "four_channel_codes": [
+        544,
+        596,
+        548,
+        544
+      ],
+      "frame_lines": 2114,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 0.0,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "slow",
+      "phase": 7,
+      "label": "cal_r5_t4",
+      "coarse": 4,
+      "four_channel_codes": [
+        544,
+        596,
+        548,
+        544
+      ],
+      "frame_lines": 2114,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 2.3192952499999997,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "slow",
+      "phase": 9,
+      "label": "cal_r5_t16",
+      "coarse": 16,
+      "four_channel_codes": [
+        544,
+        596,
+        548,
+        544
+      ],
+      "frame_lines": 2114,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 20.586425785000003,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "slow",
+      "phase": 11,
+      "label": "cal_r5_t64",
+      "coarse": 64,
+      "four_channel_codes": [
+        544,
+        596,
+        548,
+        544
+      ],
+      "frame_lines": 2114,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 79.46341960000001,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "slow",
+      "phase": 13,
+      "label": "cal_r5_t528",
+      "coarse": 528,
+      "four_channel_codes": [
+        544,
+        596,
+        548,
+        544
+      ],
+      "frame_lines": 2114,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 222.43200683499998,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "slow",
+      "phase": 15,
+      "label": "cal_r5_t1585",
+      "coarse": 1585,
+      "four_channel_codes": [
+        544,
+        596,
+        548,
+        544
+      ],
+      "frame_lines": 2114,
+      "line_pck": 842,
+      "digital_3032": 256,
+      "center_y": 255.0,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "digital",
+      "phase": 4,
+      "label": "cal_r0_baseline",
+      "coarse": 264,
+      "four_channel_codes": [
+        544,
+        594,
+        549,
+        544
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 256,
+      "center_y": 163.47135416499998,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "digital",
+      "phase": 5,
+      "label": "cal_digital_2",
+      "coarse": 264,
+      "four_channel_codes": [
+        1056,
+        1106,
+        1061,
+        1056
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 512,
+      "center_y": 221.993286135,
+      "measured_frames": 12
+    },
+    {
+      "dataset": "digital",
+      "phase": 7,
+      "label": "cal_digital_4",
+      "coarse": 264,
+      "four_channel_codes": [
+        2080,
+        2130,
+        2085,
+        2080
+      ],
+      "frame_lines": 704,
+      "line_pck": 843,
+      "digital_3032": 1024,
+      "center_y": 252.07495117000002,
+      "measured_frames": 12
+    }
+  ],
+  "validation": {
+    "criterion_ev": 0.25,
+    "leave_one_exposure_out": [
+      {
+        "phase": 23,
+        "actual_coarse": 16,
+        "predicted_coarse": 14.354860568547792,
+        "error_ev": -0.1565325876669215
+      },
+      {
+        "phase": 25,
+        "actual_coarse": 64,
+        "predicted_coarse": 66.35711323056339,
+        "error_ev": 0.05217922020254768
+      },
+      {
+        "phase": 27,
+        "actual_coarse": 176,
+        "predicted_coarse": 171.02129622405727,
+        "error_ev": -0.04139944267639627
+      }
+    ],
+    "cross_30fps_unfitted": [
+      {
+        "phase": 11,
+        "label": "cal_r8_t64",
+        "actual_model_seconds": 0.0041125206839492555,
+        "predicted_seconds_from_y": 0.00415287058056606,
+        "error_ev": 0.01408597762194423
+      },
+      {
+        "phase": 13,
+        "label": "cal_r8_t129",
+        "actual_model_seconds": 0.008289299503585219,
+        "predicted_seconds_from_y": 0.007930053210979098,
+        "error_ev": -0.06391964382932962
+      },
+      {
+        "phase": 15,
+        "label": "cal_r8_t388",
+        "actual_model_seconds": 0.024932156646442362,
+        "predicted_seconds_from_y": 0.024384638433902768,
+        "error_ev": -0.03203510140808462
+      }
+    ],
+    "temporal_holdout_frames": 19,
+    "temporal_holdout_max_abs_ev": 0.07131613902496736,
+    "temporal_holdout_rmse_ev": 0.037581641429830184,
+    "slow_baseline_scaled_unfitted": [
+      {
+        "phase": 5,
+        "coarse": 1,
+        "y": 0.0,
+        "predicted_coarse": null,
+        "error_ev": null,
+        "status": "outside_response_domain"
+      },
+      {
+        "phase": 7,
+        "coarse": 4,
+        "y": 2.3192952499999997,
+        "predicted_coarse": null,
+        "error_ev": null,
+        "status": "outside_response_domain"
+      },
+      {
+        "phase": 9,
+        "coarse": 16,
+        "y": 20.586425785000003,
+        "predicted_coarse": null,
+        "error_ev": null,
+        "status": "outside_response_domain"
+      },
+      {
+        "phase": 11,
+        "coarse": 64,
+        "y": 79.46341960000001,
+        "predicted_coarse": 66.91442545064596,
+        "error_ev": 0.06424535631714591,
+        "status": "within_engineering_tolerance"
+      },
+      {
+        "phase": 13,
+        "coarse": 528,
+        "y": 222.43200683499998,
+        "predicted_coarse": null,
+        "error_ev": null,
+        "status": "outside_response_domain"
+      },
+      {
+        "phase": 15,
+        "coarse": 1585,
+        "y": 255.0,
+        "predicted_coarse": null,
+        "error_ev": null,
+        "status": "outside_response_domain"
+      }
+    ],
+    "exposure_decision_30fps_pairs": [
+      {
+        "from_phase": 11,
+        "to_phase": 13,
+        "predicted_coarse": 122.21026291493148,
+        "actual_coarse": 129,
+        "error_ev": -0.07800562145127357
+      },
+      {
+        "from_phase": 11,
+        "to_phase": 15,
+        "predicted_coarse": 375.7923175051258,
+        "actual_coarse": 388,
+        "error_ev": -0.046121079030028905
+      },
+      {
+        "from_phase": 13,
+        "to_phase": 11,
+        "predicted_coarse": 67.55570115864053,
+        "actual_coarse": 64,
+        "error_ev": 0.07800562145127368
+      },
+      {
+        "from_phase": 13,
+        "to_phase": 15,
+        "predicted_coarse": 396.67052342326934,
+        "actual_coarse": 388,
+        "error_ev": 0.031884542421244874
+      },
+      {
+        "from_phase": 15,
+        "to_phase": 11,
+        "predicted_coarse": 66.07905176151263,
+        "actual_coarse": 64,
+        "error_ev": 0.04612107903002879
+      },
+      {
+        "from_phase": 15,
+        "to_phase": 13,
+        "predicted_coarse": 126.18028576474725,
+        "actual_coarse": 129,
+        "error_ev": -0.031884542421244874
+      }
+    ],
+    "raw_pgm_roi_checks": [
+      {
+        "file": "offline-full-01/recovered/s1-p021-cal_r0_t4.pgm",
+        "last_frame_mean_error": -4.7916666190417345e-09
+      },
+      {
+        "file": "offline-full-01/recovered/s1-p023-cal_r0_t16.pgm",
+        "last_frame_mean_error": 1.4583321217287448e-09
+      },
+      {
+        "file": "offline-full-01/recovered/s1-p025-cal_r0_t64.pgm",
+        "last_frame_mean_error": -2.083325512103329e-09
+      },
+      {
+        "file": "offline-full-01/recovered/s1-p027-cal_r0_t176.pgm",
+        "last_frame_mean_error": 2.2916708530829055e-09
+      },
+      {
+        "file": "offline-full-01/recovered/s1-p029-cal_r0_t528.pgm",
+        "last_frame_mean_error": -2.9166642434574896e-09
+      },
+      {
+        "file": "offline-full-01/recovered/s1-p011-cal_r8_t64.pgm",
+        "last_frame_mean_error": -2.9166642434574896e-09
+      },
+      {
+        "file": "offline-full-01/recovered/s1-p013-cal_r8_t129.pgm",
+        "last_frame_mean_error": -2.0833113012486137e-10
+      },
+      {
+        "file": "offline-full-01/recovered/s1-p015-cal_r8_t388.pgm",
+        "last_frame_mean_error": -3.5416576338320738e-09
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p004-cal_codes_baseline.pgm",
+        "last_frame_mean_error": 4.166668787775052e-09
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p005-cal_code_0210.pgm",
+        "last_frame_mean_error": -2.0833468283854017e-10
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p006-cal_restore.pgm",
+        "last_frame_mean_error": 1.0416663087653433e-09
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p007-cal_code_0218.pgm",
+        "last_frame_mean_error": 3.7499994220979715e-09
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p008-cal_restore.pgm",
+        "last_frame_mean_error": -6.250004958019417e-10
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p009-cal_code_0220.pgm",
+        "last_frame_mean_error": 2.0833326175306865e-09
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p010-cal_restore.pgm",
+        "last_frame_mean_error": -6.250004958019417e-10
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p011-cal_code_0228.pgm",
+        "last_frame_mean_error": -4.375003470613592e-09
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p012-cal_restore.pgm",
+        "last_frame_mean_error": -2.9166677961711684e-09
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p013-cal_code_0230.pgm",
+        "last_frame_mean_error": 2.7083331133326283e-09
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p014-cal_restore.pgm",
+        "last_frame_mean_error": -1.2500009916038834e-09
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p015-cal_code_023c.pgm",
+        "last_frame_mean_error": -8.333387313541607e-10
+      },
+      {
+        "file": "ram-codes-fine-01/recovered/s1-p016-cal_restore.pgm",
+        "last_frame_mean_error": -4.166668787775052e-09
+      }
+    ],
+    "15fps_response_and_30fps_transfer_pass": true
+  },
+  "input_sha256": {
+    "offline-full-01/analysis-prefix/calibration_plan.csv": "7df3f1c1cb73dcffa03bdc95d6f73b434f42d10a3ede3cd430cbafcc58370e6d",
+    "offline-full-01/analysis-prefix/frames.csv": "e0ea33719a1168c846fe1a78a2c420f8293eb80c0a125010df7b61b828fc10e0",
+    "offline-full-01/analysis-prefix/reads.csv": "b2fea720711f653325bac1a6ac43b0863c2284cb548a81aa455d9ffc272f3496",
+    "offline-full-01/analysis-prefix/roi.csv": "99c7d518569e09d350e6399b5879ec21ad59b00e8547191f69b552c0a93e5bc4",
+    "offline-full-01/analysis-prefix/noise.csv": "e4da2e849e13c3e96f3058fd025fe7c0d87eb9a8cefcd0bd6eba363cb035babe",
+    "offline-full-01/analysis-prefix/manifest.txt": "7a4f86dab9aaae9de8deb03f2b8d55787dc382921e8ab7ec981e99e2d0bd8bbe",
+    "offline-full-01/analysis-prefix/frame_burst.csv": "651e4293bb97d741f46856b8616f2399f14044acb5a6fa811bbed7355a88121e",
+    "ram-codes-fine-01/recovered/calibration_plan.csv": "eea25650f5733d058c2bebba7152199f16f3342f27c427862e47fec7b9da37ba",
+    "ram-codes-fine-01/recovered/frames.csv": "af1c6401dd323c93c0cac195b63a419c0789accc6aa774da94a325c2f826494e",
+    "ram-codes-fine-01/recovered/reads.csv": "79d54d243249ab79b001cace2f96791ab534f5e5b572a6e145c7b9f622facd75",
+    "ram-codes-fine-01/recovered/roi.csv": "a477042b99e2fd1f2c173cda46d138a880cc01c3b03d67cd34c1897f2867da39",
+    "ram-codes-fine-01/recovered/noise.csv": "d6a599b517452461963a9a66489a32def6ede445a97a44af8db6977fca28dd22",
+    "ram-codes-fine-01/recovered/manifest.txt": "51bb283c5577aa682d2be059121c7cff92f206b72bd3d55eb7b1ae4cac422eec",
+    "ram-codes-fine-01/recovered/frame_burst.csv": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe",
+    "slow-part-01/recovered/calibration_plan.csv": "d2e91f24821e47f486d1d36747d73f6c33e217d546e5effb2dbd44c9c30fdb59",
+    "slow-part-01/recovered/frames.csv": "026364191617142cfa460bf999a57e55f1554d6d232a1c46efcd0708fc37695b",
+    "slow-part-01/recovered/reads.csv": "9d266362c22410133cd95feadbf6295d7e72306cfdfc64df52701cac1354ceab",
+    "slow-part-01/recovered/roi.csv": "3871d5c944fa21606f7ea636dfa30bdfaa0a02f7039154295845c0d56a47c7af",
+    "slow-part-01/recovered/noise.csv": "8f44d61551317b1c808aa59cc240f051153a65ce9a9bcff87715ff3b2778969c",
+    "slow-part-01/recovered/manifest.txt": "d9280653d7d3dddbc8da1e2253b517665e8d9853a83ed8e25270e7fbb13cf525",
+    "slow-part-01/recovered/frame_burst.csv": "ec9fff61447cdf0c7590bae6ffc3ed30aee0702b21d10bbccf806a01ceeb4092",
+    "digital-part-01/recovered/calibration_plan.csv": "46935c235e213dbe02dfa02c4b4f4458d3859d6c9db6c8a94d2befeeeb21732e",
+    "digital-part-01/recovered/frames.csv": "556d7c46193fd2a07a0bbeb7ab34dba8eebd205aba37ec64d37324a55d03fe6a",
+    "digital-part-01/recovered/reads.csv": "cae20a4c52e474071a04b535669e1d3ae8d10c002cacd533b8e08302dc5d9152",
+    "digital-part-01/recovered/roi.csv": "fd7cf1209cc73422eee2f65db31974e3099105675630ee03b2683f04f122594c",
+    "digital-part-01/recovered/noise.csv": "45bd9603ac818f77f116cec888778b4bb45e0bf0b1e929b595bcb89216fdea7f",
+    "digital-part-01/recovered/manifest.txt": "37e42ccc6f7681aa161b3ab1b68d457a3bd11c77662a42f824c9bdd795c3f0f0",
+    "digital-part-01/recovered/frame_burst.csv": "e14c87b21bd055956f0bea9781e4483a7d1f6afe44ccdcba14847dee3ea03225",
+    "external-meter-reference-02.json": "f37479c9a9858ee7ccccfc5642061d4f3016f35520a4671d3bd08720e46e0207",
+    "offline-full-01/recovered/reads.csv": "a26db5f5358a6215b4f7b7d02e72defc7591d408f73d243b8262e731cb653748",
+    "offline-full-01/recovered/frames.csv": "e0ea33719a1168c846fe1a78a2c420f8293eb80c0a125010df7b61b828fc10e0",
+    "offline-full-01/recovered/calibration_plan.csv": "7df3f1c1cb73dcffa03bdc95d6f73b434f42d10a3ede3cd430cbafcc58370e6d",
+    "offline-full-01/recovered/manifest.txt": "7a4f86dab9aaae9de8deb03f2b8d55787dc382921e8ab7ec981e99e2d0bd8bbe",
+    "offline-full-01/recovered/s1-p021-cal_r0_t4.pgm": "bfec52f663fd99c845e5e3fd12a9bb4f68030adb7d45befe02bd312aa39e43ee",
+    "offline-full-01/recovered/s1-p023-cal_r0_t16.pgm": "506700567e5a340123177a1fca381f5582d71f3539358fe9722b11a07dc15eb1",
+    "offline-full-01/recovered/s1-p025-cal_r0_t64.pgm": "567e228e072db670c1f0e90396677ba5f33c7e62001eabe79a995d0982600d7e",
+    "offline-full-01/recovered/s1-p027-cal_r0_t176.pgm": "3ab3d8440e166af05523a08b2bf6fd3de3cea040ca3adb730082e8b75ce07b47",
+    "offline-full-01/recovered/s1-p029-cal_r0_t528.pgm": "cdd24eaae3d8332852e87a21baee08248708943453c6b7c63f3887da67db90e8",
+    "offline-full-01/recovered/s1-p011-cal_r8_t64.pgm": "b96cbe6ff28612642ebccbdc216c811b511c7fe3cb5d500029eeb992fc379667",
+    "offline-full-01/recovered/s1-p013-cal_r8_t129.pgm": "8d301c1cecfbc5810b15360b5bd409ccf50ea75c654452375b4312775a6b3327",
+    "offline-full-01/recovered/s1-p015-cal_r8_t388.pgm": "0f103f08e0d303897392d1b04b55f36269755ddda04e6bc0eff0b2b78c3647fe",
+    "ram-codes-fine-01/recovered/s1-p004-cal_codes_baseline.pgm": "d433a62a471d334922e0b5f8117141d44c9780e3b5bef178561626520dc7e762",
+    "ram-codes-fine-01/recovered/s1-p005-cal_code_0210.pgm": "d71ab63d7f4156b43477e75d5fbe06ac6cdcf420f83a1feda77fd5d65fc44440",
+    "ram-codes-fine-01/recovered/s1-p006-cal_restore.pgm": "359941e379e94f588be22cb0932dca13307be175759e35c347a8aeb25687dd6e",
+    "ram-codes-fine-01/recovered/s1-p007-cal_code_0218.pgm": "5c535e9c64574b3cf88c66c2cb66945deda8301e6319a7f6a3e23476ae2c50fe",
+    "ram-codes-fine-01/recovered/s1-p008-cal_restore.pgm": "5cac6528d4910a0d44613bcf909c2f2a1492c6f84087c114915f2b61a0e6b851",
+    "ram-codes-fine-01/recovered/s1-p009-cal_code_0220.pgm": "8ee227add612e1e6d44f550e516287966c9f1f49b2083b462b1d4ca6305295e2",
+    "ram-codes-fine-01/recovered/s1-p010-cal_restore.pgm": "36a9335a50ae14e371c1d8da96682ae70c0510db74901c60eb074eb6c570c384",
+    "ram-codes-fine-01/recovered/s1-p011-cal_code_0228.pgm": "a7fec549ae6218a46f17fddceae356303d5b4fa0df0f42ed4f18045d99619c62",
+    "ram-codes-fine-01/recovered/s1-p012-cal_restore.pgm": "5409f10b9423d2b7ba0573d6453b1d22130964f64f193a7b5f4b87abcd774554",
+    "ram-codes-fine-01/recovered/s1-p013-cal_code_0230.pgm": "dbb2ac319b6714a1d33206bc022ddce163bbbcd5f2176098d139c6bb645b5270",
+    "ram-codes-fine-01/recovered/s1-p014-cal_restore.pgm": "dcae7b369354d3461603268142d9f16ef499ad71307a001cd97635aa513ce841",
+    "ram-codes-fine-01/recovered/s1-p015-cal_code_023c.pgm": "0bdd88417a8b0041e4fde026f3af4e1d6c9c4a42377ffe9b872dd74c799e67ee",
+    "ram-codes-fine-01/recovered/s1-p016-cal_restore.pgm": "f354c580f7cb1a2fd13acb78773da6f1e251dc68cbfeaeb824c95d85b1c5599c"
+  },
+  "limitations": [
+    "response validation is not validation of absolute ISO or optical shutter seconds",
+    "dark/saturated response is rejected, not extrapolated",
+    "a single scene-scale change was checked only at supported 5fps points",
+    "no arbitrary shutter/gain Cartesian product is presented as tested",
+    "single-frame restart capture only; no continuous-preview claim",
+    "original incomplete full run remains incomplete; only strictly complete stages are used"
+  ]
+}

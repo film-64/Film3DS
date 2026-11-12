@@ -1,0 +1,7 @@
+code,core_302a,phase,center_y,model_domain_supported,nominal_reference_ei,fine_plus_sensitivity_ei,status,relative_effective_gain_to_0220,relative_ev_to_0220
+0x0210,4,5,9.13252767,False,,,rejected_dark_domain,,
+0x0218,6,7,18.159830725,False,,,rejected_dark_domain,,
+0x0220,8,9,25.9613444,True,158.9990468353879,143.59555790872727,conditional_meter02_EI_not_absolute_ISO,1.0,0.0
+0x0228,10,11,37.287841795000006,True,226.86768864094248,204.8892302831652,conditional_meter02_EI_not_absolute_ISO,1.4268493626620236,0.5128330326329682
+0x0230,12,13,45.709594725,True,284.3066829790089,256.7636572174979,conditional_meter02_EI_not_absolute_ISO,1.7881030650036052,0.8384298948457694
+0x023C,14,15,56.22607422,True,366.45984320251773,330.95799429722325,conditional_meter02_EI_not_absolute_ISO,2.3047927047129693,1.2046369991009285

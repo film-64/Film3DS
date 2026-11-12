@@ -1,0 +1,16 @@
+{
+  "run": "run-1293847704-000",
+  "device_last_known": "192.168.0.26",
+  "source": "user screen transcription",
+  "phase": 33,
+  "message": "SD_LOG_ERROR",
+  "stream": 0,
+  "stream_source_mapping": "calls.csv",
+  "errno": -916437685,
+  "raw_hex": "C960454B",
+  "end": "INCOMPLETE inspect partial logs",
+  "captures": 605,
+  "failures": 1,
+  "startup_message": "collecting saved crash file no process mappings",
+  "interpretation": "SD log stream reported filesystem I/O failure; completeness and control restoration require raw file recovery; no automatic rerun"
+}

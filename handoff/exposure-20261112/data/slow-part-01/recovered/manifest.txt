@@ -1,0 +1,54 @@
+FILMPROBE schema=1 revision=5a1e62d-calibration5 new3ds=1 model_result=00000000 kernel=023a0000 settle_frames=8 measured_frames=12
+STORAGE block_bytes=65536 available_blocks=1439069 free_blocks=1439069
+OPTIONS direct=0 raw=0 acquisition=continuous deterministic_ipc=1 transfer=sd_only
+REQUEST only_sensor=1 first_phase=3 last_phase=16
+CALIBRATION contract=2 expected_stages=14 target=stable_scene lock_scope=per_capture units=raw_codes scope=slow
+LOG_POLICY frame_boundary buffers=32768 all_streams=1 retry=none
+CRASH_FILE name=crash_dump_00000008.dmp found=1 copied=1 bytes=3144
+CRASH_FILE name=crash_dump_00000008.dump found=0
+SERVICE sensor=1 name=cam:u open=00000000
+SERVICE_ID sensor=1 name=cam:u result=d8a053ea id=0000
+GETTER sensor=1 service=cam:u poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:u poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:c open=00000000
+SERVICE_ID sensor=1 name=cam:c result=00000000 id=2280
+GETTER sensor=1 service=cam:c poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:c poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:s open=00000000
+SERVICE_ID sensor=1 name=cam:s result=d8a053ea id=0000
+GETTER sensor=1 service=cam:s poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:s poison=1 result=00000000 ae_low8=1
+INIT_STEP stage=calibration_queries_begin
+CALIBRATION_REPLY command=0032 result=d8a053ea header=003201c0 valid=0 payload=0011d624000000010011fc40001013dd001156740000567a00000000000000000000000000000000000000000000000000000000000000000000000000000000
+CALIBRATION_REPLY command=002b result=00000000 header=002b0440 valid=1 payload=000000003f7fe7f33deaf0bfc2b50282bfe71a4c0000000000000000428281254282775e437a0000420c000001e0028000000000000000000000000000000000
+INIT_STEP stage=calibration_queries_end
+INIT_STEP stage=initial_snapshot_begin
+INIT_STEP stage=initial_snapshot_end
+ACQUISITION sensor=1 mode=continuous complete=0
+ACQUISITION_SELECTED sensor=1 mode=single_frame_restart reason=register_brackets_or_stream_failure
+ACQUISITION sensor=1 mode=single_frame_restart complete=1 lock_scope=per_capture_only
+CAL_STAGE sensor=1 phase=3 kind=seed controls_verified=1 restoring=0
+CAL_STAGE sensor=1 phase=4 kind=normalize controls_verified=1 restoring=0
+CAL_BURST sensor=1 rate=5 frames=24 expected=24 complete=1 evidence=dma_event_cadence
+CAL_STAGE sensor=1 phase=5 kind=integration controls_verified=1 restoring=0
+CAL_STAGE sensor=1 phase=6 kind=restore controls_verified=1 restoring=1
+CAL_PAIR sensor=1 phase=6 measured=1 restored=1
+CAL_STAGE sensor=1 phase=7 kind=integration controls_verified=1 restoring=0
+CAL_STAGE sensor=1 phase=8 kind=restore controls_verified=1 restoring=1
+CAL_PAIR sensor=1 phase=8 measured=1 restored=1
+CAL_STAGE sensor=1 phase=9 kind=integration controls_verified=1 restoring=0
+CAL_STAGE sensor=1 phase=10 kind=restore controls_verified=1 restoring=1
+CAL_PAIR sensor=1 phase=10 measured=1 restored=1
+CAL_STAGE sensor=1 phase=11 kind=integration controls_verified=1 restoring=0
+CAL_STAGE sensor=1 phase=12 kind=restore controls_verified=1 restoring=1
+CAL_PAIR sensor=1 phase=12 measured=1 restored=1
+CAL_STAGE sensor=1 phase=13 kind=integration controls_verified=1 restoring=0
+CAL_STAGE sensor=1 phase=14 kind=restore controls_verified=1 restoring=1
+CAL_PAIR sensor=1 phase=14 measured=1 restored=1
+CAL_STAGE sensor=1 phase=15 kind=integration controls_verified=1 restoring=0
+CAL_STAGE sensor=1 phase=16 kind=restore controls_verified=1 restoring=1
+CAL_PAIR sensor=1 phase=16 measured=1 restored=1
+CAL_PROFILE rate=5 reference_phase=4 complete=1 seed_restored=1
+SENSOR_END sensor=1 complete=1
+MEASUREMENTS expected=14 complete=14 all_complete=1
+END complete=1 aborted=0 io_error=0 captures=285 failures=1

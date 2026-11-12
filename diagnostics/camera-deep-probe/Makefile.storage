@@ -1,0 +1,35 @@
+.DEFAULT_GOAL := all
+.SUFFIXES:
+ifeq ($(strip $(DEVKITPRO)),)
+$(error Set DEVKITPRO to the devkitPro root)
+endif
+DEVKITARM ?= $(DEVKITPRO)/devkitARM
+include $(DEVKITARM)/3ds_rules
+export PATH := $(DEVKITPRO)/tools/bin:$(PATH)
+APP_TITLE := FilmStorageCheck
+APP_DESCRIPTION := Bounded SD write and readback diagnostic
+APP_AUTHOR := Film3DS
+ARCH := -march=armv6k -mtune=mpcore -mfpu=vfp -mfloat-abi=hard -mtp=soft
+CFLAGS = -std=gnu11 -O2 -g -Wall -Wextra -Werror -mword-relocations -ffunction-sections -fdata-sections $(ARCH) $(INCLUDE) -D__3DS__
+LDFLAGS = -specs=3dsx.specs $(ARCH) -Wl,--gc-sections,-Map,$(OUTPUT).map
+LIBS := -lctru -lm
+LD := $(CC)
+ifneq ($(notdir $(CURDIR)),build-storage)
+export TOPDIR := $(CURDIR)
+export OUTPUT := $(CURDIR)/FilmStorageCheck
+export INCLUDE := -I$(CTRULIB)/include
+export LIBPATHS := -L$(CTRULIB)/lib
+export OFILES := main.o
+export VPATH := $(CURDIR)/probes/storage
+export DEPSDIR := $(CURDIR)/build-storage
+.PHONY: all
+all:
+	@mkdir -p build-storage
+	$(MAKE) --no-print-directory -C build-storage -f $(TOPDIR)/Makefile.storage
+else
+_3DSXFLAGS := --smdh=$(OUTPUT).smdh
+all: $(OUTPUT).3dsx
+$(OUTPUT).3dsx: $(OUTPUT).elf $(OUTPUT).smdh
+$(OUTPUT).elf: $(OFILES)
+-include $(OFILES:.o=.d)
+endif

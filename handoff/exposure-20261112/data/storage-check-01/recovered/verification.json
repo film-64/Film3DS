@@ -1,0 +1,8 @@
+{
+  "device": "192.168.0.26",
+  "source": "/3ds/Film3DS/storage-checks/run-1293845800-000",
+  "pass_rows": 10,
+  "all_10_native_readback_crcs_match_independent_expected_patterns": true,
+  "source_report_sha256": "776abe7b3615aa68c3e5e0cdaf81b22ebabbccfc4a9082d635cc99f0052b1415",
+  "test_files": "retained on SD; deterministically reproducible; not downloaded"
+}

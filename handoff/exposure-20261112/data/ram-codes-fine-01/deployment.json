@@ -1,0 +1,25 @@
+{
+  "device": "192.168.0.26",
+  "netloader_port": 17491,
+  "binary_sha256": "64d0d99d8ff145c13dca4d92121738cb5192cbfb90df8791f5c004021efa457e",
+  "bytes": 307508,
+  "arguments": [
+    "--auto",
+    "--calibrate",
+    "--offline",
+    "--sensor=1",
+    "--calibration-part=codes-fine",
+    "--ram"
+  ],
+  "scope": "codes-fine 14 stages /168 measured frames; raw code response; shortened integration; RAM-only",
+  "illumination_batch": "meter-02",
+  "meter_reference": "../external-meter-reference-02.json",
+  "request_unix": 1794463686.1873422,
+  "previous_attempts": [
+    {
+      "request_unix": 1794463446.3444648,
+      "result": "connection timeout before NetLoader handshake; ARP incomplete"
+    }
+  ],
+  "deployed": true
+}

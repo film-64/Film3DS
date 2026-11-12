@@ -1,0 +1,67 @@
+FILMPROBE schema=1 revision=exposure-auto-v1 new3ds=1 model_result=00000000 kernel=023a0000 settle_frames=8 measured_frames=12
+OPTIONS direct=0 raw=1 acquisition=continuous deterministic_ipc=1 transfer=ram_http
+RAM_EVIDENCE contract=2 bytes=29360128 sd_writes=0 freeze_after_camera=1 no_compression=1 retry=none
+REQUEST only_sensor=1 first_phase=3 last_phase=17
+EXPOSURE_AUTOMATION contract=1 source=exposure-auto max_stages=15 normal_steps=3 sensor=1 fps=15 coarse_min=1 coarse_max=528 target_linear=0.18 tolerance_ev=0.125 raw_locked=1 retry=none
+LOG_POLICY frame_boundary buffers=32768 all_streams=1 retry=none
+CRASH_COLLECTION skipped_existing_dump_already_recovered ram_mode=1
+SERVICE sensor=1 name=cam:u open=00000000
+SERVICE_ID sensor=1 name=cam:u result=d8a053ea id=0000
+GETTER sensor=1 service=cam:u poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:u poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:c open=00000000
+SERVICE_ID sensor=1 name=cam:c result=00000000 id=2280
+GETTER sensor=1 service=cam:c poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:c poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:s open=00000000
+SERVICE_ID sensor=1 name=cam:s result=d8a053ea id=0000
+GETTER sensor=1 service=cam:s poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:s poison=1 result=00000000 ae_low8=1
+INIT_STEP stage=calibration_queries_begin
+CALIBRATION_REPLY command=0032 result=d8a053ea header=003201c0 valid=0 payload=0011d624000000010011fc40001013dd001156740000567a00000000000000000000000000000000000000000000000000000000000000000000000000000000
+CALIBRATION_REPLY command=002b result=00000000 header=002b0440 valid=1 payload=000000003f7fe7f33deaf0bfc2b50282bfe71a4c0000000000000000428281254282775e437a0000420c000001e0028000000000000000000000000000000000
+INIT_STEP stage=calibration_queries_end
+INIT_STEP stage=initial_snapshot_begin
+INIT_STEP stage=initial_snapshot_end
+ACQUISITION sensor=1 mode=continuous complete=0
+ACQUISITION_SELECTED sensor=1 mode=single_frame_restart reason=register_brackets_or_stream_failure
+ACQUISITION sensor=1 mode=single_frame_restart complete=1 lock_scope=per_capture_only
+CAL_STAGE sensor=1 phase=3 kind=seed controls_verified=1 restoring=0
+AUTO_METER phase=3 label=auto_seed complete=1 matrix=1 linear_luma=0.0810712172 last_linear_luma=0.0811084921 target=0.18
+CAL_STAGE sensor=1 phase=4 kind=code_baseline controls_verified=1 restoring=0
+AUTO_METER phase=4 label=auto_normal_base complete=1 matrix=1 linear_luma=0.0781503587 last_linear_luma=0.0785534394 target=0.18
+CAL_BURST sensor=1 rate=0 frames=24 expected=24 complete=1 evidence=dma_event_cadence
+AUTO_DECISION step=0 current=176 next=267 error_ev=1.20367251 gain_locked=1
+CAL_STAGE sensor=1 phase=5 kind=integration controls_verified=1 restoring=0
+AUTO_METER phase=5 label=auto_normal_0 complete=1 matrix=1 linear_luma=0.1295570647 last_linear_luma=0.1292654426 target=0.18
+AUTO_DECISION step=1 current=267 next=315 error_ev=0.47440922 gain_locked=1
+CAL_STAGE sensor=1 phase=6 kind=integration controls_verified=1 restoring=0
+AUTO_METER phase=6 label=auto_normal_1 complete=1 matrix=1 linear_luma=0.1539346649 last_linear_luma=0.1537413645 target=0.18
+AUTO_DECISION step=2 current=315 next=341 error_ev=0.22567875 gain_locked=1
+CAL_STAGE sensor=1 phase=7 kind=integration controls_verified=1 restoring=0
+AUTO_METER phase=7 label=auto_normal_2 complete=1 matrix=1 linear_luma=0.1670691573 last_linear_luma=0.1667405445 target=0.18
+AUTO_NORMAL outcome=converged coarse=341 linear_luma=0.1670691573 decisions=3
+CAL_STAGE sensor=1 phase=8 kind=code_baseline controls_verified=1 restoring=0
+AUTO_METER phase=8 label=auto_gain_base complete=1 matrix=1 linear_luma=0.0279224848 last_linear_luma=0.0278370623 target=0.18
+CAL_STAGE sensor=1 phase=9 kind=code controls_verified=1 restoring=0
+AUTO_METER phase=9 label=auto_gain_0210 complete=1 matrix=1 linear_luma=0.0092170626 last_linear_luma=0.0091868991 target=0.18
+CAL_STAGE sensor=1 phase=10 kind=code controls_verified=1 restoring=0
+AUTO_METER phase=10 label=auto_gain_0218 complete=1 matrix=1 linear_luma=0.0180338048 last_linear_luma=0.0179700838 target=0.18
+CAL_STAGE sensor=1 phase=11 kind=code controls_verified=1 restoring=0
+AUTO_METER phase=11 label=auto_gain_0220 complete=1 matrix=1 linear_luma=0.0273038328 last_linear_luma=0.0272393011 target=0.18
+CAL_STAGE sensor=1 phase=12 kind=code controls_verified=1 restoring=0
+AUTO_METER phase=12 label=auto_gain_0228 complete=1 matrix=1 linear_luma=0.0378255720 last_linear_luma=0.0377492193 target=0.18
+CAL_STAGE sensor=1 phase=13 kind=code controls_verified=1 restoring=0
+AUTO_METER phase=13 label=auto_gain_0230 complete=1 matrix=1 linear_luma=0.0495288745 last_linear_luma=0.0493636746 target=0.18
+CAL_STAGE sensor=1 phase=14 kind=code controls_verified=1 restoring=0
+AUTO_METER phase=14 label=auto_gain_023c complete=1 matrix=1 linear_luma=0.0659634091 last_linear_luma=0.0657664457 target=0.18
+CAL_STAGE sensor=1 phase=15 kind=digital controls_verified=1 restoring=0
+AUTO_METER phase=15 label=auto_digital_2 complete=1 matrix=1 linear_luma=0.0723560390 last_linear_luma=0.0721023936 target=0.18
+CAL_STAGE sensor=1 phase=16 kind=digital controls_verified=1 restoring=0
+AUTO_METER phase=16 label=auto_digital_4 complete=1 matrix=1 linear_luma=0.1615543932 last_linear_luma=0.1569983766 target=0.18
+CAL_STAGE sensor=1 phase=17 kind=restore controls_verified=1 restoring=0
+AUTO_METER phase=17 label=auto_restore complete=1 matrix=1 linear_luma=0.0739891323 last_linear_luma=0.0735059580 target=0.18
+AUTO_END source=exposure-auto complete=1 stages=15 max_stages=15 gain_points=6 digital_points=2 seed_restored=1 normal=converged
+SENSOR_END sensor=1 complete=1
+MEASUREMENTS expected=15 complete=15 all_complete=1
+END complete=1 aborted=0 io_error=0 captures=305 failures=1

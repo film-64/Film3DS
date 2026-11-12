@@ -1,0 +1,2 @@
+sensor,phase,label,kind,settle,measured,baseline_phase,write_mask,coarse,gain_gr,gain_b,gain_r,gain_gb,locked
+1,3,cal_r8_auto,seed,8,12,0,0,,,,,,0

@@ -45,3 +45,9 @@ FilmOS 仓库采用 GPL-2.0，资源另见第三方清单。分发由其代码�
 | T-CameraPlus-S3，嵌入式触屏 | `examples`、`components`、`main`，仓库 GPL-3.0，ESP-IDF 和 LVGL，240×240。 [固定版本](https://github.com/Xinyuan-LilyGO/T-CameraPlus-S3/tree/d2d6d36194569706c4a48b54d5af7b7d81f6592c) | 适合比较小屏和触摸交互。迁移需要 LVGL 显示／输入端口和摄像头重写。 |
 | Saturnix，实体胶片风格 | `firmware/` 为 MIT 的 Python 固件，文档和媒体另有许可；依赖 Raspberry Pi Zero 2 W、Picamera2 和 LCD。 [固定版本](https://github.com/Yutani140x/saturnix-camera/tree/9c37beffdb6d51b2edf4dccf40cb2df9e90dd6e9) | 可研究交互，硬件和图形栈都要替换。 |
 | Camera Sim，检索 Leica／Hasselblad 风格时核查的候选 | MIT 的 Vue 3、TypeScript、WebGL 浏览器光学模拟，资源许可另见 README。 [固定版本](https://github.com/congduan/camera-sim/tree/8f76d46a4f39108db27541d250ae442c5434b36b) | 有实际界面源码，运行环境与设备端无直接交集。此次检索没有确认兼具可复用源码、清晰许可与 3DS 可移植性的 Leica 或 Hasselblad 风格项目。 |
+
+## 胶片响应与相机取景
+
+Film3DS 的取景复用系统 `cam:u`。按原版相机离线分析确认的方式保持采集运行，完成一帧后重新提交下一块 DMA 缓冲，渲染循环只检查完成事件。参考 Magic Lantern 的分层方式，现场曝光与白平衡在相机侧处理，保存源图后才进行胶片冲洗。 [devkitPro CAM 接口](https://github.com/devkitPro/libctru/blob/master/libctru/include/3ds/services/cam.h) · [Magic Lantern 使用手册](https://github.com/frantony/magic-lantern/blob/master/doc/MANUAL.txt)
+
+胶片响应可使用 Kodak 技术资料中的感光、特性和染料密度曲线，以及 spektrafilm 已数字化的负片、相纸模型。在电脑上计算负片显影与印相，将点对点色调响应烘焙为 3DS 可采样的 33³ 色表。逐镜头校准仍需要参考输入。CAM 服务可读出的出厂参数用于记录硬件基线。 [Kodak E-4050](https://kodakprofessional.com/sites/default/files/wysiwyg/pro/resources/e4050_portra_400.pdf) · [spektrafilm 0.3.4](https://github.com/andreavolpato/spektrafilm/tree/3bb2c2d2801ff68b92019cf1dbcbb133d60832bc) · [Dehancer 的胶片测量流程](https://blog.dehancer.com/articles/how-we-build-film-profiles/)

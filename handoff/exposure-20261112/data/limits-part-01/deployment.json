@@ -1,0 +1,16 @@
+{
+  "device": "192.168.0.26",
+  "netloader_port": 17491,
+  "binary_sha256": "9640fa8d0b20543c706c89b9c4e45bdbf55cb1ac2e5853c9b64c43d04b3c7aa8",
+  "bytes": 299904,
+  "arguments": [
+    "--auto",
+    "--calibrate",
+    "--offline",
+    "--sensor=1",
+    "--calibration-part=limits"
+  ],
+  "scope": "limits 8 stages / 78 measured frames; finite 65535 coarse at 30 and 5 fps; restore; SD-only",
+  "request_unix": 1794414652.097315,
+  "deployed": true
+}

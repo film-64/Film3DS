@@ -1,0 +1,464 @@
+{
+  "contract": "exposure-auto/v5",
+  "source": "/Users/a64/Documents/Codex/Film3DS/build/hardware/exposure-deep/calibration/hardware-auto-04/recovered",
+  "illumination_batch": "auto-20261112-04",
+  "hardware_evidence_verified": false,
+  "registered_cycle_complete": false,
+  "normal_exposure": {
+    "outcome": "converged",
+    "coarse": "528",
+    "linear_luma": "0.1847093330",
+    "decisions": "0"
+  },
+  "reference_status": "bound_to_batch",
+  "reference": {
+    "illumination_batch": "auto-20261112-04",
+    "timing": "after_capture",
+    "readings": [
+      {
+        "meter": "A",
+        "iso": 100,
+        "f_number": 2.8,
+        "shutter_seconds_interval": [
+          0.25,
+          0.5
+        ],
+        "cct_kelvin": 3400
+      },
+      {
+        "meter": "B",
+        "iso": 100,
+        "f_number": 2.8,
+        "shutter_seconds": 0.5,
+        "cct_kelvin": 4100
+      }
+    ],
+    "notes": [
+      "User reports normal preview appears somewhat overexposed and low contrast.",
+      "Do not average meter readings or infer an exact midpoint."
+    ]
+  },
+  "photographic_exposure_references": [
+    {
+      "meter": "A",
+      "iso": 100.0,
+      "f_number": 2.8,
+      "shutter_seconds_interval": [
+        0.25,
+        0.5
+      ],
+      "ev100_interval": [
+        3.9708536543404835,
+        4.970853654340483
+      ],
+      "reported_cct_kelvin": 3400,
+      "batch_bound": true,
+      "timing": "after_capture",
+      "camera_iso_calibrated": false
+    },
+    {
+      "meter": "B",
+      "iso": 100.0,
+      "f_number": 2.8,
+      "shutter_seconds_interval": [
+        0.5,
+        0.5
+      ],
+      "ev100_interval": [
+        3.9708536543404835,
+        3.9708536543404835
+      ],
+      "reported_cct_kelvin": 4100,
+      "batch_bound": true,
+      "timing": "after_capture",
+      "camera_iso_calibrated": false
+    }
+  ],
+  "absolute_iso_calibrated": false,
+  "jpeg_comparison_kind": "derived_from_same_YUYV; validates metering/encoding, not an independent radiometric reference",
+  "images": [
+    {
+      "phase": 4,
+      "label": "auto_normal_base",
+      "source": "s1-p004-auto_normal_base.yuyv",
+      "source_sha256": "0324a9e271c5c1485928472755d398fdb142b8771536f20bff8b7caf122b75eb",
+      "jpeg": "s1-p004-auto_normal_base.jpg",
+      "source_meter": {
+        "linear_mean": 0.1850880005547396,
+        "linear_p50": 0.1658674722981424,
+        "highlight_fraction": 0.0,
+        "black_fraction": 0.0
+      },
+      "jpeg_meter": {
+        "linear_mean": 0.18503775461966696,
+        "linear_p50": 0.16671702383749648,
+        "highlight_fraction": 0.0,
+        "black_fraction": 0.0
+      },
+      "native_last_frame_luma": 0.1850880006,
+      "native_luma_abs_error": 4.5260406533742525e-11,
+      "native_mean_12_frames": 0.184709333,
+      "jpeg_error_ev": -0.0003917023378459994,
+      "status": "verified"
+    },
+    {
+      "phase": 5,
+      "label": "auto_response_short",
+      "status": "missing_or_rejected_evidence"
+    }
+  ],
+  "decoded_controls": {
+    "schema": "film3ds-exposure-state-decoder-1",
+    "boundary": "offline_read_only_evidence_analysis",
+    "source": "/Users/a64/Documents/Codex/Film3DS/build/hardware/exposure-deep/calibration/hardware-auto-04/recovered",
+    "all_selected_stages_verified": false,
+    "register_reference": "https://mgba-emu.github.io/gbatek/#dsi-aptina-camera-registers-soc1-3210h-33fdh",
+    "limitations": [
+      "gain factors describe configuration, not pipeline enable/bypass proof",
+      "analogue gain codes are not converted with the contradicted legacy formula",
+      "this tool does not infer absolute ISO, optical shutter time or continuous-preview lock"
+    ],
+    "input_sha256": {
+      "calibration_plan.csv": "739308fc50175c4577766e709733b577f5270f3280f03441ac05fadf8cceb14d",
+      "reads.csv": "075cdb62dfeb79aa778462647c61cac3b6dc0259b34dc63866a9297585979701",
+      "frames.csv": "6e1fc7a3eca2b2c3495e5871b78cf00a26a9150fbc027a3719d6c2d3857f0683"
+    },
+    "stages": [
+      {
+        "sensor": 1,
+        "phase": 3,
+        "label": "auto_seed",
+        "kind": "seed",
+        "proof_status": "rejected",
+        "errors": [
+          "not_declared_locked",
+          "ae_or_awb_not_verified_off"
+        ],
+        "expected_frames": 4,
+        "readbacks_per_register_expected": 8,
+        "timing_raw": {
+          "0010": 273,
+          "0012": 0,
+          "0014": 45130,
+          "300a": 2114,
+          "300c": 842,
+          "3016": 1,
+          "3012": 528,
+          "3014": 633
+        },
+        "ae_mode": 1,
+        "awb_mode": 1,
+        "composite_gain_raw": {
+          "Gr": {
+            "address": "3056",
+            "raw": 681
+          },
+          "R": {
+            "address": "305a",
+            "raw": 676
+          },
+          "B": {
+            "address": "3058",
+            "raw": 752
+          },
+          "Gb": {
+            "address": "305c",
+            "raw": 681
+          }
+        },
+        "analog_global_code": 40,
+        "analog_channel_codes": {
+          "Gr": {
+            "address": "302a",
+            "raw": 40
+          },
+          "R": {
+            "address": "302c",
+            "raw": 36
+          },
+          "B": {
+            "address": "302e",
+            "raw": 96
+          },
+          "Gb": {
+            "address": "3030",
+            "raw": 40
+          }
+        },
+        "analog_multiplier_calibrated": false,
+        "core_digital": {
+          "Gr": {
+            "address": "3032",
+            "raw": 256,
+            "configured_factor": 1.0
+          },
+          "R": {
+            "address": "3034",
+            "raw": 256,
+            "configured_factor": 1.0
+          },
+          "B": {
+            "address": "3036",
+            "raw": 256,
+            "configured_factor": 1.0
+          },
+          "Gb": {
+            "address": "3038",
+            "raw": 256,
+            "configured_factor": 1.0
+          }
+        },
+        "isp_digital": {
+          "Gr": {
+            "address": "32d6",
+            "raw": 157,
+            "configured_factor": 1.2265625
+          },
+          "R": {
+            "address": "32d4",
+            "raw": 188,
+            "configured_factor": 1.46875
+          },
+          "B": {
+            "address": "32da",
+            "raw": 155,
+            "configured_factor": 1.2109375
+          },
+          "Gb": {
+            "address": "32d8",
+            "raw": 157,
+            "configured_factor": 1.2265625
+          }
+        },
+        "core_digital_unity_configured": true,
+        "isp_digital_nonunity_configured": true,
+        "pipeline_enable_state": "not_verified_by_this_contract",
+        "no_end_to_end_digital_amplification_proven": false,
+        "absolute_iso_calibrated": false
+      },
+      {
+        "sensor": 1,
+        "phase": 4,
+        "label": "auto_normal_base",
+        "kind": "code_baseline",
+        "proof_status": "verified_locked_sample",
+        "errors": [],
+        "expected_frames": 4,
+        "readbacks_per_register_expected": 8,
+        "timing_raw": {
+          "0010": 273,
+          "0012": 0,
+          "0014": 45130,
+          "300a": 2114,
+          "300c": 842,
+          "3016": 1,
+          "3012": 528,
+          "3014": 633
+        },
+        "ae_mode": 0,
+        "awb_mode": 0,
+        "composite_gain_raw": {
+          "Gr": {
+            "address": "3056",
+            "raw": 681
+          },
+          "R": {
+            "address": "305a",
+            "raw": 676
+          },
+          "B": {
+            "address": "3058",
+            "raw": 752
+          },
+          "Gb": {
+            "address": "305c",
+            "raw": 681
+          }
+        },
+        "analog_global_code": 40,
+        "analog_channel_codes": {
+          "Gr": {
+            "address": "302a",
+            "raw": 40
+          },
+          "R": {
+            "address": "302c",
+            "raw": 36
+          },
+          "B": {
+            "address": "302e",
+            "raw": 96
+          },
+          "Gb": {
+            "address": "3030",
+            "raw": 40
+          }
+        },
+        "analog_multiplier_calibrated": false,
+        "core_digital": {
+          "Gr": {
+            "address": "3032",
+            "raw": 256,
+            "configured_factor": 1.0
+          },
+          "R": {
+            "address": "3034",
+            "raw": 256,
+            "configured_factor": 1.0
+          },
+          "B": {
+            "address": "3036",
+            "raw": 256,
+            "configured_factor": 1.0
+          },
+          "Gb": {
+            "address": "3038",
+            "raw": 256,
+            "configured_factor": 1.0
+          }
+        },
+        "isp_digital": {
+          "Gr": {
+            "address": "32d6",
+            "raw": 157,
+            "configured_factor": 1.2265625
+          },
+          "R": {
+            "address": "32d4",
+            "raw": 188,
+            "configured_factor": 1.46875
+          },
+          "B": {
+            "address": "32da",
+            "raw": 155,
+            "configured_factor": 1.2109375
+          },
+          "Gb": {
+            "address": "32d8",
+            "raw": 157,
+            "configured_factor": 1.2265625
+          }
+        },
+        "core_digital_unity_configured": true,
+        "isp_digital_nonunity_configured": true,
+        "pipeline_enable_state": "not_verified_by_this_contract",
+        "no_end_to_end_digital_amplification_proven": false,
+        "absolute_iso_calibrated": false
+      },
+      {
+        "sensor": 1,
+        "phase": 5,
+        "label": "auto_response_short",
+        "kind": "code_baseline",
+        "proof_status": "verified_locked_sample",
+        "errors": [],
+        "expected_frames": 4,
+        "readbacks_per_register_expected": 8,
+        "timing_raw": {
+          "0010": 273,
+          "0012": 0,
+          "0014": 45130,
+          "300a": 2114,
+          "300c": 842,
+          "3016": 1,
+          "3012": 792,
+          "3014": 633
+        },
+        "ae_mode": 0,
+        "awb_mode": 0,
+        "composite_gain_raw": {
+          "Gr": {
+            "address": "3056",
+            "raw": 544
+          },
+          "R": {
+            "address": "305a",
+            "raw": 544
+          },
+          "B": {
+            "address": "3058",
+            "raw": 544
+          },
+          "Gb": {
+            "address": "305c",
+            "raw": 544
+          }
+        },
+        "analog_global_code": 8,
+        "analog_channel_codes": {
+          "Gr": {
+            "address": "302a",
+            "raw": 8
+          },
+          "R": {
+            "address": "302c",
+            "raw": 8
+          },
+          "B": {
+            "address": "302e",
+            "raw": 8
+          },
+          "Gb": {
+            "address": "3030",
+            "raw": 8
+          }
+        },
+        "analog_multiplier_calibrated": false,
+        "core_digital": {
+          "Gr": {
+            "address": "3032",
+            "raw": 256,
+            "configured_factor": 1.0
+          },
+          "R": {
+            "address": "3034",
+            "raw": 256,
+            "configured_factor": 1.0
+          },
+          "B": {
+            "address": "3036",
+            "raw": 256,
+            "configured_factor": 1.0
+          },
+          "Gb": {
+            "address": "3038",
+            "raw": 256,
+            "configured_factor": 1.0
+          }
+        },
+        "isp_digital": {
+          "Gr": {
+            "address": "32d6",
+            "raw": 157,
+            "configured_factor": 1.2265625
+          },
+          "R": {
+            "address": "32d4",
+            "raw": 188,
+            "configured_factor": 1.46875
+          },
+          "B": {
+            "address": "32da",
+            "raw": 155,
+            "configured_factor": 1.2109375
+          },
+          "Gb": {
+            "address": "32d8",
+            "raw": 157,
+            "configured_factor": 1.2265625
+          }
+        },
+        "core_digital_unity_configured": true,
+        "isp_digital_nonunity_configured": true,
+        "pipeline_enable_state": "not_verified_by_this_contract",
+        "no_end_to_end_digital_amplification_proven": false,
+        "absolute_iso_calibrated": false
+      }
+    ]
+  },
+  "notes": [
+    "configured digital multipliers remain separate for sensor core and ISP",
+    "normal convergence and exploration completeness are separate verdicts",
+    "a reference from another illumination batch is retained but not silently applied"
+  ]
+}

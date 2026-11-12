@@ -1,0 +1,14 @@
+{
+  "source_url": "https://pdfcoffee.com/3ds-programming-manual-pdf-free.html",
+  "document_title": "3DS Programming Manual: System, Version 1.6",
+  "attributed_author": "Nintendo",
+  "section": "2.8.5 Cameras",
+  "document_identifier": "CTR-06-0019-002-F",
+  "short_specification": "F2.8 (fixed).",
+  "nominal_f_number": 2.8,
+  "evidence_kind": "third-party public mirror of attributed manufacturer documentation, not a direct optical measurement",
+  "scope_note": "manual covers CTR and SNAKE system differences; camera paragraph names CTR; applicability to this exact New3DS module remains to be cross-checked",
+  "transmission_t_stop": null,
+  "absolute_iso_calibrated": false,
+  "next_use": "candidate nominal aperture for external-meter effective exposure index cross-check; do not retroactively mark older runs as physically calibrated"
+}

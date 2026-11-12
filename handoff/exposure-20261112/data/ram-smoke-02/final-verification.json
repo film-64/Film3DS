@@ -1,0 +1,10 @@
+{
+  "files": 13,
+  "bytes": 1556086,
+  "all_device_crc32_local_sha256_and_lengths_verified": true,
+  "measurements_complete": true,
+  "verified_measured_frames": 12,
+  "ram_failed": false,
+  "sd_writes": false,
+  "native_http_teardown_verified": true
+}

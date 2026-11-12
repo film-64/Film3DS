@@ -1,0 +1,9 @@
+{
+  "contract": "frozen-resume-v1",
+  "started_unix": 1794472677.961173,
+  "chunk_bytes": 4096,
+  "request_gap_seconds": 0.05,
+  "capture_repeated": false,
+  "max_attempts_per_range": 2,
+  "max_transient_failures_total": 16
+}

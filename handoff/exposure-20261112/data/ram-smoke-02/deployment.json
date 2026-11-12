@@ -1,0 +1,17 @@
+{
+  "device": "192.168.0.26",
+  "netloader_port": 17491,
+  "binary_sha256": "2a59e79dbf29477ab36892623918f34628753fda7dc5769ab060cb9c63919ce7",
+  "bytes": 307044,
+  "arguments": [
+    "--auto",
+    "--calibrate",
+    "--offline",
+    "--sensor=1",
+    "--smoke",
+    "--ram"
+  ],
+  "scope": "ram-evidence-1 smoke20; graceful HTTP teardown; RAM menu cannot widen scope",
+  "request_unix": 1794416645.69909,
+  "deployed": true
+}

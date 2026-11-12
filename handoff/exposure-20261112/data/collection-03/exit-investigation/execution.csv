@@ -1,0 +1,13 @@
+sensor,phase,label,frame,step
+1,3,cal_r8_auto,8,roi_begin
+1,3,cal_r8_auto,8,roi_end
+1,3,cal_r8_auto,8,preview_begin
+1,3,cal_r8_auto,8,preview_end
+1,3,cal_r8_auto,9,roi_begin
+1,3,cal_r8_auto,9,roi_end
+1,3,cal_r8_auto,9,preview_begin
+1,3,cal_r8_auto,9,preview_end
+1,3,cal_r8_auto,10,roi_begin
+1,3,cal_r8_auto,10,roi_end
+1,3,cal_r8_auto,10,preview_begin
+1,3,cal_r8_auto,10,preview_end

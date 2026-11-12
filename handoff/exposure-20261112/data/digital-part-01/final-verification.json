@@ -1,0 +1,31 @@
+{
+  "files": 18,
+  "bytes": 7588138,
+  "local_hashes_lengths_verified": true,
+  "ipc_full_record_widths_verified": true,
+  "measurements_complete": true,
+  "verified_measured_frames": 72,
+  "timing_bursts_complete": true,
+  "highlights": {
+    "4": {
+      "label": "cal_r0_baseline",
+      "center_mean": 163.47135416499998,
+      "center_high_fraction": 0.0
+    },
+    "5": {
+      "label": "cal_digital_2",
+      "center_mean": 221.993286135,
+      "center_high_fraction": 0.08159722222222222
+    },
+    "7": {
+      "label": "cal_digital_4",
+      "center_mean": 252.07495117000002,
+      "center_high_fraction": 1.0
+    },
+    "8": {
+      "label": "cal_restore",
+      "center_mean": 161.779907225,
+      "center_high_fraction": 0.0
+    }
+  }
+}

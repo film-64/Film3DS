@@ -1,0 +1,33 @@
+{
+  "device": "192.168.0.22",
+  "netloader_port": 17491,
+  "contract": "storage-check-1",
+  "camera": false,
+  "network_in_program": false,
+  "files": 10,
+  "bytes_per_file": 262144,
+  "new_files_only": true,
+  "started_unix": 1794407981.485999,
+  "source": [
+    {
+      "name": "probes/storage/main.c",
+      "bytes": 6192,
+      "sha256": "91c6d750dcb1a07230227d4483e62b565d28a27ea4f0b4dcb7b0ac87ff80cdbd"
+    },
+    {
+      "name": "Makefile.storage",
+      "bytes": 1224,
+      "sha256": "83bd58d693030e6e623b0a98787ce2e234e09f4ce342c40d1e6876924ed00790"
+    },
+    {
+      "name": "tests/storage_check.py",
+      "bytes": 1854,
+      "sha256": "67119ee855b02c758ecb5c075d76e69c58b24bc51f80be1b195e81b6a596dc43"
+    },
+    {
+      "name": "FilmStorageCheck.3dsx",
+      "bytes": 149368,
+      "sha256": "2a6cedd53b5cf8224e2cbf3a9ae65c196cf3223621f4e8a46c59e5a1268ead03"
+    }
+  ]
+}

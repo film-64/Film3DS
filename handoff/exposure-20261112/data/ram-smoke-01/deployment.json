@@ -1,0 +1,17 @@
+{
+  "device": "192.168.0.26",
+  "netloader_port": 17491,
+  "binary_sha256": "9624d531be9ef9a998fb6718ffb53a2d5292b242f133d327d4fc40d0971d8833",
+  "bytes": 306380,
+  "arguments": [
+    "--auto",
+    "--calibrate",
+    "--offline",
+    "--sensor=1",
+    "--smoke",
+    "--ram"
+  ],
+  "scope": "ram-evidence-1; smoke20 / 12 measured frames; no SD writes or compression; freeze then HTTP5000",
+  "request_unix": 1794416047.928478,
+  "deployed": true
+}

@@ -1,0 +1,74 @@
+gcc -O2 -g -std=c11 -Wall -Wextra -Wpedantic -Wno-unused-parameter -Itests/probe_shim -ffunction-sections -fdata-sections tests/probe_driver.c  -Wl,--gc-sections -o build/probe-driver -lm
+In file included from tests/../probes/exposure/main.c:623,
+                 from tests/probe_driver.c:3:
+tests/../probes/exposure/ram_http.h:60:13: warning: ‘ram_http_finish’ defined but not used [-Wunused-function]
+   60 | static void ram_http_finish(int fd)
+      |             ^~~~~~~~~~~~~~~
+tests/../probes/exposure/ram_http.h:25:13: warning: ‘ram_http_request’ defined but not used [-Wunused-function]
+   25 | static void ram_http_request(int fd,const char *run,bool complete)
+      |             ^~~~~~~~~~~~~~~~
+gcc -O2 -g -std=c11 -Wall -Wextra -Wpedantic tests/probe_plan.c -o build/probe-plan
+[12;0HSensor 1 phase 3: field_seed                  
+B: stop after current operation
+[12;0HSensor 1 phase 4: field_normal_base           
+B: stop after current operation
+[12;0HSensor 1 phase 5: field_normal_0              
+B: stop after current operation
+[12;0HSensor 1 phase 6: field_lower                 
+B: stop after current operation
+[12;0HSensor 1 phase 7: field_upper                 
+B: stop after current operation
+[12;0HSensor 1 phase 8: field_normal_check          
+B: stop after current operation
+[12;0HSensor 1 phase 3: field_seed                  
+B: stop after current operation
+[12;0HSensor 1 phase 4: field_normal_base           
+B: stop after current operation
+
+CONTROL_DRIFT phase=4 addr=32d6 expected=128 actual=129
+[12;0HSensor 1 phase 3: field_seed                  
+B: stop after current operation
+[12;0HSensor 1 phase 3: auto_seed                   
+B: stop after current operation
+[12;0HSensor 1 phase 4: auto_normal_base            
+B: stop after current operation
+[8;0HPreview: NORMAL C=100 held during exploration
+[12;0HSensor 1 phase 5: auto_normal_0               
+B: stop after current operation
+[8;0HPreview: NORMAL C=119 held during exploration
+[12;0HSensor 1 phase 6: auto_response_short         
+B: stop after current operation
+[12;0HSensor 1 phase 7: auto_reference_mid          
+B: stop after current operation
+[12;0HSensor 1 phase 8: auto_gain_base              
+B: stop after current operation
+[12;0HSensor 1 phase 9: auto_gain_0210              
+B: stop after current operation
+[12;0HSensor 1 phase 10: auto_gain_0218              
+B: stop after current operation
+[12;0HSensor 1 phase 11: auto_gain_0220              
+B: stop after current operation
+[12;0HSensor 1 phase 12: auto_gain_0228              
+B: stop after current operation
+[12;0HSensor 1 phase 13: auto_gain_0230              
+B: stop after current operation
+[12;0HSensor 1 phase 14: auto_gain_023c              
+B: stop after current operation
+[12;0HSensor 1 phase 15: auto_digital_2              
+B: stop after current operation
+[12;0HSensor 1 phase 16: auto_digital_4              
+B: stop after current operation
+[12;0HSensor 1 phase 17: auto_reference_end          
+B: stop after current operation
+[12;0HSensor 1 phase 18: auto_restore                
+B: stop after current operation
+[12;0HSensor 1 phase 3: auto_seed                   
+B: stop after current operation
+[12;0HSensor 1 phase 4: auto_normal_base            
+B: stop after current operation
+
+CONTROL_DRIFT phase=4 addr=32d6 expected=128 actual=129
+[12;0HSensor 1 phase 3: auto_seed                   
+B: stop after current operation
+PASS actual probe driver and calibration: registered auto feedback, ISP drift/write failure stop and restoration, raw RAM profile, legacy scopes
+PASS explicit diagnostic scope and invalid request rejection

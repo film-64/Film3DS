@@ -1,0 +1,33 @@
+{
+  "source": "exposure-field-install/v1",
+  "device": "192.168.0.26",
+  "app_sha256": "e5d69552dd107f4d040a905002e23d4ae1ca94e3e04cfbe4463ce63642357af1",
+  "app_bytes": 343008,
+  "app_crc32": "452e74f6",
+  "installer_sha256": "ab114907f4240d62473661e5a2e767fb4df79756b8594f5c745eac2928690e70",
+  "started_unix": 1794484370.650692,
+  "capture_automatically": false,
+  "source_sha256": {
+    "automation.h": "c8783524092947fbd76435c6226204218b72dd073fbd0dfb28a6baeb404acc6e",
+    "automation_contract.h": "974cdba415bea6df645b7e5f158f22a828fca6a49ab0a86a386b41e2478dc82c",
+    "calibration.h": "3725a18d747fc7419ee03bb30a3933388da190d8c8d95c946d46786e5f6cd2f7",
+    "calibration_contract.h": "037c2ffc322e4403f7121304c7349209028a969f6f4dd1340bd87b8c3b3e2aac",
+    "calibration_image.h": "5223e35b671b690f0d86521ae7a5997127a80387d717147c7901890d76cba950",
+    "calibration_scope.h": "b7c6c8b6740b6754e64ad56ef08ff3be0e9e348e7919343dc8a0de87a64da679",
+    "crash_collect.h": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018",
+    "deep_ipc.h": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec",
+    "fault_capture.h": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683",
+    "field_capture.h": "6d45d833a073f34faf12eda4695ed7721e43726f682264af7c4661b23847b235",
+    "field_contract.h": "f3488f4521af00248f8197662e6eec28e74a73609fa0e7bbc4bb074f79dd0629",
+    "field_install.h": "f3541a908fe0fa200081c8f664ee062bcd394b0ab844b892cf2e5c027794941d",
+    "field_store.h": "e3e3b7502a1ef92dc50812578905aa4b3d272381c6df9376aa325326deb01bed",
+    "field_ui.h": "866626710850de339366b7d7fd5e4eca5e1fb81f60f40f287662416bfb2eb664",
+    "ipc_decode.h": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73",
+    "main.c": "1a4f516e2624fbdd6a9dc1fe3be98448026bf75ce18af1022579f0195ef1bba6",
+    "probe_plan.h": "ffdeed0a66b3eb76fa3fa1d7b2456b246924779facfc38601e5cd05b821f0380",
+    "ram_http.h": "ff12449a9909d86150f77b24a3fd914ab181f4204366b2b7548db1d76a9d672a",
+    "ram_log.h": "65ddf5ffc690d21722b5bb8759dcbcbed882b93325950c364a8df99704c0c461",
+    "ram_transport_contract.h": "0416792162065c9f671c3f2f13d05b0c805b8c95bd38865e024ca83e18db1036",
+    "remote_upload.h": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "source": "../recovered/reads.csv",
+  "source_sha256": "a26db5f5358a6215b4f7b7d02e72defc7591d408f73d243b8262e731cb653748",
+  "operation": "exclude only final incomplete CSV record for prefix analysis; original unchanged",
+  "excluded_bytes": 25,
+  "excluded_hex": "312c33332c63616c5f616e616c6f675f312c2d312c696d6d65"
+}

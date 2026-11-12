@@ -1,0 +1,102 @@
+[
+  {
+    "collection": "collection-01",
+    "artifacts": [
+      {
+        "path": "run-1794398995-000/calibration_plan.csv",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "run-1794398995-000/calls.csv",
+        "bytes": 848,
+        "sha256": "61838a9378ecdf7d53b7c9ca0cae09e05ef5186cb916c745e128095f102a8af7"
+      },
+      {
+        "path": "run-1794398995-000/frames.csv",
+        "bytes": 115,
+        "sha256": "7e356d6eaa2d28b3bcdd653dacea1387da461f82cf917133446d67d97a15d5af"
+      },
+      {
+        "path": "run-1794398995-000/manifest.txt",
+        "bytes": 1166,
+        "sha256": "f28642f0ace133dad4a38067c4dfa9d43370ebd9586d2ce481937f690b326617"
+      },
+      {
+        "path": "run-1794398995-000/reads.csv",
+        "bytes": 136,
+        "sha256": "162a8707a3ffe6dff8d8bc714684d8d96c477cc8fbeb4c1a48897ec332de90ff"
+      }
+    ]
+  },
+  {
+    "collection": "collection-02",
+    "artifacts": [
+      {
+        "path": "calibration_plan.csv",
+        "bytes": 147,
+        "sha256": "e44d29797cdecd0cb3bf104f078559341bdbbbc96e3d56e1858612846d0a641c"
+      },
+      {
+        "path": "calls.csv",
+        "bytes": 14411,
+        "sha256": "7d53dcb659028c0427e0be3d4efc769ec6c35c112892d20e0352972499114efd"
+      },
+      {
+        "path": "frames.csv",
+        "bytes": 1604,
+        "sha256": "f3bf9e8043704e5910f1504177cf168b0c53e764881cc60e8bf32898dbfee0f0"
+      },
+      {
+        "path": "ipc.csv",
+        "bytes": 244826,
+        "sha256": "6b05bff5976e5abb0ccd73f74d10c73864148e929db5fe22e572bf32f241fae8"
+      },
+      {
+        "path": "manifest.txt",
+        "bytes": 2042,
+        "sha256": "17b321d3420e917c718e0c68e34fffa30a699d4af4d633524f5a6c655a05daa3"
+      },
+      {
+        "path": "noise.csv",
+        "bytes": 77,
+        "sha256": "6b6ba2a7db0d23fb4734ad922b66ff4640ab4c28d0f7e4213b0c46933776cff4"
+      },
+      {
+        "path": "reads.csv",
+        "bytes": 23561,
+        "sha256": "ed4d00be1cfdde0d9c7b6114874484c39983fbc107539eb5ecaa7314e0124e44"
+      },
+      {
+        "path": "roi.csv",
+        "bytes": 1367,
+        "sha256": "38b23b30ea8ccef7fb2138fda04bce635a2a9dd4f6e50c46b28653c8a2a39649"
+      }
+    ]
+  },
+  {
+    "collection": "collection-03",
+    "artifacts": [
+      {
+        "path": "calls.csv",
+        "bytes": 14411,
+        "sha256": "e162de26ff56a9e2a0f9d2c30c968b90738d789b6c0ffce346d6b7a08f992c3f"
+      },
+      {
+        "path": "execution.csv",
+        "bytes": 382,
+        "sha256": "cff98845b1b4e6e3b1b3f899dc3b81a135a65fcedf43c55d37ed35ee058c4db7"
+      },
+      {
+        "path": "frames.csv",
+        "bytes": 1618,
+        "sha256": "cc5d364968cf3bed92cdcf280951133140227ee1a14c379d4187d3af1f2e503a"
+      },
+      {
+        "path": "manifest.txt",
+        "bytes": 2042,
+        "sha256": "17b321d3420e917c718e0c68e34fffa30a699d4af4d633524f5a6c655a05daa3"
+      }
+    ]
+  }
+]

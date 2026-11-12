@@ -1,0 +1,4 @@
+sensor,phase,coarse,core_digital,isp_digital,proof_status,errors
+1,3,528,1×/1×/1×/1×,1.22656×/1.46875×/1.21094×/1.22656×,rejected,not_declared_locked;ae_or_awb_not_verified_off
+1,4,528,1×/1×/1×/1×,1.22656×/1.46875×/1.21094×/1.22656×,verified_locked_sample,
+1,5,792,1×/1×/1×/1×,1.22656×/1.46875×/1.21094×/1.22656×,verified_locked_sample,

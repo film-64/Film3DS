@@ -26,6 +26,7 @@
 #define MAX_LUTS 64u
 
 enum { PREVIEW_TEX_SIDE = 256, PREVIEW_TEX_ROWS = 192 };
+enum { ROLL_TEX_SIDE = 64, ROLL_TEX_ROWS = 48 };
 
 typedef struct {
     const char *directory;
@@ -45,6 +46,12 @@ typedef struct {
 } CaptureSave;
 
 typedef struct {
+    C3D_Tex texture;
+    unsigned id;
+    bool allocated, ready;
+} RollThumbnail;
+
+typedef struct {
     FilmUi ui;
     FilmRecipe darkroom, saved_recipe;
     unsigned darkroom_id;
@@ -55,6 +62,7 @@ typedef struct {
     FilmCameraAutoState camera_auto;
     FilmYuv camera_yuv;
     C3D_Tex texture;
+    RollThumbnail thumbnails[FILM_ROLL_THUMBNAILS];
     unsigned image_width, image_height;
     FilmAspect saved_aspect;
     C2D_TextBuf text;
@@ -72,6 +80,7 @@ typedef struct {
     bool preview_failed;
     bool preview_single;
     bool camera_controls;
+    bool camera_toolbar;
     enum { DARKROOM_LUT, DARKROOM_GRAIN, DARKROOM_TONE } darkroom_panel;
     FilmToneControl tone_control;
     bool halation;
@@ -298,9 +307,9 @@ static void run_commands(void)
     film_camera_close(&app.camera);
 }
 
-static unsigned swizzle(unsigned x, unsigned y)
+static unsigned swizzle(unsigned x, unsigned y, unsigned side)
 {
-    unsigned tile = (x >> 3) + (y >> 3) * (PREVIEW_TEX_SIDE / 8);
+    unsigned tile = (x >> 3) + (y >> 3) * (side / 8);
     unsigned offset = (x & 1) | ((y & 1) << 1) | ((x & 2) << 1) |
                       ((y & 2) << 2) | ((x & 4) << 2) | ((y & 4) << 3);
     return tile * 64 + offset;
@@ -342,7 +351,7 @@ static void show_camera_image(const FilmImage *image, FilmYuv matrix, float satu
             unsigned sx = x * image->width / PREVIEW_TEX_SIDE;
             const uint8_t *pair = row + (sx & ~1u) * 2;
             int yy = colors.y[pair[(sx & 1) * 2]], u = pair[1], v = pair[3];
-            unsigned i = swizzle(x, y) * 3;
+            unsigned i = swizzle(x, y, PREVIEW_TEX_SIDE) * 3;
             int b = yy + colors.blue[u], g = yy + colors.green_u[u] + colors.green_v[v];
             int r = yy + colors.red[v];
             const int white = 255 * 256;
@@ -375,7 +384,7 @@ static void show_image(const FilmImage *image, FilmYuv matrix)
         for (unsigned x = 0; x < PREVIEW_TEX_SIDE; ++x) {
             FilmRgb c = film_decode_pixel(image, x * image->width / PREVIEW_TEX_SIDE,
                                          y * image->height / PREVIEW_TEX_ROWS, matrix);
-            unsigned i = swizzle(x, y) * 3;
+            unsigned i = swizzle(x, y, PREVIEW_TEX_SIDE) * 3;
             tex[i] = (uint8_t)(c.b * 255 + 0.5f);
             tex[i + 1] = (uint8_t)(c.g * 255 + 0.5f);
             tex[i + 2] = (uint8_t)(c.r * 255 + 0.5f);
@@ -389,6 +398,53 @@ static void show_image(const FilmImage *image, FilmYuv matrix)
 static void roll_path(char path[64], unsigned id)
 {
     snprintf(path, 64, ROLLS "ROLL%04u.F3S", id);
+}
+
+static unsigned roll_group_start(void)
+{
+    return app.ui.selection - app.ui.selection % FILM_ROLL_THUMBNAILS;
+}
+
+static void update_roll_thumbnails(void)
+{
+    unsigned first = roll_group_start();
+    bool synchronized = false;
+    for (unsigned slot = 0; slot < FILM_ROLL_THUMBNAILS; ++slot) {
+        RollThumbnail *thumbnail = &app.thumbnails[slot];
+        unsigned index = first + slot;
+        unsigned id = index >= app.ui.photos ? 0 : app.count ? app.photos[index] : MAX_PHOTOS + 1 + index;
+        if (!thumbnail->allocated || thumbnail->id == id) continue;
+        thumbnail->id = id;
+        thumbnail->ready = false;
+        if (!id) continue;
+
+        FilmFrame frame = {.recipe = film_default_recipe()};
+        FilmStatus status;
+        if (app.count) {
+            char path[64];
+            roll_path(path, id);
+            status = film_frame_read(path, &frame);
+        } else status = film_mock_capture(&frame);
+        if (status == FILM_OK) {
+            if (!synchronized) {
+                C3D_FrameSync();
+                synchronized = true;
+            }
+            uint8_t *pixels = thumbnail->texture.data;
+            for (unsigned y = 0; y < ROLL_TEX_ROWS; ++y)
+                for (unsigned x = 0; x < ROLL_TEX_SIDE; ++x) {
+                    FilmRgb rgb = film_decode_pixel(&frame.source, x * frame.source.width / ROLL_TEX_SIDE,
+                                                   y * frame.source.height / ROLL_TEX_ROWS, frame.recipe.yuv);
+                    unsigned i = 3 * swizzle(x, y, ROLL_TEX_SIDE);
+                    pixels[i] = rgb.b * 255 + .5f;
+                    pixels[i + 1] = rgb.g * 255 + .5f;
+                    pixels[i + 2] = rgb.r * 255 + .5f;
+                }
+            C3D_TexFlush(&thumbnail->texture);
+            thumbnail->ready = true;
+        }
+        film_frame_free(&frame);
+    }
 }
 
 static void load_roll(void)
@@ -928,7 +984,7 @@ static void gpu_resize_probe(void)
     for (unsigned y = 0; y < INPUT; ++y)
         for (unsigned x = 0; x < INPUT; ++x) {
             const uint8_t *pixel = input.pixels + (y * INPUT + x) * 3;
-            uint8_t *tile = tiles + swizzle(x, INPUT - 1 - y) * 4;
+            uint8_t *tile = tiles + swizzle(x, INPUT - 1 - y, INPUT) * 4;
             tile[0] = 255;
             tile[1] = pixel[2];
             tile[2] = pixel[1];
@@ -1421,6 +1477,11 @@ int main(int argc, char **argv)
     bool texture = C3D_TexInit(&app.texture, PREVIEW_TEX_SIDE, PREVIEW_TEX_SIDE, GPU_RGB8);
     if (!top || !bottom || !app.text || !texture) goto cleanup;
     C3D_TexSetFilter(&app.texture, GPU_NEAREST, GPU_NEAREST);
+    for (unsigned i = 0; i < FILM_ROLL_THUMBNAILS; ++i) {
+        RollThumbnail *thumbnail = &app.thumbnails[i];
+        thumbnail->allocated = C3D_TexInit(&thumbnail->texture, ROLL_TEX_SIDE, ROLL_TEX_SIDE, GPU_RGB8);
+        if (thumbnail->allocated) C3D_TexSetFilter(&thumbnail->texture, GPU_LINEAR, GPU_LINEAR);
+    }
     memset(app.texture.data, 0, PREVIEW_TEX_SIDE * PREVIEW_TEX_SIDE * 3);
     mkdir("sdmc:/3ds", 0777);
     mkdir(ROOT, 0777);
@@ -1628,6 +1689,7 @@ int main(int argc, char **argv)
             film_frame_free(&preview);
         }
         sync_darkroom();
+        if (app.ui.page == FILM_ROLL) update_roll_thumbnails();
         draw(top, bottom);
     }
     film_camera_close(&app.camera);
@@ -1637,6 +1699,8 @@ int main(int argc, char **argv)
 cleanup:
     C3D_FrameSync();
     if (texture) C3D_TexDelete(&app.texture);
+    for (unsigned i = 0; i < FILM_ROLL_THUMBNAILS; ++i)
+        if (app.thumbnails[i].allocated) C3D_TexDelete(&app.thumbnails[i].texture);
     if (app.text) C2D_TextBufDelete(app.text);
     C2D_Fini();
     C3D_Fini();

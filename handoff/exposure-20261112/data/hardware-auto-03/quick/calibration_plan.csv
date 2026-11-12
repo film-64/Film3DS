@@ -1,0 +1,5 @@
+sensor,phase,label,kind,settle,measured,baseline_phase,write_mask,coarse,gain_gr,gain_b,gain_r,gain_gb,locked
+1,3,auto_seed,seed,2,4,0,0,,,,,,0
+1,4,auto_normal_base,code_baseline,2,4,0,31,528,676,746,639,676,1
+1,5,auto_normal_0,integration,2,4,0,1,583,676,746,639,676,1
+1,6,auto_response_short,code_baseline,2,4,0,31,317,544,544,544,544,1

@@ -1,0 +1,36 @@
+{
+  "contract": "exposure-auto/v1",
+  "device": "192.168.0.26",
+  "arguments": [
+    "--auto",
+    "--calibrate",
+    "--offline",
+    "--sensor=1",
+    "--ram",
+    "--raw",
+    "--calibration-part=exposure-auto"
+  ],
+  "illumination_batch": "auto-20261112-01",
+  "binary_sha256": "765b9c06bcb0bab4eb2b192b9c16abea0621ba92ac1b2d5a9edd53d07bc260cb",
+  "readiness_deadline_seconds": 900,
+  "readiness_poll_seconds": 5,
+  "measurement_retries": 0,
+  "started_unix": 1794471892.70504,
+  "source_sha256": {
+    "automation.h": "dca36c747fbfbee9aab8b3adf45f8173de42327e33ff49c391bee6d1137cd4fe",
+    "automation_contract.h": "58017911601d6a9ea0c02ec9dcb317cad7f8dba2df280aab34e0b5d076965b7f",
+    "calibration.h": "ffc599cd004aef73d7db0893cf15baf123c6d4dda7fef807edd2d88643a605be",
+    "calibration_contract.h": "034eeec83e6c305e4bbdc16352908ac4c33c3e46347c6bceb89e306171bf64ec",
+    "calibration_image.h": "47291651ec5fc64a43a37d611d6f1cfbc32522cb3f787bec75fea0b92d77217e",
+    "calibration_scope.h": "1181d1d0a713a4cdf5ca52024552254b5beaf3a39b9f25177adb4eedf626e58c",
+    "crash_collect.h": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018",
+    "deep_ipc.h": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec",
+    "fault_capture.h": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683",
+    "ipc_decode.h": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73",
+    "main.c": "79e6abdb7974aa26632426d7fcc20357c289d19f873152e0da291ef502c774f1",
+    "probe_plan.h": "b21ffb57ee49567c9b8672b81df344da6b7b7e1a829785d501adf4d7feda84d6",
+    "ram_http.h": "0bc7a1912b97b8795cecad5e0ee9cd0851f91d9de43967b68fb6f11d2b56cd13",
+    "ram_log.h": "ff6aa498edf109f905f799e1269ca785340c64ed1a3c1bb040efca752be1373f",
+    "remote_upload.h": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  }
+}

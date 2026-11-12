@@ -1,0 +1,35 @@
+.DEFAULT_GOAL := all
+.SUFFIXES:
+ifeq ($(strip $(DEVKITPRO)),)
+$(error Set DEVKITPRO to the devkitPro root)
+endif
+DEVKITARM ?= $(DEVKITPRO)/devkitARM
+include $(DEVKITARM)/3ds_rules
+export PATH := $(DEVKITPRO)/tools/bin:$(PATH)
+APP_TITLE := FilmRecovery
+APP_DESCRIPTION := SD-only compressed evidence recovery
+APP_AUTHOR := Film3DS
+ARCH := -march=armv6k -mtune=mpcore -mfpu=vfp -mfloat-abi=hard -mtp=soft
+CFLAGS = -std=gnu11 -O2 -g -Wall -Wextra -Werror -mword-relocations -ffunction-sections -fdata-sections $(ARCH) $(INCLUDE) -D__3DS__
+LDFLAGS = -specs=3dsx.specs $(ARCH) -Wl,--gc-sections,-Map,$(OUTPUT).map
+LIBS := -lz -lctru -lm
+LD := $(CC)
+ifneq ($(notdir $(CURDIR)),build-recovery)
+export TOPDIR := $(CURDIR)
+export OUTPUT := $(CURDIR)/FilmRecovery
+export INCLUDE := -I$(CTRULIB)/include -I$(DEVKITPRO)/portlibs/3ds/include
+export LIBPATHS := -L$(CTRULIB)/lib -L$(DEVKITPRO)/portlibs/3ds/lib
+export OFILES := main.o
+export VPATH := $(CURDIR)/probes/recovery
+export DEPSDIR := $(CURDIR)/build-recovery
+.PHONY: all
+all:
+	@mkdir -p build-recovery
+	$(MAKE) --no-print-directory -C build-recovery -f $(TOPDIR)/Makefile.recovery
+else
+_3DSXFLAGS := --smdh=$(OUTPUT).smdh
+all: $(OUTPUT).3dsx
+$(OUTPUT).3dsx: $(OUTPUT).elf $(OUTPUT).smdh
+$(OUTPUT).elf: $(OFILES)
+-include $(OFILES:.o=.d)
+endif

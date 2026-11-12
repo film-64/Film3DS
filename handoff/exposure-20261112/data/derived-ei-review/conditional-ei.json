@@ -1,0 +1,151 @@
+{
+  "status": "conditional_reference_EI_model_estimates_NOT_validated_ISO",
+  "sensor": 1,
+  "method": "EI=100*(0.008/t7)*C(Ymeasured)/C(118); C=inverse integration-response curve",
+  "time_model_seconds": 0.0006628821022727272,
+  "output_target_y": 118.0,
+  "curve_points_y_coarse": {
+    "30fps": [
+      [
+        0.579996745,
+        4
+      ],
+      [
+        10.53922526,
+        16
+      ],
+      [
+        57.326049805,
+        64
+      ],
+      [
+        88.677205405,
+        129
+      ],
+      [
+        157.12080892,
+        388
+      ]
+    ],
+    "15fps": [
+      [
+        2.075561525,
+        4
+      ],
+      [
+        20.59838867,
+        16
+      ],
+      [
+        75.400512695,
+        64
+      ],
+      [
+        131.6640625,
+        176
+      ],
+      [
+        212.53177897,
+        528
+      ]
+    ]
+  },
+  "curve_source_phases": {
+    "30fps": [
+      "7",
+      "9",
+      "11",
+      "13",
+      "15"
+    ],
+    "15fps": [
+      "21",
+      "23",
+      "25",
+      "27",
+      "29"
+    ]
+  },
+  "assumptions": [
+    "Nominal f/2.8 is applicable; external meter-02 matches illumination and ROI of gain run.",
+    "15fps cadence/frame-lines gives row period; fine integration and timing offsets omitted.",
+    "Processed Y transfer remains invariant across earlier integration and later gain runs, despite different illumination and channel gains.",
+    "Y=118 is a declared middle-output convention; no known-reflectance gray target was measured.",
+    "Piecewise log-coarse interpolation represents the unsampled response between measured points."
+  ],
+  "limitations": [
+    "30fps/15fps estimates are alternate models, not confidence limits or independently validated ISO measurements.",
+    "No extrapolation beyond observed code points; maximum usable sensor ISO remains unknown.",
+    "Y statistics are medians of frame center means; mean-Y inversion is not pixelwise inverse radiometry.",
+    "Gain baseline returns differ from the target 0220 stage: evidence of drift/settling not removed by code hold.",
+    "A same-batch fixed-gain integration sweep is absent; response-curve transfer is an unverified assumption.",
+    "sRGB proxy is intentionally included as model sensitivity, not a calibrated competing ISO result."
+  ],
+  "input_sha256": {
+    "offline-full-01/analysis-prefix/calibration-analysis.json": "d45923e5f007db61508e493a9aa86e2e4ebc945d088d4c75d9f10c537f77860e",
+    "ram-codes-fine-01/recovered/calibration-analysis.json": "d35dd4812abd4266d42e0bad3b799c5bd3882207e3cdc8ed30d114ec9e5045ed",
+    "external-meter-reference-02.json": "f37479c9a9858ee7ccccfc5642061d4f3016f35520a4671d3bd08720e46e0207"
+  },
+  "rows": [
+    {
+      "phase": "5",
+      "four_channel_code": "0x0210",
+      "core_302a": 4,
+      "center_y": 9.13252767,
+      "coarse_only_time_seconds": 0.0006628821022727272,
+      "conditional_ei_30fps_curve": 76.7813731136876,
+      "conditional_ei_15fps_curve": 59.46670808473439,
+      "srgb_mean_y_proxy_ei": 18.585296382083623
+    },
+    {
+      "phase": "7",
+      "four_channel_code": "0x0218",
+      "core_302a": 6,
+      "center_y": 18.159830725,
+      "coarse_only_time_seconds": 0.0006628821022727272,
+      "conditional_ei_30fps_curve": 117.04620452647994,
+      "conditional_ei_15fps_curve": 116.86768486830769,
+      "srgb_mean_y_proxy_ei": 41.04325565391113
+    },
+    {
+      "phase": "9",
+      "four_channel_code": "0x0220",
+      "core_302a": 8,
+      "center_y": 25.9613444,
+      "coarse_only_time_seconds": 0.0006628821022727272,
+      "conditional_ei_30fps_curve": 147.48518684229992,
+      "conditional_ei_15fps_curve": 160.6476399467216,
+      "srgb_mean_y_proxy_ei": 69.09823238926552
+    },
+    {
+      "phase": "11",
+      "four_channel_code": "0x0228",
+      "core_302a": 10,
+      "center_y": 37.287841795000006,
+      "coarse_only_time_seconds": 0.0006628821022727272,
+      "conditional_ei_30fps_curve": 206.30012828048058,
+      "conditional_ei_15fps_curve": 213.94790947776784,
+      "srgb_mean_y_proxy_ei": 125.72493332814454
+    },
+    {
+      "phase": "13",
+      "four_channel_code": "0x0230",
+      "core_302a": 12,
+      "center_y": 45.709594725,
+      "coarse_only_time_seconds": 0.0006628821022727272,
+      "conditional_ei_30fps_curve": 264.77190412414643,
+      "conditional_ei_15fps_curve": 264.746372164861,
+      "srgb_mean_y_proxy_ei": 181.05939468392975
+    },
+    {
+      "phase": "15",
+      "four_channel_code": "0x023C",
+      "core_302a": 14,
+      "center_y": 56.22607422,
+      "coarse_only_time_seconds": 0.0006628821022727272,
+      "conditional_ei_30fps_curve": 361.57597018219025,
+      "conditional_ei_15fps_curve": 345.43377721606475,
+      "srgb_mean_y_proxy_ei": 267.2058605855963
+    }
+  ]
+}

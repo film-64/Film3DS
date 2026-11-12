@@ -1,0 +1,18 @@
+FILMPROBE schema=1 revision=5a1e62d-calibration1 new3ds=1 model_result=00000000 kernel=023a0000 settle_frames=8 measured_frames=12
+OPTIONS direct=0 raw=0 acquisition=continuous deterministic_ipc=1 transfer=final_only
+REQUEST only_sensor=1 first_phase=3 last_phase=60
+CALIBRATION contract=1 expected_stages=58 target=stable_scene lock_scope=per_capture units=raw_codes
+CRASH_FILE name=crash_dump_00000008.dmp found=1 copied=1 bytes=3144
+CRASH_FILE name=crash_dump_00000008.dump found=0
+SERVICE sensor=1 name=cam:u open=00000000
+SERVICE_ID sensor=1 name=cam:u result=d8a053ea id=0000
+GETTER sensor=1 service=cam:u poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:u poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:c open=00000000
+SERVICE_ID sensor=1 name=cam:c result=00000000 id=2280
+GETTER sensor=1 service=cam:c poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:c poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:s open=00000000
+SERVICE_ID sensor=1 name=cam:s result=d8a053ea id=0000
+GETTER sensor=1 service=cam:s poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:s poison=1 result=00000000 ae_low8=1

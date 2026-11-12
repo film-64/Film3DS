@@ -1,0 +1,4 @@
+sensor,phase,label,frames,width,height,mean,temporal_variance,temporal_sigma
+1,3,auto_seed,4,128,96,117.14221191,12.62365723,3.55297864
+1,4,auto_normal_base,4,128,96,117.07855225,10.24201796,3.20031529
+1,5,auto_response_short,4,128,96,32.26794434,3.77048069,1.94177256

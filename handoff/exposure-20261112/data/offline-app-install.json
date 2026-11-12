@@ -1,0 +1,20 @@
+{
+  "device": "192.168.0.26",
+  "folder": "FilmCalOffline",
+  "new_directory_only": true,
+  "files": [
+    {
+      "path": "/3ds/FilmCalOffline/FilmCalOffline.3dsx",
+      "bytes": 294952,
+      "sha256": "879d5ad4c122d109f29318a4905182b5d98a293e504b75346250d073674f1f43",
+      "readback_verified": true
+    },
+    {
+      "path": "/3ds/FilmCalOffline/FilmCalOffline.smdh",
+      "bytes": 14016,
+      "sha256": "c62e027aa726e19da9f77c531bcba2a2b4f88bef9076fc30f9acab135ec9eecf",
+      "readback_verified": true
+    }
+  ],
+  "defaults": "Sensor1, SD-only; A smoke20 / X full58"
+}

@@ -1,0 +1,24 @@
+{
+  "files": 14,
+  "bytes": 2845457,
+  "device_crc_host_sha_length_verified": true,
+  "ram_failed": false,
+  "verified_measured_frames": 24,
+  "incomplete_phases": [
+    5,
+    6
+  ],
+  "missing_phases": [
+    7,
+    8,
+    9,
+    10
+  ],
+  "boundary_readback": 65534,
+  "wait_result": "09401bfe",
+  "wait_ms": 30002,
+  "restore_coarse": 390,
+  "restored_other_controls_held": false,
+  "seed_full_control_immediate_restore": true,
+  "conclusion": "extreme coarse readable but no DMA frame within30s at fixed30fps; not a calibrated optical shutter value or proof of no Bulb"
+}

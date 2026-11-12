@@ -1,0 +1,17 @@
+{
+  "source": "native HTTP client capture plus user screen report",
+  "device_screen": {
+    "state": "Run ended",
+    "phase": 3,
+    "captures": 25,
+    "failures": 1
+  },
+  "raw_http_received": "HTTP/1.1 200 OK\r\nContent-Length: 463\r\nConnection: close\r\n\r\n",
+  "received_bytes": 59,
+  "received_body_bytes": 0,
+  "expected_body_bytes": 463,
+  "failure": "connection reset before response body",
+  "raw_files_recovered": false,
+  "status": "smoke acquisition reported ended but transport not validated; current RAM snapshot lost on app exit; only smoke must be repeated",
+  "change": "graceful SHUT_WR and bounded peer-close drain after response; no camera retry loop"
+}

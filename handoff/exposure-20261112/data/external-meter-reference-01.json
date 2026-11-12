@@ -1,0 +1,34 @@
+{
+  "source": "user transcribed phone metering app readings",
+  "reference_iso": 100,
+  "readings": [
+    {
+      "label": "app 1",
+      "iso": 100,
+      "exposure_compensation_ev": 0,
+      "reported_ev": 7.5,
+      "f_number": 2.8,
+      "shutter_seconds": 0.04,
+      "white_balance_label": "D",
+      "computed_ev100": 7.614709844115208,
+      "app": "Lightme"
+    },
+    {
+      "label": "app 2",
+      "iso": 100,
+      "f_number": 2.8,
+      "shutter_seconds": 0.03333333333333333,
+      "white_balance_kelvin": 6700,
+      "computed_ev100": 7.877744249949002,
+      "app": "Light Meter"
+    }
+  ],
+  "difference_stops": 0.2630344058337938,
+  "scene_and_metering_roi_match": "user confirms same trackpad target and approximately matching field of view with 3DS",
+  "meaning": "external scene-meter reference only; phone app ISO/f-number are meter calculation inputs, not established Film3DS camera parameters",
+  "film3ds_absolute_iso": null,
+  "film3ds_f_number": null,
+  "target": "MacBook Pro trackpad",
+  "illumination_unchanged_between_measurement_and_probe_run": "not explicitly confirmed",
+  "measurement_time_alignment": "not established"
+}

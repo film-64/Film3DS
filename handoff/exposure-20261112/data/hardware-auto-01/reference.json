@@ -1,0 +1,11 @@
+{
+  "schema": "exposure-reference-1",
+  "source": "user current-scene meter reading",
+  "illumination_batch": "auto-20261112-01",
+  "iso": 100,
+  "f_number": 2.8,
+  "shutter_seconds": 0.06666666666666667,
+  "scene_match_confirmed": true,
+  "nominal_camera_f_number": 2.8,
+  "output_target_linear_luma": 0.18
+}

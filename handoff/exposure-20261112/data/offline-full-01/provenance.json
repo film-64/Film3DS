@@ -1,0 +1,72 @@
+{
+  "installed_binary_sha256": "879d5ad4c122d109f29318a4905182b5d98a293e504b75346250d073674f1f43",
+  "scope": "manual HBL launch; Sensor1 full58 SD-only",
+  "source_snapshot": "current isolated worktree; matching binary SHA verified; source compile inputs retained without claiming clean commit",
+  "files": [
+    {
+      "file": "FilmCalibration.3dsx",
+      "bytes": 294952,
+      "sha256": "879d5ad4c122d109f29318a4905182b5d98a293e504b75346250d073674f1f43"
+    },
+    {
+      "file": "Makefile.offline",
+      "bytes": 139,
+      "sha256": "4c3ca40ac066ee180d3e232b996054be6a82c35f4a58dce5cb4578d8234fcd16"
+    },
+    {
+      "file": "Makefile.probe",
+      "bytes": 1507,
+      "sha256": "e7bcce29b7d451cc3ca813f80d0548140a4713460b8fb959cf72b39a06d261b3"
+    },
+    {
+      "file": "probes/exposure/calibration_contract.h",
+      "bytes": 1631,
+      "sha256": "7277b32a9436137fbcfc02dd64a30bb449ac682e39873fdeddc08b84bb0a8fd0"
+    },
+    {
+      "file": "probes/exposure/calibration.h",
+      "bytes": 11019,
+      "sha256": "64e8f7d8ef326121c8ba97800c83662e3f4190e9369bcb5f699c190f8312cfb9"
+    },
+    {
+      "file": "probes/exposure/fault_capture.h",
+      "bytes": 1795,
+      "sha256": "ebf503f46c05ba33405a959decae95058b711b35d7f1d479740d3263f447cb47"
+    },
+    {
+      "file": "probes/exposure/remote_upload.h",
+      "bytes": 2789,
+      "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+    },
+    {
+      "file": "probes/exposure/deep_ipc.h",
+      "bytes": 6030,
+      "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+    },
+    {
+      "file": "probes/exposure/main.c",
+      "bytes": 32337,
+      "sha256": "c94f14f8406db84c761950eabc8a89f2461f1c09097be47edb4d213d85b0aebe"
+    },
+    {
+      "file": "probes/exposure/probe_plan.h",
+      "bytes": 1970,
+      "sha256": "350efee42ec63c7d90cdb90323029e3177708df2c41e99aaed8c8f39c53916c5"
+    },
+    {
+      "file": "probes/exposure/calibration_image.h",
+      "bytes": 2752,
+      "sha256": "6cbfc2b87ee5b4ba6ed592031e051b04b0d78eb60c4790dcbb6c44678c9f7cd7"
+    },
+    {
+      "file": "probes/exposure/crash_collect.h",
+      "bytes": 1270,
+      "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+    },
+    {
+      "file": "probes/exposure/ipc_decode.h",
+      "bytes": 525,
+      "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+    }
+  ]
+}

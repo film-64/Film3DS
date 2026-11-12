@@ -1,0 +1,464 @@
+{
+  "schema": "film3ds-exposure-state-decoder-1",
+  "boundary": "offline_read_only_evidence_analysis",
+  "source": "/Users/a64/Documents/Codex/Film3DS/build/hardware/exposure-deep/calibration/hardware-auto-02/recovered",
+  "all_selected_stages_verified": false,
+  "register_reference": "https://mgba-emu.github.io/gbatek/#dsi-aptina-camera-registers-soc1-3210h-33fdh",
+  "limitations": [
+    "gain factors describe configuration, not pipeline enable/bypass proof",
+    "analogue gain codes are not converted with the contradicted legacy formula",
+    "this tool does not infer absolute ISO, optical shutter time or continuous-preview lock"
+  ],
+  "input_sha256": {
+    "calibration_plan.csv": "ae2f4a7fadcf7f0118410b20c91bd421ed8632dd8bab01f7c199a6867bcccabe",
+    "reads.csv": "d11de2a15f8b2dcfce5619423cec503632cc4c1c8c190f71fa7a52c33403aeb4",
+    "frames.csv": "17216c74753270e5f8854213411bb9c4150d247374ef26904725948ac71fc27e"
+  },
+  "stages": [
+    {
+      "sensor": 1,
+      "phase": 3,
+      "label": "auto_seed",
+      "kind": "seed",
+      "proof_status": "rejected",
+      "errors": [
+        "not_declared_locked",
+        "ae_or_awb_not_verified_off"
+      ],
+      "expected_frames": 4,
+      "readbacks_per_register_expected": 8,
+      "timing_raw": {
+        "0010": 273,
+        "0012": 0,
+        "0014": 45130,
+        "300a": 2114,
+        "300c": 842,
+        "3016": 1,
+        "3012": 528,
+        "3014": 633
+      },
+      "ae_mode": 1,
+      "awb_mode": 1,
+      "composite_gain_raw": {
+        "Gr": {
+          "address": "3056",
+          "raw": 675
+        },
+        "R": {
+          "address": "305a",
+          "raw": 672
+        },
+        "B": {
+          "address": "3058",
+          "raw": 744
+        },
+        "Gb": {
+          "address": "305c",
+          "raw": 675
+        }
+      },
+      "analog_global_code": 34,
+      "analog_channel_codes": {
+        "Gr": {
+          "address": "302a",
+          "raw": 34
+        },
+        "R": {
+          "address": "302c",
+          "raw": 32
+        },
+        "B": {
+          "address": "302e",
+          "raw": 80
+        },
+        "Gb": {
+          "address": "3030",
+          "raw": 34
+        }
+      },
+      "analog_multiplier_calibrated": false,
+      "core_digital": {
+        "Gr": {
+          "address": "3032",
+          "raw": 256,
+          "configured_factor": 1.0
+        },
+        "R": {
+          "address": "3034",
+          "raw": 256,
+          "configured_factor": 1.0
+        },
+        "B": {
+          "address": "3036",
+          "raw": 256,
+          "configured_factor": 1.0
+        },
+        "Gb": {
+          "address": "3038",
+          "raw": 256,
+          "configured_factor": 1.0
+        }
+      },
+      "isp_digital": {
+        "Gr": {
+          "address": "32d6",
+          "raw": 155,
+          "configured_factor": 1.2109375
+        },
+        "R": {
+          "address": "32d4",
+          "raw": 181,
+          "configured_factor": 1.4140625
+        },
+        "B": {
+          "address": "32da",
+          "raw": 155,
+          "configured_factor": 1.2109375
+        },
+        "Gb": {
+          "address": "32d8",
+          "raw": 155,
+          "configured_factor": 1.2109375
+        }
+      },
+      "core_digital_unity_configured": true,
+      "isp_digital_nonunity_configured": true,
+      "pipeline_enable_state": "not_verified_by_this_contract",
+      "no_end_to_end_digital_amplification_proven": false,
+      "absolute_iso_calibrated": false
+    },
+    {
+      "sensor": 1,
+      "phase": 4,
+      "label": "auto_normal_base",
+      "kind": "code_baseline",
+      "proof_status": "rejected",
+      "errors": [
+        "missing_or_duplicate_measured_frame",
+        "missing_duplicate_or_failed:reg:0010:before:3",
+        "missing_duplicate_or_failed:reg:0010:before:4",
+        "missing_duplicate_or_failed:reg:0010:before:5",
+        "missing_duplicate_or_failed:reg:0010:after:2",
+        "missing_duplicate_or_failed:reg:0010:after:3",
+        "missing_duplicate_or_failed:reg:0010:after:4",
+        "missing_duplicate_or_failed:reg:0010:after:5",
+        "not_constant_or_incomplete:reg:0010",
+        "missing_duplicate_or_failed:reg:0012:before:3",
+        "missing_duplicate_or_failed:reg:0012:before:4",
+        "missing_duplicate_or_failed:reg:0012:before:5",
+        "missing_duplicate_or_failed:reg:0012:after:2",
+        "missing_duplicate_or_failed:reg:0012:after:3",
+        "missing_duplicate_or_failed:reg:0012:after:4",
+        "missing_duplicate_or_failed:reg:0012:after:5",
+        "not_constant_or_incomplete:reg:0012",
+        "missing_duplicate_or_failed:reg:0014:before:3",
+        "missing_duplicate_or_failed:reg:0014:before:4",
+        "missing_duplicate_or_failed:reg:0014:before:5",
+        "missing_duplicate_or_failed:reg:0014:after:2",
+        "missing_duplicate_or_failed:reg:0014:after:3",
+        "missing_duplicate_or_failed:reg:0014:after:4",
+        "missing_duplicate_or_failed:reg:0014:after:5",
+        "not_constant_or_incomplete:reg:0014",
+        "missing_duplicate_or_failed:reg:300a:before:3",
+        "missing_duplicate_or_failed:reg:300a:before:4",
+        "missing_duplicate_or_failed:reg:300a:before:5",
+        "missing_duplicate_or_failed:reg:300a:after:2",
+        "missing_duplicate_or_failed:reg:300a:after:3",
+        "missing_duplicate_or_failed:reg:300a:after:4",
+        "missing_duplicate_or_failed:reg:300a:after:5",
+        "not_constant_or_incomplete:reg:300a",
+        "missing_duplicate_or_failed:reg:300c:before:3",
+        "missing_duplicate_or_failed:reg:300c:before:4",
+        "missing_duplicate_or_failed:reg:300c:before:5",
+        "missing_duplicate_or_failed:reg:300c:after:2",
+        "missing_duplicate_or_failed:reg:300c:after:3",
+        "missing_duplicate_or_failed:reg:300c:after:4",
+        "missing_duplicate_or_failed:reg:300c:after:5",
+        "not_constant_or_incomplete:reg:300c",
+        "missing_duplicate_or_failed:reg:3016:before:3",
+        "missing_duplicate_or_failed:reg:3016:before:4",
+        "missing_duplicate_or_failed:reg:3016:before:5",
+        "missing_duplicate_or_failed:reg:3016:after:2",
+        "missing_duplicate_or_failed:reg:3016:after:3",
+        "missing_duplicate_or_failed:reg:3016:after:4",
+        "missing_duplicate_or_failed:reg:3016:after:5",
+        "not_constant_or_incomplete:reg:3016",
+        "missing_duplicate_or_failed:reg:3012:before:3",
+        "missing_duplicate_or_failed:reg:3012:before:4",
+        "missing_duplicate_or_failed:reg:3012:before:5",
+        "missing_duplicate_or_failed:reg:3012:after:2",
+        "missing_duplicate_or_failed:reg:3012:after:3",
+        "missing_duplicate_or_failed:reg:3012:after:4",
+        "missing_duplicate_or_failed:reg:3012:after:5",
+        "not_constant_or_incomplete:reg:3012",
+        "missing_duplicate_or_failed:reg:3014:before:3",
+        "missing_duplicate_or_failed:reg:3014:before:4",
+        "missing_duplicate_or_failed:reg:3014:before:5",
+        "missing_duplicate_or_failed:reg:3014:after:2",
+        "missing_duplicate_or_failed:reg:3014:after:3",
+        "missing_duplicate_or_failed:reg:3014:after:4",
+        "missing_duplicate_or_failed:reg:3014:after:5",
+        "not_constant_or_incomplete:reg:3014",
+        "missing_duplicate_or_failed:reg:3056:before:3",
+        "missing_duplicate_or_failed:reg:3056:before:4",
+        "missing_duplicate_or_failed:reg:3056:before:5",
+        "missing_duplicate_or_failed:reg:3056:after:2",
+        "missing_duplicate_or_failed:reg:3056:after:3",
+        "missing_duplicate_or_failed:reg:3056:after:4",
+        "missing_duplicate_or_failed:reg:3056:after:5",
+        "not_constant_or_incomplete:reg:3056",
+        "missing_duplicate_or_failed:reg:305a:before:3",
+        "missing_duplicate_or_failed:reg:305a:before:4",
+        "missing_duplicate_or_failed:reg:305a:before:5",
+        "missing_duplicate_or_failed:reg:305a:after:2",
+        "missing_duplicate_or_failed:reg:305a:after:3",
+        "missing_duplicate_or_failed:reg:305a:after:4",
+        "missing_duplicate_or_failed:reg:305a:after:5",
+        "not_constant_or_incomplete:reg:305a",
+        "missing_duplicate_or_failed:reg:3058:before:3",
+        "missing_duplicate_or_failed:reg:3058:before:4",
+        "missing_duplicate_or_failed:reg:3058:before:5",
+        "missing_duplicate_or_failed:reg:3058:after:2",
+        "missing_duplicate_or_failed:reg:3058:after:3",
+        "missing_duplicate_or_failed:reg:3058:after:4",
+        "missing_duplicate_or_failed:reg:3058:after:5",
+        "not_constant_or_incomplete:reg:3058",
+        "missing_duplicate_or_failed:reg:305c:before:3",
+        "missing_duplicate_or_failed:reg:305c:before:4",
+        "missing_duplicate_or_failed:reg:305c:before:5",
+        "missing_duplicate_or_failed:reg:305c:after:2",
+        "missing_duplicate_or_failed:reg:305c:after:3",
+        "missing_duplicate_or_failed:reg:305c:after:4",
+        "missing_duplicate_or_failed:reg:305c:after:5",
+        "not_constant_or_incomplete:reg:305c",
+        "missing_duplicate_or_failed:reg:3028:before:3",
+        "missing_duplicate_or_failed:reg:3028:before:4",
+        "missing_duplicate_or_failed:reg:3028:before:5",
+        "missing_duplicate_or_failed:reg:3028:after:2",
+        "missing_duplicate_or_failed:reg:3028:after:3",
+        "missing_duplicate_or_failed:reg:3028:after:4",
+        "missing_duplicate_or_failed:reg:3028:after:5",
+        "not_constant_or_incomplete:reg:3028",
+        "missing_duplicate_or_failed:reg:302a:before:3",
+        "missing_duplicate_or_failed:reg:302a:before:4",
+        "missing_duplicate_or_failed:reg:302a:before:5",
+        "missing_duplicate_or_failed:reg:302a:after:2",
+        "missing_duplicate_or_failed:reg:302a:after:3",
+        "missing_duplicate_or_failed:reg:302a:after:4",
+        "missing_duplicate_or_failed:reg:302a:after:5",
+        "not_constant_or_incomplete:reg:302a",
+        "missing_duplicate_or_failed:reg:302c:before:3",
+        "missing_duplicate_or_failed:reg:302c:before:4",
+        "missing_duplicate_or_failed:reg:302c:before:5",
+        "missing_duplicate_or_failed:reg:302c:after:2",
+        "missing_duplicate_or_failed:reg:302c:after:3",
+        "missing_duplicate_or_failed:reg:302c:after:4",
+        "missing_duplicate_or_failed:reg:302c:after:5",
+        "not_constant_or_incomplete:reg:302c",
+        "missing_duplicate_or_failed:reg:302e:before:3",
+        "missing_duplicate_or_failed:reg:302e:before:4",
+        "missing_duplicate_or_failed:reg:302e:before:5",
+        "missing_duplicate_or_failed:reg:302e:after:2",
+        "missing_duplicate_or_failed:reg:302e:after:3",
+        "missing_duplicate_or_failed:reg:302e:after:4",
+        "missing_duplicate_or_failed:reg:302e:after:5",
+        "not_constant_or_incomplete:reg:302e",
+        "missing_duplicate_or_failed:reg:3030:before:3",
+        "missing_duplicate_or_failed:reg:3030:before:4",
+        "missing_duplicate_or_failed:reg:3030:before:5",
+        "missing_duplicate_or_failed:reg:3030:after:2",
+        "missing_duplicate_or_failed:reg:3030:after:3",
+        "missing_duplicate_or_failed:reg:3030:after:4",
+        "missing_duplicate_or_failed:reg:3030:after:5",
+        "not_constant_or_incomplete:reg:3030",
+        "missing_duplicate_or_failed:reg:3032:before:3",
+        "missing_duplicate_or_failed:reg:3032:before:4",
+        "missing_duplicate_or_failed:reg:3032:before:5",
+        "missing_duplicate_or_failed:reg:3032:after:2",
+        "missing_duplicate_or_failed:reg:3032:after:3",
+        "missing_duplicate_or_failed:reg:3032:after:4",
+        "missing_duplicate_or_failed:reg:3032:after:5",
+        "not_constant_or_incomplete:reg:3032",
+        "missing_duplicate_or_failed:reg:3034:before:3",
+        "missing_duplicate_or_failed:reg:3034:before:4",
+        "missing_duplicate_or_failed:reg:3034:before:5",
+        "missing_duplicate_or_failed:reg:3034:after:2",
+        "missing_duplicate_or_failed:reg:3034:after:3",
+        "missing_duplicate_or_failed:reg:3034:after:4",
+        "missing_duplicate_or_failed:reg:3034:after:5",
+        "not_constant_or_incomplete:reg:3034",
+        "missing_duplicate_or_failed:reg:3036:before:3",
+        "missing_duplicate_or_failed:reg:3036:before:4",
+        "missing_duplicate_or_failed:reg:3036:before:5",
+        "missing_duplicate_or_failed:reg:3036:after:2",
+        "missing_duplicate_or_failed:reg:3036:after:3",
+        "missing_duplicate_or_failed:reg:3036:after:4",
+        "missing_duplicate_or_failed:reg:3036:after:5",
+        "not_constant_or_incomplete:reg:3036",
+        "missing_duplicate_or_failed:reg:3038:before:3",
+        "missing_duplicate_or_failed:reg:3038:before:4",
+        "missing_duplicate_or_failed:reg:3038:before:5",
+        "missing_duplicate_or_failed:reg:3038:after:2",
+        "missing_duplicate_or_failed:reg:3038:after:3",
+        "missing_duplicate_or_failed:reg:3038:after:4",
+        "missing_duplicate_or_failed:reg:3038:after:5",
+        "not_constant_or_incomplete:reg:3038",
+        "missing_duplicate_or_failed:reg:32d6:before:3",
+        "missing_duplicate_or_failed:reg:32d6:before:4",
+        "missing_duplicate_or_failed:reg:32d6:before:5",
+        "missing_duplicate_or_failed:reg:32d6:after:2",
+        "missing_duplicate_or_failed:reg:32d6:after:3",
+        "missing_duplicate_or_failed:reg:32d6:after:4",
+        "missing_duplicate_or_failed:reg:32d6:after:5",
+        "not_constant_or_incomplete:reg:32d6",
+        "missing_duplicate_or_failed:reg:32d4:before:3",
+        "missing_duplicate_or_failed:reg:32d4:before:4",
+        "missing_duplicate_or_failed:reg:32d4:before:5",
+        "missing_duplicate_or_failed:reg:32d4:after:2",
+        "missing_duplicate_or_failed:reg:32d4:after:3",
+        "missing_duplicate_or_failed:reg:32d4:after:4",
+        "missing_duplicate_or_failed:reg:32d4:after:5",
+        "not_constant_or_incomplete:reg:32d4",
+        "missing_duplicate_or_failed:reg:32da:before:3",
+        "missing_duplicate_or_failed:reg:32da:before:4",
+        "missing_duplicate_or_failed:reg:32da:before:5",
+        "missing_duplicate_or_failed:reg:32da:after:2",
+        "missing_duplicate_or_failed:reg:32da:after:3",
+        "missing_duplicate_or_failed:reg:32da:after:4",
+        "missing_duplicate_or_failed:reg:32da:after:5",
+        "not_constant_or_incomplete:reg:32da",
+        "missing_duplicate_or_failed:reg:32d8:before:3",
+        "missing_duplicate_or_failed:reg:32d8:before:4",
+        "missing_duplicate_or_failed:reg:32d8:before:5",
+        "missing_duplicate_or_failed:reg:32d8:after:2",
+        "missing_duplicate_or_failed:reg:32d8:after:3",
+        "missing_duplicate_or_failed:reg:32d8:after:4",
+        "missing_duplicate_or_failed:reg:32d8:after:5",
+        "not_constant_or_incomplete:reg:32d8",
+        "missing_duplicate_or_failed:mcu:a11d:before:3",
+        "missing_duplicate_or_failed:mcu:a11d:before:4",
+        "missing_duplicate_or_failed:mcu:a11d:before:5",
+        "missing_duplicate_or_failed:mcu:a11d:after:2",
+        "missing_duplicate_or_failed:mcu:a11d:after:3",
+        "missing_duplicate_or_failed:mcu:a11d:after:4",
+        "missing_duplicate_or_failed:mcu:a11d:after:5",
+        "not_constant_or_incomplete:mcu:a11d",
+        "missing_duplicate_or_failed:mcu:a11f:before:3",
+        "missing_duplicate_or_failed:mcu:a11f:before:4",
+        "missing_duplicate_or_failed:mcu:a11f:before:5",
+        "missing_duplicate_or_failed:mcu:a11f:after:2",
+        "missing_duplicate_or_failed:mcu:a11f:after:3",
+        "missing_duplicate_or_failed:mcu:a11f:after:4",
+        "missing_duplicate_or_failed:mcu:a11f:after:5",
+        "not_constant_or_incomplete:mcu:a11f",
+        "ae_or_awb_not_verified_off",
+        "requested_control_mismatch:3012",
+        "requested_control_mismatch:3056",
+        "requested_control_mismatch:3058",
+        "requested_control_mismatch:305a",
+        "requested_control_mismatch:305c"
+      ],
+      "expected_frames": 4,
+      "readbacks_per_register_expected": 8,
+      "timing_raw": {
+        "0010": null,
+        "0012": null,
+        "0014": null,
+        "300a": null,
+        "300c": null,
+        "3016": null,
+        "3012": null,
+        "3014": null
+      },
+      "ae_mode": null,
+      "awb_mode": null,
+      "composite_gain_raw": {
+        "Gr": {
+          "address": "3056",
+          "raw": null
+        },
+        "R": {
+          "address": "305a",
+          "raw": null
+        },
+        "B": {
+          "address": "3058",
+          "raw": null
+        },
+        "Gb": {
+          "address": "305c",
+          "raw": null
+        }
+      },
+      "analog_global_code": null,
+      "analog_channel_codes": {
+        "Gr": {
+          "address": "302a",
+          "raw": null
+        },
+        "R": {
+          "address": "302c",
+          "raw": null
+        },
+        "B": {
+          "address": "302e",
+          "raw": null
+        },
+        "Gb": {
+          "address": "3030",
+          "raw": null
+        }
+      },
+      "analog_multiplier_calibrated": false,
+      "core_digital": {
+        "Gr": {
+          "address": "3032",
+          "raw": null,
+          "configured_factor": null
+        },
+        "R": {
+          "address": "3034",
+          "raw": null,
+          "configured_factor": null
+        },
+        "B": {
+          "address": "3036",
+          "raw": null,
+          "configured_factor": null
+        },
+        "Gb": {
+          "address": "3038",
+          "raw": null,
+          "configured_factor": null
+        }
+      },
+      "isp_digital": {
+        "Gr": {
+          "address": "32d6",
+          "raw": null,
+          "configured_factor": null
+        },
+        "R": {
+          "address": "32d4",
+          "raw": null,
+          "configured_factor": null
+        },
+        "B": {
+          "address": "32da",
+          "raw": null,
+          "configured_factor": null
+        },
+        "Gb": {
+          "address": "32d8",
+          "raw": null,
+          "configured_factor": null
+        }
+      },
+      "core_digital_unity_configured": null,
+      "isp_digital_nonunity_configured": null,
+      "pipeline_enable_state": "not_verified_by_this_contract",
+      "no_end_to_end_digital_amplification_proven": false,
+      "absolute_iso_calibrated": false
+    }
+  ]
+}

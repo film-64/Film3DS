@@ -1,0 +1,54 @@
+{
+  "schema": "conditional-reference-EI-1",
+  "not_an_absolute_ISO_calibration": true,
+  "gain_vector_Gr_B_R_Gb": [
+    "0220",
+    "024A",
+    "0225",
+    "0220"
+  ],
+  "sensor": 1,
+  "fps_mode": 15,
+  "output_criterion": "central processed Y median =118, chosen operational reference; not a measured reference-camera gray patch",
+  "source_bracket": {
+    "phase25_coarse64_y": 75.400512695,
+    "phase27_coarse176_y": 131.6640625
+  },
+  "clock_model": "coarse component only, measured DMA period /704 lines; fine/time offsets omitted",
+  "required_assumptions": [
+    "Old meter1/25..1/30 and old integration sweep share illumination and sufficiently matching metering area. This was not synchronized/fully confirmed.",
+    "Nominal aperture f/2.8 applies to the device, matching the meter setting.",
+    "Y118 is accepted as the rendered brightness criterion; this is an EI definition, not a demonstrated ISO standard calibration.",
+    "Interpolation between measured points approximates the actual response; gamma2.2 is only one sensitivity model."
+  ],
+  "models": [
+    {
+      "model": "linear_output_y",
+      "estimated_seconds_to_center_y118": 0.014090898242842098,
+      "estimated_coarse": 148.79988544441255,
+      "EI_from_meter_1_25": 283.87118628380716,
+      "EI_from_meter_1_30": 236.55932190317264
+    },
+    {
+      "model": "linear_y_vs_log_time",
+      "estimated_seconds_to_center_y118": 0.013036266119352264,
+      "estimated_coarse": 137.6629702203599,
+      "EI_from_meter_1_25": 306.8363259370735,
+      "EI_from_meter_1_30": 255.6969382808946
+    },
+    {
+      "model": "assumed_gamma_2_2_linearization",
+      "estimated_seconds_to_center_y118": 0.013451736792395067,
+      "estimated_coarse": 142.0503405276919,
+      "EI_from_meter_1_25": 297.3593716360402,
+      "EI_from_meter_1_30": 247.79947636336684
+    }
+  ],
+  "conditional_model_envelope_EI": [
+    236.55932190317264,
+    306.8363259370735
+  ],
+  "not_a_statistical_confidence_interval": true,
+  "new_EV10_data_used_for_this_estimate": false,
+  "why_EV10_alone_is_insufficient": "New fixed-code scan stays at coarse7 with centerY9..56; it does not supply a matching Y118 shutter point for this gain vector."
+}

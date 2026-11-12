@@ -1,0 +1,92 @@
+[
+  {
+    "name": "manifest.txt",
+    "bytes": 2936,
+    "sha256": "37e42ccc6f7681aa161b3ab1b68d457a3bd11c77662a42f824c9bdd795c3f0f0"
+  },
+  {
+    "name": "frames.csv",
+    "bytes": 12019,
+    "sha256": "556d7c46193fd2a07a0bbeb7ab34dba8eebd205aba37ec64d37324a55d03fe6a"
+  },
+  {
+    "name": "calls.csv",
+    "bytes": 111143,
+    "sha256": "c7c571800685b59157b23ff910ccc25f9a708da76fbde3ac2a1be61abb9dee3f"
+  },
+  {
+    "name": "reads.csv",
+    "bytes": 520292,
+    "sha256": "cae20a4c52e474071a04b535669e1d3ae8d10c002cacd533b8e08302dc5d9152"
+  },
+  {
+    "name": "calibration_plan.csv",
+    "bytes": 445,
+    "sha256": "46935c235e213dbe02dfa02c4b4f4458d3859d6c9db6c8a94d2befeeeb21732e"
+  },
+  {
+    "name": "crash_dump_00000008.dmp",
+    "bytes": 3144,
+    "sha256": "7660df5ba72468627eee7185a0a21a5aaefb7b76113f8342df18d4cb8a94e464"
+  },
+  {
+    "name": "execution.csv",
+    "bytes": 9006,
+    "sha256": "e045bb3c68942ebce0b0da6aa769b57c4bf9c2957c76076b7712297d2a6848bd"
+  },
+  {
+    "name": "frame_burst.csv",
+    "bytes": 1097,
+    "sha256": "e14c87b21bd055956f0bea9781e4483a7d1f6afe44ccdcba14847dee3ea03225"
+  },
+  {
+    "name": "noise.csv",
+    "bytes": 452,
+    "sha256": "45bd9603ac818f77f116cec888778b4bb45e0bf0b1e929b595bcb89216fdea7f"
+  },
+  {
+    "name": "roi.csv",
+    "bytes": 49062,
+    "sha256": "fd7cf1209cc73422eee2f65db31974e3099105675630ee03b2683f04f122594c"
+  },
+  {
+    "name": "s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "1bb4fd943dba22b66101dff3d914b51d25afc4414f1ffd8e6e1c5292410458fe"
+  },
+  {
+    "name": "s1-p003-cal_r0_auto.pgm",
+    "bytes": 307215,
+    "sha256": "4cde3331d2ab452e4bd8c1d7c2c129e3bfa94ee03a4586aa63f1a2b1420a366b"
+  },
+  {
+    "name": "s1-p004-cal_r0_baseline.pgm",
+    "bytes": 307215,
+    "sha256": "e2b77b96d04ad497a68d387ba266c32f01f3f942ecb4e9b618fcb976f3603eee"
+  },
+  {
+    "name": "s1-p005-cal_digital_2.pgm",
+    "bytes": 307215,
+    "sha256": "e5074b06f3e879981aac967aa6f45fce18b37730de7bfe2a8e230c4bfe668dfa"
+  },
+  {
+    "name": "s1-p006-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "cfc5971cfe4ecfdbba2c84eaee3f6b1c5c71c6d9d21d12dc36e9f671ba41ba9f"
+  },
+  {
+    "name": "s1-p007-cal_digital_4.pgm",
+    "bytes": 307215,
+    "sha256": "9929ead15f03fe652428acc32b5105e52d4d48a231198ec1e87e87b3730bc410"
+  },
+  {
+    "name": "s1-p008-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "73128da3bc36ddff6f3000d4afc97b4683172366445c06ee5f527731444dc76e"
+  },
+  {
+    "name": "ipc.csv",
+    "bytes": 4728037,
+    "sha256": "71dce7ff4714c28f29720bd3eeaa50c62363ddc4e5e79cb60affda0f24e833c8"
+  }
+]

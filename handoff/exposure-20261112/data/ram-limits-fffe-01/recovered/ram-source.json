@@ -1,0 +1,11 @@
+{
+  "device": "192.168.0.26",
+  "protocol": "ram-evidence-1",
+  "index_sha256": "ddb488996e5577271932994ab9c72ab7ba17f22662573952a3dbf3d1a250efc1",
+  "status": {
+    "run": "ram:/run-1293855232",
+    "complete": "0",
+    "failed": "0",
+    "count": "14"
+  }
+}
