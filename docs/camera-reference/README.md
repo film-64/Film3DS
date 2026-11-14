@@ -19,16 +19,18 @@ python3 tools/camera_reference.py --verify
 python3 tools/camera_reference.py 0x32D4
 python3 tools/camera_reference.py "RAW"
 python3 tools/camera_reference.py "CCM" --table findings
+python3 tools/camera_reference.py "MT9V113" --table implementations
 python3 tools/camera_reference.py --table registers --status dsi_implementation_only
 python3 tools/camera_reference.py 133 --json
 ```
 
-四张表：
+五张表：
 
 - `sources.csv`：资料出处、权威性、硬件范围、开放状态、许可和使用限制。S02 为**存在但尚未找到全文**的原厂《Register and Variable Reference》。
 - `registers.csv`：物理寄存器与逻辑 MCU 变量的**关键子集**，不是 MT9V113 完整寄存器表；每个地址区间带来源和 N3DS 状态。
 - `experiments.csv`：由交接 `index.json` 生成的 31 个历史采集／分析目录索引；并非 31 次成功实验。
 - `findings.csv`：可复用的实测结论、明确否定结果与缺口；**这张表是开发决策入口**。
+- `implementations.csv`：9 个可运行应用、完整传感器驱动或可构建示例，含实际入口、用途、平台差异及许可注意事项。
 
 ## 权威层次与状态定义
 
@@ -48,11 +50,20 @@ python3 tools/camera_reference.py 133 --json
 
 `passed=true` 在历史报告里经常只代表**数据或诊断契约完整**，绝不自动代表「色彩标定通过」「ISO 准确」或「RAW 已取得」。`experiments.csv` 原样保留 `passed/null/false`，具体语义须查看相应报告。
 
+## 完整可参考项目的优先顺序
+
+1. **SNAP Camera / SNAP(lib)**：真实 DSi MT9V113 驱动、独立可用的 SNAP(lib) 和 10-bit Bayer RAW 旁路。参考 https://snap-camera.neocities.org/dev/snaplib 和 https://snap-camera.neocities.org/dev/camera 。代码 GPL-3.0-or-later；N3DS CAMU 接收仍未验证。
+2. **Intel AtomISP MT9V113 V4L2 driver**：同型号原生 Linux 驱动和约千行初始化/CCM 表；逐项交叉比对 A348..A350、Refresh、PLL、增益和 CCM。参考 S15/S16；GPL-2.0，不能直接移植 Linux 主机驱动。
+3. **DSi 全应用**：addisonking/dsi-camera、Epicpkmn11/dsi-camera，提供完整预览、YUV 拍照、存档和部分视频/图库；不等于 Bayer RAW。
+4. **3DS 实现**：devkitPro 3ds-examples/camera/image、3DSCameraExample 和 PixelPix3D，解决 N3DS 端 CAMU 接收、DMA/显示和界面结构；不证明底层 RAW。
+
+可通过 `python3 tools/camera_reference.py --table implementations RAW`（参数顺序不限）查询对应实现。详见 `implementations.csv` 中的 `entry_points`、`validation_gap` 和 `recommendation`。
+
 ## 已知高风险歧义
 
 - “raw”有两义：当前探针中的 `raw=yuyv` 表示**完整 YUYV 未压缩缓冲区**，不是传感器 Bayer RAW。查询 `F019`。
 - 芯片支持 RAW，SNAP 在 DSi 成功旁路；**N3DS 的 CAMU RAW 接收仍未证明**。查询 `F002`–`F005` 与 `REG-017`、`REG-018`。
-- BlocksDS `camera.h` 的多个 AWB_GAIN 宏重叠映射到 `0x2348`；不可当作多个可靠地址复制。查询 `REG-029` 与 `F016`。
+- BlocksDS `camera.h` 的多个 AWB_GAIN 宏重叠映射到 `0x2348`；不可当作多个可靠地址复制。Intel MT9V113 驱动（S16）的实际表列出 A348 缓冲速度、A349 跳变除数、A34A..A34D 增益界限、A34E/A34F/A350 三通道 AWB 增益，且 Film3DS 实验已实际观察后三个地址。移植前仍应按位宽/固件交叉核对。查询 `REG-029` 与 `F016`。
 - Batch24 的 FD OFF 可保持部分增益，但没有证明 ISP 内部写入函数、长期可靠性、任意数值与所有帧率。查询 `F006`–`F008`。
 - Batch28 15fps Y 模型通过限定条件验证，同时 5fps 有 CCM 配置差异，RGB 模型失败。三者不可合并为「曝光已完整标定」。查询 `F012`–`F014`。
 - SNAP(lib) 说明其发行采用 GPL-3.0-or-later；引用行为和文档可作为研究依据，**直接复制实现代码前必须单独完成许可兼容性审查**。
