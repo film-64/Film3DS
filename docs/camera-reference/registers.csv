@@ -1,0 +1,31 @@
+register_id,space,address,symbol,bits,component,source_ids,n3ds_status,evidence_path,notes
+REG-001,physical,0x0000,CHIP_VERSION,16,identity,S01;S03;S09,observed_n3ds,CAMERA_HARDWARE_HANDOFF.md,Sensor1 returned 0x2280; not a guarantee for other N3DS units
+REG-002,physical,0x098C,MCU_ADDRESS,16,mcu_transport,S01;S03;S05,observed_n3ds,handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/FINDINGS.md,MCU logical-variable address selection; do not confuse logical 8-bit access flag with I2C bus width
+REG-003,physical,0x0990,MCU_DATA0,16,mcu_transport,S01;S03;S05,observed_n3ds,handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/FINDINGS.md,Some native word reads reject sentinel values; see byte-alias experiment
+REG-004,physical,0x300A,FRAME_LENGTH_LINES,16,timing,S01;S03;S05,observed_n3ds,handoff/camera-20261114/evidence/batch24-gain-matrix-v4/FINDINGS.md,Observed frame lengths differ with configuration; not universal constants
+REG-005,physical,0x300C,LINE_LENGTH_PCLK,16,timing,S01;S03;S05,observed_n3ds,handoff/camera-20261114/evidence/batch24-gain-matrix-v4/FINDINGS.md,Pixel-clock calibration and optical exposure time remain open
+REG-006,physical,0x3012,COARSE_INTEGRATION_TIME,16,exposure,S01;S03;S09;S11,measured_n3ds_limited,handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/FINDINGS.md,Tested discrete coarse values at 5 and 15 fps; cannot claim all values
+REG-007,physical,0x3014,FINE_INTEGRATION_TIME,16,exposure,S03;S05;S11,observed_n3ds,handoff/camera-20261114/hardware-status.json,Reported fine integration observation; not a calibrated shutter time
+REG-008,physical,0x3056,GREEN1_GAIN,16,core_gain,S03;S05;S09,measured_n3ds_limited,handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/FINDINGS.md,Measured packed core codes 528/544/1040; do not relabel as calibrated ISO
+REG-009,physical,0x3058,BLUE_GAIN,16,core_gain,S03;S09,measured_n3ds_limited,handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/FINDINGS.md,Channel gain code
+REG-010,physical,0x305A,RED_GAIN,16,core_gain,S03;S09,measured_n3ds_limited,handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/FINDINGS.md,Channel gain code
+REG-011,physical,0x305C,GREEN2_GAIN,16,core_gain,S03;S09,measured_n3ds_limited,handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/FINDINGS.md,Channel gain code
+REG-012,physical,0x32D4,DIGITAL_GAIN1_RED,16,isp_gain,S03;S09;S11,measured_n3ds_limited,handoff/camera-20261114/evidence/batch24-gain-matrix-v4/FINDINGS.md,FD ON can overwrite to 133; FD OFF permits tested targets to hold
+REG-013,physical,0x32D6,DIGITAL_GAIN1_GREEN1,16,isp_gain,S03;S09;S11,measured_n3ds_limited,handoff/camera-20261114/evidence/batch24-gain-matrix-v4/FINDINGS.md,Same conditions as 32D4
+REG-014,physical,0x32D8,DIGITAL_GAIN1_GREEN2,16,isp_gain,S03;S09;S11,measured_n3ds_limited,handoff/camera-20261114/evidence/batch24-gain-matrix-v4/FINDINGS.md,Same conditions as 32D4
+REG-015,physical,0x32DA,DIGITAL_GAIN1_BLUE,16,isp_gain,S03;S09;S11,measured_n3ds_limited,handoff/camera-20261114/evidence/batch24-gain-matrix-v4/FINDINGS.md,Same conditions as 32D4
+REG-016,physical,0x32C4..0x32D2,COLOR_CORR_MATRIX(n),16,ccm,S03;S09,documented_not_sampled_n3ds,CAMERA_HARDWARE_HANDOFF.md,Physical packed CCM not sampled in batch26-28; MCU CCM change alone does not prove pixel application
+REG-017,physical,0x321C,OFIFO_CNT_STATUS,16,raw_bypass,S03;S05,dsi_implementation_only,,DSi SNAP bypass writes masked bits; N3DS path untested; do not execute on production
+REG-018,physical,0x3330,TEST_OUTPUT_FORMAT,16,raw_bypass,S03;S05,dsi_implementation_only,,DSi SNAP sets bypass bit 0x40; N3DS path untested
+REG-019,physical,0x33F4,KERNEL_CNT,16,denoise,S03;S05,documented_only,,DSi guide references defect-correction bit; not validated for N3DS
+REG-020,physical,0x326C,APERTURE_PARAMS,16,sharpen,S03;S05,documented_only,,DSi guide sharpening; do not assume same N3DS default
+REG-021,mcu_logical,0x2102,SEQ_MODE / A102,8,sequencer,S03;S04;S09;S11,measured_n3ds_limited,handoff/camera-20261114/evidence/batch24-gain-matrix-v4/FINDINGS.md,AE=bit0 FD=bit1 AWB=bit2 HG=bit3; bit1 FD linked to IFP gain overwrite in tested matrix
+REG-022,mcu_logical,0x2103,SEQ_CMD / A103,8,sequencer,S03;S04;S05,observed_n3ds,handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/FINDINGS.md,Command 5 Refresh; poll completion and restore controls; DSi also defines 6 Refresh_Mode
+REG-023,mcu_logical,0x2104,SEQ_STATE / A104,8,sequencer,S03;S04,observed_n3ds,handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/FINDINGS.md,Preview state observed in scoped runs
+REG-024,mcu_logical,0x221F,AE_CURRENT_DIGITAL_GAIN_AE1,16,ae_gain,S03;S09;S11,observed_n3ds,handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/FINDINGS.md,Value 128 in normalized manual matrix; does not explain IFP133
+REG-025,mcu_logical,0x2332..0x2346,AWB_CCM(n),16,ccm,S03;S09;S11,observed_n3ds,handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/FINDINGS.md,5fps end state 2332 432->430 and 2334 65455->65456; sequential snapshot not atomic
+REG-026,mcu_logical,0x2355,AWB_CNT / A355,8,awb_ccm,S03;S09,measured_n3ds_limited,handoff/camera-20261114/evidence/batch20-ccm-boot-v3/FINDINGS.md,Bit5 force-unit; bit6 normalizing hypothesis from homolog; off/on/off affected CCM but not IFP133
+REG-027,mcu_logical,0x2B3C..0x2B4E,HG_GAMMA_TABLE_A(n),8,gamma,S03;S05,observed_n3ds,handoff/camera-20261114/evidence/batch17-hg-isolation-v1/FINDINGS.md,19-point table A read in snapshots; not yet calibrated
+REG-028,mcu_logical,0x2B4F..0x2B61,HG_GAMMA_TABLE_B(n),8,gamma,S03;S05,observed_n3ds,handoff/camera-20261114/evidence/batch17-hg-isolation-v1/FINDINGS.md,19-point table B read in snapshots; not yet calibrated
+REG-029,mcu_logical,0x2348,AWB_GAIN_* overlapping macros,8,awb,S03,definition_conflict,,Several BlocksDS macros map to same logical address; do not generate device writes from them without independent crosscheck
+REG-030,physical,0x3604..0x363E,RGB_GAMMA_CURVE_KNEES,16,gamma,S03,observed_n3ds,handoff/camera-20261114/evidence/batch17-hg-isolation-v1/FINDINGS.md,Physical packed gamma knees included in read-only snapshots; not calibrated
