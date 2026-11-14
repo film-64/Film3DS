@@ -18,6 +18,7 @@ TABLES = {
     "registers": ("registers.csv", "register_id"),
     "experiments": ("experiments.csv", "batch_id"),
     "findings": ("findings.csv", "finding_id"),
+    "implementations": ("implementations.csv", "implementation_id"),
 }
 
 
@@ -48,7 +49,7 @@ def verify(tables: dict[str, list[dict[str, str]]]) -> list[str]:
             seen.add(value)
 
     known_sources = {row["source_id"] for row in tables["sources"]}
-    for name in ("registers", "findings"):
+    for name in ("registers", "findings", "implementations"):
         for number, row in enumerate(tables[name], 2):
             for source in row.get("source_ids", "").split(";"):
                 source = source.strip()
@@ -80,7 +81,7 @@ def query(tables: dict[str, list[dict[str, str]]], terms: str, kind: str,
             if needle and needle not in haystack:
                 continue
             if state:
-                values = (row.get("n3ds_status", ""), row.get("evidence_grade", ""),
+                values = (row.get("n3ds_status", ""), row.get("n3ds_applicability", ""), row.get("evidence_grade", ""),
                           row.get("access", ""), row.get("report_passed_values", ""))
                 if state not in (v.casefold() for v in values):
                     continue
@@ -119,7 +120,7 @@ def main() -> int:
             for row in matches:
                 name = row["table"]
                 key = TABLES[name][1]
-                short = (row.get("claim") or row.get("symbol") or row.get("title")
+                short = (row.get("claim") or row.get("symbol") or row.get("name") or row.get("title")
                          or row.get("directory_kind") or "").replace("\n", " ")
                 addr = row.get("address", "")
                 state = row.get("n3ds_status") or row.get("evidence_grade") or row.get("access") or ""
