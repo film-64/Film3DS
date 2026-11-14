@@ -1,0 +1,72 @@
+[
+  {
+    "command": "python tests/camera_hardware_handoff.py",
+    "returncode": 0,
+    "duration_seconds": 0.189,
+    "stdout": "build/worktrees/camera-deep-probe -> diagnostics/camera-deep-probe\nbuild/hardware/native-trace -> diagnostics/native-trace\n",
+    "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.055s\n\nOK\n"
+  },
+  {
+    "command": "python tests/exposure_dense_report.py",
+    "returncode": 0,
+    "duration_seconds": 40.907,
+    "stdout": "",
+    "stderr": "..........\n----------------------------------------------------------------------\nRan 10 tests in 35.114s\n\nOK\n"
+  },
+  {
+    "command": "python tests/exposure_rebuild_report.py",
+    "returncode": 0,
+    "duration_seconds": 66.351,
+    "stdout": "",
+    "stderr": "...............\n----------------------------------------------------------------------\nRan 15 tests in 66.016s\n\nOK\n"
+  },
+  {
+    "command": "python tests/camera_gain_matrix_report.py",
+    "returncode": 0,
+    "duration_seconds": 35.342,
+    "stdout": "",
+    "stderr": "...............\n----------------------------------------------------------------------\nRan 15 tests in 35.022s\n\nOK\n"
+  },
+  {
+    "command": "python tests/camera_ccm_boot_report.py",
+    "returncode": 0,
+    "duration_seconds": 9.637,
+    "stdout": "",
+    "stderr": "...............\n----------------------------------------------------------------------\nRan 15 tests in 9.312s\n\nOK\n"
+  },
+  {
+    "command": "python tests/exposure_dense_fit.py",
+    "returncode": 0,
+    "duration_seconds": 40.145,
+    "stdout": "",
+    "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.786s\n\nOK\n"
+  },
+  {
+    "command": "python tests/exposure_response_fit.py",
+    "returncode": 0,
+    "duration_seconds": 2.266,
+    "stdout": "",
+    "stderr": "......\n----------------------------------------------------------------------\nRan 6 tests in 1.527s\n\nOK\n"
+  },
+  {
+    "command": "python tests/exposure_luma_transfer.py",
+    "returncode": 0,
+    "duration_seconds": 0.775,
+    "stdout": "",
+    "stderr": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.024s\n\nOK\n"
+  },
+  {
+    "command": "python tests/exposure_luma_validate.py",
+    "returncode": 0,
+    "duration_seconds": 0.799,
+    "stdout": "",
+    "stderr": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.009s\n\nOK\n"
+  },
+  {
+    "command": "python tests/exposure_sweep_session.py",
+    "returncode": 0,
+    "duration_seconds": 6.391,
+    "stdout": "",
+    "stderr": "..................\n----------------------------------------------------------------------\nRan 18 tests in 6.188s\n\nOK\n"
+  }
+]

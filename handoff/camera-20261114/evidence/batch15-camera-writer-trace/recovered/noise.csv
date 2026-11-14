@@ -1,0 +1,3 @@
+sensor,phase,label,frames,width,height,mean,temporal_variance,temporal_sigma
+1,3,sweep_seed,4,128,96,203.06011963,2.09779867,1.44837794
+1,4,sweep_ref_00,4,128,96,203.06422933,1.99224854,1.41147035

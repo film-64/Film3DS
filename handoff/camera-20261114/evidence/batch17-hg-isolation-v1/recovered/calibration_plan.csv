@@ -1,0 +1,3 @@
+sensor,phase,label,kind,settle,measured,baseline_phase,write_mask,coarse,gain_gr,gain_b,gain_r,gain_gb,locked
+1,3,sweep_seed,seed,8,4,0,0,,,,,,0
+1,4,sweep_ref_00,code_baseline,8,4,0,31,264,554,616,560,554,1

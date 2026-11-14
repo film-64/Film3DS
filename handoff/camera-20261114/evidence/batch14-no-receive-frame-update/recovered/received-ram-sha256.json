@@ -1,0 +1,107 @@
+[
+  {
+    "id": 0,
+    "name": "calls.csv",
+    "bytes": 31403,
+    "crc32": "0fd8e3dc",
+    "sha256": "4f8234b712d9c782f4d31fc1cc2ce6d5382b3d2cffe49ea1f325e1a2d3f928db"
+  },
+  {
+    "id": 1,
+    "name": "reads.csv",
+    "bytes": 125523,
+    "crc32": "886e6b3b",
+    "sha256": "126f3e753312367052b9e230303eb1f3e0f518626b53aec1aa4c6762f10af420"
+  },
+  {
+    "id": 2,
+    "name": "frames.csv",
+    "bytes": 3162,
+    "crc32": "d1a0cdce",
+    "sha256": "da4ebb1e0ab35b15737cc916fe28bb8de8f285e94e2993c01d294f65f4c65ce6"
+  },
+  {
+    "id": 3,
+    "name": "manifest.txt",
+    "bytes": 4716,
+    "crc32": "7bcfd8af",
+    "sha256": "d841b00611a139f79cdf7ec18b5b2fa4486e1fe54738a45574852a64f893e300"
+  },
+  {
+    "id": 4,
+    "name": "lifecycle.txt",
+    "bytes": 0,
+    "crc32": "00000000",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "id": 5,
+    "name": "s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "crc32": "38b98616",
+    "sha256": "5baa03ca471d37c0550578484476e73d9525f9167555a5fe91bfa88965e8b039"
+  },
+  {
+    "id": 6,
+    "name": "calibration_plan.csv",
+    "bytes": 207,
+    "crc32": "aca33c13",
+    "sha256": "0da543d3c419dffd3a61ab6feee4e9b555a727cbaf694b345e3b9b7248e1e24a"
+  },
+  {
+    "id": 7,
+    "name": "frame_burst.csv",
+    "bytes": 1097,
+    "crc32": "09bfab52",
+    "sha256": "3b625f440bbbf97dbb2ecb41bea3f2269dea80b09b309d18f62b1440fee39b17"
+  },
+  {
+    "id": 8,
+    "name": "roi.csv",
+    "bytes": 5262,
+    "crc32": "b7641b07",
+    "sha256": "168884b6a185637e2a954a7f68ff11cf23bd67f4b32df8f5e9fb2621947b54eb"
+  },
+  {
+    "id": 9,
+    "name": "noise.csv",
+    "bytes": 197,
+    "crc32": "205af2b9",
+    "sha256": "f13a25f6cec6ce0fe9f0b7a7fbe4dbc9f59533ad090e83d7470d14c3fc9150d1"
+  },
+  {
+    "id": 10,
+    "name": "execution.csv",
+    "bytes": 974,
+    "crc32": "0fa2cd9a",
+    "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+  },
+  {
+    "id": 11,
+    "name": "s1-p003-sweep_seed.pgm",
+    "bytes": 307215,
+    "crc32": "14381bc5",
+    "sha256": "d49488d559ab14a4d1adfd7ab2d5d45ceb7b4e707de3df483183e0b5fc45a33f"
+  },
+  {
+    "id": 12,
+    "name": "s1-p004-sweep_ref_00.yuyv",
+    "bytes": 24576,
+    "crc32": "da3761fc",
+    "sha256": "288ea2b7a6c0e5a4bf038a1928e081a359797189b6112d1f1a72e503c04e2363"
+  },
+  {
+    "id": 13,
+    "name": "s1-p005-receive_control_128.yuyv",
+    "bytes": 24576,
+    "crc32": "042a60ea",
+    "sha256": "2cc185cd52d98b76c61a88328d3ad7971fc1b132ee0a1c0e9314c87d6ba5ebe2"
+  },
+  {
+    "id": 14,
+    "name": "s1-p006-no_receive_128.yuyv",
+    "bytes": 24576,
+    "crc32": "042a60ea",
+    "sha256": "2cc185cd52d98b76c61a88328d3ad7971fc1b132ee0a1c0e9314c87d6ba5ebe2"
+  }
+]

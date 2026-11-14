@@ -1,0 +1,756 @@
+{
+  "source": "camera-gain-matrix/v4",
+  "complete": true,
+  "strict_report_passed": true,
+  "files": 24,
+  "bytes": 1746319,
+  "completed_nodes": 8,
+  "completed_trials": 24,
+  "controllable_nodes": [
+    2,
+    3,
+    6,
+    7
+  ],
+  "conditions": [
+    {
+      "index": 0,
+      "fps": 5,
+      "gate": 2,
+      "coarse": 4,
+      "AE_DGAIN": 128,
+      "period_raw": 199949576,
+      "trials": [
+        {
+          "target": 128,
+          "cycles": 8,
+          "held": false,
+          "IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          }
+        },
+        {
+          "target": 96,
+          "cycles": 2,
+          "held": false,
+          "IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          }
+        },
+        {
+          "target": 160,
+          "cycles": 2,
+          "held": false,
+          "IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          }
+        }
+      ],
+      "ccm_windows": {
+        "before_stream": {
+          "phase": "5",
+          "when": "before_stream",
+          "addr": "2332",
+          "before": "430",
+          "combined": "430",
+          "after": "430",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        },
+        "after_stop": {
+          "phase": "5",
+          "when": "after_stop",
+          "addr": "2332",
+          "before": "428",
+          "combined": "428",
+          "after": "428",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        }
+      }
+    },
+    {
+      "index": 1,
+      "fps": 5,
+      "gate": 2,
+      "coarse": 528,
+      "AE_DGAIN": 128,
+      "period_raw": 199947532,
+      "trials": [
+        {
+          "target": 128,
+          "cycles": 8,
+          "held": false,
+          "IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          }
+        },
+        {
+          "target": 96,
+          "cycles": 2,
+          "held": false,
+          "IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          }
+        },
+        {
+          "target": 160,
+          "cycles": 2,
+          "held": false,
+          "IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          }
+        }
+      ],
+      "ccm_windows": {
+        "before_stream": {
+          "phase": "6",
+          "when": "before_stream",
+          "addr": "2332",
+          "before": "420",
+          "combined": "420",
+          "after": "420",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        },
+        "after_stop": {
+          "phase": "6",
+          "when": "after_stop",
+          "addr": "2332",
+          "before": "420",
+          "combined": "420",
+          "after": "420",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        }
+      }
+    },
+    {
+      "index": 2,
+      "fps": 5,
+      "gate": 0,
+      "coarse": 4,
+      "AE_DGAIN": 128,
+      "period_raw": 199948943,
+      "trials": [
+        {
+          "target": 128,
+          "cycles": 8,
+          "held": true,
+          "IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          }
+        },
+        {
+          "target": 96,
+          "cycles": 8,
+          "held": true,
+          "IFP": {
+            "32d4": [
+              96
+            ],
+            "32d6": [
+              96
+            ],
+            "32d8": [
+              96
+            ],
+            "32da": [
+              96
+            ]
+          }
+        },
+        {
+          "target": 160,
+          "cycles": 8,
+          "held": true,
+          "IFP": {
+            "32d4": [
+              160
+            ],
+            "32d6": [
+              160
+            ],
+            "32d8": [
+              160
+            ],
+            "32da": [
+              160
+            ]
+          }
+        }
+      ],
+      "ccm_windows": {
+        "before_stream": {
+          "phase": "7",
+          "when": "before_stream",
+          "addr": "2332",
+          "before": "424",
+          "combined": "424",
+          "after": "424",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        },
+        "after_stop": {
+          "phase": "7",
+          "when": "after_stop",
+          "addr": "2332",
+          "before": "424",
+          "combined": "424",
+          "after": "424",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        }
+      }
+    },
+    {
+      "index": 3,
+      "fps": 5,
+      "gate": 0,
+      "coarse": 528,
+      "AE_DGAIN": 128,
+      "period_raw": 199950292,
+      "trials": [
+        {
+          "target": 128,
+          "cycles": 8,
+          "held": true,
+          "IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          }
+        },
+        {
+          "target": 96,
+          "cycles": 8,
+          "held": true,
+          "IFP": {
+            "32d4": [
+              96
+            ],
+            "32d6": [
+              96
+            ],
+            "32d8": [
+              96
+            ],
+            "32da": [
+              96
+            ]
+          }
+        },
+        {
+          "target": 160,
+          "cycles": 8,
+          "held": true,
+          "IFP": {
+            "32d4": [
+              160
+            ],
+            "32d6": [
+              160
+            ],
+            "32d8": [
+              160
+            ],
+            "32da": [
+              160
+            ]
+          }
+        }
+      ],
+      "ccm_windows": {
+        "before_stream": {
+          "phase": "8",
+          "when": "before_stream",
+          "addr": "2332",
+          "before": "420",
+          "combined": "420",
+          "after": "420",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        },
+        "after_stop": {
+          "phase": "8",
+          "when": "after_stop",
+          "addr": "2332",
+          "before": "420",
+          "combined": "420",
+          "after": "420",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        }
+      }
+    },
+    {
+      "index": 4,
+      "fps": 15,
+      "gate": 2,
+      "coarse": 4,
+      "AE_DGAIN": 128,
+      "period_raw": 66668518,
+      "trials": [
+        {
+          "target": 128,
+          "cycles": 8,
+          "held": false,
+          "IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          }
+        },
+        {
+          "target": 96,
+          "cycles": 2,
+          "held": false,
+          "IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          }
+        },
+        {
+          "target": 160,
+          "cycles": 2,
+          "held": false,
+          "IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          }
+        }
+      ],
+      "ccm_windows": {
+        "before_stream": {
+          "phase": "9",
+          "when": "before_stream",
+          "addr": "2332",
+          "before": "424",
+          "combined": "424",
+          "after": "424",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        },
+        "after_stop": {
+          "phase": "9",
+          "when": "after_stop",
+          "addr": "2332",
+          "before": "424",
+          "combined": "424",
+          "after": "424",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        }
+      }
+    },
+    {
+      "index": 5,
+      "fps": 15,
+      "gate": 2,
+      "coarse": 528,
+      "AE_DGAIN": 128,
+      "period_raw": 66665862,
+      "trials": [
+        {
+          "target": 128,
+          "cycles": 8,
+          "held": false,
+          "IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          }
+        },
+        {
+          "target": 96,
+          "cycles": 2,
+          "held": false,
+          "IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          }
+        },
+        {
+          "target": 160,
+          "cycles": 2,
+          "held": false,
+          "IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          }
+        }
+      ],
+      "ccm_windows": {
+        "before_stream": {
+          "phase": "10",
+          "when": "before_stream",
+          "addr": "2332",
+          "before": "420",
+          "combined": "420",
+          "after": "412",
+          "match_before": "1",
+          "match_after": "0",
+          "atomic": false
+        },
+        "after_stop": {
+          "phase": "10",
+          "when": "after_stop",
+          "addr": "2332",
+          "before": "420",
+          "combined": "420",
+          "after": "420",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        }
+      }
+    },
+    {
+      "index": 6,
+      "fps": 15,
+      "gate": 0,
+      "coarse": 4,
+      "AE_DGAIN": 128,
+      "period_raw": 66665944,
+      "trials": [
+        {
+          "target": 128,
+          "cycles": 8,
+          "held": true,
+          "IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          }
+        },
+        {
+          "target": 96,
+          "cycles": 8,
+          "held": true,
+          "IFP": {
+            "32d4": [
+              96
+            ],
+            "32d6": [
+              96
+            ],
+            "32d8": [
+              96
+            ],
+            "32da": [
+              96
+            ]
+          }
+        },
+        {
+          "target": 160,
+          "cycles": 8,
+          "held": true,
+          "IFP": {
+            "32d4": [
+              160
+            ],
+            "32d6": [
+              160
+            ],
+            "32d8": [
+              160
+            ],
+            "32da": [
+              160
+            ]
+          }
+        }
+      ],
+      "ccm_windows": {
+        "before_stream": {
+          "phase": "11",
+          "when": "before_stream",
+          "addr": "2332",
+          "before": "424",
+          "combined": "424",
+          "after": "424",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        },
+        "after_stop": {
+          "phase": "11",
+          "when": "after_stop",
+          "addr": "2332",
+          "before": "424",
+          "combined": "424",
+          "after": "424",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        }
+      }
+    },
+    {
+      "index": 7,
+      "fps": 15,
+      "gate": 0,
+      "coarse": 528,
+      "AE_DGAIN": 128,
+      "period_raw": 66663624,
+      "trials": [
+        {
+          "target": 128,
+          "cycles": 8,
+          "held": true,
+          "IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          }
+        },
+        {
+          "target": 96,
+          "cycles": 8,
+          "held": true,
+          "IFP": {
+            "32d4": [
+              96
+            ],
+            "32d6": [
+              96
+            ],
+            "32d8": [
+              96
+            ],
+            "32da": [
+              96
+            ]
+          }
+        },
+        {
+          "target": 160,
+          "cycles": 8,
+          "held": true,
+          "IFP": {
+            "32d4": [
+              160
+            ],
+            "32d6": [
+              160
+            ],
+            "32d8": [
+              160
+            ],
+            "32da": [
+              160
+            ]
+          }
+        }
+      ],
+      "ccm_windows": {
+        "before_stream": {
+          "phase": "12",
+          "when": "before_stream",
+          "addr": "2332",
+          "before": "420",
+          "combined": "420",
+          "after": "420",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        },
+        "after_stop": {
+          "phase": "12",
+          "when": "after_stop",
+          "addr": "2332",
+          "before": "420",
+          "combined": "420",
+          "after": "420",
+          "match_before": "1",
+          "match_after": "1",
+          "atomic": false
+        }
+      }
+    }
+  ],
+  "writer_identified": false,
+  "calibration_validated": false,
+  "restored": true,
+  "total_VSYNC_observations": 168,
+  "trial_VSYNC_observations": 144,
+  "remaining": [
+    "long_duration_hold",
+    "same_stream_FD_off_on_off_causality",
+    "target_specific_image_calibration",
+    "internal_writer_and_133_formula"
+  ]
+}

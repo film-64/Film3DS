@@ -1,0 +1,34 @@
+{
+  "capture_verified": true,
+  "files": 313,
+  "points": 74,
+  "DMA_frames": 444,
+  "ROI_originals": 296,
+  "profiles": [
+    {
+      "fps": 5,
+      "relative_luma_transfer_passed": true,
+      "domain_mean_Y": [
+        37.943684895833336,
+        193.15486653645834
+      ],
+      "max_odd_error_EV": 0.016669400847141524,
+      "max_late_baseline_error_EV": 0.008527530359734747,
+      "max_four_image_gain_span_EV": 0.019117773609141686
+    },
+    {
+      "fps": 15,
+      "relative_luma_transfer_passed": true,
+      "domain_mean_Y": [
+        41.315104166666664,
+        193.4287109375
+      ],
+      "max_odd_error_EV": 0.013358689554348935,
+      "max_late_baseline_error_EV": 0.009810278757831803,
+      "max_four_image_gain_span_EV": 0.017145105175789155
+    }
+  ],
+  "absolute_calibration_validated": false,
+  "optical_time_verified": false,
+  "RGB_response_passed": false
+}

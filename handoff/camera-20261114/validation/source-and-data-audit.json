@@ -1,0 +1,16 @@
+{
+  "schema": "camera-hardware-handoff/v1",
+  "original_text_files_compared": 447,
+  "all_original_text_bytes_unchanged": true,
+  "original_capture_contracts_compared": 70,
+  "original_capture_contracts_unchanged": true,
+  "publication_only_contracts_added": [
+    "camera-hardware-handoff-bootstrap/v1",
+    "camera-hardware-handoff/v1"
+  ],
+  "source_formatting_only": {
+    "tools/camera_hg_report.py": "one_trailing_space_removed_no_algorithm_change"
+  },
+  "original_data_modified": false,
+  "images_included": false
+}

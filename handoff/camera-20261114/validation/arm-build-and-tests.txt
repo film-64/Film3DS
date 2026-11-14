@@ -1,0 +1,6 @@
+make --no-print-directory -C build-exposure-refresh -f /work/build/worktrees/camera-handoff-20261114/diagnostics/camera-deep-probe/Makefile.probe
+main.c
+linking FilmExposureSweep.elf
+built ... FilmExposureSweep.smdh
+built ... FilmExposureSweep.3dsx
+PASS 3DSX/SMDH 391920 bytes sha256=d3211d7650da96619f618aefc847049287e0897cc7ee03376af370a7a227626f

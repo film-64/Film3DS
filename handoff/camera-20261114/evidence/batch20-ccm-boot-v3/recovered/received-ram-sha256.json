@@ -1,0 +1,121 @@
+[
+  {
+    "id": 0,
+    "name": "calls.csv",
+    "bytes": 42106,
+    "crc32": "eab99cfb",
+    "sha256": "4e1c0c02ac3f0a86c3bd65a23e2eeb9f4197a45aac3bb75358d866404f1d4467"
+  },
+  {
+    "id": 1,
+    "name": "reads.csv",
+    "bytes": 221280,
+    "crc32": "c8eaa619",
+    "sha256": "f910b133cea8c1fc4cce3664677fd8a64cb078d50b6f0aa081bc011a8c536f77"
+  },
+  {
+    "id": 2,
+    "name": "frames.csv",
+    "bytes": 3070,
+    "crc32": "ee980858",
+    "sha256": "b985e7a26bfb9407f6bbd279e2f1c897034b3cce8a7d050cd91cf918780a6ce9"
+  },
+  {
+    "id": 3,
+    "name": "manifest.txt",
+    "bytes": 41071,
+    "crc32": "81368d84",
+    "sha256": "c0848403e0e47abaa4e52a92474711effba0ebcf34847b29977bb5df9c0f22e5"
+  },
+  {
+    "id": 4,
+    "name": "lifecycle.txt",
+    "bytes": 0,
+    "crc32": "00000000",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "id": 5,
+    "name": "s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "crc32": "7645e2d6",
+    "sha256": "ea23bea66a83b62d97c61cca8cc9fdc9bb89fc2a9259054a1ed472d699a45e34"
+  },
+  {
+    "id": 6,
+    "name": "calibration_plan.csv",
+    "bytes": 207,
+    "crc32": "c0cf6441",
+    "sha256": "192ab46c8a7919de11c67cc84d460fa97184425eae0e4d990a197b1f443e499b"
+  },
+  {
+    "id": 7,
+    "name": "frame_burst.csv",
+    "bytes": 1097,
+    "crc32": "da3e49c5",
+    "sha256": "c3de00cb8c56088bf9a51e14f231d149f0a4aef67b523a5e42a32fb9489b2867"
+  },
+  {
+    "id": 8,
+    "name": "roi.csv",
+    "bytes": 5262,
+    "crc32": "32d63a13",
+    "sha256": "d9af5e848bbc4b071acea7474ddcc9ba509b0a6efca1d42e74b7a82d0c4f46fd"
+  },
+  {
+    "id": 9,
+    "name": "noise.csv",
+    "bytes": 197,
+    "crc32": "d1ebe7fd",
+    "sha256": "a29b053c9809e919126046b5752d38306a695c5cce06a2d1173dc07709a91829"
+  },
+  {
+    "id": 10,
+    "name": "execution.csv",
+    "bytes": 974,
+    "crc32": "0fa2cd9a",
+    "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+  },
+  {
+    "id": 11,
+    "name": "s1-p003-sweep_seed.pgm",
+    "bytes": 307215,
+    "crc32": "0dd3e434",
+    "sha256": "e5ca151d1b490cd09c70331d5a219e7cef655475d13a6707d1aa1c904fa2927f"
+  },
+  {
+    "id": 12,
+    "name": "s1-p004-sweep_ref_00.yuyv",
+    "bytes": 24576,
+    "crc32": "5e63a854",
+    "sha256": "dee11fa470d1a8d349c0be66b54fbc106a8d5c9a331b0c1d1ad14cdce8798e9a"
+  },
+  {
+    "id": 13,
+    "name": "s1-p005-ccm_0_normalized.yuyv",
+    "bytes": 24576,
+    "crc32": "3d4e0703",
+    "sha256": "f0e6deb9643cd480878fc545b042709e0c1f699268a00a752acfe8d85cbbf38f"
+  },
+  {
+    "id": 14,
+    "name": "s1-p006-ccm_1_disabled.yuyv",
+    "bytes": 24576,
+    "crc32": "042a60ea",
+    "sha256": "2cc185cd52d98b76c61a88328d3ad7971fc1b132ee0a1c0e9314c87d6ba5ebe2"
+  },
+  {
+    "id": 15,
+    "name": "s1-p007-ccm_2_normalized.yuyv",
+    "bytes": 24576,
+    "crc32": "042a60ea",
+    "sha256": "2cc185cd52d98b76c61a88328d3ad7971fc1b132ee0a1c0e9314c87d6ba5ebe2"
+  },
+  {
+    "id": 16,
+    "name": "startup_journal.txt",
+    "bytes": 34747,
+    "crc32": "28a8d00b",
+    "sha256": "4afbf9c456015b0b7453de219a678dc0547c69df1936252bdee7cb462cfa8093"
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "recovery_complete": true,
+  "files": 313,
+  "bytes": 9996130,
+  "capture_complete": true,
+  "ram_failed": false,
+  "index_sha256": "44ae519f98d110d5e52bc555e5003fcc0080fb969540845bc3f307d108ade60a",
+  "run": "ram:/run-1794672531",
+  "original_session_failure_preserved": true,
+  "readonly_resume": true,
+  "measurement_repeated": false,
+  "deployments_total": 1,
+  "finished_unix": 1794644201.329782
+}

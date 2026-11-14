@@ -1,0 +1,18 @@
+FILMRAM 3
+run ram:/run-1794536673
+complete 0
+failed 0
+count 13
+0 calls.csv 32649 ee6e3d95
+1 reads.csv 87906 914f995b
+2 frames.csv 3633 243312d5
+3 manifest.txt 3252 da2e17c9
+4 lifecycle.txt 0 00000000
+5 s1-p002-preflight_single.pgm 307215 a05891ad
+6 calibration_plan.csv 270 b8107d6d
+7 frame_burst.csv 1097 745355df
+8 roi.csv 5366 f7cb533f
+9 noise.csv 197 f851e6a5
+10 execution.csv 974 0fa2cd9a
+11 s1-p003-sweep_seed.pgm 307215 0be701e7
+12 s1-p004-sweep_ref_00.yuyv 24576 68f72726

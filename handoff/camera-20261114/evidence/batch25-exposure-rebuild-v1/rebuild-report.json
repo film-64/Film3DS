@@ -1,0 +1,5350 @@
+{
+  "schema": "camera-exposure-rebuild-report/v1",
+  "source": "camera-exposure-rebuild/v1",
+  "passed": false,
+  "calibration_validated": false,
+  "optical_time_verified": false,
+  "writer_identified": false,
+  "files_verified": 161,
+  "points": 37,
+  "DMA_frames": 358,
+  "raw_target_images": 144,
+  "lighting_assumed_steady": false,
+  "Y2R_matrix": 1,
+  "blocks": [
+    {
+      "index": 0,
+      "fps": 5,
+      "primary_anchor": 5,
+      "secondary_anchor": 3,
+      "anchor_coverage": true,
+      "baseline": {
+        "221f": 128,
+        "300c": 842,
+        "3014": 633
+      },
+      "median_DMA_interval_ms": 200,
+      "raw_VSYNC_steps_positive": true,
+      "timing_estimate_usable": true,
+      "pipeline_endpoint_changes": {
+        "3210": [
+          2488,
+          null
+        ],
+        "32c0": [
+          14627,
+          null
+        ],
+        "32c2": [
+          1828,
+          null
+        ],
+        "337c": [
+          6,
+          null
+        ],
+        "337e": [
+          0,
+          null
+        ],
+        "3604": [
+          3584,
+          null
+        ],
+        "3606": [
+          17960,
+          null
+        ],
+        "3608": [
+          32359,
+          null
+        ],
+        "360a": [
+          41104,
+          null
+        ],
+        "360c": [
+          47277,
+          null
+        ],
+        "360e": [
+          52419,
+          null
+        ],
+        "3610": [
+          56789,
+          null
+        ],
+        "3612": [
+          60645,
+          null
+        ],
+        "3614": [
+          63987,
+          null
+        ],
+        "3616": [
+          255,
+          null
+        ],
+        "3618": [
+          3584,
+          null
+        ],
+        "361a": [
+          17960,
+          null
+        ],
+        "361c": [
+          32359,
+          null
+        ],
+        "361e": [
+          41104,
+          null
+        ],
+        "3620": [
+          47277,
+          null
+        ],
+        "3622": [
+          52419,
+          null
+        ],
+        "3624": [
+          56789,
+          null
+        ],
+        "3626": [
+          60645,
+          null
+        ],
+        "3628": [
+          63987,
+          null
+        ],
+        "362a": [
+          255,
+          null
+        ],
+        "362c": [
+          3584,
+          null
+        ],
+        "362e": [
+          17960,
+          null
+        ],
+        "3630": [
+          32359,
+          null
+        ],
+        "3632": [
+          41104,
+          null
+        ],
+        "3634": [
+          47277,
+          null
+        ],
+        "3636": [
+          52419,
+          null
+        ],
+        "3638": [
+          56789,
+          null
+        ],
+        "363a": [
+          60645,
+          null
+        ],
+        "363c": [
+          63987,
+          null
+        ],
+        "363e": [
+          255,
+          null
+        ]
+      },
+      "snapshots": {
+        "before_stream": {
+          "3210": 2488,
+          "32c0": 14627,
+          "32c2": 1828,
+          "337c": 6,
+          "337e": 0,
+          "3604": 3584,
+          "3606": 17960,
+          "3608": 32359,
+          "360a": 41104,
+          "360c": 47277,
+          "360e": 52419,
+          "3610": 56789,
+          "3612": 60645,
+          "3614": 63987,
+          "3616": 255,
+          "3618": 3584,
+          "361a": 17960,
+          "361c": 32359,
+          "361e": 41104,
+          "3620": 47277,
+          "3622": 52419,
+          "3624": 56789,
+          "3626": 60645,
+          "3628": 63987,
+          "362a": 255,
+          "362c": 3584,
+          "362e": 17960,
+          "3630": 32359,
+          "3632": 41104,
+          "3634": 47277,
+          "3636": 52419,
+          "3638": 56789,
+          "363a": 60645,
+          "363c": 63987,
+          "363e": 255,
+          "a120": 1,
+          "ab04": 32,
+          "ab06": 3,
+          "ab08": 32,
+          "ab17": 92,
+          "2b1b": 164,
+          "ab1f": 199,
+          "ab37": 3,
+          "2b38": 500,
+          "2b3a": 4300,
+          "a353": 127,
+          "a354": 128,
+          "2356": 4224,
+          "2358": 3360,
+          "ab3c": 0,
+          "ab3d": 14,
+          "ab3e": 40,
+          "ab3f": 70,
+          "ab40": 103,
+          "ab41": 126,
+          "ab42": 144,
+          "ab43": 160,
+          "ab44": 173,
+          "ab45": 184,
+          "ab46": 195,
+          "ab47": 204,
+          "ab48": 213,
+          "ab49": 221,
+          "ab4a": 229,
+          "ab4b": 236,
+          "ab4c": 243,
+          "ab4d": 249,
+          "ab4e": 255,
+          "ab4f": 0,
+          "ab50": 15,
+          "ab51": 26,
+          "ab52": 46,
+          "ab53": 80,
+          "ab54": 106,
+          "ab55": 128,
+          "ab56": 145,
+          "ab57": 161,
+          "ab58": 175,
+          "ab59": 187,
+          "ab5a": 198,
+          "ab5b": 208,
+          "ab5c": 217,
+          "ab5d": 226,
+          "ab5e": 234,
+          "ab5f": 241,
+          "ab60": 249,
+          "ab61": 255,
+          "a365": 32,
+          "a366": 175,
+          "a367": 128,
+          "a368": 87,
+          "a369": 130,
+          "a36a": 134,
+          "a36b": 130,
+          "2332": 432,
+          "2334": 65455,
+          "2336": 65456,
+          "2338": 65452,
+          "233a": 392,
+          "233c": 65506,
+          "233e": 65529,
+          "2340": 65427,
+          "2342": 385,
+          "2344": 37,
+          "2346": 61,
+          "ccm_snapshot_coherence": {
+            "phase": "4",
+            "when": "before_stream",
+            "addr": "2332",
+            "before": "432",
+            "combined": "432",
+            "after": "432",
+            "match_before": "1",
+            "match_after": "1",
+            "atomic": false
+          },
+          "matrix_mode": {
+            "2703": 640,
+            "2705": 480,
+            "2707": 640,
+            "2709": 480,
+            "2715": 1,
+            "2717": 37,
+            "2719": 26,
+            "271b": 107,
+            "271d": 107,
+            "271f": 2114,
+            "2721": 842,
+            "272b": 1,
+            "272d": 37,
+            "2731": 107,
+            "2733": 107,
+            "2735": 2114,
+            "2737": 842,
+            "2755": 2,
+            "2757": 2
+          },
+          "rebuild_timing": {
+            "0010": 273,
+            "0012": 0,
+            "0014": 45130,
+            "0016": 17119,
+            "0018": 42,
+            "300a": 2114,
+            "300c": 842,
+            "3012": 4,
+            "3014": 633,
+            "3016": 1,
+            "3024": 256,
+            "3028": 4,
+            "302a": 4,
+            "302c": 4,
+            "302e": 4,
+            "3030": 4,
+            "3032": 256,
+            "3034": 256,
+            "3036": 256,
+            "3038": 256,
+            "3040": 37,
+            "3056": 528,
+            "3058": 528,
+            "305a": 528,
+            "305c": 528,
+            "32d4": 133,
+            "32d6": 133,
+            "32d8": 133,
+            "32da": 133
+          }
+        },
+        "after_stop": {
+          "matrix_mode": {},
+          "rebuild_timing": {}
+        }
+      },
+      "points": [
+        {
+          "index": 0,
+          "phase": 5,
+          "kind": "reference_start",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 104.157185872,
+          "anchor": -1,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            0.012613932,
+            104.138590495
+          ],
+          "last_two_means": [
+            104.171468099,
+            104.142903646
+          ],
+          "images": [
+            "s1-p005-rb_p000_f000.yuyv",
+            "s1-p005-rb_p000_f001.yuyv",
+            "s1-p005-rb_p000_f004.yuyv",
+            "s1-p005-rb_p000_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 1,
+          "phase": 6,
+          "kind": "coarse",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 4,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 0.009440104,
+          "anchor": 0,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            4
+          ],
+          "first_two_means": [
+            104.155843099,
+            0.012207031
+          ],
+          "last_two_means": [
+            0.009684245,
+            0.009195964
+          ],
+          "images": [
+            "s1-p006-rb_p001_f000.yuyv",
+            "s1-p006-rb_p001_f001.yuyv",
+            "s1-p006-rb_p001_f004.yuyv",
+            "s1-p006-rb_p001_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.00044955359249612914
+        },
+        {
+          "index": 2,
+          "phase": 7,
+          "kind": "coarse",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 8,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 0.034220378,
+          "anchor": 1,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            8
+          ],
+          "first_two_means": [
+            0.01163737,
+            0.032633464
+          ],
+          "last_two_means": [
+            0.032958984,
+            0.035481771
+          ],
+          "images": [
+            "s1-p007-rb_p002_f000.yuyv",
+            "s1-p007-rb_p002_f001.yuyv",
+            "s1-p007-rb_p002_f004.yuyv",
+            "s1-p007-rb_p002_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.0008279831099984943
+        },
+        {
+          "index": 3,
+          "phase": 8,
+          "kind": "coarse",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 16,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 0.029663086,
+          "anchor": 2,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            16
+          ],
+          "first_two_means": [
+            0.031901042,
+            0.035563151
+          ],
+          "last_two_means": [
+            0.030843099,
+            0.028483073
+          ],
+          "images": [
+            "s1-p008-rb_p003_f000.yuyv",
+            "s1-p008-rb_p003_f001.yuyv",
+            "s1-p008-rb_p003_f004.yuyv",
+            "s1-p008-rb_p003_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.001584842145003225
+        },
+        {
+          "index": 4,
+          "phase": 9,
+          "kind": "coarse",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 32,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 8.76965332,
+          "anchor": 3,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            32
+          ],
+          "first_two_means": [
+            0.031656901,
+            8.891845703
+          ],
+          "last_two_means": [
+            8.741210938,
+            8.798095703
+          ],
+          "images": [
+            "s1-p009-rb_p004_f000.yuyv",
+            "s1-p009-rb_p004_f001.yuyv",
+            "s1-p009-rb_p004_f004.yuyv",
+            "s1-p009-rb_p004_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.003098560215012686
+        },
+        {
+          "index": 5,
+          "phase": 10,
+          "kind": "coarse",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 64,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 56.610839844,
+          "anchor": 4,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            64
+          ],
+          "first_two_means": [
+            8.857910156,
+            56.632161458
+          ],
+          "last_two_means": [
+            56.603922526,
+            56.617757161
+          ],
+          "images": [
+            "s1-p010-rb_p005_f000.yuyv",
+            "s1-p010-rb_p005_f001.yuyv",
+            "s1-p010-rb_p005_f004.yuyv",
+            "s1-p010-rb_p005_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.006125996355031607
+        },
+        {
+          "index": 6,
+          "phase": 11,
+          "kind": "coarse",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 104.143351237,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            56.636311849,
+            104.148844401
+          ],
+          "last_two_means": [
+            104.136962891,
+            104.149739583
+          ],
+          "images": [
+            "s1-p011-rb_p006_f000.yuyv",
+            "s1-p011-rb_p006_f001.yuyv",
+            "s1-p011-rb_p006_f004.yuyv",
+            "s1-p011-rb_p006_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 7,
+          "phase": 12,
+          "kind": "coarse",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 256,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 155.430989583,
+          "anchor": 6,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            256
+          ],
+          "first_two_means": [
+            104.14436849,
+            155.417154948
+          ],
+          "last_two_means": [
+            155.42578125,
+            155.436197917
+          ],
+          "images": [
+            "s1-p012-rb_p007_f000.yuyv",
+            "s1-p012-rb_p007_f001.yuyv",
+            "s1-p012-rb_p007_f004.yuyv",
+            "s1-p012-rb_p007_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.024290613195145132
+        },
+        {
+          "index": 8,
+          "phase": 13,
+          "kind": "coarse",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 528,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 212.723876953,
+          "anchor": 7,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            528
+          ],
+          "first_two_means": [
+            155.424072266,
+            212.71492513
+          ],
+          "last_two_means": [
+            212.721272786,
+            212.72648112
+          ],
+          "images": [
+            "s1-p013-rb_p008_f000.yuyv",
+            "s1-p013-rb_p008_f001.yuyv",
+            "s1-p013-rb_p008_f004.yuyv",
+            "s1-p013-rb_p008_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.050023820385305964
+        },
+        {
+          "index": 9,
+          "phase": 14,
+          "kind": "coarse",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 1024,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 225.962239583,
+          "anchor": 8,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            1024
+          ],
+          "first_two_means": [
+            212.719563802,
+            225.96492513
+          ],
+          "last_two_means": [
+            225.969401042,
+            225.955078125
+          ],
+          "images": [
+            "s1-p014-rb_p009_f000.yuyv",
+            "s1-p014-rb_p009_f001.yuyv",
+            "s1-p014-rb_p009_f004.yuyv",
+            "s1-p014-rb_p009_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.09694908055559925
+        },
+        {
+          "index": 10,
+          "phase": 15,
+          "kind": "coarse",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 1585,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 225.931762695,
+          "anchor": 9,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            1585
+          ],
+          "first_two_means": [
+            225.950602214,
+            225.976236979
+          ],
+          "last_two_means": [
+            225.936767578,
+            225.926757812
+          ],
+          "images": [
+            "s1-p015-rb_p010_f000.yuyv",
+            "s1-p015-rb_p010_f001.yuyv",
+            "s1-p015-rb_p010_f004.yuyv",
+            "s1-p015-rb_p010_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.15002382038530598
+        },
+        {
+          "index": 11,
+          "phase": 16,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "frames": 6,
+          "score_y": 84.556681315,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              96
+            ],
+            "32d6": [
+              96
+            ],
+            "32d8": [
+              96
+            ],
+            "32da": [
+              96
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            200.146972656,
+            84.552327474
+          ],
+          "last_two_means": [
+            84.550455729,
+            84.562906901
+          ],
+          "images": [
+            "s1-p016-rb_p011_f000.yuyv",
+            "s1-p016-rb_p011_f001.yuyv",
+            "s1-p016-rb_p011_f004.yuyv",
+            "s1-p016-rb_p011_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 12,
+          "phase": 17,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 104.135986328,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            104.145263672,
+            104.147460938
+          ],
+          "last_two_means": [
+            104.123860677,
+            104.148111979
+          ],
+          "images": [
+            "s1-p017-rb_p012_f000.yuyv",
+            "s1-p017-rb_p012_f001.yuyv",
+            "s1-p017-rb_p012_f004.yuyv",
+            "s1-p017-rb_p012_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 13,
+          "phase": 18,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "frames": 6,
+          "score_y": 120.107747396,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              160
+            ],
+            "32d6": [
+              160
+            ],
+            "32d8": [
+              160
+            ],
+            "32da": [
+              160
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            120.085611979,
+            120.114420573
+          ],
+          "last_two_means": [
+            120.12491862,
+            120.090576172
+          ],
+          "images": [
+            "s1-p018-rb_p013_f000.yuyv",
+            "s1-p018-rb_p013_f001.yuyv",
+            "s1-p018-rb_p013_f004.yuyv",
+            "s1-p018-rb_p013_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 14,
+          "phase": 19,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 544,
+          "ISP_target": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "frames": 6,
+          "score_y": 132.973836263,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              96
+            ],
+            "32d6": [
+              96
+            ],
+            "32d8": [
+              96
+            ],
+            "32da": [
+              96
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            132.973144531,
+            132.951985677
+          ],
+          "last_two_means": [
+            132.961181641,
+            132.986490885
+          ],
+          "images": [
+            "s1-p019-rb_p014_f000.yuyv",
+            "s1-p019-rb_p014_f001.yuyv",
+            "s1-p019-rb_p014_f004.yuyv",
+            "s1-p019-rb_p014_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 15,
+          "phase": 20,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 544,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 155.000610352,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            155.013753255,
+            155.010742188
+          ],
+          "last_two_means": [
+            154.982666016,
+            155.018554688
+          ],
+          "images": [
+            "s1-p020-rb_p015_f000.yuyv",
+            "s1-p020-rb_p015_f001.yuyv",
+            "s1-p020-rb_p015_f004.yuyv",
+            "s1-p020-rb_p015_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 16,
+          "phase": 21,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 544,
+          "ISP_target": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "frames": 6,
+          "score_y": 172.667114258,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              160
+            ],
+            "32d6": [
+              160
+            ],
+            "32d8": [
+              160
+            ],
+            "32da": [
+              160
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            172.682373047,
+            172.700520833
+          ],
+          "last_two_means": [
+            172.680989583,
+            172.653238932
+          ],
+          "images": [
+            "s1-p021-rb_p016_f000.yuyv",
+            "s1-p021-rb_p016_f001.yuyv",
+            "s1-p021-rb_p016_f004.yuyv",
+            "s1-p021-rb_p016_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 17,
+          "phase": 22,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 1040,
+          "ISP_target": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "frames": 6,
+          "score_y": 133.466145833,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              96
+            ],
+            "32d6": [
+              96
+            ],
+            "32d8": [
+              96
+            ],
+            "32da": [
+              96
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            133.451985677,
+            133.471191406
+          ],
+          "last_two_means": [
+            133.473063151,
+            133.459228516
+          ],
+          "images": [
+            "s1-p022-rb_p017_f000.yuyv",
+            "s1-p022-rb_p017_f001.yuyv",
+            "s1-p022-rb_p017_f004.yuyv",
+            "s1-p022-rb_p017_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 18,
+          "phase": 23,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 1040,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 155.502522786,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            155.520589193,
+            155.514567057
+          ],
+          "last_two_means": [
+            155.502929688,
+            155.502115885
+          ],
+          "images": [
+            "s1-p023-rb_p018_f000.yuyv",
+            "s1-p023-rb_p018_f001.yuyv",
+            "s1-p023-rb_p018_f004.yuyv",
+            "s1-p023-rb_p018_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 19,
+          "phase": 24,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 1040,
+          "ISP_target": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "frames": 6,
+          "score_y": 173.237792969,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              160
+            ],
+            "32d6": [
+              160
+            ],
+            "32d8": [
+              160
+            ],
+            "32da": [
+              160
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            173.249593099,
+            173.256429036
+          ],
+          "last_two_means": [
+            173.25773112,
+            173.217854818
+          ],
+          "images": [
+            "s1-p024-rb_p019_f000.yuyv",
+            "s1-p024-rb_p019_f001.yuyv",
+            "s1-p024-rb_p019_f004.yuyv",
+            "s1-p024-rb_p019_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 20,
+          "phase": 25,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 32,
+          "core": 528,
+          "ISP_target": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "frames": 6,
+          "score_y": 0.321370443,
+          "anchor": 3,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              96
+            ],
+            "32d6": [
+              96
+            ],
+            "32d8": [
+              96
+            ],
+            "32da": [
+              96
+            ]
+          },
+          "observed_coarse": [
+            32
+          ],
+          "first_two_means": [
+            133.465169271,
+            0.321940104
+          ],
+          "last_two_means": [
+            0.315592448,
+            0.327148438
+          ],
+          "images": [
+            "s1-p025-rb_p020_f000.yuyv",
+            "s1-p025-rb_p020_f001.yuyv",
+            "s1-p025-rb_p020_f004.yuyv",
+            "s1-p025-rb_p020_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.003098560215012686
+        },
+        {
+          "index": 21,
+          "phase": 26,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 32,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 8.846110026,
+          "anchor": 3,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            32
+          ],
+          "first_two_means": [
+            8.817382812,
+            8.840413411
+          ],
+          "last_two_means": [
+            8.861897786,
+            8.830322266
+          ],
+          "images": [
+            "s1-p026-rb_p021_f000.yuyv",
+            "s1-p026-rb_p021_f001.yuyv",
+            "s1-p026-rb_p021_f004.yuyv",
+            "s1-p026-rb_p021_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.003098560215012686
+        },
+        {
+          "index": 22,
+          "phase": 27,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 32,
+          "core": 528,
+          "ISP_target": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "frames": 6,
+          "score_y": 24.08194987,
+          "anchor": 3,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              160
+            ],
+            "32d6": [
+              160
+            ],
+            "32d8": [
+              160
+            ],
+            "32da": [
+              160
+            ]
+          },
+          "observed_coarse": [
+            32
+          ],
+          "first_two_means": [
+            24.179117839,
+            24.09757487
+          ],
+          "last_two_means": [
+            24.065592448,
+            24.098307292
+          ],
+          "images": [
+            "s1-p027-rb_p022_f000.yuyv",
+            "s1-p027-rb_p022_f001.yuyv",
+            "s1-p027-rb_p022_f004.yuyv",
+            "s1-p027-rb_p022_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.003098560215012686
+        },
+        {
+          "index": 23,
+          "phase": 28,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 32,
+          "core": 544,
+          "ISP_target": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "frames": 6,
+          "score_y": 35.026123047,
+          "anchor": 3,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              96
+            ],
+            "32d6": [
+              96
+            ],
+            "32d8": [
+              96
+            ],
+            "32da": [
+              96
+            ]
+          },
+          "observed_coarse": [
+            32
+          ],
+          "first_two_means": [
+            34.966959635,
+            34.944661458
+          ],
+          "last_two_means": [
+            35.045247396,
+            35.006998698
+          ],
+          "images": [
+            "s1-p028-rb_p023_f000.yuyv",
+            "s1-p028-rb_p023_f001.yuyv",
+            "s1-p028-rb_p023_f004.yuyv",
+            "s1-p028-rb_p023_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.003098560215012686
+        },
+        {
+          "index": 24,
+          "phase": 29,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 32,
+          "core": 544,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 56.975463867,
+          "anchor": 3,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            32
+          ],
+          "first_two_means": [
+            57.01180013,
+            57.031494141
+          ],
+          "last_two_means": [
+            56.941813151,
+            57.009114583
+          ],
+          "images": [
+            "s1-p029-rb_p024_f000.yuyv",
+            "s1-p029-rb_p024_f001.yuyv",
+            "s1-p029-rb_p024_f004.yuyv",
+            "s1-p029-rb_p024_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.003098560215012686
+        },
+        {
+          "index": 25,
+          "phase": 30,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 32,
+          "core": 544,
+          "ISP_target": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "frames": 6,
+          "score_y": 71.731323242,
+          "anchor": 3,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              160
+            ],
+            "32d6": [
+              160
+            ],
+            "32d8": [
+              160
+            ],
+            "32da": [
+              160
+            ]
+          },
+          "observed_coarse": [
+            32
+          ],
+          "first_two_means": [
+            71.853922526,
+            71.763916016
+          ],
+          "last_two_means": [
+            71.722249349,
+            71.740397135
+          ],
+          "images": [
+            "s1-p030-rb_p025_f000.yuyv",
+            "s1-p030-rb_p025_f001.yuyv",
+            "s1-p030-rb_p025_f004.yuyv",
+            "s1-p030-rb_p025_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.003098560215012686
+        },
+        {
+          "index": 26,
+          "phase": 31,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 32,
+          "core": 1040,
+          "ISP_target": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "frames": 6,
+          "score_y": 35.551188151,
+          "anchor": 3,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              96
+            ],
+            "32d6": [
+              96
+            ],
+            "32d8": [
+              96
+            ],
+            "32da": [
+              96
+            ]
+          },
+          "observed_coarse": [
+            32
+          ],
+          "first_two_means": [
+            35.510009766,
+            35.462158203
+          ],
+          "last_two_means": [
+            35.561442057,
+            35.540934245
+          ],
+          "images": [
+            "s1-p031-rb_p026_f000.yuyv",
+            "s1-p031-rb_p026_f001.yuyv",
+            "s1-p031-rb_p026_f004.yuyv",
+            "s1-p031-rb_p026_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.003098560215012686
+        },
+        {
+          "index": 27,
+          "phase": 32,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 32,
+          "core": 1040,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 57.528645833,
+          "anchor": 3,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            32
+          ],
+          "first_two_means": [
+            57.596191406,
+            57.50374349
+          ],
+          "last_two_means": [
+            57.513753255,
+            57.543538411
+          ],
+          "images": [
+            "s1-p032-rb_p027_f000.yuyv",
+            "s1-p032-rb_p027_f001.yuyv",
+            "s1-p032-rb_p027_f004.yuyv",
+            "s1-p032-rb_p027_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.003098560215012686
+        },
+        {
+          "index": 28,
+          "phase": 33,
+          "kind": "gain",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 32,
+          "core": 1040,
+          "ISP_target": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "frames": 6,
+          "score_y": 72.543579102,
+          "anchor": 3,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              160
+            ],
+            "32d6": [
+              160
+            ],
+            "32d8": [
+              160
+            ],
+            "32da": [
+              160
+            ]
+          },
+          "observed_coarse": [
+            32
+          ],
+          "first_two_means": [
+            72.498291016,
+            72.510498047
+          ],
+          "last_two_means": [
+            72.562906901,
+            72.524251302
+          ],
+          "images": [
+            "s1-p033-rb_p028_f000.yuyv",
+            "s1-p033-rb_p028_f001.yuyv",
+            "s1-p033-rb_p028_f004.yuyv",
+            "s1-p033-rb_p028_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.003098560215012686
+        },
+        {
+          "index": 29,
+          "phase": 34,
+          "kind": "color",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            96,
+            128,
+            160,
+            128
+          ],
+          "frames": 6,
+          "score_y": 98.923868815,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              96
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              160
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            51.683186849,
+            98.941162109
+          ],
+          "last_two_means": [
+            98.941975911,
+            98.905761719
+          ],
+          "images": [
+            "s1-p034-rb_p029_f000.yuyv",
+            "s1-p034-rb_p029_f001.yuyv",
+            "s1-p034-rb_p029_f004.yuyv",
+            "s1-p034-rb_p029_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 30,
+          "phase": 35,
+          "kind": "color",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            96,
+            128,
+            160
+          ],
+          "frames": 6,
+          "score_y": 99.416870117,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              96
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              160
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            99.439778646,
+            99.423746745
+          ],
+          "last_two_means": [
+            99.411214193,
+            99.422526042
+          ],
+          "images": [
+            "s1-p035-rb_p030_f000.yuyv",
+            "s1-p035-rb_p030_f001.yuyv",
+            "s1-p035-rb_p030_f004.yuyv",
+            "s1-p035-rb_p030_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 31,
+          "phase": 36,
+          "kind": "color",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            160,
+            128,
+            96,
+            128
+          ],
+          "frames": 6,
+          "score_y": 103.144816081,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              160
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              96
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            103.118164062,
+            103.092692057
+          ],
+          "last_two_means": [
+            103.125406901,
+            103.16422526
+          ],
+          "images": [
+            "s1-p036-rb_p031_f000.yuyv",
+            "s1-p036-rb_p031_f001.yuyv",
+            "s1-p036-rb_p031_f004.yuyv",
+            "s1-p036-rb_p031_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 32,
+          "phase": 37,
+          "kind": "color",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": 104.124064128,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            104.127034505,
+            104.148193359
+          ],
+          "last_two_means": [
+            104.145833333,
+            104.102294922
+          ],
+          "images": [
+            "s1-p037-rb_p032_f000.yuyv",
+            "s1-p037-rb_p032_f001.yuyv",
+            "s1-p037-rb_p032_f004.yuyv",
+            "s1-p037-rb_p032_f005.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 33,
+          "phase": 38,
+          "kind": "hold",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 128,
+          "score_y": 104.128295898,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            128
+          ],
+          "first_two_means": [
+            104.129964193,
+            104.133707682
+          ],
+          "last_two_means": [
+            104.090413411,
+            104.166178385
+          ],
+          "images": [
+            "s1-p038-rb_p033_f000.yuyv",
+            "s1-p038-rb_p033_f001.yuyv",
+            "s1-p038-rb_p033_f126.yuyv",
+            "s1-p038-rb_p033_f127.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.012180868635069451
+        },
+        {
+          "index": 34,
+          "phase": 39,
+          "kind": "FD_off_before",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 4,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 16,
+          "score_y": 0.01163737,
+          "anchor": -1,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              128
+            ],
+            "32d6": [
+              128
+            ],
+            "32d8": [
+              128
+            ],
+            "32da": [
+              128
+            ]
+          },
+          "observed_coarse": [
+            4
+          ],
+          "first_two_means": [
+            104.138346354,
+            0.011067708
+          ],
+          "last_two_means": [
+            0.010904948,
+            0.012369792
+          ],
+          "images": [
+            "s1-p039-rb_p034_f000.yuyv",
+            "s1-p039-rb_p034_f001.yuyv",
+            "s1-p039-rb_p034_f014.yuyv",
+            "s1-p039-rb_p034_f015.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": 0.00044955359249612914
+        },
+        {
+          "index": 35,
+          "phase": 40,
+          "kind": "FD_on",
+          "fps": 5,
+          "gate": 2,
+          "coarse": 4,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 16,
+          "score_y": 0.011393229,
+          "anchor": -1,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [
+              133
+            ],
+            "32d6": [
+              133
+            ],
+            "32d8": [
+              133
+            ],
+            "32da": [
+              133
+            ]
+          },
+          "observed_coarse": [
+            4
+          ],
+          "first_two_means": [
+            0.010742188,
+            0.013346354
+          ],
+          "last_two_means": [
+            0.01180013,
+            0.010986328
+          ],
+          "images": [
+            "s1-p040-rb_p035_f000.yuyv",
+            "s1-p040-rb_p035_f001.yuyv",
+            "s1-p040-rb_p035_f014.yuyv",
+            "s1-p040-rb_p035_f015.yuyv"
+          ],
+          "errors": [],
+          "estimated_seconds": null
+        },
+        {
+          "index": 36,
+          "phase": 41,
+          "kind": "FD_off_after",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 4,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 16,
+          "score_y": 0.0,
+          "anchor": -1,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_frame_count"
+          ],
+          "estimated_seconds": 0.00044955359249612914
+        },
+        {
+          "index": 37,
+          "phase": 42,
+          "kind": "reference_end",
+          "fps": 5,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": -1,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": 0.012180868635069451
+        }
+      ],
+      "errors": [
+        "block_identity",
+        "snapshot:after_stop",
+        "byte_transport:after_stop",
+        "static_alias_proof:after_stop",
+        "static_alias_marker:after_stop",
+        "CCM_reference:after_stop",
+        "matrix_mode:after_stop",
+        "rebuild_timing:after_stop",
+        "snapshot_completion:after_stop",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order"
+      ]
+    },
+    {
+      "index": 1,
+      "fps": 15,
+      "primary_anchor": 5,
+      "secondary_anchor": 3,
+      "anchor_coverage": false,
+      "baseline": {},
+      "median_DMA_interval_ms": 0,
+      "raw_VSYNC_steps_positive": false,
+      "timing_estimate_usable": false,
+      "pipeline_endpoint_changes": {},
+      "snapshots": {
+        "before_stream": {
+          "matrix_mode": {},
+          "rebuild_timing": {}
+        },
+        "after_stop": {
+          "matrix_mode": {},
+          "rebuild_timing": {}
+        }
+      },
+      "points": [
+        {
+          "index": 38,
+          "phase": 43,
+          "kind": "reference_start",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": -1,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 39,
+          "phase": 44,
+          "kind": "coarse",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 4,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 0,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 40,
+          "phase": 45,
+          "kind": "coarse",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 8,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 1,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 41,
+          "phase": 46,
+          "kind": "coarse",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 16,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 2,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 42,
+          "phase": 47,
+          "kind": "coarse",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 32,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 3,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 43,
+          "phase": 48,
+          "kind": "coarse",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 64,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 4,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 44,
+          "phase": 49,
+          "kind": "coarse",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 45,
+          "phase": 50,
+          "kind": "coarse",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 256,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 6,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 46,
+          "phase": 51,
+          "kind": "coarse",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 528,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 7,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 47,
+          "phase": 52,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 48,
+          "phase": 53,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 49,
+          "phase": 54,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 50,
+          "phase": 55,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 544,
+          "ISP_target": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 51,
+          "phase": 56,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 544,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 52,
+          "phase": 57,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 544,
+          "ISP_target": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 53,
+          "phase": 58,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 1040,
+          "ISP_target": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 54,
+          "phase": 59,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 1040,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 55,
+          "phase": 60,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 1040,
+          "ISP_target": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 56,
+          "phase": 61,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 32,
+          "core": 528,
+          "ISP_target": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 3,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 57,
+          "phase": 62,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 32,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 3,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 58,
+          "phase": 63,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 32,
+          "core": 528,
+          "ISP_target": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 3,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 59,
+          "phase": 64,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 32,
+          "core": 544,
+          "ISP_target": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 3,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 60,
+          "phase": 65,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 32,
+          "core": 544,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 3,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 61,
+          "phase": 66,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 32,
+          "core": 544,
+          "ISP_target": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 3,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 62,
+          "phase": 67,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 32,
+          "core": 1040,
+          "ISP_target": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 3,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 63,
+          "phase": 68,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 32,
+          "core": 1040,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 3,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 64,
+          "phase": 69,
+          "kind": "gain",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 32,
+          "core": 1040,
+          "ISP_target": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 3,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 65,
+          "phase": 70,
+          "kind": "color",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            96,
+            128,
+            160,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 66,
+          "phase": 71,
+          "kind": "color",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            96,
+            128,
+            160
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 67,
+          "phase": 72,
+          "kind": "color",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            160,
+            128,
+            96,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 68,
+          "phase": 73,
+          "kind": "color",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 69,
+          "phase": 74,
+          "kind": "hold",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 128,
+          "score_y": NaN,
+          "anchor": 5,
+          "coverage": false,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 70,
+          "phase": 75,
+          "kind": "FD_off_before",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 4,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 16,
+          "score_y": NaN,
+          "anchor": -1,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 71,
+          "phase": 76,
+          "kind": "FD_on",
+          "fps": 15,
+          "gate": 2,
+          "coarse": 4,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 16,
+          "score_y": NaN,
+          "anchor": -1,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 72,
+          "phase": 77,
+          "kind": "FD_off_after",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 4,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 16,
+          "score_y": NaN,
+          "anchor": -1,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        },
+        {
+          "index": 73,
+          "phase": 78,
+          "kind": "reference_end",
+          "fps": 15,
+          "gate": 0,
+          "coarse": 128,
+          "core": 528,
+          "ISP_target": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "frames": 6,
+          "score_y": NaN,
+          "anchor": -1,
+          "coverage": true,
+          "observed_IFP": {
+            "32d4": [],
+            "32d6": [],
+            "32d8": [],
+            "32da": []
+          },
+          "observed_coarse": [],
+          "first_two_means": [],
+          "last_two_means": [],
+          "images": [],
+          "errors": [
+            "registered_point_plan",
+            "point_manifest",
+            "point_writes",
+            "state:-1:configured",
+            "point_frame_count"
+          ],
+          "estimated_seconds": null
+        }
+      ],
+      "errors": [
+        "block_identity",
+        "snapshot:before_stream",
+        "byte_transport:before_stream",
+        "static_alias_proof:before_stream",
+        "static_alias_marker:before_stream",
+        "CCM_reference:before_stream",
+        "matrix_mode:before_stream",
+        "rebuild_timing:before_stream",
+        "snapshot_completion:before_stream",
+        "adaptive_anchor",
+        "snapshot:after_stop",
+        "byte_transport:after_stop",
+        "static_alias_proof:after_stop",
+        "static_alias_marker:after_stop",
+        "CCM_reference:after_stop",
+        "matrix_mode:after_stop",
+        "rebuild_timing:after_stop",
+        "snapshot_completion:after_stop",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "pending_receive_order",
+        "stream_start_stop"
+      ]
+    }
+  ],
+  "errors": [
+    "record_count:REBUILD_BLOCK",
+    "record_count:REBUILD_BLOCK_END",
+    "record_count:REBUILD_POINT",
+    "record_count:REBUILD_POINT_END",
+    "record_count:REBUILD_ANCHOR",
+    "record_count:MATRIX_SNAPSHOT",
+    "record_count:REBUILD_TIMING",
+    "record_count:CCM_WORD",
+    "record_count:CCM_ALIAS_WINDOW",
+    "record_count:MATRIX_ALIAS_TRANSPORT",
+    "point_count_or_order",
+    "DMA_count_or_order",
+    "band_count_or_order",
+    "point36:registered_point_plan",
+    "point36:point_manifest",
+    "point36:point_frame_count",
+    "point37:registered_point_plan",
+    "point37:point_manifest",
+    "point37:point_writes",
+    "point37:state:-1:configured",
+    "point37:point_frame_count",
+    "block0:block_identity",
+    "block0:snapshot:after_stop",
+    "block0:byte_transport:after_stop",
+    "block0:static_alias_proof:after_stop",
+    "block0:static_alias_marker:after_stop",
+    "block0:CCM_reference:after_stop",
+    "block0:matrix_mode:after_stop",
+    "block0:rebuild_timing:after_stop",
+    "block0:snapshot_completion:after_stop",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "block0:pending_receive_order",
+    "point38:registered_point_plan",
+    "point38:point_manifest",
+    "point38:point_writes",
+    "point38:state:-1:configured",
+    "point38:point_frame_count",
+    "point39:registered_point_plan",
+    "point39:point_manifest",
+    "point39:point_writes",
+    "point39:state:-1:configured",
+    "point39:point_frame_count",
+    "point40:registered_point_plan",
+    "point40:point_manifest",
+    "point40:point_writes",
+    "point40:state:-1:configured",
+    "point40:point_frame_count",
+    "point41:registered_point_plan",
+    "point41:point_manifest",
+    "point41:point_writes",
+    "point41:state:-1:configured",
+    "point41:point_frame_count",
+    "point42:registered_point_plan",
+    "point42:point_manifest",
+    "point42:point_writes",
+    "point42:state:-1:configured",
+    "point42:point_frame_count",
+    "point43:registered_point_plan",
+    "point43:point_manifest",
+    "point43:point_writes",
+    "point43:state:-1:configured",
+    "point43:point_frame_count",
+    "point44:registered_point_plan",
+    "point44:point_manifest",
+    "point44:point_writes",
+    "point44:state:-1:configured",
+    "point44:point_frame_count",
+    "point45:registered_point_plan",
+    "point45:point_manifest",
+    "point45:point_writes",
+    "point45:state:-1:configured",
+    "point45:point_frame_count",
+    "point46:registered_point_plan",
+    "point46:point_manifest",
+    "point46:point_writes",
+    "point46:state:-1:configured",
+    "point46:point_frame_count",
+    "point47:registered_point_plan",
+    "point47:point_manifest",
+    "point47:point_writes",
+    "point47:state:-1:configured",
+    "point47:point_frame_count",
+    "point48:registered_point_plan",
+    "point48:point_manifest",
+    "point48:point_writes",
+    "point48:state:-1:configured",
+    "point48:point_frame_count",
+    "point49:registered_point_plan",
+    "point49:point_manifest",
+    "point49:point_writes",
+    "point49:state:-1:configured",
+    "point49:point_frame_count",
+    "point50:registered_point_plan",
+    "point50:point_manifest",
+    "point50:point_writes",
+    "point50:state:-1:configured",
+    "point50:point_frame_count",
+    "point51:registered_point_plan",
+    "point51:point_manifest",
+    "point51:point_writes",
+    "point51:state:-1:configured",
+    "point51:point_frame_count",
+    "point52:registered_point_plan",
+    "point52:point_manifest",
+    "point52:point_writes",
+    "point52:state:-1:configured",
+    "point52:point_frame_count",
+    "point53:registered_point_plan",
+    "point53:point_manifest",
+    "point53:point_writes",
+    "point53:state:-1:configured",
+    "point53:point_frame_count",
+    "point54:registered_point_plan",
+    "point54:point_manifest",
+    "point54:point_writes",
+    "point54:state:-1:configured",
+    "point54:point_frame_count",
+    "point55:registered_point_plan",
+    "point55:point_manifest",
+    "point55:point_writes",
+    "point55:state:-1:configured",
+    "point55:point_frame_count",
+    "point56:registered_point_plan",
+    "point56:point_manifest",
+    "point56:point_writes",
+    "point56:state:-1:configured",
+    "point56:point_frame_count",
+    "point57:registered_point_plan",
+    "point57:point_manifest",
+    "point57:point_writes",
+    "point57:state:-1:configured",
+    "point57:point_frame_count",
+    "point58:registered_point_plan",
+    "point58:point_manifest",
+    "point58:point_writes",
+    "point58:state:-1:configured",
+    "point58:point_frame_count",
+    "point59:registered_point_plan",
+    "point59:point_manifest",
+    "point59:point_writes",
+    "point59:state:-1:configured",
+    "point59:point_frame_count",
+    "point60:registered_point_plan",
+    "point60:point_manifest",
+    "point60:point_writes",
+    "point60:state:-1:configured",
+    "point60:point_frame_count",
+    "point61:registered_point_plan",
+    "point61:point_manifest",
+    "point61:point_writes",
+    "point61:state:-1:configured",
+    "point61:point_frame_count",
+    "point62:registered_point_plan",
+    "point62:point_manifest",
+    "point62:point_writes",
+    "point62:state:-1:configured",
+    "point62:point_frame_count",
+    "point63:registered_point_plan",
+    "point63:point_manifest",
+    "point63:point_writes",
+    "point63:state:-1:configured",
+    "point63:point_frame_count",
+    "point64:registered_point_plan",
+    "point64:point_manifest",
+    "point64:point_writes",
+    "point64:state:-1:configured",
+    "point64:point_frame_count",
+    "point65:registered_point_plan",
+    "point65:point_manifest",
+    "point65:point_writes",
+    "point65:state:-1:configured",
+    "point65:point_frame_count",
+    "point66:registered_point_plan",
+    "point66:point_manifest",
+    "point66:point_writes",
+    "point66:state:-1:configured",
+    "point66:point_frame_count",
+    "point67:registered_point_plan",
+    "point67:point_manifest",
+    "point67:point_writes",
+    "point67:state:-1:configured",
+    "point67:point_frame_count",
+    "point68:registered_point_plan",
+    "point68:point_manifest",
+    "point68:point_writes",
+    "point68:state:-1:configured",
+    "point68:point_frame_count",
+    "point69:registered_point_plan",
+    "point69:point_manifest",
+    "point69:point_writes",
+    "point69:state:-1:configured",
+    "point69:point_frame_count",
+    "point70:registered_point_plan",
+    "point70:point_manifest",
+    "point70:point_writes",
+    "point70:state:-1:configured",
+    "point70:point_frame_count",
+    "point71:registered_point_plan",
+    "point71:point_manifest",
+    "point71:point_writes",
+    "point71:state:-1:configured",
+    "point71:point_frame_count",
+    "point72:registered_point_plan",
+    "point72:point_manifest",
+    "point72:point_writes",
+    "point72:state:-1:configured",
+    "point72:point_frame_count",
+    "point73:registered_point_plan",
+    "point73:point_manifest",
+    "point73:point_writes",
+    "point73:state:-1:configured",
+    "point73:point_frame_count",
+    "block1:block_identity",
+    "block1:snapshot:before_stream",
+    "block1:byte_transport:before_stream",
+    "block1:static_alias_proof:before_stream",
+    "block1:static_alias_marker:before_stream",
+    "block1:CCM_reference:before_stream",
+    "block1:matrix_mode:before_stream",
+    "block1:rebuild_timing:before_stream",
+    "block1:snapshot_completion:before_stream",
+    "block1:adaptive_anchor",
+    "block1:snapshot:after_stop",
+    "block1:byte_transport:after_stop",
+    "block1:static_alias_proof:after_stop",
+    "block1:static_alias_marker:after_stop",
+    "block1:CCM_reference:after_stop",
+    "block1:matrix_mode:after_stop",
+    "block1:rebuild_timing:after_stop",
+    "block1:snapshot_completion:after_stop",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:pending_receive_order",
+    "block1:stream_start_stop",
+    "global_DMA_count",
+    "extra_or_missing_image",
+    "unregistered_or_failed_post_seed_operation",
+    "MCU_budget:a102",
+    "MCU_budget:a103",
+    "MCU_budget:a11f",
+    "FD_ABA_gate_sequence",
+    "profile_sequence",
+    "Refresh_proof",
+    "boot_lifecycle",
+    "boot_count:13",
+    "boot_count:14",
+    "boot_count:15",
+    "boot_count:16",
+    "boot_count:17",
+    "boot_count:18",
+    "rebuild_incomplete",
+    "run_incomplete"
+  ],
+  "startup_journal": [
+    {
+      "run": 4003654362996,
+      "seq": 0,
+      "stage": 1,
+      "address": 0,
+      "result": "00000000",
+      "at": 4003654363012,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 1,
+      "stage": 2,
+      "address": 0,
+      "result": "00000000",
+      "at": 4003654363045,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 2,
+      "stage": 3,
+      "address": 24,
+      "result": "00000000",
+      "at": 4003654363052,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 3,
+      "stage": 4,
+      "address": 0,
+      "result": "00000000",
+      "at": 4003654363061,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 4,
+      "stage": 5,
+      "address": 29360128,
+      "result": "00000000",
+      "at": 4003654363070,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 5,
+      "stage": 6,
+      "address": 0,
+      "result": "00000000",
+      "at": 4003654363079,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 6,
+      "stage": 7,
+      "address": 614400,
+      "result": "00000000",
+      "at": 4003654363085,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 7,
+      "stage": 8,
+      "address": 614400,
+      "result": "00000000",
+      "at": 4003654363091,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 8,
+      "stage": 9,
+      "address": 1,
+      "result": "00000000",
+      "at": 4003654363098,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 9,
+      "stage": 10,
+      "address": 1,
+      "result": "00000000",
+      "at": 4003654364678,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 10,
+      "stage": 11,
+      "address": 1,
+      "result": "00000000",
+      "at": 4003654364685,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 11,
+      "stage": 12,
+      "address": 1,
+      "result": "00000000",
+      "at": 4003654367368,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 12,
+      "stage": 13,
+      "address": 0,
+      "result": "00000000",
+      "at": 4003654383237,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 13,
+      "stage": 15,
+      "address": 4,
+      "result": "00000000",
+      "at": 4003654383559,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 14,
+      "stage": 16,
+      "address": 41778,
+      "result": "00000000",
+      "at": 4003654383571,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 15,
+      "stage": 17,
+      "address": 41778,
+      "result": "00000000",
+      "at": 4003654383578,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 16,
+      "stage": 16,
+      "address": 41779,
+      "result": "00000000",
+      "at": 4003654383585,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 17,
+      "stage": 17,
+      "address": 41779,
+      "result": "00000000",
+      "at": 4003654383595,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 18,
+      "stage": 16,
+      "address": 41780,
+      "result": "00000000",
+      "at": 4003654383602,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 19,
+      "stage": 17,
+      "address": 41780,
+      "result": "00000000",
+      "at": 4003654383610,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 20,
+      "stage": 16,
+      "address": 41781,
+      "result": "00000000",
+      "at": 4003654383616,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 21,
+      "stage": 17,
+      "address": 41781,
+      "result": "00000000",
+      "at": 4003654383623,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 22,
+      "stage": 16,
+      "address": 41782,
+      "result": "00000000",
+      "at": 4003654383633,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 23,
+      "stage": 17,
+      "address": 41782,
+      "result": "00000000",
+      "at": 4003654383640,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 24,
+      "stage": 16,
+      "address": 41783,
+      "result": "00000000",
+      "at": 4003654383646,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 25,
+      "stage": 17,
+      "address": 41783,
+      "result": "00000000",
+      "at": 4003654383654,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 26,
+      "stage": 16,
+      "address": 41784,
+      "result": "00000000",
+      "at": 4003654383663,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 27,
+      "stage": 17,
+      "address": 41784,
+      "result": "00000000",
+      "at": 4003654383671,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 28,
+      "stage": 16,
+      "address": 41785,
+      "result": "00000000",
+      "at": 4003654383677,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 29,
+      "stage": 17,
+      "address": 41785,
+      "result": "00000000",
+      "at": 4003654383684,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 30,
+      "stage": 16,
+      "address": 41786,
+      "result": "00000000",
+      "at": 4003654383691,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 31,
+      "stage": 17,
+      "address": 41786,
+      "result": "00000000",
+      "at": 4003654383701,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 32,
+      "stage": 16,
+      "address": 41787,
+      "result": "00000000",
+      "at": 4003654383707,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 33,
+      "stage": 17,
+      "address": 41787,
+      "result": "00000000",
+      "at": 4003654383715,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 34,
+      "stage": 16,
+      "address": 41788,
+      "result": "00000000",
+      "at": 4003654383721,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 35,
+      "stage": 17,
+      "address": 41788,
+      "result": "00000000",
+      "at": 4003654383732,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 36,
+      "stage": 16,
+      "address": 41789,
+      "result": "00000000",
+      "at": 4003654383738,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 37,
+      "stage": 17,
+      "address": 41789,
+      "result": "00000000",
+      "at": 4003654383745,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 38,
+      "stage": 16,
+      "address": 41790,
+      "result": "00000000",
+      "at": 4003654383752,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 39,
+      "stage": 17,
+      "address": 41790,
+      "result": "00000000",
+      "at": 4003654383762,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 40,
+      "stage": 16,
+      "address": 41791,
+      "result": "00000000",
+      "at": 4003654383768,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 41,
+      "stage": 17,
+      "address": 41791,
+      "result": "00000000",
+      "at": 4003654383776,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 42,
+      "stage": 16,
+      "address": 41792,
+      "result": "00000000",
+      "at": 4003654383782,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 43,
+      "stage": 17,
+      "address": 41792,
+      "result": "00000000",
+      "at": 4003654383789,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 44,
+      "stage": 16,
+      "address": 41793,
+      "result": "00000000",
+      "at": 4003654383799,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 45,
+      "stage": 17,
+      "address": 41793,
+      "result": "00000000",
+      "at": 4003654383806,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 46,
+      "stage": 16,
+      "address": 41794,
+      "result": "00000000",
+      "at": 4003654383812,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 47,
+      "stage": 17,
+      "address": 41794,
+      "result": "00000000",
+      "at": 4003654383820,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 48,
+      "stage": 16,
+      "address": 41795,
+      "result": "00000000",
+      "at": 4003654383829,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 49,
+      "stage": 17,
+      "address": 41795,
+      "result": "00000000",
+      "at": 4003654383836,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 50,
+      "stage": 16,
+      "address": 41796,
+      "result": "00000000",
+      "at": 4003654383843,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 51,
+      "stage": 17,
+      "address": 41796,
+      "result": "00000000",
+      "at": 4003654383850,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 52,
+      "stage": 16,
+      "address": 41797,
+      "result": "00000000",
+      "at": 4003654383857,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 53,
+      "stage": 17,
+      "address": 41797,
+      "result": "00000000",
+      "at": 4003654383867,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 54,
+      "stage": 16,
+      "address": 41798,
+      "result": "00000000",
+      "at": 4003654383873,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 55,
+      "stage": 17,
+      "address": 41798,
+      "result": "00000000",
+      "at": 4003654383880,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 56,
+      "stage": 16,
+      "address": 41799,
+      "result": "00000000",
+      "at": 4003654383887,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 57,
+      "stage": 17,
+      "address": 41799,
+      "result": "00000000",
+      "at": 4003654383897,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 58,
+      "stage": 18,
+      "address": 4,
+      "result": "00000000",
+      "at": 4003654383903,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 59,
+      "stage": 14,
+      "address": 0,
+      "result": "00000000",
+      "at": 4003654383943,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 60,
+      "stage": 19,
+      "address": 1,
+      "result": "00000000",
+      "at": 4003654455913,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 61,
+      "stage": 20,
+      "address": 1,
+      "result": "00000000",
+      "at": 4003654456629,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 62,
+      "stage": 21,
+      "address": 41,
+      "result": "ffffffff",
+      "at": 4003654456639,
+      "heap": 95813632,
+      "linear": 33554432
+    },
+    {
+      "run": 4003654362996,
+      "seq": 63,
+      "stage": 22,
+      "address": 0,
+      "result": "00000000",
+      "at": 4003654456646,
+      "heap": 95813632,
+      "linear": 33554432
+    }
+  ]
+}

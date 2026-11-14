@@ -1,0 +1,305 @@
+{
+  "source": "exposure-isp-update/v1",
+  "binary_sha256": "04a87d000be19504f730379cc76080fc11e7e954aa509d447ecba5bbb30cbcc0",
+  "files_verified": 17,
+  "bytes": 1026239,
+  "diagnostic_complete": true,
+  "calibration_validated": false,
+  "atomic_snapshot": false,
+  "state_reads": 1088,
+  "mode_reads": 228,
+  "controls": {
+    "a102": [
+      10
+    ],
+    "a103": [
+      0
+    ],
+    "a104": [
+      3
+    ],
+    "a355": [
+      58
+    ],
+    "a34e": [
+      128
+    ],
+    "a34f": [
+      128
+    ],
+    "a350": [
+      128
+    ],
+    "221f": [
+      128
+    ],
+    "3012": [
+      4
+    ],
+    "3056": [
+      528
+    ],
+    "3058": [
+      528
+    ],
+    "305a": [
+      528
+    ],
+    "305c": [
+      528
+    ]
+  },
+  "arms": [
+    {
+      "index": 0,
+      "mode": "restart",
+      "initial": 96,
+      "observed": {
+        "first_frame": [
+          96,
+          133,
+          133,
+          133
+        ],
+        "before_rewrite": [
+          133,
+          133,
+          133,
+          133
+        ],
+        "rewrite": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "next_frame": [
+          128,
+          128,
+          133,
+          133
+        ],
+        "fresh_frame": [
+          133,
+          133,
+          133,
+          133
+        ]
+      },
+      "outcome": "rewrite_overwritten"
+    },
+    {
+      "index": 1,
+      "mode": "restart",
+      "initial": 128,
+      "observed": {
+        "first_frame": [
+          128,
+          128,
+          133,
+          133
+        ],
+        "before_rewrite": [
+          133,
+          133,
+          133,
+          133
+        ],
+        "rewrite": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "next_frame": [
+          128,
+          128,
+          133,
+          133
+        ],
+        "fresh_frame": [
+          133,
+          133,
+          133,
+          133
+        ]
+      },
+      "outcome": "rewrite_overwritten"
+    },
+    {
+      "index": 2,
+      "mode": "restart",
+      "initial": 160,
+      "observed": {
+        "first_frame": [
+          160,
+          160,
+          133,
+          133
+        ],
+        "before_rewrite": [
+          133,
+          133,
+          133,
+          133
+        ],
+        "rewrite": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "next_frame": [
+          128,
+          128,
+          133,
+          133
+        ],
+        "fresh_frame": [
+          133,
+          133,
+          133,
+          133
+        ]
+      },
+      "outcome": "rewrite_overwritten"
+    },
+    {
+      "index": 3,
+      "mode": "continuous",
+      "initial": 128,
+      "observed": {
+        "first_frame": [
+          128,
+          133,
+          133,
+          133
+        ],
+        "before_rewrite": [
+          133,
+          133,
+          133,
+          133
+        ],
+        "rewrite": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "next_frame": [
+          133,
+          133,
+          133,
+          133
+        ],
+        "fresh_frame": [
+          133,
+          133,
+          133,
+          133
+        ]
+      },
+      "outcome": "rewrite_overwritten"
+    }
+  ],
+  "mode_values": {
+    "2703": [
+      640
+    ],
+    "2705": [
+      480
+    ],
+    "2707": [
+      640
+    ],
+    "2709": [
+      480
+    ],
+    "2715": [
+      1
+    ],
+    "2717": [
+      37
+    ],
+    "2719": [
+      26
+    ],
+    "271b": [
+      107
+    ],
+    "271d": [
+      107
+    ],
+    "271f": [
+      2114
+    ],
+    "2721": [
+      842
+    ],
+    "272b": [
+      1
+    ],
+    "272d": [
+      37
+    ],
+    "2731": [
+      107
+    ],
+    "2733": [
+      107
+    ],
+    "2735": [
+      2114
+    ],
+    "2737": [
+      842
+    ],
+    "2755": [
+      2
+    ],
+    "2757": [
+      2
+    ]
+  },
+  "mode_values_matching_133": [],
+  "events": [
+    "ISP_UPDATE_CONTRACT source=exposure-isp-update/v1 arms=4 frames=3 sensor=1 fps=5 retry=none context_writes=0 mcu_ram_writes=0",
+    "ISP_UPDATE_ARM index=0 phase=5 label=isp_update_restart_096 initial=96 continuous=0",
+    "SEQ_REFRESH restoring=0 command=5 writes=1 polls=16 state=3 verified=1",
+    "ISP_UPDATE_FRAME phase=5 frame=0 ok=1 wait=00000000 received=1",
+    "ISP_UPDATE_FRAME phase=5 frame=1 ok=1 wait=00000000 received=1",
+    "ISP_UPDATE_FRAME phase=5 frame=2 ok=1 wait=00000000 received=1",
+    "ISP_UPDATE_ARM_END index=0 phase=5 complete=1",
+    "ISP_UPDATE_ARM index=1 phase=6 label=isp_update_restart_128 initial=128 continuous=0",
+    "SEQ_REFRESH restoring=0 command=5 writes=2 polls=13 state=3 verified=1",
+    "ISP_UPDATE_FRAME phase=6 frame=0 ok=1 wait=00000000 received=1",
+    "ISP_UPDATE_FRAME phase=6 frame=1 ok=1 wait=00000000 received=1",
+    "ISP_UPDATE_FRAME phase=6 frame=2 ok=1 wait=00000000 received=1",
+    "ISP_UPDATE_ARM_END index=1 phase=6 complete=1",
+    "ISP_UPDATE_ARM index=2 phase=7 label=isp_update_restart_160 initial=160 continuous=0",
+    "SEQ_REFRESH restoring=0 command=5 writes=3 polls=13 state=3 verified=1",
+    "ISP_UPDATE_FRAME phase=7 frame=0 ok=1 wait=00000000 received=1",
+    "ISP_UPDATE_FRAME phase=7 frame=1 ok=1 wait=00000000 received=1",
+    "ISP_UPDATE_FRAME phase=7 frame=2 ok=1 wait=00000000 received=1",
+    "ISP_UPDATE_ARM_END index=2 phase=7 complete=1",
+    "ISP_UPDATE_ARM index=3 phase=8 label=isp_update_continuous_128 initial=128 continuous=1",
+    "SEQ_REFRESH restoring=0 command=5 writes=4 polls=13 state=3 verified=1",
+    "ISP_UPDATE_FRAME phase=8 frame=0 ok=1 wait=00000000 received=1",
+    "ISP_UPDATE_FRAME phase=8 frame=1 ok=1 wait=00000000 received=1",
+    "ISP_UPDATE_FRAME phase=8 frame=2 ok=1 wait=00000000 received=1",
+    "ISP_UPDATE_ARM_END index=3 phase=8 complete=1",
+    "PREVIEW_AWB_RESTORE saved=0 actual=0 verified=1",
+    "AWB_RESTORE saved=26 actual=26 verified=1",
+    "SEQ_RESTORE saved=10 actual=10 verified=1",
+    "SEQ_REFRESH restoring=1 command=5 writes=5 polls=13 state=3 verified=1",
+    "ISP_UPDATE_END complete=1 arms=4 restored=1",
+    "END complete=1 aborted=0 io_error=0 captures=41 failures=1"
+  ],
+  "limitations": [
+    "Repeated update was observed but writing on every frame is not established",
+    "Continuous capture still invokes SetReceiving; MCU and camera-service writers remain unseparated",
+    "The 19 Mode variables are a documented subset, not a complete MCU RAM or shadow search",
+    "Diagnostic passed means evidence complete, not ISP unity or calibration passed"
+  ]
+}

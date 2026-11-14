@@ -1,0 +1,52 @@
+[
+  {
+    "name": "FINDINGS.md",
+    "bytes": 1231,
+    "sha256": "9158fbd668b3e913ff2dd60dda259a409b9827098f052a85e1990e24ed68ba30"
+  },
+  {
+    "name": "fit-status.log",
+    "bytes": 764,
+    "sha256": "347173799f8b85e98da2bccadb2e37ed31b4e5ebf254f97c54495c0a6c5b9dc7"
+  },
+  {
+    "name": "fit.json",
+    "bytes": 43828,
+    "sha256": "b30e504ce97eeb7fca8b23292705d047f1ab65373e3acd8fa6029600841b7b94"
+  },
+  {
+    "name": "source/decode_exposure_state.py",
+    "bytes": 9686,
+    "sha256": "cf36fac0fa37e7e2e2cea8b6d6749a801d006c5b035c29ee4217b0134bf9b3cd"
+  },
+  {
+    "name": "source/exposure_rebuild_report.py",
+    "bytes": 27129,
+    "sha256": "03545a9c0533f15794f5facdc7ea4ce09cbfd7f8c7fa52cbba317c8e9552223f"
+  },
+  {
+    "name": "source/exposure_response_fit.py",
+    "bytes": 11338,
+    "sha256": "adee25a46959105f117d32a192381baaaa9b605b6a1832bef116280c39ac2d55"
+  },
+  {
+    "name": "source/exposure_session.py",
+    "bytes": 35309,
+    "sha256": "78c67bff19dbf251415d81a8be6af4cfaa5396948146ea068155e4018b14e58b"
+  },
+  {
+    "name": "source/exposure_sweep_contract.py",
+    "bytes": 57151,
+    "sha256": "bdf210c7c3cf7872859c262431553695a642654c72d968cf1789f02acc02c3a4"
+  },
+  {
+    "name": "source/test_exposure_response_fit.py",
+    "bytes": 2274,
+    "sha256": "c45d7d2a74e13a45888fc15177051d24c80414d030d355b1f565d97908470ef5"
+  },
+  {
+    "name": "tests.log",
+    "bytes": 104,
+    "sha256": "00883bf8c5cd3cbb53c4d87e696302d1e5d1994f9032eab5b5ba1cc694e5e70d"
+  }
+]

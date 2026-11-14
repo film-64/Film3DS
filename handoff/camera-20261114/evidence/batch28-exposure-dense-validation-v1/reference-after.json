@@ -1,0 +1,15 @@
+{
+  "schema": "camera-exposure-reference-input/v1",
+  "metering_mode": "central",
+  "raw_user_input": "\u57fa\u672c\u6c92\u8b8a",
+  "inherited_settings": {
+    "iso": 100,
+    "f_number": 2.8
+  },
+  "same_as_before_qualitative": true,
+  "nominal_shutter_seconds": 0.016666666666666666,
+  "precision": "approximate_not_quantified",
+  "reference_to_before": "reference-before.json",
+  "recorded_unix": 1794643999.8911412,
+  "calibration_validated": false
+}

@@ -1,0 +1,1116 @@
+{
+  "schema": "exposure-isp-diagnostic-report/v2",
+  "source": "exposure-sweep-awb-refresh/v1",
+  "passed": false,
+  "calibration_validated": false,
+  "atomic_snapshot": false,
+  "files_verified": 13,
+  "capture_id": "f0c03462cdc667f4822e7cf59d8d5c1d530a7d51dfeee5be50f823790739699f",
+  "errors": [
+    "8:before:missing_or_unexpected_register",
+    "8:after:missing_or_unexpected_register",
+    "9:before:missing_or_unexpected_register",
+    "9:after:missing_or_unexpected_register",
+    "10:before:missing_or_unexpected_register",
+    "10:after:missing_or_unexpected_register",
+    "11:before:missing_or_unexpected_register",
+    "11:after:missing_or_unexpected_register",
+    "missing_or_failed_measured_capture",
+    "transition:0:before_arm:missing_or_unexpected_register",
+    "transition:0:after_arm:missing_or_unexpected_register",
+    "transition:0:after_start:missing_or_unexpected_register",
+    "transition:0:after_wait:missing_or_unexpected_register",
+    "transition:0:after_stop:missing_or_unexpected_register",
+    "transition:1:before_arm:missing_or_unexpected_register",
+    "transition:1:after_arm:missing_or_unexpected_register",
+    "transition:1:after_start:missing_or_unexpected_register",
+    "transition:1:after_wait:missing_or_unexpected_register",
+    "transition:1:after_stop:missing_or_unexpected_register",
+    "transition:2:before_arm:missing_or_unexpected_register",
+    "transition:2:after_arm:missing_or_unexpected_register",
+    "transition:2:after_start:missing_or_unexpected_register",
+    "transition:2:after_wait:missing_or_unexpected_register",
+    "transition:2:after_stop:missing_or_unexpected_register",
+    "transition:3:before_arm:missing_or_unexpected_register",
+    "transition:3:after_arm:missing_or_unexpected_register",
+    "transition:3:after_start:missing_or_unexpected_register",
+    "transition:3:after_wait:missing_or_unexpected_register",
+    "transition:3:after_stop:missing_or_unexpected_register",
+    "transition:4:before_arm:missing_or_unexpected_register",
+    "transition:4:after_arm:missing_or_unexpected_register",
+    "transition:4:after_start:missing_or_unexpected_register",
+    "transition:4:after_wait:missing_or_unexpected_register",
+    "transition:4:after_stop:missing_or_unexpected_register",
+    "transition:5:before_arm:missing_or_unexpected_register",
+    "transition:5:after_arm:missing_or_unexpected_register",
+    "transition:5:after_start:missing_or_unexpected_register",
+    "transition:5:after_wait:missing_or_unexpected_register",
+    "transition:5:after_stop:missing_or_unexpected_register",
+    "transition:6:before_arm:missing_or_unexpected_register",
+    "transition:6:after_arm:missing_or_unexpected_register",
+    "transition:6:after_start:missing_or_unexpected_register",
+    "transition:6:after_wait:missing_or_unexpected_register",
+    "transition:6:after_stop:missing_or_unexpected_register",
+    "transition:7:before_arm:missing_or_unexpected_register",
+    "transition:7:after_arm:missing_or_unexpected_register",
+    "transition:7:after_start:missing_or_unexpected_register",
+    "transition:7:after_wait:missing_or_unexpected_register",
+    "transition:7:after_stop:missing_or_unexpected_register",
+    "refresh_not_verified",
+    "diagnostic_incomplete",
+    "run_did_not_finish_cleanly"
+  ],
+  "measured": [
+    {
+      "frame": 8,
+      "when": "before",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ]
+    },
+    {
+      "frame": 8,
+      "when": "after",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ]
+    },
+    {
+      "frame": 9,
+      "when": "before",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ]
+    },
+    {
+      "frame": 9,
+      "when": "after",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ]
+    },
+    {
+      "frame": 10,
+      "when": "before",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ]
+    },
+    {
+      "frame": 10,
+      "when": "after",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ]
+    },
+    {
+      "frame": 11,
+      "when": "before",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ]
+    },
+    {
+      "frame": 11,
+      "when": "after",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "frame": 0,
+      "boundary": "before_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 0,
+      "boundary": "after_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 0,
+      "boundary": "after_start",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 0,
+      "boundary": "after_wait",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 0,
+      "boundary": "after_stop",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 1,
+      "boundary": "before_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 1,
+      "boundary": "after_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 1,
+      "boundary": "after_start",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 1,
+      "boundary": "after_wait",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 1,
+      "boundary": "after_stop",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 2,
+      "boundary": "before_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 2,
+      "boundary": "after_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 2,
+      "boundary": "after_start",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 2,
+      "boundary": "after_wait",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 2,
+      "boundary": "after_stop",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 3,
+      "boundary": "before_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 3,
+      "boundary": "after_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 3,
+      "boundary": "after_start",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 3,
+      "boundary": "after_wait",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 3,
+      "boundary": "after_stop",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 4,
+      "boundary": "before_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 4,
+      "boundary": "after_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 4,
+      "boundary": "after_start",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 4,
+      "boundary": "after_wait",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 4,
+      "boundary": "after_stop",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 5,
+      "boundary": "before_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 5,
+      "boundary": "after_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 5,
+      "boundary": "after_start",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 5,
+      "boundary": "after_wait",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 5,
+      "boundary": "after_stop",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 6,
+      "boundary": "before_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 6,
+      "boundary": "after_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 6,
+      "boundary": "after_start",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 6,
+      "boundary": "after_wait",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 6,
+      "boundary": "after_stop",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 7,
+      "boundary": "before_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 7,
+      "boundary": "after_arm",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 7,
+      "boundary": "after_start",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 7,
+      "boundary": "after_wait",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    },
+    {
+      "frame": 7,
+      "boundary": "after_stop",
+      "values": {
+        "a102": null,
+        "a103": null,
+        "a104": null,
+        "a355": null,
+        "a34e": null,
+        "a34f": null,
+        "a350": null,
+        "221f": null,
+        "32d4": null,
+        "32d6": null,
+        "32d8": null,
+        "32da": null
+      },
+      "errors": [
+        "missing_or_unexpected_register"
+      ],
+      "times_ms": []
+    }
+  ],
+  "gain_model": []
+}

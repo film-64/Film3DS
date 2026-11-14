@@ -1,0 +1,17 @@
+{
+  "FINDINGS.md": "598d3b244a071d1cf80f991562180ad675f5b8934d22676759e455d87252d06d",
+  "VALIDATION.md": "3e37129123fc1a9e1b824a056e7e9bd659e77062a1c9daf895339e858dd8500d",
+  "analysis-final-status.log": "d4e2a0ab14f10eedfd9b6516c7a800a4648d4eaaff76a7861efa8defb652c1a4",
+  "analysis-final.json": "5c7ef4b27946cacdbee8b89a68bd69fc58d86a317d236bc4f4e5b7e4a6ceb19d",
+  "analysis-status.log": "d4e2a0ab14f10eedfd9b6516c7a800a4648d4eaaff76a7861efa8defb652c1a4",
+  "analysis.json": "d9d0e85d57546dce48d528322988eea5d7c85a8cd01c4908e04953565ca29148",
+  "host-tools/exposure_dense_report.py": "9aecb8414467e1eb5fc63dfb87d558715d15acb074ee9522cea1d75d67da1cdf",
+  "host-tools/exposure_luma_transfer.py": "87520a5e616554849bb399eb3941364c6f1ee03bcc680ba8564d69e5d255db18",
+  "host-tools/exposure_luma_validate.py": "aa2e1d1209a42a3d7bd9395d7ed4731ad1d104bf040577fd6a8411ab3a2b9728",
+  "host-tools/exposure_rebuild_report.py": "a945a3beaa7325a15ec7d39d920adb81ec5ba171df73d46b6eb2566e8162019a",
+  "host-tools/exposure_response_fit.py": "bee99d8a3c64ae1ff33590750433d50d661a1c51ee629dbde0a5cea369ec4950",
+  "host-tools/exposure_sweep_contract.py": "a25dc8111bc56743ebf66caeb9c0347965b6b03eb5b047fbce57e3653c10765b",
+  "test-results.json": "05e64bdcde6ed358fa249ac2a60fd35aafc8a899bc1287141748cfc8329c80fd",
+  "tests/exposure_luma_transfer.py": "a25c50f3d755e2d4cac50c6d0196d0295c7bea62f439389b460c24dc5c34c53c",
+  "tests/exposure_luma_validate.py": "43e6087396229578a813c927894a9b79c618315dcbe8baffde96360b852932b9"
+}

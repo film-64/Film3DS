@@ -1,0 +1,249 @@
+FILMPROBE schema=1 revision=5a1e62d-gain-matrix-v3 new3ds=1 model_result=00000000 kernel=023a0000 settle_frames=8 measured_frames=12
+OPTIONS direct=0 raw=1 acquisition=continuous deterministic_ipc=1 transfer=ram_http
+RAM_EVIDENCE contract=3 bytes=29360128 sd_writes=1 freeze_after_camera=1 no_compression=1 retry=none
+REQUEST only_sensor=1 first_phase=3 last_phase=12
+CALIBRATION contract=2 expected_stages=10 target=stable_scene lock_scope=per_capture units=raw_codes scope=camera-gain-matrix-v3
+LOG_POLICY frame_boundary buffers=32768 all_streams=1 retry=none
+IPC_DUMP disabled_by_sweep_contract proof=reads_frames_calls
+CRASH_COLLECTION skipped_existing_dump_already_recovered ram_mode=1
+SERVICE sensor=1 name=cam:u open=00000000
+SERVICE_ID sensor=1 name=cam:u result=d8a053ea id=0000
+GETTER sensor=1 service=cam:u poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:u poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:c open=00000000
+SERVICE_ID sensor=1 name=cam:c result=00000000 id=2280
+GETTER sensor=1 service=cam:c poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:c poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:s open=00000000
+SERVICE_ID sensor=1 name=cam:s result=d8a053ea id=0000
+GETTER sensor=1 service=cam:s poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:s poison=1 result=00000000 ae_low8=1
+INIT_STEP stage=calibration_queries_begin
+CALIBRATION_REPLY command=0032 result=d8a053ea header=003201c0 valid=0 payload=0011d624000000010011fc40001013dd001156740000567a00000000000000000000000000000000000000000000000000000000000000000000000000000000
+CALIBRATION_REPLY command=002b result=00000000 header=002b0440 valid=1 payload=000000003f7fe7f33deaf0bfc2b50282bfe71a4c0000000000000000428281254282775e437a0000420c000001e0028000000000000000000000000000000000
+INIT_STEP stage=calibration_queries_end
+INIT_STEP stage=initial_snapshot_begin
+INIT_STEP stage=initial_snapshot_end
+ACQUISITION sensor=1 mode=continuous complete=0
+ACQUISITION_SELECTED sensor=1 mode=single_frame_restart reason=register_brackets_or_stream_failure
+ACQUISITION sensor=1 mode=single_frame_restart complete=1 lock_scope=per_capture_only
+MATRIX_CONTRACT source=camera-gain-matrix/v3 nodes=8 targets=128,96,160 cycles=8_or_2 calibration=0
+CAL_STAGE sensor=1 phase=3 kind=seed controls_verified=1 restoring=0
+CAL_STAGE sensor=1 phase=4 kind=code_baseline controls_verified=1 restoring=0
+AUTO_ISP_PIN phase=4 frame=8 established=1 red=163 gr=160 gb=160 blue=133
+SWEEP_RAW phase=4 bytes=24576 crc32=c61d8ae3
+CAL_BURST sensor=1 rate=5 frames=24 expected=24 complete=1 evidence=dma_event_cadence
+MATRIX_NODE index=0 phase=5 fps=5 gate=2 coarse=4 label=gm_n00_f05_d2_c0004
+SEQ_REFRESH restoring=0 command=5 writes=1 polls=15 state=3 verified=1
+POST_REFRESH_MANUAL seq=10 preview_awb=0 awb_r=128 awb_g=128 awb_b=128 command=0 state=3 verified=1
+MATRIX_ALIAS_TRANSPORT phase=5 when=before_stream before=640 combined=640 after=640 verified=1
+CCM_WORD phase=5 when=before_stream addr=2332 msb=1 lsb=174 value=430
+CCM_ALIAS_WINDOW phase=5 when=before_stream addr=2332 before=430 combined=430 after=430 match_before=1 match_after=1
+CCM_WORD phase=5 when=before_stream addr=2334 msb=255 lsb=177 value=65457
+CCM_WORD phase=5 when=before_stream addr=2336 msb=255 lsb=177 value=65457
+CCM_WORD phase=5 when=before_stream addr=2338 msb=255 lsb=172 value=65452
+CCM_WORD phase=5 when=before_stream addr=233a msb=1 lsb=135 value=391
+CCM_WORD phase=5 when=before_stream addr=233c msb=255 lsb=226 value=65506
+CCM_WORD phase=5 when=before_stream addr=233e msb=255 lsb=251 value=65531
+CCM_WORD phase=5 when=before_stream addr=2340 msb=255 lsb=149 value=65429
+CCM_WORD phase=5 when=before_stream addr=2342 msb=1 lsb=125 value=381
+CCM_WORD phase=5 when=before_stream addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=5 when=before_stream addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=0 when=before_stream complete=1
+SWEEP_RAW phase=5 bytes=24576 crc32=f9f5d338
+MATRIX_PERIOD node=0 raw=199951478 host_span_ms=400 verified=1
+MATRIX_TRIAL node=0 trial=0 target=128 cycles=8 label=gm_n00_f05_d2_c0004_t128
+MATRIX_TRIAL_END node=0 trial=0 complete=1 held=0 image_source=none
+MATRIX_TRIAL node=0 trial=1 target=96 cycles=2 label=gm_n00_f05_d2_c0004_t096
+MATRIX_TRIAL_END node=0 trial=1 complete=1 held=0 image_source=none
+MATRIX_TRIAL node=0 trial=2 target=160 cycles=2 label=gm_n00_f05_d2_c0004_t160
+MATRIX_TRIAL_END node=0 trial=2 complete=1 held=0 image_source=none
+MATRIX_ALIAS_TRANSPORT phase=5 when=after_stop before=640 combined=640 after=640 verified=1
+CCM_WORD phase=5 when=after_stop addr=2332 msb=1 lsb=172 value=428
+CCM_ALIAS_WINDOW phase=5 when=after_stop addr=2332 before=428 combined=428 after=428 match_before=1 match_after=1
+CCM_WORD phase=5 when=after_stop addr=2334 msb=255 lsb=177 value=65457
+CCM_WORD phase=5 when=after_stop addr=2336 msb=255 lsb=177 value=65457
+CCM_WORD phase=5 when=after_stop addr=2338 msb=255 lsb=172 value=65452
+CCM_WORD phase=5 when=after_stop addr=233a msb=1 lsb=135 value=391
+CCM_WORD phase=5 when=after_stop addr=233c msb=255 lsb=226 value=65506
+CCM_WORD phase=5 when=after_stop addr=233e msb=255 lsb=251 value=65531
+CCM_WORD phase=5 when=after_stop addr=2340 msb=255 lsb=150 value=65430
+CCM_WORD phase=5 when=after_stop addr=2342 msb=1 lsb=125 value=381
+CCM_WORD phase=5 when=after_stop addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=5 when=after_stop addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=0 when=after_stop complete=1
+MATRIX_NODE_END index=0 complete=1 first_held=0
+MATRIX_NODE index=1 phase=6 fps=5 gate=2 coarse=528 label=gm_n01_f05_d2_c0528
+SEQ_REFRESH restoring=0 command=5 writes=2 polls=11 state=3 verified=1
+POST_REFRESH_MANUAL seq=10 preview_awb=0 awb_r=128 awb_g=128 awb_b=128 command=0 state=3 verified=1
+MATRIX_ALIAS_TRANSPORT phase=6 when=before_stream before=640 combined=640 after=640 verified=1
+CCM_WORD phase=6 when=before_stream addr=2332 msb=1 lsb=164 value=420
+CCM_ALIAS_WINDOW phase=6 when=before_stream addr=2332 before=420 combined=420 after=420 match_before=1 match_after=1
+CCM_WORD phase=6 when=before_stream addr=2334 msb=255 lsb=180 value=65460
+CCM_WORD phase=6 when=before_stream addr=2336 msb=255 lsb=180 value=65460
+CCM_WORD phase=6 when=before_stream addr=2338 msb=255 lsb=177 value=65457
+CCM_WORD phase=6 when=before_stream addr=233a msb=1 lsb=128 value=384
+CCM_WORD phase=6 when=before_stream addr=233c msb=255 lsb=227 value=65507
+CCM_WORD phase=6 when=before_stream addr=233e msb=255 lsb=250 value=65530
+CCM_WORD phase=6 when=before_stream addr=2340 msb=255 lsb=154 value=65434
+CCM_WORD phase=6 when=before_stream addr=2342 msb=1 lsb=120 value=376
+CCM_WORD phase=6 when=before_stream addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=6 when=before_stream addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=1 when=before_stream complete=1
+SWEEP_RAW phase=6 bytes=24576 crc32=fb0f63c7
+MATRIX_PERIOD node=1 raw=199950636 host_span_ms=400 verified=1
+MATRIX_TRIAL node=1 trial=0 target=128 cycles=8 label=gm_n01_f05_d2_c0528_t128
+MATRIX_TRIAL_END node=1 trial=0 complete=1 held=0 image_source=none
+MATRIX_TRIAL node=1 trial=1 target=96 cycles=2 label=gm_n01_f05_d2_c0528_t096
+MATRIX_TRIAL_END node=1 trial=1 complete=1 held=0 image_source=none
+MATRIX_TRIAL node=1 trial=2 target=160 cycles=2 label=gm_n01_f05_d2_c0528_t160
+MATRIX_TRIAL_END node=1 trial=2 complete=1 held=0 image_source=none
+MATRIX_ALIAS_TRANSPORT phase=6 when=after_stop before=640 combined=640 after=640 verified=1
+CCM_WORD phase=6 when=after_stop addr=2332 msb=1 lsb=164 value=420
+CCM_ALIAS_WINDOW phase=6 when=after_stop addr=2332 before=420 combined=420 after=420 match_before=1 match_after=1
+CCM_WORD phase=6 when=after_stop addr=2334 msb=255 lsb=180 value=65460
+CCM_WORD phase=6 when=after_stop addr=2336 msb=255 lsb=180 value=65460
+CCM_WORD phase=6 when=after_stop addr=2338 msb=255 lsb=177 value=65457
+CCM_WORD phase=6 when=after_stop addr=233a msb=1 lsb=128 value=384
+CCM_WORD phase=6 when=after_stop addr=233c msb=255 lsb=227 value=65507
+CCM_WORD phase=6 when=after_stop addr=233e msb=255 lsb=250 value=65530
+CCM_WORD phase=6 when=after_stop addr=2340 msb=255 lsb=154 value=65434
+CCM_WORD phase=6 when=after_stop addr=2342 msb=1 lsb=120 value=376
+CCM_WORD phase=6 when=after_stop addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=6 when=after_stop addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=1 when=after_stop complete=1
+MATRIX_NODE_END index=1 complete=1 first_held=0
+MATRIX_NODE index=2 phase=7 fps=5 gate=0 coarse=4 label=gm_n02_f05_d0_c0004
+SEQ_REFRESH restoring=0 command=5 writes=3 polls=11 state=3 verified=1
+POST_REFRESH_MANUAL seq=10 preview_awb=0 awb_r=128 awb_g=128 awb_b=128 command=0 state=3 verified=1
+MATRIX_ALIAS_TRANSPORT phase=7 when=before_stream before=640 combined=640 after=640 verified=1
+CCM_WORD phase=7 when=before_stream addr=2332 msb=1 lsb=172 value=428
+CCM_ALIAS_WINDOW phase=7 when=before_stream addr=2332 before=428 combined=428 after=428 match_before=1 match_after=1
+CCM_WORD phase=7 when=before_stream addr=2334 msb=255 lsb=178 value=65458
+CCM_WORD phase=7 when=before_stream addr=2336 msb=255 lsb=178 value=65458
+CCM_WORD phase=7 when=before_stream addr=2338 msb=255 lsb=173 value=65453
+CCM_WORD phase=7 when=before_stream addr=233a msb=1 lsb=134 value=390
+CCM_WORD phase=7 when=before_stream addr=233c msb=255 lsb=226 value=65506
+CCM_WORD phase=7 when=before_stream addr=233e msb=255 lsb=251 value=65531
+CCM_WORD phase=7 when=before_stream addr=2340 msb=255 lsb=151 value=65431
+CCM_WORD phase=7 when=before_stream addr=2342 msb=1 lsb=124 value=380
+CCM_WORD phase=7 when=before_stream addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=7 when=before_stream addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=2 when=before_stream complete=1
+SWEEP_RAW phase=7 bytes=24576 crc32=b7dca9ba
+MATRIX_PERIOD node=2 raw=199949823 host_span_ms=400 verified=1
+MATRIX_TRIAL node=2 trial=0 target=128 cycles=8 label=gm_n02_f05_d0_c0004_t128
+MATRIX_TRIAL_END node=2 trial=0 complete=1 held=1 image_source=none
+MATRIX_TRIAL node=2 trial=1 target=96 cycles=8 label=gm_n02_f05_d0_c0004_t096
+MATRIX_TRIAL_END node=2 trial=1 complete=1 held=1 image_source=none
+MATRIX_TRIAL node=2 trial=2 target=160 cycles=8 label=gm_n02_f05_d0_c0004_t160
+MATRIX_TRIAL_END node=2 trial=2 complete=1 held=1 image_source=none
+MATRIX_ALIAS_TRANSPORT phase=7 when=after_stop before=640 combined=640 after=640 verified=1
+CCM_WORD phase=7 when=after_stop addr=2332 msb=1 lsb=170 value=426
+CCM_ALIAS_WINDOW phase=7 when=after_stop addr=2332 before=426 combined=426 after=426 match_before=1 match_after=1
+CCM_WORD phase=7 when=after_stop addr=2334 msb=255 lsb=178 value=65458
+CCM_WORD phase=7 when=after_stop addr=2336 msb=255 lsb=178 value=65458
+CCM_WORD phase=7 when=after_stop addr=2338 msb=255 lsb=173 value=65453
+CCM_WORD phase=7 when=after_stop addr=233a msb=1 lsb=134 value=390
+CCM_WORD phase=7 when=after_stop addr=233c msb=255 lsb=226 value=65506
+CCM_WORD phase=7 when=after_stop addr=233e msb=255 lsb=251 value=65531
+CCM_WORD phase=7 when=after_stop addr=2340 msb=255 lsb=151 value=65431
+CCM_WORD phase=7 when=after_stop addr=2342 msb=1 lsb=124 value=380
+CCM_WORD phase=7 when=after_stop addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=7 when=after_stop addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=2 when=after_stop complete=1
+MATRIX_NODE_END index=2 complete=1 first_held=1
+MATRIX_NODE index=3 phase=8 fps=5 gate=0 coarse=528 label=gm_n03_f05_d0_c0528
+SEQ_REFRESH restoring=0 command=5 writes=4 polls=11 state=3 verified=1
+POST_REFRESH_MANUAL seq=10 preview_awb=0 awb_r=128 awb_g=128 awb_b=128 command=0 state=3 verified=1
+MATRIX_ALIAS_TRANSPORT phase=8 when=before_stream before=640 combined=640 after=640 verified=1
+CCM_WORD phase=8 when=before_stream addr=2332 msb=1 lsb=164 value=420
+CCM_ALIAS_WINDOW phase=8 when=before_stream addr=2332 before=420 combined=420 after=420 match_before=1 match_after=1
+CCM_WORD phase=8 when=before_stream addr=2334 msb=255 lsb=180 value=65460
+CCM_WORD phase=8 when=before_stream addr=2336 msb=255 lsb=180 value=65460
+CCM_WORD phase=8 when=before_stream addr=2338 msb=255 lsb=177 value=65457
+CCM_WORD phase=8 when=before_stream addr=233a msb=1 lsb=128 value=384
+CCM_WORD phase=8 when=before_stream addr=233c msb=255 lsb=227 value=65507
+CCM_WORD phase=8 when=before_stream addr=233e msb=255 lsb=250 value=65530
+CCM_WORD phase=8 when=before_stream addr=2340 msb=255 lsb=154 value=65434
+CCM_WORD phase=8 when=before_stream addr=2342 msb=1 lsb=120 value=376
+CCM_WORD phase=8 when=before_stream addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=8 when=before_stream addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=3 when=before_stream complete=1
+SWEEP_RAW phase=8 bytes=24576 crc32=b80b3646
+MATRIX_PERIOD node=3 raw=199949837 host_span_ms=400 verified=1
+MATRIX_TRIAL node=3 trial=0 target=128 cycles=8 label=gm_n03_f05_d0_c0528_t128
+MATRIX_TRIAL_END node=3 trial=0 complete=1 held=1 image_source=none
+MATRIX_TRIAL node=3 trial=1 target=96 cycles=8 label=gm_n03_f05_d0_c0528_t096
+MATRIX_TRIAL_END node=3 trial=1 complete=1 held=1 image_source=none
+MATRIX_TRIAL node=3 trial=2 target=160 cycles=8 label=gm_n03_f05_d0_c0528_t160
+MATRIX_TRIAL_END node=3 trial=2 complete=1 held=1 image_source=none
+MATRIX_ALIAS_TRANSPORT phase=8 when=after_stop before=640 combined=640 after=640 verified=1
+CCM_WORD phase=8 when=after_stop addr=2332 msb=1 lsb=164 value=420
+CCM_ALIAS_WINDOW phase=8 when=after_stop addr=2332 before=420 combined=420 after=420 match_before=1 match_after=1
+CCM_WORD phase=8 when=after_stop addr=2334 msb=255 lsb=180 value=65460
+CCM_WORD phase=8 when=after_stop addr=2336 msb=255 lsb=180 value=65460
+CCM_WORD phase=8 when=after_stop addr=2338 msb=255 lsb=177 value=65457
+CCM_WORD phase=8 when=after_stop addr=233a msb=1 lsb=128 value=384
+CCM_WORD phase=8 when=after_stop addr=233c msb=255 lsb=227 value=65507
+CCM_WORD phase=8 when=after_stop addr=233e msb=255 lsb=250 value=65530
+CCM_WORD phase=8 when=after_stop addr=2340 msb=255 lsb=154 value=65434
+CCM_WORD phase=8 when=after_stop addr=2342 msb=1 lsb=120 value=376
+CCM_WORD phase=8 when=after_stop addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=8 when=after_stop addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=3 when=after_stop complete=1
+MATRIX_NODE_END index=3 complete=1 first_held=1
+MATRIX_NODE index=4 phase=9 fps=15 gate=2 coarse=4 label=gm_n04_f15_d2_c0004
+MATRIX_PROFILE fps=15 polls=2 verified=1
+SEQ_REFRESH restoring=0 command=5 writes=5 polls=6 state=3 verified=1
+POST_REFRESH_MANUAL seq=10 preview_awb=0 awb_r=128 awb_g=128 awb_b=128 command=0 state=3 verified=1
+MATRIX_ALIAS_TRANSPORT phase=9 when=before_stream before=640 combined=640 after=640 verified=1
+CCM_WORD phase=9 when=before_stream addr=2332 msb=1 lsb=172 value=428
+CCM_ALIAS_WINDOW phase=9 when=before_stream addr=2332 before=426 combined=428 after=426 match_before=0 match_after=0
+CCM_WORD phase=9 when=before_stream addr=2334 msb=255 lsb=178 value=65458
+CCM_WORD phase=9 when=before_stream addr=2336 msb=255 lsb=178 value=65458
+CCM_WORD phase=9 when=before_stream addr=2338 msb=255 lsb=173 value=65453
+CCM_WORD phase=9 when=before_stream addr=233a msb=1 lsb=134 value=390
+CCM_WORD phase=9 when=before_stream addr=233c msb=255 lsb=226 value=65506
+CCM_WORD phase=9 when=before_stream addr=233e msb=255 lsb=251 value=65531
+CCM_WORD phase=9 when=before_stream addr=2340 msb=255 lsb=151 value=65431
+CCM_WORD phase=9 when=before_stream addr=2342 msb=1 lsb=124 value=380
+CCM_WORD phase=9 when=before_stream addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=9 when=before_stream addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=4 when=before_stream complete=1
+SWEEP_RAW phase=9 bytes=24576 crc32=6d52a1c2
+MATRIX_PERIOD node=4 raw=66664460 host_span_ms=133 verified=1
+MATRIX_TRIAL node=4 trial=0 target=128 cycles=8 label=gm_n04_f15_d2_c0004_t128
+MATRIX_TRIAL_END node=4 trial=0 complete=1 held=0 image_source=none
+MATRIX_TRIAL node=4 trial=1 target=96 cycles=2 label=gm_n04_f15_d2_c0004_t096
+MATRIX_TRIAL_END node=4 trial=1 complete=1 held=0 image_source=none
+MATRIX_TRIAL node=4 trial=2 target=160 cycles=2 label=gm_n04_f15_d2_c0004_t160
+MATRIX_TRIAL_END node=4 trial=2 complete=1 held=0 image_source=none
+MATRIX_ALIAS_TRANSPORT phase=9 when=after_stop before=640 combined=640 after=640 verified=1
+CCM_WORD phase=9 when=after_stop addr=2332 msb=1 lsb=170 value=426
+CCM_ALIAS_WINDOW phase=9 when=after_stop addr=2332 before=426 combined=426 after=426 match_before=1 match_after=1
+CCM_WORD phase=9 when=after_stop addr=2334 msb=255 lsb=178 value=65458
+CCM_WORD phase=9 when=after_stop addr=2336 msb=255 lsb=180 value=65460
+CCM_WORD phase=9 when=after_stop addr=2338 msb=255 lsb=173 value=65453
+CCM_WORD phase=9 when=after_stop addr=233a msb=1 lsb=134 value=390
+CCM_WORD phase=9 when=after_stop addr=233c msb=255 lsb=226 value=65506
+CCM_WORD phase=9 when=after_stop addr=233e msb=255 lsb=251 value=65531
+CCM_WORD phase=9 when=after_stop addr=2340 msb=255 lsb=151 value=65431
+CCM_WORD phase=9 when=after_stop addr=2342 msb=1 lsb=124 value=380
+CCM_WORD phase=9 when=after_stop addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=9 when=after_stop addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=4 when=after_stop complete=1
+MATRIX_NODE_END index=4 complete=1 first_held=0
+MATRIX_NODE index=5 phase=10 fps=15 gate=2 coarse=528 label=gm_n05_f15_d2_c0528
+SEQ_REFRESH restoring=0 command=5 writes=6 polls=6 state=3 verified=1
+POST_REFRESH_MANUAL seq=10 preview_awb=0 awb_r=128 awb_g=128 awb_b=128 command=0 state=3 verified=1
+MATRIX_NODE_END index=5 complete=0 first_held=0
+MATRIX_PROFILE fps=5 polls=2 verified=1
+PREVIEW_AWB_RESTORE saved=0 actual=0 verified=1
+AWB_RESTORE saved=2 actual=2 verified=1
+SEQ_RESTORE saved=10 actual=10 verified=1
+SEQ_REFRESH restoring=1 command=5 writes=7 polls=15 state=3 verified=1
+MATRIX_END complete=0 nodes=5 restored=1
+SENSOR_END sensor=1 complete=0
+MEASUREMENTS expected=8 complete=7 all_complete=0
+END complete=0 aborted=0 io_error=0 captures=34 failures=1

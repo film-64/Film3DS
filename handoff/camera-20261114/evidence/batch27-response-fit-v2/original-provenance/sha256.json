@@ -1,0 +1,9 @@
+{
+  "FINDINGS.md": "ac3d3ab1f287bbfa810c37082a71bc24f24d8a53a9463418a933a2b95ed7fb9b",
+  "fit-status.log": "48c83991de2e46fe2474fb3d814469a6c21afeb2adc914e953e884b68f699347",
+  "fit.json": "5babcf8b5ab11b00eb2e0ca09fc0fcfd5e18518cc86214d9db826273281d3cf6",
+  "host-tools/exposure_dense_fit.py": "dd809e1a791e0de1593ae626edd8946943404ddcb1a39623d85f774323fe7187",
+  "host-tools/exposure_rebuild_report.py": "a945a3beaa7325a15ec7d39d920adb81ec5ba171df73d46b6eb2566e8162019a",
+  "host-tools/exposure_response_fit.py": "bee99d8a3c64ae1ff33590750433d50d661a1c51ee629dbde0a5cea369ec4950",
+  "host-tools/exposure_sweep_contract.py": "afd40be5aca041d9fb8e36c39a4d15a0056de78a8a45a032f6aa248a7803480a"
+}

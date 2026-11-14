@@ -1,0 +1,59 @@
+{
+  "schema": "camera-exposure-reference-evidence/v1",
+  "input_source": "camera-exposure-rebuild/v2",
+  "manifest_sha256": "20d0b6dfea44a33ae49de5e0b5a0cd91ab0b9840ebd82730daeb58ed7c1a7041",
+  "before": {
+    "schema": "camera-exposure-reference-input/v1",
+    "meter": "user_external_reference",
+    "reading": {
+      "iso": 100,
+      "f_number": 2.8,
+      "shutter_seconds": 0.016666666666666666
+    },
+    "reported_ev100": 9,
+    "computed_ev100": 8.877744249949002,
+    "target_id": "screen-gray-01",
+    "screen": {
+      "patch": "neutral_gray_requested",
+      "brightness_setting": "not_reported",
+      "stability": "user_reports_relative_stability_1_to_10_minutes"
+    },
+    "raw_user_input": "\u5c31\u7dd2\uff0c\u8b80\u6578\u76f8\u540c",
+    "received_unix": 1794637630.73581,
+    "calibration_validated": false,
+    "previous_input": "iso100 f2.8 1/60\uff0cev9",
+    "reading_confirmation": "user_reconfirmed_before_second_capture"
+  },
+  "after": {
+    "schema": "camera-exposure-reference-input/v1",
+    "meter": "user_external_reference",
+    "reading": {
+      "iso": 100,
+      "f_number": 2.8,
+      "shutter_seconds": 0.01818181818181818
+    },
+    "reported_ev100": null,
+    "computed_ev100": 8.752213367865142,
+    "target_id": "screen-gray-01",
+    "screen": {
+      "patch": "neutral_gray_requested",
+      "brightness_setting": "not_reported",
+      "stability": "user_reports_relative_stability_1_to_10_minutes"
+    },
+    "raw_user_input": "\u8aa4\u5dee5% \u63a5\u8fd11/60 \u5927\u69821/55 \u5176\u9918\u53c3\u6578\u4e0d\u8b8a",
+    "received_unix": 1794638254.983813,
+    "calibration_validated": false,
+    "previous_input": "iso100 f2.8 1/60\uff0cev9",
+    "reading_confirmation": "user_reconfirmed_before_second_capture",
+    "reported_error_percent": 5,
+    "approximate": true,
+    "uncertainty_quantified": false
+  },
+  "nominal_computed_endpoint_drift_ev": -0.12553088208385965,
+  "nominal_shutter_time_change_percent": 9.090909090909083,
+  "endpoint_drift_decision": "approximate_readings_uncertainty_not_quantified_no_precision_calibration_acceptance",
+  "reported_error_percent_preserved": 5,
+  "continuous_light_stability_proven": false,
+  "reference_instrument_accuracy_verified": false,
+  "calibration_validated": false
+}

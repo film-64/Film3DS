@@ -1,0 +1,1098 @@
+{
+  "schema": "camera-exposure-luma-transfer-check/v1",
+  "contract": {
+    "compute": false,
+    "lane_admission": false,
+    "override": null,
+    "proof": "local_trace",
+    "input_source": "camera-exposure-dense/v1",
+    "model_source": "camera-exposure-luma-transfer/v1",
+    "input_integrity": "strict_dense_report_CRC_SHA_and_caller_pinned_frozen_model_SHA256",
+    "model": "fixed_previous_batch_knots_and_gain_shifts_never_refit_new_data",
+    "illumination_offset": "only_reference_start_coarse128_core528_ISP128_last_two_images_mean_EV",
+    "validation": "all_in_domain_coarse_images_reference_end_and_all_gain_images_both_last_images",
+    "minimum_coarse_holdouts": 2,
+    "max_error_EV": 0.25,
+    "coverage": 0.8,
+    "extrapolation": false,
+    "pipeline_match": {
+      "flat": [
+        "3210",
+        "32c0",
+        "32c2",
+        "337c",
+        "337e",
+        "3604",
+        "3606",
+        "3608",
+        "360a",
+        "360c",
+        "360e",
+        "3610",
+        "3612",
+        "3614",
+        "3616",
+        "3618",
+        "361a",
+        "361c",
+        "361e",
+        "3620",
+        "3622",
+        "3624",
+        "3626",
+        "3628",
+        "362a",
+        "362c",
+        "362e",
+        "3630",
+        "3632",
+        "3634",
+        "3636",
+        "3638",
+        "363a",
+        "363c",
+        "363e",
+        "2332",
+        "2334",
+        "2336",
+        "2338",
+        "233a",
+        "233c",
+        "233e",
+        "2340",
+        "2342",
+        "2344",
+        "2346",
+        "ab3c",
+        "ab3d",
+        "ab3e",
+        "ab3f",
+        "ab40",
+        "ab41",
+        "ab42",
+        "ab43",
+        "ab44",
+        "ab45",
+        "ab46",
+        "ab47",
+        "ab48",
+        "ab49",
+        "ab4a",
+        "ab4b",
+        "ab4c",
+        "ab4d",
+        "ab4e",
+        "ab4f",
+        "ab50",
+        "ab51",
+        "ab52",
+        "ab53",
+        "ab54",
+        "ab55",
+        "ab56",
+        "ab57",
+        "ab58",
+        "ab59",
+        "ab5a",
+        "ab5b",
+        "ab5c",
+        "ab5d",
+        "ab5e",
+        "ab5f",
+        "ab60",
+        "ab61"
+      ],
+      "matrix_mode": "entire_recorded_context",
+      "rebuild_timing": [
+        "0010",
+        "0012",
+        "0014",
+        "0016",
+        "0018",
+        "300a",
+        "300c",
+        "3014",
+        "3016",
+        "3040"
+      ]
+    },
+    "external_reference": "central_only_before_after_kept_separate_no_residual_correction",
+    "failure": "pipeline_mismatch_missing_proof_unknown_source_or_holdout_failure_rejects_no_refit",
+    "runtime_internal_fields": "none_new_offline_local_analysis_only"
+  },
+  "frozen_model_sha256": "5c7ef4b27946cacdbee8b89a68bd69fc58d86a317d236bc4f4e5b7e4a6ceb19d",
+  "manifest_sha256": "9c6c4d8d5eb7f2e3465a6554f9a6eefe7630d1ed8a0b90b1c155805cdae1de00",
+  "profiles": [
+    {
+      "fps": 5,
+      "passed": false,
+      "reason": "pipeline_mismatch",
+      "pipeline_mismatches": {
+        "before_stream": {},
+        "after_stop": {
+          "flat/2332": {
+            "expected": 432,
+            "actual": 430
+          },
+          "flat/2334": {
+            "expected": 65455,
+            "actual": 65456
+          }
+        }
+      }
+    },
+    {
+      "fps": 15,
+      "passed": true,
+      "reason": "fixed_model_validation_pass",
+      "reference_start_offset_EV": 0.25987681087902237,
+      "checks": [
+        {
+          "point": 40,
+          "kind": "coarse",
+          "coarse": 32,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": false,
+          "images": [
+            {
+              "mean_Y": 9.702718098958334,
+              "common_pixel_fraction": 0.0,
+              "in_domain": false,
+              "exposure_shift_EV": null
+            },
+            {
+              "mean_Y": 9.7001953125,
+              "common_pixel_fraction": 0.0,
+              "in_domain": false,
+              "exposure_shift_EV": null
+            }
+          ],
+          "residuals_EV": null,
+          "passed": false
+        },
+        {
+          "point": 41,
+          "kind": "coarse",
+          "coarse": 48,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": false,
+          "images": [
+            {
+              "mean_Y": 34.503662109375,
+              "common_pixel_fraction": 0.04833984375,
+              "in_domain": false,
+              "exposure_shift_EV": null
+            },
+            {
+              "mean_Y": 34.449869791666664,
+              "common_pixel_fraction": 0.049072265625,
+              "in_domain": false,
+              "exposure_shift_EV": null
+            }
+          ],
+          "residuals_EV": null,
+          "passed": false
+        },
+        {
+          "point": 42,
+          "kind": "coarse",
+          "coarse": 64,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 54.826741536458336,
+              "common_pixel_fraction": 0.99951171875,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2861568365901359
+            },
+            {
+              "mean_Y": 54.832600911458336,
+              "common_pixel_fraction": 0.9986979166666666,
+              "in_domain": true,
+              "exposure_shift_EV": 0.28628092963441354
+            }
+          ],
+          "residuals_EV": [
+            0.02628002571111354,
+            0.02640411875539117
+          ],
+          "passed": true
+        },
+        {
+          "point": 43,
+          "kind": "coarse",
+          "coarse": 80,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 69.19270833333333,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.27166406523733766
+            },
+            {
+              "mean_Y": 69.15234375,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2708219816501902
+            }
+          ],
+          "residuals_EV": [
+            0.011787254358315291,
+            0.010945170771167856
+          ],
+          "passed": true
+        },
+        {
+          "point": 44,
+          "kind": "coarse",
+          "coarse": 96,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 81.9013671875,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2759945934366739
+            },
+            {
+              "mean_Y": 81.86783854166667,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2752951207796075
+            }
+          ],
+          "residuals_EV": [
+            0.016117782557651505,
+            0.015418309900585125
+          ],
+          "passed": true
+        },
+        {
+          "point": 45,
+          "kind": "coarse",
+          "coarse": 112,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 92.16438802083333,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2679483921036452
+            },
+            {
+              "mean_Y": 92.19246419270833,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2685238796047891
+            }
+          ],
+          "residuals_EV": [
+            0.008071581224622815,
+            0.008647068725766704
+          ],
+          "passed": true
+        },
+        {
+          "point": 46,
+          "kind": "coarse",
+          "coarse": 128,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 101.10774739583333,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2598200961687649
+            },
+            {
+              "mean_Y": 101.09073893229167,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2594714675086509
+            }
+          ],
+          "residuals_EV": [
+            -5.671471025747721e-05,
+            -0.0004053433703714582
+          ],
+          "passed": true
+        },
+        {
+          "point": 47,
+          "kind": "coarse",
+          "coarse": 160,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 116.78824869791667,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2609847107888337
+            },
+            {
+              "mean_Y": 116.77921549479167,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2607995539406396
+            }
+          ],
+          "residuals_EV": [
+            0.0011078999098113052,
+            0.000922743061617215
+          ],
+          "passed": true
+        },
+        {
+          "point": 48,
+          "kind": "coarse",
+          "coarse": 192,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 129.64501953125,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.26260381924756704
+            },
+            {
+              "mean_Y": 129.59806315104166,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2616413372528994
+            }
+          ],
+          "residuals_EV": [
+            0.00272700836854467,
+            0.001764526373877029
+          ],
+          "passed": true
+        },
+        {
+          "point": 49,
+          "kind": "coarse",
+          "coarse": 224,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 141.19669596354166,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2710324742293979
+            },
+            {
+              "mean_Y": 141.22224934895834,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2715149545903399
+            }
+          ],
+          "residuals_EV": [
+            0.011155663350375544,
+            0.01163814371131755
+          ],
+          "passed": true
+        },
+        {
+          "point": 50,
+          "kind": "coarse",
+          "coarse": 256,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 151.27775065104166,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.26933313728309116
+            },
+            {
+              "mean_Y": 151.22566731770834,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2683497378212998
+            }
+          ],
+          "residuals_EV": [
+            0.009456326404068793,
+            0.008472926942277414
+          ],
+          "passed": true
+        },
+        {
+          "point": 51,
+          "kind": "coarse",
+          "coarse": 320,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 168.41463216145834,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.27136945682314284
+            },
+            {
+              "mean_Y": 168.44938151041666,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.27199426723992914
+            }
+          ],
+          "residuals_EV": [
+            0.011492645944120472,
+            0.012117456360906775
+          ],
+          "passed": true
+        },
+        {
+          "point": 52,
+          "kind": "coarse",
+          "coarse": 384,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 183.00504557291666,
+              "common_pixel_fraction": 0.9971516927083334,
+              "in_domain": true,
+              "exposure_shift_EV": 0.27124088369742694
+            },
+            {
+              "mean_Y": 182.99886067708334,
+              "common_pixel_fraction": 0.997314453125,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2711296762227775
+            }
+          ],
+          "residuals_EV": [
+            0.01136407281840457,
+            0.011252865343755136
+          ],
+          "passed": true
+        },
+        {
+          "point": 53,
+          "kind": "coarse",
+          "coarse": 448,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": false,
+          "images": [
+            {
+              "mean_Y": 195.39029947916666,
+              "common_pixel_fraction": 0.3822428385416667,
+              "in_domain": false,
+              "exposure_shift_EV": null
+            },
+            {
+              "mean_Y": 195.42830403645834,
+              "common_pixel_fraction": 0.3829752604166667,
+              "in_domain": false,
+              "exposure_shift_EV": null
+            }
+          ],
+          "residuals_EV": null,
+          "passed": false
+        },
+        {
+          "point": 54,
+          "kind": "coarse",
+          "coarse": 528,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": false,
+          "images": [
+            {
+              "mean_Y": 208.223388671875,
+              "common_pixel_fraction": 0.0003255208333333333,
+              "in_domain": false,
+              "exposure_shift_EV": null
+            },
+            {
+              "mean_Y": 208.217041015625,
+              "common_pixel_fraction": 8.138020833333333e-05,
+              "in_domain": false,
+              "exposure_shift_EV": null
+            }
+          ],
+          "residuals_EV": null,
+          "passed": false
+        },
+        {
+          "point": 55,
+          "kind": "gain",
+          "coarse": 96,
+          "core_code": 528,
+          "ISP": 96,
+          "expected_shift_EV": -0.41435809993586314,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 62.120198567708336,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": -0.1387532586476352
+            },
+            {
+              "mean_Y": 62.075439453125,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": -0.13970119162475747
+            }
+          ],
+          "residuals_EV": [
+            0.015728030409205562,
+            0.014780097432083306
+          ],
+          "passed": true
+        },
+        {
+          "point": 56,
+          "kind": "gain",
+          "coarse": 96,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": -0.004230768840572496,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 81.85791015625,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.27508799538115625
+            },
+            {
+              "mean_Y": 81.89697265625,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.27590291498162145
+            }
+          ],
+          "residuals_EV": [
+            0.019441953342706375,
+            0.020256872943171578
+          ],
+          "passed": true
+        },
+        {
+          "point": 57,
+          "kind": "gain",
+          "coarse": 96,
+          "core_code": 528,
+          "ISP": 160,
+          "expected_shift_EV": 0.31425009202297893,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 96.80167643229167,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.5837925629314675
+            },
+            {
+              "mean_Y": 96.82763671875,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.5843246803600612
+            }
+          ],
+          "residuals_EV": [
+            0.009665660029466228,
+            0.010197777458059942
+          ],
+          "passed": true
+        },
+        {
+          "point": 58,
+          "kind": "gain",
+          "coarse": 96,
+          "core_code": 544,
+          "ISP": 96,
+          "expected_shift_EV": 0.5672175302862419,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 109.118896484375,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.8362630998827205
+            },
+            {
+              "mean_Y": 109.09635416666667,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.8358010418020916
+            }
+          ],
+          "residuals_EV": [
+            0.00916875871745626,
+            0.008706700636827325
+          ],
+          "passed": true
+        },
+        {
+          "point": 59,
+          "kind": "gain",
+          "coarse": 96,
+          "core_code": 544,
+          "ISP": 128,
+          "expected_shift_EV": 0.9824759057985644,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 129.23388671875,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 1.2485673668981416
+            },
+            {
+              "mean_Y": 129.29337565104166,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 1.2497867331686816
+            }
+          ],
+          "residuals_EV": [
+            0.006214650220554896,
+            0.007434016491094875
+          ],
+          "passed": true
+        },
+        {
+          "point": 60,
+          "kind": "gain",
+          "coarse": 96,
+          "core_code": 544,
+          "ISP": 160,
+          "expected_shift_EV": 1.3099791416039017,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 146.01521809895834,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 1.5779922839063811
+            },
+            {
+              "mean_Y": 146.033203125,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 1.5783318640330304
+            }
+          ],
+          "residuals_EV": [
+            0.008136331423457044,
+            0.008475911550106296
+          ],
+          "passed": true
+        },
+        {
+          "point": 61,
+          "kind": "gain",
+          "coarse": 96,
+          "core_code": 1040,
+          "ISP": 96,
+          "expected_shift_EV": 0.577755584725306,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 109.57950846354167,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.8457044310609128
+            },
+            {
+              "mean_Y": 109.61572265625,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.8464467265334026
+            }
+          ],
+          "residuals_EV": [
+            0.008072035456584414,
+            0.008814330929074243
+          ],
+          "passed": true
+        },
+        {
+          "point": 62,
+          "kind": "gain",
+          "coarse": 96,
+          "core_code": 1040,
+          "ISP": 128,
+          "expected_shift_EV": 0.9931664701641425,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 129.77286783854166,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 1.2596150588403976
+            },
+            {
+              "mean_Y": 129.799072265625,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 1.2601521805081317
+            }
+          ],
+          "residuals_EV": [
+            0.006571777797232725,
+            0.007108899464966845
+          ],
+          "passed": true
+        },
+        {
+          "point": 63,
+          "kind": "gain",
+          "coarse": 96,
+          "core_code": 1040,
+          "ISP": 160,
+          "expected_shift_EV": 1.3203810673056613,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 146.60115559895834,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 1.5890555278515333
+            },
+            {
+              "mean_Y": 146.56087239583334,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 1.5882949298303046
+            }
+          ],
+          "residuals_EV": [
+            0.008797649666849594,
+            0.008037051645620963
+          ],
+          "passed": true
+        },
+        {
+          "point": 64,
+          "kind": "gain",
+          "coarse": 160,
+          "core_code": 528,
+          "ISP": 96,
+          "expected_shift_EV": -0.41435809993586314,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 96.6494140625,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": -0.15180830358263186
+            },
+            {
+              "mean_Y": 96.675048828125,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": -0.15128285847289114
+            }
+          ],
+          "residuals_EV": [
+            0.002672985474208911,
+            0.0031984305839496407
+          ],
+          "passed": true
+        },
+        {
+          "point": 65,
+          "kind": "gain",
+          "coarse": 160,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": -0.004230768840572496,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 116.77652994791667,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.26074450731009513
+            },
+            {
+              "mean_Y": 116.81941731770833,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.26162358531908936
+            }
+          ],
+          "residuals_EV": [
+            0.005098465271645258,
+            0.005977543280639486
+          ],
+          "passed": true
+        },
+        {
+          "point": 66,
+          "kind": "gain",
+          "coarse": 160,
+          "core_code": 528,
+          "ISP": 160,
+          "expected_shift_EV": 0.31425009202297893,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 132.702880859375,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.5871927114736533
+            },
+            {
+              "mean_Y": 132.687744140625,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.586882448646949
+            }
+          ],
+          "residuals_EV": [
+            0.01306580857165196,
+            0.01275554574494775
+          ],
+          "passed": true
+        },
+        {
+          "point": 67,
+          "kind": "gain",
+          "coarse": 160,
+          "core_code": 544,
+          "ISP": 96,
+          "expected_shift_EV": 0.5672175302862419,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 145.89786783854166,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.8432966726238185
+            },
+            {
+              "mean_Y": 145.86319986979166,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.8426420973570643
+            }
+          ],
+          "residuals_EV": [
+            0.01620233145855421,
+            0.015547756191800044
+          ],
+          "passed": true
+        },
+        {
+          "point": 68,
+          "kind": "gain",
+          "coarse": 160,
+          "core_code": 544,
+          "ISP": 128,
+          "expected_shift_EV": 0.9824759057985644,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 167.95613606770834,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 1.2597520159124773
+            },
+            {
+              "mean_Y": 168.01920572916666,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 1.2608860395026618
+            }
+          ],
+          "residuals_EV": [
+            0.017399299234890586,
+            0.018533322825075027
+          ],
+          "passed": true
+        },
+        {
+          "point": 69,
+          "kind": "gain",
+          "coarse": 160,
+          "core_code": 544,
+          "ISP": 160,
+          "expected_shift_EV": 1.3099791416039017,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 186.03645833333334,
+              "common_pixel_fraction": 0.906494140625,
+              "in_domain": true,
+              "exposure_shift_EV": 1.584845119209385
+            },
+            {
+              "mean_Y": 186.04606119791666,
+              "common_pixel_fraction": 0.8995768229166666,
+              "in_domain": true,
+              "exposure_shift_EV": 1.585017783446343
+            }
+          ],
+          "residuals_EV": [
+            0.014989166726461,
+            0.015161830963418943
+          ],
+          "passed": true
+        },
+        {
+          "point": 70,
+          "kind": "gain",
+          "coarse": 160,
+          "core_code": 1040,
+          "ISP": 96,
+          "expected_shift_EV": 0.577755584725306,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 146.41316731770834,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.8530261810489179
+            },
+            {
+              "mean_Y": 146.42822265625,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.8533104449558415
+            }
+          ],
+          "residuals_EV": [
+            0.01539378544458958,
+            0.01567804935151318
+          ],
+          "passed": true
+        },
+        {
+          "point": 71,
+          "kind": "gain",
+          "coarse": 160,
+          "core_code": 1040,
+          "ISP": 128,
+          "expected_shift_EV": 0.9931664701641425,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 168.54541015625,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 1.2703474543854227
+            },
+            {
+              "mean_Y": 168.53800455729166,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 1.2702142980670903
+            }
+          ],
+          "residuals_EV": [
+            0.017304173342257867,
+            0.017171017023925428
+          ],
+          "passed": true
+        },
+        {
+          "point": 72,
+          "kind": "gain",
+          "coarse": 160,
+          "core_code": 1040,
+          "ISP": 160,
+          "expected_shift_EV": 1.3203810673056613,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 186.59781901041666,
+              "common_pixel_fraction": 0.8675130208333334,
+              "in_domain": true,
+              "exposure_shift_EV": 1.5949386607901594
+            },
+            {
+              "mean_Y": 186.56412760416666,
+              "common_pixel_fraction": 0.87109375,
+              "in_domain": true,
+              "exposure_shift_EV": 1.5943328727045625
+            }
+          ],
+          "residuals_EV": [
+            0.014680782605475784,
+            0.014074994519878814
+          ],
+          "passed": true
+        },
+        {
+          "point": 73,
+          "kind": "reference_end",
+          "coarse": 128,
+          "core_code": 528,
+          "ISP": 128,
+          "expected_shift_EV": 0,
+          "in_domain": true,
+          "images": [
+            {
+              "mean_Y": 101.09415690104167,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2595415268566166
+            },
+            {
+              "mean_Y": 101.096435546875,
+              "common_pixel_fraction": 1.0,
+              "in_domain": true,
+              "exposure_shift_EV": 0.2595882330885937
+            }
+          ],
+          "residuals_EV": [
+            -0.0003352840224057907,
+            -0.00028857779042867904
+          ],
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "passed": false,
+  "model_refit": false,
+  "absolute_calibration_validated": false,
+  "optical_time_verified": false,
+  "external_reference_used_for_correction": false
+}

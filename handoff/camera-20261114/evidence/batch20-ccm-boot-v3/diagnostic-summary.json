@@ -1,0 +1,443 @@
+{
+  "source": "camera-ccm-normalization/v3",
+  "passed": true,
+  "calibration_validated": false,
+  "conclusion": "CCM_bit6_not_sufficient_to_stop_update",
+  "files": 17,
+  "bytes": 1062745,
+  "restored": true,
+  "boot_records": 298,
+  "heap_reserved_bytes": 95862784,
+  "linear_reserved_bytes": 33554432,
+  "arena_allocation_bytes": 29360128,
+  "pixel_allocation_bytes": 614400,
+  "allocation_stages_successful": true,
+  "previous_Batch19_exit_cause": "still_unknown",
+  "live_byte_alias_checks": 6,
+  "successful_byte_reads": 132,
+  "derived_CCM_words": 66,
+  "live_FFFF_words_seen": 0,
+  "arms": [
+    {
+      "index": 0,
+      "normalization_disable": 0,
+      "live_sequence": [
+        2
+      ],
+      "AWB_mode": [
+        42
+      ],
+      "snapshots": {
+        "before_stream": {
+          "CCM_signed": [
+            432,
+            -80,
+            -80,
+            -84,
+            392,
+            -30,
+            -7,
+            -109,
+            385
+          ],
+          "CCM_row_sums_raw": [
+            272,
+            278,
+            269
+          ],
+          "normalization_coefficients": [
+            32,
+            175,
+            128,
+            87,
+            130,
+            134,
+            130
+          ]
+        },
+        "after_stop": {
+          "CCM_signed": [
+            430,
+            -80,
+            -80,
+            -84,
+            392,
+            -30,
+            -7,
+            -109,
+            385
+          ],
+          "CCM_row_sums_raw": [
+            270,
+            278,
+            269
+          ],
+          "normalization_coefficients": [
+            32,
+            175,
+            128,
+            87,
+            130,
+            134,
+            130
+          ]
+        }
+      },
+      "trials": [
+        {
+          "write_target": 96,
+          "immediate_IFP": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "polls": 37,
+          "final_IFP": [
+            133,
+            133,
+            133,
+            133
+          ],
+          "first_changed_after_write_end_upper_ms": 172,
+          "first_changed_after_vsync_return_ms": 202
+        },
+        {
+          "write_target": 128,
+          "immediate_IFP": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "polls": 27,
+          "final_IFP": [
+            133,
+            133,
+            133,
+            133
+          ],
+          "first_changed_after_write_end_upper_ms": 124,
+          "first_changed_after_vsync_return_ms": 204
+        },
+        {
+          "write_target": 160,
+          "immediate_IFP": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "polls": 16,
+          "final_IFP": [
+            133,
+            133,
+            133,
+            133
+          ],
+          "first_changed_after_write_end_upper_ms": 72,
+          "first_changed_after_vsync_return_ms": 202
+        },
+        {
+          "write_target": 128,
+          "immediate_IFP": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "polls": 6,
+          "final_IFP": [
+            133,
+            133,
+            133,
+            133
+          ],
+          "first_changed_after_write_end_upper_ms": 24,
+          "first_changed_after_vsync_return_ms": 204
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "normalization_disable": 1,
+      "live_sequence": [
+        2
+      ],
+      "AWB_mode": [
+        106
+      ],
+      "snapshots": {
+        "before_stream": {
+          "CCM_signed": [
+            412,
+            -78,
+            -78,
+            -79,
+            363,
+            -29,
+            -7,
+            -104,
+            367
+          ],
+          "CCM_row_sums_raw": [
+            256,
+            255,
+            256
+          ],
+          "normalization_coefficients": [
+            32,
+            175,
+            128,
+            87,
+            130,
+            134,
+            130
+          ]
+        },
+        "after_stop": {
+          "CCM_signed": [
+            412,
+            -78,
+            -78,
+            -79,
+            363,
+            -29,
+            -7,
+            -104,
+            367
+          ],
+          "CCM_row_sums_raw": [
+            256,
+            255,
+            256
+          ],
+          "normalization_coefficients": [
+            32,
+            175,
+            128,
+            87,
+            130,
+            134,
+            130
+          ]
+        }
+      },
+      "trials": [
+        {
+          "write_target": 96,
+          "immediate_IFP": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "polls": 37,
+          "final_IFP": [
+            133,
+            133,
+            133,
+            133
+          ],
+          "first_changed_after_write_end_upper_ms": 172,
+          "first_changed_after_vsync_return_ms": 202
+        },
+        {
+          "write_target": 128,
+          "immediate_IFP": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "polls": 27,
+          "final_IFP": [
+            133,
+            133,
+            133,
+            133
+          ],
+          "first_changed_after_write_end_upper_ms": 124,
+          "first_changed_after_vsync_return_ms": 204
+        },
+        {
+          "write_target": 160,
+          "immediate_IFP": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "polls": 16,
+          "final_IFP": [
+            133,
+            133,
+            133,
+            133
+          ],
+          "first_changed_after_write_end_upper_ms": 72,
+          "first_changed_after_vsync_return_ms": 202
+        },
+        {
+          "write_target": 128,
+          "immediate_IFP": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "polls": 6,
+          "final_IFP": [
+            133,
+            133,
+            133,
+            133
+          ],
+          "first_changed_after_write_end_upper_ms": 24,
+          "first_changed_after_vsync_return_ms": 204
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "normalization_disable": 0,
+      "live_sequence": [
+        2
+      ],
+      "AWB_mode": [
+        42
+      ],
+      "snapshots": {
+        "before_stream": {
+          "CCM_signed": [
+            431,
+            -80,
+            -80,
+            -85,
+            392,
+            -31,
+            -6,
+            -107,
+            382
+          ],
+          "CCM_row_sums_raw": [
+            271,
+            276,
+            269
+          ],
+          "normalization_coefficients": [
+            32,
+            175,
+            128,
+            87,
+            130,
+            134,
+            130
+          ]
+        },
+        "after_stop": {
+          "CCM_signed": [
+            429,
+            -80,
+            -80,
+            -85,
+            392,
+            -31,
+            -6,
+            -107,
+            382
+          ],
+          "CCM_row_sums_raw": [
+            269,
+            276,
+            269
+          ],
+          "normalization_coefficients": [
+            32,
+            175,
+            128,
+            87,
+            130,
+            134,
+            130
+          ]
+        }
+      },
+      "trials": [
+        {
+          "write_target": 96,
+          "immediate_IFP": [
+            96,
+            96,
+            96,
+            96
+          ],
+          "polls": 37,
+          "final_IFP": [
+            133,
+            133,
+            133,
+            133
+          ],
+          "first_changed_after_write_end_upper_ms": 171,
+          "first_changed_after_vsync_return_ms": 201
+        },
+        {
+          "write_target": 128,
+          "immediate_IFP": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "polls": 27,
+          "final_IFP": [
+            133,
+            133,
+            133,
+            133
+          ],
+          "first_changed_after_write_end_upper_ms": 124,
+          "first_changed_after_vsync_return_ms": 205
+        },
+        {
+          "write_target": 160,
+          "immediate_IFP": [
+            160,
+            160,
+            160,
+            160
+          ],
+          "polls": 16,
+          "final_IFP": [
+            133,
+            133,
+            133,
+            133
+          ],
+          "first_changed_after_write_end_upper_ms": 72,
+          "first_changed_after_vsync_return_ms": 202
+        },
+        {
+          "write_target": 128,
+          "immediate_IFP": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "polls": 6,
+          "final_IFP": [
+            133,
+            133,
+            133,
+            133
+          ],
+          "first_changed_after_write_end_upper_ms": 25,
+          "first_changed_after_vsync_return_ms": 205
+        }
+      ]
+    }
+  ],
+  "report_target_field_caveat": "legacy arms.target contains final perturbation128 due variable shadowing; use actual state A102 and HG_ARM proof (2) as this summary does"
+}

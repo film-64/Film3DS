@@ -1,0 +1,12 @@
+{
+  "operation": "explicit_readonly_resume_existing_frozen_RAM",
+  "original_session_error": "EOFError_truncated_RAM_response",
+  "expected_index_sha256": "44ae519f98d110d5e52bc555e5003fcc0080fb969540845bc3f307d108ade60a",
+  "expected_run": "ram:/run-1794672531",
+  "chunk": 16384,
+  "request_gap_seconds": 0.02,
+  "policy": "frozen-resume-v2",
+  "measurement_repeated": false,
+  "deployments_total": 1,
+  "started_unix": 1794644069.734227
+}

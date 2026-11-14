@@ -1,0 +1,100 @@
+[
+  {
+    "id": 0,
+    "name": "calls.csv",
+    "bytes": 29118,
+    "crc32": "c572bbe3",
+    "sha256": "ccb271c84c671af91a628655d9d6da8d49eea578098f70876a332b1e854533e0"
+  },
+  {
+    "id": 1,
+    "name": "reads.csv",
+    "bytes": 99952,
+    "crc32": "6e3ed967",
+    "sha256": "4ec2ae847789f8340d9d3d83ea7746e034f2af12ba362dc6736d72cde18a4168"
+  },
+  {
+    "id": 2,
+    "name": "frames.csv",
+    "bytes": 2904,
+    "crc32": "48333719",
+    "sha256": "cb5f14b392174820bb757bb3158346b9cafe62e4b2dcafd13c8cab3ea73843a4"
+  },
+  {
+    "id": 3,
+    "name": "manifest.txt",
+    "bytes": 4334,
+    "crc32": "18a34aa1",
+    "sha256": "2663ca001a9240c59310f318c83471b9e57ca51281e48cc1585c8d16667097b9"
+  },
+  {
+    "id": 4,
+    "name": "lifecycle.txt",
+    "bytes": 0,
+    "crc32": "00000000",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "id": 5,
+    "name": "s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "crc32": "e0f572b0",
+    "sha256": "7d223489e8a1cb34c4f40f18ac60af506fba737054a62926c5abd6fb7b5d2ee5"
+  },
+  {
+    "id": 6,
+    "name": "calibration_plan.csv",
+    "bytes": 207,
+    "crc32": "85970fb3",
+    "sha256": "b7f502f6f619fee308fd7591b02e467e59068f26dda70f481efdea8c40675555"
+  },
+  {
+    "id": 7,
+    "name": "frame_burst.csv",
+    "bytes": 1097,
+    "crc32": "2d998c8d",
+    "sha256": "8b73adee6bd87d2ad336834b216b1edbed8ec8de7a7642a019dd9f15e8d9cd73"
+  },
+  {
+    "id": 8,
+    "name": "roi.csv",
+    "bytes": 5262,
+    "crc32": "fb62b24d",
+    "sha256": "83bbe4b35b1e2242e5ae523987a355fee778625cc3465056af9baca0ebc73d18"
+  },
+  {
+    "id": 9,
+    "name": "noise.csv",
+    "bytes": 197,
+    "crc32": "905e53e8",
+    "sha256": "418f6aadcf56b4741bf5511ccdbfc6ce768151c294791109e46d7abf83071848"
+  },
+  {
+    "id": 10,
+    "name": "execution.csv",
+    "bytes": 974,
+    "crc32": "0fa2cd9a",
+    "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+  },
+  {
+    "id": 11,
+    "name": "s1-p003-sweep_seed.pgm",
+    "bytes": 307215,
+    "crc32": "990fae8c",
+    "sha256": "99a322cc26f9124176ea683cc0209a8c3a4dfd755c2fa1fcbc34a06e5d147e90"
+  },
+  {
+    "id": 12,
+    "name": "s1-p004-sweep_ref_00.yuyv",
+    "bytes": 24576,
+    "crc32": "50fb8cf2",
+    "sha256": "07dff0768590565521a4652850c10a21667a1cbc77e962478d6a81f197be4608"
+  },
+  {
+    "id": 13,
+    "name": "s1-p005-no_receive_128.yuyv",
+    "bytes": 24576,
+    "crc32": "042a60ea",
+    "sha256": "2cc185cd52d98b76c61a88328d3ad7971fc1b132ee0a1c0e9314c87d6ba5ebe2"
+  }
+]

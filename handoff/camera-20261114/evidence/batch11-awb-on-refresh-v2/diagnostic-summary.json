@@ -1,0 +1,133 @@
+{
+  "batch": "batch11-awb-on-refresh-v2",
+  "source": "exposure-sweep-awb-refresh/v2",
+  "files": 13,
+  "bytes": 824291,
+  "integrity_verified": true,
+  "atomic_snapshot": false,
+  "calibration_validated": false,
+  "passed": false,
+  "transition_reads": 480,
+  "mcu_unique_values": {
+    "a102": [
+      14
+    ],
+    "a103": [
+      0
+    ],
+    "a104": [
+      3
+    ],
+    "a355": [
+      58
+    ],
+    "a34e": [
+      128
+    ],
+    "a34f": [
+      128
+    ],
+    "a350": [
+      128
+    ],
+    "221f": [
+      128
+    ]
+  },
+  "first_observed_drift": {
+    "frame": 0,
+    "boundary": "after_wait",
+    "values": {
+      "a102": 14,
+      "a103": 0,
+      "a104": 3,
+      "a355": 58,
+      "a34e": 128,
+      "a34f": 128,
+      "a350": 128,
+      "221f": 128,
+      "32d4": 133,
+      "32d6": 133,
+      "32d8": 133,
+      "32da": 133
+    },
+    "errors": [],
+    "times_ms": [
+      4003551902227,
+      4003551902228,
+      4003551902229,
+      4003551902229,
+      4003551902230,
+      4003551902231,
+      4003551902232,
+      4003551902233,
+      4003551902234,
+      4003551902234,
+      4003551902235,
+      4003551902236
+    ]
+  },
+  "coarse_and_AE_before_after_settle": {
+    "immediate": {
+      "3012": [
+        4
+      ],
+      "221f": [
+        128
+      ],
+      "2222": [
+        264
+      ],
+      "a102": [
+        14
+      ],
+      "a103": [
+        0
+      ],
+      "a104": [
+        3
+      ],
+      "a355": [
+        58
+      ]
+    },
+    "before": {
+      "3012": [
+        264
+      ],
+      "221f": [
+        128
+      ],
+      "2222": [
+        264
+      ],
+      "a102": [
+        14
+      ],
+      "a103": [
+        0
+      ],
+      "a104": [
+        3
+      ],
+      "a355": [
+        58
+      ]
+    }
+  },
+  "original_coarse": [
+    264
+  ],
+  "events": [
+    "SEQ_GATE saved=10 target=14 verified=1",
+    "AWB_FORCE saved=26 target=58 verified=1",
+    "SEQ_REFRESH restoring=0 command=5 writes=1 polls=16 state=3 verified=1",
+    "CONTROL_DRIFT phase=5 when=before frame=8 addr=3012 expected=4 actual=264 result=00000000",
+    "PREVIEW_AWB_RESTORE saved=0 actual=0 verified=1",
+    "AWB_RESTORE saved=26 actual=26 verified=1",
+    "SEQ_RESTORE saved=10 actual=10 verified=1",
+    "SEQ_REFRESH restoring=1 command=5 writes=2 polls=9 state=3 verified=1",
+    "SWEEP_END complete=0 stages=2 restored=1",
+    "END complete=0 aborted=0 io_error=0 captures=37 failures=1"
+  ]
+}

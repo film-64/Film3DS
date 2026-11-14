@@ -1,0 +1,7 @@
+batch,fps,2332_before,2332_after,2334_before,2334_after,physical_CCM_sampled
+batch26-exposure-rebuild-v2,5,432,430,65455,65456,False
+batch26-exposure-rebuild-v2,15,429,429,65456,65456,False
+batch27-exposure-dense-v1,5,432,430,65455,65456,False
+batch27-exposure-dense-v1,15,429,429,65456,65456,False
+batch28-exposure-dense-validation-v1,5,432,430,65455,65456,False
+batch28-exposure-dense-validation-v1,15,429,429,65456,65456,False

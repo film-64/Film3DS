@@ -1,0 +1,58 @@
+{
+  "capture_complete": true,
+  "capture_evidence_passed": true,
+  "deployments": 1,
+  "measurement_repeated": false,
+  "originals": 313,
+  "original_bytes": 9996130,
+  "points": 74,
+  "DMA_frames": 444,
+  "ROI_originals": 296,
+  "fixed_model_sha256": "5c7ef4b27946cacdbee8b89a68bd69fc58d86a317d236bc4f4e5b7e4a6ceb19d",
+  "fixed_model_validation_passed": false,
+  "profiles": [
+    {
+      "fps": 5,
+      "passed": false,
+      "reason": "pipeline_mismatch",
+      "pipeline_mismatches": {
+        "before_stream": {},
+        "after_stop": {
+          "flat/2332": {
+            "expected": 432,
+            "actual": 430
+          },
+          "flat/2334": {
+            "expected": 65455,
+            "actual": 65456
+          }
+        }
+      }
+    },
+    {
+      "fps": 15,
+      "passed": true,
+      "reason": "fixed_model_validation_pass",
+      "reference_start_offset_EV": 0.25987681087902237,
+      "coarse": {
+        "points": 11,
+        "images": 22,
+        "max_abs_EV": 0.02640411875539117
+      },
+      "gain": {
+        "points": 18,
+        "images": 36,
+        "max_abs_EV": 0.020256872943171578
+      },
+      "reference_end": {
+        "points": 1,
+        "images": 2,
+        "max_abs_EV": 0.0003352840224057907
+      }
+    }
+  ],
+  "calibration_validated": false,
+  "optical_time_verified": false,
+  "external_reference_used_for_correction": false,
+  "manual_FD_off_only": true
+}

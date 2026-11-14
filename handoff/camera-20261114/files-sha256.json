@@ -1,0 +1,3360 @@
+{
+  "schema": "camera-hardware-handoff/v1",
+  "as_of": "2026-11-14",
+  "images_included": false,
+  "calibration_validated": false,
+  "capture_reverified": false,
+  "omitted_image_files": 1335,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 226,
+      "sha256": "39a109dfa130f95de05073fe22be0c8363a728b6187db6da047f0b21f64f4ad7"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 108,
+      "sha256": "e92a26eec91030ac500640e5cf2fdaacf7327db8edcc1e88669b6c2b860f8e81"
+    },
+    {
+      "path": "CAMERA_HARDWARE_HANDOFF.md",
+      "bytes": 7245,
+      "sha256": "fd02f9509794afa7b80bfddc149cbcc72aac48093c2684e4629bfeda590c983c"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2662,
+      "sha256": "b1e6730068fdfbbf40055727ec12a365a9e9ed220042bcf16d73fa79fd66e18b"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/.gitignore",
+      "bytes": 59,
+      "sha256": "0f7fa66aaf40bb56ccab99023d0627a22e7a553be2218a525e85e829cdcdee49"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/LICENSE",
+      "bytes": 1211,
+      "sha256": "6b0382b16279f26ff69014300541967a356a666eb0b91b422f6862f6b7dad17e"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/Makefile",
+      "bytes": 2025,
+      "sha256": "3c78b5b319019818dba733ffc8c8c018303383d4f7dc1ae23e109565c3e5f261"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/Makefile.offline",
+      "bytes": 139,
+      "sha256": "4c3ca40ac066ee180d3e232b996054be6a82c35f4a58dce5cb4578d8234fcd16"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/Makefile.probe",
+      "bytes": 1513,
+      "sha256": "5403d5f9e303a7586edb135837c2570fddfb7e37421cd7810ac0f570a18353d4"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/Makefile.recovery",
+      "bytes": 1290,
+      "sha256": "53c717bcd19167609a9ed6a746a840d5b512a5b3a0723c305acf9607e636db89"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/Makefile.storage",
+      "bytes": 1224,
+      "sha256": "83bd58d693030e6e623b0a98787ce2e234e09f4ce342c40d1e6876924ed00790"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/README.md",
+      "bytes": 1043,
+      "sha256": "f0cbb2c016c57e274ebaf7352076c1d0429d557a8da19c04367e7adfa8237dd0"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/docs/EXPOSURE_PROBE.md",
+      "bytes": 26137,
+      "sha256": "48ef579761018f4a577053036a7ea04f943d7f7e336999b26d28a941ba1cdf20"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/automation.h",
+      "bytes": 6431,
+      "sha256": "c8783524092947fbd76435c6226204218b72dd073fbd0dfb28a6baeb404acc6e"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/automation_contract.h",
+      "bytes": 3989,
+      "sha256": "974cdba415bea6df645b7e5f158f22a828fca6a49ab0a86a386b41e2478dc82c"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/boot_journal.h",
+      "bytes": 4803,
+      "sha256": "f135d5c2144794eefedba5d5663b7086e9441aa58b44eaefb5243e81ddbab2c3"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/calibration.h",
+      "bytes": 17344,
+      "sha256": "7cae48ab1524d4ec2448c007f57dcdee839e53ddee09d2c3c118952149dace10"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/calibration_contract.h",
+      "bytes": 2875,
+      "sha256": "037c2ffc322e4403f7121304c7349209028a969f6f4dd1340bd87b8c3b3e2aac"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/calibration_image.h",
+      "bytes": 4280,
+      "sha256": "5223e35b671b690f0d86521ae7a5997127a80387d717147c7901890d76cba950"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/calibration_scope.h",
+      "bytes": 2859,
+      "sha256": "6d824e4f736832fde93b0793c53a5b0ffa1177cf3e6b0ffdfe99840b070f5b03"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/crash_collect.h",
+      "bytes": 1270,
+      "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/deep_ipc.h",
+      "bytes": 6030,
+      "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/exposure_rebuild.h",
+      "bytes": 15387,
+      "sha256": "48a57eb0486f100450ae0c60e79633ef31442edeb25fbbe95d0cca0605dff185"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/fault_capture.h",
+      "bytes": 2082,
+      "sha256": "a577088464ca391de96aa71e4fa3f79031357130dbb9d1317e898cbfae9045af"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/field_capture.h",
+      "bytes": 5504,
+      "sha256": "6d45d833a073f34faf12eda4695ed7721e43726f682264af7c4661b23847b235"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/field_contract.h",
+      "bytes": 3334,
+      "sha256": "f3488f4521af00248f8197662e6eec28e74a73609fa0e7bbc4bb074f79dd0629"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/field_install.h",
+      "bytes": 2134,
+      "sha256": "f3541a908fe0fa200081c8f664ee062bcd394b0ab844b892cf2e5c027794941d"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/field_store.h",
+      "bytes": 3436,
+      "sha256": "e3e3b7502a1ef92dc50812578905aa4b3d272381c6df9376aa325326deb01bed"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/field_ui.h",
+      "bytes": 7680,
+      "sha256": "866626710850de339366b7d7fd5e4eca5e1fb81f60f40f287662416bfb2eb664"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/gain_matrix.h",
+      "bytes": 12196,
+      "sha256": "ba0e28d895d1f0114cacbfae1c2e5d4735292069f702a12d61e3cc89ff091d0b"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/hg_isolation.h",
+      "bytes": 13480,
+      "sha256": "4bbecf651114cd81e2d9ca6910f63dbc84a183aedce7f9a7bc5eec66e809229a"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/ipc_decode.h",
+      "bytes": 525,
+      "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/isp_update.h",
+      "bytes": 10402,
+      "sha256": "57e82a35bf77e7f66e8557ca4fd3ecb53327a88b47a0981ab714ebeaa52138bd"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/main.c",
+      "bytes": 47762,
+      "sha256": "9fd8d2cda5ec538b53e71d069ba2dffee50a7d2ec0be280710a9cc0ccb6aaa94"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/no_receive.h",
+      "bytes": 5817,
+      "sha256": "f81433b96e701faa021d2f589bc757063eebdaaedded7b7281f4fbe47418d119"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/probe_plan.h",
+      "bytes": 3677,
+      "sha256": "04344b8bd006cc3f3bc328237fefe1dd393d311ef28f1ce25de559a1b70e63ef"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/ram_http.h",
+      "bytes": 5454,
+      "sha256": "144284862764a798bbcedf3d7ba37d854df2df30c3bdab87c2dfdb16ec171ae5"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/ram_log.h",
+      "bytes": 5706,
+      "sha256": "56426aaff503f637564198671c102fc40041a9d6b046cf0331b2a7e40ec19354"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/ram_transport_contract.h",
+      "bytes": 471,
+      "sha256": "0416792162065c9f671c3f2f13d05b0c805b8c95bd38865e024ca83e18db1036"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/remote_upload.h",
+      "bytes": 2789,
+      "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/sweep.h",
+      "bytes": 11990,
+      "sha256": "114bfae2b987691232d632685eee4e38ce3f5c7b1713eb678444948da3560014"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/sweep_contract.h",
+      "bytes": 6621,
+      "sha256": "38d2bd7469c12992c2e44a901e05e0e01126eeae4535b6387a6e162bee665951"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/exposure/writer_window.h",
+      "bytes": 5340,
+      "sha256": "5cf0c304c17b39fd2ef86d5966d177c9c44db47701323b52e01c7a9032fa8bcf"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/recovery/main.c",
+      "bytes": 10408,
+      "sha256": "89d346861ac92340eb7c76e775339948bf96ad563742e8e394f2d6ac077ccccb"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/probes/storage/main.c",
+      "bytes": 6192,
+      "sha256": "91c6d750dcb1a07230227d4483e62b565d28a27ea4f0b4dcb7b0ac87ff80cdbd"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/calibration_report.py",
+      "bytes": 5192,
+      "sha256": "d14d73dcc7a2f65d5c75abacd2835243493108561d3dbc47d48affb8e079569d"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/deep_transfer.py",
+      "bytes": 1672,
+      "sha256": "60779b068beaa854c546536c4d7751cd7a503f2da148d16241468fcb9ba9ab84"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/exposure_report.py",
+      "bytes": 6106,
+      "sha256": "8da2766f3d3b4a1d37ff61a23dcf8ba4014d10e45a394f476fd98b220ee81a9c"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/ftp_persistent.py",
+      "bytes": 3714,
+      "sha256": "d496a383afc7b99558df326e4017c296688cad429ef39cb9348fd8ab87eadcea"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/ftp_segments.py",
+      "bytes": 3066,
+      "sha256": "2cd8c9ce5f8d9b57d23d7a89614bb40ac44b2633ccd27a36ba959bf17d2d2829"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/hardware_qa_report.py",
+      "bytes": 2849,
+      "sha256": "147f7f36a62b05c28e2b299054653c8e01fb968a9d79c11fed8421a7b707d993"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/integration.py",
+      "bytes": 7902,
+      "sha256": "a872f0f4494157b7c90a464d71697b407c8c92e2588c67a39a9971b1dfa372c8"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/probe_driver.c",
+      "bytes": 59280,
+      "sha256": "e20e100b05e7ef8d3f2de307530892aae7e01a360fbbcbd22003f143787e68ac"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/probe_ipc_decode.c",
+      "bytes": 625,
+      "sha256": "58dbe081061857f61d94826a79b6ef8501f9d9cc1228546cab845f2c7e9b055c"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/probe_plan.c",
+      "bytes": 8675,
+      "sha256": "2f10431219d27e99273b3801ebace18a876c28d2a13b7eefce88fe3e3e81da57"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/probe_recovery.py",
+      "bytes": 4002,
+      "sha256": "214f4cdc4e14a52f1a1c94718fe9ba2910d719b9154e0752b1d341473bb0e20f"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/probe_shim/3ds.h",
+      "bytes": 3667,
+      "sha256": "85dcd0f1c476e51715b9a92373f72adb8e6ddb07f03d502267db785d53267e95"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/ram_evidence.py",
+      "bytes": 2983,
+      "sha256": "860004900cf181f7c286d375c3c307fc7711656a69f15d76aaa82ff9dda2b381"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/ram_log.c",
+      "bytes": 2912,
+      "sha256": "58c55599c266d0ee68b150870797080774ca7079daf6c3ffee963d30f104902f"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/ram_sweep.c",
+      "bytes": 1665,
+      "sha256": "81481f40d63c90d3400f323dfcd4aa4dba7f4eff91f0a8ec75e606368ccaf9a4"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/ram_sweep.py",
+      "bytes": 1505,
+      "sha256": "8c8d88495e84eb8a709ce8ddc378a9421b5179a7419c687f81abe2a3f3118535"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/simulator_http.py",
+      "bytes": 2382,
+      "sha256": "c1044ba38628b37486456277f9fa3bde78c6be94ec7640fcc2edb30e6ea768e4"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/storage_check.py",
+      "bytes": 1854,
+      "sha256": "67119ee855b02c758ecb5c075d76e69c58b24bc51f80be1b195e81b6a596dc43"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tests/unit.c",
+      "bytes": 27021,
+      "sha256": "d95012326e5890c2b9c06361f435932acffbb8da13b79e3ba007e940f2bb1b2d"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/build_arm_jpeg.sh",
+      "bytes": 1263,
+      "sha256": "a5496642c2cfcfd4721d2a253b65d58731b42ef08768cd1d76527135dddc1138"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/build_exposure_field.sh",
+      "bytes": 307,
+      "sha256": "03613d57f2e31b056689f83e1ca7b91283a73e5ea47cc7991a76f72fc3d79b20"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/build_exposure_field_installer.sh",
+      "bytes": 348,
+      "sha256": "8fc13801e2c515ceac4f08f4605c4bbeca6f0a2aaf9f1b21980694f01becf74b"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/calibration_report.py",
+      "bytes": 9722,
+      "sha256": "1b4119516660642ce46b93552dfb612f25a75f3d4c0ad41d1b745020eaf4cec4"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/combine_exposure_runs.py",
+      "bytes": 5223,
+      "sha256": "7b3be4935db9bfb829a760b5468fcf7d9fefdcfa03faac078ba2b597d3f3b69a"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/control.py",
+      "bytes": 3907,
+      "sha256": "7beacba29b5c7d4e4742c52ef23587b1b1b0d5a8c878c24c907661e6b37b47fb"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/driver_report.py",
+      "bytes": 2924,
+      "sha256": "98c0860ff72d0aac44df53b9ea6c8490112410deca50c311d01b4da44ba356d2"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/exposure_curves.py",
+      "bytes": 3598,
+      "sha256": "dc6f3224b5a10f924eea6bc6abccb8e2db86e3a9f4f7998b054893afa5d4e517"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/exposure_report.py",
+      "bytes": 14006,
+      "sha256": "a1bf6b1a106aa9636b092638b3b8c64387de273ccfb822c30b7c2b49bb7cd07e"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/fit_camera.py",
+      "bytes": 3217,
+      "sha256": "65ad4c347d66aabb11082fabbc7710cca62b6d9af7c4c4c4459d7fb7db5433f4"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/fixtures.py",
+      "bytes": 1141,
+      "sha256": "8105050d6dc70612b0472911939acfda716cd5ae7c7c720b3c58d1fdb7313f51"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/frozen_transfer_contract.py",
+      "bytes": 1075,
+      "sha256": "7416a30c954adf394298a4f2a6de0e72234b633f264385ca1a9a48dcf81a5e10"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/hardware_qa.py",
+      "bytes": 10388,
+      "sha256": "b19a91dab50ed3b63c9dffc0b385410cc742fac243fe51c2acfc842ae5faff4e"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/host.c",
+      "bytes": 4978,
+      "sha256": "278a9878d1cde3eed6813b9cf53e52d29bebf1e88f6c58e4a664c51f5bb8d7aa"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/import_lut16.py",
+      "bytes": 2133,
+      "sha256": "fbc09f114450aa73afede626b61bab4617aa2135795a92436f7a77910b8a48bd"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/import_m9.py",
+      "bytes": 1762,
+      "sha256": "ff5f2dc53d2864fc20627ed8c2d234f5779a943307da2c4692075552e27861f2"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/measure_grain.py",
+      "bytes": 3969,
+      "sha256": "c0cab5ffba5cbf3f28092a69a8b7b7f869dff0c70478a6ca7f4b5047ba874cb9"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/package_exposure_field.py",
+      "bytes": 1020,
+      "sha256": "25bfe2f638a2877a98dadf65db0e6ead211ca3d0edcda79e1ad1584dc61ed283"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/profile.py",
+      "bytes": 1901,
+      "sha256": "7b5c3540afbfb209e87a4c5bdfe8d5585ba84eb7d31e648a5d49cefc4c7fd680"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/retrieve_probe_archive.py",
+      "bytes": 8424,
+      "sha256": "4bae8325280734582c567516045f224877422fba692abeb39b4ea30e683a772d"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/retrieve_probe_ftp.py",
+      "bytes": 7815,
+      "sha256": "6a8e46b7e26d0f00c90428fc1f84a7c499a4b2c67a20ddc8120d3aaf3f1c4114"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/retrieve_probe_ram.py",
+      "bytes": 6850,
+      "sha256": "1c70735ec9546584d43d54821ef57c939e6bd3f61ff12cafece14d7302231ed4"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/run_calibration_probe.py",
+      "bytes": 3103,
+      "sha256": "0061a18c1d6c32526fca076201d9bff3224f8cf99b5f5153c6beb9733dfcbaa1"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/run_deep_probe.py",
+      "bytes": 5663,
+      "sha256": "f312d01b6e96b959096bd167c6e1f0323dc134ec08fe65ddb396a188ff9b35b7"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/simulator.py",
+      "bytes": 4997,
+      "sha256": "0fbf76bb5d897a09fc0c45b89e6b58db9bc354a2d7b0a7508e79bb3b768e67aa"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/test_exposure_field_native.sh",
+      "bytes": 182,
+      "sha256": "5af473c4c2b9e3b167074359e06dc4bcc2d960a7221438d2ce394cc1c64c9fec"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/validate_exposure_auto.sh",
+      "bytes": 337,
+      "sha256": "e6c5aa41b85c589c916725e030d82facdbd06772bc650a92d37add3d17cb7dfa"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/validate_exposure_auto_quick.sh",
+      "bytes": 396,
+      "sha256": "4248f9d60018c7a8046fef71330b5117d39bfbd7d85c9e13fa7bf84dcd096015"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/validate_exposure_field.sh",
+      "bytes": 517,
+      "sha256": "3d801c80b5c990eba0cecf3c30c99df39894c77b7cb5f0a0b699addb7a0e421f"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/verify_3dsx.py",
+      "bytes": 1966,
+      "sha256": "57a18ceac83f2a2a3d1ff7181e02c7e5a0c87b306529ec786eecac209c6a4f6e"
+    },
+    {
+      "path": "diagnostics/camera-deep-probe/tools/verify_arm11.sh",
+      "bytes": 1086,
+      "sha256": "1468ecb5fffb097a07600994a117630ff5430411e2ea11ffa19f634bd8c93ff7"
+    },
+    {
+      "path": "diagnostics/native-trace/trace_gdb_mi.py",
+      "bytes": 5781,
+      "sha256": "ea92dad389f6cd8d173e2b5254113a400f732648079ef402539156a11acd6c2d"
+    },
+    {
+      "path": "diagnostics/native-trace/trace_ipc.py",
+      "bytes": 6205,
+      "sha256": "73998cf2f20cb8636d156b6bdf82792eb19f9db555476501ff58a42942645630"
+    },
+    {
+      "path": "docs/CAMERA_CCM_BOOT_V3.md",
+      "bytes": 4923,
+      "sha256": "0cd9fe90ea09915dde0038252022f5b948641245d6a5bf23a51180e06f33e953"
+    },
+    {
+      "path": "docs/CAMERA_CCM_BYTES_V2.md",
+      "bytes": 4695,
+      "sha256": "b305a7708125ab23e0816fb8bd2cde71320d9ac9020988db8fde6e49d3b42438"
+    },
+    {
+      "path": "docs/CAMERA_CCM_INVESTIGATION.md",
+      "bytes": 5278,
+      "sha256": "10585e049598f0e4c88a40cef970438b2842d00e3559f5c588e935c1e3b6e96b"
+    },
+    {
+      "path": "docs/CAMERA_EXPOSURE_DENSE_V1.md",
+      "bytes": 4018,
+      "sha256": "7be902bd16277724f390c72a0c580b8478db39527636cab105a7c436b5977a50"
+    },
+    {
+      "path": "docs/CAMERA_EXPOSURE_LUMA_TRANSFER_V1.md",
+      "bytes": 7892,
+      "sha256": "e63e4fd6fc9e4be0e73ddf7e40580366746773a3f9c72666acdc05c867145763"
+    },
+    {
+      "path": "docs/CAMERA_EXPOSURE_REBUILD_V1.md",
+      "bytes": 5684,
+      "sha256": "22c37f4c51256f6998e0cd69d0f1115cdab2bc4513ce420bedeed7224e1ca13d"
+    },
+    {
+      "path": "docs/CAMERA_EXPOSURE_REBUILD_V2.md",
+      "bytes": 2424,
+      "sha256": "291421f85eb54599d0fde630fdd57f8f3c583af09f2acad65342a3ec5760e0ec"
+    },
+    {
+      "path": "docs/CAMERA_GAIN_MATRIX_V1.md",
+      "bytes": 3520,
+      "sha256": "e99ebb5f6fe3599e2522e91ea76e0df7c88a7a49e9c02b8a720825e84d80b2be"
+    },
+    {
+      "path": "docs/CAMERA_GAIN_MATRIX_V2.md",
+      "bytes": 2462,
+      "sha256": "411475bc45c04c3bf6cea81dfef1ec8f374b9d4a4421fa14f5410ae7efa4dc3c"
+    },
+    {
+      "path": "docs/CAMERA_GAIN_MATRIX_V3.md",
+      "bytes": 3045,
+      "sha256": "df4ac3439ab327ea15039d703e27582a2a188dea0eb1d51910e940f6dbe41a8c"
+    },
+    {
+      "path": "docs/CAMERA_GAIN_MATRIX_V4.md",
+      "bytes": 2905,
+      "sha256": "23593f37124ee1d5ec299a48dfadb7b29146c2ed90d075da156795faf3893b85"
+    },
+    {
+      "path": "docs/CAMERA_HARDWARE_TESTING.md",
+      "bytes": 8553,
+      "sha256": "4721397af5b246a56163df2d62dfa38f9577fc7834a65d9ffa7ee375ab95f2bf"
+    },
+    {
+      "path": "docs/CAMERA_HG_INVESTIGATION.md",
+      "bytes": 5526,
+      "sha256": "07bd793e6ac67f4dcd2409c3bebc3c07f879fec1330923bc6818ce6ae6823c0f"
+    },
+    {
+      "path": "docs/EXPOSURE_AUTOMATION.md",
+      "bytes": 5021,
+      "sha256": "104babd40ca72a872593d8a140c42d1e6ce59dd15b497ff9dda004613027d428"
+    },
+    {
+      "path": "docs/EXPOSURE_MODEL_SOURCE_AUDIT.md",
+      "bytes": 3354,
+      "sha256": "8a3b015c6d52f83f1310e5f30ec689a569996ac3a30a4bec5f4563319bc0b521"
+    },
+    {
+      "path": "docs/EXPOSURE_SWEEP.md",
+      "bytes": 26459,
+      "sha256": "108cf7ee38cbd281437ac627e84c0097182a3128757dd3c1690f3430cf2335c7"
+    },
+    {
+      "path": "docs/examples/camera-hardware-contracts.yml",
+      "bytes": 1771,
+      "sha256": "407ee0a8616d3394e40b1dc6bb63bf430fbf2f24254149744d74a114ca1f8e3b"
+    },
+    {
+      "path": "handoff/camera-20261114/CCM-endpoints.csv",
+      "bytes": 430,
+      "sha256": "22aa04ec733ab8e07e8864d377ad75647aad5ba602a121d5c7e5f9d3fcae1a6f"
+    },
+    {
+      "path": "handoff/camera-20261114/README.md",
+      "bytes": 2002,
+      "sha256": "e77e6da20f83c5d862cc0f5d386027c3d9bcf679001497fb0636f89d10b3171f"
+    },
+    {
+      "path": "handoff/camera-20261114/VALIDATION.md",
+      "bytes": 5610,
+      "sha256": "d3070a5bc4cafd687710a3d5fb95ddaee94da88c92776c039d0865ba5c8aa516"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch01-capture/original-provenance/deployment-public.json",
+      "bytes": 2826,
+      "sha256": "fc24f4cd67f80b384e07a63944cae7cd9098019b2eddd8229a3c0846d5fd80e0"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch01-capture/recovered/calibration_plan.csv",
+      "bytes": 3985,
+      "sha256": "62a09632046c2dd7b0d856a679756c132119a4a2b340d071080d90e4f48028f8"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch01-capture/recovered/calls.csv",
+      "bytes": 623788,
+      "sha256": "6206a93e84f7108354c877bc17e4b825e7769c23051d6794ad03faaf95bc592f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch01-capture/recovered/execution.csv",
+      "bytes": 32118,
+      "sha256": "5b4f9cad974a1668edd0efe837e1ea625ede8e565d2577766d951996056d29e7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch01-capture/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "99a41bae60a3d3ee013c015a29308f10593b7c3d7b08d8bf3dbc0a601b215fb1"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch01-capture/recovered/frames.csv",
+      "bytes": 67686,
+      "sha256": "6f2c1f94e9ab11210f65fe861bdf68fa3ae6d74ff689cd4a19e6300a478346a2"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch01-capture/recovered/manifest.txt",
+      "bytes": 9840,
+      "sha256": "cd80b3f35c0a97a3ba36148eb52476c6a60e2d2d5a8f3f54a4f497bd42497edc"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch01-capture/recovered/noise.csv",
+      "bytes": 3811,
+      "sha256": "bf17180ac9b655eaa1997556049aa8213ab0d41142ddb4094fbd85774220f231"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch01-capture/recovered/reads.csv",
+      "bytes": 1938913,
+      "sha256": "248501d6e4a94f4c0a8f96d2d0fe286b1595bc6d9c5ba7e7f8811a30b3576b31"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch01-capture/recovered/received-sha256.json",
+      "bytes": 10665,
+      "sha256": "65fdfc8efeb2510a8964ce39fb697ce079091404a630ac65af5a959b665dcdaa"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch01-capture/recovered/recovery-source.json",
+      "bytes": 207,
+      "sha256": "ec6fe8aad6b0b724d08c0ac9e7ea806a9694787dd219bd39abfbf5443ac79435"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch01-capture/recovered/roi.csv",
+      "bytes": 165175,
+      "sha256": "a410343a1c041222358d75ce7e5f30ee056be7e769a3c162140c7d6e94bd3a36"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/FINDINGS.md",
+      "bytes": 2462,
+      "sha256": "4937966937a2d18e65e31becee54bbd84dbbdcd6bc3b51eb3551946f2e6dbdc9"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/original-provenance/deployment-public.json",
+      "bytes": 2834,
+      "sha256": "0f18b6ff9bd16638e4cd5ac9942f095a9d3ad7c0e238d4da18189d57bbbf045a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/recovered/calibration_plan.csv",
+      "bytes": 9889,
+      "sha256": "2e2e9d1d183b4962277f851a78a8bcb5356ea533924e15d0c56fb89673569804"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/recovered/calls.csv",
+      "bytes": 1538778,
+      "sha256": "9bc1c9b10fb564e288a50057aaae304def822c89b33de75f9fdb91e1484f016c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/recovered/execution.csv",
+      "bytes": 79974,
+      "sha256": "fad5ca23bcbb17aa0140be0ac51662b5cd69d189b34a8a7f164d0c45ffe05860"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "bf61cf00c910609390a894e11b975decf1539aa8144c2e68a98324958a20bfba"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/recovered/frames.csv",
+      "bytes": 167335,
+      "sha256": "86ccd155eaf897e8d8c861831c7f415b95935f8ef78208948118c78c46c6efb2"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/recovered/manifest.txt",
+      "bytes": 27601,
+      "sha256": "b3fba071701c053482467ac34c4614ca8d5f987d5cdc6ca049ecc2932f24627c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/recovered/noise.csv",
+      "bytes": 9423,
+      "sha256": "684bcc5b331c78c29f6d5d75754415ae4521365bb72fea756f2e37cc863df6e3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/recovered/ram-index.txt",
+      "bytes": 7232,
+      "sha256": "04c119337390d641f194ddf4f2087395953b02ec2bc21a7c66921cfd026fbd32"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/recovered/reads.csv",
+      "bytes": 4788749,
+      "sha256": "eb49ba97afa850d21af7a435eb0bc3f824550b90145121b0367c89978fcd2af5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/recovered/received-ram-sha256.json",
+      "bytes": 29947,
+      "sha256": "f67eec89b32c38121c493188092397f24fb1ba77c26485afb25088724315ca3d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch02-ram/recovered/roi.csv",
+      "bytes": 408893,
+      "sha256": "24934bac115bb90044a94c06a9859eda3325cfce3533d582af592c46d85af9dd"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/diagnostic-summary.json",
+      "bytes": 1798,
+      "sha256": "193bbd6faac4f2d84da5f49b5ab8a77e437a67b4965a98f0281f4673ea9eedca"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/original-provenance/deployment-public.json",
+      "bytes": 3002,
+      "sha256": "ef745ebf031a57911bd96ea0726a69ab90ea7f5f9936d3b27db263095cb0e1a9"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/recovered/calibration_plan.csv",
+      "bytes": 270,
+      "sha256": "6059d1499fd3f8e836c087ece2ca29d48f0c39c2f71071004d4103437d2f5e85"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/recovered/calls.csv",
+      "bytes": 32503,
+      "sha256": "130be27de0df9b351cccc81256ed65ed6e3ac816dddae29138629c84ee0319b0"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "411e9191bba87fbd21ff9fbbb907be455e9cd083bca4542fe740947a6405923c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/recovered/frames.csv",
+      "bytes": 3587,
+      "sha256": "f84daa81049e69b92c9059b220fa99988330bf7c6dade78c8ae2ed675ae065d5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/recovered/manifest.txt",
+      "bytes": 3171,
+      "sha256": "40d0e3b2d9158dbbb21257e25b74ae921c0d17825aab9c080dc70bc6c488d20b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "a76662efd92f9d28ddf23645d767d0277f5c7b2dd40567a75772588dfbef14bb"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/recovered/ram-index.txt",
+      "bytes": 480,
+      "sha256": "d601a3988a767d16efcef94a0064967df620e86f3a8ba6fcd96888d9645d6a1f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/recovered/reads.csv",
+      "bytes": 74137,
+      "sha256": "1e5ae3e3f4fc13bf10be92bf36ef510273266da73fb5cb4cc300f1a7f55362e3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/recovered/received-ram-sha256.json",
+      "bytes": 2318,
+      "sha256": "06cce0621adfa234b9700feb516b762a19986fc65223a97eb2eaf9e1c4da97d4"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/recovered/roi.csv",
+      "bytes": 5268,
+      "sha256": "20cc0d06e8814599342b20e908434b8d2078a3d325b424cbfdb5c194fc4baf3b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch03-isp-check/session-status.json",
+      "bytes": 196,
+      "sha256": "ec2c9d5d8384d717dc151a4284e5c54633515ccb3445b412f0305509b7e9da56"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/original-provenance/deployment-public.json",
+      "bytes": 3002,
+      "sha256": "0aef9219239dd2c241a016aac446158e2e7ccbba89d970e852b5d9b92f8ede44"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/recovered/calibration_plan.csv",
+      "bytes": 270,
+      "sha256": "8ec740cc188b7c7165e9d037f25141cca1b6a688b61934f7aa7d4e0607426fd3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/recovered/calls.csv",
+      "bytes": 32503,
+      "sha256": "63d3e6f5d4ca5ea8e6ae4cf170a14cd8a4704883231d370796d3f0bd9db0d4c3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "dddaa275673cef6062cec10bf07afd25ad1a2483b3e18734d2364ce6c48a8d28"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/recovered/frames.csv",
+      "bytes": 3574,
+      "sha256": "0030447fec0a86106e0586d0b70b32c7af3606bf5683367bbe8d895b08e7e631"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/recovered/manifest.txt",
+      "bytes": 3171,
+      "sha256": "5684e42c4bd746e8467b529aa46cbbe3fd59135158a691eb53fca3aa87fd93b9"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "5b01b782479f6c790480517c1218699a107c2ac1f82224b96d15ec7dedc8b724"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/recovered/ram-index.txt",
+      "bytes": 480,
+      "sha256": "071cba01c576c3bbf3c57500e21014a2204271a38dcd6c09590ca8afd3b61eee"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/recovered/reads.csv",
+      "bytes": 87579,
+      "sha256": "dd3f3eb56bf923cbaef9c63b34538ce736c20f62aad0c421f287a400a224bbd2"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/recovered/received-ram-sha256.json",
+      "bytes": 2318,
+      "sha256": "4ca58f1e2b50162c4e001ad69ffacf8db81b36f3079b7de990455ba241082b29"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/recovered/roi.csv",
+      "bytes": 5270,
+      "sha256": "013ab20df3e18f26e28655f54a039e847c6e457633f367727816606e7227eb3b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch04-isp-transition/session-status.json",
+      "bytes": 198,
+      "sha256": "8593594ac5d7cbec23216aedcde37e7aec5ec86987a5560976f5ea4fd2d8e1e2"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/original-provenance/deployment-public.json",
+      "bytes": 3002,
+      "sha256": "e4d41ab7ce1d4e667ca7785589b48cb5d543a8df2a6cdf919d14a01a9b5d1a22"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/recovered/calibration_plan.csv",
+      "bytes": 270,
+      "sha256": "dac89d1871f26f0e0a3b1084feab06f7a36b069780338cf790a7ebc894c3a7ed"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/recovered/calls.csv",
+      "bytes": 32649,
+      "sha256": "1f51f35fa4047989f5b1b36e54d229f5ea38525fa4c9b956dcdc444d4d0d478e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "5b00f2a8cc861e4783b99b6802f8f12e74536bcdfc7a57e6683a56a8173fb122"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/recovered/frames.csv",
+      "bytes": 3633,
+      "sha256": "30bb2a0eae92af8599957fef251449aeeefdd788f3c1635c476994a4663860ad"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/recovered/manifest.txt",
+      "bytes": 3252,
+      "sha256": "c9ce19f1098d96329bfc7c7915c3c2dfaddd72de44b02e5f61eebb951d9f29d5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "a5f20db3803c48aca0c64c415f115cd628f3f832c894ad14e09b778ce46d0469"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/recovered/ram-index.txt",
+      "bytes": 480,
+      "sha256": "d1a112185577341ca569fe564abdfb49e7d5d602e4fcd1422f18e7c8976e9a26"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/recovered/reads.csv",
+      "bytes": 87906,
+      "sha256": "74fd83f4a173b0055fdf239d26a1c7388f183a17902fdae5395f67869e1ea609"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/recovered/received-ram-sha256.json",
+      "bytes": 2318,
+      "sha256": "91d549a002f478d67dca60c027ff121cb01df48c81ddf39a40759a49cd34f19d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/recovered/roi.csv",
+      "bytes": 5366,
+      "sha256": "36f2df66f93e2978a2a6d979940c1505becc6ab9a8116a6829dd0140f164a2b3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch05-live-seq-gate/session-status.json",
+      "bytes": 198,
+      "sha256": "62bf8ed57339d3ed32582ffde1edc1531efdb8b478e6eb7c5765caabb1f303c5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch06-awb-force-state/original-provenance/deployment-public.json",
+      "bytes": 3002,
+      "sha256": "2dcc1b818fdb5de23333623e518d690ece4469daa5efaa6df36226bbf0bcd173"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch06-awb-force-state/session-status.json",
+      "bytes": 143,
+      "sha256": "e233d6183e8ccb6d76c80f2b8bd1e4e1a7c9103fe7013d4be0c2b6157c3c7265"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch07-awb-force-state/original-provenance/deployment-public.json",
+      "bytes": 3002,
+      "sha256": "fac13190a2e8801ac3bcb0b1e50c1b2e111e303e4d6801e1bb2115d40d49a32d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch07-awb-force-state/session-status.json",
+      "bytes": 157,
+      "sha256": "694ed0c43096e2af081b539cbac66863d4fae9988cd0c10fb0f0ddd35bd676fd"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/diagnostic-summary.json",
+      "bytes": 4037,
+      "sha256": "56dd655ae6ef7682dfc97214d643094edd3cab5e27ff15344d0c4dac739ea9a3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/isp-report.json",
+      "bytes": 28601,
+      "sha256": "f71eeb69fbfe58f27e6d8eebf89f5e3370bde06ace8a6e1b1bc8025ae170e542"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/original-provenance/deployment-public.json",
+      "bytes": 3002,
+      "sha256": "e2a7efe0021361438b69f539cd113dbee974d25a0e69387e513582fd2c9e0d74"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/recovered/calibration_plan.csv",
+      "bytes": 270,
+      "sha256": "dac89d1871f26f0e0a3b1084feab06f7a36b069780338cf790a7ebc894c3a7ed"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/recovered/calls.csv",
+      "bytes": 32792,
+      "sha256": "d888566a7436f2ae697831ff7ffe08e35c025a5637e1b8d93a62c5926067140a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "8b63db6d07a36ae69baffb28724da31358676150203ffdf59c996a9d8a538687"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/recovered/frames.csv",
+      "bytes": 3574,
+      "sha256": "661ef268181128fd1b4b6728734c6026506f6fda71feb4832abc68095d17def3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/recovered/manifest.txt",
+      "bytes": 3331,
+      "sha256": "2eb0a4ca1fab1db12d24d416f4807da0520df26498816417e972b18a290dc268"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "7dd8e26c1c628684755f9ffe1645999a0593bbd867eda0b97c34096838daaea4"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/recovered/ram-index.txt",
+      "bytes": 481,
+      "sha256": "5f4700bafec301da236b67f9897085b39b5b0862e33a5cf383d516901f0a417f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/recovered/reads.csv",
+      "bytes": 121914,
+      "sha256": "8d5d2e84aef4ff66addf7405fa1bae593509f6b19a6236f13db5deabf2c3a91c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/recovered/received-ram-sha256.json",
+      "bytes": 2319,
+      "sha256": "901972ca5bb9f884016b48e35fff543fc50bc9a2cde4d96c1da546f4bbc7f37e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/recovered/roi.csv",
+      "bytes": 5270,
+      "sha256": "bac74f386ad6cf9caeb96e79852376a2b2e48f085ee8eea53d3fd407e1e376a5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch08-latest-mcu-state/session-status.json",
+      "bytes": 197,
+      "sha256": "b7515a34768089d107f262f37706d21d69655561f1401478fd419494eff81f90"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/diagnostic-summary.json",
+      "bytes": 2186,
+      "sha256": "6b3695a51c4269ed83fcba06fda0f067be02fc314b5d5eec1d349aa006bc21c8"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/isp-report.json",
+      "bytes": 41596,
+      "sha256": "179782d8c5bc24345b376f8ad6cb3458b43d2b70de2b2c10144ad0adc724fb03"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/original-provenance/deployment-public.json",
+      "bytes": 3002,
+      "sha256": "0b269cbbfeae56369e078829bedff7a76300efb5d98c3808d691a47047772765"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/recovered/calibration_plan.csv",
+      "bytes": 270,
+      "sha256": "974031de23445cb33abb12c8ed2bb15ba011c644d7c61eeb67483c6bc26808b9"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/recovered/calls.csv",
+      "bytes": 32793,
+      "sha256": "bc2ffc1e4b7c373d510e95a59975e099a78af696914bb813821354f4692d53dc"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "c38f010e99e0a59f6a2bc70b8164bea003e30d6a738d93752930e4f2bfd57c3d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/recovered/frames.csv",
+      "bytes": 3618,
+      "sha256": "f1c2ab410d7bfc10c153ac65d84a507dea2e95f7b42c829f2b419eb364a6410f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/recovered/manifest.txt",
+      "bytes": 3342,
+      "sha256": "8cddd2d40136fe41b5e79ff887fed3018560affa2cf89eccb24083524078c65a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "50ce8b9b877c0ba6e49f35405fa6242c6fd0363ec59eca756c0946a770d4cfb9"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/recovered/ram-index.txt",
+      "bytes": 481,
+      "sha256": "7dea6fc32c37aa43cb873f746c18c5cc93b6181e2763a28572476fcc786d5d14"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/recovered/reads.csv",
+      "bytes": 126926,
+      "sha256": "6e72fd31a4c1919099a1ad0fcc77808f4fc85cbc53c1071acd90c7f5bc309d18"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/recovered/received-ram-sha256.json",
+      "bytes": 2319,
+      "sha256": "ef4814a84f332ac92fe35be99d252d1236ef6e0dc78d868890e33ee7dcc02f66"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/recovered/roi.csv",
+      "bytes": 5306,
+      "sha256": "99636b469b91c2a28d1308b83f68999b3a7aefeac4469576e57a9ab08dd3d2a2"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch09-v5-awb-off/session-status.json",
+      "bytes": 197,
+      "sha256": "59e84e590c32d23ef6cf3e7280ec5d0cf859ae6781fb6bebe241ef85a5711cc8"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/diagnostic-summary.json",
+      "bytes": 1341,
+      "sha256": "0c6c41ae0682e5d0bbe6ccd2c42408b4a31cfe12a0f02af89edac302714641fa"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/isp-report.json",
+      "bytes": 24332,
+      "sha256": "817b8e79ae12e30f34a5f2f35e561f885128acd5fc486dce3f9579d9381d5f7f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/original-provenance/deployment-public.json",
+      "bytes": 3067,
+      "sha256": "247f7fe526203fe4d6975d2f86334be09a2584f659a08c52e277d3378c5e9e62"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/recovered/calibration_plan.csv",
+      "bytes": 207,
+      "sha256": "eb3868bd887f0893f6ee9ec6179a4d42cc99f9767319ba784549766cba54cd5f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/recovered/calls.csv",
+      "bytes": 26390,
+      "sha256": "026c0cd282a8663137b825c012876419b8212ef0e7fb48846763c490f29d2360"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "b1f26bfa2d3d55f804678821c77a5f690db5722c5c421a42260d7916434ff354"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/recovered/frames.csv",
+      "bytes": 2823,
+      "sha256": "4f80115513c57ec437a14107cd23e1bff4ed225e5d21dda856f4a5c788b41eb7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/recovered/manifest.txt",
+      "bytes": 3256,
+      "sha256": "f0c03462cdc667f4822e7cf59d8d5c1d530a7d51dfeee5be50f823790739699f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "cfcf2def8c5334f3fde7fc264d7742b0b347d546c168e21ebc914cc5e16a52e9"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/recovered/ram-index.txt",
+      "bytes": 481,
+      "sha256": "ea18610b4025ae0d833f646e7d9e1215a8b722b5746346ec34b87ae5af34edbe"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/recovered/reads.csv",
+      "bytes": 155628,
+      "sha256": "6ec4d81fca45388d6c5822bf241026793b9f4e78b3c2334d112929b41b2b8768"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/recovered/received-ram-sha256.json",
+      "bytes": 2319,
+      "sha256": "64668f95d376c4fe2d99f6b6bf8261d079e3015f4dc085b3eb408fcddd8ddfaa"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/recovered/roi.csv",
+      "bytes": 5270,
+      "sha256": "e6d81e6b0460ffba3f96797320cdba8ca3df6951b2e32004f8ca4752ca810781"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch10-awb-on-refresh/session-status.json",
+      "bytes": 197,
+      "sha256": "f6388563d4c99b11428d80f7b7e71d835ba364b2658f8a54a9461bc4cfb268b7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/FINDINGS.md",
+      "bytes": 5238,
+      "sha256": "4226520fe5d6b32d80e74bae4bbbb2af9638b71827b2535333894fa09af55283"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/diagnostic-summary.json",
+      "bytes": 2409,
+      "sha256": "1bb97097873f9160bdad94f8020cc95626cdb8e444cdbf52486398e86d9fcc4d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/isp-report.json",
+      "bytes": 41599,
+      "sha256": "119960413e475b4ab1b4f128922ffb044fa9578e4c61ffbc8a4230c9d0a25998"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/original-provenance/deployment-public.json",
+      "bytes": 3067,
+      "sha256": "f97da993ae4752fff50bb6937ade5f8d91f9c1cdb8c99b43f60ad065bc992d4c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/recovered/calibration_plan.csv",
+      "bytes": 270,
+      "sha256": "974031de23445cb33abb12c8ed2bb15ba011c644d7c61eeb67483c6bc26808b9"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/recovered/calls.csv",
+      "bytes": 33102,
+      "sha256": "f5b30824a347d300661cfcd149cb7077312ab5e877800c3616662d04232c15c4"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "cd03eafd9cce1bfc9e0deb6fe95535d29ae43483952332cf6d0f990266c6281a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/recovered/frames.csv",
+      "bytes": 3568,
+      "sha256": "2af17d2d57e4a9226bf02cfe1bfa174c9d38751067dec79afb8110679da3d039"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/recovered/manifest.txt",
+      "bytes": 3538,
+      "sha256": "41cd88089fc9079a85ea303539dacc6c3e27baa871f1b06e09c4c9e163c28a34"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "578e9961e3234585892ba3862d075e0bcac0b29d2aff5f03c540a31d94522028"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/recovered/ram-index.txt",
+      "bytes": 481,
+      "sha256": "70fe42c88b5505583b6d953d3c375e4e8afacdc809bdeb0bed0b2d9a9cd0275e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/recovered/reads.csv",
+      "bytes": 137261,
+      "sha256": "a2d413ca3a22405afc2de9b92e4d78e22fefebc457bab555d16a76829b94eb00"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/recovered/received-ram-sha256.json",
+      "bytes": 2319,
+      "sha256": "1dcab1943870d21d3994453f39c439022a45ee7ef4f3c6def6b33ff309087b8b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/recovered/roi.csv",
+      "bytes": 5278,
+      "sha256": "3c1fd0b9aef40c1971a602d888526ecd7c2c4b4e38b56686eed238b8d04c267c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch11-awb-on-refresh-v2/session-status.json",
+      "bytes": 197,
+      "sha256": "6678a873a2954eacb0d9bd83c3d99984a08ad979d5c18576e7536fc73bda3b81"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/FINDINGS.md",
+      "bytes": 5775,
+      "sha256": "071aa21050b9885b8440cef6e040e661dfef5541e2f19659078bcaf9593a6571"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/diagnostic-summary.json",
+      "bytes": 5879,
+      "sha256": "470d5fdabd97d0f813efa052d6a6bcd56bf123fb55bafb5d59390892e8efeab6"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/isp-report.json",
+      "bytes": 43460,
+      "sha256": "5f749dd16b84c161246f0d8e7a44fc8011019688c0e0a351d60c5e75bbf14d77"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/original-provenance/deployment-public.json",
+      "bytes": 3091,
+      "sha256": "97eb22df68a1587779d91270cc06bb5d37090a512ef6b06316e697e6fa8db906"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/recovered/calibration_plan.csv",
+      "bytes": 270,
+      "sha256": "503bc8ac99256dd336c7c158687bed9ff9e91a6687cc969012e5b8b7e162d076"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/recovered/calls.csv",
+      "bytes": 33277,
+      "sha256": "f15c9f01f75155f18624bce7957ce52de663ad57f73f7174dac0fe3e7b296108"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "4da94c0ac411bc7c9afb9b084d2c84918915193222ec62d678ca162950e518cd"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/recovered/frames.csv",
+      "bytes": 3590,
+      "sha256": "af5d9f651250b8456f95ec71cc02d15a993304c6aec1a26201b3e364a91d0649"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/recovered/manifest.txt",
+      "bytes": 3699,
+      "sha256": "df1875ba9d0891d032fef38b7676ea0558b7d322d3d0bbfa74b2d7e20bfa8d3c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "402b6911981aaee71855dcb5aca19e5dabec94f7cfee358f3b64f7a47a29f973"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/recovered/ram-index.txt",
+      "bytes": 481,
+      "sha256": "deaf4c5e53fe392ddc4c7dfcfa8f3c3bb58e97fb279faa96854b422caeffd154"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/recovered/reads.csv",
+      "bytes": 141570,
+      "sha256": "f8c8320c7b112f9037ad509f47abc900029775d05b558f57beb59b9d944361e7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/recovered/received-ram-sha256.json",
+      "bytes": 2319,
+      "sha256": "6611213bb38ef28032d89236df398deddf20ccc3006958b887b784f3b954ac38"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/recovered/roi.csv",
+      "bytes": 5273,
+      "sha256": "7233ee2ed7fa85e5c746def867107d55951ded8691d47d25efbee475ca1f017a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch12-post-refresh-manual/session-status.json",
+      "bytes": 197,
+      "sha256": "08bcb04fde35744187a9ffbea6c52ca17a1719d400d78495867e5679e5daf97b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/FINDINGS.md",
+      "bytes": 7660,
+      "sha256": "d779ddddc0ae53d59ab7369bcfe4b76784b07889cea2355d79710e8af2f086be"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/diagnostic-summary.json",
+      "bytes": 6472,
+      "sha256": "9360ce0f85141ff481f54977dc1330a366c367ab875d8038201e9767e4f8d59f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/isp-update-report.json",
+      "bytes": 69874,
+      "sha256": "737a0b4b6fce0198e1008a6d64ef486eb04dcf3eb3afe2358041edb9b64fe5b2"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/original-provenance/deployment-public.json",
+      "bytes": 3134,
+      "sha256": "576eaa673061a862e27eb00275419d75f721bc670eb20d408190131948bfe43a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/recovered/calibration_plan.csv",
+      "bytes": 207,
+      "sha256": "0da543d3c419dffd3a61ab6feee4e9b555a727cbaf694b345e3b9b7248e1e24a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/recovered/calls.csv",
+      "bytes": 37534,
+      "sha256": "bff6797e7d236d9fa926a6b118ed6e445bbeed6f162a8dedff90ff69d6a6c2e3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "c10e273b9744d2983dec14c9338d1fce51c30501674878084d277d204da8f634"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/recovered/frames.csv",
+      "bytes": 3948,
+      "sha256": "acaab8f9728be438ac6e1bd64efbc7d11c7f184b75dcf138ba09d4d2d2dfc432"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/recovered/manifest.txt",
+      "bytes": 5177,
+      "sha256": "c17059cb95578dcfbf4df4ac9c46296f247987669c1adb33849135dd554a2363"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/recovered/noise.csv",
+      "bytes": 200,
+      "sha256": "6af12332c2deb42d02070a5519748df953c78d6585bdb8467fdfb8c00bad9bc5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/recovered/ram-index.txt",
+      "bytes": 700,
+      "sha256": "af5a9481af65321818a569bf06548ea54a7a02618c4dcf213eb8e6805b771c5c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/recovered/reads.csv",
+      "bytes": 234506,
+      "sha256": "7f1fcfd4bbcdc051911d1c20fad75edff9e64a7e3ddb8d25738745f9a3c95480"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/recovered/received-ram-sha256.json",
+      "bytes": 3122,
+      "sha256": "7931f71fbc943a59ffcc2598a372d06caa959cb31af56da6513339d84efa4ada"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/recovered/roi.csv",
+      "bytes": 5286,
+      "sha256": "8be50f8ca2f4448bae3084a33f0e2e6e2e20c78bfdf668234a585e4c4de4fb5f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch13-isp-update/session-status.json",
+      "bytes": 197,
+      "sha256": "4d5601b9e06927bb9d172b1efdb0f3350e20f0abd55accc5b2760f49443ab4af"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/FINDINGS.md",
+      "bytes": 9639,
+      "sha256": "e1bbbf7dc19787fbd3bd853025dc29bcf51c66d7e0efbabe74e9e96fff79e51a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/diagnostic-summary.json",
+      "bytes": 5983,
+      "sha256": "3509f8a7cb28b53339080fee658f03186a9c9da04360eaea704417952e2ed9fc"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/no-receive-report.json",
+      "bytes": 23018,
+      "sha256": "764f392ee36ec7704f86e8064acdf257db7e27596f5750eef9354bc4164457b9"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/original-provenance/deployment-public.json",
+      "bytes": 3234,
+      "sha256": "c9b2ae469af8d1c163f6454caf4dc7bf9e3e760621083cd7bb68d16373c55bc7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/recovered/calibration_plan.csv",
+      "bytes": 207,
+      "sha256": "0da543d3c419dffd3a61ab6feee4e9b555a727cbaf694b345e3b9b7248e1e24a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/recovered/calls.csv",
+      "bytes": 31403,
+      "sha256": "4f8234b712d9c782f4d31fc1cc2ce6d5382b3d2cffe49ea1f325e1a2d3f928db"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "3b625f440bbbf97dbb2ecb41bea3f2269dea80b09b309d18f62b1440fee39b17"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/recovered/frames.csv",
+      "bytes": 3162,
+      "sha256": "da4ebb1e0ab35b15737cc916fe28bb8de8f285e94e2993c01d294f65f4c65ce6"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/recovered/manifest.txt",
+      "bytes": 4716,
+      "sha256": "d841b00611a139f79cdf7ec18b5b2fa4486e1fe54738a45574852a64f893e300"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "f13a25f6cec6ce0fe9f0b7a7fbe4dbc9f59533ad090e83d7470d14c3fc9150d1"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/recovered/ram-index.txt",
+      "bytes": 578,
+      "sha256": "5bc13a412be36b2bf5aab84fea12a823ab4d7456a975d2097d642273acf9d1be"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/recovered/reads.csv",
+      "bytes": 125523,
+      "sha256": "126f3e753312367052b9e230303eb1f3e0f518626b53aec1aa4c6762f10af420"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/recovered/received-ram-sha256.json",
+      "bytes": 2708,
+      "sha256": "136425a77dda9d2e4fd1d104a0045cda0006efa65834d8b77d8c7e2e0594a9bd"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/recovered/roi.csv",
+      "bytes": 5262,
+      "sha256": "168884b6a185637e2a954a7f68ff11cf23bd67f4b32df8f5e9fb2621947b54eb"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch14-no-receive-frame-update/session-status.json",
+      "bytes": 197,
+      "sha256": "341378e4d8c3a1ca16f02335d4b91bf7a6dad9df2959f12e4ed258e90127d711"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/FINDINGS.md",
+      "bytes": 4330,
+      "sha256": "61f21eba7790019bda9040f581d47016d423a7b7d7a6cf3922bba3d1e145fcc1"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/original-provenance/deployment-public.json",
+      "bytes": 3316,
+      "sha256": "704a47aed6769bf1f95c172f2bea7aced1446cb38b641d17f338e37ef16726d6"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/recovered/calibration_plan.csv",
+      "bytes": 207,
+      "sha256": "45d99ad0933b33a8cadbd2de74a3b1740c291dc57cdf2a4e4967a114b0f049c4"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/recovered/calls.csv",
+      "bytes": 28221,
+      "sha256": "f0125ab5fe40315083182853f92e409edc3a975c52e6c284a2922553aaca65ea"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "a8152a8a2e3d7a4724898bdde6c04f8e2b191f4c48a134a07de930ae8ea88825"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/recovered/frames.csv",
+      "bytes": 2991,
+      "sha256": "ef01778b4250e9f5c0d6a0f3da17ce88938d5be2d8041eb5b29b152c7cb7d0e1"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/recovered/manifest.txt",
+      "bytes": 3473,
+      "sha256": "bbca2fc40588e4216eb49e274ffd1775ce536b2aa59f3a33a7b4aed90d77e373"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "fbd9f642f3d8eb73a62ba222c78fdd1bfc8a341136267417f4c3ed40de9f9b83"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/recovered/ram-index.txt",
+      "bytes": 480,
+      "sha256": "b2ce2a67edaf7ec6fc75cc387c9a21d5edbc26db9e7bf51afe9f769826c50dcc"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/recovered/reads.csv",
+      "bytes": 93967,
+      "sha256": "c4eee76b252066922fe14a0d3a16c988d39660b369a5f4d8b5f2e94becbb6e2e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/recovered/received-ram-sha256.json",
+      "bytes": 2318,
+      "sha256": "39a5beff0041e7618e9a012bcb9d58bffec9efbd057c661d2271b348b255b184"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/recovered/roi.csv",
+      "bytes": 5358,
+      "sha256": "ec93d10f3a458654978377157e91b0d017ebcb02ad2a7bff1c30a615c9534489"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch15-camera-writer-trace/session-status.json",
+      "bytes": 198,
+      "sha256": "493884b9d86bc6509c18e0af95dee06e39aeae121612623e9e64ca2d11565707"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/FINDINGS.md",
+      "bytes": 12068,
+      "sha256": "1879cfa6451966cf818741e791e663f4d3b9b2dca75a342fca42866ce88ae6d2"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/diagnostic-summary.json",
+      "bytes": 8534,
+      "sha256": "3084e2b43787f8af9526d7de9548c538724324cfa08cea06e97fb004367e42c0"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/original-provenance/deployment-public.json",
+      "bytes": 3319,
+      "sha256": "aa1dfc6ae27f3dd6114617b7634e844546a43774f72d9023c80daa0e9a3db09d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/recovered/calibration_plan.csv",
+      "bytes": 207,
+      "sha256": "b7f502f6f619fee308fd7591b02e467e59068f26dda70f481efdea8c40675555"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/recovered/calls.csv",
+      "bytes": 29118,
+      "sha256": "ccb271c84c671af91a628655d9d6da8d49eea578098f70876a332b1e854533e0"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "8b73adee6bd87d2ad336834b216b1edbed8ec8de7a7642a019dd9f15e8d9cd73"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/recovered/frames.csv",
+      "bytes": 2904,
+      "sha256": "cb5f14b392174820bb757bb3158346b9cafe62e4b2dcafd13c8cab3ea73843a4"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/recovered/manifest.txt",
+      "bytes": 4334,
+      "sha256": "2663ca001a9240c59310f318c83471b9e57ca51281e48cc1585c8d16667097b9"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "418f6aadcf56b4741bf5511ccdbfc6ce768151c294791109e46d7abf83071848"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/recovered/ram-index.txt",
+      "bytes": 526,
+      "sha256": "e68446476f4a7c8d50785e5f81166d35ff883cf2165fe035b09c5da042164571"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/recovered/reads.csv",
+      "bytes": 99952,
+      "sha256": "4ec2ae847789f8340d9d3d83ea7746e034f2af12ba362dc6736d72cde18a4168"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/recovered/received-ram-sha256.json",
+      "bytes": 2510,
+      "sha256": "5eee6029af3b88e25ffd31bbc4ccb7a1d6ef937ac5b2e85a6d851a433590388f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/recovered/roi.csv",
+      "bytes": 5262,
+      "sha256": "83bbe4b35b1e2242e5ae523987a355fee778625cc3465056af9baca0ebc73d18"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/session-status.json",
+      "bytes": 196,
+      "sha256": "e354aa419f818966982002204eb82cd1ba7de4467da005a37ca3ce5492676428"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch16-camera-writer-observe-v2/writer-report.json",
+      "bytes": 8011,
+      "sha256": "990676d0fc62120bc262b4f000b2c4aead3df776ca3a03308b3d19bdd6d3167f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/FINDINGS.md",
+      "bytes": 5557,
+      "sha256": "83fc9f854cc0c21e55313a7ae7fb69b8832ab3802ed0e09ad676a482ea8aab51"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/diagnostic-summary.json",
+      "bytes": 6554,
+      "sha256": "8a90c7fd11c70441e29cef7cf4aa16422f8d9679abd3c216c166b8ef28f0155c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/hg-report.json",
+      "bytes": 59187,
+      "sha256": "1914054a67cb0b5e30fa584a2f2d9d92a32d12691f45f7cb10e9a50f0cf42034"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/original-provenance/batch-sha256.json",
+      "bytes": 6419,
+      "sha256": "d5ace633aca03b138f95404fc8ccca8921b9d3ab24c078ec3053f7eb6961cb50"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/original-provenance/deployment-public.json",
+      "bytes": 3403,
+      "sha256": "2d378ec353ac3e8b1d3871750c4d27786620fabc775dba873ed40a1db5866426"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/recovered/calibration_plan.csv",
+      "bytes": 207,
+      "sha256": "c4f3f811173003938c453fa89aba9ad20d14ebeafb60a4e7a2c074dc5d7d22f8"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/recovered/calls.csv",
+      "bytes": 41089,
+      "sha256": "3fe7add560435ebc87ffa0c08d0ef5c559c7fcdc17201f3a47ba000fa6a7d0b4"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "9b710e100199bdf21f534d9306613ba0c7f6328410cf7c999b5561e12fb949c0"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/recovered/frames.csv",
+      "bytes": 3104,
+      "sha256": "baddc5b8115689cbb3261098a716d85eb8ebd14c7440597a49668d1687cba71a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/recovered/manifest.txt",
+      "bytes": 35333,
+      "sha256": "dcb53e9ea76a2ae111320682e50f3c02559a68e5ef41ac50dbcd39f2e254ad19"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "5cfdf5fa79654f2ec82d5d5a768ddcd6665e44a93730df1238b312ec362c4dfa"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/recovered/ram-index.txt",
+      "bytes": 600,
+      "sha256": "dbce121af38ff7808b90ef186a2796d35d8a55cbcdf188278f28c1a77ea8f5f1"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/recovered/reads.csv",
+      "bytes": 198174,
+      "sha256": "81bfab5e9c57eb47bf5c3eedfae1611bcbae19cbbaf16d98c9ee678658296eb8"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/recovered/received-ram-sha256.json",
+      "bytes": 2876,
+      "sha256": "c7ddeda7fd4901e3c308144d9e51263d3013bae233cae43528a714903cf79652"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/recovered/roi.csv",
+      "bytes": 5382,
+      "sha256": "c1b00302ac3553e0848305c92c7969be3f86ab9f370edc5b4067a16162be4b81"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch17-hg-isolation-v1/session-status.json",
+      "bytes": 197,
+      "sha256": "55fec1ec2b17a7a32a80bd05e05e0d81d01a5b3a650eb5f72fb5617ee31d2611"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/FINDINGS.md",
+      "bytes": 2830,
+      "sha256": "4684f4a68b4d21c152769561c99c9a53ce02a2fcc80bdd976d0144a2bb457353"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/ccm-report.json",
+      "bytes": 44244,
+      "sha256": "aac59591f8556e8d733cfde29ca82076cfa88dffff63004dc71c4e9eb8b666d8"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/diagnostic-summary.json",
+      "bytes": 782,
+      "sha256": "6bca9d21dbab984591691d2e9b474d9ac28b69bf3dac2661b0afed8c674ec6be"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/original-provenance/batch-sha256.json",
+      "bytes": 6919,
+      "sha256": "a88fec4ab3ab04bc76ed3a2906a2290118b8ebbcec229694d62f0f8d37a39a75"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/original-provenance/deployment-public.json",
+      "bytes": 3418,
+      "sha256": "7e65192af0737c4f14042189c72f7c0183562dde33ce96b677046b2582226365"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/recovered/calibration_plan.csv",
+      "bytes": 208,
+      "sha256": "4f26901d20723aa3e4721db03717d5e1f3d9f114903fe64e3bf3634370b7c107"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/recovered/calls.csv",
+      "bytes": 33280,
+      "sha256": "bce40936ded8f153fb91c4157f071e81469417e2ea309d725ae9e14db06a5d08"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "d44ed738fb2e67df8e08677be58d7a614ec8c56d31bafe20ddcb2b98ad9969a0"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/recovered/frames.csv",
+      "bytes": 2985,
+      "sha256": "ff2a324323652f8cb76d8b703a7156f7716b21602bbcb069d9b7c3c032b6fcc3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/recovered/manifest.txt",
+      "bytes": 14356,
+      "sha256": "3cfa70a07c628ad9f9cc444f23e13a924228b1f5db9c40d992c84715433be128"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/recovered/noise.csv",
+      "bytes": 204,
+      "sha256": "f4afcc2721556f41b43eaf645f2244738ab3f9e257d78b0ce1a1bf8d27e5e152"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/recovered/ram-index.txt",
+      "bytes": 530,
+      "sha256": "e2f2ea5e33f8a1ff9642479e504adfae01cb2f16d0ff9e5cebee122a106b5aff"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/recovered/reads.csv",
+      "bytes": 137320,
+      "sha256": "aa716ef4c8f883e98d7e3366a4a36089c2f75291be15361b6482f7ada093ca11"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/recovered/received-ram-sha256.json",
+      "bytes": 2514,
+      "sha256": "c07a30af09c346c7d79e538ee249a8f890c6c11a2a172d4086893c8a15923c5b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/recovered/roi.csv",
+      "bytes": 5418,
+      "sha256": "c1318c3c591e05d6c06937d42f7813667bf553ed331caf119b1fbe007caff00d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch18-ccm-normalization-v1/session-status.json",
+      "bytes": 198,
+      "sha256": "b5ad9110aa0705ede9afb5b5fd097fe79a82cd47c1be469c8d138b9d917905ca"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch19-ccm-bytes-v2/FINDINGS.md",
+      "bytes": 2160,
+      "sha256": "e1c6fd6f72c13601dfecf8002f0b9d58876eddbc8db500a121795b1b4759f8cc"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch19-ccm-bytes-v2/diagnostic-summary.json",
+      "bytes": 448,
+      "sha256": "495bafd5e0117ce1b21114e60d2bef933b60f3b17af686b6bf553a8afd35188a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch19-ccm-bytes-v2/original-provenance/batch-sha256.json",
+      "bytes": 5156,
+      "sha256": "bb257f996f50fae03330694eeeddc8118e7347d6f696acfd63a90328a720aa7e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch19-ccm-bytes-v2/original-provenance/deployment-public.json",
+      "bytes": 3421,
+      "sha256": "84516d71bd02012fbe07d121247fb0baf4222672a0037c1bf4236a29fd7e46fe"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch19-ccm-bytes-v2/session-status.json",
+      "bytes": 147,
+      "sha256": "3c9f5a2284e86d808915bb5629c1733c1532b405db822c523c149cb2601ab0eb"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/FINDINGS.md",
+      "bytes": 5465,
+      "sha256": "391b20e0f1f41ae3c6167bbbb1e0433aa191c69395eb152131043780e8175723"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/ccm-report.json",
+      "bytes": 120347,
+      "sha256": "1ec62ecebe478a73ab6b82165e09f85ac59b8d99f0e40e2d832763eaeae884db"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/diagnostic-summary.json",
+      "bytes": 9107,
+      "sha256": "6eca4805feec3e1c8a9dbec9a73a825404a16fe72d5204d3aa0a1ea73c3778d1"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/original-provenance/batch-sha256.json",
+      "bytes": 7971,
+      "sha256": "0d4e2dda854eddf21308f5caca34bb949c3e8b19e49f36ec25496ac67ab89f50"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/original-provenance/deployment-public.json",
+      "bytes": 3511,
+      "sha256": "6fc793c5c073ec109fa4d56ef43e3f749583116ce8ecc728356ed75c66f3f35f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/calibration_plan.csv",
+      "bytes": 207,
+      "sha256": "192ab46c8a7919de11c67cc84d460fa97184425eae0e4d990a197b1f443e499b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/calls.csv",
+      "bytes": 42106,
+      "sha256": "4e1c0c02ac3f0a86c3bd65a23e2eeb9f4197a45aac3bb75358d866404f1d4467"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "c3de00cb8c56088bf9a51e14f231d149f0a4aef67b523a5e42a32fb9489b2867"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/frames.csv",
+      "bytes": 3070,
+      "sha256": "b985e7a26bfb9407f6bbd279e2f1c897034b3cce8a7d050cd91cf918780a6ce9"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/manifest.txt",
+      "bytes": 41071,
+      "sha256": "c0848403e0e47abaa4e52a92474711effba0ebcf34847b29977bb5df9c0f22e5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "a29b053c9809e919126046b5752d38306a695c5cce06a2d1173dc07709a91829"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/ram-index.txt",
+      "bytes": 662,
+      "sha256": "c54d8658402073d8efbec78313ad38ae6c2f263c72849099bf9ca1d51b431e20"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/reads.csv",
+      "bytes": 221280,
+      "sha256": "f910b133cea8c1fc4cce3664677fd8a64cb078d50b6f0aa081bc011a8c536f77"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/received-ram-sha256.json",
+      "bytes": 3084,
+      "sha256": "2a3b52f6a92244e469d4e8fde9ee5e864baf02cb170574222f93e5ad0270f9cc"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/roi.csv",
+      "bytes": 5262,
+      "sha256": "d9af5e848bbc4b071acea7474ddcc9ba509b0a6efca1d42e74b7a82d0c4f46fd"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/recovered/startup_journal.txt",
+      "bytes": 34747,
+      "sha256": "4afbf9c456015b0b7453de219a678dc0547c69df1936252bdee7cb462cfa8093"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch20-ccm-boot-v3/session-status.json",
+      "bytes": 198,
+      "sha256": "a941952d09dffe7757ba01ac9dc31e665ff0c90d911206151983447720d193ce"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/FINDINGS.md",
+      "bytes": 1509,
+      "sha256": "bcecbfe18c01b0be6f3df873842a532f3bf6ed4b85f17b3dc549f7fe0950cdf5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/diagnostic-summary.json",
+      "bytes": 10196,
+      "sha256": "b2061cd046ecd81ccc3a3a0791c860986b639fdc1b11959c060ad492defeafae"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/matrix-report.json",
+      "bytes": 76068,
+      "sha256": "7826b0532047d08201e9fa739ebde9f18393880d3028d1cda2a74c7c3e8d7f4f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/original-provenance/batch-sha256.json",
+      "bytes": 16125,
+      "sha256": "45478349cb4c8a143feb2e54638f954946d9fd541523a8c0d0bfbb795c7425a0"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/original-provenance/deployment-public.json",
+      "bytes": 3579,
+      "sha256": "ca367dacc0a43127da7c793f1ce7925246fbe41c9177d08b12d592bc619761f0"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/calibration_plan.csv",
+      "bytes": 207,
+      "sha256": "510a2208dfd58f4d50ad33db1667cde6e6554ca59554182469c0b3905a8d7268"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/calls.csv",
+      "bytes": 32921,
+      "sha256": "289db704a7181b6c9dfff1667fa64117c7a71b306bc7657ea950cba481de97e5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "d3c99594d029fe48c2f72a4fb3374881a8195223ddbd31b3687e8b80f60c8649"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/frames.csv",
+      "bytes": 3001,
+      "sha256": "6a9f55806abfce54806d871601e46cd0521d2e8807540f952bc4b092ed60bdbc"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/manifest.txt",
+      "bytes": 4496,
+      "sha256": "53a129aea6fce76389326c0a1dce699f700f73e6e97b98faef542ce1936e81eb"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/matrix_events.csv",
+      "bytes": 1088,
+      "sha256": "4b0f3649219382c1e71cb76e0a84d454a9d8e7cbfbb8a2081dca63a0f9ede0c7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/matrix_plan.csv",
+      "bytes": 52,
+      "sha256": "ac7cde6c6bf4cfbb2cc7eda606ca80c8d0fc8250ca24ae02243d288cdf01092c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "23343f905abf51c81c3551d3578d3eb50aca785af7f039b519200669b3eee707"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/ram-index.txt",
+      "bytes": 584,
+      "sha256": "50b9dc0741e465300b172eb5206665e93b627e9f4795f8bc3cc16455c8853c6e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/reads.csv",
+      "bytes": 124549,
+      "sha256": "225e576746a0bbb08643a7fe66f33e792c6db73adc5f5935817f910dbd37c188"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/received-ram-sha256.json",
+      "bytes": 2860,
+      "sha256": "126f0ac97f8d0571eb22e72a57569071bc8eb1453cd1d0175695e0c27ce39ac8"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/roi.csv",
+      "bytes": 5262,
+      "sha256": "d78d681119f15bac776ee45b6e78eb21997b1f4b5b3fd2c377c22cbfd022e70c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/recovered/startup_journal.txt",
+      "bytes": 7405,
+      "sha256": "55a08cd9b601163125e173cb64bc50aa39485dc925fe42ea1f08512a83732b8c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch21-gain-matrix-v1/session-status.json",
+      "bytes": 196,
+      "sha256": "969473a40a8bb3153d90bd5123874bed5ca7b59d8c242a8452a8b42b507a95b6"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/FINDINGS.md",
+      "bytes": 1264,
+      "sha256": "9d055f8067eefc8a9ced207cd119ef2e87f9c540681afa8460b13d30973d835e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/matrix-report.json",
+      "bytes": 81499,
+      "sha256": "d0a9165f7ff9f7e31fcfe18ea534cd752ae18b5dd4814a00a6a2f49b3afed1b5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/original-provenance/batch-sha256.json",
+      "bytes": 15995,
+      "sha256": "45f40a36dbc7784ebcfd67dea5815f27155b075408549b5ce5ffb432bf22e530"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/original-provenance/deployment-public.json",
+      "bytes": 3582,
+      "sha256": "597318ac0b327d7571c5d0bb8e2f8992d5cabba8b843d28ce8ee33cad004ff01"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/calibration_plan.csv",
+      "bytes": 207,
+      "sha256": "510a2208dfd58f4d50ad33db1667cde6e6554ca59554182469c0b3905a8d7268"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/calls.csv",
+      "bytes": 36418,
+      "sha256": "73d481ea882b5cb63be466c96e8a07be8f4def7b2a4e8ca0cee8efd3a0c53a65"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "17c398abdaa534ceec1817e50cadc59a27632fbb85edb4c9a48f414c444fbe60"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/frames.csv",
+      "bytes": 2910,
+      "sha256": "63f63c23d7907de4f56715804b032567e0ce38b705ad2e6a8768a7be2d4bc407"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/manifest.txt",
+      "bytes": 6175,
+      "sha256": "7b06ff22bd80323510fc486fab80b5930dc8575ff0639d401c30d8b9bb8f0358"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/matrix_events.csv",
+      "bytes": 1478,
+      "sha256": "4f7c1457af24df0c32d01900e8a090cdcb4425e0ea43ac6aceff79e70e43541d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/matrix_plan.csv",
+      "bytes": 107,
+      "sha256": "f10cfc9ff302843f559a169652fa098866623aa62c9a6d0df3b8a1faa49d2b86"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "4f22b6ed1542b7d03065e2253d6f6bf06ce41127cd89f6fde13e60dbfa0e4b07"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/ram-index.txt",
+      "bytes": 637,
+      "sha256": "750dc41229973e05aff9426975d65fa126421406ea31177f0de112380803c4ea"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/reads.csv",
+      "bytes": 163150,
+      "sha256": "71b4736cb5ade8e791a72bfa4fcd307b9d2b736fb504a4b29122e88b742c3baa"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/received-ram-sha256.json",
+      "bytes": 3059,
+      "sha256": "d4471aa0d561720fbdc73e880a97f819cf88e650ffd98d59ebe24b6c2917e573"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/roi.csv",
+      "bytes": 5262,
+      "sha256": "27ae2f52cc26d71dc349ede67cc52eb2e2d7c57326fef8cee3c7a6d042a624c5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/recovered/startup_journal.txt",
+      "bytes": 13453,
+      "sha256": "f778241d24760155664cdfb671682dc785dab23f6a8367b2045fb36bf7129a94"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch22-gain-matrix-v2/session-status.json",
+      "bytes": 197,
+      "sha256": "f25eb07a51fa162aaa5007ff0c091c27a695cdf30fd4a448325fefa675e23f8e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/FINDINGS.md",
+      "bytes": 1662,
+      "sha256": "8f768d1fc5f76a2ed65ef96dcc78b12568fc65c434e73556ee5d711d5c07c8ce"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/diagnostic-summary.json",
+      "bytes": 6626,
+      "sha256": "9d9515141168104b4fdf3de55397e5d11a60ecf234cc0cf433328f1044e74c2d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/matrix-report.json",
+      "bytes": 262054,
+      "sha256": "de38fc957ae1de1712b33b470d53efaf4659a519b8cdd657f345bb0e56142900"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/original-provenance/batch-sha256.json",
+      "bytes": 16973,
+      "sha256": "b23ebc59ac3de2e93e39c56886137d2082694dfd16167f3f019a78a552977394"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/original-provenance/deployment-public.json",
+      "bytes": 3582,
+      "sha256": "65985137ae4aade78d7c3d141aba4ede4cf9757cb2d6324f99c743810d1b1980"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/calibration_plan.csv",
+      "bytes": 207,
+      "sha256": "2fb16aa7f8763c2e94ff67b4d33c1ddb7744112f53c8b5eac4432e413eb65dc3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/calls.csv",
+      "bytes": 76862,
+      "sha256": "6eeb0fa7c86333c1e6b731f5950f2629a0afaf12b201650cfba7e03812dfaf7f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "0fb08c0ad05caef446220b393c9a3e66b599165ed69c910a37d7b579f3e69d1c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/frames.csv",
+      "bytes": 3258,
+      "sha256": "cf514b5c980819a45c97b4ddaee5df51c00dfc010d3b82643cd6fbf10ea8d696"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/manifest.txt",
+      "bytes": 17950,
+      "sha256": "b547e406f27e98abd5cfbd672007b0e209a9124e7130b8ae49cca19816f95db6"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/matrix_events.csv",
+      "bytes": 9297,
+      "sha256": "2446c02b6861142c2a10e256f310730e0bd44ee3bb4c2f5b30d66087ff2acae9"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/matrix_plan.csv",
+      "bytes": 379,
+      "sha256": "701e5b375a653f69f44f259a3534c0aad34c18c02225cdc5d6fa2dad6f10f701"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "98f7f952cc892c7915d631e225865cc9eee29ab404a38d26530fce10a190f7d2"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/ram-index.txt",
+      "bytes": 842,
+      "sha256": "f220dad52ef727e486edccfb4e09b7c1d1bf76fca6df98374ecfca10d1641df7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/reads.csv",
+      "bytes": 440676,
+      "sha256": "22606f30f216b754c9fba36919c351b0818821fa3144d8ab95dfc0dd8c6c0e62"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/received-ram-sha256.json",
+      "bytes": 3848,
+      "sha256": "54593a5cc09d39c533cfb2f7415ea9d3b4f748f79ebac4a42cabc6e6955edb8c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/roi.csv",
+      "bytes": 5270,
+      "sha256": "f645274bf675d8ce610f71d3b8799c98cfee169d45a589be1ba48fb48b0d8793"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/recovered/startup_journal.txt",
+      "bytes": 56860,
+      "sha256": "b4fe0b7369bcad21b534fb957088fb5d6b46d80144cb5e7b668b4598635e01b8"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch23-gain-matrix-v3/session-status.json",
+      "bytes": 198,
+      "sha256": "c358b2e7abc3bbb1c2b6a1943cc9af6fddc80dbd2972d92fb2ae076f3b17d352"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/FINDINGS.md",
+      "bytes": 3529,
+      "sha256": "47a1811608bf1fca4f3ed98828d5de3c74cfd96587ff1c5b063630880b8b29c5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/VALIDATION.md",
+      "bytes": 3999,
+      "sha256": "b65390d8ae765271976ffe2ae8e0dddbd9f0d5e7fe502cff4b92949771a2011c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/diagnostic-summary.json",
+      "bytes": 14983,
+      "sha256": "8bc2085af686df3cf23f0dd1b2bd57eabde75bda2c4d0ca286069176039bff7b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/matrix-report.json",
+      "bytes": 403847,
+      "sha256": "95506274d34606e3f45a058b4b4af42c12e77ebc891e2df8d709da337d8c6364"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/original-provenance/batch-sha256.json",
+      "bytes": 17631,
+      "sha256": "b8517ad5ffbfa0ca3f1d2691ab5ffa122576a6c9d84d6f48cc12e6ccd49f347d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/original-provenance/deployment-public.json",
+      "bytes": 3582,
+      "sha256": "4a75bfeee395c77bb89f72091ca2da490123773296448b4e1f520a61150ac2b3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/calibration_plan.csv",
+      "bytes": 207,
+      "sha256": "c31f78d78976ec69a0faff0beba9fe75bf5f514de1f3774004f2eff8db518ec4"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/calls.csv",
+      "bytes": 107486,
+      "sha256": "97a31c491792ec355cfb6b3ee2a9c2d6a38d37022b53878418c15017203c44f0"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "f81b398c998cc4f9bb38a4fbaef92553a6fc1d9372dfd610887b5b8100cbdb32"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/frames.csv",
+      "bytes": 3522,
+      "sha256": "2eed0e09b3599d4532dc0949c086d9619a0ef2db9c8422e0fe280f62710e852f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/manifest.txt",
+      "bytes": 26472,
+      "sha256": "63badec0ba7ec72ae2567417f2229ed32e0a976ab9ea9e334cad0dc80e6ec21d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/matrix_events.csv",
+      "bytes": 15822,
+      "sha256": "d1fed0da1fe8d03b593219b9d7a952ffb1adf715aa53e0558f27a71f310ee123"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/matrix_plan.csv",
+      "bytes": 576,
+      "sha256": "71a424163be9ad3dbd12b989a6eb8794cb180e3d7c61481db3a15f9aea0c0f57"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "459aa8987acda72cf616417594aa0ae4eec5c92cbd5a6ff6265a8d6751804b2b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/ram-index.txt",
+      "bytes": 997,
+      "sha256": "24e2c1db0b50b17d38e294a11818509fc5dfca5efcec163c6ac4b6591054550c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/reads.csv",
+      "bytes": 659353,
+      "sha256": "82ff855c716abbebaebae34d3f27fa6e0709d686f3475cffa53143c81e9e767a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/received-ram-sha256.json",
+      "bytes": 4441,
+      "sha256": "6d500c5fe5e89181062d5c32fedfed29d2ac36c87c9d3cf6db7175612916c3bc"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/roi.csv",
+      "bytes": 5262,
+      "sha256": "56b9f69585f4bc688fa7c45ee19333791d38a867dd70ea2eb6cc094162228b36"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/recovered/startup_journal.txt",
+      "bytes": 89737,
+      "sha256": "18b81f951a9bc64c69a112e90d507d7d96f8cf4435f992f22a4b4c35bb606864"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch24-gain-matrix-v4/session-status.json",
+      "bytes": 197,
+      "sha256": "b2f1aa95544885256e04d73b16fbcf4e59d65d1e002042910c80b50217473b48"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/FINDINGS.md",
+      "bytes": 1662,
+      "sha256": "edaeabe75049ef781544a7d3d7616a2a9b29a0ccf510596b09ca40d7603e0c4b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/external-reference.json",
+      "bytes": 1738,
+      "sha256": "81ea8219f1d9fb178ce9fba5456d367540d5d9452b50c1ab03cc8548f59b21bd"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/original-provenance/batch-sha256.json",
+      "bytes": 40540,
+      "sha256": "941b3266a50c0e28085c3d7af6744aa81ad9c6189cca51d2c117c2dd83720ac7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/original-provenance/deployment-public.json",
+      "bytes": 3692,
+      "sha256": "b021aa44fc89baaa2f30f478bcda11f7137b67b499b81853fe4157657d5ee134"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/rebuild-report.json",
+      "bytes": 132656,
+      "sha256": "a9ff3eeb6c42687ea071beb55432da7449fd555a6342e932a5a470ae49dfb783"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/calibration_plan.csv",
+      "bytes": 206,
+      "sha256": "513fdc12e32fa7664e62966da62e2253e2619edf386deee40cc46f60039aea14"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/calls.csv",
+      "bytes": 211700,
+      "sha256": "1824e2f578b47dd84298f78c3a603d449dc860393016fb95b73863013bae6253"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "486adc4ec587faa1bf1c3f0cd13d3c71997b4cf195939e2e78f999551fafe990"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/frames.csv",
+      "bytes": 34118,
+      "sha256": "b798bab516b35c095c271f61d377b922e377c7ed53a5aba57459525be359fd01"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/manifest.txt",
+      "bytes": 17590,
+      "sha256": "8840b6d9b5672fd0d1b56d518a4f9e09d72c2f339f140c6cc93365291ec62df4"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "a1f83b94200a83ff52ea96a16e71351519f3f76daf5798ceae6491858167a109"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/ram-index.txt",
+      "bytes": 7029,
+      "sha256": "99c1068c63de7f8678e255ef1731c9cccf815c7a9b6df2ee77812f13dae24471"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/reads.csv",
+      "bytes": 1188120,
+      "sha256": "9cf38bd2e74b1e3e2906a708199b126ea72404f6f80b415ec5275eed7b366682"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/rebuild_bands.csv",
+      "bytes": 81434,
+      "sha256": "57efe1bb156393024eabf2eb240b8e940683d50ba55f0ede07c6dc553238c2fd"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/rebuild_frames.csv",
+      "bytes": 53273,
+      "sha256": "67513940418874f6ceb7cad80cfa9ea7fb9b46eef0e6bb3719b7464cae66d5a7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/rebuild_points.csv",
+      "bytes": 3482,
+      "sha256": "01e2650967ed5c1e48d401ebe6de8f5aaecaf2e2e23af597602aa23457305183"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/received-ram-sha256.json",
+      "bytes": 30474,
+      "sha256": "71e7dda6f397467cc86a05dd84ae89738fafdf371c5b8accbd0892cb9e221c58"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/roi.csv",
+      "bytes": 5262,
+      "sha256": "31c183201cb31abf6e4ccdbff1805abb4df17db05229ace2afe270a1f4243561"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/recovered/startup_journal.txt",
+      "bytes": 7405,
+      "sha256": "7bc0331e1dec8cf94fc8a4b074c821ae0d8c083277c2d3ebd210b79f98cf51e7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/reference-after.json",
+      "bytes": 666,
+      "sha256": "4a9929e9e49db42f88e48b08fab33a806fa2277838716042c808d3ef9010bd09"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/reference-before.json",
+      "bytes": 575,
+      "sha256": "633cb7b998175442d391d6514ca3c30d017c919c75fec6a92d5cd4a0f1dd384b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch25-exposure-rebuild-v1/session-status.json",
+      "bytes": 199,
+      "sha256": "ee787a41e815451cef0b57bef4d89a1e45418e4608aa97613d82e6cb0011f86b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/FINDINGS.md",
+      "bytes": 4624,
+      "sha256": "f7a4f5d897d9f5450bdc50b8d00f8c101a8ba8d61d20cd754070a597faee28a9"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/VALIDATION.md",
+      "bytes": 4172,
+      "sha256": "842780add17344777637c88215a2bb353d60fff5afcec9ee5718fd5461cf301f"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/diagnostic-summary.json",
+      "bytes": 3310,
+      "sha256": "4d844487bcc617599d9b32ae06ace161183607ee03d03c1fd06e1f2d4ef5d18e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/external-reference.json",
+      "bytes": 2269,
+      "sha256": "791fcd3c8972546a4d4d970241e1a8c9367bf0fe90e3596bfbd268629cd07773"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/observation-summary.json",
+      "bytes": 12807,
+      "sha256": "bd1aa8a2ef93f5416e459164b58434e5bd66c9c64fb2a2690408e8071b3227ec"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/original-provenance/batch-sha256.json",
+      "bytes": 65308,
+      "sha256": "e0020dba6d4f9380345096284b3db28fbbf4e715513d8b097c179d060db3ea64"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/original-provenance/deployment-public.json",
+      "bytes": 3692,
+      "sha256": "bd89342ca945a0ed6c23cf0a8e1d9f78f43ce18c34a0f5bb0123ecfa0fedf581"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/parameter-observations.csv",
+      "bytes": 11149,
+      "sha256": "da04d596c5953259d4b013d1f46f1a559d31ba88aa0269fb5705d8d1280ad805"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/rebuild-report.json",
+      "bytes": 149892,
+      "sha256": "254940cb2065ec055d32eff11cc40bd3a2dbe5f30c1bccef7d489805ed2cdeaa"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/calibration_plan.csv",
+      "bytes": 206,
+      "sha256": "dc939b8cc2bf55748432c5a3230d86f8b050ca56cea6d807674c79534293a967"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/calls.csv",
+      "bytes": 411614,
+      "sha256": "76c39d54a710575a94c9710e0960e95292d197e8eb575d6a7281e713a2813829"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "af0318a12e396a65e0fdb086b9a8034d9523517af56b24a7961a7d1d46d4d1be"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/frames.csv",
+      "bytes": 68344,
+      "sha256": "dc4473b58ef492700e2a240db8c817d568ddf30cc28cd743854f2ba262696af7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/manifest.txt",
+      "bytes": 34695,
+      "sha256": "20d0b6dfea44a33ae49de5e0b5a0cd91ab0b9840ebd82730daeb58ed7c1a7041"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "a6d2296cadbf20902ce7c4e58f62e0e4f3196b3a3311735aa53e6d42c3db7427"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/ram-index.txt",
+      "bytes": 13872,
+      "sha256": "e446537f4044d820cc20ee2350549a24a0ca29097a7d087141c2e1830b59093e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/reads.csv",
+      "bytes": 2405588,
+      "sha256": "c80d122c9cc69a42cc747bcc42c46d1b2869d36eda9da81f6d0dbbb5408fa490"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/rebuild_bands.csv",
+      "bytes": 169869,
+      "sha256": "4557b50a811b7b0d0eb597e9de5ab7b538f367dc27ca5b458fe207d239f78c35"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/rebuild_frames.csv",
+      "bytes": 112272,
+      "sha256": "1ad490233ab5a6fa65d03d4544eeb0fc7af1af3b31435bcd048d6a968c8e0e67"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/rebuild_points.csv",
+      "bytes": 6899,
+      "sha256": "8f07c034856d3b374f2a2e74003b28713cfbb2a51e05a1fd88ff7a06376b2b1e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/received-ram-sha256.json",
+      "bytes": 59509,
+      "sha256": "e0810f86292aa3ac19706661c1b473038786e86d7acf1fdfdfd188330ba9a598"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/roi.csv",
+      "bytes": 5278,
+      "sha256": "acbcedccd9ff296f7ad774e521b49d9118e483eb340f1bbd36c8a2b9e766a407"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/recovered/startup_journal.txt",
+      "bytes": 23749,
+      "sha256": "11ef86188030e489559ebdb7a24bd1e10918bc8bc6cfc955cfe81b2f2236d3df"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/reference-after.json",
+      "bytes": 843,
+      "sha256": "4a476a4c3a6c0fd6a0cdd77d023048728d063676eadb891bb9c0a703e66b0984"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/reference-before.json",
+      "bytes": 708,
+      "sha256": "3f5f9e90dc2ea5ef29c48a2c2f54db1caa1fb7b879d1d95e0996f5e4d91981bb"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-exposure-rebuild-v2/session-status.json",
+      "bytes": 200,
+      "sha256": "13ee6977f3c69c028d0544a66f9b106a70715a071875e0cd20538938cee89b73"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-response-fit-v1/FINDINGS.md",
+      "bytes": 1231,
+      "sha256": "9158fbd668b3e913ff2dd60dda259a409b9827098f052a85e1990e24ed68ba30"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-response-fit-v1/fit.json",
+      "bytes": 43828,
+      "sha256": "b30e504ce97eeb7fca8b23292705d047f1ab65373e3acd8fa6029600841b7b94"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch26-response-fit-v1/original-provenance/sha256.json",
+      "bytes": 1488,
+      "sha256": "4910685470bcd2d8b92adfae6398f3eaf5cba1856b060fb22c41375cfcd05cea"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/FINDINGS.md",
+      "bytes": 1348,
+      "sha256": "c37ff174bebd12406cb319beee85cfb1a17babdea2feb7260b4f16d4bdf04b5a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/VALIDATION.md",
+      "bytes": 5617,
+      "sha256": "3e37129123fc1a9e1b824a056e7e9bd659e77062a1c9daf895339e858dd8500d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/dense-report.json",
+      "bytes": 150095,
+      "sha256": "a5504952a2c741256a891890999821fc6b4bd13c74127bef64c3752bfca26c8a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/external-reference.json",
+      "bytes": 2375,
+      "sha256": "93c4e57f4a5301f25b8c94011f6c0a9bea886c821b25706e54555e4543726766"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/frozen-resume.json",
+      "bytes": 442,
+      "sha256": "562e438b471f2aa97bacd09dfdabb062ab1244a078c98efb7cfbca9648af9e54"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/observation-summary.json",
+      "bytes": 888,
+      "sha256": "772a4cc6158f56ddea8a0174a0737abdf28f8485b1b78ec9ce4bd670c7058d1d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/original-provenance/batch-sha256.json",
+      "bytes": 45606,
+      "sha256": "2dca62e33f819af635c70487e3a08bcdf8137519fc0600ad6d2414bb1b643d90"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/original-provenance/deployment-public.json",
+      "bytes": 3686,
+      "sha256": "3c7fc67808b77b52d54301890b952234419605c8772c7ae515f2c51f056cc785"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/parameter-observations.csv",
+      "bytes": 6981,
+      "sha256": "1a706c0efbd9ceb43f3a3e39413145e98ece69f69606ab4a35d9035857b89f46"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/calibration_plan.csv",
+      "bytes": 206,
+      "sha256": "9c3c986e8b8ef5d4a10ce6e2b593f851151fa1342471001d0b60c8f7c4a740aa"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/calls.csv",
+      "bytes": 272212,
+      "sha256": "c3da13f5eb81718ed164c432854ca70be0ea0b307f288768410e813306e6fa81"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "4fe8b2335fcfe86933ec15590d776e1fefbeb272fd85c497713778c0bf280710"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/frames.csv",
+      "bytes": 41302,
+      "sha256": "baff15ea6bce4aafdcf8d39921d3c213f37ed64d82cdf2d97b804b4013252c8e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/manifest.txt",
+      "bytes": 34521,
+      "sha256": "60c78d07d717bedca8c173cde1f1676681ca873cc47868b72db2de8effea29a0"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "16aecf237bb566ceb34baa0ba1139399539a361c82f6512291dae983d47fb463"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/ram-index.txt",
+      "bytes": 13871,
+      "sha256": "15c1ca37ac9a593242736aafaba9f0039dc6d1f1ac1453663ea631d1c6dbeba2"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/reads.csv",
+      "bytes": 1527774,
+      "sha256": "3634aaeefd4ad9a5f832583808d05ca6b79691cfa05828afa9cd6ab0dc8a6f38"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/rebuild_bands.csv",
+      "bytes": 101972,
+      "sha256": "a2b070ab13e72bb8ec1105befe58f8bf80f8475a3b14438422357ccf75dc8275"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/rebuild_frames.csv",
+      "bytes": 66208,
+      "sha256": "313a2a374649b5d71a78bc4f4da2fd2761e11bebc56c39b8e157bddf74053c2d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/rebuild_points.csv",
+      "bytes": 6947,
+      "sha256": "8477dfdcab6bed3c18f4afbaf8bcd01ba65899a899d95da924e3bc6f938548a6"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/received-ram-sha256.json",
+      "bytes": 59508,
+      "sha256": "5a15c3031e17be8b3525f7c7738550456746f723be29cc80dc0bfc6d7b81fe14"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/roi.csv",
+      "bytes": 5270,
+      "sha256": "f70d496bcfe9ed04b2bca5e4bb8dbd5699a9db45a0eafd3a7594f14a39ffe015"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/startup_journal.txt",
+      "bytes": 23749,
+      "sha256": "b6d8574ac6a82fc073ea032fbb6e4ff586fe3f7c699b9450fffcf0c0d3c54897"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovered/transport-events.jsonl",
+      "bytes": 1514,
+      "sha256": "6bcca08e12432043c7f4455e90af542569a08dc729b6e28471f451748a8c7ff5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/recovery-summary.json",
+      "bytes": 407,
+      "sha256": "5d8f338f03c07ba7236e78062caebe64cac968697498ab1a38e11bd57327fd7b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/reference-after.json",
+      "bytes": 843,
+      "sha256": "0c7351bff6b348b3561169f86de382125b9e6ced9d088518ff1e89c94b227d3e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/reference-before.json",
+      "bytes": 902,
+      "sha256": "78b6b3a074d18f62ca5b0837b14d2fde1f9d3e7acfdcd656b38121221c05ee30"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-exposure-dense-v1/session-status.json",
+      "bytes": 144,
+      "sha256": "2a51ca9d90369cda90e6ebf743e729fbd014638981a770076698eb40d8ddbad3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-luma-transfer-v1/FINDINGS.md",
+      "bytes": 941,
+      "sha256": "598d3b244a071d1cf80f991562180ad675f5b8934d22676759e455d87252d06d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-luma-transfer-v1/VALIDATION.md",
+      "bytes": 5617,
+      "sha256": "3e37129123fc1a9e1b824a056e7e9bd659e77062a1c9daf895339e858dd8500d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-luma-transfer-v1/analysis-final.json",
+      "bytes": 50988,
+      "sha256": "5c7ef4b27946cacdbee8b89a68bd69fc58d86a317d236bc4f4e5b7e4a6ceb19d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-luma-transfer-v1/analysis.json",
+      "bytes": 49885,
+      "sha256": "d9d0e85d57546dce48d528322988eea5d7c85a8cd01c4908e04953565ca29148"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-luma-transfer-v1/original-provenance/sha256.json",
+      "bytes": 1508,
+      "sha256": "98debe71e3b6a1ee22fd097457ed84f5581f78fcda350aad9baab2ec01062038"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-response-fit-v2/FINDINGS.md",
+      "bytes": 626,
+      "sha256": "ac3d3ab1f287bbfa810c37082a71bc24f24d8a53a9463418a933a2b95ed7fb9b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-response-fit-v2/fit.json",
+      "bytes": 79637,
+      "sha256": "5babcf8b5ab11b00eb2e0ca09fc0fcfd5e18518cc86214d9db826273281d3cf6"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch27-response-fit-v2/original-provenance/sha256.json",
+      "bytes": 695,
+      "sha256": "6981e24d3bddb74bff59785bc2dcbae0d18c23e758839760eb9eb6433df1290e"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/FINDINGS.md",
+      "bytes": 2426,
+      "sha256": "eca34ed74234ae59027981fa55ffa07aec36a905f091ce00c7d57ccd8063bed5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/VALIDATION.md",
+      "bytes": 7892,
+      "sha256": "e63e4fd6fc9e4be0e73ddf7e40580366746773a3f9c72666acdc05c867145763"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/dense-report.json",
+      "bytes": 150062,
+      "sha256": "a22f743fd43f62254a3ec3fe764c10f7e5de90bbf58cfbb0aa657a87111bc459"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/external-reference.json",
+      "bytes": 1757,
+      "sha256": "1a051c8532c48ce9461cc8ff188b4e7bb3c186de259dac9a4c2200613c1e44d3"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/fixed-model-validation-final.json",
+      "bytes": 30373,
+      "sha256": "4e89e35115cd3962d9cac15455d9ab9dd2d0c83f9bbe25fcc048a2badf189db1"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/fixed-model-validation.json",
+      "bytes": 30277,
+      "sha256": "d2638ac62f150b70b2b7324091e07cd30429b164b8e897f7ab66eebf507a904d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/frozen-resume.json",
+      "bytes": 442,
+      "sha256": "3f25c70b6b79cce2543616ca07ed55d3921d83bf4cccf9539e7e3e153da8f877"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/observation-summary.json",
+      "bytes": 1411,
+      "sha256": "d5d725c0b737024dd266f2e6229f3d9f9ccbefdba4b46efa17cb2a2ae3b624db"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/original-provenance/batch-sha256.json",
+      "bytes": 41266,
+      "sha256": "ecdd03b736dcea0e1bd711c8743ff67e4e7674edf23c7985428d7d0e81862cb1"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/original-provenance/deployment-public.json",
+      "bytes": 3686,
+      "sha256": "88ced28334e2a09a971697157922b293870462706272df2743cdc5b2520a1082"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/calibration_plan.csv",
+      "bytes": 206,
+      "sha256": "dc939b8cc2bf55748432c5a3230d86f8b050ca56cea6d807674c79534293a967"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/calls.csv",
+      "bytes": 272194,
+      "sha256": "741da4c268fbf16be4caa5966f94c08770d4ca8f989bfd14ed914027bab37506"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/execution.csv",
+      "bytes": 974,
+      "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/frame_burst.csv",
+      "bytes": 1097,
+      "sha256": "97513a6daed2eae64950b5e636f9e358dec922280d44aa53f4878e6f06068d0b"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/frames.csv",
+      "bytes": 41310,
+      "sha256": "0a4dfe6760149a90a31f30b3074e0bc9d39977368e3d6661c41b213b707c3587"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/lifecycle.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/manifest.txt",
+      "bytes": 34503,
+      "sha256": "9c6c4d8d5eb7f2e3465a6554f9a6eefe7630d1ed8a0b90b1c155805cdae1de00"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/noise.csv",
+      "bytes": 197,
+      "sha256": "6fbccd2014b15ba481276e1eb407bddba4ce7e207b2c21ee950e67970c7f7c77"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/ram-index.txt",
+      "bytes": 13871,
+      "sha256": "44ae519f98d110d5e52bc555e5003fcc0080fb969540845bc3f307d108ade60a"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/reads.csv",
+      "bytes": 1527545,
+      "sha256": "c0f709891cbe883eb7129f549e7dd85663639c49bf2545a4d410515c0f439620"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/rebuild_bands.csv",
+      "bytes": 102430,
+      "sha256": "555b1e751064daa403ab91ace335221012291a59ea8276caeed729eaa6c0d3b7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/rebuild_frames.csv",
+      "bytes": 66221,
+      "sha256": "3c17f5db6496014a2c6c19dcbec26a714851bd1e27a0d058511a15527e1524d8"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/rebuild_points.csv",
+      "bytes": 6932,
+      "sha256": "4d9b06e1df835c4a9c4c718602fb3c29b7cfc35feba2fca319ee411bdcb0c87c"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/received-ram-sha256.json",
+      "bytes": 59508,
+      "sha256": "e2bb70166c19c43e10c1fae953860e1ca38f7457eafa06e88224993177c216f6"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/roi.csv",
+      "bytes": 5270,
+      "sha256": "5fee3b5152ce1b00242975fb624c331bcf8b2c2a0eb115010c80e8c42188d5a2"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/startup_journal.txt",
+      "bytes": 23749,
+      "sha256": "e64d70af1754c8927294a265757b901c1e39464d92d3499c32e29e78859ea7e7"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovered/transport-events.jsonl",
+      "bytes": 306,
+      "sha256": "6e965032518c9d5c6354b31ecd715f3712b86ecfded8b60e7fa0be1f159865a5"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/recovery-summary.json",
+      "bytes": 407,
+      "sha256": "13a157e10c14c605a345941f907aab860f5d6b0aec1922f7b227a575c0cfb678"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/reference-after.json",
+      "bytes": 455,
+      "sha256": "74e7bf7e0d82b1f064b467557e36944c4eacf345a616177dd5c6288a7bece690"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/reference-before.json",
+      "bytes": 935,
+      "sha256": "892d59bf880b194325ec2b5030703675d80e87c036af111a7560d20659620a0d"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/reference-parameters.csv",
+      "bytes": 7759,
+      "sha256": "19897baeb3c24e51e3cb3e0f4c45008a4507ba1eb62e1663528a37087161e279"
+    },
+    {
+      "path": "handoff/camera-20261114/evidence/batch28-exposure-dense-validation-v1/session-status.json",
+      "bytes": 143,
+      "sha256": "a5bc2c8235fa25de0c4f2376d78f0183f82d3c8542a011ab579534efc8574016"
+    },
+    {
+      "path": "handoff/camera-20261114/hardware-status.json",
+      "bytes": 35425,
+      "sha256": "eb3f6ae32552707a7f10cebc7144d4ad188ab50e95ca34bdadfd2f8669349ce0"
+    },
+    {
+      "path": "handoff/camera-20261114/index.json",
+      "bytes": 17472,
+      "sha256": "3c0f53eb28182fd2213058225c4bb22d8c26c319adf29dd5ff65143c46a9c0ef"
+    },
+    {
+      "path": "handoff/camera-20261114/omitted-images.json",
+      "bytes": 329337,
+      "sha256": "664c4f516dfc310bd1e6be17da3d3707474ec2430e185838eb82077927ee39f3"
+    },
+    {
+      "path": "handoff/camera-20261114/snapshot.json",
+      "bytes": 3592,
+      "sha256": "70f794cd19f253f8b398625856da70b49750e791511ebb582e89067e3c6a03f5"
+    },
+    {
+      "path": "handoff/camera-20261114/validation/arm-build-and-tests.txt",
+      "bytes": 349,
+      "sha256": "33771a2fbb6e97f4782023f3bd0fddfd0b3f12b8f0713de78ad924123c8ebd42"
+    },
+    {
+      "path": "handoff/camera-20261114/validation/arm-log-provenance.json",
+      "bytes": 229,
+      "sha256": "9ba818d442ead603a23ea6d4dce12cf7399138cfefc0b4cd2cb47caab8adc27f"
+    },
+    {
+      "path": "handoff/camera-20261114/validation/native-build-and-tests.txt",
+      "bytes": 8363,
+      "sha256": "a53fb30cace5c99e4e078cb06e1c41e56752c1d6410eb7cd87c581411de2afcc"
+    },
+    {
+      "path": "handoff/camera-20261114/validation/native-log-provenance.json",
+      "bytes": 232,
+      "sha256": "a345724e103178c9e423ef48079d681b600be88cadad2ea933a7762b8e4f9198"
+    },
+    {
+      "path": "handoff/camera-20261114/validation/python-results.json",
+      "bytes": 2811,
+      "sha256": "a72553f97352e32ded55a6475b7db2ed95f7b250d9fb7c070ef02ad446e6d132"
+    },
+    {
+      "path": "handoff/camera-20261114/validation/source-and-data-audit.json",
+      "bytes": 524,
+      "sha256": "99bb12fc20bcebcf7b83b8d2190aa41c2e42166e69acb15bb04c54541905034d"
+    },
+    {
+      "path": "requirements-camera.txt",
+      "bytes": 42,
+      "sha256": "45fdf7093710b6fa5103b5a76b840b4ddb3b2ec65ca528ebd0d0b9a5fe313247"
+    },
+    {
+      "path": "tests/camera_ccm_boot_report.py",
+      "bytes": 8688,
+      "sha256": "4b7765da2ed409284f69883dbdeee854de607eab50f27b4911cfb9fffb1f30ca"
+    },
+    {
+      "path": "tests/camera_ccm_bytes_report.py",
+      "bytes": 7848,
+      "sha256": "3886cc1eda18e7731d7a46bf9aed8f9b60da54050495c6558c9787aaeb3fd652"
+    },
+    {
+      "path": "tests/camera_ccm_report.py",
+      "bytes": 6573,
+      "sha256": "040725d2b07f724427d2c27359638a5fb2bbb8759355f4cf51cabbc702687819"
+    },
+    {
+      "path": "tests/camera_gain_matrix_report.py",
+      "bytes": 7226,
+      "sha256": "29c414cd4fa04e7d0595241496253394a0266a67c237771a626418d577078499"
+    },
+    {
+      "path": "tests/camera_hardware_handoff.py",
+      "bytes": 5723,
+      "sha256": "f4f3bf3991fb95f9a70e232bda6a73a62f06a06e4b336d074ccf186404af79b2"
+    },
+    {
+      "path": "tests/camera_hg_report.py",
+      "bytes": 5250,
+      "sha256": "abd5d6db166683270b3c4b66d14025d6be5eb3cf6dd1b996023158c8bc1e2c80"
+    },
+    {
+      "path": "tests/camera_writer_identity.py",
+      "bytes": 2817,
+      "sha256": "0a1dd4eb7fc960dbf44353591c2323b524ef12a891c637854618d973a5d2db26"
+    },
+    {
+      "path": "tests/camera_writer_report.py",
+      "bytes": 7461,
+      "sha256": "bc7477e6af33aa12c44ed9cfbd7d96402e9cac8b487169d6393857bc30d68377"
+    },
+    {
+      "path": "tests/camera_writer_trace.py",
+      "bytes": 2604,
+      "sha256": "908aa1899c2ece5ff91238018d56e8b36044f880bc9e485c8590ab01bd6152f0"
+    },
+    {
+      "path": "tests/camera_writer_trace_transport.py",
+      "bytes": 7503,
+      "sha256": "077d1f308bf65299c9e7769dd8d9b4a535be5ca9de1c8223c18479e5270615e9"
+    },
+    {
+      "path": "tests/exposure_automation.py",
+      "bytes": 8706,
+      "sha256": "18b9feda356389a4d84bb46636a4392b749f68407f22e457ffd738d2e3704446"
+    },
+    {
+      "path": "tests/exposure_dense_fit.py",
+      "bytes": 1899,
+      "sha256": "d3be498edc715911ba69214926da06bdcd9e287c62dd02716d74b0b15f9faa4b"
+    },
+    {
+      "path": "tests/exposure_dense_report.py",
+      "bytes": 4727,
+      "sha256": "92bf3bfb3a2a548ad7d02bc4a063fff02f64895e3f14ab145241dc553ff8c8e8"
+    },
+    {
+      "path": "tests/exposure_field.py",
+      "bytes": 3213,
+      "sha256": "b01105a15e8808fcfb5057a16f441f452a8fdcb4ce5200c9e94527d2d16b8b74"
+    },
+    {
+      "path": "tests/exposure_isp_report.py",
+      "bytes": 7902,
+      "sha256": "4ce5f3ef08adf47ee6c08d23522394a65c289ec45195847600803d3e1c4a197e"
+    },
+    {
+      "path": "tests/exposure_isp_update_report.py",
+      "bytes": 5158,
+      "sha256": "df05e0e775fb11607993f251853351395dcf8dc29bde85c9e031639ad631b85b"
+    },
+    {
+      "path": "tests/exposure_luma_transfer.py",
+      "bytes": 4798,
+      "sha256": "a25c50f3d755e2d4cac50c6d0196d0295c7bea62f439389b460c24dc5c34c53c"
+    },
+    {
+      "path": "tests/exposure_luma_validate.py",
+      "bytes": 4534,
+      "sha256": "55a68493d5f2d15266dd74b4d8c95b4de8875f6012337d80410b7a34db8f10e2"
+    },
+    {
+      "path": "tests/exposure_no_receive_report.py",
+      "bytes": 5362,
+      "sha256": "d0e1527f1a4fcd1537702f65487a3c5f4e1d5084ca0ad4cf2754fe67d7162975"
+    },
+    {
+      "path": "tests/exposure_rebuild_report.py",
+      "bytes": 7545,
+      "sha256": "184e68afce36570a4bbd2a2fb68ead7907cbdfbfbf38e152bf796bf38d38dd03"
+    },
+    {
+      "path": "tests/exposure_response_fit.py",
+      "bytes": 2274,
+      "sha256": "c45d7d2a74e13a45888fc15177051d24c80414d030d355b1f565d97908470ef5"
+    },
+    {
+      "path": "tests/exposure_sweep.py",
+      "bytes": 6768,
+      "sha256": "2b005144735e0d98286749bc84b6fa8be3ec740a447d219e31bd3a02f5ffae81"
+    },
+    {
+      "path": "tests/exposure_sweep_session.py",
+      "bytes": 7953,
+      "sha256": "c194335e1414c624c7e456952a85790d3472970300565e89566537cff3ae441b"
+    },
+    {
+      "path": "tools/bootstrap_camera_handoff.py",
+      "bytes": 1396,
+      "sha256": "89e7877c3574ace3591bf2b7f1fe2d298076d4ad224f1e6c7943e70c16a88b20"
+    },
+    {
+      "path": "tools/camera_ccm_boot_report.py",
+      "bytes": 779,
+      "sha256": "00516ec8a73102a16234df7e39f4e1b136db20fbb59a8a64cbcd7c41166e837f"
+    },
+    {
+      "path": "tools/camera_ccm_bytes_report.py",
+      "bytes": 800,
+      "sha256": "a34212a412f11505e6403bebc3c98741aacca0186965a5d06ea92c24c59bbcea"
+    },
+    {
+      "path": "tools/camera_ccm_report.py",
+      "bytes": 766,
+      "sha256": "76a62dcf3f262ee998e1903a31690f396eda75da42fe4a22dafcce47131f1cd0"
+    },
+    {
+      "path": "tools/camera_gain_matrix_report.py",
+      "bytes": 24180,
+      "sha256": "467063214549c4fd3f9408c4885c7ba128152d0a184c29597df689e69eaa02be"
+    },
+    {
+      "path": "tools/camera_hg_report.py",
+      "bytes": 25526,
+      "sha256": "d2e614d75ca5e2b2dfe19f8c1e04dd04feb74c6c8c820854c3395bcda8ee2524"
+    },
+    {
+      "path": "tools/camera_writer_identity.py",
+      "bytes": 4676,
+      "sha256": "0e870c21ef4de3fa62481ad4028d78438ec4efaec12d42a563b7ed65f0d15eb3"
+    },
+    {
+      "path": "tools/camera_writer_report.py",
+      "bytes": 14372,
+      "sha256": "723495a0b781aa894cebb8b63d20dae39e19d680d53b217837272fccb4015538"
+    },
+    {
+      "path": "tools/camera_writer_trace.py",
+      "bytes": 12503,
+      "sha256": "408399cda6323f082c73992d6d7d0ef3f4456fc8c6bcacbe6dc7ed4f7bdec6d3"
+    },
+    {
+      "path": "tools/decode_exposure_state.py",
+      "bytes": 9686,
+      "sha256": "cf36fac0fa37e7e2e2cea8b6d6749a801d006c5b035c29ee4217b0134bf9b3cd"
+    },
+    {
+      "path": "tools/deploy_exposure_field.py",
+      "bytes": 2648,
+      "sha256": "e90cc3deef599188b57bc3ef5d4578a129184980ebd847f8ed20f2fca5247eb3"
+    },
+    {
+      "path": "tools/export_camera_handoff.py",
+      "bytes": 4960,
+      "sha256": "53bae9dac8b8a04dc3e9ed244c2fbc2c271742d38611eada29465d740ca363ab"
+    },
+    {
+      "path": "tools/exposure_dense_fit.py",
+      "bytes": 823,
+      "sha256": "dd809e1a791e0de1593ae626edd8946943404ddcb1a39623d85f774323fe7187"
+    },
+    {
+      "path": "tools/exposure_dense_report.py",
+      "bytes": 800,
+      "sha256": "9aecb8414467e1eb5fc63dfb87d558715d15acb074ee9522cea1d75d67da1cdf"
+    },
+    {
+      "path": "tools/exposure_field_report.py",
+      "bytes": 9251,
+      "sha256": "c9cbfea4381bf29b5ad952f886629e67997f38a0bdbd9f2edbcd33522e90faa1"
+    },
+    {
+      "path": "tools/exposure_isp_report.py",
+      "bytes": 10813,
+      "sha256": "351dfe208bd091e2c36575ec2a80e991753abbdbb8f5ca47fc0d2038736d45d1"
+    },
+    {
+      "path": "tools/exposure_isp_update_report.py",
+      "bytes": 12806,
+      "sha256": "61f1c4df45316ee2ac03f25cdfdcd0828e9b25861b4bcecc6de7a562656c1588"
+    },
+    {
+      "path": "tools/exposure_luma_transfer.py",
+      "bytes": 9824,
+      "sha256": "87520a5e616554849bb399eb3941364c6f1ee03bcc680ba8564d69e5d255db18"
+    },
+    {
+      "path": "tools/exposure_luma_validate.py",
+      "bytes": 7031,
+      "sha256": "76d52123e5dddfa445468a65221a51513c3c234fe6624664d66298d1739aade9"
+    },
+    {
+      "path": "tools/exposure_no_receive_report.py",
+      "bytes": 14718,
+      "sha256": "a777f5c8e373c9dbaceded47bdb557ab4d3a0203c21a62298edcb0f491fbe891"
+    },
+    {
+      "path": "tools/exposure_opencv_crosscheck.py",
+      "bytes": 5666,
+      "sha256": "1e355a89426c3c17eb731b8342b3f35f3e80aede3d31e287f9847cbe91af03fc"
+    },
+    {
+      "path": "tools/exposure_rebuild_report.py",
+      "bytes": 28177,
+      "sha256": "a945a3beaa7325a15ec7d39d920adb81ec5ba171df73d46b6eb2566e8162019a"
+    },
+    {
+      "path": "tools/exposure_register_contract.py",
+      "bytes": 1731,
+      "sha256": "086dc4e7d54bf137cac56fea530aac683e26e68a4cb90ea9b5773e0f610669b6"
+    },
+    {
+      "path": "tools/exposure_response_fit.py",
+      "bytes": 12081,
+      "sha256": "bee99d8a3c64ae1ff33590750433d50d661a1c51ee629dbde0a5cea369ec4950"
+    },
+    {
+      "path": "tools/exposure_session.py",
+      "bytes": 35309,
+      "sha256": "78c67bff19dbf251415d81a8be6af4cfaa5396948146ea068155e4018b14e58b"
+    },
+    {
+      "path": "tools/exposure_sweep.py",
+      "bytes": 32642,
+      "sha256": "cd8a9ddf87c975c245b9480aa8f3caa6a569d238797baa2f664b1269df36fd9c"
+    },
+    {
+      "path": "tools/exposure_sweep_contract.py",
+      "bytes": 65311,
+      "sha256": "a53d728a4f9940687fdf3b7b02bc8112535c1781201e7f2a596739b866f2ddbc"
+    },
+    {
+      "path": "tools/exposure_sweep_session.py",
+      "bytes": 10028,
+      "sha256": "ccf045a74ab18f93e4e9539c6a72c3c0498150311e2e3b9afe0f339d61c5e003"
+    },
+    {
+      "path": "tools/verify_camera_handoff.py",
+      "bytes": 3451,
+      "sha256": "1c2d8e1d423221e9e5299f0eb2e4dc5931e635d65ba0ba3bdee5a20dcf6f6a1b"
+    }
+  ]
+}
