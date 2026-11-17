@@ -1,6 +1,26 @@
 #include "ui.h"
 
 #include <string.h>
+#include <math.h>
+
+FilmRecipe film_ui_capture_recipe(const FilmUi *ui)
+{
+    FilmRecipe recipe = film_default_recipe();
+    recipe.aspect = ui->recipe.aspect;
+    recipe.scale = ui->recipe.scale;
+    recipe.filter = ui->recipe.filter;
+    recipe.yuv = ui->recipe.yuv;
+    recipe.grain_seed = ui->recipe.grain_seed;
+    return recipe;
+}
+
+float film_ui_curve_adjust(float stored, int direction)
+{
+    /* Eleven UI levels map to normalized -1..+1 without changing old files. */
+    if (!isfinite(stored)) return 0;
+    if (!direction) return stored;
+    return fmaxf(-1, fminf(1, (roundf(stored * 5) + (direction > 0 ? 1 : -1)) / 5));
+}
 
 FilmUi film_ui_new(unsigned photos)
 {
@@ -79,18 +99,11 @@ void film_ui_apply_look(FilmRecipe *recipe, unsigned look, float strength)
 void film_ui_select_look(FilmRecipe *recipe, const FilmRecipe *saved, const char *id,
                          const FilmProfile *preset)
 {
-    if (!strcmp(id, saved->lut_id)) {
-        recipe->profile = saved->profile;
-    } else {
-        recipe->profile = *preset;
-        const FilmProfile *base = &saved->profile;
-        if (base->exposure) recipe->profile.exposure = base->exposure;
-        if (base->global.hue || base->global.saturation || base->global.lightness)
-            recipe->profile.global = base->global;
-        for (unsigned i = 0; i < 12; ++i) {
-            FilmHsl zone = base->zones[i];
-            if (zone.hue || zone.saturation || zone.lightness) recipe->profile.zones[i] = zone;
-        }
-    }
+    /* Film simulation is one setting, not a saved custom-settings bank.
+     * Transfer encodings belong to the selected asset. User controls, including
+     * explicit zeroes, belong to the current recipe, never the saved baseline. */
+    (void)saved;
+    recipe->profile.input = preset->input;
+    recipe->profile.output = preset->output;
     snprintf(recipe->lut_id, sizeof recipe->lut_id, "%s", id);
 }

@@ -1,14 +1,18 @@
 #ifndef FILM_PLATFORM_CAMERA_H
 #define FILM_PLATFORM_CAMERA_H
 #include "film.h"
+#include "film_runtime_contract.h"
+#include "hardware_exposure.h"
+#include "hardware_transport.h"
 
 typedef enum { FILM_CAMERA_REAR1 = 1, FILM_CAMERA_REAR2, FILM_CAMERA_FRONT } FilmSensor;
 typedef enum {
-    FILM_CAM_EXPOSURE, FILM_CAM_METERING, FILM_CAM_EV_COMP, FILM_CAM_WB,
+    FILM_CAM_EXPOSURE, FILM_CAM_EXPOSURE_MODE, FILM_CAM_EV_COMP, FILM_CAM_WB,
     FILM_CAM_CONTRAST, FILM_CAM_SATURATION, FILM_CAM_SHARPNESS, FILM_CAM_CONTROL_COUNT
 } FilmCameraControl;
 typedef enum { FILM_METER_MANUAL, FILM_METER_AVERAGE, FILM_METER_CENTER } FilmMeterMode;
-enum { FILM_EXPOSURE_MIN = -5, FILM_EXPOSURE_MAX = 5 };
+typedef enum { FILM_EXPOSURE_NATIVE_AE,FILM_EXPOSURE_MANUAL } FilmExposureMode;
+enum { FILM_EXPOSURE_MIN = FILM_NATIVE_EXPOSURE_MIN, FILM_EXPOSURE_MAX = FILM_NATIVE_EXPOSURE_MAX };
 enum { FILM_SHARPNESS_MIN = -2, FILM_SHARPNESS_MAX = 2 };
 #define FILM_METER_TOLERANCE_EV .25f
 
@@ -27,6 +31,11 @@ typedef struct {
     unsigned preview_pending;
     bool preview_ready;
     bool preview_signaled;
+    FilmHardwareExposure exposure;
+    FilmRegisterTransport exposure_transport;
+    FILE *exposure_trace;
+    bool exposure_requested;
+    FilmExposureMode exposure_mode;
 } FilmCamera;
 
 typedef struct {
@@ -65,9 +74,18 @@ int film_camera_meter_step(FilmExposureMeter *meter, int step, FilmMeterReading 
 
 FilmStatus film_camera_open(FilmCamera *camera, FilmPixelFormat format, FilmSensor sensor);
 FilmStatus film_camera_capture(FilmCamera *camera, FilmFrame *frame);
+FilmStatus film_camera_capture_raw(FilmCamera *camera,FilmFrame *frame,FILE *local_trace);
+FilmStatus film_camera_capture_pair(FilmCamera *,FilmFrame *raw,FilmFrame *native,FILE *local_trace);
 FilmStatus film_camera_measure(FilmCamera *camera, FilmFrame *frame, bool keep_stream, FilmCaptureTiming *timing);
 FilmStatus film_camera_receive(FilmCamera *camera, FilmImage *linear, bool keep_stream, FilmCaptureTiming *timing);
 FilmStatus film_camera_request_30fps(FilmCamera *camera);
+FilmStatus film_camera_request_15fps(FilmCamera *camera);
+FilmStatus film_camera_enable_manual_exposure(FilmCamera *camera, FILE *local_trace);
+FilmStatus film_camera_select_exposure_mode(FilmCamera *,FilmExposureMode,int,FILE *);
+FilmStatus film_camera_set_ae_compensation(FilmCamera *,int);
+FilmStatus film_camera_progress_manual_exposure(FilmCamera *camera);
+FilmStatus film_camera_verify_manual_capture(FilmCamera *camera);
+void film_camera_close_manual_exposure(FilmCamera *camera);
 FilmStatus film_camera_yuv_matrix(FilmCamera *camera, FilmYuv *matrix);
 FilmStatus film_camera_set_control(FilmCamera *camera, FilmCameraControl control, int value);
 FilmCameraAutoState film_camera_auto_state(const FilmCamera *camera);

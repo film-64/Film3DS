@@ -7,6 +7,9 @@
 
 enum { PROFILE_BYTES = 172, FRAME_HEADER = 304, FRAME_HEADER_V2 = 308, VERSION = 1 };
 enum { FRAME_HEADER_V3 = FRAME_HEADER_V2 + 4 * FILM_TONE_COUNT };
+enum { FRAME_HEADER_V4 = FRAME_HEADER_V3 + 4 * FILM_TONE_COUNT + 4 };
+enum { FRAME_HEADER_V5 = FRAME_HEADER_V4 + 4 * FILM_TONE_COUNT };
+enum { FRAME_HEADER_V6 = FRAME_HEADER_V5 + 28 };
 _Static_assert(sizeof(float) == 4 && FLT_RADIX == 2 && FLT_MANT_DIG == 24,
                "Film format requires binary32");
 
@@ -154,15 +157,25 @@ FilmStatus film_frame_write(const char *path, const FilmFrame *frame)
     const FilmImage *image = &frame->source;
     const FilmRecipe *r = &frame->recipe;
     size_t bytes = film_image_bytes(image->width, image->height, image->format);
+    if(image->format==FILM_RAW10_RGGB)for(size_t i=1;i<bytes;i+=2)if(image->pixels[i]>3)return FILM_CORRUPT;
     unsigned w, h;
     FilmRect rect;
     if (!bytes || film_scaled_dims(image->width, image->height, r->scale, &w, &h) != FILM_OK ||
-        film_crop_rect(w, h, r->aspect, &rect) != FILM_OK) return FILM_INVALID;
+        film_crop_rect(w, h, r->aspect, &rect) != FILM_OK ||
+        film_composition_rect(image->width,image->height,r,&rect)!=FILM_OK) return FILM_INVALID;
     unsigned version = r->base_saturation != 0 ? 2 : VERSION;
     for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
         if (r->tone.value[i] != 0) version = 3;
-    size_t header_size = version == 3 ? FRAME_HEADER_V3 : version == 2 ? FRAME_HEADER_V2 : FRAME_HEADER;
-    uint8_t header[FRAME_HEADER_V3] = {'F', '3', 'S', 'R'};
+    if (r->sharpness) version = 4;
+    for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
+        if (r->input_tone.value[i] != 0) version = 4;
+    for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
+        if (r->output_tone.value[i] != 0) version = 5;
+    if (r->white_balance.kelvin || r->white_balance.red || r->white_balance.blue ||
+        r->crop_percent || r->crop_positioned) version=6;
+    size_t header_size = version == 6 ? FRAME_HEADER_V6 : version == 5 ? FRAME_HEADER_V5 : version == 4 ? FRAME_HEADER_V4 : version == 3 ? FRAME_HEADER_V3 :
+                         version == 2 ? FRAME_HEADER_V2 : FRAME_HEADER;
+    uint8_t header[FRAME_HEADER_V6] = {'F', '3', 'S', 'R'};
     put32(header + 4, version);
     put32(header + 8, header_size);
     put32(header + 12, (uint32_t)bytes);
@@ -184,9 +197,22 @@ FilmStatus film_frame_write(const char *path, const FilmFrame *frame)
     memcpy(header + 64, r->lut_id, strlen(r->lut_id) + 1);
     put_profile(header + 128, &r->profile);
     if (version >= 2) put_float(header + FRAME_HEADER - 4, r->base_saturation);
-    if (version == 3)
+    if (version >= 3)
         for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
             put_float(header + FRAME_HEADER_V2 - 4 + 4 * i, r->tone.value[i]);
+    if (version >= 4) {
+        for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
+            put_float(header + FRAME_HEADER_V3 - 4 + 4 * i, r->input_tone.value[i]);
+        put32(header + FRAME_HEADER_V4 - 8, (uint32_t)(r->sharpness + 5));
+    }
+    if (version >= 5)
+        for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
+            put_float(header + FRAME_HEADER_V4 - 4 + 4 * i, r->output_tone.value[i]);
+    if (version==6) {
+        unsigned values[]={r->white_balance.kelvin,(unsigned)(r->white_balance.red+9),
+            (unsigned)(r->white_balance.blue+9),r->crop_percent,r->crop_x,r->crop_y,r->crop_positioned?1u:0u};
+        for (unsigned i=0;i<7;++i) put32(header+FRAME_HEADER_V5-4+4*i,values[i]);
+    }
     uint32_t crc = crc32(UINT32_MAX, header, header_size - 4);
     put32(header + header_size - 4, ~crc32(crc, image->pixels, bytes));
     FilmWrite write;
@@ -199,11 +225,12 @@ FilmStatus film_frame_write(const char *path, const FilmFrame *frame)
 
 static FilmStatus read_frame(FILE *file, FilmFrame *frame)
 {
-    uint8_t h[FRAME_HEADER_V3];
+    uint8_t h[FRAME_HEADER_V6];
     if (fread(h, 1, 8, file) != 8 || memcmp(h, "F3SR", 4)) return FILM_CORRUPT;
     uint32_t version = get32(h + 4);
-    if (version < VERSION || version > 3) return FILM_UNSUPPORTED;
-    size_t header_size = version == 3 ? FRAME_HEADER_V3 : version == 2 ? FRAME_HEADER_V2 : FRAME_HEADER;
+    if (version < VERSION || version > 6) return FILM_UNSUPPORTED;
+    size_t header_size = version == 6 ? FRAME_HEADER_V6 : version == 5 ? FRAME_HEADER_V5 : version == 4 ? FRAME_HEADER_V4 : version == 3 ? FRAME_HEADER_V3 :
+                         version == 2 ? FRAME_HEADER_V2 : FRAME_HEADER;
     if (fread(h + 8, 1, header_size - 8, file) != header_size - 8 ||
         get32(h + 8) != header_size) return FILM_CORRUPT;
     unsigned w = get32(h + 16), height = get32(h + 20);
@@ -218,6 +245,7 @@ static FilmStatus read_frame(FILE *file, FilmFrame *frame)
     if (status != FILM_OK) return status;
     uint32_t crc = crc32(UINT32_MAX, h, header_size - 4);
     if (get32(h + header_size - 4) != ~crc32(crc, frame->source.pixels, bytes)) return FILM_CORRUPT;
+    if(format==FILM_RAW10_RGGB)for(size_t i=1;i<bytes;i+=2)if(frame->source.pixels[i]>3)return FILM_CORRUPT;
 
     frame->captured_at = get32(h + 28) | (uint64_t)get32(h + 32) << 32;
     frame->exposure_us = get32(h + 36);
@@ -228,9 +256,27 @@ static FilmStatus read_frame(FILE *file, FilmFrame *frame)
     r->grain_seed = get32(h + 52);
     r->grain_amount = get_float(h + 56);
     if (version >= 2) r->base_saturation = get_float(h + FRAME_HEADER - 4);
-    if (version == 3)
+    if (version >= 3)
         for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
             r->tone.value[i] = get_float(h + FRAME_HEADER_V2 - 4 + 4 * i);
+    if (version >= 4) {
+        for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
+            r->input_tone.value[i] = get_float(h + FRAME_HEADER_V3 - 4 + 4 * i);
+        uint32_t sharpness = get32(h + FRAME_HEADER_V4 - 8);
+        if (sharpness > 10) return FILM_CORRUPT;
+        r->sharpness = (int)sharpness - 5;
+    }
+    if (version >= 5)
+        for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
+            r->output_tone.value[i] = get_float(h + FRAME_HEADER_V4 - 4 + 4 * i);
+    if (version==6) {
+        uint32_t red=get32(h+FRAME_HEADER_V5),blue=get32(h+FRAME_HEADER_V5+4),flags=get32(h+FRAME_HEADER_V6-8);
+        if (red>18 || blue>18 || flags>1) return FILM_CORRUPT;
+        r->white_balance=(FilmWhiteBalance){get32(h+FRAME_HEADER_V5-4),(int)red-9,(int)blue-9};
+        r->crop_percent=get32(h+FRAME_HEADER_V5+8);
+        r->crop_x=get32(h+FRAME_HEADER_V5+12); r->crop_y=get32(h+FRAME_HEADER_V5+16);
+        r->crop_positioned=flags!=0;
+    }
     r->jpeg_quality = get32(h + 60);
     memcpy(r->lut_id, h + 64, sizeof r->lut_id);
     r->profile = get_profile(h + 128);
@@ -239,7 +285,8 @@ static FilmStatus read_frame(FILE *file, FilmFrame *frame)
     unsigned scaled_w, scaled_h;
     FilmRect rect;
     if (film_scaled_dims(w, height, r->scale, &scaled_w, &scaled_h) != FILM_OK ||
-        film_crop_rect(scaled_w, scaled_h, r->aspect, &rect) != FILM_OK) return FILM_CORRUPT;
+        film_crop_rect(scaled_w, scaled_h, r->aspect, &rect) != FILM_OK ||
+        film_composition_rect(w,height,r,&rect)!=FILM_OK) return FILM_CORRUPT;
     return FILM_OK;
 }
 

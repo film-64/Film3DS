@@ -1,0 +1,14 @@
+{
+  "ram_log.h": {
+    "source": "/Users/a64/Documents/Codex/worktrees/film3ds-raw-20261115/diagnostics/camera-deep-probe/probes/exposure/ram_log.h",
+    "sha256": "56426aaff503f637564198671c102fc40041a9d6b046cf0331b2a7e40ec19354"
+  },
+  "ram_http.h": {
+    "source": "/Users/a64/Documents/Codex/worktrees/film3ds-raw-20261115/diagnostics/camera-deep-probe/probes/exposure/ram_http.h",
+    "sha256": "144284862764a798bbcedf3d7ba37d854df2df30c3bdab87c2dfdb16ec171ae5"
+  },
+  "ram_transport_contract.h": {
+    "source": "/Users/a64/Documents/Codex/worktrees/film3ds-raw-20261115/diagnostics/camera-deep-probe/probes/exposure/ram_transport_contract.h",
+    "sha256": "0416792162065c9f671c3f2f13d05b0c805b8c95bd38865e024ca83e18db1036"
+  }
+}

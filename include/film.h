@@ -11,7 +11,7 @@ typedef enum {
     FILM_CORRUPT, FILM_STATE, FILM_DEVICE
 } FilmStatus;
 
-typedef enum { FILM_YUYV = 1, FILM_RGB565_LE, FILM_RGB24 } FilmPixelFormat;
+typedef enum { FILM_YUYV = 1, FILM_RGB565_LE, FILM_RGB24, FILM_RAW10_RGGB } FilmPixelFormat;
 typedef enum { FILM_601_FULL, FILM_601_LIMITED, FILM_709_FULL, FILM_709_LIMITED } FilmYuv;
 typedef enum { FILM_4_3, FILM_3_2, FILM_1_1, FILM_16_9 } FilmAspect;
 typedef enum { FILM_NATIVE, FILM_150, FILM_200 } FilmScale;
@@ -51,12 +51,18 @@ typedef enum {
 } FilmToneControl;
 
 typedef struct { float value[FILM_TONE_COUNT]; } FilmTone;
+typedef struct { unsigned kelvin; int red, blue; } FilmWhiteBalance;
 
 typedef struct {
     FilmGrade grade;
     FilmTone tone;
+    FilmTone input_tone;
+    float output_curve[4][4];
     float post_gain;
-    bool active;
+    float input_gain;
+    bool active, input_active, output_active;
+    float white_balance[3][3];
+    bool white_balance_active;
 } FilmDevelopGrade;
 
 #define FILM_WARM_LUT_ID "builtin-warm"
@@ -68,17 +74,28 @@ typedef struct {
 } FilmImage;
 
 typedef struct { unsigned x, y, width, height; } FilmRect;
+typedef struct { unsigned width, height; uint16_t *pixels; } FilmDevelopCanvas;
 typedef struct { float rows[3][3]; } FilmCameraColor;
 typedef struct {
     float code[9], rms[9], correlation[9];
 } FilmGrainProfile;
+struct FilmLayeredGrain;
+struct FilmGrainTexture;
+typedef FilmStatus (*FilmLayeredGrainRenderer)(const char *,FilmImage *,
+    const struct FilmLayeredGrain *,const FilmGrainProfile *,const struct FilmGrainTexture *);
 typedef struct {
     bool adaptive_grain;
     FilmGrain grain;
     const FilmCameraColor *camera_color;
     const FilmGrainProfile *grain_profile;
     bool halation;
+    bool layered_grain;
+    float grain_size,grain_shadow,grain_mid,grain_highlight;
+    const struct FilmGrainTexture *grain_texture;
+    FilmLayeredGrainRenderer grain_renderer;
+    float chroma_denoise;
 } FilmDevelopOptions;
+FilmStatus film_darkroom_denoise(const char *,FilmRgb *,unsigned,unsigned,float);
 
 typedef struct {
     FilmAspect aspect;
@@ -92,6 +109,15 @@ typedef struct {
     FilmProfile profile;
     char lut_id[64];
     FilmTone tone;
+    /* v4: independent user adjustments; old tone remains a post-LUT legacy trim. */
+    FilmTone input_tone;
+    int sharpness;
+    /* v5: final user H/M/S, independent of the legacy v4 input curves. */
+    FilmTone output_tone;
+    /* v6: 0 K is original; 0 percent is the legacy/default 100% frame. */
+    FilmWhiteBalance white_balance;
+    unsigned crop_percent, crop_x, crop_y;
+    bool crop_positioned;
 } FilmRecipe;
 
 typedef struct {
@@ -118,6 +144,10 @@ FilmStatus film_camera_color_load(FILE *file, FilmCameraColor *out);
 FilmRgb film_camera_color_apply(FilmRgb code, const FilmCameraColor *color);
 float film_srgb_linear_luma(FilmRgb code);
 FilmRgb film_srgb_add_halation(FilmRgb code, float energy);
+FilmStatus film_white_balance_matrix(FilmWhiteBalance balance, float out[3][3]);
+FilmRgb film_white_balance_apply(FilmRgb code, const float matrix[3][3]);
+FilmRgb film_white_balance_swatch(int red, int blue);
+FilmStatus film_blackbody_white(unsigned kelvin, float xyz[3]);
 FilmStatus film_profile_write(const char *path, const FilmProfile *profile);
 FilmStatus film_profile_read(const char *path, FilmProfile *profile);
 
@@ -130,11 +160,21 @@ FilmStatus film_rgb24(const FilmImage *source, FilmYuv yuv, FilmImage *out);
 FilmStatus film_crop_rect(unsigned width, unsigned height, FilmAspect aspect, FilmRect *out);
 FilmStatus film_scaled_dims(unsigned width, unsigned height, FilmScale scale, unsigned *w, unsigned *h);
 FilmStatus film_resize(const FilmImage *source, unsigned width, unsigned height, FilmFilter filter, FilmImage *out);
+FilmStatus film_sharpen(FilmImage *image, int level);
+FilmStatus film_composition_rect(unsigned width, unsigned height, const FilmRecipe *recipe, FilmRect *out);
+FilmStatus film_composition_percent(FilmRecipe *recipe, unsigned width, unsigned height, int direction);
+FilmStatus film_composition_pan(FilmRecipe *recipe, unsigned width, unsigned height, int dx, int dy);
+void film_composition_reset(FilmRecipe *recipe);
 FilmStatus film_recipe_validate(const FilmRecipe *recipe);
 FilmRecipe film_default_recipe(void);
 FilmStatus film_develop(const FilmFrame *frame, const FilmLut *lut, FilmImage *out);
 FilmStatus film_develop_with_options(const FilmFrame *frame, const FilmLut *lut,
                                      const FilmDevelopOptions *options, FilmImage *out);
+FilmStatus film_develop_canvas(const FilmFrame *frame, const FilmLut *lut,
+                               const FilmDevelopOptions *options, FilmDevelopCanvas *out);
+void film_develop_canvas_free(FilmDevelopCanvas *canvas);
+FilmStatus film_develop_canvas_render(const FilmDevelopCanvas *canvas, const FilmRecipe *recipe,
+                                      const FilmDevelopOptions *options, bool full_preview, FilmImage *out);
 void film_grain_adaptive(FilmImage *image, uint32_t seed, float amount, FilmScale scale, FilmGrain grain);
 FilmStatus film_grain_profile_load(FILE *file, FilmGrainProfile *out);
 FilmStatus film_grain_measured(FilmImage *image, uint32_t seed, float amount, const FilmGrainProfile *profile);

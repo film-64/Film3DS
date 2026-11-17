@@ -1,0 +1,27 @@
+{
+  "scope": "isolated code-only snapshot; no runtime changes during synchronization",
+  "commands": [
+    {
+      "command": "make -j2 test test-raw-darkroom test-native-integration CC=/usr/bin/cc CPPFLAGS='-Iinclude -I/usr/local/include -D_POSIX_C_SOURCE=200809L' LDFLAGS='-L/usr/local/lib'",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --cached --check",
+      "exit_code": 0
+    }
+  ],
+  "private_fixture_tests": "skipped where proprietary fixtures are absent",
+  "exclusions": [
+    "images",
+    "RAW/F3S/BIN payloads",
+    "private LUTs and texture atlases",
+    "CXI/ROM",
+    "build artifacts",
+    "credentials"
+  ],
+  "runtime_boundary_classification": "snapshot only; camera/darkroom contracts and verifier copied unchanged from tested local state",
+  "runtime_contract_matrix_changed_for_sync": false,
+  "verifier_changed_for_sync": false,
+  "runtime_internal_fields_changed_for_sync": false,
+  "vision_contract_pytests": "not run; corresponding Vision modules/tests do not exist in Film3DS"
+}

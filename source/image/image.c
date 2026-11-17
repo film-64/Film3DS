@@ -1,4 +1,7 @@
 #include "film.h"
+#include "film_runtime_contract.h"
+#include "raw_darkroom.h"
+#include "layered_grain.h"
 
 #include <math.h>
 #include <stdlib.h>
@@ -20,6 +23,7 @@ size_t film_image_bytes(unsigned w, unsigned h, FilmPixelFormat format)
     switch (format) {
     case FILM_YUYV:
     case FILM_RGB565_LE: return (size_t)w * h * 2;
+    case FILM_RAW10_RGGB: return w>=4 && h>=4 && !(w&1) && !(h&1) && (size_t)w*h<=FILM_RAW_MAX_PIXELS ? (size_t)w*h*2 : 0;
     case FILM_RGB24: return (size_t)w * h * 3;
     default: return 0;
     }
@@ -91,6 +95,13 @@ FilmStatus film_rgb24(const FilmImage *source, FilmYuv yuv, FilmImage *out)
 {
     if (!valid_image(source) || !out || out == source || (unsigned)yuv > FILM_709_LIMITED)
         return FILM_INVALID;
+    if(source->format==FILM_RAW10_RGGB) {
+        FilmFrame frame={.source=*source,.recipe=film_default_recipe()};
+        FilmDevelopCanvas canvas={0};
+        FilmStatus s=film_develop_canvas(&frame,NULL,NULL,&canvas);
+        if(s==FILM_OK)s=film_develop_canvas_render(&canvas,&frame.recipe,NULL,true,out);
+        film_develop_canvas_free(&canvas);return s;
+    }
     FilmStatus status = film_image_alloc(out, source->width, source->height, FILM_RGB24);
     if (status != FILM_OK) return status;
     FilmYuvTransform t = film_yuv_transform(yuv, 0);
@@ -274,11 +285,24 @@ FilmStatus film_recipe_validate(const FilmRecipe *p)
         (unsigned)p->filter > FILM_BICUBIC || (unsigned)p->yuv > FILM_709_LIMITED ||
         !isfinite(p->grain_amount) || p->grain_amount < 0 || p->grain_amount > 1 ||
         !isfinite(p->base_saturation) || fabsf(p->base_saturation) > 1 ||
-        p->jpeg_quality < 1 || p->jpeg_quality > 100 ||
+        p->jpeg_quality < 1 || p->jpeg_quality > 100 || p->sharpness < -5 || p->sharpness > 5 ||
         !memchr(p->lut_id, 0, sizeof p->lut_id)) return FILM_INVALID;
     for (unsigned i = 0; i < FILM_TONE_COUNT; ++i)
         if (!isfinite(p->tone.value[i]) || p->tone.value[i] != film_tone_limit(i, p->tone.value[i]))
             return FILM_INVALID;
+    for (unsigned i = 0; i < FILM_TONE_COUNT; ++i) {
+        float value = p->input_tone.value[i];
+        if (!isfinite(value) || value != film_tone_limit(i, value)) return FILM_INVALID;
+        if (i != FILM_TONE_EV && i != FILM_TONE_MID && i != FILM_TONE_HIGH &&
+            i != FILM_TONE_SHADOWS && value != 0) return FILM_INVALID;
+        value = p->output_tone.value[i];
+        if (!isfinite(value) || value != film_tone_limit(i, value)) return FILM_INVALID;
+        if (i != FILM_TONE_MID && i != FILM_TONE_HIGH && i != FILM_TONE_SHADOWS && value != 0)
+            return FILM_INVALID;
+    }
+    if ((p->white_balance.kelvin && (p->white_balance.kelvin<1000 || p->white_balance.kelvin>10000)) ||
+        p->white_balance.red < -9 || p->white_balance.red > 9 || p->white_balance.blue < -9 || p->white_balance.blue > 9 ||
+        p->crop_percent>100 || (!p->crop_positioned && (p->crop_x || p->crop_y))) return FILM_INVALID;
     return film_profile_validate(&p->profile);
 }
 
@@ -314,10 +338,11 @@ static FilmStatus warm_lut(FilmLut *lut)
     return FILM_OK;
 }
 
-FilmStatus film_develop_with_options(const FilmFrame *frame, const FilmLut *lut,
-                                     const FilmDevelopOptions *options, FilmImage *out)
+static FilmStatus develop(const FilmFrame *frame, const FilmLut *lut,
+                          const FilmDevelopOptions *options, FilmImage *out, FilmDevelopCanvas *canvas)
 {
-    if (!frame || !valid_image(&frame->source) || !out || out == &frame->source) return FILM_INVALID;
+    if (!film_runtime_source_valid("film-darkroom/v1")) return FILM_STATE;
+    if (!frame || !valid_image(&frame->source) || (!out && !canvas) || out == &frame->source) return FILM_INVALID;
     const FilmRecipe *p = &frame->recipe;
     FilmStatus status = film_recipe_validate(p);
     if (status != FILM_OK) return status;
@@ -334,7 +359,7 @@ FilmStatus film_develop_with_options(const FilmFrame *frame, const FilmLut *lut,
     FilmImage graded = {0};
     bool resized = w != source->width || h != source->height;
     uint16_t *high_precision = NULL;
-    if (options && resized) {
+    if ((options && resized) || canvas) {
         high_precision = malloc(film_image_bytes(source->width, source->height, FILM_RGB24) *
                                 sizeof *high_precision);
         if (!high_precision) return FILM_NOMEM;
@@ -362,12 +387,31 @@ FilmStatus film_develop_with_options(const FilmFrame *frame, const FilmLut *lut,
         free(high_precision);
         return FILM_NOMEM;
     }
+    FilmRgb *clean=NULL;
+    if(options&&options->chroma_denoise!=0) {
+        size_t count=(size_t)source->width*source->height;
+        clean=malloc(count*sizeof *clean);
+        if(!clean)status=FILM_NOMEM;
+        else {
+            for(unsigned y=0;y<source->height;++y)for(unsigned x=0;x<source->width;++x){FilmRgb c=decode_pixel(source,x,y,&t);
+                if(camera_color)c=film_camera_color_apply(c,camera_color);
+                if(halo)c=film_srgb_add_halation(c,halation_energy(halo,mask_w,mask_h,x,y));
+                clean[(size_t)y*source->width+x]=c;
+            }
+            status=film_darkroom_denoise("film-darkroom-denoise/v1",clean,source->width,source->height,options->chroma_denoise);
+        }
+        if(status!=FILM_OK){free(clean);free(halo);film_lut_free(&generated);film_image_free(&graded);free(high_precision);return status;}
+    }
     for (unsigned y = 0; y < source->height; ++y) {
         size_t index = (size_t)y * source->width * 3;
         for (unsigned x = 0; x < source->width; ++x, index += 3) {
-            FilmRgb c = decode_pixel(source, x, y, &t);
-            if (camera_color) c = film_camera_color_apply(c, camera_color);
-            if (halo) c = film_srgb_add_halation(c, halation_energy(halo, mask_w, mask_h, x, y));
+            FilmRgb c;
+            if(clean)c=clean[(size_t)y*source->width+x];
+            else {
+                c=decode_pixel(source,x,y,&t);
+                if(camera_color)c=film_camera_color_apply(c,camera_color);
+                if(halo)c=film_srgb_add_halation(c,halation_energy(halo,mask_w,mask_h,x,y));
+            }
             c = film_develop_grade_pixel(c, &grade);
             if (high_precision) {
                 high_precision[index] = (uint16_t)(unit(c.r) * 65535 + .5f);
@@ -380,8 +424,12 @@ FilmStatus film_develop_with_options(const FilmFrame *frame, const FilmLut *lut,
             }
         }
     }
-    free(halo);
+    free(clean);free(halo);
     film_lut_free(&generated);
+    if (canvas) {
+        *canvas = (FilmDevelopCanvas){source->width, source->height, high_precision};
+        return FILM_OK;
+    }
     FilmImage scaled = graded;
     if (high_precision) {
         status = resize_rgb(high_precision, source->width, source->height, w, h, p->filter, true, &scaled);
@@ -392,6 +440,8 @@ FilmStatus film_develop_with_options(const FilmFrame *frame, const FilmLut *lut,
         film_image_free(&graded);
         if (status != FILM_OK) return status;
     }
+    status = film_sharpen(&scaled, p->sharpness);
+    if (status != FILM_OK) { film_image_free(&scaled); return status; }
     if (options && options->grain_profile) {
         status = film_grain_measured(&scaled, p->grain_seed, p->grain_amount, options->grain_profile);
         if (status != FILM_OK) { film_image_free(&scaled); return status; }
@@ -406,6 +456,108 @@ FilmStatus film_develop_with_options(const FilmFrame *frame, const FilmLut *lut,
     scaled.height = rect.height;
     *out = scaled;
     return FILM_OK;
+}
+
+FilmStatus film_raw_prepared_halation(FilmRawPrepared *prepared)
+{
+    if(!film_runtime_source_valid("film-app-raw-canvas/v1"))return FILM_STATE;
+    if(!prepared||!prepared->pixels)return FILM_INVALID;
+    FilmImage mask={0};FilmStatus status=film_image_alloc(&mask,prepared->width,prepared->height,FILM_RGB24);
+    if(status!=FILM_OK)return status;
+    for(size_t i=0;i<(size_t)prepared->width*prepared->height;++i){FilmRgb c=prepared->pixels[i];
+        mask.pixels[3*i]=quantize(c.r);mask.pixels[3*i+1]=quantize(c.g);mask.pixels[3*i+2]=quantize(c.b);}
+    unsigned w=(mask.width+HALATION_CELL-1)/HALATION_CELL,h=(mask.height+HALATION_CELL-1)/HALATION_CELL;
+    FilmYuvTransform t=film_yuv_transform(FILM_601_FULL,0);float *halo=make_halation(&mask,&t,NULL,w,h);
+    film_image_free(&mask);if(!halo)return FILM_NOMEM;
+    for(unsigned y=0;y<prepared->height;++y)for(unsigned x=0;x<prepared->width;++x){size_t i=(size_t)y*prepared->width+x;
+        prepared->pixels[i]=film_srgb_add_halation(prepared->pixels[i],halation_energy(halo,w,h,x,y));}
+    free(halo);return FILM_OK;
+}
+
+FilmStatus film_develop_canvas(const FilmFrame *frame, const FilmLut *lut,
+                               const FilmDevelopOptions *options, FilmDevelopCanvas *out)
+{
+    if (!out) return FILM_INVALID;
+    if(frame && frame->source.format==FILM_RAW10_RGGB) {
+        if(!film_runtime_source_valid("film-app-raw-canvas/v1"))return FILM_STATE;
+        FilmRawPrepared prepared={0};FilmStatus s=film_raw_frame_prepare(frame,options,&prepared);
+        FilmRecipe recipe=frame->recipe;recipe.input_tone.value[FILM_TONE_EV]=0;recipe.base_saturation=0;
+        if(s==FILM_OK)s=film_raw_grade_canvas("film-raw-grade/v1",&prepared,&recipe,lut,out);
+        film_raw_prepared_free(&prepared);return s;
+    }
+    return develop(frame,lut,options,NULL,out);
+}
+
+static FilmStatus layered_render(FilmImage *image,const FilmRecipe *p,const FilmDevelopOptions *o,unsigned reference_width)
+{
+    if(!o->grain_profile||!o->grain_renderer)return FILM_STATE;
+    FilmLayeredGrain grain={.amount=p->grain_amount,.size=o->grain_size,
+        .coarse=o->grain==FILM_GRAIN_FINE?.2f:o->grain==FILM_GRAIN_COARSE?.8f:.5f,
+        .shadow=o->grain_shadow,.mid=o->grain_mid,.highlight=o->grain_highlight,
+        .reference_width=reference_width,.seed=p->grain_seed};
+    return o->grain_renderer("film-grain-layered/v1",image,&grain,o->grain_profile,o->grain_texture);
+}
+
+void film_develop_canvas_free(FilmDevelopCanvas *canvas)
+{
+    free(canvas->pixels);
+    *canvas=(FilmDevelopCanvas){0};
+}
+
+FilmStatus film_develop_canvas_render(const FilmDevelopCanvas *canvas, const FilmRecipe *p,
+                                      const FilmDevelopOptions *options, bool full_preview, FilmImage *out)
+{
+    if (!film_runtime_source_valid(full_preview ? "film-darkroom/v1" : "film-darkroom-save/v1")) return FILM_STATE;
+    if (!canvas || !canvas->pixels || !out || !film_image_bytes(canvas->width,canvas->height,FILM_RGB24) ||
+        film_recipe_validate(p)!=FILM_OK || (options && options->adaptive_grain && (unsigned)options->grain>=FILM_GRAIN_COUNT))
+        return FILM_INVALID;
+    FilmRect crop={0,0,canvas->width,canvas->height}, target=crop;
+    if (!full_preview) {
+        unsigned w,h;
+        if (film_composition_rect(canvas->width,canvas->height,p,&crop)!=FILM_OK ||
+            film_scaled_dims(canvas->width,canvas->height,p->scale,&w,&h)!=FILM_OK ||
+            film_crop_rect(w,h,p->aspect,&target)!=FILM_OK) return FILM_INVALID;
+    }
+    uint16_t *selected=NULL;
+    const uint16_t *pixels=canvas->pixels;
+    if (crop.width!=canvas->width || crop.height!=canvas->height || crop.x || crop.y) {
+        selected=malloc((size_t)crop.width*crop.height*3*sizeof *selected);
+        if (!selected) return FILM_NOMEM;
+        for (unsigned y=0;y<crop.height;++y)
+            memcpy(selected+(size_t)y*crop.width*3,
+                   pixels+((size_t)(crop.y+y)*canvas->width+crop.x)*3,
+                   (size_t)crop.width*3*sizeof *selected);
+        pixels=selected;
+    }
+    FilmImage image={0};
+    FilmStatus status=resize_rgb(pixels,crop.width,crop.height,target.width,target.height,p->filter,true,&image);
+    free(selected);
+    if (status!=FILM_OK) return status;
+    status=film_sharpen(&image,p->sharpness);
+    if (status==FILM_OK && options && options->layered_grain)
+        status=layered_render(&image,p,options,crop.width);
+    else if (status==FILM_OK && options && options->grain_profile)
+        status=film_grain_measured(&image,p->grain_seed,p->grain_amount,options->grain_profile);
+    else if (status==FILM_OK && options && options->adaptive_grain)
+        film_grain_adaptive(&image,p->grain_seed,p->grain_amount,full_preview?FILM_NATIVE:p->scale,options->grain);
+    else if (status==FILM_OK) add_grain(&image,p->grain_seed,p->grain_amount);
+    if (status!=FILM_OK) { film_image_free(&image); return status; }
+    *out=image;
+    return FILM_OK;
+}
+
+FilmStatus film_develop_with_options(const FilmFrame *frame, const FilmLut *lut,
+                                     const FilmDevelopOptions *options, FilmImage *out)
+{
+    if (!out || (frame && out==&frame->source)) return FILM_INVALID;
+    if (frame && (frame->source.format==FILM_RAW10_RGGB || frame->recipe.crop_percent || frame->recipe.crop_positioned || (options && options->layered_grain))) {
+        FilmDevelopCanvas canvas={0};
+        FilmStatus status=film_develop_canvas(frame,lut,options,&canvas);
+        if (status==FILM_OK) status=film_develop_canvas_render(&canvas,&frame->recipe,options,false,out);
+        film_develop_canvas_free(&canvas);
+        return status;
+    }
+    return develop(frame,lut,options,out,NULL);
 }
 
 FilmStatus film_develop(const FilmFrame *frame, const FilmLut *lut, FilmImage *out)

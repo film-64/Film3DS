@@ -131,6 +131,12 @@ def main():
         bad.write_bytes(packet[:4] + b"\x03" + packet[5:])
         assert run("develop", bad, reproduced, expected=1).stderr.strip() == "corrupt"
         bad.write_bytes(packet[:4] + b"\x04" + packet[5:])
+        assert run("develop", bad, reproduced, expected=1).stderr.strip() == "corrupt"
+        bad.write_bytes(packet[:4] + b"\x05" + packet[5:])
+        assert run("develop", bad, reproduced, expected=1).stderr.strip() == "corrupt"
+        bad.write_bytes(packet[:4] + b"\x06" + packet[5:])
+        assert run("develop", bad, reproduced, expected=1).stderr.strip() == "corrupt"
+        bad.write_bytes(packet[:4] + b"\x07" + packet[5:])
         assert run("develop", bad, reproduced, expected=1).stderr.strip() == "unsupported"
         bad.write_bytes(profile.read_bytes()[:-1])
         assert run("develop", source, reproduced, luts / "identity17.cube", bad,

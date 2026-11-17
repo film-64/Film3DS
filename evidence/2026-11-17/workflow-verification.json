@@ -1,0 +1,18 @@
+{
+  "photo": 72,
+  "format": "RAW10 high8+low2",
+  "width": 640,
+  "height": 480,
+  "payload_bytes": 614400,
+  "header_bytes": 304,
+  "crc_ok": true,
+  "low2_valid": true,
+  "raw_payload_sha256": "882f5b90168164eb602ad818cb37f3550f4c0335143150d7cf976f359c831891",
+  "file_sha256": "a9889cf6e22938567a14d1bf62d9a792cd0d68a788be2f391d139e9bba125ed8",
+  "native_jpeg_crc32": "0ed92d68",
+  "pair_index_crc32": "2144df1c",
+  "pair_source_fingerprint_verified": true,
+  "device_button_capture": true,
+  "device_darkroom_user_confirmed": "可以進行暗房操作 已經顯示預覽和可保存",
+  "historical_log_fully_recovered": false
+}

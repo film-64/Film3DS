@@ -56,18 +56,25 @@ void film_camera_close(FilmCamera *cam)
     if (!cam->initialized) return;
     CAMU_StopCapture(cam->port);
     CAMU_ClearBuffer(cam->port);
+    film_camera_close_manual_exposure(cam);
     CAMU_Activate(SELECT_NONE);
     camExit();
     cam->initialized = false;
     cam->streaming = false;
     release_preview(cam);
+    cam->exposure_requested = false;
 }
 
 FilmStatus film_camera_open(FilmCamera *cam, FilmPixelFormat format, FilmSensor sensor)
 {
+    if (!film_runtime_source_valid("film-camera-native-preview/v1")) return FILM_STATE;
     if (!cam || (format != FILM_YUYV && format != FILM_RGB565_LE) ||
         sensor < FILM_CAMERA_REAR1 || sensor > FILM_CAMERA_FRONT) return FILM_INVALID;
     if (cam->initialized) return cam->format == format && cam->sensor == sensor ? FILM_OK : FILM_STATE;
+    cam->exposure = (FilmHardwareExposure){0};
+    cam->exposure_transport = (FilmRegisterTransport){0};
+    cam->exposure_trace = NULL;
+    cam->exposure_requested = false;
     cam->last_result = 0;
     Result rc = camInit();
     if (R_FAILED(rc)) { cam->last_result = rc; return FILM_DEVICE; }
@@ -103,6 +110,14 @@ FilmStatus film_camera_request_30fps(FilmCamera *cam)
     return R_SUCCEEDED(rc) ? FILM_OK : FILM_DEVICE;
 }
 
+FilmStatus film_camera_request_15fps(FilmCamera *cam)
+{
+    if (!cam->initialized || cam->streaming) return FILM_STATE;
+    Result rc = CAMU_SetFrameRate(selectors[cam->sensor - FILM_CAMERA_REAR1], FRAME_RATE_15);
+    cam->last_result = rc;
+    return R_SUCCEEDED(rc) ? FILM_OK : FILM_DEVICE;
+}
+
 FilmStatus film_camera_yuv_matrix(FilmCamera *cam, FilmYuv *matrix)
 {
     if (!cam->initialized || cam->format != FILM_YUYV) return FILM_STATE;
@@ -126,7 +141,13 @@ FilmStatus film_camera_set_control(FilmCamera *cam, FilmCameraControl control, i
     Result rc;
     switch (control) {
     case FILM_CAM_EXPOSURE:
+        if (!film_runtime_source_valid("film-camera-native-exposure/v1")) return FILM_STATE;
         if (value < FILM_EXPOSURE_MIN || value > FILM_EXPOSURE_MAX) return FILM_INVALID;
+        if (cam->exposure_requested) {
+            FilmStatus status = film_hardware_step(&cam->exposure, value, "film-camera-exposure/v1");
+            if (status == FILM_OK && !cam->exposure.ready) cam->preview_ready = false;
+            return status;
+        }
         rc = CAMU_SetExposure(sensor, (s8)value);
         break;
     case FILM_CAM_WB:
@@ -309,6 +330,7 @@ static void copy_capture(FilmCamera *cam, FilmFrame *frame, FilmImage source, co
 
 FilmStatus film_camera_preview_snapshot(FilmCamera *cam, FilmFrame *frame)
 {
+    if (!film_runtime_source_valid("film-camera-native-capture/v1")) return FILM_STATE;
     if (!cam->preview_ready) return FILM_STATE;
     FilmImage source = {0};
     FilmStatus status = film_image_alloc(&source, WIDTH / cam->zoom, HEIGHT / cam->zoom, cam->format);
@@ -320,6 +342,7 @@ FilmStatus film_camera_preview_snapshot(FilmCamera *cam, FilmFrame *frame)
 static FilmStatus capture(FilmCamera *cam, FilmFrame *frame, uint8_t *linear,
                           bool keep_stream, FilmCaptureTiming *timing)
 {
+    if (!film_runtime_source_valid("film-camera-native-capture/v1")) return FILM_STATE;
     if (!cam->initialized || cam->preview_dma[0]) return FILM_STATE;
     u64 start = timing ? svcGetSystemTick() : 0;
     cam->last_result = 0;

@@ -38,7 +38,7 @@ else
 _3DSXFLAGS := --smdh=$(OUTPUT).smdh --romfs=$(TOPDIR)/romfs
 .PHONY: all
 all: $(OUTPUT).3dsx
-$(OUTPUT).3dsx: $(OUTPUT).elf $(OUTPUT).smdh $(wildcard $(TOPDIR)/romfs/grain/*.f3g)
+$(OUTPUT).3dsx: $(OUTPUT).elf $(OUTPUT).smdh $(wildcard $(TOPDIR)/romfs/grain/*.f3g $(TOPDIR)/romfs/grain/*.f3gt)
 $(OUTPUT).elf: $(OFILES) $(ARM_JPEG) $(TOPDIR)/Makefile.3ds
 $(OFILES): $(TOPDIR)/Makefile.3ds
 jpeg.o: $(ARM_JPEG)

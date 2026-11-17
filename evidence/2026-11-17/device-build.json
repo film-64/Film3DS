@@ -1,0 +1,6 @@
+{
+  "app_sha256": "828d6ffc062d8904748a02d444af707c63d17c0bfa10ee38ff8f24d7ea7b5073",
+  "source_manifest_sha256": "71284050d2f821fd6b0d3527affc02e3e49e0641d38b1141092b6d74aeb709d7",
+  "arm11_verified": true,
+  "romfs_verified": true
+}

@@ -1,6 +1,9 @@
 #ifndef FILM_PLATFORM_DEVELOP_H
 #define FILM_PLATFORM_DEVELOP_H
 #include "film.h"
+#include "layered_grain.h"
+FilmStatus film_3ds_grain_layered(const char *,FilmImage *,const FilmLayeredGrain *,
+    const FilmGrainProfile *,const FilmGrainTexture *);
 
 typedef struct {
     bool gpu_accepted;

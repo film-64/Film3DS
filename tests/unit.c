@@ -405,10 +405,11 @@ static void darkroom_recipe(void)
     FilmRecipe edit = reopened.recipe;
     FilmProfile preset = {.input = FILM_REC709, .strength = .8f, .exposure = -.5f};
     film_ui_select_look(&edit, &reopened.recipe, "replacement.cube", &preset);
-    assert(edit.profile.input == FILM_REC709 && edit.profile.strength == .8f);
+    assert(edit.profile.input == FILM_REC709 && edit.profile.strength == .35f);
     assert(edit.profile.exposure == .25f && edit.profile.global.hue == 2);
     assert(edit.profile.zones[11].lightness == -.1f && edit.tone.value[FILM_TONE_EV] == -.75f);
-    film_ui_select_look(&edit, &reopened.recipe, "original.cube", &preset);
+    FilmProfile original = reopened.recipe.profile;
+    film_ui_select_look(&edit, &reopened.recipe, "original.cube", &original);
     assert(edit.profile.input == FILM_SRGB && edit.profile.strength == .35f);
     edit.tone.value[FILM_TONE_EV] = NAN;
     assert(film_recipe_validate(&edit) == FILM_INVALID);
@@ -598,7 +599,7 @@ int main(void)
     source_saturation(); puts("PASS v2 source saturation, unchanged YUYV and neutral development");
     camera_metering(); puts("PASS camera metering weights, EV compensation, hysteresis and stability");
     darkroom_tone(); puts("PASS post-LUT EV, monotonic tone, shoulder and luminance-preserving saturation");
-    darkroom_recipe(); puts("PASS v3 recipe round trip and saved-look restoration");
+    darkroom_recipe(); puts("PASS v3 recipe round trip and independent film-simulation switching");
     adaptive_grain(); puts("PASS grain density follows luminance, seed is repeatable, zero is exact");
     camera_color(); puts("PASS camera input matrix and high-precision export");
     measured_grain(); puts("PASS measured grain tracks RMS and spatial correlation");

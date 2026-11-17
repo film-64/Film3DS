@@ -1,4 +1,5 @@
 #include "film.h"
+#include "film_runtime_contract.h"
 
 #include <ctype.h>
 #include <errno.h>
@@ -411,13 +412,44 @@ float film_tone_limit(FilmToneControl control, float value)
     return fmaxf(min, fminf(value, max));
 }
 
+static void prepare_output_curve(FilmDevelopGrade *grade, const FilmTone *tone)
+{
+    const float *v = tone->value;
+    float shadows = v[FILM_TONE_SHADOWS], mid = v[FILM_TONE_MID], high = v[FILM_TONE_HIGH];
+    grade->output_active = shadows != 0 || mid != 0 || high != 0;
+    if (!grade->output_active) return;
+    /* Blend knot offsets with smoothstep, leaving the base ramp unchanged.
+     * Nonnegative blend weights keep every control direction consistent.
+     * Minimum knot gap is .12 > .25/3: the curve derivative stays positive
+     * even at all +/-5 combinations. Joins have slope 1 on both sides. */
+    float spread = FILM_CURVE_MID_RANGE * FILM_CURVE_MID_SPREAD * mid;
+    float offset[] = {-shadows * (shadows < 0 ? FILM_CURVE_BLACK_LIFT : FILM_CURVE_BLACK_PUSH),
+        -FILM_CURVE_SHADOW_RANGE * shadows + spread,
+        FILM_CURVE_MID_RANGE * mid,
+        FILM_CURVE_HIGH_RANGE * high + spread,
+        high * (high < 0 ? FILM_CURVE_WHITE_PULL : FILM_CURVE_WHITE_PUSH)};
+    for (unsigned i = 0; i < 4; ++i) {
+        float delta = offset[i + 1] - offset[i];
+        grade->output_curve[i][0] = i * .25f + offset[i];
+        grade->output_curve[i][1] = .25f;
+        grade->output_curve[i][2] = 3 * delta;
+        grade->output_curve[i][3] = -2 * delta;
+    }
+}
+
 FilmDevelopGrade film_develop_grade_prepare(const FilmLut *lut, const FilmRecipe *recipe)
 {
     FilmDevelopGrade grade = {.grade = film_grade_prepare(lut, &recipe->profile),
-        .tone = recipe->tone, .post_gain = exp2f(recipe->tone.value[FILM_TONE_EV])};
+        .tone = recipe->tone, .post_gain = exp2f(recipe->tone.value[FILM_TONE_EV]),
+        .input_tone = recipe->input_tone,
+        .input_gain = exp2f(recipe->input_tone.value[FILM_TONE_EV])};
     grade.tone.value[FILM_TONE_SATURATION] +=
         recipe->base_saturation * (1 + grade.tone.value[FILM_TONE_SATURATION]);
     for (unsigned i = 0; i < FILM_TONE_COUNT; ++i) grade.active |= grade.tone.value[i] != 0;
+    for (unsigned i = 0; i < FILM_TONE_COUNT; ++i) grade.input_active |= grade.input_tone.value[i] != 0;
+    prepare_output_curve(&grade, &recipe->output_tone);
+    grade.white_balance_active=recipe->white_balance.kelvin || recipe->white_balance.red || recipe->white_balance.blue;
+    film_white_balance_matrix(recipe->white_balance,grade.white_balance);
     return grade;
 }
 
@@ -487,8 +519,52 @@ FilmRgb film_fit_chroma(FilmRgb rgb, float y, float chroma)
                      target + chroma * (rgb.b - y)};
 }
 
+static FilmRgb apply_input_tone(FilmRgb color, const FilmDevelopGrade *grade)
+{
+    FilmRgb rgb = decode_rgb(color);
+    float gain = grade->input_gain;
+    rgb = (FilmRgb){rgb.r * gain, rgb.g * gain, rgb.b * gain};
+    float y = linear_luma(rgb), mapped = y;
+    const float *v = grade->input_tone.value;
+    /* Ordered linear-light anchors: all 11^3 H/M/S combinations are monotonic.
+     * Positive shadows deepen blacks; positive highlights brighten highlights.
+     * 0 is identity, and exposure headroom beyond white is left intact for LUTs. */
+    const float x[] = {0, .04f, .18f, .65f, 1};
+    const float target[] = {0, .04f - .02f * v[FILM_TONE_SHADOWS],
+        .18f + .035f * v[FILM_TONE_MID], .65f + .12f * v[FILM_TONE_HIGH], 1};
+    if (y > 0 && y < 1) {
+        unsigned i = 0;
+        while (i < 3 && y > x[i + 1]) ++i;
+        mapped = target[i] + (target[i + 1] - target[i]) * (y - x[i]) / (x[i + 1] - x[i]);
+    }
+    if (y > 1e-6f) {
+        float scale = mapped / y;
+        rgb = (FilmRgb){rgb.r * scale, rgb.g * scale, rgb.b * scale};
+    }
+    return encode_rgb(rgb);
+}
+
+static FilmRgb apply_output_curve(FilmRgb rgb, const FilmDevelopGrade *grade)
+{
+    float y = linear_luma(rgb);
+    float position = clamp01(encode_srgb(y)) * 4;
+    unsigned segment = (unsigned)position;
+    if (segment > 3) segment = 3;
+    float t = position - segment;
+    const float *c = grade->output_curve[segment];
+    float mapped = decode_srgb(clamp01(((c[3] * t + c[2]) * t + c[1]) * t + c[0]));
+    if (y > 1e-6f) {
+        float scale = mapped / y;
+        return (FilmRgb){rgb.r * scale, rgb.g * scale, rgb.b * scale};
+    }
+    float shift = mapped - y;
+    return (FilmRgb){rgb.r + shift, rgb.g + shift, rgb.b + shift};
+}
+
 FilmRgb film_develop_grade_pixel(FilmRgb color, const FilmDevelopGrade *grade)
 {
+    if (grade->white_balance_active) color=film_white_balance_apply(color,grade->white_balance);
+    if (grade->input_active) color = apply_input_tone(color, grade);
     color = apply_lut(color, &grade->grade, true);
     bool bounded = in_gamut(color);
     if (!bounded) {
@@ -498,7 +574,7 @@ FilmRgb film_develop_grade_pixel(FilmRgb color, const FilmDevelopGrade *grade)
                           fmaxf(-limit, fminf(color.g, limit)),
                           fmaxf(-limit, fminf(color.b, limit))};
     }
-    if (grade->active) {
+    if (grade->active || grade->output_active) {
         FilmRgb rgb = decode_rgb(color);
         float gain = grade->post_gain;
         rgb = (FilmRgb){rgb.r * gain, rgb.g * gain, rgb.b * gain};
@@ -513,6 +589,7 @@ FilmRgb film_develop_grade_pixel(FilmRgb color, const FilmDevelopGrade *grade)
                 rgb = (FilmRgb){rgb.r + shift, rgb.g + shift, rgb.b + shift};
             }
         }
+        if (grade->output_active) rgb = apply_output_curve(rgb, grade);
         float saturation = grade->tone.value[FILM_TONE_SATURATION];
         if (!grade->grade.has_hsl) return encode_rgb(film_fit_chroma(rgb, linear_luma(rgb), 1 + saturation));
         color = extended_hsl(encode_rgb(rgb), grade->grade.profile);

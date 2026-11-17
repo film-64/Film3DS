@@ -25,7 +25,8 @@ static int send_report(void *context, const char *data, size_t length)
         if (ready < 0) return -1;
         if (!ready) { errno = ETIMEDOUT; return -1; }
         if (!(socket.revents & POLLOUT)) { errno = EPIPE; return -1; }
-        ssize_t sent = send(qa->socket_fd, data + total, length - total, 0);
+        size_t chunk=length-total;if(chunk>4096)chunk=4096;
+        ssize_t sent = send(qa->socket_fd, data + total, chunk, 0);
         if (sent < 0 && (errno == EAGAIN || errno == EWOULDBLOCK)) continue;
         if (sent <= 0) return -1;
         total += sent;

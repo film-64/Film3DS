@@ -1,0 +1,22 @@
+{
+  "retrieve_probe_ram.py": {
+    "source_scope": "existing local hardware tooling",
+    "sha256": "1c70735ec9546584d43d54821ef57c939e6bd3f61ff12cafece14d7302231ed4"
+  },
+  "frozen_transfer_contract.py": {
+    "source_scope": "existing local hardware tooling",
+    "sha256": "7416a30c954adf394298a4f2a6de0e72234b633f264385ca1a9a48dcf81a5e10"
+  },
+  "run_deep_probe.py": {
+    "source_scope": "existing local hardware tooling",
+    "sha256": "f312d01b6e96b959096bd167c6e1f0323dc134ec08fe65ddb396a188ff9b35b7"
+  },
+  "trace_ipc.py": {
+    "source_scope": "existing local hardware tooling",
+    "sha256": "73998cf2f20cb8636d156b6bdf82792eb19f9db555476501ff58a42942645630"
+  },
+  "trace_gdb_mi.py": {
+    "source_scope": "existing local hardware tooling",
+    "sha256": "ea92dad389f6cd8d173e2b5254113a400f732648079ef402539156a11acd6c2d"
+  }
+}
