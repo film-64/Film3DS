@@ -1,10 +1,6 @@
 # Film3DS
 
-本分支同步至 **2026-11-17 的正常 App／r12 RAW 按鍵拍攝狀態**。完整接手入口：[雲端與跨環境說明](docs/CLOUD_HANDOFF_20261117.md)。
-
-已實機確認：快門取得同曝光原生幀＋旁路 RAW，RAW 存 SD、原生 JPG 供 ROLL 選圖，進暗房才解碼 RAW，使用者確認能預覽及保存。沒有上傳影像、私人 LUT／紋理或建置產物。
-
-下一輪工作是影調／高光保留、相對校正及 New 3DS 效能；尚未把這些改善標為完成。歷史功能與操作記錄保留如下；若描述不同，以接手說明與 `docs/SHUTTER_NATIVE_RAW_20261117.md` 為準。
+目前 3DS 工作流：标准 `.cube`、标准 `.DNG` RAW、完整原图上的二次构图，以及可切换 debug 日志。操作与验证记录见 [标准 RAW / LUT / debug 说明](docs/STANDARD_RAW_DEBUG_20261117.md)。历史实验记录不代表当前界面或已完成的实机验证。
 
 ## 快速开始
 
@@ -25,7 +21,7 @@ make -j4 3ds
 python3 tools/verify_3dsx.py Film3DS.3dsx
 ```
 
-将 `Film3DS.3dsx` 复制到 SD 卡的 `/3ds/Film3DS/Film3DS.3dsx`，从 Homebrew Launcher 启动。X 切换页面，B 回取景，方向键改变画幅、输出或暗房参数，A 确认，R 拍摄，L 切换镜头，SELECT 切换插值，Y 打开相机控制，START 退出。下屏也可触摸操作。源图在 `rolls/`，JPEG 在 `exports/`，目录均位于 `/3ds/Film3DS/`。
+将 `Film3DS.3dsx` 复制到 SD 卡的 `/3ds/Film3DS/Film3DS.3dsx`，从 Homebrew Launcher 启动。X 切换页面，B 回取景，方向键改变画幅、输出或暗房参数，A 确认，R 拍摄，L 切换镜头，暗房 A 预览、SELECT 保存当前预览，Y 打开相机控制，START 退出。下屏也可触摸操作。源图在 `rolls/`，JPEG 在 `exports/`，目录均位于 `/3ds/Film3DS/`。
 
 | 画幅 | 原尺寸 | 2× |
 | --- | --- | --- |
@@ -38,17 +34,15 @@ python3 tools/verify_3dsx.py Film3DS.3dsx
 
 ## 从源图重新洗印
 
-暗房按 ZL 循环切换 4:3、3:2、1:1、16:9，按 A 按当前画幅导出。取景页明确选过的画幅也会用于本次会话的导出。未选择时使用源片记录的画幅。下屏显示最终 JPEG 的实际宽高，重新取景裁切不会改写 F3S。
-
-暗房按 Y 循环切换 LUT、颗粒和影调。影调页用左右选择 Post-LUT EV、黑点、中间调、高光、Shadows、Shoulder 或饱和度，上下改变数值。EV 范围为 −4 至 +4，步进 0.25 EV。按 A 导出当前效果，真卷在影调页按 SELECT 会另存并打开一份带新配方的 F3S 副本。打开真卷默认加载该文件已存的配方。
+暗房上下选择参数，左右调整；WB shift 的网格只改数值，按 A 才预览。完整原图与构图框保留，B＋方向键移动框，构图比例改变框大小。A 同时准备最终裁切的保存快取，SELECT 只编码保存该快取；改变构图后再按 A。RAW 原件为 `rolls/ROLLnnnn.DNG`，原件不会被构图或 LUT 改写；旧 F3S 仍可读取。
 
 暗房颗粒档位使用本机 DxO Silver Efex Pro 3 的三款参考输出。细为 Ilford PAN F Plus 50，中为 Ilford Pan 400，粗为 Ilford Delta 3200 Pro。使用 `python3 tools/measure_grain.py --chart chart.tif` 生成九级灰阶，逐个选择胶卷类型并保存无损 TIFF，然后运行 `python3 tools/measure_grain.py rendered.tif --out measurements.json --profile stock.f3g`。Film3DS 在放大后、裁切和 JPEG 编码前，根据画面亮度查表调节颗粒 RMS 和相邻像素相关性。ROMFS 中保存的是输出统计拟合。
 
-在 `VIEW` 按 `Y` 打开相机控制，上下选择项目，左右调整。CAM 自动曝光关闭并读回确认。`Metering` 默认是 `Manual`，手动曝光档保持锁定。`Full average` 等权采样取景框，`Center weighted` 给框内中央四分之一面积 4 倍权重，其余区域仍参与。两个自动模式都由 Film3DS 计算并下发硬件档位。切回手动时恢复原来的手动档。
+在 VIEW 按 Y 打开相机控制，选择 Native AE 或 Manual。Native AE 使用相机自动曝光与原生补偿；Manual 验证 AE 关闭后使用既有传感器 coarse/gain 档位，禁止走 Native AE 补偿。实际快门时长与 ISO 未标定，不写入虚假数值。
 
-`Exposure compensation` 只影响自动测光目标，范围 ±2 EV，步进 1/3 EV。0 EV 使用名义线性亮度 18% 的目标，+1 EV 将目标翻倍。取景显示当前档位和 AWB 状态。`LIMIT` 表示已到硬件档位上限或下限，仍未达到目标。`SW STEP` 表示目标落在两个硬件档位之间，已停在较接近的一档。相机饱和度随胶卷配方保存，取景超色域时沿 Y′ 收回色度，冲洗时在输出阶段按线性亮度收回色度。
+输入 A、A、B、B、上、上、下、下切换 debug；上屏右下角显示 `debug`。重复同一组合关闭。日志追加到 `/3ds/Film3DS/log/film3ds.log`，记录用户按键、模式、寄存器读写、DMA 阶段与错误。RAW 由一个工作线程采集，主屏持续显示阶段；错误返回后恢复操作，不自动重拍。
 
-`Sharpness step` 调整 CAM 原生锐化档位，范围 −2 至 +2。此设置作用于拍摄时的相机像素。
+以下是保留的旧主机配方兼容命令；当前 3DS LUT 载入不需要 `.f3p`：
 
 ```sh
 ./build/filmctl develop input.f3s neutral.jpg
@@ -56,9 +50,9 @@ python3 tools/profile.py profile.json look.f3p
 ./build/filmctl develop input.f3s new-look.jpg look.cube look.f3p
 ```
 
-把同名的 `.cube` 和 `.f3p` 放进 SD 卡的 `/3ds/Film3DS/luts/`，在暗房按左右键选色表，按 `A` 从源图重新冲洗。旧版根目录的 `look.cube` 和 `look.f3p` 也可读取。配置支持 `srgb`、`linear-srgb`、`rec709`，以及仅用于输入的 `f-log2c`。两个字段按具体色表的要求填写。
+直接把 `.cube` 放到 SD 卡 `/3ds/Film3DS/luts/`。启动时按文件名扫描全部 `.cube`（不区分扩展名大小写），不需要同名 `.f3p`。支持 2 至 256 点的 3D CUBE；超出设备内存会报告分配失败。内建 `.cube` 会首次复制到该目录，已有同名文件不覆盖。DNG 采用未压缩 16-bit 容器保存全部 10-bit RGGB 样本，无私有配方标签。
 
-`.f3p` 的强度用于初始化滑块。照片保存当前的实际混合比例，重新打开时沿用该比例和已存色彩参数。旧卷里已记录的比例也按原值使用。
+This product includes DNG technology under license by Adobe.
 
 - 胶片版提供 Portra 400 / Endura、Gold 200 / Endura 和 Vision3 500T / 2383。它们来自 Andrea Volpato 的 spektrafilm 模型，由 NicePhoto 做中灰曝光归一化。`python3 tools/import_lut16.py manifest.json stock.lut16 stock.cube` 会核对下载文件的 SHA-256，并生成保持采样值的 `.cube` 和 sRGB 配置。 [来源与许可](https://huggingface.co/Norton0924/OpenSourceLuts/tree/484c3c1)
 - 富士 GFX ETERNA 55 的 F-Log2 C 胶片模拟使用 `{"input":"f-log2c","output":"rec709"}`。Film3DS 先把相机 RGB 按 sRGB 线性化，再按富士公开的原色转入 F-Gamut C 并编码为 F-Log2 C，随后采样原厂色表。3DS 采集当前使用标称 sRGB，逐镜头色卡校准仍待实拍。 [原厂色表](https://www.fujifilm-x.com/ja-jp/support/download/lut/) · [F-Log2 C 数据表](https://dl.fujifilm-x.com/support/lut/F-Log2C_DataSheet_E_Ver.1.0.pdf)

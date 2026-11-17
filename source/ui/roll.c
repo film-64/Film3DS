@@ -1,6 +1,7 @@
 #include "roll.h"
 #include "film_runtime_contract.h"
 #include <stdio.h>
+#include <errno.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -66,15 +67,21 @@ FilmStatus film_roll_original_path(char *path,size_t capacity,const char *direct
     path[0]=0;if(!directory||!*directory||!id||id>9999)return FILM_INVALID;
     size_t n=strlen(directory);while(n&&directory[n-1]=='/')--n;
     if(n>4096)return FILM_INVALID;
-    int written=snprintf(path,capacity,"%.*s/ROLL%04u.F3S",(int)n,directory,id);
-    return written>=0&&(size_t)written<capacity?FILM_OK:FILM_INVALID;
+    int written=snprintf(path,capacity,"%.*s/ROLL%04u.DNG",(int)n,directory,id);
+    if(written<0||(size_t)written>=capacity)return FILM_INVALID;
+    struct stat st;if(stat(path,&st)==0)return FILM_OK;
+    if(errno!=ENOENT)return FILM_IO;
+    memcpy(path+strlen(path)-3,"F3S",3);
+    if(stat(path,&st)==0)return FILM_OK;
+    if(errno!=ENOENT)return FILM_IO;
+    memcpy(path+strlen(path)-3,"DNG",3);return FILM_OK;
 }
 
 FilmStatus film_roll_confirm_delete(FilmRoll *roll, FilmUi *ui, uint16_t *ids, unsigned *count,
-                                    const char *directory)
+                                    const char *directory,const char *previews)
 {
     if (!film_runtime_source_valid("film-roll-delete/v1")) return FILM_STATE;
-    if (!roll || !ui || !ids || !count || !directory || !roll->deleting) return FILM_STATE;
+    if (!roll || !ui || !ids || !count || !directory || !previews || !roll->deleting) return FILM_STATE;
     unsigned index=roll->pending_index,id=roll->pending_id;
     film_roll_cancel_delete(roll); /* One confirmation permits only one attempt. */
     if (!*count || *count!=ui->photos || index>=*count || ui->selection!=index ||
@@ -82,7 +89,18 @@ FilmStatus film_roll_confirm_delete(FilmRoll *roll, FilmUi *ui, uint16_t *ids, u
     char path[512];
     if(film_roll_original_path(path,sizeof path,directory,id)!=FILM_OK)return FILM_INVALID;
     struct stat st;
-    if (stat(path,&st)!=0 || !S_ISREG(st.st_mode) || unlink(path)!=0) return FILM_IO;
+    if (stat(path,&st)!=0 || !S_ISREG(st.st_mode)) return FILM_IO;
+    char derived[512];
+    if(film_roll_original_path(derived,sizeof derived,previews,id)!=FILM_OK)return FILM_INVALID;
+    const char *extensions[]={"JPG","F3I"};
+    for(unsigned i=0;i<2;++i){
+        memcpy(derived+strlen(derived)-3,extensions[i],3);
+        if(unlink(derived)!=0&&errno!=ENOENT)return FILM_IO;
+    }
+    char duplicate[512];memcpy(duplicate,path,strlen(path)+1);
+    memcpy(duplicate+strlen(duplicate)-3,!strcmp(path+strlen(path)-3,"DNG")?"F3S":"DNG",3);
+    if(unlink(duplicate)!=0&&errno!=ENOENT)return FILM_IO;
+    if(unlink(path)!=0)return FILM_IO;
     memmove(ids+index,ids+index+1,(*count-index-1)*sizeof *ids);
     --*count;ids[*count]=0;ui->photos=*count;
     ui->selection=!*count?0:index<*count?index:*count-1;

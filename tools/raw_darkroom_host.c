@@ -11,7 +11,7 @@
 typedef struct { unsigned w,h;FilmRawIsp isp;FilmRecipe recipe;FilmLayeredGrain grain;FilmRawBadPixel *bad;float denoise; } Config;
 static const char *keys[]={"width","height","cfa","black","white","wb","ccm","exposure_ev","shoulder","denoise",
     "highlights","midtones","shadows","saturation","sharpness","grain_amount","grain_size","grain_coarse",
-    "grain_shadow","grain_mid","grain_highlight","seed","lut_strength","bad_pixel"};
+    "grain_shadow","grain_mid","grain_highlight","seed","lut_strength","bad_pixel","ccm_offset","local_strength","local_limit_ev","shading_r","shading_g","shading_b"};
 static bool integer(double x,unsigned *out)
 { if(!isfinite(x)||x<0||x>UINT_MAX||floor(x)!=x)return false;*out=(unsigned)x;return true; }
 static bool config(const char *path,Config *c)
@@ -30,7 +30,7 @@ static bool config(const char *path,Config *c)
             if(n==9){ok=false;break;}char *end;errno=0;v[n]=strtod(word,&end);
             if(*end || errno || !isfinite(v[n])){ok=false;break;}++n;
         }
-        unsigned expected=k==3?4:k==5?3:k==6?9:k==23?2:1;
+        unsigned expected=k>=27?6:k==3?4:(k==5||k==24)?3:k==6?9:k==23?2:1;
         if(!ok||n!=expected){ok=false;break;}
         unsigned u=0;
         if((k<=2 || k==21) && !integer(v[0],&u)){ok=false;break;}
@@ -50,6 +50,10 @@ static bool config(const char *path,Config *c)
         case 17:c->grain.coarse=(float)v[0];break;case 18:c->grain.shadow=(float)v[0];break;
         case 19:c->grain.mid=(float)v[0];break;case 20:c->grain.highlight=(float)v[0];break;
         case 21:c->grain.seed=u;break;case 22:c->recipe.profile.strength=(float)v[0];break;
+        case 24:for(unsigned i=0;i<3;++i)c->isp.ccm_offset[i]=(float)v[i];break;
+        case 25:c->isp.local_strength=(float)v[0];break;
+        case 26:c->isp.local_limit_ev=(float)v[0];break;
+        case 27:case 28:case 29:for(unsigned i=0;i<6;++i)c->isp.lens_shading[k-27][i]=(float)v[i];break;
         case 23: {
             unsigned x,y;
             if(!integer(v[0],&x)||!integer(v[1],&y)||c->isp.bad_pixel_count==FILM_RAW_MAX_BAD_PIXELS){ok=false;break;}
@@ -118,6 +122,12 @@ int main(int argc,char **argv)
     FilmRaw10View view={c.w,c.h,raw};
     s=film_raw_isp_prepare("film-raw-isp/v1",&view,&c.isp,&prepared);if(s!=FILM_OK)goto done;
     s=film_darkroom_denoise("film-darkroom-denoise/v1",prepared.pixels,c.w,c.h,c.denoise);if(s!=FILM_OK)goto done;
+    /* Local host float cache: extended sRGB transfer, native float32 RGB.
+     * Retains the pre-quantization values for offline calibration analysis. */
+    if(snprintf(path,sizeof path,"%s/prepared.rgbf32",argv[3])>=(int)sizeof path){s=FILM_INVALID;goto done;}
+    f=fopen(path,"wx");if(!f){s=FILM_IO;goto done;}
+    bool floated=sizeof(FilmRgb)==3*sizeof(float) && sizeof(float)==4 && fwrite(prepared.pixels,sizeof(FilmRgb),n,f)==n;
+    if(fclose(f))floated=false;f=NULL;if(!floated){s=FILM_IO;goto done;}
     for(unsigned variant=0;variant<(has_lut?2u:1u);++variant) {
         FilmRecipe recipe=c.recipe;FilmDevelopCanvas canvas={0};FilmImage image={0};
         if(!variant){recipe.profile.strength=0;recipe.lut_id[0]=0;}

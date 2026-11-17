@@ -6,7 +6,7 @@ LDLIBS += -ljpeg -lm
 CORE := $(wildcard source/camera/*.c source/color/*.c source/image/*.c source/storage/*.c source/ui/*.c source/debug/*.c)
 HEADERS := $(wildcard include/*.h source/storage/*.h source/color/*.h)
 
-.PHONY: all host test test-native-integration test-raw-darkroom sanitize bench 3ds clean
+.PHONY: all host test test-native-integration test-raw-darkroom test-standard-media sanitize bench 3ds clean
 all: host
 host: build/filmctl
 build/filmctl: $(CORE) $(HEADERS) tools/host.c
@@ -15,18 +15,23 @@ build/filmctl: $(CORE) $(HEADERS) tools/host.c
 build/filmraw: $(CORE) $(HEADERS) tools/raw_darkroom_host.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tools/raw_darkroom_host.c $(LDFLAGS) $(LDLIBS) -o $@
+build/filmscene: $(CORE) $(HEADERS) tools/raw_scene_host.c
+	@mkdir -p build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tools/raw_scene_host.c $(LDFLAGS) $(LDLIBS) -o $@
 build/raw-darkroom-test: $(CORE) $(HEADERS) tests/raw_darkroom.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/raw_darkroom.c $(LDFLAGS) $(LDLIBS) -o $@
 build/raw-app-test: $(CORE) $(HEADERS) tests/raw_app.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/raw_app.c $(LDFLAGS) $(LDLIBS) -o $@
-test-raw-darkroom: build/filmraw build/raw-darkroom-test build/raw-app-test build/roll-preview-test
+test-raw-darkroom: build/filmscene build/filmraw build/raw-darkroom-test build/raw-app-test build/roll-preview-test
 	python3 tools/camera_runtime_contract.py --check
 	./build/raw-darkroom-test
 	./build/raw-app-test
 	./build/roll-preview-test
 	python3 tests/raw_darkroom_export.py
+	python3 tests/display_chart_calibrate.py
+	python3 tests/raw_scene_pipeline.py
 build/unit: $(CORE) $(HEADERS) tests/unit.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/unit.c $(LDFLAGS) $(LDLIBS) -o $@
@@ -48,7 +53,7 @@ build/roll-test: $(CORE) $(HEADERS) tests/roll.c
 build/roll-preview-test: $(CORE) $(HEADERS) tests/roll_preview.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/roll_preview.c $(LDFLAGS) $(LDLIBS) -o $@
-test: host build/unit build/hardware-exposure-test build/hardware-transport-test build/darkroom-test build/wb-composition-test build/roll-test
+test: build/standard-media-test host build/unit build/hardware-exposure-test build/hardware-transport-test build/darkroom-test build/wb-composition-test build/roll-test
 	python3 tools/camera_runtime_contract.py --check
 	python3 tests/camera_ui_package.py
 	./build/hardware-exposure-test
@@ -57,6 +62,8 @@ test: host build/unit build/hardware-exposure-test build/hardware-transport-test
 	./build/darkroom-test
 	./build/wb-composition-test
 	./build/roll-test
+	./build/standard-media-test
+	python3 tests/dng_interop.py
 	python3 tests/integration.py
 	python3 tests/simulator_http.py
 	python3 tests/hardware_qa_report.py
@@ -74,3 +81,10 @@ bench: host
 	$(MAKE) -f Makefile.3ds
 clean:
 	rm -rf build build-3ds Film3DS.3dsx Film3DS.elf Film3DS.smdh Film3DS.map
+
+build/standard-media-test: $(CORE) $(HEADERS) tests/standard_media.c
+	@mkdir -p build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/standard_media.c $(LDFLAGS) $(LDLIBS) -o $@
+test-standard-media: build/standard-media-test
+	./build/standard-media-test
+	python3 tests/dng_interop.py

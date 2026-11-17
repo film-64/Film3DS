@@ -268,6 +268,10 @@ static void preview_and_storage(void)
     assert(film_darkroom_preview(&room, &frame, NULL, NULL) == FILM_OK);
     assert(film_darkroom_input(&room, select_key, select_key) == DARKROOM_INPUT_SAVE && room.preview.pixels);
     assert(film_jpeg_write(expected, &room.preview, room.quality) == FILM_OK);
+    /* Saving needs only the displayed pixels: poison the old render inputs. */
+    film_develop_canvas_free(&room.canvas);
+    room.recipe.scale=FILM_200;
+    room.recipe.sharpness=-5;
     memset(frame.source.pixels, 0, 8 * 6 * 3);
     frame.recipe.jpeg_quality = 1;
     frame.recipe.scale = FILM_200;

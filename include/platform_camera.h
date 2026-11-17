@@ -1,6 +1,7 @@
 #ifndef FILM_PLATFORM_CAMERA_H
 #define FILM_PLATFORM_CAMERA_H
 #include "film.h"
+#include <stdatomic.h>
 #include "film_runtime_contract.h"
 #include "hardware_exposure.h"
 #include "hardware_transport.h"
@@ -19,6 +20,7 @@ enum { FILM_SHARPNESS_MIN = -2, FILM_SHARPNESS_MAX = 2 };
 typedef struct {
     bool initialized;
     bool streaming;
+    bool dma_safe;
     FilmSensor sensor;
     unsigned port;
     unsigned transfer, zoom;
@@ -34,8 +36,11 @@ typedef struct {
     FilmHardwareExposure exposure;
     FilmRegisterTransport exposure_transport;
     FILE *exposure_trace;
+    FILE *runtime_log;
     bool exposure_requested;
     FilmExposureMode exposure_mode;
+    atomic_bool debug_mode;
+    atomic_uint capture_phase;
 } FilmCamera;
 
 typedef struct {
@@ -72,10 +77,17 @@ FilmCameraStabilityResult film_camera_stability_read(const FilmCameraStability *
 float film_camera_meter_error_ev(FilmMeterReading sample, int ev_thirds);
 int film_camera_meter_step(FilmExposureMeter *meter, int step, FilmMeterReading sample, int ev_thirds);
 
+enum {FILM_CAPTURE_VERIFY,FILM_CAPTURE_PRECONDITIONS,FILM_CAPTURE_LOCK,FILM_CAPTURE_NATIVE,FILM_CAPTURE_SWITCH,FILM_CAPTURE_SETTLE,FILM_CAPTURE_RETAIN,FILM_CAPTURE_RESTORE};
+uint32_t film_camera_receive_wait(FilmCamera *,uint32_t event,FILE *trace,bool *received);
+uint32_t film_camera_stop_port(unsigned port,FILE *log,bool *dma_safe);
+uint32_t film_camera_read_bool(unsigned command,unsigned argument,bool *value,FILE *log);
 FilmStatus film_camera_open(FilmCamera *camera, FilmPixelFormat format, FilmSensor sensor);
-FilmStatus film_camera_capture(FilmCamera *camera, FilmFrame *frame);
+FilmStatus film_camera_capture_diagnostic(const char *source,FilmCamera *camera,FilmFrame *frame);
+FilmStatus film_camera_raw_shutter_check(const char *source,const FilmCamera *camera);
+/* On restoration failure the status remains an error and the camera closes.
+ * A nonempty RAW output is nevertheless independently owned and fully validated;
+ * production may save it. Diagnostics must still report the returned error. */
 FilmStatus film_camera_capture_raw(FilmCamera *camera,FilmFrame *frame,FILE *local_trace);
-FilmStatus film_camera_capture_pair(FilmCamera *,FilmFrame *raw,FilmFrame *native,FILE *local_trace);
 FilmStatus film_camera_measure(FilmCamera *camera, FilmFrame *frame, bool keep_stream, FilmCaptureTiming *timing);
 FilmStatus film_camera_receive(FilmCamera *camera, FilmImage *linear, bool keep_stream, FilmCaptureTiming *timing);
 FilmStatus film_camera_request_30fps(FilmCamera *camera);
@@ -93,7 +105,6 @@ FilmStatus film_camera_set_zoom(FilmCamera *camera, unsigned zoom);
 void film_camera_log_calibration(FILE *log);
 FilmStatus film_camera_preview_start(FilmCamera *camera);
 FilmStatus film_camera_preview_poll(FilmCamera *camera, FilmImage *image);
-FilmStatus film_camera_preview_snapshot(FilmCamera *camera, FilmFrame *frame);
 FilmStatus film_camera_preview_stop(FilmCamera *camera);
 void film_camera_close(FilmCamera *camera);
 FilmStatus film_y2r_transfer(const FilmImage *linear_yuyv, FilmYuv matrix, unsigned transfer_lines,

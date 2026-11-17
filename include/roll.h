@@ -16,8 +16,12 @@ typedef struct {
     FilmPixelFormat format;
     uint32_t source_crc,jpeg_crc;
 } FilmRollPair;
+typedef struct {
+    bool written;
+    FilmStatus write_status, verification_status, preview_status;
+} FilmRollSaveResult;
+FilmStatus film_roll_capture_save(const char *,const FilmFrame *,const char *,const char *,unsigned,FilmRollSaveResult *);
 FilmStatus film_roll_pair_publish(const char *,const FilmFrame *,const char *,unsigned);
-FilmStatus film_roll_native_raw_pair(const char *,const FilmFrame *raw,const FilmFrame *native,const char *,unsigned);
 FilmStatus film_roll_pair_index(const char *,const char *,unsigned,FilmRollPair *);
 FilmStatus film_roll_jpeg_preview(const char *,const char *,unsigned,FilmRollPair *,FilmImage *);
 FilmStatus film_roll_pair_verify(const char *,const FilmFrame *,const FilmRollPair *);
@@ -29,5 +33,5 @@ bool film_roll_touch(FilmRoll *roll, FilmUi *ui, unsigned x, unsigned y);
 FilmStatus film_roll_request_delete(FilmRoll *roll, const FilmUi *ui, const uint16_t *ids, unsigned count);
 void film_roll_cancel_delete(FilmRoll *roll);
 FilmStatus film_roll_confirm_delete(FilmRoll *roll, FilmUi *ui, uint16_t *ids, unsigned *count,
-                                    const char *directory);
+                                    const char *directory,const char *previews);
 #endif

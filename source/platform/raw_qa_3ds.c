@@ -43,7 +43,7 @@ bool film_raw_capture_qa(const char *token,const char *recover,bool recover_only
         bool sent=film_hardware_qa_confirm(&qa);film_hardware_qa_close(&qa);fclose(raw_trace);return sent;
     }
     fprintf(raw_trace,"source=film-raw-capture-automation/v1 case=native_AE\n");
-    FilmCamera camera={0};FilmFrame raw={.recipe=film_default_recipe()};
+    FilmCamera camera={.runtime_log=raw_trace};FilmFrame raw={.recipe=film_default_recipe()};
     milestone(qa.output,"before_open");
     FilmStatus s=film_camera_open(&camera,FILM_YUYV,FILM_CAMERA_REAR1);
     fprintf(raw_trace,"QA stage=open status=%s result=%08lx\n",film_status_name(s),(unsigned long)camera.last_result);fflush(raw_trace);
@@ -69,8 +69,8 @@ bool film_raw_capture_qa(const char *token,const char *recover,bool recover_only
     milestone(qa.output,"after_capture");film_camera_close(&camera);
     milestone(qa.output,"after_close");
     if(s==FILM_OK){
-        snprintf(path,sizeof path,"%s/capture.f3s",directory);
-        s=film_frame_write(path,&raw);
+        snprintf(path,sizeof path,"%s/capture.dng",directory);
+        s=film_dng_write("film-dng-write/v1",path,&raw);
         FilmFrame check={0};if(s==FILM_OK)s=film_frame_read(path,&check);
         if(s==FILM_OK&&(check.source.format!=FILM_RAW10_RGGB||check.source.width!=640||check.source.height!=480||memcmp(raw.source.pixels,check.source.pixels,614400)))s=FILM_CORRUPT;
         film_frame_free(&check);

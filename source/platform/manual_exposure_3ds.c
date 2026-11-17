@@ -2,6 +2,10 @@
 #include <3ds.h>
 #include <string.h>
 
+#ifndef FILM_CAMERA_VERBOSE
+#define FILM_CAMERA_VERBOSE 0
+#endif
+
 enum { WIDTH = 640, HEIGHT = 480, CAMERA_BYTES = WIDTH * HEIGHT * 2 };
 
 static int32_t register_open(void *context, const char *service, uint32_t *handle)
@@ -30,9 +34,10 @@ static void register_close(void *context, uint32_t handle)
 static FilmStatus hardware_exchange(FilmCamera *cam, bool writing, bool mcu,
                                     uint16_t address, uint16_t *value)
 {
+    if(atomic_load(&cam->debug_mode)&&cam->exposure_trace){fprintf(cam->exposure_trace,"MANUAL begin %s %s %04x\n",writing?"write":"read",mcu?"mcu":"reg",address);fflush(cam->exposure_trace);}
     FilmStatus status = film_register_access(&cam->exposure_transport, writing, mcu, address, value);
     cam->last_result = cam->exposure_transport.native_result;
-    if (cam->exposure_trace)
+    if (cam->exposure_trace && (FILM_CAMERA_VERBOSE || atomic_load(&cam->debug_mode) || status != FILM_OK))
         fprintf(cam->exposure_trace, "HW15 ms=%llu %s %s %04x %u %08lX\n",
                 (unsigned long long)osGetTime(), writing ? "write" : "read",
                 mcu ? "mcu" : "reg", address, *value, (unsigned long)cam->last_result);
@@ -63,20 +68,20 @@ static FilmStatus hardware_seed(FilmCamera *cam)
     FilmStatus status = FILM_OK;
     for (unsigned i = 0; i < FILM_HW_SEED_FRAMES; ++i) {
         status = film_camera_receive(cam, &image, true, NULL);
-        fprintf(cam->exposure_trace, "HW15 native_seed frame=%u status=%s result=%08lX\n",
+        if (cam->exposure_trace) fprintf(cam->exposure_trace, "HW15 native_seed frame=%u status=%s result=%08lX\n",
                 i, film_status_name(status), (unsigned long)cam->last_result);
         if (status != FILM_OK) break;
     }
     if (cam->initialized) {
-        Result stopped = CAMU_StopCapture(cam->port);
-        Result cleared = CAMU_ClearBuffer(cam->port);
+        Result stopped = film_camera_stop_port(cam->port,cam->exposure_trace,&cam->dma_safe);
+        Result cleared = 0;
         cam->streaming = false;
         if (status == FILM_OK && (R_FAILED(stopped) || R_FAILED(cleared))) {
             cam->last_result = R_FAILED(stopped) ? stopped : cleared;
             status = FILM_DEVICE;
         }
     }
-    linearFree(image.pixels);
+    if(cam->dma_safe)linearFree(image.pixels);
     return status;
 }
 
@@ -84,8 +89,8 @@ FilmStatus film_camera_enable_manual_exposure(FilmCamera *cam, FILE *local_trace
 {
     if (!cam || !cam->initialized || cam->streaming || cam->preview_event) return FILM_STATE;
     if (cam->exposure.active || cam->exposure.saved_valid) return FILM_STATE;
+    if (cam->sensor != FILM_CAMERA_REAR1) return FILM_UNSUPPORTED;
     cam->exposure_requested = true;
-    if (cam->sensor != FILM_CAMERA_REAR1 || !local_trace) return FILM_UNSUPPORTED;
     cam->exposure = (FilmHardwareExposure){0};
     cam->exposure_trace = local_trace;
     cam->preview_stage = "cam:c open";
@@ -112,14 +117,16 @@ FilmStatus film_camera_enable_manual_exposure(FilmCamera *cam, FILE *local_trace
         cam->last_result = rc;
         if (R_FAILED(rc)) status = FILM_DEVICE;
     }
+    if(status==FILM_OK){bool ae=true;rc=film_camera_read_bool(0x1a,SELECT_OUT1,&ae,local_trace);cam->last_result=rc;
+        if(R_FAILED(rc)||ae)status=FILM_DEVICE;}
     if (status == FILM_OK) {
         cam->preview_stage = "register init";
         status = film_hardware_begin(&cam->exposure,
         (FilmHardwareIo){cam, hardware_read, hardware_write, hardware_delay},
         "film-camera-manual-setup/v1");
     }
-    fprintf(local_trace, "MANUAL source=film-camera-manual-setup/v1 begin=%s nominal_EV_only=1\n", film_status_name(status));
-    fflush(local_trace);
+    if(local_trace){fprintf(local_trace, "MANUAL source=film-camera-manual-setup/v1 begin=%s nominal_EV_only=1\n", film_status_name(status));
+    fflush(local_trace);}
     if (status != FILM_OK) { cam->exposure.failed = true; film_camera_close_manual_exposure(cam); }
     return status;
 }
@@ -138,6 +145,10 @@ FilmStatus film_camera_progress_manual_exposure(FilmCamera *cam)
 FilmStatus film_camera_verify_manual_capture(FilmCamera *cam)
 {
     if (!cam->exposure_requested || !cam->exposure.ready || cam->exposure.failed) return FILM_STATE;
+    bool ae=true;
+    Result rc=film_camera_read_bool(0x1a,SELECT_OUT1,&ae,atomic_load(&cam->debug_mode)?cam->runtime_log:NULL);
+    cam->last_result=rc;
+    if(R_FAILED(rc)||ae)return FILM_STATE;
     return film_hardware_verify(&cam->exposure);
 }
 
@@ -160,7 +171,7 @@ FilmStatus film_camera_set_ae_compensation(FilmCamera *cam,int value)
     if(value<FILM_EXPOSURE_MIN||value>FILM_EXPOSURE_MAX)return FILM_INVALID;
     u32 select=cam->sensor==FILM_CAMERA_REAR1?SELECT_OUT1:cam->sensor==FILM_CAMERA_REAR2?SELECT_OUT2:SELECT_IN1;
     Result rc=CAMU_SetExposure(select,(s8)value);bool enabled=false;
-    if(R_SUCCEEDED(rc))rc=CAMU_IsAutoExposure(&enabled,select);
+    if(R_SUCCEEDED(rc))rc=film_camera_read_bool(0x1a,select,&enabled,atomic_load(&cam->debug_mode)?cam->runtime_log:NULL);
     cam->last_result=rc;
     FilmStatus status=R_SUCCEEDED(rc)&&enabled?FILM_OK:FILM_DEVICE;
     if(status!=FILM_OK)film_camera_close(cam);
@@ -170,8 +181,9 @@ FilmStatus film_camera_set_ae_compensation(FilmCamera *cam,int value)
 FilmStatus film_camera_select_exposure_mode(FilmCamera *cam,FilmExposureMode mode,int compensation,FILE *trace)
 {
     if(!film_runtime_source_valid("film-camera-exposure-mode/v1"))return FILM_STATE;
-    if(!cam||!cam->initialized||!trace||(unsigned)mode>FILM_EXPOSURE_MANUAL||
+    if(!cam||!cam->initialized||(unsigned)mode>FILM_EXPOSURE_MANUAL||
        compensation<FILM_EXPOSURE_MIN||compensation>FILM_EXPOSURE_MAX)return FILM_INVALID;
+    if(mode==FILM_EXPOSURE_MANUAL&&cam->sensor!=FILM_CAMERA_REAR1)return FILM_UNSUPPORTED;
     FilmStatus status=film_camera_preview_stop(cam);
     if(status!=FILM_OK)return status;
     if(cam->exposure_requested){
@@ -186,14 +198,14 @@ FilmStatus film_camera_select_exposure_mode(FilmCamera *cam,FilmExposureMode mod
         u32 select=cam->sensor==FILM_CAMERA_REAR1?SELECT_OUT1:cam->sensor==FILM_CAMERA_REAR2?SELECT_OUT2:SELECT_IN1;
         Result rc=CAMU_SetAutoExposure(select,true);bool enabled=false;
         if(R_SUCCEEDED(rc))rc=CAMU_SetAutoWhiteBalance(select,true);
-        if(R_SUCCEEDED(rc))rc=CAMU_IsAutoExposure(&enabled,select);
+        if(R_SUCCEEDED(rc))rc=film_camera_read_bool(0x1a,select,&enabled,atomic_load(&cam->debug_mode)?cam->runtime_log:NULL);
         cam->last_result=rc;status=R_SUCCEEDED(rc)&&enabled?FILM_OK:FILM_DEVICE;
         cam->exposure_mode=FILM_EXPOSURE_NATIVE_AE;
         if(status==FILM_OK)status=film_camera_set_ae_compensation(cam,compensation);
     }
     if(status==FILM_OK)cam->exposure_mode=mode;
-    fprintf(trace,"source=film-camera-exposure-mode/v1 mode=%s status=%s native_comp=%d\n",
-        mode==FILM_EXPOSURE_MANUAL?"manual":"native_AE",film_status_name(status),compensation);fflush(trace);
+    if(trace){fprintf(trace,"source=film-camera-exposure-mode/v1 mode=%s status=%s native_comp=%d\n",
+        mode==FILM_EXPOSURE_MANUAL?"manual":"native_AE",film_status_name(status),compensation);fflush(trace);}
     if(status!=FILM_OK)film_camera_close(cam);
     return status;
 }

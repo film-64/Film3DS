@@ -71,7 +71,7 @@ class ExportTests(unittest.TestCase):
             means.append(sum(sum(p) for p in self.pixels(out/'plain.ppm')))
         self.assertLess(means[0],means[1]);self.assertLess(means[1],means[2])
         for name,value in [('wb','2 1 1'),('ccm','1.5 0 0 0 1 0 0 0 1'),('highlights','.5'),
-                           ('midtones','.5'),('shadows','.5'),('saturation','.5'),('sharpness','2')]:
+                           ('midtones','.5'),('shadows','.5'),('saturation','.5'),('sharpness','2'),('ccm_offset','.05 0 0'),('local_strength','.5'),('shading_r','0 0 0 1 0 0')]:
             out=self.run_export(name,f'{name} {value}\ngrain_amount 0\n')
             self.assertNotEqual(self.pixels(out/'plain.ppm'),base_pixels,name)
         a=self.run_export('grain1','grain_amount .5\nseed 64\n')
@@ -88,6 +88,8 @@ class ExportTests(unittest.TestCase):
             self.assertFalse(out.exists())
         self.run_export('fake','admission_decision admitted\n',expected=1)
         self.run_export('nan','wb nan 1 1\n',expected=1)
+        self.run_export('invalid-local','local_strength 1.1\n',expected=1)
+        self.run_export('invalid-shading','shading_r 0 0 0 0 0 5\n',expected=1)
         out=self.run_export('evbad','exposure_ev 9\n',expected=1)
         self.assertFalse((out/'completed.json').exists())
         bad=bytearray(self.payload);bad[-1]=4;self.payload=bytes(bad);self.raw.write_bytes(self.payload)

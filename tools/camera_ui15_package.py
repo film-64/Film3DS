@@ -20,9 +20,9 @@ def sha(path):
 
 def stage(out, luts, grain_texture=None):
     assert CONTRACT_MATRIX["film-camera-ui-package/v1"]["compute"] is False
-    cubes = sorted(luts.glob("*.cube"))
-    if not cubes or any(not p.with_suffix(".f3p").is_file() for p in cubes):
-        raise ValueError("require LUTs with matching .f3p profiles")
+    cubes = sorted(p for p in luts.iterdir() if p.is_file() and p.suffix.lower()==".cube")
+    if not cubes:
+        raise ValueError("require standalone .cube LUT files")
     if out.exists():
         raise FileExistsError(out)
     out.mkdir(parents=True)
@@ -38,8 +38,7 @@ def stage(out, luts, grain_texture=None):
     packed = out / "romfs/luts"
     packed.mkdir(exist_ok=True)
     for cube in cubes:
-        for source in (cube, cube.with_suffix(".f3p")):
-            shutil.copy2(source, packed / source.name)
+        shutil.copy2(cube, packed / cube.name)
     # Reuse the already-pinned JPEG source, never old application objects.
     jpeg = ROOT / "build-3ds/jpeg-arm11/source"
     if jpeg.is_dir():

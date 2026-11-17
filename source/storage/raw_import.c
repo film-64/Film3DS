@@ -20,6 +20,6 @@ FilmStatus film_raw_import(const char *source,const char *input,const char *outp
     if(!ok)s=FILM_CORRUPT;
     if(s==FILM_OK)for(size_t i=1;i<614400;i+=2)if(frame.source.pixels[i]>3){s=FILM_CORRUPT;break;}
     frame.recipe.grain_amount=.35f;
-    if(s==FILM_OK)s=film_frame_write(output,&frame);
+    if(s==FILM_OK)s=film_dng_write("film-dng-write/v1",output,&frame);
     film_frame_free(&frame);return s;
 }

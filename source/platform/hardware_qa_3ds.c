@@ -338,14 +338,14 @@ void film_hardware_qa_camera(FILE *output, bool send_frames)
         if (camera.initialized && !ferror(output)) {
             FilmFrame zoomed = {0};
             FilmStatus set = film_camera_set_zoom(&camera, 2);
-            FilmStatus sample = set == FILM_OK ? film_camera_capture(&camera, &zoomed) : set;
+            FilmStatus sample = set == FILM_OK ? film_camera_capture_diagnostic("film-camera-native-capture/v1",&camera,&zoomed) : set;
             fprintf(output, "ZOOM sensor=%u set=%s sample=%s width=%u height=%u result=%08" PRIx32 "\n",
                     sensor, film_status_name(set), film_status_name(sample),
                     zoomed.source.width, zoomed.source.height, camera.last_result);
             film_frame_free(&zoomed);
             if (sample == FILM_OK) {
                 FilmStatus restore = film_camera_set_zoom(&camera, 1);
-                if (restore == FILM_OK) restore = film_camera_capture(&camera, &zoomed);
+                if (restore == FILM_OK) restore = film_camera_capture_diagnostic("film-camera-native-capture/v1",&camera,&zoomed);
                 fprintf(output, "ZOOM_RESTORE sensor=%u sample=%s width=%u height=%u result=%08" PRIx32 "\n",
                         sensor, film_status_name(restore), zoomed.source.width, zoomed.source.height, camera.last_result);
                 film_frame_free(&zoomed);

@@ -39,9 +39,19 @@ static const unsigned short film_hw_core[] = {528,528,528,528,528,528,544};
 static inline bool film_runtime_source_valid(const char *source)
 {
     if (!source) return false;
+    if (!strcmp(source, "film-display-chart-calibrate/v1")) return true;
+    if (!strcmp(source, "film-camera-receive-complete/v1")) return true;
+    if (!strcmp(source, "film-camera-command-raw/v1")) return true;
+    if (!strcmp(source, "film-camera-stop/v1")) return true;
+    if (!strcmp(source, "film-debug-toggle/v1")) return true;
+    if (!strcmp(source, "film-camera-shutter-worker/v1")) return true;
+    if (!strcmp(source, "film-dng-write/v1")) return true;
+    if (!strcmp(source, "film-dng-read/v1")) return true;
+    if (!strcmp(source, "film-lut-install/v1")) return true;
+    if (!strcmp(source, "film-lut-catalog/v1")) return true;
+    if (!strcmp(source, "film-roll-capture-save/v1")) return true;
     if (!strcmp(source, "film-app-frozen-evidence/v1")) return true;
-    if (!strcmp(source, "film-camera-shutter-pair/v1")) return true;
-    if (!strcmp(source, "film-roll-native-raw-pair/v1")) return true;
+    if (!strcmp(source, "film-camera-shutter-raw/v1")) return true;
     if (!strcmp(source, "film-online-evidence-send/v1")) return true;
     if (!strcmp(source, "film-camera-bool-reply/v1")) return true;
     if (!strcmp(source, "film-raw-capture-trace-recover/v1")) return true;
@@ -64,6 +74,11 @@ static inline bool film_runtime_source_valid(const char *source)
     if (!strcmp(source, "film-raw-darkroom-comparison/v1")) return true;
     if (!strcmp(source, "film-grain-layered/v1")) return true;
     if (!strcmp(source, "film-raw10-unpack/v1")) return true;
+    if (!strcmp(source, "film-raw-scene-deploy/v1")) return true;
+    if (!strcmp(source, "film-raw-scene/v1")) return true;
+    if (!strcmp(source, "film-raw-scene-grade/v1")) return true;
+    if (!strcmp(source, "film-raw-profile-load/v1")) return true;
+    if (!strcmp(source, "film-raw-scene-probe/v1")) return true;
     if (!strcmp(source, "film-raw-isp/v1")) return true;
     if (!strcmp(source, "film-raw-grade/v1")) return true;
     if (!strcmp(source, "film-raw-darkroom-export/v1")) return true;

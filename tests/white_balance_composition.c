@@ -93,12 +93,18 @@ static void render_and_storage(void)
     FilmDarkroom room={0};
     assert(film_darkroom_preview(&room,&frame,NULL,NULL)==FILM_OK);
     assert(room.preview.width==64 && room.preview.height==48 && room.canvas.width==64);
-    assert(room.preview.pixels[0]==0 && room.preview.pixels[3*63]==252);
+    assert(room.preview.pixels[0]>=62 && room.preview.pixels[0]<=66);
+    assert(room.composition_view.width==64 && room.composition_view.height==48);
+    assert(room.composition_view.pixels[0]==0 && room.composition_view.pixels[3*63]==252);
+    uint8_t *full_view=room.composition_view.pixels;
+    uint16_t *graded_canvas=room.canvas.pixels;
     FilmImage a={0},b={0};
     assert(film_develop_canvas_render(&room.canvas,&room.recipe,NULL,false,&a)==FILM_OK);
     assert(a.width==64 && a.height==48 && a.pixels[0]>=62 && a.pixels[0]<=66);
     FilmRecipe changed=frame.recipe;changed.crop_positioned=true;changed.crop_x=0;changed.crop_y=0;changed.scale=FILM_200;
     film_darkroom_update_geometry(&room,&changed);
+    assert(!room.preview.pixels && room.composition_view.pixels==full_view && room.canvas.pixels==graded_canvas);
+    assert(film_darkroom_finish(&room,true,"build/stale-composition-must-not-save.JPG")==FILM_STATE);
     assert(film_develop_canvas_render(&room.canvas,&room.recipe,NULL,false,&b)==FILM_OK);
     assert(b.width==128 && b.height==96 && b.pixels[0]<=2);
     film_image_free(&a);film_image_free(&b);
@@ -118,9 +124,14 @@ static void render_and_storage(void)
     frame.recipe.crop_x=100;assert(film_frame_write(path,&frame)==FILM_INVALID);
     frame.recipe.crop_x=7;
     assert(film_develop_with_options(&frame,NULL,NULL,&frame.source)==FILM_INVALID);
-    /* Save derives only current geometry from immutable original graded canvas. */
-    assert(film_develop_canvas_render(&room.canvas,&room.recipe,NULL,false,&b)==FILM_OK);
-    assert(film_jpeg_write(expected,&b,room.quality)==FILM_OK);film_image_free(&b);
+    frame.recipe=changed;
+    assert(film_darkroom_preview(&room,&frame,NULL,NULL)==FILM_OK);
+    assert(room.preview.width==96 && room.preview.height==96);
+    assert(room.composition_view.width==64 && room.composition_view.height==48);
+    /* Geometry is baked at A; SELECT preserves even a cached preview whose
+     * original canvas/recipe can no longer be rendered. */
+    assert(film_jpeg_write(expected,&room.preview,room.quality)==FILM_OK);
+    film_develop_canvas_free(&room.canvas);
     memset(frame.source.pixels,255,64*48*3);
     assert(film_darkroom_finish(&room,true,saved)==FILM_OK);
     FILE *fa=fopen(saved,"rb"),*fb=fopen(expected,"rb");assert(fa&&fb);int ca,cb;
@@ -128,7 +139,7 @@ static void render_and_storage(void)
     assert(film_darkroom_preview(&room,&frame,NULL,NULL)==FILM_OK);
     assert(film_darkroom_finish(&room,false,NULL)==FILM_OK && !room.canvas.pixels);
     film_frame_free(&frame);unlink(path);unlink(saved);unlink(expected);
-    puts("PASS full canvas preview, independent crop/resize/save, original coordinates, immutable cache, v6 roundtrip, OOB and alias rejection, cancel cleanup");
+    puts("PASS full original composition view, edit preserves frame canvas, cached crop save, original coordinates, immutable cache, v6 roundtrip, OOB and alias rejection, cancel cleanup");
 }
 int main(void)
 {

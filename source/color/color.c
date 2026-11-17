@@ -105,7 +105,7 @@ FilmStatus film_lut_load(FILE *file, FilmLut *out, unsigned *error_line)
                 errno = 0;
                 unsigned long n = strtoul(line, &end, 10);
                 if (lut.size || errno == ERANGE || *skip_space(end)) goto fail;
-                if (n != 17 && n != 33 && n != 65) {
+                if (n < 2 || n > 256) {
                     status = FILM_UNSUPPORTED;
                     goto fail;
                 }

@@ -152,12 +152,12 @@ FilmStatus film_profile_read(const char *path, FilmProfile *profile)
 FilmStatus film_frame_write(const char *path, const FilmFrame *frame)
 {
     if (!frame || !frame->source.pixels) return FILM_INVALID;
+    if(frame->source.format==FILM_RAW10_RGGB)return film_dng_write("film-dng-write/v1",path,frame);
     FilmStatus status = film_recipe_validate(&frame->recipe);
     if (status != FILM_OK) return status;
     const FilmImage *image = &frame->source;
     const FilmRecipe *r = &frame->recipe;
     size_t bytes = film_image_bytes(image->width, image->height, image->format);
-    if(image->format==FILM_RAW10_RGGB)for(size_t i=1;i<bytes;i+=2)if(image->pixels[i]>3)return FILM_CORRUPT;
     unsigned w, h;
     FilmRect rect;
     if (!bytes || film_scaled_dims(image->width, image->height, r->scale, &w, &h) != FILM_OK ||
@@ -296,7 +296,8 @@ FilmStatus film_frame_read(const char *path, FilmFrame *out)
     FILE *file = fopen(path, "rb");
     if (!file) return FILM_IO;
     FilmFrame frame = {0};
-    FilmStatus status = read_frame(file, &frame);
+    uint8_t magic[4];size_t n=fread(magic,1,4,file);rewind(file);
+    FilmStatus status = n==4&&!memcmp(magic,"II\052\0",4)?film_dng_read("film-dng-read/v1",file,&frame):read_frame(file, &frame);
     if (ferror(file)) status = FILM_IO;
     fclose(file);
     if (status == FILM_OK) *out = frame;

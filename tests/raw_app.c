@@ -8,23 +8,22 @@
 #include <string.h>
 #include <unistd.h>
 
-typedef struct {uint16_t reg[65536],seq;unsigned writes,frames,retained,locks,unlocks;int fail_frame;bool fail_restore,wrong_hold,native_channels;uint16_t expected_coarse,expected_gain,lock_coarse,failed_address,failed_expected,failed_observed;} Sensor;
+typedef struct {uint16_t reg[65536],seq;unsigned writes,frames,retained,locks,unlocks;int fail_frame;bool fail_restore,wrong_hold,native_channels,fail_post_hold,fail_idle;uint16_t expected_coarse,expected_gain,lock_coarse,failed_address,failed_expected,failed_observed;} Sensor;
 static FilmStatus rd(void *ctx,bool mcu,uint16_t a,uint16_t *v)
-{Sensor *s=ctx;*v=mcu?s->seq:s->reg[a];if(s->wrong_hold&&s->writes&&a==0x3056)*v^=1;return FILM_OK;}
+{Sensor *s=ctx;*v=mcu?s->seq:s->reg[a];if((s->wrong_hold&&s->writes&&a==0x3056)||(s->fail_post_hold&&s->retained&&a==0x3056))*v^=1;return FILM_OK;}
 static FilmStatus wr(void *ctx,bool mcu,uint16_t a,uint16_t v)
 {Sensor *s=ctx;++s->writes;if(s->fail_restore&&a==0x3006&&v==487)return FILM_DEVICE;if(mcu)s->seq=v;else s->reg[a]=v;return FILM_OK;}
 static FilmStatus lock(void *ctx){Sensor *s=ctx;++s->locks;if(s->lock_coarse){s->reg[0x3012]=s->lock_coarse;s->expected_coarse=s->lock_coarse;}return FILM_OK;}
 static FilmStatus unlock(void *ctx){++((Sensor *)ctx)->unlocks;return FILM_OK;}
-static FilmStatus idle(void *ctx){(void)ctx;return FILM_OK;}
+static FilmStatus idle(void *ctx){return ((Sensor *)ctx)->fail_idle?FILM_DEVICE:FILM_OK;}
 static FilmStatus frame(void *ctx,bool retained,bool raw)
 {
     Sensor *s=ctx;++s->frames;if((int)s->frames==s->fail_frame)return FILM_DEVICE;
     if(raw){assert(s->reg[0x3006]==479&&s->reg[0x3008]==639);assert((s->reg[0x3330]&0x40)&&s->reg[0x3012]==s->expected_coarse);}
     else assert(s->reg[0x3006]==487&&s->reg[0x3008]==647);
     if(raw)assert(s->reg[0x3056]==s->expected_gain&&s->reg[0x3058]==s->expected_gain+(s->native_channels?7:0)&&s->reg[0x305a]==s->expected_gain+(s->native_channels?14:0)&&s->reg[0x305c]==s->expected_gain+(s->native_channels?25:0));
-    if(retained)++s->retained;return FILM_OK;
+    if(retained){assert(raw);++s->retained;}return FILM_OK;
 }
-static FilmStatus native_gate(void *ctx){return frame(ctx,true,false);}
 static void setup(Sensor *s)
 {memset(s,0,sizeof *s);s->reg[0]=8832;s->reg[0x3006]=487;s->reg[0x3008]=647;s->reg[0x3040]=0x25;s->reg[0x300a]=704;s->seq=13;s->reg[0x3012]=s->expected_coarse=128;
     s->expected_gain=528;s->reg[0x3056]=s->reg[0x3058]=s->reg[0x305a]=s->reg[0x305c]=528;}
@@ -33,7 +32,7 @@ static void observe(void *ctx,const char *phase,uint16_t a,uint16_t expected,uin
 static void transaction(void)
 {
     Sensor *s=calloc(1,sizeof *s);assert(s);setup(s);Sensor before=*s;
-    FilmRawCaptureIo io={s,rd,wr,lock,frame,idle,unlock,observe,NULL};
+    FilmRawCaptureIo io={s,rd,wr,lock,frame,idle,unlock,observe};
     assert(!film_raw_qa_token_valid(NULL)&&!film_raw_qa_token_valid("bad")&&!film_raw_qa_token_valid("0123456789abcdef0123456789abcdeg"));
     assert(film_raw_qa_token_valid("0123456789abcdef0123456789abcdef"));
     assert(film_raw_capture_transaction("scheduler_decision:admitted",io)==FILM_STATE);assert(!s->writes);
@@ -56,12 +55,22 @@ static void transaction(void)
     setup(s);s->lock_coarse=117;s->native_channels=true;s->expected_gain=s->reg[0x3056]=530;
     s->reg[0x3058]=537;s->reg[0x305a]=544;s->reg[0x305c]=555;
     assert(film_raw_capture_transaction("film-camera-raw-capture/v1",io)==FILM_OK&&s->reg[0x3012]==117);
-    setup(s);io.native_frame=native_gate;
-    assert(film_raw_capture_transaction("film-camera-raw-capture/v1",io)==FILM_OK&&s->retained==2&&s->frames==5);
-    assert(!memcmp(s->reg,before.reg,sizeof s->reg));
-    for(int fail=1;fail<=5;++fail){setup(s);s->fail_frame=fail;
-        assert(film_raw_capture_transaction("film-camera-raw-capture/v1",io)==FILM_DEVICE);
-        assert(!memcmp(s->reg,before.reg,sizeof s->reg));}
+    FilmRawCaptureResult result;
+    setup(s);s->fail_restore=true;
+    assert(film_raw_capture_transaction_result("film-camera-raw-capture/v1",io,&result)!=FILM_OK);
+    assert(result.raw_received&&result.raw_valid&&!result.camera_restored&&result.capture_status==FILM_OK&&result.restore_status!=FILM_OK);
+    setup(s);s->fail_frame=4;
+    assert(film_raw_capture_transaction_result("film-camera-raw-capture/v1",io,&result)==FILM_DEVICE);
+    assert(!result.raw_received&&!result.raw_valid&&result.camera_restored);
+    setup(s);s->fail_post_hold=true;
+    assert(film_raw_capture_transaction_result("film-camera-raw-capture/v1",io,&result)!=FILM_OK);
+    assert(result.raw_received&&!result.raw_valid);
+    setup(s);s->fail_idle=true;
+    assert(film_raw_capture_transaction_result("film-camera-raw-capture/v1",io,&result)==FILM_DEVICE);
+    assert(result.raw_valid&&!result.camera_restored&&result.restore_status==FILM_DEVICE);
+    setup(s);
+    assert(film_raw_capture_transaction_result("unknown",io,&result)==FILM_STATE);
+    assert(!result.raw_received&&!result.raw_valid&&!result.camera_restored&&!s->writes);
     free(s);puts("PASS RAW transaction preconditions, gate, two settle frames, retention, reverse restore, errors and unknown-source rejection");
 }
 static FilmStatus sum_mix(unsigned w,unsigned h,const float *planes,float *noise)
@@ -125,6 +134,6 @@ static void app(void)
     wire[9]=4;input=fopen(bin,"wb");assert(input&&fwrite(wire,1,614400,input)==614400);fclose(input);
     assert(film_raw_import("film-app-raw-import/v1",bin,file)==FILM_CORRUPT);assert(access(file,F_OK)!=0);
     unlink(bin);free(wire);
-    puts("PASS app RAW F3S roundtrip, actual darkroom path, pair export/no-overwrite, density mixer equivalence and failure atomicity");
+    puts("PASS app RAW DNG roundtrip, actual darkroom path, pair export/no-overwrite, density mixer equivalence and failure atomicity");
 }
 int main(void){transaction();denoise();app();return 0;}

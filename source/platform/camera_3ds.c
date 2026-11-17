@@ -6,7 +6,6 @@
 #include <time.h>
 
 enum { WIDTH = 640, HEIGHT = 480, CAMERA_BYTES = WIDTH * HEIGHT * 2 };
-static const s64 capture_timeout = INT64_C(1500000000);
 static const u32 selectors[] = {SELECT_OUT1, SELECT_OUT2, SELECT_IN1};
 static const Y2RU_StandardCoefficient coefficients[] = {
     COEFFICIENT_ITU_R_BT_601, COEFFICIENT_ITU_R_BT_601_SCALING,
@@ -39,12 +38,13 @@ static Result set_window(FilmCamera *cam, unsigned zoom)
     return rc;
 }
 
-static void release_preview(FilmCamera *cam)
+static void release_preview(FilmCamera *cam,bool safe)
 {
     if (cam->preview_event) svcCloseHandle(cam->preview_event);
     cam->preview_event = 0;
     for (unsigned i = 0; i < 2; ++i) {
-        if (cam->preview_dma[i]) linearFree(cam->preview_dma[i]);
+        if (cam->preview_dma[i] && safe) linearFree(cam->preview_dma[i]);
+        /* Unproven DMA remains allocated until process exit, never reused. */
         cam->preview_dma[i] = NULL;
     }
     cam->preview_ready = false;
@@ -54,14 +54,15 @@ static void release_preview(FilmCamera *cam)
 void film_camera_close(FilmCamera *cam)
 {
     if (!cam->initialized) return;
-    CAMU_StopCapture(cam->port);
-    CAMU_ClearBuffer(cam->port);
-    film_camera_close_manual_exposure(cam);
+    film_camera_stop_port(cam->port,cam->runtime_log,&cam->dma_safe);
+    if(cam->dma_safe)film_camera_close_manual_exposure(cam);
+    else {film_register_close(&cam->exposure_transport);cam->exposure.failed=true;}
     CAMU_Activate(SELECT_NONE);
     camExit();
     cam->initialized = false;
     cam->streaming = false;
-    release_preview(cam);
+    if(!cam->dma_safe&&cam->runtime_log){fputs("CAM unsafe stop: DMA quarantined; register restore skipped\n",cam->runtime_log);fflush(cam->runtime_log);}
+    release_preview(cam,cam->dma_safe);
     cam->exposure_requested = false;
 }
 
@@ -75,6 +76,7 @@ FilmStatus film_camera_open(FilmCamera *cam, FilmPixelFormat format, FilmSensor 
     cam->exposure_transport = (FilmRegisterTransport){0};
     cam->exposure_trace = NULL;
     cam->exposure_requested = false;
+    cam->dma_safe=true;
     cam->last_result = 0;
     Result rc = camInit();
     if (R_FAILED(rc)) { cam->last_result = rc; return FILM_DEVICE; }
@@ -88,7 +90,7 @@ FilmStatus film_camera_open(FilmCamera *cam, FilmPixelFormat format, FilmSensor 
         format == FILM_YUYV ? OUTPUT_YUV_422 : OUTPUT_RGB_565, CONTEXT_A);
     if (R_SUCCEEDED(rc)) rc = CAMU_SetAutoExposure(select, false);
     bool auto_exposure = true;
-    if (R_SUCCEEDED(rc)) rc = CAMU_IsAutoExposure(&auto_exposure, select);
+    if (R_SUCCEEDED(rc)) rc = film_camera_read_bool(0x1a,select,&auto_exposure,atomic_load(&cam->debug_mode)?cam->runtime_log:NULL);
     if (R_SUCCEEDED(rc) && auto_exposure) {
         film_camera_close(cam);
         return FILM_UNSUPPORTED;
@@ -143,6 +145,7 @@ FilmStatus film_camera_set_control(FilmCamera *cam, FilmCameraControl control, i
     case FILM_CAM_EXPOSURE:
         if (!film_runtime_source_valid("film-camera-native-exposure/v1")) return FILM_STATE;
         if (value < FILM_EXPOSURE_MIN || value > FILM_EXPOSURE_MAX) return FILM_INVALID;
+        if(cam->exposure_mode==FILM_EXPOSURE_MANUAL&&!cam->exposure_requested)return FILM_STATE;
         if (cam->exposure_requested) {
             FilmStatus status = film_hardware_step(&cam->exposure, value, "film-camera-exposure/v1");
             if (status == FILM_OK && !cam->exposure.ready) cam->preview_ready = false;
@@ -178,8 +181,8 @@ FilmCameraAutoState film_camera_auto_state(const FilmCamera *cam)
         return state;
     }
     u32 select = selectors[cam->sensor - FILM_CAMERA_REAR1];
-    state.exposure_result = CAMU_IsAutoExposure(&state.exposure, select);
-    state.white_balance_result = CAMU_IsAutoWhiteBalance(&state.white_balance, select);
+    state.exposure_result = film_camera_read_bool(0x1a,select,&state.exposure,atomic_load(&cam->debug_mode)?cam->runtime_log:NULL);
+    state.white_balance_result = film_camera_read_bool(0x1c,select,&state.white_balance,atomic_load(&cam->debug_mode)?cam->runtime_log:NULL);
     return state;
 }
 
@@ -216,6 +219,7 @@ static Result arm_preview(FilmCamera *cam)
     cam->preview_signaled = false;
     Result rc = CAMU_SetReceiving(&cam->preview_event, cam->preview_dma[cam->preview_pending],
                                   cam->port, frame_bytes(cam), (s16)cam->transfer);
+    if(R_SUCCEEDED(rc))cam->dma_safe=false;
     cam->preview_deadline = osGetTime() + 1500;
     return rc;
 }
@@ -223,13 +227,11 @@ static Result arm_preview(FilmCamera *cam)
 FilmStatus film_camera_preview_stop(FilmCamera *cam)
 {
     if (!cam->preview_dma[0]) return FILM_OK;
-    Result rc = CAMU_StopCapture(cam->port);
-    Result cleared = CAMU_ClearBuffer(cam->port);
-    if (R_SUCCEEDED(rc)) rc = cleared;
+    Result rc = film_camera_stop_port(cam->port,cam->runtime_log,&cam->dma_safe);
     if (R_FAILED(rc)) film_camera_close(cam);
     else {
         cam->streaming = false;
-        release_preview(cam);
+        release_preview(cam,cam->dma_safe);
     }
     cam->last_result = rc;
     return R_SUCCEEDED(rc) ? FILM_OK : FILM_DEVICE;
@@ -244,8 +246,7 @@ FilmStatus film_camera_set_zoom(FilmCamera *cam, unsigned zoom)
     FilmStatus status = film_camera_preview_stop(cam);
     if (status != FILM_OK) return status;
     if (cam->streaming) {
-        Result stopped = CAMU_StopCapture(cam->port);
-        if (R_SUCCEEDED(stopped)) stopped = CAMU_ClearBuffer(cam->port);
+        Result stopped=film_camera_stop_port(cam->port,cam->runtime_log,&cam->dma_safe);
         if (R_FAILED(stopped)) {
             film_camera_close(cam);
             cam->last_result = stopped;
@@ -267,9 +268,9 @@ FilmStatus film_camera_preview_start(FilmCamera *cam)
     cam->preview_stage = "DMA";
     for (unsigned i = 0; i < 2; ++i) {
         cam->preview_dma[i] = linearMemAlign(frame_bytes(cam), 0x80);
-        if (!cam->preview_dma[i]) { release_preview(cam); return FILM_NOMEM; }
+        if (!cam->preview_dma[i]) { release_preview(cam,true); return FILM_NOMEM; }
         Result rc = GSPGPU_FlushDataCache(cam->preview_dma[i], frame_bytes(cam));
-        if (R_FAILED(rc)) { cam->last_result = rc; release_preview(cam); return FILM_DEVICE; }
+        if (R_FAILED(rc)) { cam->last_result = rc; release_preview(cam,true); return FILM_DEVICE; }
     }
     cam->preview_pending = 0;
     cam->preview_stage = "start";
@@ -294,7 +295,7 @@ FilmStatus film_camera_preview_poll(FilmCamera *cam, FilmImage *image)
     if (R_SUCCEEDED(rc)) {
         cam->preview_stage = "receive";
         cam->preview_signaled = true;
-        rc = CAMU_IsFinishedReceiving(&received, cam->port);
+        rc = film_camera_read_bool(8,cam->port,&received,atomic_load(&cam->debug_mode)?cam->runtime_log:NULL);
     }
     if (R_SUCCEEDED(rc) && !received && osGetTime() < cam->preview_deadline) return FILM_OK;
     if (R_SUCCEEDED(rc) && received) {
@@ -328,17 +329,6 @@ static void copy_capture(FilmCamera *cam, FilmFrame *frame, FilmImage source, co
     frame->captured_at = now < 0 ? 0 : (uint64_t)now;
 }
 
-FilmStatus film_camera_preview_snapshot(FilmCamera *cam, FilmFrame *frame)
-{
-    if (!film_runtime_source_valid("film-camera-native-capture/v1")) return FILM_STATE;
-    if (!cam->preview_ready) return FILM_STATE;
-    FilmImage source = {0};
-    FilmStatus status = film_image_alloc(&source, WIDTH / cam->zoom, HEIGHT / cam->zoom, cam->format);
-    if (status == FILM_OK)
-        copy_capture(cam, frame, source, cam->preview_dma[cam->preview_pending ^ 1]);
-    return status;
-}
-
 static FilmStatus capture(FilmCamera *cam, FilmFrame *frame, uint8_t *linear,
                           bool keep_stream, FilmCaptureTiming *timing)
 {
@@ -357,15 +347,14 @@ static FilmStatus capture(FilmCamera *cam, FilmFrame *frame, uint8_t *linear,
     Result rc = GSPGPU_FlushDataCache(dma, bytes);
     if (R_SUCCEEDED(rc)) rc = start_capture(cam);
     u64 setup = timing ? svcGetSystemTick() : 0;
-    if (R_SUCCEEDED(rc)) rc = CAMU_SetReceiving(&complete, dma, cam->port, bytes, (s16)cam->transfer);
+    if (R_SUCCEEDED(rc)){rc = CAMU_SetReceiving(&complete, dma, cam->port, bytes, (s16)cam->transfer);if(R_SUCCEEDED(rc))cam->dma_safe=false;}
     u64 armed = timing ? svcGetSystemTick() : 0;
-    if (R_SUCCEEDED(rc)) rc = svcWaitSynchronization(complete, capture_timeout);
+    bool received=false;
+    if(R_SUCCEEDED(rc))rc=film_camera_receive_wait(cam,complete,atomic_load(&cam->debug_mode)?cam->runtime_log:NULL,&received);
     u64 waited = timing ? svcGetSystemTick() : 0;
-    bool received = false;
-    if (R_SUCCEEDED(rc)) rc = CAMU_IsFinishedReceiving(&received, cam->port);
     if (!keep_stream || R_FAILED(rc) || !received) {
-        Result stopped = CAMU_StopCapture(cam->port);
-        Result cleared = CAMU_ClearBuffer(cam->port);
+        Result stopped = film_camera_stop_port(cam->port,cam->runtime_log,&cam->dma_safe);
+        Result cleared = 0;
         cam->streaming = false;
         if (R_FAILED(stopped) || R_FAILED(cleared)) {
             if (R_SUCCEEDED(rc)) rc = R_FAILED(stopped) ? stopped : cleared;
@@ -379,7 +368,7 @@ static FilmStatus capture(FilmCamera *cam, FilmFrame *frame, uint8_t *linear,
         film_image_free(&source);
         status = FILM_DEVICE;
     } else if (frame) copy_capture(cam, frame, source, dma);
-    if (!linear) linearFree(dma);
+    if (!linear && ((R_SUCCEEDED(rc)&&received) || cam->dma_safe)) linearFree(dma);
     if (timing) {
         u64 end = svcGetSystemTick();
         *timing = (FilmCaptureTiming){elapsed_us(start, setup), elapsed_us(setup, armed),
@@ -409,8 +398,9 @@ FilmStatus film_camera_receive(FilmCamera *cam, FilmImage *linear, bool keep_str
     return capture(cam, NULL, linear->pixels, keep_stream, timing);
 }
 
-FilmStatus film_camera_capture(FilmCamera *cam, FilmFrame *frame)
+FilmStatus film_camera_capture_diagnostic(const char *source,FilmCamera *cam,FilmFrame *frame)
 {
+    if(!source||strcmp(source,"film-camera-native-capture/v1")||!film_runtime_source_valid(source))return FILM_STATE;
     return film_camera_measure(cam, frame, false, NULL);
 }
 

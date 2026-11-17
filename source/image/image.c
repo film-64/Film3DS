@@ -349,7 +349,7 @@ static FilmStatus develop(const FilmFrame *frame, const FilmLut *lut,
     if (options && options->adaptive_grain && (unsigned)options->grain >= FILM_GRAIN_COUNT) return FILM_INVALID;
     bool builtin = !lut && p->profile.strength && !strcmp(p->lut_id, FILM_WARM_LUT_ID);
     if (p->lut_id[0] && !lut && p->profile.strength && !builtin) return FILM_STATE;
-    if (lut && (!lut->samples || (lut->size != 17 && lut->size != 33 && lut->size != 65)))
+    if (lut && (!lut->samples || (lut->size < 2 || lut->size > 256)))
         return FILM_INVALID;
     unsigned w, h;
     FilmRect rect;
@@ -480,10 +480,9 @@ FilmStatus film_develop_canvas(const FilmFrame *frame, const FilmLut *lut,
     if (!out) return FILM_INVALID;
     if(frame && frame->source.format==FILM_RAW10_RGGB) {
         if(!film_runtime_source_valid("film-app-raw-canvas/v1"))return FILM_STATE;
-        FilmRawPrepared prepared={0};FilmStatus s=film_raw_frame_prepare(frame,options,&prepared);
-        FilmRecipe recipe=frame->recipe;recipe.input_tone.value[FILM_TONE_EV]=0;recipe.base_saturation=0;
-        if(s==FILM_OK)s=film_raw_grade_canvas("film-raw-grade/v1",&prepared,&recipe,lut,out);
-        film_raw_prepared_free(&prepared);return s;
+        FilmRawScene scene={0};FilmStatus s=film_raw_frame_scene(frame,options,&scene);
+        if(s==FILM_OK)s=film_raw_scene_grade("film-raw-scene-grade/v1",&scene,&frame->recipe,lut,options,out);
+        film_raw_scene_free(&scene);return s;
     }
     return develop(frame,lut,options,NULL,out);
 }

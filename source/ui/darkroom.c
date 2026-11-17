@@ -12,7 +12,7 @@ const char *film_darkroom_label(FilmDarkroomRow row)
         "Aspect ratio", "Composition", "Image size", "White balance", "WB shift", "Film sim", "Exposure", "Highlights",
         "Midtones", "Shadows", "Grain effect", "Grain type", "Color",
         "Sharpness", "LUT strength", "Resampling", "Halation",
-        "Grain size","Grain shadows","Grain midtones","Grain highlights","Grain backend","Chroma denoise"
+        "Grain size","Grain shadows","Grain midtones","Grain highlights","Grain backend","Chroma denoise","RAW calibration","RAW shadows","RAW midtones","RAW highlights","RAW shoulder","RAW local exposure"
     };
     return (unsigned)row < DARKROOM_ROW_COUNT ? labels[row] : "";
 }
@@ -86,6 +86,7 @@ void film_darkroom_discard(FilmDarkroom *room)
 {
     if (!room) return;
     film_image_free(&room->preview);
+    film_image_free(&room->composition_view);
     film_develop_canvas_free(&room->canvas);
     room->quality = 0;
 }
@@ -97,6 +98,12 @@ bool film_darkroom_geometry_row(FilmDarkroomRow row)
 
 void film_darkroom_update_geometry(FilmDarkroom *room, const FilmRecipe *r)
 {
+    /* Geometry edits move the frame on the full original view. They never
+     * render or allow an outdated final crop to be saved. A rebuilds it. */
+    if(room->recipe.aspect!=r->aspect || room->recipe.scale!=r->scale || room->recipe.filter!=r->filter ||
+       room->recipe.crop_percent!=r->crop_percent || room->recipe.crop_x!=r->crop_x ||
+       room->recipe.crop_y!=r->crop_y || room->recipe.crop_positioned!=r->crop_positioned)
+        film_image_free(&room->preview);
     room->recipe.aspect=r->aspect; room->recipe.scale=r->scale; room->recipe.filter=r->filter;
     room->recipe.crop_percent=r->crop_percent; room->recipe.crop_x=r->crop_x; room->recipe.crop_y=r->crop_y;
     room->recipe.crop_positioned=r->crop_positioned;
@@ -124,13 +131,15 @@ FilmStatus film_darkroom_preview(FilmDarkroom *room, const FilmFrame *frame,
     if (!film_runtime_source_valid("film-darkroom/v1")) return FILM_STATE;
     room->failure_phase="color";
     FilmStatus status = film_develop_canvas(frame,lut,options,&room->canvas);
-    if (status==FILM_OK) {room->failure_phase="render";status=film_develop_canvas_render(&room->canvas,&frame->recipe,options,true,&room->preview);}
+    if (status==FILM_OK) {room->failure_phase="composition";status=film_develop_canvas_render(&room->canvas,&frame->recipe,options,true,&room->composition_view);}
+    if (status==FILM_OK) {room->failure_phase="render";status=film_develop_canvas_render(&room->canvas,&frame->recipe,options,false,&room->preview);}
     if (status == FILM_OK) {
         room->failure_phase=NULL;
         room->quality = frame->recipe.jpeg_quality;
         room->recipe=frame->recipe;
         room->options=options?*options:(FilmDevelopOptions){0};
         room->options.camera_color=NULL;
+        room->options.raw_isp=NULL; /* calibration already baked into this display cache */
         room->has_grain_profile=options && options->grain_profile;
         if (room->has_grain_profile) room->grain_profile=*options->grain_profile;
         room->options.grain_profile=NULL;
@@ -149,12 +158,7 @@ FilmStatus film_darkroom_finish(FilmDarkroom *room, bool select_only, const char
         else if (stat(path, &existing) == 0) status = FILM_STATE;
         else if (errno != ENOENT) status = FILM_IO;
         else {
-            FilmImage image={0};
-            FilmDevelopOptions options=room->options;
-            if (room->has_grain_profile) options.grain_profile=&room->grain_profile;
-            status=film_develop_canvas_render(&room->canvas,&room->recipe,&options,false,&image);
-            if (status==FILM_OK) status=film_jpeg_write(path,&image,room->quality);
-            film_image_free(&image);
+            status=film_jpeg_write(path,&room->preview,room->quality);
         }
     }
     film_darkroom_discard(room);

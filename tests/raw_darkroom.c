@@ -61,6 +61,93 @@ static void isp(void)
     assert(!memcmp(before,raw,sizeof raw));
     raw[0]=1024;assert(film_raw_isp_prepare("film-raw-isp/v1",&view,&p,&image)==FILM_CORRUPT);
 }
+static float linear(float x){return x<=.04045f?x/12.92f:powf((x+.055f)/1.055f,2.4f);}
+static void local_and_offset(void)
+{
+    uint16_t raw[128*64];
+    /* Two flat regions straddling the base grid, with stable RGB ratios. */
+    for(unsigned y=0;y<64;++y)for(unsigned x=0;x<128;++x){
+        unsigned c=cfa_color(0,(y&1)*2+(x&1));
+        raw[y*128+x]=(x<64?32:256)*(c==0?1:c==1?2:3);
+    }
+    FilmRaw10View view={128,64,raw};FilmRawIsp p=film_raw_isp_default();
+    FilmRawPrepared base={0},local={0};
+    assert(film_raw_isp_prepare("film-raw-isp/v1",&view,&p,&base)==FILM_OK);
+    p.local_strength=1;p.local_limit_ev=.5f;
+    assert(film_raw_isp_prepare("film-raw-isp/v1",&view,&p,&local)==FILM_OK);
+    for(unsigned i=0;i<128*64;++i){
+        FilmRgb a=base.pixels[i],b=local.pixels[i];
+        float gain=linear(b.g)/linear(a.g);
+        assert(gain>=exp2f(-.5f)-1e-5f && gain<=exp2f(.5f)+1e-5f);
+        assert(fabsf(linear(b.r)/linear(a.r)-gain)<1e-5f);
+        assert(fabsf(linear(b.b)/linear(a.b)-gain)<1e-5f);
+    }
+    assert(local.pixels[16].g>base.pixels[16].g);
+    assert(local.pixels[112].g<base.pixels[112].g);
+    film_raw_prepared_free(&local);film_raw_prepared_free(&base);
+    p.local_strength=0;p.ccm_offset[0]=-.01f;
+    assert(film_raw_isp_prepare("film-raw-isp/v1",&view,&p,&local)==FILM_OK);
+    assert(fabsf(linear(local.pixels[16].r)-(32/1023.f-.01f))<1e-6f);
+    film_raw_prepared_free(&local);
+    p.ccm_offset[0]=0;p.lens_shading[0][3]=1;
+    assert(film_raw_isp_prepare("film-raw-isp/v1",&view,&p,&local)==FILM_OK);
+    /* x=-1 edge is one stop brighter in red; green remains unchanged. */
+    assert(fabsf(linear(local.pixels[0].r)-2*32/1023.f)<1e-6f);
+    assert(fabsf(linear(local.pixels[0].g)-64/1023.f)<1e-6f);
+    film_raw_prepared_free(&local);
+    p.lens_shading[0][3]=NAN;
+    assert(film_raw_isp_prepare("film-raw-isp/v1",&view,&p,&local)==FILM_INVALID);
+    p.lens_shading[0][3]=0;
+    p.local_strength=NAN;assert(film_raw_isp_prepare("film-raw-isp/v1",&view,&p,&local)==FILM_INVALID);
+    p.local_strength=1;p.local_limit_ev=4.1f;assert(film_raw_isp_prepare("film-raw-isp/v1",&view,&p,&local)==FILM_INVALID);
+    p.local_limit_ev=1;p.ccm_offset[0]=INFINITY;assert(film_raw_isp_prepare("film-raw-isp/v1",&view,&p,&local)==FILM_INVALID);
+    assert(film_raw_isp_prepare("scheduler_decision:admitted",&view,&p,&local)==FILM_STATE);
+}
+static void calibration_contract(void)
+{
+    FILE *f=fopen("romfs/calibration/display-color.f3isp","rb");assert(f);
+    FilmRawIsp p=film_raw_isp_default();
+    assert(film_raw_profile_load("scheduler_decision:admitted",f,&p)==FILM_STATE);
+    assert(film_raw_profile_load("film-raw-profile-load/v1",f,&p)==FILM_OK);fclose(f);
+    FilmRawIsp before=p;
+    f=tmpfile();assert(f);fputs("F3ISP1 black nan 0 0 0",f);rewind(f);
+    assert(film_raw_profile_load("film-raw-profile-load/v1",f,&p)==FILM_CORRUPT);
+    assert(!memcmp(&p,&before,sizeof p));fclose(f);
+}
+static void scene_headroom(void)
+{
+    uint16_t raw[16*12];for(unsigned y=0;y<12;++y)for(unsigned x=0;x<16;++x)raw[y*16+x]=x<8?800:900;
+    FilmRaw10View view={16,12,raw};FilmRawIsp p=film_raw_isp_default();p.ccm[0]=p.ccm[4]=p.ccm[8]=4;
+    FilmRawScene scene={0};
+    assert(film_raw_scene_prepare("scheduler_decision:admitted",&view,&p,&scene)==FILM_STATE);
+    assert(film_raw_scene_prepare("film-raw-scene/v1",&view,&p,&scene)==FILM_OK);
+    assert(scene.pixels[2].r>3 && scene.pixels[12].r>3.5f);
+    FilmRgb before[192];memcpy(before,scene.pixels,sizeof before);
+    FilmRecipe recipe=film_default_recipe();recipe.grain_amount=0;recipe.input_tone.value[FILM_TONE_EV]=-2;
+    FilmDevelopCanvas a={0},b={0};FilmDevelopOptions o={0};
+    assert(film_raw_scene_grade("film-raw-scene-grade/v1",&scene,&recipe,NULL,&o,&a)==FILM_OK);
+    assert(a.pixels[12*3]>a.pixels[2*3]+2000); /* high values remain distinguishable after lowering EV */
+    for(unsigned i=0;i<3;++i)assert(abs((int)a.pixels[2*3+i]-(int)lroundf(encoded(800/1023.f)*65535))<=2);
+    o.raw_shoulder=.75f;
+    assert(film_raw_scene_grade("film-raw-scene-grade/v1",&scene,&recipe,NULL,&o,&b)==FILM_OK);
+    assert(!memcmp(before,scene.pixels,sizeof before));
+    film_develop_canvas_free(&a);film_develop_canvas_free(&b);
+    o.raw_midtones=NAN;assert(film_raw_scene_grade("film-raw-scene-grade/v1",&scene,&recipe,NULL,&o,&a)==FILM_INVALID);
+    assert(film_raw_scene_grade("startup_warmup",&scene,&recipe,NULL,&o,&a)==FILM_STATE);
+    film_raw_scene_free(&scene);
+    p.ccm_offset[0]=-1;p.ccm[0]=1;
+    assert(film_raw_scene_prepare("film-raw-scene/v1",&view,&p,&scene)==FILM_OK);
+    assert(scene.pixels[2].r<0);film_raw_scene_free(&scene);
+    /* Dense log ramp, all extreme scene-curve combinations remain monotone. */
+    FilmRgb ramp[512];for(unsigned i=0;i<512;++i){float v=.18f*exp2f(-12+24*i/511.f);ramp[i]=(FilmRgb){v,v,v};}
+    FilmRawScene synthetic={32,16,ramp};recipe.input_tone.value[FILM_TONE_EV]=0;
+    for(int sh=-1;sh<=1;++sh)for(int mid=-1;mid<=1;++mid)for(int hi=-1;hi<=1;++hi){
+        o=(FilmDevelopOptions){.raw_shadows=2.5f*sh,.raw_midtones=2.5f*mid,.raw_highlights=2.5f*hi,.raw_shoulder=.75f};
+        assert(film_raw_scene_grade("film-raw-scene-grade/v1",&synthetic,&recipe,NULL,&o,&a)==FILM_OK);
+        for(unsigned i=1;i<512;++i)assert(a.pixels[3*i]>=a.pixels[3*(i-1)]);
+        film_develop_canvas_free(&a);
+    }
+}
 static void grade(void)
 {
     FilmRawPrepared prepared={16,12,calloc(192,sizeof(FilmRgb))};assert(prepared.pixels);
@@ -110,4 +197,4 @@ static void grain(void)
     printf("PASS layered grain deterministic density response: mean delta %.3f RMS %.3f\n",mean,square);
     film_image_free(&a);film_image_free(&b);
 }
-int main(void){unpack();isp();grade();grain();puts("PASS RAW10 exact unpack, immutable ISP, four CFA patterns, exposure/WB, explicit repair, shared LUT/neutral canvas");return 0;}
+int main(void){unpack();isp();local_and_offset();calibration_contract();scene_headroom();grade();grain();puts("PASS RAW10 exact unpack, immutable ISP, four CFA patterns, exposure/WB, explicit repair, shared LUT/neutral canvas");return 0;}

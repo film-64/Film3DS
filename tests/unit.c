@@ -43,7 +43,8 @@ static void parser_errors(void)
     FilmLut lut = {0};
     unsigned line;
     assert(load_text("LUT_1D_SIZE 17\n", &lut, &line) == FILM_UNSUPPORTED && line == 1);
-    assert(load_text("LUT_3D_SIZE 32\n", &lut, NULL) == FILM_UNSUPPORTED);
+    assert(load_text("LUT_3D_SIZE 257\n", &lut, NULL) == FILM_UNSUPPORTED);
+    assert(load_text("LUT_3D_SIZE 32\n", &lut, NULL) == FILM_CORRUPT);
     assert(load_text("LUT_3D_SIZE 17\n0 0 0\n", &lut, NULL) == FILM_CORRUPT);
     assert(load_text("LUT_3D_SIZE 17\n0 nan 0\n", &lut, &line) == FILM_CORRUPT && line == 2);
     assert(load_text("LUT_3D_SIZE 17\n0 1e100 0\n", &lut, NULL) == FILM_CORRUPT);

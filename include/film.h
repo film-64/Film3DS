@@ -79,6 +79,7 @@ typedef struct { float rows[3][3]; } FilmCameraColor;
 typedef struct {
     float code[9], rms[9], correlation[9];
 } FilmGrainProfile;
+struct FilmRawIsp;
 struct FilmLayeredGrain;
 struct FilmGrainTexture;
 typedef FilmStatus (*FilmLayeredGrainRenderer)(const char *,FilmImage *,
@@ -94,6 +95,9 @@ typedef struct {
     const struct FilmGrainTexture *grain_texture;
     FilmLayeredGrainRenderer grain_renderer;
     float chroma_denoise;
+    const struct FilmRawIsp *raw_isp; /* explicit image calibration; borrowed */
+    float raw_shadows,raw_midtones,raw_highlights; /* scene EV offsets, -2.5..2.5 */
+    float raw_shoulder,raw_local,raw_local_limit; /* late knee (0=off), strength, EV bound */
 } FilmDevelopOptions;
 FilmStatus film_darkroom_denoise(const char *,FilmRgb *,unsigned,unsigned,float);
 
@@ -179,6 +183,8 @@ void film_grain_adaptive(FilmImage *image, uint32_t seed, float amount, FilmScal
 FilmStatus film_grain_profile_load(FILE *file, FilmGrainProfile *out);
 FilmStatus film_grain_measured(FilmImage *image, uint32_t seed, float amount, const FilmGrainProfile *profile);
 
+FilmStatus film_dng_write(const char *source,const char *path,const FilmFrame *frame);
+FilmStatus film_dng_read(const char *source,FILE *file,FilmFrame *frame);
 FilmStatus film_frame_write(const char *path, const FilmFrame *frame);
 FilmStatus film_frame_read(const char *path, FilmFrame *frame);
 FilmStatus film_jpeg_write(const char *path, const FilmImage *image, unsigned quality);

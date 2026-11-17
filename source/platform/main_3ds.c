@@ -8,6 +8,8 @@
 #include "raw_darkroom.h"
 #include "raw_capture.h"
 #include "layered_grain.h"
+#include "lut_catalog.h"
+#include "debug_mode.h"
 
 #include <3ds.h>
 #include <citro2d.h>
@@ -22,6 +24,7 @@
 #include <sys/stat.h>
 
 #define ROOT "sdmc:/3ds/Film3DS/"
+#define LOGS ROOT "log/"
 #define ROLLS ROOT "rolls/"
 #define EXPORTS ROOT "exports/"
 #define PREVIEWS ROOT "previews/"
@@ -30,25 +33,26 @@
 #define PACKED_LUTS "romfs:/luts/"
 #define VIRTUAL_PHOTOS 3u
 #define MAX_PHOTOS 9999u
-#define MAX_LUTS 64u
 
 enum { PREVIEW_TEX_SIDE = 256, PREVIEW_TEX_ROWS = 192 };
 enum { ROLL_TEX_SIDE = 64, ROLL_TEX_ROWS = 48, ROLL_VISIBLE_TEXTURES=30 };
 
-typedef struct {
-    const char *directory;
-    char name[sizeof ((FilmRecipe *)0)->lut_id];
-} Look;
+typedef FilmLook Look;
 
+enum {CAPTURE_ACQUIRING=1,CAPTURE_SAVING,CAPTURE_DONE};
 typedef struct {
     Thread thread;
     Handle completion;
-    FilmFrame frame,native_capture;
+    FilmFrame frame;
     const char *capture_mode;
     unsigned id;
     uint64_t capture_ms, save_ms;
-    FilmStatus status, profile_status,preview_status;
-    bool written;
+    FilmStatus status, profile_status;
+    FilmRollSaveResult result;
+    atomic_uint phase;
+    unsigned capture_zoom;
+    int expected_step;
+    FilmStatus capture_status;
 } CaptureSave;
 
 typedef struct {
@@ -62,6 +66,7 @@ typedef struct {
     FilmRecipe darkroom, saved_recipe;
     unsigned darkroom_id;
     bool darkroom_ready;
+    FilmDebugMode debug;
     const Look *capture_look;
     float capture_strength;
     FilmCamera camera;
@@ -78,7 +83,7 @@ typedef struct {
     uint16_t photos[MAX_PHOTOS];
     unsigned count, next_number;
     CaptureSave save;
-    Look luts[MAX_LUTS];
+    Look *luts;
     unsigned lut_count;
     char status[96];
     char y2r_status[64];
@@ -86,7 +91,6 @@ typedef struct {
     char probe_rows[6][72];
     bool live;
     bool preview_failed;
-    bool preview_single;
     bool camera_controls;
     bool camera_toolbar;
     FilmDarkroom room;
@@ -95,9 +99,11 @@ typedef struct {
     bool halation;
     FilmGrain grain;
     FilmGrainTexture grain_texture;
-    bool grain_gpu,source_raw;
+    bool grain_gpu;
     float grain_size,grain_shadow,grain_mid,grain_highlight;
     float chroma_denoise;
+    unsigned raw_calibration;
+    float raw_shadows,raw_midtones,raw_highlights,raw_shoulder,raw_local;
     bool grain_reference[FILM_GRAIN_COUNT];
     unsigned control;
     int camera_values[FILM_CAM_CONTROL_COUNT];
@@ -114,7 +120,7 @@ static const char *const sensors[] = {"SIM", "REAR1", "REAR2", "FRONT"};
 static const char *const grain_names[] = {"Fine", "Medium", "Coarse"};
 static const char *const grain_stock_names[] = {"PAN F+ 50", "Pan 400", "Delta 3200"};
 static const char *const grain_paths[] = {"romfs:/grain/fine.f3g", "romfs:/grain/medium.f3g", "romfs:/grain/coarse.f3g"};
-static const Look legacy_look = {ROOT, "look.cube"};
+static const Look legacy_look = {.directory=ROOT,.name="look.cube",.key="look.cube"};
 static const char *const control_names[] = {
     [FILM_CAM_EXPOSURE] = "Manual exposure", [FILM_CAM_EXPOSURE_MODE] = "Exposure mode",
     [FILM_CAM_EV_COMP] = "Exposure compensation", [FILM_CAM_WB] = "White balance",
@@ -193,12 +199,16 @@ static void update_status(const char *operation, FilmStatus status, uint32_t res
 
 static FilmStatus init(void *context, FilmPixelFormat format)
 {
-    return film_camera_open(context, format, FILM_CAMERA_REAR1);
+    FilmStatus status=film_camera_open(context,format,FILM_CAMERA_REAR1);
+    if(status==FILM_OK)status=film_camera_request_15fps(context);
+    if(status==FILM_OK)status=film_camera_select_exposure_mode(context,FILM_EXPOSURE_NATIVE_AE,0,app.log);
+    return status;
 }
 
 static FilmStatus capture(void *context, FilmFrame *frame)
 {
-    return film_camera_capture(context, frame);
+    film_log(app.log,"film-camera-command-raw/v1",FILM_OK,0);
+    return film_camera_capture_raw(context,frame,app.log);
 }
 
 static uint64_t ticks(void *context)
@@ -212,47 +222,24 @@ static uint32_t device_result(void *context)
     return ((FilmCamera *)context)->last_result;
 }
 
-static int compare_looks(const void *a, const void *b)
+static void scan_looks(const char *directory)
 {
-    return strcasecmp(((const Look *)a)->name, ((const Look *)b)->name);
-}
-
-static void scan_looks(const char *path)
-{
-    DIR *directory = opendir(path);
-    if (!directory) return;
-    unsigned first = app.lut_count;
-    struct dirent *entry;
-    while (app.lut_count < MAX_LUTS && (entry = readdir(directory))) {
-        size_t len = strlen(entry->d_name);
-        if (len <= 5 || len >= sizeof app.luts[0].name ||
-            strcasecmp(entry->d_name + len - 5, ".cube") || entry->d_name[0] == '.' ||
-            entry->d_type == DT_DIR) continue;
-        Look *look = &app.luts[app.lut_count++];
-        look->directory = path;
-        memcpy(look->name, entry->d_name, len + 1);
-    }
-    closedir(directory);
-    qsort(app.luts + first, app.lut_count - first, sizeof *app.luts, compare_looks);
+    FilmLookCatalog catalog={0};FilmStatus status=film_lut_catalog_scan("film-lut-catalog/v1",directory,&catalog);
+    film_log(app.log,"film-lut-catalog/v1",status,0);
+    if(status==FILM_OK){free(app.luts);app.luts=catalog.looks;app.lut_count=catalog.count;}
+    else update_status("LUT directory",status,0);
 }
 
 static unsigned find_look(const char *id)
 {
     for (unsigned i = 0; i < app.lut_count; ++i)
-        if (!strcmp(id, app.luts[i].name)) return i + 1;
+        if (!strcmp(id, app.luts[i].key)) return i + 1;
     return 0;
-}
-
-static FilmStatus load_look_profile(const Look *look, FilmProfile *profile)
-{
-    char path[128];
-    snprintf(path, sizeof path, "%s%.*s.f3p", look->directory, (int)strlen(look->name) - 5, look->name);
-    return film_profile_read(path, profile);
 }
 
 static FilmStatus load_look_lut(const Look *look, FilmLut *lut)
 {
-    char path[128];
+    char path[768];
     snprintf(path, sizeof path, "%s%s", look->directory, look->name);
     FILE *file = fopen(path, "rb");
     if (!file) return FILM_IO;
@@ -271,9 +258,8 @@ static void run_commands(void)
     if (replies) {
         FilmLut lut = {0};
         FilmDebug debug = {.ops = {init, capture, ticks, device_result}, .context = &app.camera,
-            .jpeg_path = ROOT "debug.jpg", .source_path = ROOT "debug.f3s", .ui = film_ui_new(3)};
-        if (load_look_profile(&legacy_look, &debug.ui.recipe.profile) == FILM_OK &&
-            load_look_lut(&legacy_look, &lut) == FILM_OK) {
+            .jpeg_path = ROOT "debug.jpg", .source_path = ROOT "debug.DNG", .ui = film_ui_new(3)};
+        if (load_look_lut(&legacy_look, &lut) == FILM_OK) {
             debug.lut = &lut;
             memcpy(debug.ui.recipe.lut_id, "look.cube", sizeof "look.cube");
         }
@@ -381,9 +367,14 @@ static void show_image(const FilmImage *image, FilmYuv matrix)
     app.image_height = image->height;
 }
 
+static void show_camera_closed(void)
+{
+    uint8_t black[3]={0};FilmImage image={1,1,FILM_RGB24,black};show_image(&image,FILM_601_FULL);
+}
+
 static void roll_path(char path[64], unsigned id)
 {
-    snprintf(path, 64, ROLLS "ROLL%04u.F3S", id);
+    film_roll_original_path(path,64,ROLLS,id);
 }
 
 /* ROLL_PREVIEW_BEGIN */
@@ -430,7 +421,7 @@ static void roll_delete_input(u32 keys)
     if(input!=ROLL_DELETE_CONFIRM)return;
     unsigned id=app.roll.pending_id;
     FilmStatus status=app.save.thread?FILM_STATE:
-        film_roll_confirm_delete(&app.roll,&app.ui,app.photos,&app.count,ROLLS);
+        film_roll_confirm_delete(&app.roll,&app.ui,app.photos,&app.count,ROLLS,PREVIEWS);
     int delete_errno=status==FILM_IO?errno:0;
     if (status==FILM_OK) {
         app.roll_preview_id=0;
@@ -454,8 +445,8 @@ static void load_roll(void)
         while ((entry = readdir(directory))) {
             unsigned id;
             char suffix;
-            if (strlen(entry->d_name) == 12 && sscanf(entry->d_name, "ROLL%4u.F3S%c", &id, &suffix) == 1 &&
-                id > 0 && id <= MAX_PHOTOS && !strcmp(entry->d_name + 8, ".F3S")) exists[id] = true;
+            if (strlen(entry->d_name) == 12 && sscanf(entry->d_name, "ROLL%4u%*4s%c", &id, &suffix) == 1 &&
+                id > 0 && id <= MAX_PHOTOS && (!strcmp(entry->d_name + 8, ".F3S")||!strcmp(entry->d_name + 8, ".DNG"))) exists[id] = true;
         }
         closedir(directory);
     }
@@ -469,14 +460,7 @@ static void load_roll(void)
     app.ui = film_ui_new(app.count);
     app.ui.looks = app.lut_count + 1;
     app.capture_strength = 1;
-    if (app.lut_count) {
-        FilmProfile profile;
-        FilmStatus status = load_look_profile(&app.luts[0], &profile);
-        if (status == FILM_OK) {
-            app.capture_look = &app.luts[0];
-            app.capture_strength = profile.strength;
-        } else film_log(app.log, "Default LUT profile", status, 0);
-    }
+    if (app.lut_count) app.capture_look=&app.luts[0];
 }
 
 static void import_raw_on_device(void)
@@ -529,6 +513,7 @@ static void prepare_selected_preview(void)
 static void sync_darkroom(void)
 {
     if (app.ui.page != FILM_DARKROOM) return;
+    if(!app.count){film_darkroom_discard(&app.room);app.darkroom_id=0;app.darkroom_ready=false;app.source_width=app.source_height=0;return;}
     unsigned id = app.count ? app.photos[app.ui.selection] : MAX_PHOTOS + app.ui.selection + 1;
     if (id == app.darkroom_id) return;
     FilmFrame frame = {.recipe = film_default_recipe()};
@@ -540,15 +525,14 @@ static void sync_darkroom(void)
         frame.recipe.grain_amount = .3f;
         frame.recipe.grain_seed += app.ui.selection;
         if (app.capture_look) {
-            status = load_look_profile(app.capture_look, &frame.recipe.profile);
+            frame.recipe.profile=film_default_recipe().profile;
             if (status == FILM_OK) {
-                strcpy(frame.recipe.lut_id, app.capture_look->name);
+                strcpy(frame.recipe.lut_id, app.capture_look->key);
                 frame.recipe.profile.strength = app.capture_strength;
             }
         }
     }
     film_darkroom_discard(&app.room);
-    app.source_raw=frame.source.format==FILM_RAW10_RGGB;
     app.source_width = frame.source.width ? frame.source.width : 640;
     app.source_height = frame.source.height ? frame.source.height : 480;
     app.darkroom_id = id;
@@ -564,13 +548,9 @@ static void change_darkroom_look(int direction)
 {
     unsigned index = (app.ui.look + app.ui.looks + direction) % app.ui.looks;
     const Look *look = index ? &app.luts[index - 1] : NULL;
-    const char *id = look ? look->name : "";
+    const char *id = look ? look->key : "";
     if (!strcmp(id, app.darkroom.lut_id)) return;
     FilmProfile preset = film_default_recipe().profile;
-    if (look) {
-        FilmStatus status = load_look_profile(look, &preset);
-        if (status != FILM_OK) { update_status("LUT profile", status, 0); return; }
-    }
     film_ui_select_look(&app.darkroom, &app.saved_recipe, id, &preset);
     app.ui.look = index;
 
@@ -596,41 +576,23 @@ static void adjust_darkroom(int direction)
     else if(app.room.row==DARKROOM_GRAIN_SHADOW)app.grain_shadow=fminf(2,fmaxf(0,app.grain_shadow+direction*.1f));
     else if(app.room.row==DARKROOM_GRAIN_MID)app.grain_mid=fminf(2,fmaxf(0,app.grain_mid+direction*.1f));
     else if(app.room.row==DARKROOM_GRAIN_HIGH)app.grain_highlight=fminf(2,fmaxf(0,app.grain_highlight+direction*.1f));
+    else if(app.room.row==DARKROOM_RAW_CALIBRATION)app.raw_calibration=(app.raw_calibration+3+direction)%3;
+    else if(app.room.row==DARKROOM_RAW_SHADOWS)app.raw_shadows=fminf(2.5f,fmaxf(-2.5f,app.raw_shadows+.5f*direction));
+    else if(app.room.row==DARKROOM_RAW_MIDTONES)app.raw_midtones=fminf(2.5f,fmaxf(-2.5f,app.raw_midtones+.5f*direction));
+    else if(app.room.row==DARKROOM_RAW_HIGHLIGHTS)app.raw_highlights=fminf(2.5f,fmaxf(-2.5f,app.raw_highlights+.5f*direction));
+    else if(app.room.row==DARKROOM_RAW_SHOULDER)app.raw_shoulder=fminf(.95f,fmaxf(0,roundf(app.raw_shoulder*20+direction)/20));
+    else if(app.room.row==DARKROOM_RAW_LOCAL)app.raw_local=fminf(1,fmaxf(0,app.raw_local+.1f*direction));
     else if(app.room.row==DARKROOM_DENOISE)app.chroma_denoise=fminf(1,fmaxf(0,app.chroma_denoise+direction*.1f));
     else if (app.room.row == DARKROOM_HALATION) app.halation = !app.halation;
     else film_darkroom_adjust(&app.darkroom, app.room.row, direction);
     if (geometry) film_darkroom_update_geometry(&app.room,&app.darkroom);
 }
 
-static FilmStatus take(FilmFrame *frame)
+static FilmStatus update_preview(void)
 {
-    frame->recipe = app.ui.recipe;
-    if (!app.live) return film_mock_capture(frame);
-    frame->recipe.yuv = app.camera_yuv;
-    return app.camera.preview_event ? film_camera_preview_snapshot(&app.camera, frame) :
-                                      film_camera_capture(&app.camera, frame);
-}
-
-static FilmStatus update_preview(FilmFrame *single)
-{
-    FilmImage image = {0};
-    FilmStatus status = FILM_OK;
-    if (!app.preview_single) {
-        status = film_camera_preview_start(&app.camera);
-        if (status == FILM_OK) status = film_camera_preview_poll(&app.camera, &image);
-        if (status != FILM_OK) {
-            snprintf(app.status, sizeof app.status, "CAM %s %08lX  Single fallback",
-                     app.camera.preview_stage ? app.camera.preview_stage : "preview",
-                     (unsigned long)app.camera.last_result);
-            film_log(app.log, app.status, status, app.camera.last_result);
-            app.preview_single = app.camera.initialized;
-            reset_preview_tracking();
-        }
-    }
-    if (app.preview_single) {
-        status = film_camera_capture(&app.camera, single);
-        image = single->source;
-    }
+    FilmImage image={0};FilmStatus status=film_camera_preview_start(&app.camera);
+    if(status==FILM_OK)status=film_camera_preview_poll(&app.camera,&image);
+    if(status!=FILM_OK){film_log(app.log,"film-camera-native-preview/v1",status,app.camera.last_result);reset_preview_tracking();}
     if (status == FILM_OK && image.pixels) {
         FilmExposureMode mode=(FilmExposureMode)app.camera_values[FILM_CAM_EXPOSURE_MODE];
         film_camera_sample_preview(&app.stability,&image,app.camera_yuv,app.ui.recipe.aspect,FILM_METER_MANUAL);
@@ -662,29 +624,32 @@ static FilmStatus update_preview(FilmFrame *single)
 
 static void save_capture(void *argument)
 {
-    CaptureSave *save = argument;
-    uint64_t started = ticks(NULL);
-    char path[64];
-    roll_path(path, save->id);
-    save->status = film_frame_write(path, &save->frame);
-    save->written = save->status == FILM_OK;
-    if (save->written) {
-        FilmFrame saved = {0};
-        save->status = film_frame_read(path, &saved);
-        film_frame_free(&saved);
-        film_log(app.log,"Shutter original SD CRC",save->status,save->id);
-        if(save->status==FILM_OK)
-            save->preview_status=save->native_capture.source.pixels?
-                film_roll_native_raw_pair("film-roll-native-raw-pair/v1",&save->frame,&save->native_capture,PREVIEWS,save->id):
-                film_roll_pair_publish("film-roll-pair-publish/v1",&save->frame,PREVIEWS,save->id);
-    }
-    save->save_ms = (ticks(NULL) - started) / 1000;
+    CaptureSave *save=argument;uint64_t started=ticks(NULL);
+    atomic_store(&app.camera.capture_phase,FILM_CAPTURE_VERIFY);
+    if(app.log){fprintf(app.log,"RAW acquisition begin mode=%u expected_step=%d\n",app.camera.exposure_mode,save->expected_step);fflush(app.log);}
+    FilmStatus status=FILM_OK;
+    if(app.camera.exposure_mode==FILM_EXPOSURE_MANUAL&&app.camera.exposure.step!=save->expected_step)status=FILM_STATE;
+    if(status==FILM_OK)status=film_camera_capture_raw(&app.camera,&save->frame,app.log);
+    bool valid=save->frame.source.pixels&&save->frame.source.format==FILM_RAW10_RGGB;
+    if(status==FILM_OK&&!valid)status=FILM_CORRUPT;
+    if(status!=FILM_OK)film_camera_close(&app.camera);
+    save->capture_status=status;
+    film_log(app.log,"RAW acquisition result",status,app.camera.last_result);
+    if(!valid){film_frame_free(&save->frame);save->status=status;atomic_store(&save->phase,CAPTURE_DONE);return;}
+    save->capture_ms=(ticks(NULL)-started)/1000;
+    atomic_store(&save->phase,CAPTURE_SAVING);started=ticks(NULL);
+    char path[64];snprintf(path,sizeof path,ROLLS "ROLL%04u.DNG",save->id);
+    if(app.log){fprintf(app.log,"SAVE original begin path=%s\n",path);fflush(app.log);}
+    save->status=film_roll_capture_save("film-roll-capture-save/v1",&save->frame,path,PREVIEWS,save->id,&save->result);
+    if(app.log){fprintf(app.log,"SAVE result written=%u write=%s verify=%s preview=%s\n",save->result.written,film_status_name(save->result.write_status),film_status_name(save->result.verification_status),film_status_name(save->result.preview_status));fflush(app.log);}
+    film_log(app.log,"Shutter original SD CRC",save->result.verification_status,save->id);
+    save->save_ms=(ticks(NULL)-started)/1000;atomic_store(&save->phase,CAPTURE_DONE);
 }
 
 static bool finish_capture(bool wait)
 {
     CaptureSave *save = &app.save;
-    if (!save->frame.source.pixels) return false;
+    if (!save->thread && !save->frame.source.pixels) return false;
     if (save->thread) {
         u64 timeout = wait ? U64_MAX : 0;
         Result joined = save->completion == UINT32_MAX ? threadJoin(save->thread, timeout) :
@@ -692,85 +657,50 @@ static bool finish_capture(bool wait)
         if (joined != 0) return false;
         threadFree(save->thread);
     }
+    app.live=app.camera.initialized;app.preview_failed=!app.live;reset_preview_tracking();
+    if(save->capture_status!=FILM_OK)update_status("RAW capture/restore; L reopens",save->capture_status,app.camera.last_result);
+    if(!save->frame.source.pixels){*save=(CaptureSave){0};return false;}
     if (save->profile_status != FILM_OK)
         film_log(app.log, "Capture profile", save->profile_status, 0);
-    if (save->written) ++app.next_number;
-    bool saved = save->status == FILM_OK;
+    if (save->result.written) ++app.next_number;
+    bool saved = save->result.written;
     if (saved) {
         if (!app.count) app.ui.photos = 0;
         app.photos[app.count++] = save->id;
         film_ui_add_photo(&app.ui);
-        snprintf(app.status, sizeof app.status, "%s #%04u %" PRIu64 "ms %s SD %" PRIu64 "ms CRC OK",
+        snprintf(app.status, sizeof app.status, "%s #%04u %" PRIu64 "ms %s SD %" PRIu64 "ms CRC %s",
                  save->frame.camera ? "CAM" : "SIM", save->id, save->capture_ms,
-                 save->capture_mode, save->save_ms);
+                 save->capture_mode, save->save_ms, save->result.verification_status==FILM_OK?"OK":"FAILED");
         film_log(app.log, app.status, FILM_OK, 0);
-        if(save->preview_status!=FILM_OK)update_status("Original saved; preview failed",save->preview_status,0);
-        film_log(app.log,"film-roll-pair-publish/v1",save->preview_status,0);
+        if(save->status!=FILM_OK)update_status("Original kept; SD verify failed",save->status,0);
+        else if(save->result.preview_status!=FILM_OK)update_status("Original saved; preview failed",save->result.preview_status,0);
+        film_log(app.log,"film-roll-pair-publish/v1",save->result.preview_status,0);
 
-    } else update_status(save->written ? "Capture SD verify" : "Capture SD write", save->status, 0);
+    } else update_status(save->result.written ? "Capture SD verify" : "Capture SD write", save->status, 0);
     film_frame_free(&save->frame);
-    film_frame_free(&save->native_capture);
     *save = (CaptureSave){0};
     return saved;
 }
 
-static bool capture_photo(FilmFrame *shown)
+static bool capture_photo(void)
 {
-    CaptureSave *save = &app.save;
-    bool raw_capture=app.live && app.camera.sensor==FILM_CAMERA_REAR1;
-    if (app.live && app.camera_values[FILM_CAM_EXPOSURE_MODE]==FILM_EXPOSURE_MANUAL) {
-        FilmStatus exposure = film_camera_verify_manual_capture(&app.camera);
-        if(exposure==FILM_OK&&app.camera.exposure.step!=app.camera_values[FILM_CAM_EXPOSURE])exposure=FILM_STATE;
-        film_log(app.log, "film-camera-capture/v1", exposure, app.camera.last_result);
-        if (exposure != FILM_OK) {
-            update_status("Exposure not ready", exposure, app.camera.last_result);
-            return false;
-        }
-    }
-    if (app.preview_failed) {
-        update_status("Camera failed: reopen with L", FILM_STATE, 0);
-        return false;
-    }
-    if (save->thread) {
-        snprintf(app.status, sizeof app.status, "Saving #%04u to SD...", save->id);
-        return false;
-    }
-    if (app.next_number > MAX_PHOTOS) { update_status("Capture", FILM_STATE, 0); return false; }
-    uint64_t started = ticks(NULL);
-    if(raw_capture) {
-        if(!film_runtime_source_valid("film-camera-shutter-pair/v1"))return false;
-        film_log(app.log,"film-camera-shutter-pair/v1 shutter",FILM_OK,app.next_number);
-        film_frame_free(shown);
-        FilmStatus status=film_camera_capture_pair(&app.camera,&save->frame,&save->native_capture,app.log);
-        app.live=app.camera.initialized;app.preview_failed=status!=FILM_OK;reset_preview_tracking();
-        if(status!=FILM_OK){film_camera_close(&app.camera);app.live=false;update_status("RAW capture/restore",status,0);return false;}
-        save->capture_mode="RAW+native JPG";
-    } else if (shown->source.pixels) {
-        save->frame = *shown;
-        *shown = (FilmFrame){0};
-        save->frame.recipe = app.ui.recipe;
-        save->frame.recipe.yuv = app.camera_yuv;
-        save->capture_mode = "preview";
-    } else {
-        FilmStatus status = take(&save->frame);
-        if (status != FILM_OK) { update_status("Capture", status, app.camera.last_result); return false; }
-        save->capture_mode = app.camera.preview_event ? "copy" : "capture";
-    }
-    save->id = app.next_number;
-    save->frame.recipe = film_ui_capture_recipe(&app.ui);
-    if (app.live) save->frame.recipe.yuv = app.camera_yuv;
-    save->native_capture.recipe=save->frame.recipe;
-    save->capture_ms = (ticks(NULL) - started) / 1000;
-    snprintf(app.status, sizeof app.status, "Saving #%04u to SD...", save->id);
-    s32 priority = 0x30;
-    svcGetThreadPriority(&priority, CUR_THREAD_HANDLE);
-    save->thread = threadCreate(save_capture, save, 16 * 1024, priority < 0x3f ? priority + 1 : priority, 0, false);
-    if (save->thread) {
-        save->completion = threadGetHandle(save->thread);
-        return false;
-    }
-    save_capture(save);
-    return finish_capture(true);
+    CaptureSave *save=&app.save;
+    if(save->thread){update_status("RAW capture/save busy",FILM_STATE,0);return false;}
+    FilmStatus allowed=film_camera_raw_shutter_check("film-camera-shutter-raw/v1",&app.camera);
+    film_log(app.log,"film-camera-shutter-raw/v1",allowed,app.next_number);
+    if(allowed!=FILM_OK){update_status(allowed==FILM_UNSUPPORTED?"Lens cannot capture RAW":"RAW camera not ready; L opens",allowed,0);return false;}
+    if(app.preview_failed){update_status("Camera failed: reopen with L",FILM_STATE,0);return false;}
+    if(app.next_number>MAX_PHOTOS){update_status("Capture",FILM_STATE,0);return false;}
+    save->capture_status=FILM_STATE;save->capture_zoom=app.camera.zoom;
+    save->expected_step=app.camera_values[FILM_CAM_EXPOSURE];
+    save->id=app.next_number;save->frame.recipe=film_ui_capture_recipe(&app.ui);
+    save->capture_mode="RAW DNG";
+    atomic_store(&app.camera.capture_phase,FILM_CAPTURE_VERIFY);atomic_store(&save->phase,CAPTURE_ACQUIRING);
+    snprintf(app.status,sizeof app.status,"Capturing RAW #%04u",save->id);
+    s32 priority=0x30;svcGetThreadPriority(&priority,CUR_THREAD_HANDLE);
+    save->thread=threadCreate(save_capture,save,16*1024,priority<0x3f?priority+1:priority,0,false);
+    if(save->thread){save->completion=threadGetHandle(save->thread);return false;}
+    update_status("RAW worker allocation",FILM_NOMEM,0);*save=(CaptureSave){0};return false;
 }
 
 static void draw(C3D_RenderTarget *top,C3D_RenderTarget *bottom);
@@ -785,7 +715,7 @@ static void serve_selected_evidence(C3D_RenderTarget *top,C3D_RenderTarget *bott
     roll_path(original,id);snprintf(jpeg,sizeof jpeg,PREVIEWS "ROLL%04u.JPG",id);
     snprintf(index,sizeof index,PREVIEWS "ROLL%04u.F3I",id);
     snprintf(run,sizeof run,"film-app-%04u-%llu",id,(unsigned long long)osGetTime());
-    const char *paths[4]={original,jpeg,index,ROOT "film3ds.log"};
+    const char *paths[4]={original,jpeg,index,LOGS "film3ds.log"};
     app.probe_title="Existing online recovery";memset(app.probe_rows,0,sizeof app.probe_rows);
     snprintf(app.probe_rows[0],sizeof app.probe_rows[0],"Photo #%04u; FILMRAM HTTP port 5000",id);
     snprintf(app.probe_rows[1],sizeof app.probe_rows[1],"Keep open; START returns to app");draw(top,bottom);
@@ -793,7 +723,7 @@ static void serve_selected_evidence(C3D_RenderTarget *top,C3D_RenderTarget *bott
     app.probe_title=NULL;update_status(served?"Recovery ended; L: reopen camera":"Recovery snapshot failed",served?FILM_OK:FILM_IO,0);
 }
 
-static void preview_darkroom(bool wb_editor)
+static void preview_darkroom(void)
 {
     FilmFrame frame = {0};
     FilmLut lut = {0};
@@ -802,7 +732,10 @@ static void preview_darkroom(bool wb_editor)
     const Look *look = look_index ? &app.luts[look_index - 1] : NULL;
     FilmCameraColor camera_color;
     FilmGrainProfile grain_profile;
+    FilmRawIsp raw_isp;
     FilmDevelopOptions options = {.adaptive_grain = true, .grain = app.grain, .halation = app.halation,
+        .raw_shadows=app.raw_shadows,.raw_midtones=app.raw_midtones,.raw_highlights=app.raw_highlights,
+        .raw_shoulder=app.raw_shoulder,.raw_local=app.raw_local,.raw_local_limit=1.5f,
         .layered_grain=true,.chroma_denoise=app.chroma_denoise,.grain_size=app.grain_size,.grain_shadow=app.grain_shadow,
         .grain_mid=app.grain_mid,.grain_highlight=app.grain_highlight,
         .grain_renderer=app.grain_gpu?film_3ds_grain_layered:film_grain_layered_texture,
@@ -810,10 +743,14 @@ static void preview_darkroom(bool wb_editor)
     FilmStatus status;
     if (app.count) {
         status=open_selected_original(&frame);
-    } else status = film_mock_capture(&frame);
+    } else status=FILM_STATE;
+    if(status==FILM_OK && frame.source.format==FILM_RAW10_RGGB && app.raw_calibration){
+        const char *path=app.raw_calibration==1?"romfs:/calibration/display-color.f3isp":"romfs:/calibration/display-gray.f3isp";
+        FILE *file=fopen(path,"rb");status=file?film_raw_profile_load("film-raw-profile-load/v1",file,&raw_isp):FILM_IO;
+        if(file)fclose(file);if(status==FILM_OK)options.raw_isp=&raw_isp;
+    }
     if (status == FILM_OK) {
         frame.recipe = app.darkroom;
-        if (wb_editor) frame.recipe.white_balance=app.room.pending_wb;
         frame.recipe.grain_seed ^= UINT32_C(0x9e3779b9) * app.darkroom_id;
         if (look && frame.recipe.profile.strength > 0) status = load_look_lut(look, &lut);
     }
@@ -825,38 +762,10 @@ static void preview_darkroom(bool wb_editor)
         if (file) fclose(file);
         if (status == FILM_OK) options.grain_profile = &grain_profile;
     }
-    if(status==FILM_OK&&wb_editor&&frame.source.format==FILM_RAW10_RGGB) {
-        FilmDevelopCanvas canvas={0};FilmImage display={0};
-        if(!film_runtime_source_valid("film-darkroom-wb-preview/v1"))status=FILM_STATE;
-        if(status==FILM_OK)status=film_develop_canvas(&frame,lut.samples?&lut:NULL,&options,&canvas);
-        if(status==FILM_OK)status=film_develop_canvas_render(&canvas,&frame.recipe,&options,true,&display);
-        if(status==FILM_OK)show_image(&display,FILM_601_FULL);else update_status("RAW WB preview",status,0);
-        film_image_free(&display);film_develop_canvas_free(&canvas);
-    } else if (status==FILM_OK && wb_editor) {
-        if (!film_runtime_source_valid("film-darkroom-wb-preview/v1")) status=FILM_STATE;
-        FilmImage rgb={0},small={0},display={0};
-        FilmDevelopCanvas canvas={0};
-        if (status==FILM_OK) status=film_rgb24(&frame.source,frame.recipe.yuv,&rgb);
-        unsigned w=256,h=frame.source.height*256/frame.source.width;
-        if (h>192) { h=192;w=frame.source.width*192/frame.source.height; }
-        if (status==FILM_OK) status=film_resize(&rgb,w,h,FILM_BILINEAR,&small);
-        film_image_free(&rgb);
-        if (status==FILM_OK) {
-            film_image_free(&frame.source);frame.source=small;small=(FilmImage){0};
-            film_composition_reset(&frame.recipe);
-            frame.recipe.scale=FILM_NATIVE;
-            frame.recipe.tone.value[FILM_TONE_SATURATION]+=frame.recipe.base_saturation*(1+frame.recipe.tone.value[FILM_TONE_SATURATION]);
-            frame.recipe.base_saturation=0;
-            status=film_develop_canvas(&frame,lut.samples?&lut:NULL,&options,&canvas);
-        }
-        if (status==FILM_OK) status=film_develop_canvas_render(&canvas,&frame.recipe,&options,true,&display);
-        if (status==FILM_OK) show_image(&display,FILM_601_FULL);
-        film_image_free(&small);film_image_free(&display);film_develop_canvas_free(&canvas);
-        if (status!=FILM_OK) update_status("WB preview",status,0);
-    } else if (status == FILM_OK) {
+    if (status == FILM_OK) {
         status = film_darkroom_preview(&app.room, &frame, lut.samples ? &lut : NULL, &options);
         if (status==FILM_OK) {
-        show_image(&app.room.preview, FILM_601_FULL);
+        show_image(&app.room.composition_view, FILM_601_FULL);
         snprintf(app.status, sizeof app.status, "Preview %ux%u - not saved",
                  app.room.preview.width, app.room.preview.height);
         if (app.log) {
@@ -882,7 +791,6 @@ static void preview_darkroom(bool wb_editor)
 
 static void white_balance_input(u32 keys, u32 repeated)
 {
-    bool changed=false;
     int red=app.room.pending_wb.red,blue=app.room.pending_wb.blue;
     if (repeated&KEY_LEFT) --red;
     if (repeated&KEY_RIGHT) ++red;
@@ -899,43 +807,20 @@ static void white_balance_input(u32 keys, u32 repeated)
     if (red>9) red=9;
     if (blue<-9) blue=-9;
     if (blue>9) blue=9;
-    changed=red!=app.room.pending_wb.red || blue!=app.room.pending_wb.blue;
     app.room.pending_wb.red=red;app.room.pending_wb.blue=blue;
     if (keys&KEY_X) {
         app.room.wb_editor=false;
-        if (app.room.preview.pixels) show_image(&app.room.preview,FILM_601_FULL);
-        else preview_darkroom(false);
+        if (app.room.composition_view.pixels) show_image(&app.room.composition_view,FILM_601_FULL);
     } else if (keys&KEY_A) {
         app.darkroom.white_balance=app.room.pending_wb;
         app.room.wb_editor=false;
-        preview_darkroom(false);
-    } else if (changed) preview_darkroom(true);
+        preview_darkroom();
+    }
 }
 
 static void save_darkroom_preview(void)
 {
     if (!app.room.preview.pixels) return;
-    if(app.source_raw) {
-        FilmFrame frame={0};FilmLut lut={0};char input[64],plain[128],lookpath[128];
-        roll_path(input,app.darkroom_id);FilmStatus status=open_selected_original(&frame);
-        frame.recipe=app.darkroom;frame.recipe.grain_seed^=UINT32_C(0x9e3779b9)*app.darkroom_id;
-        unsigned index=find_look(frame.recipe.lut_id);
-        if(status==FILM_OK&&index&&frame.recipe.profile.strength>0)status=load_look_lut(&app.luts[index-1],&lut);
-        FilmDevelopOptions options=app.room.options;
-        if(app.room.has_grain_profile)options.grain_profile=&app.room.grain_profile;
-        if(status==FILM_OK) {
-            struct stat st;bool available=false;
-            for(unsigned revision=1;revision<=MAX_PHOTOS;++revision){
-                snprintf(plain,sizeof plain,EXPORTS "R%04u-%04u-plain.JPG",app.darkroom_id,revision);
-                snprintf(lookpath,sizeof lookpath,EXPORTS "R%04u-%04u-look.JPG",app.darkroom_id,revision);
-                if(stat(plain,&st)!=0&&errno==ENOENT&&stat(lookpath,&st)!=0&&errno==ENOENT){available=true;break;}
-            }
-            status=available?film_raw_export_pair(&frame,lut.samples?&lut:NULL,&options,plain,lookpath):FILM_STATE;
-        }
-        film_log(app.log,"film-app-raw-export-pair/v1",status,0);
-        film_frame_free(&frame);film_lut_free(&lut);film_darkroom_discard(&app.room);
-        update_status("RAW plain + look JPEG saved",status,0);return;
-    }
     char filename[24] = {0}, path[96] = {0};
     struct stat existing;
     FilmStatus status = FILM_STATE;
@@ -1395,7 +1280,8 @@ static void darkroom_value(FilmDarkroomRow row, char *value, size_t size)
         film_crop_rect(w, h, r->aspect, &crop);
         snprintf(value, size, "%ux%u %s", crop.width, crop.height, scale_names[r->scale]); break;
     case DARKROOM_LOOK: {
-        const char *name = r->lut_id[0] ? r->lut_id : "Neutral";
+        unsigned look=find_look(r->lut_id);
+        const char *name=look?app.luts[look-1].name:r->lut_id[0]?r->lut_id:"Neutral";
         size_t length = strlen(name);
         if (length > 5 && !strcasecmp(name + length - 5, ".cube")) length -= 5;
         snprintf(value, size, "%.*s", (int)length, name); break;
@@ -1406,6 +1292,12 @@ static void darkroom_value(FilmDarkroomRow row, char *value, size_t size)
     case DARKROOM_SHADOWS: snprintf(value, size, "%+.0f", r->output_tone.value[FILM_TONE_SHADOWS] * 5); break;
     case DARKROOM_GRAIN_AMOUNT: snprintf(value, size, "%.0f%%", r->grain_amount * 100); break;
     case DARKROOM_GRAIN_BACKEND:snprintf(value,size,"%s",app.grain_gpu?"GPU mix":"CPU");break;
+    case DARKROOM_RAW_CALIBRATION:snprintf(value,size,"%s",app.raw_calibration==1?"Display color":app.raw_calibration==2?"Display gray":"Off");break;
+    case DARKROOM_RAW_SHADOWS:snprintf(value,size,"%+.1f EV",app.raw_shadows);break;
+    case DARKROOM_RAW_MIDTONES:snprintf(value,size,"%+.1f EV",app.raw_midtones);break;
+    case DARKROOM_RAW_HIGHLIGHTS:snprintf(value,size,"%+.1f EV",app.raw_highlights);break;
+    case DARKROOM_RAW_SHOULDER:snprintf(value,size,"%s%.2f",app.raw_shoulder?"Knee ":"Off ",app.raw_shoulder);break;
+    case DARKROOM_RAW_LOCAL:snprintf(value,size,"%.0f%%",app.raw_local*100);break;
     case DARKROOM_DENOISE:snprintf(value,size,"%.0f%%",app.chroma_denoise*100);break;
     case DARKROOM_GRAIN_SIZE:snprintf(value,size,"%.2fx",app.grain_size);break;
     case DARKROOM_GRAIN_SHADOW:snprintf(value,size,"%.1f",app.grain_shadow);break;
@@ -1460,7 +1352,7 @@ static void draw_white_balance(u32 bg,u32 fg,u32 gold)
     text_at(20,110,.53f,fg,"R-");text_at(254,110,.53f,fg,"R+");
     text_at(241,48,.53f,fg,"B+");text_at(241,179,.53f,fg,"B-");
     text_at(12,197,.42f,fg,"Arrows: move   Y: reset");
-    text_at(12,213,.53f,gold,"A: apply                 X: cancel");
+    text_at(12,213,.53f,gold,"A: preview               X: cancel");
 }
 
 static void draw_composition(float x,float y,float w,float h,u32 gold)
@@ -1486,7 +1378,7 @@ static void draw_roll(u32 bg,u32 fg,u32 gold,u32 dim)
     if (app.roll.deleting) {
         C2D_DrawRectSolid(12,50,.4f,296,150,bg);
         text_at(24,64,.65f,gold,"DELETE ORIGINAL?");
-        snprintf(line,sizeof line,"ROLL%04u.F3S",app.roll.pending_id);
+        snprintf(line,sizeof line,"Photo #%04u original",app.roll.pending_id);
         text_at(24,95,.62f,fg,line);
         text_at(24,124,.5f,fg,"Exported JPEGs are kept");
         text_at(24,165,.58f,gold,"A: delete       X: cancel");
@@ -1520,10 +1412,10 @@ static void draw_roll(u32 bg,u32 fg,u32 gold,u32 dim)
 
 static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
 {
-    static const char *const pages[] = {"VIEW NATIVE15", "ROLL", "DARKROOM"};
+    static const char *const pages[] = {"VIEW RAW15", "ROLL", "DARKROOM"};
     u32 bg = C2D_Color32(18, 22, 23, 255), fg = C2D_Color32(241, 235, 216, 255);
     u32 gold = C2D_Color32(248, 193, 107, 255), dim = C2D_Color32(40, 49, 48, 255);
-    unsigned zoom = app.live ? app.camera.zoom : 1;
+    unsigned zoom = app.save.thread&&atomic_load(&app.save.phase)==CAPTURE_ACQUIRING?app.save.capture_zoom:app.live?app.camera.zoom:1;
     char line[100];
     C2D_TextBufClear(app.text);
     if (!C3D_FrameBegin(C3D_FRAME_SYNCDRAW)) return;
@@ -1560,6 +1452,7 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         C2D_DrawRectSolid(40 + right - 1, crop.y, 0.2f, 1, crop.height, gold);
     }
 
+    if(app.debug.debug_mode)text_at(350,222,.45f,gold,"debug");
     C2D_TargetClear(bottom, bg);
     C2D_SceneBegin(bottom);
     if (app.ui.page==FILM_DARKROOM && app.room.wb_editor) {
@@ -1578,9 +1471,9 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         if (app.preview_failed) snprintf(line, sizeof line, "CAM ERROR");
         else if (!app.live) snprintf(line, sizeof line, "CAM OFF");
         else if (!app.preview_fps) snprintf(line, sizeof line, "%s %s WAIT", sensors[app.camera.sensor],
-                                            app.preview_single ? "ONE" : "DMA");
+                                            "DMA");
         else snprintf(line, sizeof line, "%s %s %u FPS", sensors[app.camera.sensor],
-                      app.preview_single ? "ONE" : "DMA", app.preview_fps);
+                      "DMA", app.preview_fps);
         text_at(148, 12, 0.59f, gold, line);
         if (app.live) {
             if(app.camera_values[FILM_CAM_EXPOSURE_MODE]==FILM_EXPOSURE_NATIVE_AE)
@@ -1618,7 +1511,7 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         text_at(20, 163, 0.53f, gold, "Up/Down: setting   Left/Right: value");
         text_at(20, 183, 0.48f, fg, "Y: back   R: capture");
     } else if (app.ui.page == FILM_VIEW) {
-        text_at(20, 68, 0.62f, fg, "Capture original image");
+        text_at(20, 68, 0.62f, fg, "Capture RAW DNG");
         text_at(20, 116, 0.62f, fg, "Output settings: Darkroom");
         snprintf(line, sizeof line, "A/R: Capture   Zoom %ux (Circle Pad)", zoom);
         text_at(20, 163, 0.54f, gold, line);
@@ -1703,12 +1596,15 @@ static void run_hardware_qa(const char *token, bool frames, C3D_RenderTarget *to
 
 int main(int argc, char **argv)
 {
+    const char *scene_qa_token=NULL;bool scene_qa_gray=false;
     const char *qa_token = NULL;
     const char *raw_qa_token = NULL;
     const char *raw_recover_token = NULL;
     bool raw_recover_only=false;
     bool qa_frames = false;
     for (int i = 1; i < argc; ++i) {
+        if(!strcmp(argv[i],"f3scene-gray"))scene_qa_gray=true;
+        if(!strncmp(argv[i],"f3sceneqa=",10)&&film_raw_qa_token_valid(argv[i]+10))scene_qa_token=argv[i]+10;
         if (!strncmp(argv[i], "f3qa=", 5) && strlen(argv[i] + 5) == 32 &&
             strspn(argv[i] + 5, "0123456789abcdef") == 32) qa_token = argv[i] + 5;
         if (!strcmp(argv[i], "f3qa-frames")) qa_frames = true;
@@ -1735,6 +1631,7 @@ int main(int argc, char **argv)
     memset(app.texture.data, 0, PREVIEW_TEX_SIDE * PREVIEW_TEX_SIDE * 3);
     mkdir("sdmc:/3ds", 0777);
     mkdir(ROOT, 0777);
+    mkdir(LOGS,0777);
     mkdir(ROLLS, 0777);
     mkdir(EXPORTS, 0777);
     mkdir(PREVIEWS,0777);
@@ -1750,19 +1647,35 @@ int main(int argc, char **argv)
         while(aptMainLoop()){hidScanInput();if(hidKeysDown()&KEY_START)break;draw(top,bottom);}
         goto cleanup;
     }
+    app.log=fopen(LOGS "film3ds.log","a");
+    app.camera.runtime_log=app.log;
+    if(app.log){setvbuf(app.log,NULL,_IOLBF,0);fprintf(app.log,"APP startup ms=%llu\n",(unsigned long long)osGetTime());fflush(app.log);}
     bool romfs_mounted = R_SUCCEEDED(romfsInit());
+    if(scene_qa_token){
+        if(!romfs_mounted){update_status("Scene probe ROMFS failed",FILM_IO,0);goto cleanup;}
+        char dir[256];snprintf(dir,sizeof dir,ROOT "scene-%s",scene_qa_token);
+        FilmRecipe recipe=film_default_recipe();recipe.grain_amount=0;
+        FilmDevelopOptions options={.raw_local=.35f,.raw_local_limit=1.5f};
+        FilmStatus result=film_raw_scene_probe("film-raw-scene-probe/v1",scene_qa_gray?"romfs:/rawqa/gray.F3S":"romfs:/rawqa/color.F3S",scene_qa_gray?"romfs:/calibration/display-gray.f3isp":"romfs:/calibration/display-color.f3isp",dir,&recipe,&options);
+        app.probe_title="RAW scene consistency probe";
+        snprintf(app.probe_rows[0],sizeof app.probe_rows[0],"%s; camera untouched",film_status_name(result));
+        snprintf(app.probe_rows[1],sizeof app.probe_rows[1],"FILMRAM HTTP 5000; START returns");draw(top,bottom);
+        if(result==FILM_OK){
+            char files[4][300];const char *paths[4];const char *names[]={"canvas.rgb16","samples.f32","preview.jpg","report.json"};
+            for(unsigned i=0;i<4;++i){snprintf(files[i],sizeof files[i],"%s/%s",dir,names[i]);paths[i]=files[i];}
+            film_app_evidence_serve(scene_qa_token,paths);
+        }
+        goto cleanup;
+    }
     if (romfs_mounted) {
-        scan_looks(PACKED_LUTS);
+        unsigned installed=0;FilmStatus installed_status=film_lut_install_missing("film-lut-install/v1",PACKED_LUTS,LUTS,&installed);
+        film_log(app.log,"film-lut-install/v1",installed_status,installed);
         for (unsigned i = 0; i < FILM_GRAIN_COUNT; ++i) {
             struct stat profile;
             app.grain_reference[i] = stat(grain_paths[i], &profile) == 0 && S_ISREG(profile.st_mode);
         }
     }
     scan_looks(LUTS);
-    struct stat look_file;
-    if (app.lut_count < MAX_LUTS && stat(ROOT "look.cube", &look_file) == 0 && S_ISREG(look_file.st_mode))
-        app.luts[app.lut_count++] = legacy_look;
-    app.log = fopen(ROOT "film3ds.log", "a");
     load_roll();
     app.preview_top=top;app.preview_bottom=bottom;
     if(app.log){fprintf(app.log,"source=film-preview-catalog-prepare/v1 entry=startup count=%u\n",app.count);fflush(app.log);}
@@ -1771,14 +1684,13 @@ int main(int argc, char **argv)
     if(catalog!=FILM_OK)update_status("Preview preparation stopped",catalog,0);
     app.grain = FILM_GRAIN_MEDIUM;
     app.control=FILM_CAM_EXPOSURE_MODE;
+    app.raw_shoulder=.75f;
     app.grain_size=1;app.grain_shadow=.8f;app.grain_mid=1.1f;app.grain_highlight=.7f;
     FILE *atlas=fopen("romfs:/grain/pan400.f3gt","rb");
     if(atlas){FilmStatus gs=film_grain_texture_load(atlas,&app.grain_texture);fclose(atlas);film_log(app.log,"Grain texture",gs,0);}
     if (!qa_token) run_commands();
-    FilmFrame preview = {0};
-    bool calibration_logged = false;
-    if (film_mock_capture(&preview) == FILM_OK) show_image(&preview.source, FILM_601_FULL);
-    film_frame_free(&preview);
+    bool calibration_logged=false;
+    show_camera_closed();
     if(catalog==FILM_OK)update_status("L: camera  R: RAW rear1  X: pages", FILM_OK, 0);
     if (qa_token) run_hardware_qa(qa_token, qa_frames, top, bottom);
 
@@ -1789,6 +1701,29 @@ int main(int argc, char **argv)
         bool saved = finish_capture(false);
         hidScanInput();
         u32 keys = hidKeysDown();
+        if(keys){
+            unsigned key=keys==KEY_A?FILM_DEBUG_A:keys==KEY_B?FILM_DEBUG_B:
+                (keys&KEY_UP)&&!(keys&~KEY_UP)?FILM_DEBUG_UP:(keys&KEY_DOWN)&&!(keys&~KEY_DOWN)?FILM_DEBUG_DOWN:FILM_DEBUG_OTHER;
+            bool was_debug=app.debug.debug_mode;
+            if(film_debug_mode_key(&app.debug,key)){
+                atomic_store(&app.camera.debug_mode,app.debug.debug_mode);
+                if(app.log){fprintf(app.log,"DEBUG %s ms=%llu\n",app.debug.debug_mode?"ON":"OFF",(unsigned long long)osGetTime());fflush(app.log);}
+            }
+            if((was_debug||app.debug.debug_mode)&&app.log){fprintf(app.log,"KEY ms=%llu down=%08lx held=%08lx page=%u\n",
+                (unsigned long long)osGetTime(),(unsigned long)keys,(unsigned long)hidKeysHeld(),app.ui.page);fflush(app.log);}
+        }
+        if(app.save.thread){
+            unsigned phase=atomic_load(&app.save.phase);
+            if(phase==CAPTURE_ACQUIRING){
+                static const char *const names[]={"Manual/AE verify","RAW preconditions","Lock AE/AWB","Native gate","RAW switch","RAW settle","RAW retain","Camera restore"};
+                unsigned step=atomic_load(&app.camera.capture_phase);
+                snprintf(app.status,sizeof app.status,"%s #%04u",step<8?names[step]:"RAW capture",app.save.id);
+                draw(top,bottom);continue;
+            }
+            app.live=app.camera.initialized;app.preview_failed=!app.live;
+            if(phase==CAPTURE_SAVING)snprintf(app.status,sizeof app.status,"Saving DNG #%04u",app.save.id);
+        }
+
         /* ROLL_MODAL_INPUT_BEGIN */
         if (app.ui.page==FILM_ROLL && app.roll.deleting) {
             roll_delete_input(keys);draw(top,bottom);continue;
@@ -1800,7 +1735,6 @@ int main(int argc, char **argv)
             white_balance_input(keys,repeated);draw(top,bottom);continue;
         }
         if (app.ui.page==FILM_DARKROOM && app.room.preview.pixels && keys==KEY_SELECT) {
-            film_darkroom_update_geometry(&app.room,&app.darkroom);
             save_darkroom_preview();draw(top,bottom);continue;
         }
         if (app.room.preview.pixels && (keys&(KEY_X|KEY_L|KEY_R|KEY_START|KEY_ZL|KEY_ZR)))
@@ -1844,12 +1778,10 @@ int main(int argc, char **argv)
             film_camera_close(&app.camera);
             reset_preview_tracking();
             app.preview_failed = false;
-            app.preview_single = false;
             if (next > FILM_CAMERA_FRONT) {
                 app.live = false;
-                if (film_mock_capture(&preview) == FILM_OK) show_image(&preview.source, FILM_601_FULL);
-                film_frame_free(&preview);
-                update_status("Simulator", FILM_OK, 0);
+                show_camera_closed();
+                update_status("Camera closed; L opens RAW",FILM_OK,0);
             } else {
                 FilmStatus status = film_camera_open(&app.camera, FILM_YUYV, next);
                 app.live = status == FILM_OK;
@@ -1875,6 +1807,11 @@ int main(int argc, char **argv)
                         calibration_logged = true;
                     }
                     app.camera_auto = film_camera_auto_state(&app.camera);
+                    if(app.camera.sensor!=FILM_CAMERA_REAR1 &&
+                       app.camera_values[FILM_CAM_EXPOSURE_MODE]==FILM_EXPOSURE_MANUAL) {
+                        app.camera_values[FILM_CAM_EXPOSURE_MODE]=FILM_EXPOSURE_NATIVE_AE;
+                        update_status("Lens supports Native AE only",FILM_OK,0);
+                    }
                     FilmStatus exposure = film_camera_select_exposure_mode(&app.camera,
                         (FilmExposureMode)app.camera_values[FILM_CAM_EXPOSURE_MODE],app.camera_values[FILM_CAM_EV_COMP],app.log);
                     if(exposure!=FILM_OK){update_status("Exposure mode",exposure,app.camera.last_result);film_camera_close(&app.camera);}
@@ -1977,14 +1914,13 @@ int main(int argc, char **argv)
         }
         sync_darkroom();
         bool camera_failed = false;
-        FilmFrame shown = {0};
         if (app.live && app.ui.page == FILM_VIEW) {
             if (app.ui.recipe.aspect != previous_aspect) reset_exposure_tracking();
-            FilmStatus status = update_preview(&shown);
+            FilmStatus status = update_preview();
             if (status != FILM_OK) {
                 update_status("CAM preview", status, app.camera.last_result);
                 snprintf(app.status, sizeof app.status, "CAM %s %s %08lX",
-                         app.preview_single ? "single" : (app.camera.preview_stage ? app.camera.preview_stage : "preview"),
+                         app.camera.preview_stage ? app.camera.preview_stage : "preview",
                          film_status_name(status), (unsigned long)app.camera.last_result);
                 film_camera_close(&app.camera);
                 app.live = false;
@@ -2001,30 +1937,29 @@ int main(int argc, char **argv)
                 camera_failed = true;
             }
         }
-        if (!camera_failed && app.ui.page==FILM_VIEW && (action == UI_CAPTURE || (keys & KEY_R))) saved = capture_photo(&shown) || saved;
+        if (!camera_failed && app.ui.page==FILM_VIEW && (action == UI_CAPTURE || (keys & KEY_R))) saved = capture_photo() || saved;
         else if (action == UI_EXPORT && !app.save.thread) {
             snprintf(app.status, sizeof app.status, "%s",
                      app.darkroom.lut_id[0] && app.darkroom.profile.strength > 0 ? "Applying LUT..." : "Developing...");
             draw(top, bottom);
-            preview_darkroom(false);
+            preview_darkroom();
         }
-        film_frame_free(&shown);
         /* ROLL_REFRESH_BEGIN */
         if ((saved || app.ui.page!=previous_page || app.ui.selection!=previous_photo) && app.ui.page!=FILM_VIEW) {
             if(!saved&&app.ui.page!=previous_page)app.roll_preview_id=0;
             roll_show_selection();
         }
         else if (app.ui.page==FILM_VIEW && previous_page!=FILM_VIEW && !app.live) {
-            if (film_mock_capture(&preview)==FILM_OK) show_image(&preview.source,FILM_601_FULL);
-            film_frame_free(&preview);
+            show_camera_closed();
         }
         /* ROLL_REFRESH_END */
         sync_darkroom();
         draw(top, bottom);
     }
     film_darkroom_discard(&app.room);
-    film_camera_close(&app.camera);
     finish_capture(true);
+    film_camera_close(&app.camera);
+    free(app.luts);app.luts=NULL;
     film_grain_texture_free(&app.grain_texture);
     if (romfs_mounted) romfsExit();
     if (app.log) fclose(app.log);

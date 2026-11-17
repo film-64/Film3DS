@@ -14,12 +14,14 @@ from camera_runtime_contract import CONTRACT_MATRIX, RUNTIME_INTERNAL_FIELDS, he
 from camera_ui15_package import checked_manifest, deploy, stage, prepare_deployment
 
 class UiPackageTests(unittest.TestCase):
-    def test_shutter_native_jpeg_and_existing_recovery(self):
-        shutter=CONTRACT_MATRIX["film-camera-shutter-pair/v1"]
+    def test_raw_only_shutter_and_existing_recovery(self):
+        shutter=CONTRACT_MATRIX["film-camera-shutter-raw/v1"]
         self.assertTrue(shutter["compute"])
-        self.assertFalse(shutter["raw_decode"] or shutter["lane_admission"])
+        self.assertTrue(shutter["raw_decode"])
+        self.assertFalse(shutter["lane_admission"] or shutter["native_retention"])
         self.assertIsNone(shutter["override"])
-        self.assertFalse(CONTRACT_MATRIX["film-roll-native-raw-pair/v1"]["raw_decode"])
+        self.assertNotIn("film-roll-native-raw-pair/v1",CONTRACT_MATRIX)
+        self.assertNotIn("film-camera-shutter-pair/v1",CONTRACT_MATRIX)
         evidence=CONTRACT_MATRIX["film-app-frozen-evidence/v1"]
         self.assertFalse(evidence["compute"] or evidence["camera_work"] or evidence["queues"])
         self.assertEqual(evidence["host"],"unchanged_retrieve_probe_ram.py")
@@ -112,19 +114,48 @@ class UiPackageTests(unittest.TestCase):
         self.assertEqual(develop["recipe_version"], 6)
         self.assertEqual(save["prerequisite"], "preview_then_SELECT_only")
         self.assertEqual(save["cancel"], "any_other_key_continues_normal_action")
-        self.assertEqual(save["input"], "cached_full_original_RGB16_canvas")
+        self.assertEqual(save["input"], "cached_displayed_RGB24_preview_for_RAW_and_native")
         self.assertEqual(save["writes"], "new_jpeg_only")
         self.assertEqual(save["retries"], 0)
         wb = CONTRACT_MATRIX["film-darkroom-wb-preview/v1"]
         self.assertTrue(wb["compute"])
         self.assertFalse(wb["writes"] or wb["camera_calls"])
-        self.assertEqual(wb["input"], "original_source_downsample_not_previous_preview")
+        self.assertEqual(wb["input"], "original_source_on_explicit_A_not_previous_preview")
         self.assertEqual(develop["percent_step"], 1)
         self.assertEqual((develop["dpad_step"], develop["circle_step"]), (1, 10))
         self.assertFalse(develop["acceleration"])
         self.assertEqual(develop["aspect_change"], "reset_centered_maximum")
-        self.assertEqual(save["compute_scope"], "crop_resize_sharpen_grain_only_no_LUT_recompute")
+        self.assertEqual(save["compute_scope"], "JPEG_encoding_only_no_original_read_no_ISP_LUT_resize_sharpen_or_grain")
 
+
+    def test_on_device_darkroom_and_save_dispatch(self):
+        text=(ROOT/"source/platform/main_3ds.c").read_text()
+        wb=text.split("static void white_balance_input",1)[1].split("static void save_darkroom_preview",1)[0]
+        self.assertEqual(wb.count("preview_darkroom();"),1)
+        self.assertIn("else if (keys&KEY_A)",wb)
+        self.assertNotIn("else if (changed)",wb)
+        save=text.split("static void save_darkroom_preview",1)[1].split("static void y2r_check",1)[0]
+        self.assertNotIn("open_selected_original",save)
+        self.assertNotIn("film_raw_export_pair",save)
+        finish=text.split("static bool finish_capture",1)[1].split("static bool capture_photo",1)[0]
+        self.assertIn("bool saved = save->result.written;",finish)
+        storage=CONTRACT_MATRIX["film-roll-capture-save/v1"]
+        self.assertTrue(storage["compute"])
+        self.assertFalse(storage["lane_admission"] or storage["retries"])
+        self.assertIsNone(storage["override"])
+
+    def test_composition_frame_survives_A_and_geometry_edits(self):
+        text=(ROOT/"source/platform/main_3ds.c").read_text()
+        draw=text.split("static void draw_composition",1)[1].split("/* ROLL_DRAW_BEGIN */",1)[0]
+        self.assertNotIn("darkroom_preview_displayed",draw)
+        self.assertNotIn("room.preview",draw)
+        self.assertIn("film_composition_rect(app.source_width,app.source_height",draw)
+        preview=text.split("static void preview_darkroom",1)[1].split("static void white_balance_input",1)[0]
+        self.assertIn("show_image(&app.room.composition_view",preview)
+        pan=text.split("/* DARKROOM_CONTROLS_BEGIN */",1)[1].split("/* DARKROOM_CONTROLS_END */",1)[0]
+        self.assertNotIn("film_darkroom_discard(&app.room);",pan.split("} else {",1)[0])
+        self.assertEqual(CONTRACT_MATRIX["film-darkroom-save/v1"]["display"],
+            "full_original_composition_view_with_always_visible_original_coordinate_frame")
 
     def test_roll_boundaries(self):
         preview = CONTRACT_MATRIX["film-roll-preview/v1"]
@@ -142,8 +173,8 @@ class UiPackageTests(unittest.TestCase):
         self.assertEqual(preview["empty"], "zero_original_files_no_virtual_entries")
         self.assertFalse(delete["compute"])
         self.assertEqual(delete["entry"], "Y_then_A_only")
-        self.assertEqual(delete["target"], "snapshotted_selected_F3S_ID_and_index_verified_before_unlink")
-        self.assertEqual(delete["writes"], "one_original_F3S_only_preserve_exported_JPEG")
+        self.assertEqual(delete["target"], "snapshotted_selected_DNG_or_legacy_F3S_ID_verified_before_unlink")
+        self.assertEqual(delete["writes"], "selected_preview_JPG_and_F3I_then_DNG_and_legacy_duplicate_preserve_exports_missing_sidecars_OK")
         self.assertEqual(delete["retries"], 0)
         self.assertEqual(delete["path"],"exact_one_separator_after_directory_including_sdmc_trailing_slash")
 
@@ -159,6 +190,48 @@ class UiPackageTests(unittest.TestCase):
         for name in ('film-camera-exposure-mode/v1','film-darkroom-denoise/v1','film-roll-pair-publish/v1','film-roll-original-open/v1','film-preview-catalog-prepare/v1'):
             rule=CONTRACT_MATRIX[name];self.assertTrue(rule['compute']);self.assertFalse(rule['lane_admission']);self.assertIsNone(rule['override'])
 
+    def test_shutter_worker_debug_and_standard_original_contracts(self):
+        worker=CONTRACT_MATRIX["film-camera-shutter-worker/v1"]
+        self.assertTrue(worker["compute"])
+        self.assertEqual(worker["workers"],1)
+        self.assertFalse(worker["lane_admission"] or worker["queues"] or worker["retries"])
+        self.assertIsNone(worker["override"])
+        text=(ROOT/"source/platform/main_3ds.c").read_text()
+        shutter=text.split("static bool capture_photo",1)[1].split("static void draw",1)[0]
+        self.assertNotIn("film_camera_capture_pair",shutter)
+        self.assertIn("film_camera_raw_shutter_check",shutter)
+        self.assertNotIn("film_mock_capture",shutter)
+        self.assertNotIn("preview_snapshot",shutter)
+        self.assertNotIn("film_camera_capture_diagnostic",shutter)
+        worker=text.split("static void save_capture",1)[1].split("static bool finish_capture",1)[0]
+        self.assertIn("film_camera_capture_raw",worker)
+        self.assertNotIn("native_capture",worker)
+        self.assertNotIn("F3S",worker)
+        self.assertIn('ROLL%04u.DNG',worker)
+        self.assertNotIn("save_capture(save)",shutter)
+        self.assertIn("CAPTURE_ACQUIRING",text)
+        end=text.rsplit("    film_darkroom_discard(&app.room);",1)[1]
+        self.assertLess(end.index("finish_capture(true)"),end.index("film_camera_close"))
+        self.assertIn('LOGS ROOT "log/"',text)
+        self.assertIn('text_at(350,222,.45f,gold,"debug")',text)
+        self.assertNotIn("load_look_profile",text)
+        raw=(ROOT/"source/platform/raw_camera_3ds.c").read_text()
+        manual=(ROOT/"source/platform/manual_exposure_3ds.c").read_text()
+        self.assertIn("film_camera_read_bool",raw)
+        self.assertIn("if(R_FAILED(rc)||ae)return FILM_STATE",manual)
+        self.assertIn("standard_RawImageDigest",CONTRACT_MATRIX["film-dng-read/v1"]["integrity"])
+
+    def test_debug_logging_never_clobbers_camera_ipc_buffer(self):
+        text=(ROOT/"source/platform/camera_bool_3ds.c").read_text()
+        prepare=text.index("u32 *b=getThreadCommandBuffer()")
+        send=text.index("svcSendSyncRequest(camHandle)")
+        copy=text.index("memcpy(reply,b,sizeof reply)")
+        self.assertLess(text.index("fflush(log)"),prepare)
+        self.assertNotIn("fprintf",text[prepare:send])
+        self.assertNotIn("fflush",text[prepare:send])
+        self.assertLess(send,copy)
+        self.assertLess(copy,text.index('if(log){fprintf(log,"CAM bool cmd=%02x header='))
+
     def test_frozen_package(self):
         with tempfile.TemporaryDirectory(dir=ROOT / "build") as tmp:
             directory = Path(tmp)
@@ -166,14 +239,13 @@ class UiPackageTests(unittest.TestCase):
             luts.mkdir()
             cube = luts / "Test.cube"
             cube.write_text("LUT_3D_SIZE 17\n" + "0 0 0\n" * 17**3)
-            with self.assertRaises(ValueError):
-                stage(directory / "missing-profile", luts)
-            subprocess.run([str(ROOT / "build/filmctl"), "profile", str(cube.with_suffix(".f3p"))], check=True)
+            self.assertFalse(cube.with_suffix(".f3p").exists())
             out = directory / "ui"
             stage(out, luts)
             manifest = checked_manifest(out)
             self.assertTrue(manifest["ui"])
             self.assertEqual(manifest["lut_count"], 1)
+            self.assertFalse((out/"romfs/luts/Test.f3p").exists())
             self.assertEqual((out / "romfs/luts/Test.cube").read_bytes(), cube.read_bytes())
             with self.assertRaises(FileExistsError):
                 stage(out, luts)
