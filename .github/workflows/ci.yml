@@ -58,6 +58,19 @@ jobs:
       - name: Verify native media and gallery integration
         run: PATH=/usr/bin:/bin make test-native-integration
 
+  probe-host:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exercise FilmProbe's real trial and restore logic using a host shim
+        run: |
+          mkdir -p build
+          /usr/bin/cc -O2 -g -std=c11 -Wall -Wextra -Wpedantic -Wno-unused-parameter \
+            -Itests/probe_shim -ffunction-sections -fdata-sections \
+            tests/probe_driver.c -Wl,--gc-sections -o build/probe-driver
+          ./build/probe-driver
+          python3 tests/exposure_report.py
+
   arm11:
     runs-on: ubuntu-24.04
     container:
@@ -81,6 +94,11 @@ jobs:
           test -s Film3DS.3dsx
           sha256sum Film3DS.3dsx > Film3DS.3dsx.sha256
           sha256sum --check Film3DS.3dsx.sha256
+          make -j2 -f Makefile.probe
+          test -s FilmProbe.3dsx
+          python3 tools/verify_3dsx.py FilmProbe.3dsx
+          sha256sum FilmProbe.3dsx > FilmProbe.3dsx.sha256
+          sha256sum --check FilmProbe.3dsx.sha256
           mkdir -p build-3ds/notices
           cp build-3ds/jpeg-arm11/source/LICENSE.md build-3ds/notices/libjpeg-turbo-LICENSE.md
           cp build-3ds/jpeg-arm11/source/README.ijg build-3ds/notices/libjpeg-turbo-README.ijg
@@ -90,5 +108,7 @@ jobs:
           path: |
             Film3DS.3dsx
             Film3DS.3dsx.sha256
+            FilmProbe.3dsx
+            FilmProbe.3dsx.sha256
             build-3ds/notices/
           if-no-files-found: error
