@@ -82,9 +82,13 @@ typedef struct {
 struct FilmRawIsp;
 struct FilmLayeredGrain;
 struct FilmGrainTexture;
+struct FilmRecipe;
+struct FilmDevelopOptions;
+typedef FilmStatus (*FilmCanvasRenderer)(const char *,const FilmDevelopCanvas *,
+    const struct FilmRecipe *,const struct FilmDevelopOptions *,FilmImage *);
 typedef FilmStatus (*FilmLayeredGrainRenderer)(const char *,FilmImage *,
     const struct FilmLayeredGrain *,const FilmGrainProfile *,const struct FilmGrainTexture *);
-typedef struct {
+typedef struct FilmDevelopOptions {
     bool adaptive_grain;
     FilmGrain grain;
     const FilmCameraColor *camera_color;
@@ -94,6 +98,7 @@ typedef struct {
     float grain_size,grain_shadow,grain_mid,grain_highlight;
     const struct FilmGrainTexture *grain_texture;
     FilmLayeredGrainRenderer grain_renderer;
+    FilmCanvasRenderer output_renderer;
     float chroma_denoise;
     const struct FilmRawIsp *raw_isp; /* explicit image calibration; borrowed */
     float raw_shadows,raw_midtones,raw_highlights; /* scene EV offsets, -2.5..2.5 */
@@ -101,7 +106,7 @@ typedef struct {
 } FilmDevelopOptions;
 FilmStatus film_darkroom_denoise(const char *,FilmRgb *,unsigned,unsigned,float);
 
-typedef struct {
+typedef struct FilmRecipe {
     FilmAspect aspect;
     FilmScale scale;
     FilmFilter filter;
@@ -179,6 +184,8 @@ FilmStatus film_develop_canvas(const FilmFrame *frame, const FilmLut *lut,
 void film_develop_canvas_free(FilmDevelopCanvas *canvas);
 FilmStatus film_develop_canvas_render(const FilmDevelopCanvas *canvas, const FilmRecipe *recipe,
                                       const FilmDevelopOptions *options, bool full_preview, FilmImage *out);
+FilmStatus film_develop_canvas_render_pair(const FilmDevelopCanvas *,const FilmRecipe *,
+    const FilmDevelopOptions *,FilmImage *,FilmImage *);
 void film_grain_adaptive(FilmImage *image, uint32_t seed, float amount, FilmScale scale, FilmGrain grain);
 FilmStatus film_grain_profile_load(FILE *file, FilmGrainProfile *out);
 FilmStatus film_grain_measured(FilmImage *image, uint32_t seed, float amount, const FilmGrainProfile *profile);

@@ -53,6 +53,7 @@ static void release_preview(FilmCamera *cam,bool safe)
 
 void film_camera_close(FilmCamera *cam)
 {
+    film_camera_raw_invalidate(cam);
     if (!cam->initialized) return;
     film_camera_stop_port(cam->port,cam->runtime_log,&cam->dma_safe);
     if(cam->dma_safe)film_camera_close_manual_exposure(cam);
@@ -72,6 +73,7 @@ FilmStatus film_camera_open(FilmCamera *cam, FilmPixelFormat format, FilmSensor 
     if (!cam || (format != FILM_YUYV && format != FILM_RGB565_LE) ||
         sensor < FILM_CAMERA_REAR1 || sensor > FILM_CAMERA_FRONT) return FILM_INVALID;
     if (cam->initialized) return cam->format == format && cam->sensor == sensor ? FILM_OK : FILM_STATE;
+    film_camera_raw_invalidate(cam);
     cam->exposure = (FilmHardwareExposure){0};
     cam->exposure_transport = (FilmRegisterTransport){0};
     cam->exposure_trace = NULL;
@@ -107,6 +109,7 @@ FilmStatus film_camera_open(FilmCamera *cam, FilmPixelFormat format, FilmSensor 
 FilmStatus film_camera_request_30fps(FilmCamera *cam)
 {
     if (!cam->initialized || cam->streaming) return FILM_STATE;
+    film_camera_raw_invalidate(cam);
     Result rc = CAMU_SetFrameRate(selectors[cam->sensor - FILM_CAMERA_REAR1], FRAME_RATE_30);
     cam->last_result = rc;
     return R_SUCCEEDED(rc) ? FILM_OK : FILM_DEVICE;
@@ -115,6 +118,7 @@ FilmStatus film_camera_request_30fps(FilmCamera *cam)
 FilmStatus film_camera_request_15fps(FilmCamera *cam)
 {
     if (!cam->initialized || cam->streaming) return FILM_STATE;
+    film_camera_raw_invalidate(cam);
     Result rc = CAMU_SetFrameRate(selectors[cam->sensor - FILM_CAMERA_REAR1], FRAME_RATE_15);
     cam->last_result = rc;
     return R_SUCCEEDED(rc) ? FILM_OK : FILM_DEVICE;
@@ -146,6 +150,7 @@ FilmStatus film_camera_set_control(FilmCamera *cam, FilmCameraControl control, i
         if (!film_runtime_source_valid("film-camera-native-exposure/v1")) return FILM_STATE;
         if (value < FILM_EXPOSURE_MIN || value > FILM_EXPOSURE_MAX) return FILM_INVALID;
         if(cam->exposure_mode==FILM_EXPOSURE_MANUAL&&!cam->exposure_requested)return FILM_STATE;
+        film_camera_raw_invalidate(cam);
         if (cam->exposure_requested) {
             FilmStatus status = film_hardware_step(&cam->exposure, value, "film-camera-exposure/v1");
             if (status == FILM_OK && !cam->exposure.ready) cam->preview_ready = false;
@@ -155,15 +160,18 @@ FilmStatus film_camera_set_control(FilmCamera *cam, FilmCameraControl control, i
         break;
     case FILM_CAM_WB:
         if (value < WHITE_BALANCE_AUTO || value > WHITE_BALANCE_7000K) return FILM_INVALID;
+        film_camera_raw_invalidate(cam);
         rc = CAMU_SetWhiteBalance(sensor, (CAMU_WhiteBalance)value);
         if (R_SUCCEEDED(rc)) rc = CAMU_SetAutoWhiteBalance(sensor, value == WHITE_BALANCE_AUTO);
         break;
     case FILM_CAM_CONTRAST:
         if (value < -1 || value > 1) return FILM_INVALID;
+        film_camera_raw_invalidate(cam);
         rc = CAMU_SetContrast(sensor, (CAMU_Contrast)(CONTRAST_NORMAL + value));
         break;
     case FILM_CAM_SHARPNESS:
         if (value < FILM_SHARPNESS_MIN || value > FILM_SHARPNESS_MAX) return FILM_INVALID;
+        film_camera_raw_invalidate(cam);
         rc = CAMU_SetSharpness(sensor, (s8)value);
         break;
     default: return FILM_INVALID;
@@ -227,7 +235,7 @@ static Result arm_preview(FilmCamera *cam)
 FilmStatus film_camera_preview_stop(FilmCamera *cam)
 {
     if (!cam->preview_dma[0]) return FILM_OK;
-    Result rc = film_camera_stop_port(cam->port,cam->runtime_log,&cam->dma_safe);
+    Result rc = film_camera_stop_port(cam->port,atomic_load(&cam->debug_mode)?cam->runtime_log:NULL,&cam->dma_safe);
     if (R_FAILED(rc)) film_camera_close(cam);
     else {
         cam->streaming = false;
@@ -312,6 +320,9 @@ FilmStatus film_camera_preview_poll(FilmCamera *cam, FilmImage *image)
         if (R_SUCCEEDED(rc)) {
             cam->preview_ready = true;
             *image = (FilmImage){WIDTH / cam->zoom, HEIGHT / cam->zoom, cam->format, pixels};
+            if(cam->sensor==FILM_CAMERA_REAR1&&!cam->raw_preparation.attempted&&
+               (cam->exposure_mode!=FILM_EXPOSURE_MANUAL||cam->exposure.ready))
+                film_camera_prepare_raw(cam,cam->runtime_log);
             return FILM_OK;
         }
     }

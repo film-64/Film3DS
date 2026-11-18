@@ -17,7 +17,7 @@ class UiPackageTests(unittest.TestCase):
     def test_raw_only_shutter_and_existing_recovery(self):
         shutter=CONTRACT_MATRIX["film-camera-shutter-raw/v1"]
         self.assertTrue(shutter["compute"])
-        self.assertTrue(shutter["raw_decode"])
+        self.assertFalse(shutter["raw_decode"])
         self.assertFalse(shutter["lane_admission"] or shutter["native_retention"])
         self.assertIsNone(shutter["override"])
         self.assertNotIn("film-roll-native-raw-pair/v1",CONTRACT_MATRIX)
@@ -96,7 +96,7 @@ class UiPackageTests(unittest.TestCase):
         # must not become a field of the portable recipe/file structure.
         film = (ROOT / "include/film.h").read_text()
         for name in ("FilmRecipe", "FilmFrame"):
-            body = re.search(r"typedef struct \{([^{}]*)\} " + name + ";", film).group(1)
+            body = re.search(r"typedef struct(?: \w+)? \{([^{}]*)\} " + name + ";", film).group(1)
             self.assertTrue(set(re.findall(r"\b\w+\b", body)).isdisjoint(RUNTIME_INTERNAL_FIELDS))
 
     def test_darkroom_preview_and_save_boundaries(self):
@@ -120,7 +120,7 @@ class UiPackageTests(unittest.TestCase):
         wb = CONTRACT_MATRIX["film-darkroom-wb-preview/v1"]
         self.assertTrue(wb["compute"])
         self.assertFalse(wb["writes"] or wb["camera_calls"])
-        self.assertEqual(wb["input"], "original_source_on_explicit_A_not_previous_preview")
+        self.assertEqual(wb["input"], "original_or_cached_linear_scene_on_explicit_A_not_previous_preview")
         self.assertEqual(develop["percent_step"], 1)
         self.assertEqual((develop["dpad_step"], develop["circle_step"]), (1, 10))
         self.assertFalse(develop["acceleration"])
@@ -174,7 +174,7 @@ class UiPackageTests(unittest.TestCase):
         self.assertFalse(delete["compute"])
         self.assertEqual(delete["entry"], "Y_then_A_only")
         self.assertEqual(delete["target"], "snapshotted_selected_DNG_or_legacy_F3S_ID_verified_before_unlink")
-        self.assertEqual(delete["writes"], "selected_preview_JPG_and_F3I_then_DNG_and_legacy_duplicate_preserve_exports_missing_sidecars_OK")
+        self.assertEqual(delete["writes"], "selected_preview_JPG_F3I_and_F3C_then_DNG_and_legacy_duplicate_preserve_exports_missing_sidecars_OK")
         self.assertEqual(delete["retries"], 0)
         self.assertEqual(delete["path"],"exact_one_separator_after_directory_including_sdmc_trailing_slash")
 
@@ -189,6 +189,29 @@ class UiPackageTests(unittest.TestCase):
         self.assertNotIn('optional_chroma_median',CONTRACT_MATRIX['film-raw-isp/v1']['stages'])
         for name in ('film-camera-exposure-mode/v1','film-darkroom-denoise/v1','film-roll-pair-publish/v1','film-roll-original-open/v1','film-preview-catalog-prepare/v1'):
             rule=CONTRACT_MATRIX[name];self.assertTrue(rule['compute']);self.assertFalse(rule['lane_admission']);self.assertIsNone(rule['override'])
+
+    def test_deferred_decode_and_linear_cache_dispatch(self):
+        text=(ROOT/"source/platform/main_3ds.c").read_text()
+        startup=text.split("    load_roll();",1)[1].split("    while (aptMainLoop())",1)[0]
+        self.assertNotIn("film_roll_prepare_catalog",startup)
+        save=(ROOT/"source/storage/roll_preview.c").read_text().split("FilmStatus film_roll_capture_save",1)[1]
+        self.assertIn("film_dng_write",save)
+        self.assertIn("film_frame_read",save)
+        self.assertNotIn("film_roll_pair_publish",save)
+        self.assertNotIn("film_develop",save)
+        preview=text.split("static void preview_darkroom",1)[1].split("static void white_balance_input",1)[0]
+        self.assertIn("film_darkroom_scene_preview",preview)
+        self.assertIn("app.decoded_calibration!=app.raw_calibration",preview)
+        grid=text.split("static void roll_prepare_grid",1)[1].split("static void roll_show_selection",1)[0]
+        self.assertIn("break;",grid)
+        for name in ("film-roll-decode/v1","film-roll-decode-load/v1","film-darkroom-scene-preview/v1"):
+            rule=CONTRACT_MATRIX[name]
+            self.assertTrue(rule["compute"])
+            self.assertFalse(rule["lane_admission"] or rule["retries"])
+            self.assertIsNone(rule["override"])
+        cache=(ROOT/"source/storage/roll_decode.c").read_text().split("FilmStatus film_roll_decode_load",1)[1]
+        self.assertNotIn("film_frame_read",cache)
+        self.assertNotIn("film_raw_frame_scene",cache)
 
     def test_shutter_worker_debug_and_standard_original_contracts(self):
         worker=CONTRACT_MATRIX["film-camera-shutter-worker/v1"]
@@ -220,6 +243,83 @@ class UiPackageTests(unittest.TestCase):
         self.assertIn("film_camera_read_bool",raw)
         self.assertIn("if(R_FAILED(rc)||ae)return FILM_STATE",manual)
         self.assertIn("standard_RawImageDigest",CONTRACT_MATRIX["film-dng-read/v1"]["integrity"])
+
+    def test_home_close_cleanup_does_not_wait_for_another_vblank(self):
+        rule=CONTRACT_MATRIX["film-app-shutdown/v1"]
+        self.assertFalse(rule["compute"] or rule["lane_admission"] or rule["vblank_wait"] or rule["new_frames"])
+        self.assertIsNone(rule["override"])
+        text=(ROOT/"source/platform/main_3ds.c").read_text()
+        cleanup=text.rsplit("\ncleanup:",1)[1]
+        for wait in ("C3D_FrameSync(","gspWaitForVBlank(","C3D_FrameBegin("):
+            self.assertNotIn(wait,cleanup)
+        drain=cleanup.index("C3D_Fini();")
+        for release in ("C3D_TexDelete(","C2D_TextBufDelete(","C2D_Fini();","gfxExit();"):
+            self.assertLess(drain,cleanup.index(release))
+        self.assertEqual(cleanup.count("C3D_Fini();"),1)
+        self.assertLess(cleanup.index("C2D_Fini();"),cleanup.index("gfxExit();"))
+        shutdown=text.rsplit("    film_darkroom_discard(&app.room);",1)[1]
+        self.assertLess(shutdown.index("finish_capture(true)"),shutdown.index("film_camera_close"))
+        self.assertLess(shutdown.index("film_camera_close"),shutdown.index("\ncleanup:"))
+
+    def test_gpu_final_composition_reuses_resources_and_cache(self):
+        gpu=(ROOT/"source/platform/grain_gpu_3ds.c").read_text()
+        self.assertNotIn("gpu_mix(",gpu)
+        self.assertNotIn("float *noise",gpu)
+        self.assertNotIn("memcpy(im->pixels",gpu)
+        self.assertEqual(gpu.count("C3D_SyncDisplayTransfer("),1)
+        self.assertIn("C3D_RenderTargetCreateFromTex",gpu)
+        self.assertIn("GPU_L8",gpu)
+        tile=gpu.split("static FilmStatus render_tile",1)[1].split("FilmStatus film_3ds_grain_layered",1)[0]
+        self.assertNotIn("C3D_TexInit",tile)
+        self.assertNotIn("malloc(",tile)
+        self.assertIn("no CPU blend",tile)
+        room=(ROOT/"source/ui/darkroom.c").read_text().split("static FilmStatus render_preview",1)[1].split("FilmStatus film_darkroom_preview",1)[0]
+        self.assertEqual(room.count("film_develop_canvas_render_pair("),1)
+        self.assertNotIn("film_develop_canvas_render(",room)
+        main=(ROOT/"source/platform/main_3ds.c").read_text()
+        self.assertIn(".output_renderer=app.grain_gpu?film_3ds_canvas_output:NULL",main)
+        cleanup=main.rsplit("\ncleanup:",1)[1]
+        self.assertLess(cleanup.index("film_3ds_develop_release()"),cleanup.index("C3D_Fini()"))
+        for name in ("film-grain-gpu-compose/v1","film-darkroom-gpu-output/v1","film-darkroom-render-pair/v1","film-raw-bad-pixel/v1"):
+            rule=CONTRACT_MATRIX[name];self.assertTrue(rule["compute"])
+            self.assertFalse(rule["lane_admission"] or rule["retries"]);self.assertIsNone(rule["override"])
+
+    def test_prepared_shutter_and_decode_only_roll(self):
+        rule=CONTRACT_MATRIX["film-camera-raw-capture/v1"]
+        self.assertEqual((rule["manual_gate_frames"],rule["raw_settle_frames"],rule["raw_retained_frames"],rule["restored_frames"]),(1,0,1,1))
+        raw=(ROOT/"source/platform/raw_camera_3ds.c").read_text()
+        capture=raw.split("FilmStatus film_camera_capture_raw",1)[1]
+        self.assertNotIn("film_camera_prepare_raw(",capture)
+        self.assertNotIn("film_camera_verify_manual_capture(",capture)
+        self.assertIn("film_raw_capture_transaction_result",capture)
+        preview=(ROOT/"source/platform/camera_3ds.c").read_text().split("FilmStatus film_camera_preview_poll",1)[1]
+        self.assertIn("!cam->raw_preparation.attempted",preview)
+        self.assertIn("film_camera_prepare_raw",preview)
+        main=(ROOT/"source/platform/main_3ds.c").read_text()
+        self.assertIn("app.ui.page == FILM_VIEW && !capture_requested",main)
+        publisher=(ROOT/"source/storage/roll_preview.c").read_text()
+        for name in ("film_develop", "film_raw_scene_grade", "film_resize"):
+            self.assertNotIn(name,publisher)
+        self.assertNotIn("film_roll_scene_publish",publisher)
+        prepare=CONTRACT_MATRIX["film-camera-raw-prepare/v1"]
+        self.assertTrue(prepare["compute"]);self.assertEqual(prepare["camera_frames"],0)
+        self.assertFalse(prepare["lane_admission"] or prepare["retries"])
+        self.assertIsNone(prepare["override"])
+
+    def test_roll_to_darkroom_uses_the_resident_scene(self):
+        text=(ROOT/"source/platform/main_3ds.c").read_text()
+        sync=text.split("static void sync_darkroom",1)[1].split("static void change_darkroom_look",1)[0]
+        hot=sync.split("if(app.decoded_id==id&&app.decoded_scene.pixels){",1)[1].split("}else",1)[0]
+        self.assertIn("frame.recipe=app.decoded_recipe",hot)
+        self.assertNotIn("film_roll_decode_load",hot)
+        self.assertNotIn("film_raw_scene_free",hot)
+        step=text.split("static void decode_roll_step",1)[1].split("static void sync_darkroom",1)[0]
+        self.assertIn("selected?&app.decoded_scene:NULL",step)
+        refresh=text.split("/* ROLL_REFRESH_BEGIN */",1)[1].split("/* ROLL_REFRESH_END */",1)[0]
+        self.assertNotIn("app.roll_preview_id=0",refresh)
+        preview=text.split("static void preview_darkroom",1)[1].split("static void white_balance_input",1)[0]
+        self.assertIn("app.decoded_calibration!=app.raw_calibration",preview)
+        self.assertIn("else if(app.roll_preview_format==FILM_RAW10_RGGB)status=FILM_STATE",preview)
 
     def test_debug_logging_never_clobbers_camera_ipc_buffer(self):
         text=(ROOT/"source/platform/camera_bool_3ds.c").read_text()

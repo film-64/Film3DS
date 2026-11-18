@@ -92,8 +92,8 @@ FilmStatus film_roll_confirm_delete(FilmRoll *roll, FilmUi *ui, uint16_t *ids, u
     if (stat(path,&st)!=0 || !S_ISREG(st.st_mode)) return FILM_IO;
     char derived[512];
     if(film_roll_original_path(derived,sizeof derived,previews,id)!=FILM_OK)return FILM_INVALID;
-    const char *extensions[]={"JPG","F3I"};
-    for(unsigned i=0;i<2;++i){
+    const char *extensions[]={"JPG","F3I","F3C"};
+    for(unsigned i=0;i<3;++i){
         memcpy(derived+strlen(derived)-3,extensions[i],3);
         if(unlink(derived)!=0&&errno!=ENOENT)return FILM_IO;
     }

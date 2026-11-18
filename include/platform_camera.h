@@ -5,6 +5,7 @@
 #include "film_runtime_contract.h"
 #include "hardware_exposure.h"
 #include "hardware_transport.h"
+#include "raw_capture.h"
 
 typedef enum { FILM_CAMERA_REAR1 = 1, FILM_CAMERA_REAR2, FILM_CAMERA_FRONT } FilmSensor;
 typedef enum {
@@ -41,6 +42,8 @@ typedef struct {
     FilmExposureMode exposure_mode;
     atomic_bool debug_mode;
     atomic_uint capture_phase;
+    FilmRawPreparation raw_preparation;
+    uint32_t raw_epoch;
 } FilmCamera;
 
 typedef struct {
@@ -84,6 +87,8 @@ uint32_t film_camera_read_bool(unsigned command,unsigned argument,bool *value,FI
 FilmStatus film_camera_open(FilmCamera *camera, FilmPixelFormat format, FilmSensor sensor);
 FilmStatus film_camera_capture_diagnostic(const char *source,FilmCamera *camera,FilmFrame *frame);
 FilmStatus film_camera_raw_shutter_check(const char *source,const FilmCamera *camera);
+void film_camera_raw_invalidate(FilmCamera *);
+FilmStatus film_camera_prepare_raw(FilmCamera *,FILE *);
 /* On restoration failure the status remains an error and the camera closes.
  * A nonempty RAW output is nevertheless independently owned and fully validated;
  * production may save it. Diagnostics must still report the returned error. */

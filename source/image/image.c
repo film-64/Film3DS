@@ -510,6 +510,8 @@ FilmStatus film_develop_canvas_render(const FilmDevelopCanvas *canvas, const Fil
     if (!canvas || !canvas->pixels || !out || !film_image_bytes(canvas->width,canvas->height,FILM_RGB24) ||
         film_recipe_validate(p)!=FILM_OK || (options && options->adaptive_grain && (unsigned)options->grain>=FILM_GRAIN_COUNT))
         return FILM_INVALID;
+    if(!full_preview&&options&&options->output_renderer)
+        return options->output_renderer("film-darkroom-gpu-output/v1",canvas,p,options,out);
     FilmRect crop={0,0,canvas->width,canvas->height}, target=crop;
     if (!full_preview) {
         unsigned w,h;
@@ -543,6 +545,35 @@ FilmStatus film_develop_canvas_render(const FilmDevelopCanvas *canvas, const Fil
     if (status!=FILM_OK) { film_image_free(&image); return status; }
     *out=image;
     return FILM_OK;
+}
+
+FilmStatus film_develop_canvas_render_pair(const FilmDevelopCanvas *canvas,const FilmRecipe *recipe,
+    const FilmDevelopOptions *options,FilmImage *context,FilmImage *output)
+{
+    if(!film_runtime_source_valid("film-darkroom-render-pair/v1"))return FILM_STATE;
+    if(!canvas||!context||!output||context==output||context->pixels||output->pixels)return FILM_INVALID;
+    FilmImage final={0},view={0},inset={0};
+    FilmStatus s=film_develop_canvas_render(canvas,recipe,options,false,&final);
+    if(s==FILM_OK)s=film_image_alloc(&view,canvas->width,canvas->height,FILM_RGB24);
+    FilmRect crop={0};
+    if(s==FILM_OK)s=film_composition_rect(canvas->width,canvas->height,recipe,&crop);
+    if(s==FILM_OK){
+        /* Context is already graded. Never rerun resize/sharpen/grain for it.
+         * The composition rectangle displays the actual final output. */
+        for(size_t i=0;i<(size_t)canvas->width*canvas->height*3;++i)
+            view.pixels[i]=(uint8_t)((canvas->pixels[i]+128u)/257u);
+        const FilmImage *patch=&final;
+        if(final.width!=crop.width||final.height!=crop.height){
+            s=film_resize(&final,crop.width,crop.height,FILM_BILINEAR,&inset);patch=&inset;
+        }
+        if(s==FILM_OK)for(unsigned y=0;y<crop.height;++y)
+            memcpy(view.pixels+((size_t)(crop.y+y)*view.width+crop.x)*3,
+                patch->pixels+(size_t)y*crop.width*3,(size_t)crop.width*3);
+    }
+    film_image_free(&inset);
+    if(s==FILM_OK){*context=view;*output=final;}
+    else{film_image_free(&view);film_image_free(&final);}
+    return s;
 }
 
 FilmStatus film_develop_with_options(const FilmFrame *frame, const FilmLut *lut,

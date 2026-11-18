@@ -123,6 +123,25 @@ FilmDarkroomInput film_darkroom_input(FilmDarkroom *room, uint32_t keys, uint32_
     return DARKROOM_INPUT_CONTINUE;
 }
 
+static FilmStatus render_preview(FilmDarkroom *room,const FilmRecipe *recipe,
+                                 const FilmDevelopOptions *options,FilmStatus status)
+{
+    if (status==FILM_OK) {room->failure_phase="render";
+        status=film_develop_canvas_render_pair(&room->canvas,recipe,options,&room->composition_view,&room->preview);}
+    if (status == FILM_OK) {
+        room->failure_phase=NULL;
+        room->quality = recipe->jpeg_quality;
+        room->recipe=*recipe;
+        room->options=options?*options:(FilmDevelopOptions){0};
+        room->options.camera_color=NULL;
+        room->options.raw_isp=NULL;
+        room->has_grain_profile=options && options->grain_profile;
+        if (room->has_grain_profile) room->grain_profile=*options->grain_profile;
+        room->options.grain_profile=NULL;
+    } else film_darkroom_discard(room);
+    return status;
+}
+
 FilmStatus film_darkroom_preview(FilmDarkroom *room, const FilmFrame *frame,
                                  const FilmLut *lut, const FilmDevelopOptions *options)
 {
@@ -131,20 +150,20 @@ FilmStatus film_darkroom_preview(FilmDarkroom *room, const FilmFrame *frame,
     if (!film_runtime_source_valid("film-darkroom/v1")) return FILM_STATE;
     room->failure_phase="color";
     FilmStatus status = film_develop_canvas(frame,lut,options,&room->canvas);
-    if (status==FILM_OK) {room->failure_phase="composition";status=film_develop_canvas_render(&room->canvas,&frame->recipe,options,true,&room->composition_view);}
-    if (status==FILM_OK) {room->failure_phase="render";status=film_develop_canvas_render(&room->canvas,&frame->recipe,options,false,&room->preview);}
-    if (status == FILM_OK) {
-        room->failure_phase=NULL;
-        room->quality = frame->recipe.jpeg_quality;
-        room->recipe=frame->recipe;
-        room->options=options?*options:(FilmDevelopOptions){0};
-        room->options.camera_color=NULL;
-        room->options.raw_isp=NULL; /* calibration already baked into this display cache */
-        room->has_grain_profile=options && options->grain_profile;
-        if (room->has_grain_profile) room->grain_profile=*options->grain_profile;
-        room->options.grain_profile=NULL;
-    } else film_darkroom_discard(room);
-    return status;
+    return render_preview(room,&frame->recipe,options,status);
+}
+
+FilmStatus film_darkroom_scene_preview(FilmDarkroom *room,const FilmRawScene *scene,
+    const FilmRecipe *recipe,const FilmLut *lut,const FilmDevelopOptions *options)
+{
+    if(!room||!scene||!recipe)return FILM_INVALID;
+    film_darkroom_discard(room);
+    if(!film_runtime_source_valid("film-darkroom-scene-preview/v1"))return FILM_STATE;
+    /* Sensor calibration precedes the cached scene; never silently ignore it. */
+    if(options&&options->raw_isp)return FILM_STATE;
+    room->failure_phase="color";
+    FilmStatus s=film_raw_scene_grade("film-raw-scene-grade/v1",scene,recipe,lut,options,&room->canvas);
+    return render_preview(room,recipe,options,s);
 }
 
 FilmStatus film_darkroom_finish(FilmDarkroom *room, bool select_only, const char *path)

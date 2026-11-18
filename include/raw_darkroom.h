@@ -27,6 +27,7 @@ FilmStatus film_raw_scene_grade(const char *,const FilmRawScene *,const FilmReci
 FilmStatus film_raw_scene_probe(const char *,const char *,const char *,const char *,const FilmRecipe *,const FilmDevelopOptions *);
 FilmStatus film_raw10_unpack(const char *source,const uint8_t *wire,size_t bytes,
     unsigned width,unsigned height,uint16_t *samples,size_t capacity);
+FilmStatus film_raw_bad_pixel_clean(const char *,uint16_t *,unsigned,unsigned);
 /* Output structs must be zero-initialized and own no live allocation. Inputs
  * remain caller-owned and immutable; release successful outputs with the
  * matching free function before reusing them. Outputs must not alias inputs. */

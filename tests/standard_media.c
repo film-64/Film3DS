@@ -76,6 +76,9 @@ static void safe_stop(void)
 static void raw_only_shutter(void)
 {
     FilmCamera camera={.initialized=true,.sensor=FILM_CAMERA_REAR1,.exposure_mode=FILM_EXPOSURE_NATIVE_AE};
+    assert(film_camera_raw_shutter_check("film-camera-shutter-raw/v1",&camera)==FILM_STATE);
+    film_camera_raw_invalidate(&camera);
+    camera.raw_preparation.ready=camera.raw_preparation.attempted=true;camera.raw_preparation.status=FILM_OK;
     assert(film_camera_raw_shutter_check("film-camera-shutter-raw/v1",&camera)==FILM_OK);
     assert(film_camera_raw_shutter_check("scheduler_decision:admitted",&camera)==FILM_STATE);
     assert(film_camera_raw_shutter_check("film-camera-shutter-pair/v1",&camera)==FILM_STATE);
@@ -87,6 +90,10 @@ static void raw_only_shutter(void)
     assert(film_camera_raw_shutter_check("film-camera-shutter-raw/v1",&camera)==FILM_STATE);
     camera.exposure_requested=true;camera.exposure.active=camera.exposure.saved_valid=camera.exposure.ready=true;
     assert(film_camera_raw_shutter_check("film-camera-shutter-raw/v1",&camera)==FILM_OK);
+    uint32_t epoch=camera.raw_epoch;film_camera_raw_invalidate(&camera);
+    assert(camera.raw_epoch!=epoch&&!camera.raw_preparation.ready);
+    assert(film_camera_raw_shutter_check("film-camera-shutter-raw/v1",&camera)==FILM_STATE);
+    camera.raw_preparation.ready=camera.raw_preparation.attempted=true;camera.raw_preparation.status=FILM_OK;
     camera.exposure.failed=true;assert(film_camera_raw_shutter_check("film-camera-shutter-raw/v1",&camera)==FILM_STATE);
     puts("PASS RAW-only shutter: closed camera, unsupported sensors, unready/failed Manual and retired/fake sources reject without native fallback");
 }

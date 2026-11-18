@@ -1,6 +1,7 @@
 #ifndef FILM_ROLL_H
 #define FILM_ROLL_H
 #include "ui.h"
+#include "raw_darkroom.h"
 
 enum { FILM_ROLL_COLUMNS=10, FILM_ROLL_ROWS=3, FILM_ROLL_GRID_X=10,
        FILM_ROLL_GRID_Y=87, FILM_ROLL_CELL=30, FILM_ROLL_SQUARE=24 };
@@ -9,6 +10,17 @@ typedef struct {
     bool deleting;
 } FilmRoll;
 typedef enum {ROLL_DELETE_WAIT,ROLL_DELETE_CONFIRM,ROLL_DELETE_CANCEL} FilmRollDeleteInput;
+enum {FILM_ROLL_MAX_PHOTOS=9999};
+typedef struct {
+    bool decode_selection[FILM_ROLL_MAX_PHOTOS+1];
+    uint16_t decode_ids[FILM_ROLL_MAX_PHOTOS];
+    unsigned decode_count,decode_position;
+    bool decode_active;
+} FilmRollDecode;
+FilmStatus film_roll_decode_toggle(FilmRollDecode *,unsigned);
+FilmStatus film_roll_decode_begin(FilmRollDecode *,const uint16_t *,unsigned,unsigned);
+void film_roll_decode_advance(FilmRollDecode *,bool);
+void film_roll_decode_cancel(FilmRollDecode *);
 FilmRollDeleteInput film_roll_delete_input(uint32_t down,uint32_t confirm,uint32_t cancel,uint32_t actions);
 FilmStatus film_roll_original_path(char *,size_t,const char *,unsigned);
 typedef struct {
@@ -21,7 +33,13 @@ typedef struct {
     FilmStatus write_status, verification_status, preview_status;
 } FilmRollSaveResult;
 FilmStatus film_roll_capture_save(const char *,const FilmFrame *,const char *,const char *,unsigned,FilmRollSaveResult *);
-FilmStatus film_roll_pair_publish(const char *,const FilmFrame *,const char *,unsigned);
+FilmStatus film_roll_pair_publish(const char *,const FilmFrame *,const FilmRawScene *,const char *,unsigned);
+/* Explicit preparation only. F3C is a disposable local linear scene cache,
+ * not an original or a JPEG-derived darkroom input. No background repair. */
+/* Optional outputs take ownership of the just-decoded scene and its recipe.
+ * With NULL outputs, batch items are freed after publication. */
+FilmStatus film_roll_decode(const char *,const char *,const char *,unsigned,FilmRawScene *,FilmRecipe *);
+FilmStatus film_roll_decode_load(const char *,const char *,const char *,unsigned,FilmRawScene *);
 FilmStatus film_roll_pair_index(const char *,const char *,unsigned,FilmRollPair *);
 FilmStatus film_roll_jpeg_preview(const char *,const char *,unsigned,FilmRollPair *,FilmImage *);
 FilmStatus film_roll_pair_verify(const char *,const FilmFrame *,const FilmRollPair *);

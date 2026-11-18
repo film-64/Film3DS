@@ -3,6 +3,12 @@
 #define FILM_RUNTIME_CONTRACT_H
 #include <stdbool.h>
 #include <string.h>
+#define FILM_RAW_SCENE_CACHE_VERSION 2u
+#define FILM_RAW_BAD_PIXEL_RANGE 64u
+#define FILM_RAW_BAD_PIXEL_DIFFERENCE 128u
+#define FILM_GPU_COMPOSE_SIDE 256u
+#define FILM_GPU_COMPOSE_CORE 254u
+#define FILM_GPU_GAIN_LIMIT 1.95f
 #define FILM_RAW_MAX_PIXELS 786432u
 #define FILM_RAW_MAX_BAD_PIXELS 4096u
 #define FILM_NATIVE_MEDIA_MAX_BYTES 16777216u
@@ -39,6 +45,7 @@ static const unsigned short film_hw_core[] = {528,528,528,528,528,528,544};
 static inline bool film_runtime_source_valid(const char *source)
 {
     if (!source) return false;
+    if (!strcmp(source, "film-app-shutdown/v1")) return true;
     if (!strcmp(source, "film-display-chart-calibrate/v1")) return true;
     if (!strcmp(source, "film-camera-receive-complete/v1")) return true;
     if (!strcmp(source, "film-camera-command-raw/v1")) return true;
@@ -61,18 +68,26 @@ static inline bool film_runtime_source_valid(const char *source)
     if (!strcmp(source, "film-camera-exposure-mode/v1")) return true;
     if (!strcmp(source, "film-darkroom-denoise/v1")) return true;
     if (!strcmp(source, "film-roll-pair-publish/v1")) return true;
+    if (!strcmp(source, "film-roll-decode/v1")) return true;
+    if (!strcmp(source, "film-roll-decode-load/v1")) return true;
+    if (!strcmp(source, "film-darkroom-scene-preview/v1")) return true;
     if (!strcmp(source, "film-roll-pair-index/v1")) return true;
     if (!strcmp(source, "film-roll-jpeg-preview/v1")) return true;
     if (!strcmp(source, "film-roll-original-open/v1")) return true;
     if (!strcmp(source, "film-camera-ui-receiver-reset-deploy/v1")) return true;
+    if (!strcmp(source, "film-camera-raw-prepare/v1")) return true;
     if (!strcmp(source, "film-camera-raw-capture/v1")) return true;
     if (!strcmp(source, "film-app-raw-canvas/v1")) return true;
     if (!strcmp(source, "film-app-raw-import/v1")) return true;
     if (!strcmp(source, "film-app-raw-export-pair/v1")) return true;
     if (!strcmp(source, "film-grain-gpu-mix/v1")) return true;
+    if (!strcmp(source, "film-grain-gpu-compose/v1")) return true;
+    if (!strcmp(source, "film-darkroom-gpu-output/v1")) return true;
+    if (!strcmp(source, "film-darkroom-render-pair/v1")) return true;
     if (!strcmp(source, "film-grain-texture-build/v1")) return true;
     if (!strcmp(source, "film-raw-darkroom-comparison/v1")) return true;
     if (!strcmp(source, "film-grain-layered/v1")) return true;
+    if (!strcmp(source, "film-raw-bad-pixel/v1")) return true;
     if (!strcmp(source, "film-raw10-unpack/v1")) return true;
     if (!strcmp(source, "film-raw-scene-deploy/v1")) return true;
     if (!strcmp(source, "film-raw-scene/v1")) return true;

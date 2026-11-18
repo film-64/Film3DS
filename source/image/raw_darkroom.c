@@ -42,6 +42,29 @@ static float median(float *v,unsigned n)
     return n&1?v[n/2]:(v[n/2-1]+v[n/2])*.5f;
 }
 
+FilmStatus film_raw_bad_pixel_clean(const char *source,uint16_t *samples,unsigned w,unsigned h)
+{
+    if(!admitted(source,"film-raw-bad-pixel/v1"))return FILM_STATE;
+    if(!samples||!shape(w,h))return FILM_INVALID;
+    size_t count=(size_t)w*h;
+    for(size_t i=0;i<count;++i)if(samples[i]>1023)return FILM_CORRUPT;
+    uint16_t *original=malloc(count*sizeof *original);if(!original)return FILM_NOMEM;
+    memcpy(original,samples,count*sizeof *original);
+    for(unsigned y=2;y+2<h;++y)for(unsigned x=2;x+2<w;++x){
+        float neighbors[8];unsigned n=0;uint16_t lo=1023,hi=0;
+        for(int dy=-2;dy<=2;dy+=2)for(int dx=-2;dx<=2;dx+=2){
+            if(!dx&&!dy)continue;
+            uint16_t v=original[(size_t)((int)y+dy)*w+(unsigned)((int)x+dx)];
+            neighbors[n++]=v;if(v<lo)lo=v;if(v>hi)hi=v;
+        }
+        if((unsigned)(hi-lo)>FILM_RAW_BAD_PIXEL_RANGE)continue; /* Protect edges, texture and uncertain clusters. */
+        float center=median(neighbors,8);
+        if(fabsf(original[(size_t)y*w+x]-center)>=FILM_RAW_BAD_PIXEL_DIFFERENCE)
+            samples[(size_t)y*w+x]=(uint16_t)lroundf(center);
+    }
+    free(original);return FILM_OK;
+}
+
 static float interpolate(const float *raw,unsigned w,unsigned h,FilmCfa cfa,unsigned x,unsigned y,unsigned c)
 {
     if (color(cfa,x,y)==c) return raw[(size_t)y*w+x];

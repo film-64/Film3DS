@@ -28,6 +28,7 @@ uint32_t film_camera_receive_wait(FilmCamera *camera,uint32_t event,FILE *trace,
     *received=completion==FILM_OK;
     Result rc=*received?0:R_FAILED(context.result)?context.result:MAKERESULT(RL_PERMANENT,RS_INVALIDSTATE,RM_CAM,RD_TIMEOUT);
     FILE *log=trace?trace:camera->runtime_log;
-    if(log){fprintf(log,"CAM receive completion=%s finished=%u result=%08lx\n",film_status_name(completion),*received,(unsigned long)rc);fflush(log);}
+    if(log){fprintf(log,"CAM receive completion=%s finished=%u result=%08lx\n",film_status_name(completion),*received,(unsigned long)rc);
+        if(trace||completion!=FILM_OK)fflush(log);}
     return rc;
 }

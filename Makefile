@@ -24,11 +24,12 @@ build/raw-darkroom-test: $(CORE) $(HEADERS) tests/raw_darkroom.c
 build/raw-app-test: $(CORE) $(HEADERS) tests/raw_app.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/raw_app.c $(LDFLAGS) $(LDLIBS) -o $@
-test-raw-darkroom: build/filmscene build/filmraw build/raw-darkroom-test build/raw-app-test build/roll-preview-test
+test-raw-darkroom: build/filmscene build/filmraw build/raw-darkroom-test build/raw-app-test build/roll-preview-test build/gpu-pipeline-test
 	python3 tools/camera_runtime_contract.py --check
 	./build/raw-darkroom-test
 	./build/raw-app-test
 	./build/roll-preview-test
+	./build/gpu-pipeline-test
 	python3 tests/raw_darkroom_export.py
 	python3 tests/display_chart_calibrate.py
 	python3 tests/raw_scene_pipeline.py
@@ -53,6 +54,9 @@ build/roll-test: $(CORE) $(HEADERS) tests/roll.c
 build/roll-preview-test: $(CORE) $(HEADERS) tests/roll_preview.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/roll_preview.c $(LDFLAGS) $(LDLIBS) -o $@
+build/gpu-pipeline-test: $(CORE) $(HEADERS) tests/gpu_pipeline.c
+	@mkdir -p build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/gpu_pipeline.c $(LDFLAGS) $(LDLIBS) -o $@
 test: build/standard-media-test host build/unit build/hardware-exposure-test build/hardware-transport-test build/darkroom-test build/wb-composition-test build/roll-test
 	python3 tools/camera_runtime_contract.py --check
 	python3 tests/camera_ui_package.py

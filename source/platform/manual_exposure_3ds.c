@@ -169,6 +169,7 @@ FilmStatus film_camera_set_ae_compensation(FilmCamera *cam,int value)
     if(!film_runtime_source_valid("film-camera-exposure-mode/v1"))return FILM_STATE;
     if(!cam||!cam->initialized||cam->exposure_requested||cam->exposure_mode!=FILM_EXPOSURE_NATIVE_AE)return FILM_STATE;
     if(value<FILM_EXPOSURE_MIN||value>FILM_EXPOSURE_MAX)return FILM_INVALID;
+    film_camera_raw_invalidate(cam);
     u32 select=cam->sensor==FILM_CAMERA_REAR1?SELECT_OUT1:cam->sensor==FILM_CAMERA_REAR2?SELECT_OUT2:SELECT_IN1;
     Result rc=CAMU_SetExposure(select,(s8)value);bool enabled=false;
     if(R_SUCCEEDED(rc))rc=film_camera_read_bool(0x1a,select,&enabled,atomic_load(&cam->debug_mode)?cam->runtime_log:NULL);
@@ -184,6 +185,7 @@ FilmStatus film_camera_select_exposure_mode(FilmCamera *cam,FilmExposureMode mod
     if(!cam||!cam->initialized||(unsigned)mode>FILM_EXPOSURE_MANUAL||
        compensation<FILM_EXPOSURE_MIN||compensation>FILM_EXPOSURE_MAX)return FILM_INVALID;
     if(mode==FILM_EXPOSURE_MANUAL&&cam->sensor!=FILM_CAMERA_REAR1)return FILM_UNSUPPORTED;
+    film_camera_raw_invalidate(cam);
     FilmStatus status=film_camera_preview_stop(cam);
     if(status!=FILM_OK)return status;
     if(cam->exposure_requested){

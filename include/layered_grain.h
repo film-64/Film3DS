@@ -8,7 +8,11 @@ typedef struct FilmLayeredGrain {
 } FilmLayeredGrain;
 typedef struct FilmGrainTexture { unsigned side;float code[9];int16_t *pixels; } FilmGrainTexture;
 typedef FilmStatus (*FilmGrainMixer)(unsigned,unsigned,const float *,float *);
+float film_grain_linear_luma(const uint8_t [3]);
 FilmStatus film_grain_gpu_encoding(const char *,const float *,size_t,float *);
+FilmStatus film_grain_response_prepare(const char *,const FilmImage *,const FilmLayeredGrain *,
+    const FilmGrainProfile *,const FilmGrainTexture *,float *,float *,uint8_t *);
+FilmStatus film_grain_gpu_masks(const char *,const float [3],float,uint8_t,uint8_t [5]);
 FilmStatus film_grain_layered_mix(const char *,FilmImage *,const FilmLayeredGrain *,
     const FilmGrainProfile *,const FilmGrainTexture *,FilmGrainMixer);
 FilmStatus film_grain_texture_load(FILE *file,FilmGrainTexture *out);

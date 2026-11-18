@@ -1,6 +1,7 @@
 #ifndef FILM_DARKROOM_H
 #define FILM_DARKROOM_H
 #include "film.h"
+#include "raw_darkroom.h"
 
 typedef enum {
     DARKROOM_ASPECT, DARKROOM_COMPOSITION, DARKROOM_SIZE, DARKROOM_WB, DARKROOM_WB_SHIFT, DARKROOM_LOOK, DARKROOM_EXPOSURE,
@@ -38,6 +39,8 @@ FilmStatus film_darkroom_pan(FilmRecipe *recipe, unsigned w, unsigned h, int dx,
  * It never writes a file or calls a camera. SELECT only JPEG-encodes these pixels. */
 FilmStatus film_darkroom_preview(FilmDarkroom *room, const FilmFrame *frame,
                                  const FilmLut *lut, const FilmDevelopOptions *options);
+FilmStatus film_darkroom_scene_preview(FilmDarkroom *,const FilmRawScene *,const FilmRecipe *,
+                                      const FilmLut *,const FilmDevelopOptions *);
 void film_darkroom_discard(FilmDarkroom *room);
 /* Non-SELECT input releases the preview and continues normal key dispatch. */
 FilmDarkroomInput film_darkroom_input(FilmDarkroom *room, uint32_t keys, uint32_t select_key);

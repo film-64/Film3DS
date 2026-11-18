@@ -67,11 +67,13 @@ static void deletion(void)
     assert(temporary>=0 && close(temporary)==0 && unlink(directory)==0 && mkdir(directory,0700)==0);
     char exported[512];snprintf(exported,sizeof exported,"%s/export.JPG",directory);
     FILE *f=fopen(exported,"wb");assert(f);fputs("preserve",f);fclose(f);
-    char preview[512],index[512];
+    char preview[512],index[512],cache[512];
     snprintf(preview,sizeof preview,"%s/ROLL0002.JPG",directory);
     snprintf(index,sizeof index,"%s/ROLL0002.F3I",directory);
     f=fopen(preview,"wb");assert(f);fputs("preview",f);fclose(f);
     f=fopen(index,"wb");assert(f);fputs("index",f);fclose(f);
+    snprintf(cache,sizeof cache,"%s/ROLL0002.F3C",directory);
+    f=fopen(cache,"wb");assert(f);fputs("cache",f);fclose(f);
     uint16_t ids[4]={1,2,4};unsigned count=3;
     FilmUi ui=film_ui_new(count);ui.page=FILM_ROLL;ui.selection=1;FilmRoll roll={0};
     create(directory,1);create(directory,2);create(directory,4);
@@ -95,7 +97,7 @@ static void deletion(void)
     assert(film_roll_request_delete(&roll,&ui,ids,count)==FILM_OK);
     char trailing[512];snprintf(trailing,sizeof trailing,"%s/",directory);
     assert(film_roll_confirm_delete(&roll,&ui,ids,&count,trailing,directory)==FILM_OK);
-    assert(access(preview,F_OK)!=0&&access(index,F_OK)!=0);
+    assert(access(preview,F_OK)!=0&&access(index,F_OK)!=0&&access(cache,F_OK)!=0);
     assert(count==2 && ui.photos==2 && ui.selection==1 && ids[0]==1 && ids[1]==4 && !exists(directory,2));
     assert(exists(directory,1)&&exists(directory,4)&&access(exported,F_OK)==0);
     assert(film_roll_confirm_delete(&roll,&ui,ids,&count,directory,directory)==FILM_STATE);
@@ -109,9 +111,32 @@ static void deletion(void)
     assert(unlink(exported)==0 && rmdir(directory)==0);
     puts("PASS delete confirmation snapshot, cancel/no writes, stale ID/selection rejection, error preserves list, next/previous/empty selection, derived JPEG/index removed, export retained and no retries");
 }
+static void decode_selection(void)
+{
+    FilmRollDecode *batch=calloc(1,sizeof *batch);assert(batch);
+    uint16_t ids[]={1,3,8};
+    assert(film_roll_decode_begin(batch,ids,3,1)==FILM_OK);
+    assert(batch->decode_active&&batch->decode_count==1&&batch->decode_ids[0]==3);
+    assert(film_roll_decode_toggle(batch,1)==FILM_STATE);
+    film_roll_decode_advance(batch,true);assert(!batch->decode_active);
+    assert(film_roll_decode_toggle(batch,1)==FILM_OK&&film_roll_decode_toggle(batch,8)==FILM_OK);
+    assert(film_roll_decode_begin(batch,ids,3,1)==FILM_OK&&batch->decode_count==2);
+    assert(batch->decode_ids[0]==1&&batch->decode_ids[1]==8);
+    film_roll_decode_advance(batch,true);
+    assert(batch->decode_position==1&&!batch->decode_selection[1]&&batch->decode_selection[8]);
+    film_roll_decode_cancel(batch);assert(!batch->decode_active&&batch->decode_selection[8]);
+    assert(film_roll_decode_begin(batch,ids,3,0)==FILM_OK&&batch->decode_ids[0]==8);
+    film_roll_decode_advance(batch,false);assert(!batch->decode_active&&batch->decode_selection[8]);
+    film_roll_decode_cancel(batch);batch->decode_selection[1]=batch->decode_selection[8]=true;
+    assert(film_roll_decode_begin(batch,ids,3,0)==FILM_OK&&batch->decode_count==2);
+    assert(batch->decode_ids[0]==8&&batch->decode_ids[1]==1); /* Selected scene is retained last. */
+    film_roll_decode_cancel(batch);
+    uint16_t bad[]={3,3};assert(film_roll_decode_begin(batch,bad,2,0)==FILM_INVALID&&!batch->decode_active);
+    free(batch);puts("PASS single decode, marked-ID snapshot, one-at-a-time advance, cancel/error retain unprocessed selection");
+}
 int main(void)
 {
     assert(film_runtime_source_valid("film-roll-preview/v1") && film_runtime_source_valid("film-roll-delete/v1"));
     assert(!film_runtime_source_valid("film-roll-delete/unknown") && !film_runtime_source_valid("scheduler_decision:admitted"));
-    grid();deletion();return 0;
+    grid();deletion();decode_selection();return 0;
 }

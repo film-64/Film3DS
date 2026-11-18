@@ -4,6 +4,7 @@
 #include "storage_internal.h"
 #include <errno.h>
 #include <stdlib.h>
+#include <math.h>
 #include <strings.h>
 #include <sys/stat.h>
 #include <string.h>
@@ -24,7 +25,7 @@ static FilmStatus path(char *out,size_t capacity,const char *directory,unsigned 
 }
 static bool shape(unsigned w,unsigned h,FilmPixelFormat format)
 {return w&&h&&(size_t)w<=FILM_RAW_MAX_PIXELS/h&&film_image_bytes(w,h,format);}
-static uint32_t fingerprint(const FilmImage *image)
+uint32_t film_roll_source_crc(const FilmImage *image)
 {
     uint8_t dimensions[12];put(dimensions,image->width);put(dimensions+4,image->height);put(dimensions+8,image->format);
     return ~update(update(UINT32_MAX,dimensions,sizeof dimensions),image->pixels,film_image_bytes(image->width,image->height,image->format));
@@ -66,40 +67,46 @@ FilmStatus film_roll_jpeg_preview(const char *source,const char *directory,unsig
     if(s==FILM_OK){if(pair_out)*pair_out=pair;}else film_image_free(out);
     return s;
 }
-static FilmStatus publish(const FilmFrame *frame,const char *directory,unsigned id)
+FilmStatus film_roll_pair_publish(const char *source,const FilmFrame *frame,const FilmRawScene *scene,const char *directory,unsigned id)
 {
+    if(!source||(strcmp(source,"film-roll-pair-publish/v1")&&strcmp(source,"film-roll-decode/v1"))||!film_runtime_source_valid(source))return FILM_STATE;
     if(!frame||!frame->source.pixels||!shape(frame->source.width,frame->source.height,frame->source.format))return FILM_INVALID;
+    if(scene&&(!scene->pixels||frame->source.format!=FILM_RAW10_RGGB||scene->width!=frame->source.width||scene->height!=frame->source.height))return FILM_INVALID;
     char jpeg[512],index[512];FilmStatus s=path(jpeg,sizeof jpeg,directory,id,"JPG");
     if(s==FILM_OK)s=path(index,sizeof index,directory,id,"F3I");
     if(s!=FILM_OK)return s;
-    FilmFrame neutral=*frame;neutral.recipe=film_default_recipe();
-    neutral.recipe.yuv=frame->recipe.yuv;neutral.recipe.base_saturation=frame->recipe.base_saturation;
-    FilmImage full={0},small={0};s=film_develop_with_options(&neutral,NULL,NULL,&full);
-    if(s==FILM_OK)s=film_resize(&full,320,240,FILM_BILINEAR,&small);
-    film_image_free(&full);
-    if(s==FILM_OK)s=film_jpeg_write(jpeg,&small,90);
+    FilmRawScene decoded={0};
+    if(frame->source.format==FILM_RAW10_RGGB&&!scene){s=film_raw_frame_scene(frame,NULL,&decoded);scene=&decoded;}
+    FilmImage small={0};
+    if(s==FILM_OK)s=film_image_alloc(&small,320,240,FILM_RGB24);
+    for(unsigned y=0;s==FILM_OK&&y<240;++y)for(unsigned x=0;x<320;++x){
+        unsigned sx=x*frame->source.width/320,sy=y*frame->source.height/240;
+        FilmRgb rgb=scene?scene->pixels[(size_t)sy*scene->width+sx]:film_decode_pixel(&frame->source,sx,sy,frame->recipe.yuv);
+        float values[3]={rgb.r,rgb.g,rgb.b};
+        for(unsigned c=0;c<3;++c){
+            float v=values[c];if(!isfinite(v)){s=FILM_CORRUPT;break;}
+            if(scene){v=fmaxf(v,0);v=v<=.0031308f?12.92f*v:1.055f*powf(v,1/2.4f)-.055f;}
+            small.pixels[((size_t)y*320+x)*3+c]=(uint8_t)lroundf(fminf(fmaxf(v,0),1)*255);
+        }
+    }
+    film_raw_scene_free(&decoded);
+    if(s==FILM_OK)s=film_jpeg_write(jpeg,&small,70);
     film_image_free(&small);if(s!=FILM_OK)return s;
     uint8_t *data=NULL;size_t bytes=0;s=encoded(jpeg,&data,&bytes);if(s!=FILM_OK)return s;
     uint32_t jpeg_crc=~update(UINT32_MAX,data,bytes);free(data);
     uint8_t b[INDEX_BYTES]={'F','3','R','I'};put(b+4,1);put(b+8,id);put(b+12,frame->source.format);
-    put(b+16,frame->source.width);put(b+20,frame->source.height);put(b+24,fingerprint(&frame->source));
+    put(b+16,frame->source.width);put(b+20,frame->source.height);put(b+24,film_roll_source_crc(&frame->source));
     put(b+28,jpeg_crc);put(b+32,320);put(b+36,240);put(b+40,~update(UINT32_MAX,b,40));
     FilmWrite write;s=film_write_begin(&write,index);if(s!=FILM_OK)return s;
     if(fwrite(b,1,sizeof b,write.file)!=sizeof b)s=FILM_IO;
     return film_write_end(&write,s);
-}
-FilmStatus film_roll_pair_publish(const char *source,const FilmFrame *frame,const char *directory,unsigned id)
-{
-    if(!source_is(source,"film-roll-pair-publish/v1"))return FILM_STATE;
-    if(!frame)return FILM_INVALID;
-    return publish(frame,directory,id);
 }
 FilmStatus film_roll_pair_verify(const char *source,const FilmFrame *frame,const FilmRollPair *pair)
 {
     if(!source_is(source,"film-roll-original-open/v1"))return FILM_STATE;
     if(!frame||!pair||!frame->source.pixels||!shape(frame->source.width,frame->source.height,frame->source.format))return FILM_INVALID;
     return pair->format==frame->source.format&&pair->width==frame->source.width&&pair->height==frame->source.height&&
-        pair->source_crc==fingerprint(&frame->source)?FILM_OK:FILM_CORRUPT;
+        pair->source_crc==film_roll_source_crc(&frame->source)?FILM_OK:FILM_CORRUPT;
 }
 
 FilmStatus film_roll_prepare_catalog(const char *source,const char *originals,const char *previews,const uint16_t *ids,unsigned count,
@@ -123,7 +130,7 @@ FilmStatus film_roll_prepare_catalog(const char *source,const char *originals,co
         /* Only missing/corrupt derived data is repairable; allocation and
          * other errors are surfaced without a second compute attempt. */
         if(status==FILM_CORRUPT||status==FILM_IO)
-            status=film_roll_pair_publish("film-roll-pair-publish/v1",&frame,previews,ids[i]);
+            status=film_roll_pair_publish("film-roll-pair-publish/v1",&frame,NULL,previews,ids[i]);
         film_frame_free(&frame);if(status!=FILM_OK)return status;
     }
     return FILM_OK;
@@ -147,9 +154,9 @@ FilmStatus film_roll_capture_save(const char *source,const FilmFrame *frame,
     if(!result->written)return result->write_status;
     FilmFrame saved={0};result->verification_status=film_frame_read(original,&saved);
     if(result->verification_status==FILM_OK && (saved.source.format!=frame->source.format || saved.source.width!=frame->source.width ||
-       saved.source.height!=frame->source.height || fingerprint(&saved.source)!=fingerprint(&frame->source)))result->verification_status=FILM_CORRUPT;
+       saved.source.height!=frame->source.height || film_roll_source_crc(&saved.source)!=film_roll_source_crc(&frame->source)))result->verification_status=FILM_CORRUPT;
     film_frame_free(&saved);
     if(result->verification_status!=FILM_OK)return result->verification_status;
-    result->preview_status=film_roll_pair_publish("film-roll-pair-publish/v1",frame,previews,id);
+    /* Deliberately deferred: Roll shows a placeholder until explicit decode. */
     return FILM_OK; /* Commit/verification success is independent of preview. */
 }

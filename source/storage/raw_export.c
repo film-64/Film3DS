@@ -12,6 +12,7 @@ FilmStatus film_raw_frame_prepare(const FilmFrame *frame,const FilmDevelopOption
     const FilmImage *im=&frame->source;size_t bytes=film_image_bytes(im->width,im->height,im->format);if(!bytes)return FILM_INVALID;
     uint16_t *samples=malloc(bytes);if(!samples)return FILM_NOMEM;
     FilmStatus s=film_raw10_unpack("film-raw10-unpack/v1",im->pixels,bytes,im->width,im->height,samples,bytes/2);
+    if(s==FILM_OK)s=film_raw_bad_pixel_clean("film-raw-bad-pixel/v1",samples,im->width,im->height);
     FilmRawIsp isp=film_raw_isp_default();isp.exposure_ev=frame->recipe.input_tone.value[FILM_TONE_EV];isp.shoulder=.75f;
     FilmRaw10View view={im->width,im->height,samples};
     if(s==FILM_OK)s=film_raw_isp_prepare("film-raw-isp/v1",&view,&isp,out);
@@ -28,6 +29,7 @@ FilmStatus film_raw_frame_scene(const FilmFrame *frame,const FilmDevelopOptions 
     const FilmImage *im=&frame->source;size_t bytes=film_image_bytes(im->width,im->height,im->format);if(!bytes)return FILM_INVALID;
     uint16_t *samples=malloc(bytes);if(!samples)return FILM_NOMEM;
     FilmStatus s=film_raw10_unpack("film-raw10-unpack/v1",im->pixels,bytes,im->width,im->height,samples,bytes/2);
+    if(s==FILM_OK)s=film_raw_bad_pixel_clean("film-raw-bad-pixel/v1",samples,im->width,im->height);
     FilmRawIsp isp=o&&o->raw_isp?*o->raw_isp:film_raw_isp_default();
     isp.exposure_ev=0;isp.shoulder=0;isp.local_strength=0;
     FilmRaw10View raw={im->width,im->height,samples};

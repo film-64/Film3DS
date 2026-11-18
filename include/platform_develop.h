@@ -2,8 +2,13 @@
 #define FILM_PLATFORM_DEVELOP_H
 #include "film.h"
 #include "layered_grain.h"
+/* GPU completion may replace pixels. Input must own film_image_alloc memory;
+ * failure preserves it, success transfers the completed image without copying. */
 FilmStatus film_3ds_grain_layered(const char *,FilmImage *,const FilmLayeredGrain *,
     const FilmGrainProfile *,const FilmGrainTexture *);
+void film_3ds_develop_release(void);
+FilmStatus film_3ds_canvas_output(const char *,const FilmDevelopCanvas *,const FilmRecipe *,
+    const FilmDevelopOptions *,FilmImage *);
 
 typedef struct {
     bool gpu_accepted;
