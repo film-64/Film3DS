@@ -1,0 +1,25 @@
+{
+  "schema": "camera-exposure-reference-input/v1",
+  "meter": "user_external_reference",
+  "reading": {
+    "iso": 100,
+    "f_number": 2.8,
+    "shutter_seconds": 0.01818181818181818
+  },
+  "reported_ev100": null,
+  "computed_ev100": 8.752213367865142,
+  "target_id": "screen-gray-01",
+  "screen": {
+    "patch": "neutral_gray_requested",
+    "brightness_setting": "not_reported",
+    "stability": "user_reports_relative_stability_1_to_10_minutes"
+  },
+  "raw_user_input": "\u8aa4\u5dee5% \u63a5\u8fd11/60 \u5927\u69821/55 \u5176\u9918\u53c3\u6578\u4e0d\u8b8a",
+  "received_unix": 1794638254.983813,
+  "calibration_validated": false,
+  "previous_input": "iso100 f2.8 1/60\uff0cev9",
+  "reading_confirmation": "user_reconfirmed_before_second_capture",
+  "reported_error_percent": 5,
+  "approximate": true,
+  "uncertainty_quantified": false
+}

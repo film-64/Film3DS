@@ -1,0 +1,77 @@
+{
+  "files_verified": 13,
+  "manifest_summary": [
+    "SWEEP_CONTRACT source=exposure-sweep-check/v1 states=1 points=1 stages=5 sensor=1 fps=5 settle=8 measured=4 retry=none ipc_dump=0 raw_x=256 raw_y=192 raw_w=128 raw_h=96",
+    "CONTROL_DRIFT phase=5 when=before frame=8 addr=32d4 expected=128 actual=167 result=00000000",
+    "SAMPLE_FAILED sensor=1 phase=5 label=sweep_s13_c0004",
+    "SWEEP_END complete=0 stages=2 restored=1",
+    "END complete=0 aborted=0 io_error=0 captures=37 failures=1"
+  ],
+  "isp": [
+    {
+      "phase": "5",
+      "label": "sweep_s13_c0004",
+      "when": "immediate",
+      "frame": "-1",
+      "addr": "32d4",
+      "value": "128"
+    },
+    {
+      "phase": "5",
+      "label": "sweep_s13_c0004",
+      "when": "immediate",
+      "frame": "-1",
+      "addr": "32d6",
+      "value": "128"
+    },
+    {
+      "phase": "5",
+      "label": "sweep_s13_c0004",
+      "when": "immediate",
+      "frame": "-1",
+      "addr": "32d8",
+      "value": "128"
+    },
+    {
+      "phase": "5",
+      "label": "sweep_s13_c0004",
+      "when": "immediate",
+      "frame": "-1",
+      "addr": "32da",
+      "value": "128"
+    },
+    {
+      "phase": "5",
+      "label": "sweep_s13_c0004",
+      "when": "before",
+      "frame": "8",
+      "addr": "32d4",
+      "value": "167"
+    },
+    {
+      "phase": "5",
+      "label": "sweep_s13_c0004",
+      "when": "before",
+      "frame": "8",
+      "addr": "32d6",
+      "value": "162"
+    },
+    {
+      "phase": "5",
+      "label": "sweep_s13_c0004",
+      "when": "before",
+      "frame": "8",
+      "addr": "32d8",
+      "value": "162"
+    },
+    {
+      "phase": "5",
+      "label": "sweep_s13_c0004",
+      "when": "before",
+      "frame": "8",
+      "addr": "32da",
+      "value": "133"
+    }
+  ],
+  "usable_calibration": false
+}

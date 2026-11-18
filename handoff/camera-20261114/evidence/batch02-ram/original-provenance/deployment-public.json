@@ -1,0 +1,51 @@
+{
+  "source": "exposure-sweep/v2",
+  "binary_sha256": "b4c635f20aa1d57393c3328dec9bc23a3915cdd19f7bb5c1359afe0622f88301",
+  "source_sha256": {
+    "automation.h": "c8783524092947fbd76435c6226204218b72dd073fbd0dfb28a6baeb404acc6e",
+    "automation_contract.h": "974cdba415bea6df645b7e5f158f22a828fca6a49ab0a86a386b41e2478dc82c",
+    "calibration.h": "880f6fbf7fb7ea1253e906612a6dedafc5dabd66e95d7c03f4798049af369f2e",
+    "calibration_contract.h": "037c2ffc322e4403f7121304c7349209028a969f6f4dd1340bd87b8c3b3e2aac",
+    "calibration_image.h": "5223e35b671b690f0d86521ae7a5997127a80387d717147c7901890d76cba950",
+    "calibration_scope.h": "fda701f53375673e88d1b1218338314c508fc293702269f2361b62754c2df6a3",
+    "crash_collect.h": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018",
+    "deep_ipc.h": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec",
+    "fault_capture.h": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683",
+    "field_capture.h": "6d45d833a073f34faf12eda4695ed7721e43726f682264af7c4661b23847b235",
+    "field_contract.h": "f3488f4521af00248f8197662e6eec28e74a73609fa0e7bbc4bb074f79dd0629",
+    "field_install.h": "f3541a908fe0fa200081c8f664ee062bcd394b0ab844b892cf2e5c027794941d",
+    "field_store.h": "e3e3b7502a1ef92dc50812578905aa4b3d272381c6df9376aa325326deb01bed",
+    "field_ui.h": "866626710850de339366b7d7fd5e4eca5e1fb81f60f40f287662416bfb2eb664",
+    "ipc_decode.h": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73",
+    "main.c": "2ff58d55c3abd4a38704c6602bc60d215028a08670ee3e1d438a11f01a54f2b8",
+    "probe_plan.h": "073419858a61a6e4a719238b695a2eecd157228bbd50b65f46d49aa18dfdc73d",
+    "ram_http.h": "144284862764a798bbcedf3d7ba37d854df2df30c3bdab87c2dfdb16ec171ae5",
+    "ram_log.h": "ee1ea2e06dcb0ed42a64da78509d6cb8463d583aca2accda12a3f2d6529a6aae",
+    "ram_transport_contract.h": "0416792162065c9f671c3f2f13d05b0c805b8c95bd38865e024ca83e18db1036",
+    "remote_upload.h": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15",
+    "sweep.h": "94e94a91a8978060efe4610ad17fb46d496b1316c9c15c9a5d03547b31592ece",
+    "sweep_contract.h": "a75a4aee2918cc10e216c0de285b7f7d9e0177ed59703a02811687592106f609"
+  },
+  "arguments": [
+    "--auto",
+    "--calibrate",
+    "--offline",
+    "--sensor=1",
+    "--raw",
+    "--ram",
+    "--automation-fps=5",
+    "--calibration-part=exposure-sweep"
+  ],
+  "session_contract": {
+    "compute": true,
+    "lane_admission": false,
+    "override": "standalone_hardware_diagnostic",
+    "proof": "local_trace",
+    "deployments": 1,
+    "measurement_retries": 0,
+    "readiness_deadline_seconds": 3600,
+    "readiness_poll_seconds": 2,
+    "recovery": "frozen_RAM_v3_CRC_ranges"
+  },
+  "original_deployment_json_sha256": "16182ebd4957be6e92cf0b9dced46d79467da725b91921bce95ae0b466dc89c0"
+}

@@ -1,0 +1,326 @@
+{
+  "source": "no-receive-frame-update/v1",
+  "passed": true,
+  "calibration_validated": false,
+  "conclusion": "new_SetReceiving_not_necessary",
+  "writer_identified": false,
+  "files_verified": 15,
+  "bytes": 860699,
+  "binary_sha256": "50f4b81ecf0ddb837a6627ca3158ee7c15bd2bc92d99beb856af6d4a8d64dd5e",
+  "state_reads": 289,
+  "red_reads": 24,
+  "controls": {
+    "a102": [
+      10
+    ],
+    "a103": [
+      0
+    ],
+    "a104": [
+      3
+    ],
+    "a355": [
+      58
+    ],
+    "a34e": [
+      128
+    ],
+    "a34f": [
+      128
+    ],
+    "a350": [
+      128
+    ],
+    "221f": [
+      128
+    ],
+    "3012": [
+      4
+    ],
+    "3056": [
+      528
+    ],
+    "3058": [
+      528
+    ],
+    "305a": [
+      528
+    ],
+    "305c": [
+      528
+    ]
+  },
+  "arms": [
+    {
+      "label": "receive_control_128",
+      "outcome": "rewrite_overwritten",
+      "observed": {
+        "-1:initial": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "0:before_arm": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "0:after_arm": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "0:after_start": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "0:after_wait": [
+          128,
+          133,
+          133,
+          133
+        ],
+        "0:before_rewrite": [
+          133,
+          133,
+          133,
+          133
+        ],
+        "0:after_rewrite": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "1:after_wait": [
+          133,
+          133,
+          133,
+          133
+        ],
+        "2:after_wait": [
+          133,
+          133,
+          133,
+          133
+        ],
+        "2:after_stop": [
+          133,
+          133,
+          133,
+          133
+        ]
+      },
+      "vsync": [],
+      "red_bursts": [],
+      "raw_provenance": "last_DMA"
+    },
+    {
+      "label": "no_receive_128",
+      "outcome": "rewrite_overwritten",
+      "observed": {
+        "-1:initial": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "0:after_dma": [
+          128,
+          133,
+          133,
+          133
+        ],
+        "0:after_rewrite": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "1:post_vsync": [
+          133,
+          133,
+          133,
+          133
+        ],
+        "2:post_vsync": [
+          133,
+          133,
+          133,
+          133
+        ],
+        "3:post_vsync": [
+          133,
+          133,
+          133,
+          133
+        ],
+        "3:after_stop": [
+          133,
+          133,
+          133,
+          133
+        ]
+      },
+      "vsync": [
+        {
+          "observation": "1",
+          "baseline": "26243556287585",
+          "latest": "26243756235647",
+          "verified": "1"
+        },
+        {
+          "observation": "2",
+          "baseline": "26243756235647",
+          "latest": "26243956188610",
+          "verified": "1"
+        },
+        {
+          "observation": "3",
+          "baseline": "26243956188610",
+          "latest": "26244156137671",
+          "verified": "1"
+        }
+      ],
+      "red_bursts": [
+        [
+          {
+            "value": 128,
+            "time_ms": 4003588174007
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174008
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174008
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174009
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174010
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174010
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174011
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174011
+          }
+        ],
+        [
+          {
+            "value": 133,
+            "time_ms": 4003588174207
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174208
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174209
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174209
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174210
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174210
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174211
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174211
+          }
+        ],
+        [
+          {
+            "value": 133,
+            "time_ms": 4003588174407
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174408
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174409
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174409
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174410
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174410
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174411
+          },
+          {
+            "value": 133,
+            "time_ms": 4003588174411
+          }
+        ]
+      ],
+      "raw_provenance": "first_DMA_only"
+    }
+  ],
+  "restoration": {
+    "coarse": 264,
+    "MCU_verified": true,
+    "physical_verified": true,
+    "IFP": {
+      "32d4": 169,
+      "32d6": 165,
+      "32d8": 165,
+      "32da": 133
+    }
+  },
+  "source_snapshot_verified": true,
+  "MCU_write_counts": {
+    "a102": 5,
+    "a11f": 5,
+    "a355": 2,
+    "a103": 3
+  },
+  "first_VSYNC_red_transition": {
+    "values": [
+      128,
+      133
+    ],
+    "read_return_times_ms": [
+      4003588174007,
+      4003588174008
+    ],
+    "hardware_write_duration_proven": false
+  }
+}

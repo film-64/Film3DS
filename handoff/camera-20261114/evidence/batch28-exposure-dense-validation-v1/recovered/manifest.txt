@@ -1,0 +1,561 @@
+FILMPROBE schema=1 revision=5a1e62d-exposure-dense-v1 new3ds=1 model_result=00000000 kernel=023a0000 settle_frames=8 measured_frames=12
+OPTIONS direct=0 raw=1 acquisition=continuous deterministic_ipc=1 transfer=ram_http
+RAM_EVIDENCE contract=3 bytes=29360128 sd_writes=1 freeze_after_camera=1 no_compression=1 retry=none
+REQUEST only_sensor=1 first_phase=3 last_phase=78
+CALIBRATION contract=2 expected_stages=76 target=stable_scene lock_scope=per_capture units=raw_codes scope=camera-exposure-dense-v1
+LOG_POLICY frame_boundary buffers=32768 all_streams=1 retry=none
+IPC_DUMP disabled_by_sweep_contract proof=reads_frames_calls
+CRASH_COLLECTION skipped_existing_dump_already_recovered ram_mode=1
+SERVICE sensor=1 name=cam:u open=00000000
+SERVICE_ID sensor=1 name=cam:u result=d8a053ea id=0000
+GETTER sensor=1 service=cam:u poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:u poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:c open=00000000
+SERVICE_ID sensor=1 name=cam:c result=00000000 id=2280
+GETTER sensor=1 service=cam:c poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:c poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:s open=00000000
+SERVICE_ID sensor=1 name=cam:s result=d8a053ea id=0000
+GETTER sensor=1 service=cam:s poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:s poison=1 result=00000000 ae_low8=1
+INIT_STEP stage=calibration_queries_begin
+CALIBRATION_REPLY command=0032 result=d8a053ea header=003201c0 valid=0 payload=0011d624000000010011fc40001013dd001156740000567a00000000000000000000000000000000000000000000000000000000000000000000000000000000
+CALIBRATION_REPLY command=002b result=00000000 header=002b0440 valid=1 payload=000000003f7fe7f33deaf0bfc2b50282bfe71a4c0000000000000000428281254282775e437a0000420c000001e0028000000000000000000000000000000000
+INIT_STEP stage=calibration_queries_end
+INIT_STEP stage=initial_snapshot_begin
+INIT_STEP stage=initial_snapshot_end
+ACQUISITION sensor=1 mode=continuous complete=0
+ACQUISITION_SELECTED sensor=1 mode=single_frame_restart reason=register_brackets_or_stream_failure
+ACQUISITION sensor=1 mode=single_frame_restart complete=1 lock_scope=per_capture_only
+REBUILD_CONTRACT source=camera-exposure-dense/v1 blocks=2 points=74 DMA=444 images=296 calibration=0 optical_time=0
+CAL_STAGE sensor=1 phase=3 kind=seed controls_verified=1 restoring=0
+CAL_STAGE sensor=1 phase=4 kind=code_baseline controls_verified=1 restoring=0
+AUTO_ISP_PIN phase=4 frame=8 established=1 red=168 gr=162 gb=162 blue=133
+SWEEP_RAW phase=4 bytes=24576 crc32=bbd87eb8
+CAL_BURST sensor=1 rate=5 frames=24 expected=24 complete=1 evidence=dma_event_cadence
+REBUILD_COLOR_MATRIX value=1 verified=1
+REBUILD_BUFFER extra_bytes=614400 slots=2 max_pending=1 allocated=1 crc_scratch=24576
+REBUILD_BLOCK index=0 fps=5 first_point=0
+SEQ_REFRESH restoring=0 command=5 writes=1 polls=15 state=3 verified=1
+POST_REFRESH_MANUAL seq=10 preview_awb=0 awb_r=128 awb_g=128 awb_b=128 command=0 state=3 verified=1
+MATRIX_ALIAS_TRANSPORT phase=4 when=before_stream before=640 combined=640 after=640 verified=1
+CCM_WORD phase=4 when=before_stream addr=2332 msb=1 lsb=176 value=432
+CCM_ALIAS_WINDOW phase=4 when=before_stream addr=2332 before=432 combined=432 after=432 match_before=1 match_after=1
+CCM_WORD phase=4 when=before_stream addr=2334 msb=255 lsb=175 value=65455
+CCM_WORD phase=4 when=before_stream addr=2336 msb=255 lsb=176 value=65456
+CCM_WORD phase=4 when=before_stream addr=2338 msb=255 lsb=172 value=65452
+CCM_WORD phase=4 when=before_stream addr=233a msb=1 lsb=136 value=392
+CCM_WORD phase=4 when=before_stream addr=233c msb=255 lsb=226 value=65506
+CCM_WORD phase=4 when=before_stream addr=233e msb=255 lsb=249 value=65529
+CCM_WORD phase=4 when=before_stream addr=2340 msb=255 lsb=147 value=65427
+CCM_WORD phase=4 when=before_stream addr=2342 msb=1 lsb=129 value=385
+CCM_WORD phase=4 when=before_stream addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=4 when=before_stream addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=0 when=before_stream complete=1
+REBUILD_TIMING block=0 when=before_stream complete=1
+REBUILD_POINT index=0 phase=5 block=0 kind=reference_start fps=5 gate=0 coarse=128 core=528 isp=128,128,128,128 frames=6 anchor=-1 coverage=1
+SWEEP_RAW phase=5 bytes=24576 crc32=08b65101
+SWEEP_RAW phase=5 bytes=24576 crc32=479f239e
+SWEEP_RAW phase=5 bytes=24576 crc32=0e84b58d
+SWEEP_RAW phase=5 bytes=24576 crc32=2def0338
+REBUILD_POINT_END index=0 complete=1
+REBUILD_POINT index=1 phase=6 block=0 kind=coarse fps=5 gate=0 coarse=32 core=528 isp=128,128,128,128 frames=6 anchor=0 coverage=1
+SWEEP_RAW phase=6 bytes=24576 crc32=36c5a9e2
+SWEEP_RAW phase=6 bytes=24576 crc32=d6b21f74
+SWEEP_RAW phase=6 bytes=24576 crc32=0515cdfc
+SWEEP_RAW phase=6 bytes=24576 crc32=273e1464
+REBUILD_POINT_END index=1 complete=1
+REBUILD_POINT index=2 phase=7 block=0 kind=coarse fps=5 gate=0 coarse=48 core=528 isp=128,128,128,128 frames=6 anchor=1 coverage=1
+SWEEP_RAW phase=7 bytes=24576 crc32=a325d3e7
+SWEEP_RAW phase=7 bytes=24576 crc32=3333f03e
+SWEEP_RAW phase=7 bytes=24576 crc32=77d7da32
+SWEEP_RAW phase=7 bytes=24576 crc32=e2f90f63
+REBUILD_POINT_END index=2 complete=1
+REBUILD_POINT index=3 phase=8 block=0 kind=coarse fps=5 gate=0 coarse=64 core=528 isp=128,128,128,128 frames=6 anchor=2 coverage=1
+SWEEP_RAW phase=8 bytes=24576 crc32=168727fd
+SWEEP_RAW phase=8 bytes=24576 crc32=7499e372
+SWEEP_RAW phase=8 bytes=24576 crc32=1056016a
+SWEEP_RAW phase=8 bytes=24576 crc32=9cd41a8a
+REBUILD_POINT_END index=3 complete=1
+REBUILD_POINT index=4 phase=9 block=0 kind=coarse fps=5 gate=0 coarse=80 core=528 isp=128,128,128,128 frames=6 anchor=3 coverage=1
+SWEEP_RAW phase=9 bytes=24576 crc32=ceffb0a5
+SWEEP_RAW phase=9 bytes=24576 crc32=3787df2e
+SWEEP_RAW phase=9 bytes=24576 crc32=ea848203
+SWEEP_RAW phase=9 bytes=24576 crc32=5ab50cfa
+REBUILD_POINT_END index=4 complete=1
+REBUILD_POINT index=5 phase=10 block=0 kind=coarse fps=5 gate=0 coarse=96 core=528 isp=128,128,128,128 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=10 bytes=24576 crc32=4dfbec12
+SWEEP_RAW phase=10 bytes=24576 crc32=6d10d657
+SWEEP_RAW phase=10 bytes=24576 crc32=bf7ed01b
+SWEEP_RAW phase=10 bytes=24576 crc32=ab4a4675
+REBUILD_POINT_END index=5 complete=1
+REBUILD_POINT index=6 phase=11 block=0 kind=coarse fps=5 gate=0 coarse=112 core=528 isp=128,128,128,128 frames=6 anchor=5 coverage=1
+SWEEP_RAW phase=11 bytes=24576 crc32=26a3436d
+SWEEP_RAW phase=11 bytes=24576 crc32=e9b76212
+SWEEP_RAW phase=11 bytes=24576 crc32=bf846399
+SWEEP_RAW phase=11 bytes=24576 crc32=f2a16bb4
+REBUILD_POINT_END index=6 complete=1
+REBUILD_POINT index=7 phase=12 block=0 kind=coarse fps=5 gate=0 coarse=128 core=528 isp=128,128,128,128 frames=6 anchor=6 coverage=1
+SWEEP_RAW phase=12 bytes=24576 crc32=8c3ab73f
+SWEEP_RAW phase=12 bytes=24576 crc32=c533136c
+SWEEP_RAW phase=12 bytes=24576 crc32=83535f36
+SWEEP_RAW phase=12 bytes=24576 crc32=e420ed8a
+REBUILD_POINT_END index=7 complete=1
+REBUILD_POINT index=8 phase=13 block=0 kind=coarse fps=5 gate=0 coarse=160 core=528 isp=128,128,128,128 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=13 bytes=24576 crc32=65202b19
+SWEEP_RAW phase=13 bytes=24576 crc32=5c4f7508
+SWEEP_RAW phase=13 bytes=24576 crc32=d1c8408a
+SWEEP_RAW phase=13 bytes=24576 crc32=98368b11
+REBUILD_POINT_END index=8 complete=1
+REBUILD_POINT index=9 phase=14 block=0 kind=coarse fps=5 gate=0 coarse=192 core=528 isp=128,128,128,128 frames=6 anchor=8 coverage=1
+SWEEP_RAW phase=14 bytes=24576 crc32=d067c1be
+SWEEP_RAW phase=14 bytes=24576 crc32=26f55750
+SWEEP_RAW phase=14 bytes=24576 crc32=9398bbbf
+SWEEP_RAW phase=14 bytes=24576 crc32=05ff762d
+REBUILD_POINT_END index=9 complete=1
+REBUILD_POINT index=10 phase=15 block=0 kind=coarse fps=5 gate=0 coarse=224 core=528 isp=128,128,128,128 frames=6 anchor=9 coverage=1
+SWEEP_RAW phase=15 bytes=24576 crc32=05b45269
+SWEEP_RAW phase=15 bytes=24576 crc32=83f44a1e
+SWEEP_RAW phase=15 bytes=24576 crc32=58a5e613
+SWEEP_RAW phase=15 bytes=24576 crc32=b9eb603f
+REBUILD_POINT_END index=10 complete=1
+REBUILD_POINT index=11 phase=16 block=0 kind=coarse fps=5 gate=0 coarse=256 core=528 isp=128,128,128,128 frames=6 anchor=10 coverage=1
+SWEEP_RAW phase=16 bytes=24576 crc32=9796531a
+SWEEP_RAW phase=16 bytes=24576 crc32=96495622
+SWEEP_RAW phase=16 bytes=24576 crc32=53d73d15
+SWEEP_RAW phase=16 bytes=24576 crc32=9c5ee553
+REBUILD_POINT_END index=11 complete=1
+REBUILD_POINT index=12 phase=17 block=0 kind=coarse fps=5 gate=0 coarse=320 core=528 isp=128,128,128,128 frames=6 anchor=11 coverage=1
+SWEEP_RAW phase=17 bytes=24576 crc32=ba5cbf43
+SWEEP_RAW phase=17 bytes=24576 crc32=0276a7f3
+SWEEP_RAW phase=17 bytes=24576 crc32=984a9843
+SWEEP_RAW phase=17 bytes=24576 crc32=a46905bd
+REBUILD_POINT_END index=12 complete=1
+REBUILD_POINT index=13 phase=18 block=0 kind=coarse fps=5 gate=0 coarse=384 core=528 isp=128,128,128,128 frames=6 anchor=12 coverage=1
+SWEEP_RAW phase=18 bytes=24576 crc32=87e8975b
+SWEEP_RAW phase=18 bytes=24576 crc32=7fd88251
+SWEEP_RAW phase=18 bytes=24576 crc32=2ab0a7e0
+SWEEP_RAW phase=18 bytes=24576 crc32=295338f2
+REBUILD_POINT_END index=13 complete=1
+REBUILD_POINT index=14 phase=19 block=0 kind=coarse fps=5 gate=0 coarse=448 core=528 isp=128,128,128,128 frames=6 anchor=13 coverage=1
+SWEEP_RAW phase=19 bytes=24576 crc32=b28609d8
+SWEEP_RAW phase=19 bytes=24576 crc32=b96c4ae9
+SWEEP_RAW phase=19 bytes=24576 crc32=eb5ca25a
+SWEEP_RAW phase=19 bytes=24576 crc32=b7e91a53
+REBUILD_POINT_END index=14 complete=1
+REBUILD_POINT index=15 phase=20 block=0 kind=coarse fps=5 gate=0 coarse=528 core=528 isp=128,128,128,128 frames=6 anchor=14 coverage=1
+SWEEP_RAW phase=20 bytes=24576 crc32=be6e325a
+SWEEP_RAW phase=20 bytes=24576 crc32=14aa796e
+SWEEP_RAW phase=20 bytes=24576 crc32=5b87b4c2
+SWEEP_RAW phase=20 bytes=24576 crc32=d90a005c
+REBUILD_POINT_END index=15 complete=1
+REBUILD_POINT index=16 phase=21 block=0 kind=coarse fps=5 gate=0 coarse=768 core=528 isp=128,128,128,128 frames=6 anchor=15 coverage=1
+SWEEP_RAW phase=21 bytes=24576 crc32=524c4a82
+SWEEP_RAW phase=21 bytes=24576 crc32=8e1cc6c0
+SWEEP_RAW phase=21 bytes=24576 crc32=26e8d756
+SWEEP_RAW phase=21 bytes=24576 crc32=a02cafa8
+REBUILD_POINT_END index=16 complete=1
+REBUILD_POINT index=17 phase=22 block=0 kind=coarse fps=5 gate=0 coarse=1024 core=528 isp=128,128,128,128 frames=6 anchor=16 coverage=1
+SWEEP_RAW phase=22 bytes=24576 crc32=98397e06
+SWEEP_RAW phase=22 bytes=24576 crc32=e75aa789
+SWEEP_RAW phase=22 bytes=24576 crc32=610a03f6
+SWEEP_RAW phase=22 bytes=24576 crc32=3300ca0f
+REBUILD_POINT_END index=17 complete=1
+REBUILD_POINT index=18 phase=23 block=0 kind=coarse fps=5 gate=0 coarse=1280 core=528 isp=128,128,128,128 frames=6 anchor=17 coverage=1
+SWEEP_RAW phase=23 bytes=24576 crc32=ccff28bd
+SWEEP_RAW phase=23 bytes=24576 crc32=a74807b1
+SWEEP_RAW phase=23 bytes=24576 crc32=f6c08a67
+SWEEP_RAW phase=23 bytes=24576 crc32=2ef6606b
+REBUILD_POINT_END index=18 complete=1
+REBUILD_POINT index=19 phase=24 block=0 kind=coarse fps=5 gate=0 coarse=1585 core=528 isp=128,128,128,128 frames=6 anchor=18 coverage=1
+SWEEP_RAW phase=24 bytes=24576 crc32=852f68be
+SWEEP_RAW phase=24 bytes=24576 crc32=18ecc1a3
+SWEEP_RAW phase=24 bytes=24576 crc32=84975ae2
+SWEEP_RAW phase=24 bytes=24576 crc32=4111e6f9
+REBUILD_POINT_END index=19 complete=1
+REBUILD_ANCHOR block=0 primary=4 secondary=7 coverage=1
+REBUILD_POINT index=20 phase=25 block=0 kind=gain fps=5 gate=0 coarse=96 core=528 isp=96,96,96,96 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=25 bytes=24576 crc32=786164d4
+SWEEP_RAW phase=25 bytes=24576 crc32=49914f3e
+SWEEP_RAW phase=25 bytes=24576 crc32=c2c38b24
+SWEEP_RAW phase=25 bytes=24576 crc32=001caf2f
+REBUILD_POINT_END index=20 complete=1
+REBUILD_POINT index=21 phase=26 block=0 kind=gain fps=5 gate=0 coarse=96 core=528 isp=128,128,128,128 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=26 bytes=24576 crc32=acc39cc8
+SWEEP_RAW phase=26 bytes=24576 crc32=7e7f99d7
+SWEEP_RAW phase=26 bytes=24576 crc32=dd18a63c
+SWEEP_RAW phase=26 bytes=24576 crc32=505ea41d
+REBUILD_POINT_END index=21 complete=1
+REBUILD_POINT index=22 phase=27 block=0 kind=gain fps=5 gate=0 coarse=96 core=528 isp=160,160,160,160 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=27 bytes=24576 crc32=013d1cf4
+SWEEP_RAW phase=27 bytes=24576 crc32=958d143b
+SWEEP_RAW phase=27 bytes=24576 crc32=c47f9689
+SWEEP_RAW phase=27 bytes=24576 crc32=6c03d82b
+REBUILD_POINT_END index=22 complete=1
+REBUILD_POINT index=23 phase=28 block=0 kind=gain fps=5 gate=0 coarse=96 core=544 isp=96,96,96,96 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=28 bytes=24576 crc32=ab2513ee
+SWEEP_RAW phase=28 bytes=24576 crc32=b5d603fa
+SWEEP_RAW phase=28 bytes=24576 crc32=2904219b
+SWEEP_RAW phase=28 bytes=24576 crc32=de0aa0b2
+REBUILD_POINT_END index=23 complete=1
+REBUILD_POINT index=24 phase=29 block=0 kind=gain fps=5 gate=0 coarse=96 core=544 isp=128,128,128,128 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=29 bytes=24576 crc32=90ea3300
+SWEEP_RAW phase=29 bytes=24576 crc32=00864ab4
+SWEEP_RAW phase=29 bytes=24576 crc32=9fead97c
+SWEEP_RAW phase=29 bytes=24576 crc32=e182b6c2
+REBUILD_POINT_END index=24 complete=1
+REBUILD_POINT index=25 phase=30 block=0 kind=gain fps=5 gate=0 coarse=96 core=544 isp=160,160,160,160 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=30 bytes=24576 crc32=b4b3cc9e
+SWEEP_RAW phase=30 bytes=24576 crc32=6f405281
+SWEEP_RAW phase=30 bytes=24576 crc32=6ee6fe01
+SWEEP_RAW phase=30 bytes=24576 crc32=2fa640b3
+REBUILD_POINT_END index=25 complete=1
+REBUILD_POINT index=26 phase=31 block=0 kind=gain fps=5 gate=0 coarse=96 core=1040 isp=96,96,96,96 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=31 bytes=24576 crc32=79be642c
+SWEEP_RAW phase=31 bytes=24576 crc32=5c5dc575
+SWEEP_RAW phase=31 bytes=24576 crc32=eb02b14b
+SWEEP_RAW phase=31 bytes=24576 crc32=c92a372b
+REBUILD_POINT_END index=26 complete=1
+REBUILD_POINT index=27 phase=32 block=0 kind=gain fps=5 gate=0 coarse=96 core=1040 isp=128,128,128,128 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=32 bytes=24576 crc32=9105ab24
+SWEEP_RAW phase=32 bytes=24576 crc32=426e7382
+SWEEP_RAW phase=32 bytes=24576 crc32=d1f1cd50
+SWEEP_RAW phase=32 bytes=24576 crc32=b8c50209
+REBUILD_POINT_END index=27 complete=1
+REBUILD_POINT index=28 phase=33 block=0 kind=gain fps=5 gate=0 coarse=96 core=1040 isp=160,160,160,160 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=33 bytes=24576 crc32=11170167
+SWEEP_RAW phase=33 bytes=24576 crc32=e783bd89
+SWEEP_RAW phase=33 bytes=24576 crc32=3302f8c3
+SWEEP_RAW phase=33 bytes=24576 crc32=974dd248
+REBUILD_POINT_END index=28 complete=1
+REBUILD_POINT index=29 phase=34 block=0 kind=gain fps=5 gate=0 coarse=160 core=528 isp=96,96,96,96 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=34 bytes=24576 crc32=531e8800
+SWEEP_RAW phase=34 bytes=24576 crc32=079870f9
+SWEEP_RAW phase=34 bytes=24576 crc32=05043656
+SWEEP_RAW phase=34 bytes=24576 crc32=b1e047f8
+REBUILD_POINT_END index=29 complete=1
+REBUILD_POINT index=30 phase=35 block=0 kind=gain fps=5 gate=0 coarse=160 core=528 isp=128,128,128,128 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=35 bytes=24576 crc32=1376eb7e
+SWEEP_RAW phase=35 bytes=24576 crc32=40c46b80
+SWEEP_RAW phase=35 bytes=24576 crc32=12351bdb
+SWEEP_RAW phase=35 bytes=24576 crc32=8ae952d9
+REBUILD_POINT_END index=30 complete=1
+REBUILD_POINT index=31 phase=36 block=0 kind=gain fps=5 gate=0 coarse=160 core=528 isp=160,160,160,160 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=36 bytes=24576 crc32=6af98262
+SWEEP_RAW phase=36 bytes=24576 crc32=7900fdb6
+SWEEP_RAW phase=36 bytes=24576 crc32=d888dd6e
+SWEEP_RAW phase=36 bytes=24576 crc32=5f673bd6
+REBUILD_POINT_END index=31 complete=1
+REBUILD_POINT index=32 phase=37 block=0 kind=gain fps=5 gate=0 coarse=160 core=544 isp=96,96,96,96 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=37 bytes=24576 crc32=9792af9b
+SWEEP_RAW phase=37 bytes=24576 crc32=43b2a5c2
+SWEEP_RAW phase=37 bytes=24576 crc32=54f13fb0
+SWEEP_RAW phase=37 bytes=24576 crc32=8900f035
+REBUILD_POINT_END index=32 complete=1
+REBUILD_POINT index=33 phase=38 block=0 kind=gain fps=5 gate=0 coarse=160 core=544 isp=128,128,128,128 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=38 bytes=24576 crc32=1ac870ce
+SWEEP_RAW phase=38 bytes=24576 crc32=4ffb8be7
+SWEEP_RAW phase=38 bytes=24576 crc32=a46bb6db
+SWEEP_RAW phase=38 bytes=24576 crc32=3b1c9017
+REBUILD_POINT_END index=33 complete=1
+REBUILD_POINT index=34 phase=39 block=0 kind=gain fps=5 gate=0 coarse=160 core=544 isp=160,160,160,160 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=39 bytes=24576 crc32=d48278ec
+SWEEP_RAW phase=39 bytes=24576 crc32=588d97b5
+SWEEP_RAW phase=39 bytes=24576 crc32=f478aef0
+SWEEP_RAW phase=39 bytes=24576 crc32=356748a0
+REBUILD_POINT_END index=34 complete=1
+REBUILD_POINT index=35 phase=40 block=0 kind=gain fps=5 gate=0 coarse=160 core=1040 isp=96,96,96,96 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=40 bytes=24576 crc32=679b97e6
+SWEEP_RAW phase=40 bytes=24576 crc32=449c9096
+SWEEP_RAW phase=40 bytes=24576 crc32=c05b097e
+SWEEP_RAW phase=40 bytes=24576 crc32=beaf3807
+REBUILD_POINT_END index=35 complete=1
+REBUILD_POINT index=36 phase=41 block=0 kind=gain fps=5 gate=0 coarse=160 core=1040 isp=128,128,128,128 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=41 bytes=24576 crc32=189edc32
+SWEEP_RAW phase=41 bytes=24576 crc32=4f2160ca
+SWEEP_RAW phase=41 bytes=24576 crc32=055df958
+SWEEP_RAW phase=41 bytes=24576 crc32=3eb3c884
+REBUILD_POINT_END index=36 complete=1
+REBUILD_POINT index=37 phase=42 block=0 kind=gain fps=5 gate=0 coarse=160 core=1040 isp=160,160,160,160 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=42 bytes=24576 crc32=29d6246d
+SWEEP_RAW phase=42 bytes=24576 crc32=ae6ed19b
+SWEEP_RAW phase=42 bytes=24576 crc32=9f548c41
+SWEEP_RAW phase=42 bytes=24576 crc32=8570e382
+REBUILD_POINT_END index=37 complete=1
+REBUILD_POINT index=38 phase=43 block=0 kind=reference_end fps=5 gate=0 coarse=128 core=528 isp=128,128,128,128 frames=6 anchor=-1 coverage=1
+SWEEP_RAW phase=43 bytes=24576 crc32=e6497474
+SWEEP_RAW phase=43 bytes=24576 crc32=1e513c4c
+SWEEP_RAW phase=43 bytes=24576 crc32=db829a9d
+SWEEP_RAW phase=43 bytes=24576 crc32=8a64afdd
+REBUILD_POINT_END index=38 complete=1
+MATRIX_ALIAS_TRANSPORT phase=43 when=after_stop before=640 combined=640 after=640 verified=1
+CCM_WORD phase=43 when=after_stop addr=2332 msb=1 lsb=174 value=430
+CCM_ALIAS_WINDOW phase=43 when=after_stop addr=2332 before=430 combined=430 after=430 match_before=1 match_after=1
+CCM_WORD phase=43 when=after_stop addr=2334 msb=255 lsb=176 value=65456
+CCM_WORD phase=43 when=after_stop addr=2336 msb=255 lsb=176 value=65456
+CCM_WORD phase=43 when=after_stop addr=2338 msb=255 lsb=172 value=65452
+CCM_WORD phase=43 when=after_stop addr=233a msb=1 lsb=136 value=392
+CCM_WORD phase=43 when=after_stop addr=233c msb=255 lsb=226 value=65506
+CCM_WORD phase=43 when=after_stop addr=233e msb=255 lsb=249 value=65529
+CCM_WORD phase=43 when=after_stop addr=2340 msb=255 lsb=147 value=65427
+CCM_WORD phase=43 when=after_stop addr=2342 msb=1 lsb=129 value=385
+CCM_WORD phase=43 when=after_stop addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=43 when=after_stop addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=0 when=after_stop complete=1
+REBUILD_TIMING block=0 when=after_stop complete=1
+REBUILD_BLOCK_END index=0 complete=1
+REBUILD_BLOCK index=1 fps=15 first_point=39
+MATRIX_PROFILE fps=15 polls=2 verified=1
+SEQ_REFRESH restoring=0 command=5 writes=2 polls=6 state=3 verified=1
+POST_REFRESH_MANUAL seq=10 preview_awb=0 awb_r=128 awb_g=128 awb_b=128 command=0 state=3 verified=1
+MATRIX_ALIAS_TRANSPORT phase=43 when=before_stream before=640 combined=640 after=640 verified=1
+CCM_WORD phase=43 when=before_stream addr=2332 msb=1 lsb=173 value=429
+CCM_ALIAS_WINDOW phase=43 when=before_stream addr=2332 before=429 combined=429 after=429 match_before=1 match_after=1
+CCM_WORD phase=43 when=before_stream addr=2334 msb=255 lsb=176 value=65456
+CCM_WORD phase=43 when=before_stream addr=2336 msb=255 lsb=176 value=65456
+CCM_WORD phase=43 when=before_stream addr=2338 msb=255 lsb=171 value=65451
+CCM_WORD phase=43 when=before_stream addr=233a msb=1 lsb=136 value=392
+CCM_WORD phase=43 when=before_stream addr=233c msb=255 lsb=225 value=65505
+CCM_WORD phase=43 when=before_stream addr=233e msb=255 lsb=250 value=65530
+CCM_WORD phase=43 when=before_stream addr=2340 msb=255 lsb=149 value=65429
+CCM_WORD phase=43 when=before_stream addr=2342 msb=1 lsb=126 value=382
+CCM_WORD phase=43 when=before_stream addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=43 when=before_stream addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=1 when=before_stream complete=1
+REBUILD_TIMING block=1 when=before_stream complete=1
+REBUILD_POINT index=39 phase=44 block=1 kind=reference_start fps=15 gate=0 coarse=128 core=528 isp=128,128,128,128 frames=6 anchor=-1 coverage=1
+SWEEP_RAW phase=44 bytes=24576 crc32=86ecbb3d
+SWEEP_RAW phase=44 bytes=24576 crc32=ab704331
+SWEEP_RAW phase=44 bytes=24576 crc32=980e9e1d
+SWEEP_RAW phase=44 bytes=24576 crc32=3f90519c
+REBUILD_POINT_END index=39 complete=1
+REBUILD_POINT index=40 phase=45 block=1 kind=coarse fps=15 gate=0 coarse=32 core=528 isp=128,128,128,128 frames=6 anchor=0 coverage=1
+SWEEP_RAW phase=45 bytes=24576 crc32=c9b641ba
+SWEEP_RAW phase=45 bytes=24576 crc32=ff9a364b
+SWEEP_RAW phase=45 bytes=24576 crc32=0f304d95
+SWEEP_RAW phase=45 bytes=24576 crc32=7c662351
+REBUILD_POINT_END index=40 complete=1
+REBUILD_POINT index=41 phase=46 block=1 kind=coarse fps=15 gate=0 coarse=48 core=528 isp=128,128,128,128 frames=6 anchor=1 coverage=1
+SWEEP_RAW phase=46 bytes=24576 crc32=1a9dcadf
+SWEEP_RAW phase=46 bytes=24576 crc32=b0ac1a4b
+SWEEP_RAW phase=46 bytes=24576 crc32=8a72cfe4
+SWEEP_RAW phase=46 bytes=24576 crc32=f5752f99
+REBUILD_POINT_END index=41 complete=1
+REBUILD_POINT index=42 phase=47 block=1 kind=coarse fps=15 gate=0 coarse=64 core=528 isp=128,128,128,128 frames=6 anchor=2 coverage=1
+SWEEP_RAW phase=47 bytes=24576 crc32=6faf8e7a
+SWEEP_RAW phase=47 bytes=24576 crc32=19a18a95
+SWEEP_RAW phase=47 bytes=24576 crc32=4c376cf3
+SWEEP_RAW phase=47 bytes=24576 crc32=917e1d93
+REBUILD_POINT_END index=42 complete=1
+REBUILD_POINT index=43 phase=48 block=1 kind=coarse fps=15 gate=0 coarse=80 core=528 isp=128,128,128,128 frames=6 anchor=3 coverage=1
+SWEEP_RAW phase=48 bytes=24576 crc32=8b4aa795
+SWEEP_RAW phase=48 bytes=24576 crc32=516ab5bb
+SWEEP_RAW phase=48 bytes=24576 crc32=18b84a1d
+SWEEP_RAW phase=48 bytes=24576 crc32=c2ac97ba
+REBUILD_POINT_END index=43 complete=1
+REBUILD_POINT index=44 phase=49 block=1 kind=coarse fps=15 gate=0 coarse=96 core=528 isp=128,128,128,128 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=49 bytes=24576 crc32=537713d6
+SWEEP_RAW phase=49 bytes=24576 crc32=648ea595
+SWEEP_RAW phase=49 bytes=24576 crc32=b2d14c6d
+SWEEP_RAW phase=49 bytes=24576 crc32=58ccf627
+REBUILD_POINT_END index=44 complete=1
+REBUILD_POINT index=45 phase=50 block=1 kind=coarse fps=15 gate=0 coarse=112 core=528 isp=128,128,128,128 frames=6 anchor=5 coverage=1
+SWEEP_RAW phase=50 bytes=24576 crc32=b13204e3
+SWEEP_RAW phase=50 bytes=24576 crc32=24624697
+SWEEP_RAW phase=50 bytes=24576 crc32=3626d016
+SWEEP_RAW phase=50 bytes=24576 crc32=ece7152b
+REBUILD_POINT_END index=45 complete=1
+REBUILD_POINT index=46 phase=51 block=1 kind=coarse fps=15 gate=0 coarse=128 core=528 isp=128,128,128,128 frames=6 anchor=6 coverage=1
+SWEEP_RAW phase=51 bytes=24576 crc32=b65986db
+SWEEP_RAW phase=51 bytes=24576 crc32=f0c15d6f
+SWEEP_RAW phase=51 bytes=24576 crc32=0ec0e9e7
+SWEEP_RAW phase=51 bytes=24576 crc32=bdc44789
+REBUILD_POINT_END index=46 complete=1
+REBUILD_POINT index=47 phase=52 block=1 kind=coarse fps=15 gate=0 coarse=160 core=528 isp=128,128,128,128 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=52 bytes=24576 crc32=904646eb
+SWEEP_RAW phase=52 bytes=24576 crc32=036c4574
+SWEEP_RAW phase=52 bytes=24576 crc32=ca3b14b6
+SWEEP_RAW phase=52 bytes=24576 crc32=677925b3
+REBUILD_POINT_END index=47 complete=1
+REBUILD_POINT index=48 phase=53 block=1 kind=coarse fps=15 gate=0 coarse=192 core=528 isp=128,128,128,128 frames=6 anchor=8 coverage=1
+SWEEP_RAW phase=53 bytes=24576 crc32=f345851c
+SWEEP_RAW phase=53 bytes=24576 crc32=6ce1393b
+SWEEP_RAW phase=53 bytes=24576 crc32=164a1a21
+SWEEP_RAW phase=53 bytes=24576 crc32=5ece15c1
+REBUILD_POINT_END index=48 complete=1
+REBUILD_POINT index=49 phase=54 block=1 kind=coarse fps=15 gate=0 coarse=224 core=528 isp=128,128,128,128 frames=6 anchor=9 coverage=1
+SWEEP_RAW phase=54 bytes=24576 crc32=1b1084f6
+SWEEP_RAW phase=54 bytes=24576 crc32=b7d436a4
+SWEEP_RAW phase=54 bytes=24576 crc32=a72891da
+SWEEP_RAW phase=54 bytes=24576 crc32=4b16a352
+REBUILD_POINT_END index=49 complete=1
+REBUILD_POINT index=50 phase=55 block=1 kind=coarse fps=15 gate=0 coarse=256 core=528 isp=128,128,128,128 frames=6 anchor=10 coverage=1
+SWEEP_RAW phase=55 bytes=24576 crc32=94e62a74
+SWEEP_RAW phase=55 bytes=24576 crc32=33cf3a94
+SWEEP_RAW phase=55 bytes=24576 crc32=8c756163
+SWEEP_RAW phase=55 bytes=24576 crc32=3a62576f
+REBUILD_POINT_END index=50 complete=1
+REBUILD_POINT index=51 phase=56 block=1 kind=coarse fps=15 gate=0 coarse=320 core=528 isp=128,128,128,128 frames=6 anchor=11 coverage=1
+SWEEP_RAW phase=56 bytes=24576 crc32=168afc58
+SWEEP_RAW phase=56 bytes=24576 crc32=f5bf66a5
+SWEEP_RAW phase=56 bytes=24576 crc32=aad572ce
+SWEEP_RAW phase=56 bytes=24576 crc32=2e86b588
+REBUILD_POINT_END index=51 complete=1
+REBUILD_POINT index=52 phase=57 block=1 kind=coarse fps=15 gate=0 coarse=384 core=528 isp=128,128,128,128 frames=6 anchor=12 coverage=1
+SWEEP_RAW phase=57 bytes=24576 crc32=5ad5c844
+SWEEP_RAW phase=57 bytes=24576 crc32=f2e9a5a9
+SWEEP_RAW phase=57 bytes=24576 crc32=587c3e02
+SWEEP_RAW phase=57 bytes=24576 crc32=1522f120
+REBUILD_POINT_END index=52 complete=1
+REBUILD_POINT index=53 phase=58 block=1 kind=coarse fps=15 gate=0 coarse=448 core=528 isp=128,128,128,128 frames=6 anchor=13 coverage=1
+SWEEP_RAW phase=58 bytes=24576 crc32=b1955b05
+SWEEP_RAW phase=58 bytes=24576 crc32=03a9850a
+SWEEP_RAW phase=58 bytes=24576 crc32=37576c98
+SWEEP_RAW phase=58 bytes=24576 crc32=ea462f4d
+REBUILD_POINT_END index=53 complete=1
+REBUILD_POINT index=54 phase=59 block=1 kind=coarse fps=15 gate=0 coarse=528 core=528 isp=128,128,128,128 frames=6 anchor=14 coverage=1
+SWEEP_RAW phase=59 bytes=24576 crc32=2b8e6df7
+SWEEP_RAW phase=59 bytes=24576 crc32=c14bfaea
+SWEEP_RAW phase=59 bytes=24576 crc32=19c17ada
+SWEEP_RAW phase=59 bytes=24576 crc32=9d7d36bf
+REBUILD_POINT_END index=54 complete=1
+REBUILD_ANCHOR block=1 primary=4 secondary=7 coverage=1
+REBUILD_POINT index=55 phase=60 block=1 kind=gain fps=15 gate=0 coarse=96 core=528 isp=96,96,96,96 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=60 bytes=24576 crc32=9e102bcb
+SWEEP_RAW phase=60 bytes=24576 crc32=f2df046c
+SWEEP_RAW phase=60 bytes=24576 crc32=5f1314a7
+SWEEP_RAW phase=60 bytes=24576 crc32=53cf792e
+REBUILD_POINT_END index=55 complete=1
+REBUILD_POINT index=56 phase=61 block=1 kind=gain fps=15 gate=0 coarse=96 core=528 isp=128,128,128,128 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=61 bytes=24576 crc32=26ea247e
+SWEEP_RAW phase=61 bytes=24576 crc32=0f1b909f
+SWEEP_RAW phase=61 bytes=24576 crc32=54079a51
+SWEEP_RAW phase=61 bytes=24576 crc32=9e62b5a6
+REBUILD_POINT_END index=56 complete=1
+REBUILD_POINT index=57 phase=62 block=1 kind=gain fps=15 gate=0 coarse=96 core=528 isp=160,160,160,160 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=62 bytes=24576 crc32=239edc90
+SWEEP_RAW phase=62 bytes=24576 crc32=859cadd3
+SWEEP_RAW phase=62 bytes=24576 crc32=cc364397
+SWEEP_RAW phase=62 bytes=24576 crc32=b5a9dc63
+REBUILD_POINT_END index=57 complete=1
+REBUILD_POINT index=58 phase=63 block=1 kind=gain fps=15 gate=0 coarse=96 core=544 isp=96,96,96,96 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=63 bytes=24576 crc32=e8527224
+SWEEP_RAW phase=63 bytes=24576 crc32=0d3b476e
+SWEEP_RAW phase=63 bytes=24576 crc32=4dc93fc5
+SWEEP_RAW phase=63 bytes=24576 crc32=fba5a828
+REBUILD_POINT_END index=58 complete=1
+REBUILD_POINT index=59 phase=64 block=1 kind=gain fps=15 gate=0 coarse=96 core=544 isp=128,128,128,128 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=64 bytes=24576 crc32=ae3cf85f
+SWEEP_RAW phase=64 bytes=24576 crc32=38f690b7
+SWEEP_RAW phase=64 bytes=24576 crc32=e9e3a2f1
+SWEEP_RAW phase=64 bytes=24576 crc32=bb1b2ff0
+REBUILD_POINT_END index=59 complete=1
+REBUILD_POINT index=60 phase=65 block=1 kind=gain fps=15 gate=0 coarse=96 core=544 isp=160,160,160,160 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=65 bytes=24576 crc32=2f45a0a8
+SWEEP_RAW phase=65 bytes=24576 crc32=439318a4
+SWEEP_RAW phase=65 bytes=24576 crc32=00df3f87
+SWEEP_RAW phase=65 bytes=24576 crc32=323c2736
+REBUILD_POINT_END index=60 complete=1
+REBUILD_POINT index=61 phase=66 block=1 kind=gain fps=15 gate=0 coarse=96 core=1040 isp=96,96,96,96 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=66 bytes=24576 crc32=95673171
+SWEEP_RAW phase=66 bytes=24576 crc32=3d63314a
+SWEEP_RAW phase=66 bytes=24576 crc32=773de8f4
+SWEEP_RAW phase=66 bytes=24576 crc32=7442be38
+REBUILD_POINT_END index=61 complete=1
+REBUILD_POINT index=62 phase=67 block=1 kind=gain fps=15 gate=0 coarse=96 core=1040 isp=128,128,128,128 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=67 bytes=24576 crc32=f431ca26
+SWEEP_RAW phase=67 bytes=24576 crc32=d0d72056
+SWEEP_RAW phase=67 bytes=24576 crc32=59b8c799
+SWEEP_RAW phase=67 bytes=24576 crc32=1b4b080f
+REBUILD_POINT_END index=62 complete=1
+REBUILD_POINT index=63 phase=68 block=1 kind=gain fps=15 gate=0 coarse=96 core=1040 isp=160,160,160,160 frames=6 anchor=4 coverage=1
+SWEEP_RAW phase=68 bytes=24576 crc32=b818cc04
+SWEEP_RAW phase=68 bytes=24576 crc32=fd3f9e6f
+SWEEP_RAW phase=68 bytes=24576 crc32=de2bc4a3
+SWEEP_RAW phase=68 bytes=24576 crc32=47ec7148
+REBUILD_POINT_END index=63 complete=1
+REBUILD_POINT index=64 phase=69 block=1 kind=gain fps=15 gate=0 coarse=160 core=528 isp=96,96,96,96 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=69 bytes=24576 crc32=8a650f13
+SWEEP_RAW phase=69 bytes=24576 crc32=1eff15b7
+SWEEP_RAW phase=69 bytes=24576 crc32=65d3764b
+SWEEP_RAW phase=69 bytes=24576 crc32=6c6e6098
+REBUILD_POINT_END index=64 complete=1
+REBUILD_POINT index=65 phase=70 block=1 kind=gain fps=15 gate=0 coarse=160 core=528 isp=128,128,128,128 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=70 bytes=24576 crc32=25efd43c
+SWEEP_RAW phase=70 bytes=24576 crc32=b963899e
+SWEEP_RAW phase=70 bytes=24576 crc32=ae2b106c
+SWEEP_RAW phase=70 bytes=24576 crc32=ea24949c
+REBUILD_POINT_END index=65 complete=1
+REBUILD_POINT index=66 phase=71 block=1 kind=gain fps=15 gate=0 coarse=160 core=528 isp=160,160,160,160 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=71 bytes=24576 crc32=fe3298f3
+SWEEP_RAW phase=71 bytes=24576 crc32=b7988124
+SWEEP_RAW phase=71 bytes=24576 crc32=add1d2d4
+SWEEP_RAW phase=71 bytes=24576 crc32=6a5131d3
+REBUILD_POINT_END index=66 complete=1
+REBUILD_POINT index=67 phase=72 block=1 kind=gain fps=15 gate=0 coarse=160 core=544 isp=96,96,96,96 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=72 bytes=24576 crc32=f948bc3c
+SWEEP_RAW phase=72 bytes=24576 crc32=5f9de554
+SWEEP_RAW phase=72 bytes=24576 crc32=9a7f8177
+SWEEP_RAW phase=72 bytes=24576 crc32=1db3a0ea
+REBUILD_POINT_END index=67 complete=1
+REBUILD_POINT index=68 phase=73 block=1 kind=gain fps=15 gate=0 coarse=160 core=544 isp=128,128,128,128 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=73 bytes=24576 crc32=51a003ae
+SWEEP_RAW phase=73 bytes=24576 crc32=7b9bcf4b
+SWEEP_RAW phase=73 bytes=24576 crc32=92e9dc09
+SWEEP_RAW phase=73 bytes=24576 crc32=aec38c2f
+REBUILD_POINT_END index=68 complete=1
+REBUILD_POINT index=69 phase=74 block=1 kind=gain fps=15 gate=0 coarse=160 core=544 isp=160,160,160,160 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=74 bytes=24576 crc32=560e55ae
+SWEEP_RAW phase=74 bytes=24576 crc32=fd785b65
+SWEEP_RAW phase=74 bytes=24576 crc32=b76f5383
+SWEEP_RAW phase=74 bytes=24576 crc32=65d27458
+REBUILD_POINT_END index=69 complete=1
+REBUILD_POINT index=70 phase=75 block=1 kind=gain fps=15 gate=0 coarse=160 core=1040 isp=96,96,96,96 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=75 bytes=24576 crc32=054c110a
+SWEEP_RAW phase=75 bytes=24576 crc32=8a1b8ce9
+SWEEP_RAW phase=75 bytes=24576 crc32=8f6f1fe1
+SWEEP_RAW phase=75 bytes=24576 crc32=cb4ebb2a
+REBUILD_POINT_END index=70 complete=1
+REBUILD_POINT index=71 phase=76 block=1 kind=gain fps=15 gate=0 coarse=160 core=1040 isp=128,128,128,128 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=76 bytes=24576 crc32=17846a56
+SWEEP_RAW phase=76 bytes=24576 crc32=b953c343
+SWEEP_RAW phase=76 bytes=24576 crc32=48adaa7a
+SWEEP_RAW phase=76 bytes=24576 crc32=1b4386e3
+REBUILD_POINT_END index=71 complete=1
+REBUILD_POINT index=72 phase=77 block=1 kind=gain fps=15 gate=0 coarse=160 core=1040 isp=160,160,160,160 frames=6 anchor=7 coverage=1
+SWEEP_RAW phase=77 bytes=24576 crc32=72fbd2ac
+SWEEP_RAW phase=77 bytes=24576 crc32=141d3737
+SWEEP_RAW phase=77 bytes=24576 crc32=5c1d7da6
+SWEEP_RAW phase=77 bytes=24576 crc32=d8b7f47f
+REBUILD_POINT_END index=72 complete=1
+REBUILD_POINT index=73 phase=78 block=1 kind=reference_end fps=15 gate=0 coarse=128 core=528 isp=128,128,128,128 frames=6 anchor=-1 coverage=1
+SWEEP_RAW phase=78 bytes=24576 crc32=48a56a14
+SWEEP_RAW phase=78 bytes=24576 crc32=0d0afc83
+SWEEP_RAW phase=78 bytes=24576 crc32=31fbc148
+SWEEP_RAW phase=78 bytes=24576 crc32=fb8d2410
+REBUILD_POINT_END index=73 complete=1
+MATRIX_ALIAS_TRANSPORT phase=78 when=after_stop before=640 combined=640 after=640 verified=1
+CCM_WORD phase=78 when=after_stop addr=2332 msb=1 lsb=173 value=429
+CCM_ALIAS_WINDOW phase=78 when=after_stop addr=2332 before=429 combined=429 after=429 match_before=1 match_after=1
+CCM_WORD phase=78 when=after_stop addr=2334 msb=255 lsb=176 value=65456
+CCM_WORD phase=78 when=after_stop addr=2336 msb=255 lsb=176 value=65456
+CCM_WORD phase=78 when=after_stop addr=2338 msb=255 lsb=171 value=65451
+CCM_WORD phase=78 when=after_stop addr=233a msb=1 lsb=136 value=392
+CCM_WORD phase=78 when=after_stop addr=233c msb=255 lsb=225 value=65505
+CCM_WORD phase=78 when=after_stop addr=233e msb=255 lsb=250 value=65530
+CCM_WORD phase=78 when=after_stop addr=2340 msb=255 lsb=149 value=65429
+CCM_WORD phase=78 when=after_stop addr=2342 msb=1 lsb=126 value=382
+CCM_WORD phase=78 when=after_stop addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=78 when=after_stop addr=2346 msb=0 lsb=61 value=61
+MATRIX_SNAPSHOT node=1 when=after_stop complete=1
+REBUILD_TIMING block=1 when=after_stop complete=1
+REBUILD_BLOCK_END index=1 complete=1
+MATRIX_PROFILE fps=5 polls=2 verified=1
+PREVIEW_AWB_RESTORE saved=0 actual=0 verified=1
+AWB_RESTORE saved=26 actual=26 verified=1
+SEQ_RESTORE saved=10 actual=10 verified=1
+SEQ_REFRESH restoring=1 command=5 writes=3 polls=15 state=3 verified=1
+REBUILD_END complete=1 points=74 DMA=444 restored=1
+SENSOR_END sensor=1 complete=1
+MEASUREMENTS expected=76 complete=76 all_complete=1
+END complete=1 aborted=0 io_error=0 captures=473 failures=1

@@ -1,0 +1,36 @@
+{
+  "source": "camera-ccm-normalization/v1",
+  "passed": false,
+  "conclusion": "inconclusive",
+  "files": 14,
+  "bytes": 859424,
+  "completed_arms": 1,
+  "completed_trials": 4,
+  "restored": true,
+  "calibration_validated": false,
+  "failed_reads": [
+    {
+      "sensor": "1",
+      "phase": "6",
+      "label": "ccm_1_disabled",
+      "frame": "-1",
+      "when": "before_stream",
+      "space": "mcu",
+      "name": "hg_snapshot",
+      "addr": "233e",
+      "value": "0",
+      "result": "c9602fef",
+      "time_ms": "4003643423365"
+    }
+  ],
+  "new_coefficients": {
+    "a365": 32,
+    "a366": 175,
+    "a367": 128,
+    "a368": 87,
+    "a369": 130,
+    "a36a": 134,
+    "a36b": 130
+  },
+  "binary_sha256": "36f980be2285c82feae99fc58b17a1deb3a46f06126ad46a0ff8e43ff729e617"
+}

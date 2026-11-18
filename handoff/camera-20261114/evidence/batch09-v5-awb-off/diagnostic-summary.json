@@ -1,0 +1,130 @@
+{
+  "batch": "batch09-v5-awb-off",
+  "source": "exposure-sweep-check/v5",
+  "files": 13,
+  "bytes": 813529,
+  "integrity_verified": true,
+  "atomic_snapshot": false,
+  "calibration_validated": false,
+  "passed": false,
+  "transition_reads": 480,
+  "mcu_unique_values": {
+    "a102": [
+      10
+    ],
+    "a103": [
+      0
+    ],
+    "a104": [
+      3
+    ],
+    "a355": [
+      58
+    ],
+    "a34e": [
+      135
+    ],
+    "a34f": [
+      128
+    ],
+    "a350": [
+      103
+    ],
+    "221f": [
+      128
+    ]
+  },
+  "first_observed_drift": {
+    "frame": 0,
+    "boundary": "after_wait",
+    "values": {
+      "a102": 10,
+      "a103": 0,
+      "a104": 3,
+      "a355": 58,
+      "a34e": 135,
+      "a34f": 128,
+      "a350": 103,
+      "221f": 128,
+      "32d4": 128,
+      "32d6": 128,
+      "32d8": 165,
+      "32da": 133
+    },
+    "errors": [],
+    "times_ms": [
+      4003551597812,
+      4003551597813,
+      4003551597813,
+      4003551597814,
+      4003551597815,
+      4003551597816,
+      4003551597817,
+      4003551597817,
+      4003551597818,
+      4003551597819,
+      4003551597820,
+      4003551597821
+    ]
+  },
+  "coarse_and_AE_before_after_settle": {
+    "immediate": {
+      "3012": [
+        4
+      ],
+      "221f": [
+        128
+      ],
+      "2222": [
+        264
+      ],
+      "a102": [
+        10
+      ],
+      "a103": [
+        0
+      ],
+      "a104": [
+        3
+      ],
+      "a355": [
+        58
+      ]
+    },
+    "before": {
+      "3012": [
+        4
+      ],
+      "221f": [
+        128
+      ],
+      "2222": [
+        264
+      ],
+      "a102": [
+        10
+      ],
+      "a103": [
+        0
+      ],
+      "a104": [
+        3
+      ],
+      "a355": [
+        58
+      ]
+    }
+  },
+  "original_coarse": [
+    264
+  ],
+  "events": [
+    "SEQ_GATE saved=10 target=10 verified=1",
+    "AWB_FORCE saved=26 target=58 verified=1",
+    "CONTROL_DRIFT phase=5 when=before frame=8 addr=32d4 expected=128 actual=174 result=00000000",
+    "AWB_RESTORE saved=26 actual=26 verified=1",
+    "SEQ_RESTORE saved=10 actual=10 verified=1",
+    "SWEEP_END complete=0 stages=2 restored=1",
+    "END complete=0 aborted=0 io_error=0 captures=37 failures=1"
+  ]
+}

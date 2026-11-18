@@ -1,0 +1,13 @@
+{
+  "source": "camera-ccm-normalization/v2",
+  "status": "device_exited_no_recovered_evidence",
+  "deployment_accepted": true,
+  "device": "192.168.0.14",
+  "files_recovered": 0,
+  "passed": false,
+  "calibration_validated": false,
+  "restoration": "unknown_no_device_evidence",
+  "cause": "unknown",
+  "user_observation": "screen_flashed_application_exited_no_visible_error",
+  "session_error": "readiness_deadline_TimeoutError_no_redeployment"
+}

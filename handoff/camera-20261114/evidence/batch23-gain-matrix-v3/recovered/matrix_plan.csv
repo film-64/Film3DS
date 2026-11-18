@@ -1,0 +1,16 @@
+node,trial,target,cycles,reason
+0,0,128,8,mandatory
+0,1,96,2,first_overwritten
+0,2,160,2,first_overwritten
+1,0,128,8,mandatory
+1,1,96,2,first_overwritten
+1,2,160,2,first_overwritten
+2,0,128,8,mandatory
+2,1,96,8,first_held
+2,2,160,8,first_held
+3,0,128,8,mandatory
+3,1,96,8,first_held
+3,2,160,8,first_held
+4,0,128,8,mandatory
+4,1,96,2,first_overwritten
+4,2,160,2,first_overwritten

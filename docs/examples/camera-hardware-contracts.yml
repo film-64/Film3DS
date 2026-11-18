@@ -1,0 +1,40 @@
+name: Camera hardware contracts
+on:
+  push:
+    branches: ['codex/camera-hardware-handoff-*']
+  pull_request:
+    paths: ['tools/**', 'tests/**', 'diagnostics/**', 'handoff/camera-20261114/**', 'requirements-camera.txt', '.github/workflows/camera-hardware-contracts.yml']
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r requirements-camera.txt
+      - run: python tools/bootstrap_camera_handoff.py
+      - run: python tools/verify_camera_handoff.py
+      - run: python tests/camera_hardware_handoff.py
+      - run: make -C diagnostics/camera-deep-probe build/probe-driver build/probe-plan CC=gcc LDFLAGS=
+      - name: Native diagnostic models
+        working-directory: diagnostics/camera-deep-probe
+        run: |
+          EXPOSURE_DENSE_ONLY=1 ./build/probe-driver
+          EXPOSURE_REBUILD_ONLY=1 ./build/probe-driver
+          GAIN_MATRIX_ONLY=1 ./build/probe-driver
+          CCM_BOOT_ONLY=1 ./build/probe-driver
+          ./build/probe-plan
+      - name: Report and analysis contracts
+        run: |
+          python tests/exposure_dense_report.py
+          python tests/exposure_rebuild_report.py
+          python tests/camera_gain_matrix_report.py
+          python tests/camera_ccm_boot_report.py
+          python tests/exposure_dense_fit.py
+          python tests/exposure_response_fit.py
+          python tests/exposure_luma_transfer.py
+          python tests/exposure_luma_validate.py
+          python tests/exposure_sweep_session.py
+          python tools/exposure_sweep_contract.py --header diagnostics/camera-deep-probe/probes/exposure/sweep_contract.h --check
+          git diff --check

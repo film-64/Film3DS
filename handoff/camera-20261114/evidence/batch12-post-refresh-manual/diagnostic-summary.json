@@ -1,0 +1,270 @@
+{
+  "source": "exposure-sweep-post-refresh-manual/v1",
+  "binary_sha256": "e08a7d212c23fbd288383c63d1c0e3cc50ae3db67f2d51629918055013f00619",
+  "files_verified": 13,
+  "bytes": 828953,
+  "transition_reads_verified": 520,
+  "atomic_snapshot": false,
+  "calibration_validated": false,
+  "passed": false,
+  "manual_write_order_and_no_refresh_proof_verified": true,
+  "coarse_held_through_8_settle_frames_and_frame8_before": true,
+  "register_unique_values": {
+    "a102": [
+      10
+    ],
+    "a103": [
+      0
+    ],
+    "a104": [
+      3
+    ],
+    "a355": [
+      58
+    ],
+    "a34e": [
+      128
+    ],
+    "a34f": [
+      128
+    ],
+    "a350": [
+      128
+    ],
+    "221f": [
+      128
+    ],
+    "3012": [
+      4
+    ]
+  },
+  "frame0": [
+    {
+      "frame": 0,
+      "boundary": "before_arm",
+      "values": {
+        "a102": 10,
+        "a103": 0,
+        "a104": 3,
+        "a355": 58,
+        "a34e": 128,
+        "a34f": 128,
+        "a350": 128,
+        "221f": 128,
+        "32d4": 128,
+        "32d6": 128,
+        "32d8": 128,
+        "32da": 128,
+        "3012": 4
+      },
+      "errors": [],
+      "times_ms": [
+        4003552662746,
+        4003552662747,
+        4003552662747,
+        4003552662748,
+        4003552662749,
+        4003552662750,
+        4003552662751,
+        4003552662751,
+        4003552662752,
+        4003552662753,
+        4003552662754,
+        4003552662755,
+        4003552662755
+      ]
+    },
+    {
+      "frame": 0,
+      "boundary": "after_arm",
+      "values": {
+        "a102": 10,
+        "a103": 0,
+        "a104": 3,
+        "a355": 58,
+        "a34e": 128,
+        "a34f": 128,
+        "a350": 128,
+        "221f": 128,
+        "32d4": 128,
+        "32d6": 128,
+        "32d8": 128,
+        "32da": 128,
+        "3012": 4
+      },
+      "errors": [],
+      "times_ms": [
+        4003552662756,
+        4003552662757,
+        4003552662757,
+        4003552662758,
+        4003552662759,
+        4003552662760,
+        4003552662761,
+        4003552662761,
+        4003552662762,
+        4003552662763,
+        4003552662764,
+        4003552662765,
+        4003552662765
+      ]
+    },
+    {
+      "frame": 0,
+      "boundary": "after_start",
+      "values": {
+        "a102": 10,
+        "a103": 0,
+        "a104": 3,
+        "a355": 58,
+        "a34e": 128,
+        "a34f": 128,
+        "a350": 128,
+        "221f": 128,
+        "32d4": 128,
+        "32d6": 128,
+        "32d8": 128,
+        "32da": 128,
+        "3012": 4
+      },
+      "errors": [],
+      "times_ms": [
+        4003552662766,
+        4003552662767,
+        4003552662767,
+        4003552662768,
+        4003552662769,
+        4003552662770,
+        4003552662770,
+        4003552662771,
+        4003552662772,
+        4003552662773,
+        4003552662774,
+        4003552662775,
+        4003552662775
+      ]
+    },
+    {
+      "frame": 0,
+      "boundary": "after_wait",
+      "values": {
+        "a102": 10,
+        "a103": 0,
+        "a104": 3,
+        "a355": 58,
+        "a34e": 128,
+        "a34f": 128,
+        "a350": 128,
+        "221f": 128,
+        "32d4": 128,
+        "32d6": 128,
+        "32d8": 133,
+        "32da": 133,
+        "3012": 4
+      },
+      "errors": [],
+      "times_ms": [
+        4003552662853,
+        4003552662854,
+        4003552662855,
+        4003552662855,
+        4003552662856,
+        4003552662857,
+        4003552662858,
+        4003552662859,
+        4003552662860,
+        4003552662860,
+        4003552662861,
+        4003552662862,
+        4003552662863
+      ]
+    },
+    {
+      "frame": 0,
+      "boundary": "after_stop",
+      "values": {
+        "a102": 10,
+        "a103": 0,
+        "a104": 3,
+        "a355": 58,
+        "a34e": 128,
+        "a34f": 128,
+        "a350": 128,
+        "221f": 128,
+        "32d4": 133,
+        "32d6": 133,
+        "32d8": 133,
+        "32da": 133,
+        "3012": 4
+      },
+      "errors": [],
+      "times_ms": [
+        4003552662864,
+        4003552662865,
+        4003552662865,
+        4003552662866,
+        4003552662867,
+        4003552662867,
+        4003552662868,
+        4003552662869,
+        4003552662870,
+        4003552662871,
+        4003552662872,
+        4003552662873,
+        4003552662873
+      ]
+    }
+  ],
+  "first_observed_IFP_drift": {
+    "frame": 0,
+    "boundary": "after_wait",
+    "values": {
+      "a102": 10,
+      "a103": 0,
+      "a104": 3,
+      "a355": 58,
+      "a34e": 128,
+      "a34f": 128,
+      "a350": 128,
+      "221f": 128,
+      "32d4": 128,
+      "32d6": 128,
+      "32d8": 133,
+      "32da": 133,
+      "3012": 4
+    },
+    "errors": [],
+    "times_ms": [
+      4003552662853,
+      4003552662854,
+      4003552662855,
+      4003552662855,
+      4003552662856,
+      4003552662857,
+      4003552662858,
+      4003552662859,
+      4003552662860,
+      4003552662860,
+      4003552662861,
+      4003552662862,
+      4003552662863
+    ]
+  },
+  "events": [
+    "SEQ_REFRESH restoring=0 command=5 writes=1 polls=16 state=3 verified=1",
+    "POST_REFRESH_MANUAL seq=10 preview_awb=0 awb_r=128 awb_g=128 awb_b=128 command=0 state=3 verified=1",
+    "MANUAL_FINAL phase=5 coarse=4 isp=128 verified=1",
+    "CONTROL_DRIFT phase=5 when=before frame=8 addr=32d4 expected=128 actual=133 result=00000000",
+    "PREVIEW_AWB_RESTORE saved=0 actual=0 verified=1",
+    "AWB_RESTORE saved=26 actual=26 verified=1",
+    "SEQ_RESTORE saved=10 actual=10 verified=1",
+    "SEQ_REFRESH restoring=1 command=5 writes=2 polls=9 state=3 verified=1",
+    "SWEEP_END complete=0 stages=2 restored=1",
+    "END complete=0 aborted=0 io_error=0 captures=37 failures=1"
+  ],
+  "limitations": [
+    "S13 stopped before the first formal measured capture because physical IFP was 133",
+    "Sampled state stability does not exclude transitions between sequential reads",
+    "Register writer and residual common gain source remain unproven"
+  ]
+}

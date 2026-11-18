@@ -1,0 +1,21 @@
+{
+  "schema": "camera-exposure-reference-input/v1",
+  "meter": "user_external_reference",
+  "reading": {
+    "iso": 100,
+    "f_number": 2.8,
+    "shutter_seconds": 0.016666666666666666
+  },
+  "reported_ev100": 9,
+  "computed_ev100": 8.877744249949002,
+  "target_id": "screen-gray-01",
+  "screen": {
+    "patch": "neutral_gray_requested",
+    "brightness_setting": "not_reported",
+    "stability": "user_reports_relative_stability_1_to_10_minutes"
+  },
+  "raw_user_input": "\u5168\u5c40\u6e2c\u5149\u8b80\u6578\u6c92\u8b8a",
+  "received_unix": 1794637114.004606,
+  "calibration_validated": false,
+  "reading_confirmation": "user_reports_same_global_meter_reading"
+}

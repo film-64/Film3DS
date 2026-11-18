@@ -1,0 +1,205 @@
+{
+  "source": "camera-exposure-rebuild/v2",
+  "complete": true,
+  "strict_report_passed": true,
+  "files": 313,
+  "bytes": 11154284,
+  "points": 74,
+  "DMA_frames": 748,
+  "target_ROI_images": 296,
+  "restored": true,
+  "holds": [
+    {
+      "fps": 5,
+      "DMA_frames": 128,
+      "first_to_last_wait_seconds": 25.394,
+      "Y_min": 134.780598958,
+      "Y_max": 134.924153646,
+      "observed_IFP": {
+        "32d4": [
+          128
+        ],
+        "32d6": [
+          128
+        ],
+        "32d8": [
+          128
+        ],
+        "32da": [
+          128
+        ]
+      }
+    },
+    {
+      "fps": 15,
+      "DMA_frames": 128,
+      "first_to_last_wait_seconds": 8.466,
+      "Y_min": 135.590576172,
+      "Y_max": 135.686686198,
+      "observed_IFP": {
+        "32d4": [
+          128
+        ],
+        "32d6": [
+          128
+        ],
+        "32d8": [
+          128
+        ],
+        "32da": [
+          128
+        ]
+      }
+    }
+  ],
+  "FD_segments": [
+    {
+      "fps": 5,
+      "kind": "FD_off_before",
+      "actual_Gr": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "post_reassert_hold": null
+    },
+    {
+      "fps": 5,
+      "kind": "FD_on",
+      "actual_Gr": [
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133
+      ],
+      "post_reassert_hold": null
+    },
+    {
+      "fps": 5,
+      "kind": "FD_off_after",
+      "actual_Gr": [
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "post_reassert_hold": true
+    },
+    {
+      "fps": 15,
+      "kind": "FD_off_before",
+      "actual_Gr": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "post_reassert_hold": null
+    },
+    {
+      "fps": 15,
+      "kind": "FD_on",
+      "actual_Gr": [
+        128,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133
+      ],
+      "post_reassert_hold": null
+    },
+    {
+      "fps": 15,
+      "kind": "FD_off_after",
+      "actual_Gr": [
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        133,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "post_reassert_hold": true
+    }
+  ],
+  "external_reference_nominal_drift_ev": -0.12553088208385965,
+  "external_reference_approximate": true,
+  "calibration_validated": false,
+  "optical_time_verified": false,
+  "remaining": [
+    "optical_shutter_validation",
+    "fixed_pipeline_RGB_response_and_gain_calibration",
+    "independent_light_or_batch_holdout",
+    "external_reference_uncertainty"
+  ]
+}

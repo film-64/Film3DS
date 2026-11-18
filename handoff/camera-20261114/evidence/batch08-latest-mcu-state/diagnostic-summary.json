@@ -1,0 +1,189 @@
+{
+  "source": "exposure-sweep-check/v4",
+  "binary_sha256": "d30032fac757dd584fdd4d51d00439443eed2e229ac2df6c7f25d1aed8aebc3c",
+  "observed_firmware": "FILMPROBE schema=1 revision=exposure-sweep-check-v4 new3ds=1 model_result=00000000 kernel=023a0000 settle_frames=8 measured_frames=12",
+  "sensor": 1,
+  "label": "sweep_s13_c0004",
+  "files_verified": 13,
+  "bytes": 808425,
+  "capture_complete": false,
+  "calibration_validated": false,
+  "atomic_snapshot": false,
+  "transition_groups_verified": 40,
+  "transition_reads": 440,
+  "mcu_unique_values": {
+    "a102": [
+      10
+    ],
+    "a104": [
+      3
+    ],
+    "a355": [
+      34
+    ],
+    "a34e": [
+      132
+    ],
+    "a34f": [
+      128
+    ],
+    "a350": [
+      105
+    ],
+    "221f": [
+      128
+    ]
+  },
+  "first_observed_drift": {
+    "frame": 0,
+    "boundary": "after_wait",
+    "values": {
+      "32d4": 128,
+      "32d6": 128,
+      "32d8": 162,
+      "32da": 133,
+      "a102": 10,
+      "a104": 3,
+      "a355": 34,
+      "a34e": 132,
+      "a34f": 128,
+      "a350": 105,
+      "221f": 128
+    },
+    "time_start_ms": 4003550290685,
+    "time_end_ms": 4003550290693
+  },
+  "frame0": [
+    {
+      "frame": 0,
+      "boundary": "before_arm",
+      "values": {
+        "32d4": 128,
+        "32d6": 128,
+        "32d8": 128,
+        "32da": 128,
+        "a102": 10,
+        "a104": 3,
+        "a355": 34,
+        "a34e": 132,
+        "a34f": 128,
+        "a350": 105,
+        "221f": 128
+      },
+      "time_start_ms": 4003550290543,
+      "time_end_ms": 4003550290550
+    },
+    {
+      "frame": 0,
+      "boundary": "after_arm",
+      "values": {
+        "32d4": 128,
+        "32d6": 128,
+        "32d8": 128,
+        "32da": 128,
+        "a102": 10,
+        "a104": 3,
+        "a355": 34,
+        "a34e": 132,
+        "a34f": 128,
+        "a350": 105,
+        "221f": 128
+      },
+      "time_start_ms": 4003550290551,
+      "time_end_ms": 4003550290559
+    },
+    {
+      "frame": 0,
+      "boundary": "after_start",
+      "values": {
+        "32d4": 128,
+        "32d6": 128,
+        "32d8": 128,
+        "32da": 128,
+        "a102": 10,
+        "a104": 3,
+        "a355": 34,
+        "a34e": 132,
+        "a34f": 128,
+        "a350": 105,
+        "221f": 128
+      },
+      "time_start_ms": 4003550290560,
+      "time_end_ms": 4003550290567
+    },
+    {
+      "frame": 0,
+      "boundary": "after_wait",
+      "values": {
+        "32d4": 128,
+        "32d6": 128,
+        "32d8": 162,
+        "32da": 133,
+        "a102": 10,
+        "a104": 3,
+        "a355": 34,
+        "a34e": 132,
+        "a34f": 128,
+        "a350": 105,
+        "221f": 128
+      },
+      "time_start_ms": 4003550290685,
+      "time_end_ms": 4003550290693
+    },
+    {
+      "frame": 0,
+      "boundary": "after_stop",
+      "values": {
+        "32d4": 167,
+        "32d6": 162,
+        "32d8": 162,
+        "32da": 133,
+        "a102": 10,
+        "a104": 3,
+        "a355": 34,
+        "a34e": 132,
+        "a34f": 128,
+        "a350": 105,
+        "221f": 128
+      },
+      "time_start_ms": 4003550290694,
+      "time_end_ms": 4003550290702
+    }
+  ],
+  "awb_rgb": [
+    132,
+    128,
+    105
+  ],
+  "physical_rg1g2b": [
+    167,
+    162,
+    162,
+    133
+  ],
+  "color_ratio_comparison": {
+    "method": "round(AWB_channel * observed_IFP_G / AWB_G)",
+    "observed_common_scale": 1.265625,
+    "predicted": [
+      167,
+      162,
+      162,
+      133
+    ],
+    "matches_observed": true,
+    "causation_proven": false
+  },
+  "measured_capture_frames": [],
+  "restoration_records": [
+    "AWB_RESTORE saved=2 actual=2 verified=1",
+    "SEQ_RESTORE saved=10 actual=10 verified=1",
+    "SWEEP_END complete=0 stages=2 restored=1",
+    "END complete=0 aborted=0 io_error=0 captures=37 failures=1"
+  ],
+  "limits": [
+    "MCU and IFP reads are sequential, not atomic",
+    "Sampled state 3 does not exclude transitions between reads",
+    "No idle-without-StartCapture control was implemented in this version",
+    "Register writer and common-scale source remain unidentified"
+  ]
+}

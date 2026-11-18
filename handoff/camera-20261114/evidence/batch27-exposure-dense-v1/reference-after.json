@@ -1,0 +1,24 @@
+{
+  "schema": "camera-exposure-reference-input/v1",
+  "recorded_unix": 1794642198.7816901,
+  "target_id": "screen-gray-01",
+  "inherited_settings": {
+    "iso": 100,
+    "f_number": 2.8
+  },
+  "global_meter": {
+    "raw_user_input": "1/60+ \u5927\u6982\u572865\uff1f \u7576\u524d\u8b80\u6578\u662f1/60 - - 1/125 \u8b80\u6578\u57281/60\u5192\u982d\u4e00\u9ede\u3002",
+    "metering_mode_confirmation": "\u5168\u5c40\u6e2c\u5149",
+    "nominal_shutter_seconds": 0.015384615384615385,
+    "nominal_computed_ev100": 8.993221467368938,
+    "display_scale_markers": [
+      "1/60",
+      "1/125"
+    ],
+    "interpretation": "indicator_near_1over60_approx1over65_not_full_range_variation",
+    "precision": "approximate_not_quantified"
+  },
+  "center_meter": null,
+  "center_after_reading_status": "not_provided",
+  "calibration_validated": false
+}

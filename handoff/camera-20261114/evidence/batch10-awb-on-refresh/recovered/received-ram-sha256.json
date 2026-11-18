@@ -1,0 +1,93 @@
+[
+  {
+    "id": 0,
+    "name": "calls.csv",
+    "bytes": 26390,
+    "crc32": "d6ed704c",
+    "sha256": "026c0cd282a8663137b825c012876419b8212ef0e7fb48846763c490f29d2360"
+  },
+  {
+    "id": 1,
+    "name": "reads.csv",
+    "bytes": 155628,
+    "crc32": "eefaa24c",
+    "sha256": "6ec4d81fca45388d6c5822bf241026793b9f4e78b3c2334d112929b41b2b8768"
+  },
+  {
+    "id": 2,
+    "name": "frames.csv",
+    "bytes": 2823,
+    "crc32": "2ee23532",
+    "sha256": "4f80115513c57ec437a14107cd23e1bff4ed225e5d21dda856f4a5c788b41eb7"
+  },
+  {
+    "id": 3,
+    "name": "manifest.txt",
+    "bytes": 3256,
+    "crc32": "bf3925ae",
+    "sha256": "f0c03462cdc667f4822e7cf59d8d5c1d530a7d51dfeee5be50f823790739699f"
+  },
+  {
+    "id": 4,
+    "name": "lifecycle.txt",
+    "bytes": 0,
+    "crc32": "00000000",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "id": 5,
+    "name": "s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "crc32": "71e1ddd2",
+    "sha256": "95f94a2a368aaedda05e62c68ba20048d85d5407d97a36a0f7b1a848150b5f7a"
+  },
+  {
+    "id": 6,
+    "name": "calibration_plan.csv",
+    "bytes": 207,
+    "crc32": "35145980",
+    "sha256": "eb3868bd887f0893f6ee9ec6179a4d42cc99f9767319ba784549766cba54cd5f"
+  },
+  {
+    "id": 7,
+    "name": "frame_burst.csv",
+    "bytes": 1097,
+    "crc32": "2657204c",
+    "sha256": "b1f26bfa2d3d55f804678821c77a5f690db5722c5c421a42260d7916434ff354"
+  },
+  {
+    "id": 8,
+    "name": "roi.csv",
+    "bytes": 5270,
+    "crc32": "452201dd",
+    "sha256": "e6d81e6b0460ffba3f96797320cdba8ca3df6951b2e32004f8ca4752ca810781"
+  },
+  {
+    "id": 9,
+    "name": "noise.csv",
+    "bytes": 197,
+    "crc32": "88b3df26",
+    "sha256": "cfcf2def8c5334f3fde7fc264d7742b0b347d546c168e21ebc914cc5e16a52e9"
+  },
+  {
+    "id": 10,
+    "name": "execution.csv",
+    "bytes": 974,
+    "crc32": "0fa2cd9a",
+    "sha256": "46b5a17a236471d01c2fc79223bb8aa27e4a48fdf746cf3d2302e4d7e35dc533"
+  },
+  {
+    "id": 11,
+    "name": "s1-p003-sweep_seed.pgm",
+    "bytes": 307215,
+    "crc32": "0d6a3030",
+    "sha256": "2b55e1598a85b3bf317a060ebb43e0266dcde85b9a2b38d6f7f7ab4d6280c53a"
+  },
+  {
+    "id": 12,
+    "name": "s1-p004-sweep_ref_00.yuyv",
+    "bytes": 24576,
+    "crc32": "4e48d01c",
+    "sha256": "cad7a5cecc18f3b67c9b49580239f83f700fec522d2f3bde33dd3951426a71f8"
+  }
+]

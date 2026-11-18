@@ -1,0 +1,1 @@
+{"source": "frozen_ram_http_range", "policy": "frozen-resume-v2", "file": "reads.csv", "start": 114688, "length": 16384, "exception": "ConnectionResetError", "fingerprint": "44ae519f98d110d5e52bc555e5003fcc0080fb969540845bc3f307d108ade60a", "attempt": 2, "failure_count": 1, "measurement_repeated": false}
