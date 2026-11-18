@@ -1,6 +1,7 @@
 #include "roll.h"
 #include "film_runtime_contract.h"
 #include "storage_internal.h"
+#include "exposure_matrix.h"
 #include <float.h>
 #include <math.h>
 #include <stdlib.h>
@@ -76,6 +77,17 @@ FilmStatus film_roll_decode(const char *source,const char *originals,const char 
         s=film_raw_frame_scene(&frame,NULL,&scene);
         if(s==FILM_OK)s=original_stat(originals,id,&after,name);
         if(s==FILM_OK&&!same_original(&before,&after))s=FILM_CORRUPT;
+        /* Fit only at explicit Roll decode, never in the shutter worker.
+         * F3EM is optional derived metadata; older RAWs stay decodable.
+         * No image data or original DNG is written by this operation. */
+        if(s==FILM_OK){
+            FilmExposureMatrix matrix={0};
+            FilmStatus metadata=film_exposure_matrix_read(previews,id,
+                film_roll_source_crc(&frame.source),&matrix);
+            if(metadata==FILM_OK && matrix.preview_valid && !matrix.fitted &&
+               film_exposure_matrix_fit(&matrix,&scene)==FILM_OK)
+                (void)film_exposure_matrix_write(previews,&matrix);
+        }
         if(s==FILM_OK)s=write_cache(&frame,&scene,&before,previews,id);
         if(s==FILM_OK)s=film_roll_pair_publish(source,&frame,&scene,previews,id);
     }else if(s==FILM_OK){
