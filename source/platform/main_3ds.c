@@ -822,7 +822,18 @@ static bool finish_capture(bool wait)
         if (joined != 0) return false;
         threadFree(save->thread);
     }
-    app.live=app.camera.initialized;app.preview_failed=!app.live;reset_preview_tracking();
+    app.live=app.camera.initialized;app.preview_failed=!app.live;
+    if(app.live&&app.camera.exposure_mode==FILM_EXPOSURE_NATIVE_AE){
+        /* Raw transaction temporarily switches AE off; reassert the
+         * explicitly programmed window before restarting any preview. */
+        FilmStatus roi=film_camera_set_ae_window(&app.camera,app.ae_region);
+        if(roi!=FILM_OK){
+            film_log(app.log,"Post-RAW AE window restore",roi,app.camera.last_result);
+            film_camera_close(&app.camera);
+            app.live=false;app.preview_failed=true;
+        }
+    }
+    reset_preview_tracking();
     if(save->capture_status!=FILM_OK)update_status("RAW capture/restore; L reopens",save->capture_status,app.camera.last_result);
     if(!save->frame.source.pixels){free(save->gray_pair.preview.pixels);*save=(CaptureSave){0};return false;}
     if (save->profile_status != FILM_OK)
@@ -868,7 +879,11 @@ static bool capture_photo(bool gray_pair)
     save->matrix.exposure_mode=(unsigned)app.camera_values[FILM_CAM_EXPOSURE_MODE];
     save->matrix.native_level=save->matrix.exposure_mode==FILM_EXPOSURE_NATIVE_AE?
         app.camera_values[FILM_CAM_EV_COMP]:0;
-    save->matrix.preview_valid=app.stability.preview_valid;
+    /* Legacy F3E fit samples the whole RAW scene. Do not fit a partial
+     * metering ROI against full-scene RAW quantiles; new F3YG v2 carries the
+     * precise hardware ROI for later paired Display-gray calibration. */
+    save->matrix.preview_valid=app.stability.preview_valid&&
+        app.camera.ae_window_applied&&film_ae_region_is_full(app.camera.ae_window);
     if(save->matrix.preview_valid)memcpy(save->matrix.preview_linear,app.stability.preview_linear,
         sizeof save->matrix.preview_linear);
     if(gray_pair){
@@ -880,6 +895,7 @@ static bool capture_photo(bool gray_pair)
            app.camera.format!=FILM_YUYV||!app.camera.preview_ready||
            !app.last_native_frame_ms||now<app.last_native_frame_ms||
            now-app.last_native_frame_ms>2500||!app.stability.preview_valid||
+           !app.camera.ae_window_applied||
            !app.camera.preview_dma[app.camera.preview_pending^1]){
             update_status("Gray pair: need fresh Native AE VGA preview",FILM_STATE,0);
             *save=(CaptureSave){0};return false;
@@ -895,6 +911,7 @@ static bool capture_photo(bool gray_pair)
         save->gray_requested=true;
         save->gray_pair=(FilmGrayPair){
             .preview={640,480,FILM_YUYV,pixels},.yuv=app.camera_yuv,
+            .meter_region=app.camera.ae_window,
             .preview_time_ms=app.last_native_frame_ms,
             .native_level=app.camera_values[FILM_CAM_EV_COMP],
             .exposure_mode=FILM_EXPOSURE_NATIVE_AE,
@@ -1900,6 +1917,7 @@ int main(int argc, char **argv)
     scan_looks(LUTS);
     load_roll();
     app.grain = FILM_GRAIN_MEDIUM;
+    app.ae_region=film_ae_region_default();
     app.control=FILM_CAM_EXPOSURE_MODE;
     app.raw_shoulder=.75f;
     app.grain_size=1;app.grain_shadow=.8f;app.grain_mid=1.1f;app.grain_highlight=.7f;
@@ -2046,7 +2064,9 @@ int main(int argc, char **argv)
                     }
                     FilmStatus exposure = film_camera_select_exposure_mode(&app.camera,
                         (FilmExposureMode)app.camera_values[FILM_CAM_EXPOSURE_MODE],app.camera_values[FILM_CAM_EV_COMP],app.log);
-                    if(exposure!=FILM_OK){update_status("Exposure mode",exposure,app.camera.last_result);film_camera_close(&app.camera);}
+                    if(exposure==FILM_OK&&app.camera.exposure_mode==FILM_EXPOSURE_NATIVE_AE)
+                        exposure=film_camera_set_ae_window(&app.camera,app.ae_region);
+                    if(exposure!=FILM_OK){update_status("Exposure mode/AE window",exposure,app.camera.last_result);film_camera_close(&app.camera);}
                     else app.camera_auto=film_camera_auto_state(&app.camera);
                     if (!app.camera.initialized) {
                         app.live = false;
