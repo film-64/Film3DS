@@ -7,6 +7,7 @@
 #include "roll.h"
 #include "raw_darkroom.h"
 #include "raw_capture.h"
+#include "exposure_matrix.h"
 #include "layered_grain.h"
 #include "lut_catalog.h"
 #include "debug_mode.h"
@@ -49,6 +50,8 @@ typedef struct {
     uint64_t capture_ms, save_ms;
     FilmStatus status, profile_status;
     FilmRollSaveResult result;
+    FilmExposureMatrix matrix;
+    FilmStatus matrix_status;
     atomic_uint phase;
     unsigned capture_zoom;
     int expected_step;
@@ -98,6 +101,8 @@ typedef struct {
     FilmRawScene decoded_scene;
     unsigned decoded_id,decoded_calibration;
     FilmRecipe decoded_recipe;
+    FilmExposureMatrix shot_matrix;
+    unsigned shot_curve_mode; /* 0 neutral, 1 capture-reference approximation */
     unsigned source_width, source_height;
     bool halation;
     FilmGrain grain;
@@ -684,6 +689,12 @@ static void save_capture(void *argument)
     save->status=film_roll_capture_save("film-roll-capture-save/v1",&save->frame,path,PREVIEWS,save->id,&save->result);
     if(app.log){fprintf(app.log,"SAVE result written=%u write=%s verify=%s preview=%s\n",save->result.written,film_status_name(save->result.write_status),film_status_name(save->result.verification_status),film_status_name(save->result.preview_status));fflush(app.log);}
     film_log(app.log,"Shutter original SD CRC",save->result.verification_status,save->id);
+    if(save->status==FILM_OK){
+        save->matrix.id=save->id;
+        save->matrix.source_crc=film_roll_source_crc(&save->frame.source);
+        save->matrix_status=film_exposure_matrix_write(PREVIEWS,&save->matrix);
+        film_log(app.log,"Capture native-preview curve reference",save->matrix_status,save->id);
+    }
     save->save_ms=(ticks(NULL)-started)/1000;atomic_store(&save->phase,CAPTURE_DONE);
 }
 
@@ -714,6 +725,7 @@ static bool finish_capture(bool wait)
                  save->capture_mode, save->save_ms, save->result.verification_status==FILM_OK?"OK":"FAILED");
         film_log(app.log, app.status, FILM_OK, 0);
         if(save->status!=FILM_OK)update_status("Original kept; SD verify failed",save->status,0);
+        else if(save->matrix_status!=FILM_OK)update_status("Original saved; look reference missing",save->matrix_status,0);
         else update_status("Original saved; Roll SELECT decodes",FILM_OK,0);
 
     } else update_status(save->result.written ? "Capture SD verify" : "Capture SD write", save->status, 0);
@@ -735,6 +747,13 @@ static bool capture_photo(void)
     save->capture_status=FILM_STATE;save->capture_zoom=app.camera.zoom;
     save->expected_step=app.camera_values[FILM_CAM_EXPOSURE];
     save->id=app.next_number;save->frame.recipe=film_ui_capture_recipe(&app.ui);
+    save->matrix=film_exposure_matrix_default();
+    save->matrix.exposure_mode=(unsigned)app.camera_values[FILM_CAM_EXPOSURE_MODE];
+    save->matrix.native_level=save->matrix.exposure_mode==FILM_EXPOSURE_NATIVE_AE?
+        app.camera_values[FILM_CAM_EV_COMP]:0;
+    save->matrix.preview_valid=app.stability.preview_valid;
+    if(save->matrix.preview_valid)memcpy(save->matrix.preview_linear,app.stability.preview_linear,
+        sizeof save->matrix.preview_linear);
     save->capture_mode="RAW DNG";
     atomic_store(&app.camera.capture_phase,FILM_CAPTURE_VERIFY);atomic_store(&save->phase,CAPTURE_ACQUIRING);
     snprintf(app.status,sizeof app.status,"Capturing RAW #%04u",save->id);
