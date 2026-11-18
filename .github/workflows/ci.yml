@@ -54,7 +54,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install native-media integration dependencies
-        run: sudo apt-get update && sudo apt-get install -y libjpeg-dev python3-pil
+        run: sudo apt-get update && sudo apt-get install -y libjpeg-dev python3-pil python3-capstone
       - name: Verify native media and gallery integration
         run: PATH=/usr/bin:/bin make test-native-integration
 
