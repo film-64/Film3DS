@@ -19,6 +19,13 @@ jobs:
         run: PATH=/usr/bin:/bin make -j2 test
       - name: Run AddressSanitizer and UndefinedBehaviorSanitizer
         run: PATH=/usr/bin:/bin make sanitize
+      - name: Generate unaltered 21-step sRGB gray chart
+        run: python3 tools/gray_chart.py --out Film3DS-gray21.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FilmGrayCal-21step-chart
+          path: Film3DS-gray21.png
+          if-no-files-found: error
 
   contracts:
     runs-on: ubuntu-24.04
@@ -94,6 +101,9 @@ jobs:
           test -s Film3DS.3dsx
           sha256sum Film3DS.3dsx > Film3DS.3dsx.sha256
           sha256sum --check Film3DS.3dsx.sha256
+          cp Film3DS.3dsx FilmGrayCal.3dsx
+          sha256sum FilmGrayCal.3dsx > FilmGrayCal.3dsx.sha256
+          sha256sum --check FilmGrayCal.3dsx.sha256
           make -j2 -f Makefile.probe
           test -s FilmProbe.3dsx
           python3 tools/verify_3dsx.py FilmProbe.3dsx
@@ -102,6 +112,13 @@ jobs:
           mkdir -p build-3ds/notices
           cp build-3ds/jpeg-arm11/source/LICENSE.md build-3ds/notices/libjpeg-turbo-LICENSE.md
           cp build-3ds/jpeg-arm11/source/README.ijg build-3ds/notices/libjpeg-turbo-README.ijg
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FilmGrayCal-ARM11
+          path: |
+            FilmGrayCal.3dsx
+            FilmGrayCal.3dsx.sha256
+          if-no-files-found: error
       - uses: actions/upload-artifact@v4
         with:
           name: Film3DS-ARM11

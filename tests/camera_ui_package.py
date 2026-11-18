@@ -332,6 +332,22 @@ class UiPackageTests(unittest.TestCase):
         self.assertLess(send,copy)
         self.assertLess(copy,text.index('if(log){fprintf(log,"CAM bool cmd=%02x header='))
 
+    def test_gray_pair_capture_and_source_contract(self):
+        main=(ROOT/"source/platform/main_3ds.c").read_text()
+        storage=(ROOT/"source/storage/gray_capture.c").read_text()
+        decode=(ROOT/"source/storage/roll_decode.c").read_text()
+        dng=(ROOT/"source/storage/dng.c").read_text()
+        self.assertIn('capture_photo((keys&KEY_R)&&(held&KEY_SELECT))',main)
+        self.assertIn('app.camera.preview_dma[app.camera.preview_pending^1]',main)
+        self.assertIn('film_gray_pair_write("film-gray-pair-write/v1"',main)
+        self.assertIn('film_gray_pair_verify("film-gray-pair-verify/v1"',main)
+        self.assertIn('gray==FILM_IO',decode)
+        self.assertIn('ROLL%04u.F3Y',storage)
+        self.assertNotIn('film_gray_pair_',dng)
+        self.assertFalse(CONTRACT_MATRIX["film-gray-pair-write/v1"]["compute"])
+        self.assertFalse(CONTRACT_MATRIX["film-gray-pair-write/v1"]["queues"])
+        self.assertEqual(CONTRACT_MATRIX["film-gray-pair-write/v1"]["retries"],0)
+
     def test_exposure_matrix_has_separate_neutral_and_shot_presets(self):
         root = ROOT
         main = (root/"source/platform/main_3ds.c").read_text()
