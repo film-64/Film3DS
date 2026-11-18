@@ -38,9 +38,18 @@ FilmStatus film_lut_catalog_scan(const char *source,const char *directory,FilmLo
 FilmStatus film_lut_install_missing(const char *source,const char *bundled,const char *directory,unsigned *installed)
 {
     if(!source_is(source,"film-lut-install/v1"))return FILM_STATE;
-    if(!installed)return FILM_INVALID;*installed=0;FilmLookCatalog catalog={0};
-    FilmStatus s=film_lut_catalog_scan("film-lut-catalog/v1",bundled,&catalog);if(s!=FILM_OK)return s;
-    if(!directory||!*directory){film_lut_catalog_free(&catalog);return FILM_INVALID;}
+    if(!installed)return FILM_INVALID;
+    *installed=0;
+    if(!bundled||!*bundled||!directory||!*directory)return FILM_INVALID;
+    FilmLookCatalog catalog={0};
+    FilmStatus s=film_lut_catalog_scan("film-lut-catalog/v1",bundled,&catalog);
+    /* An intentionally LUT-free ROMFS has no luts/ directory. It must not
+     * report an import failure or touch existing user-managed SD LUTs. */
+    if(s==FILM_IO){
+        struct stat st;
+        if(stat(bundled,&st)!=0&&errno==ENOENT)return FILM_OK;
+    }
+    if(s!=FILM_OK)return s;
     for(unsigned i=0;s==FILM_OK&&i<catalog.count;++i){char from[768],to[768];struct stat st;
         if(!path(from,bundled,catalog.looks[i].name)||!path(to,directory,catalog.looks[i].name)){s=FILM_INVALID;break;}
         if(!stat(to,&st)){if(!S_ISREG(st.st_mode))s=FILM_IO;continue;}if(errno!=ENOENT){s=FILM_IO;break;}

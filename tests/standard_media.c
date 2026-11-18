@@ -37,14 +37,23 @@ static void cubes(void)
     FilmLookCatalog c={0};assert(film_lut_catalog_scan("unknown",sd,&c)==FILM_STATE);
     assert(film_lut_catalog_scan("film-lut-catalog/v1",sd,&c)==FILM_OK&&c.count==71);
     assert(!strcmp(c.looks[0].name,"000.CUBE"));assert(strlen(c.looks[70].key)<64&&!strcmp(c.looks[70].name,long_name));film_lut_catalog_free(&c);
+    /* A current .3dsx does not ship romfs:/luts/. Existing SD LUTs survive
+     * this case and remain discoverable on the next startup scan. */
+    char missing[512];snprintf(missing,sizeof missing,"%s/no-bundled-luts",root);
+    unsigned installed=99;
+    assert(film_lut_install_missing("film-lut-install/v1",missing,sd,&installed)==FILM_OK&&!installed);
+    assert(film_lut_catalog_scan("film-lut-catalog/v1",sd,&c)==FILM_OK&&c.count==71);
+    film_lut_catalog_free(&c);
+    snprintf(name,sizeof name,"%s/000.CUBE",sd);FILE *existing=fopen(name,"rb");
+    assert(existing&&fgetc(existing)=='L');fclose(existing);
     snprintf(name,sizeof name,"%s/000.CUBE",packed);write_text(name,"do not overwrite user file");
-    snprintf(name,sizeof name,"%s/new.cube",packed);write_text(name,"plain cube only");unsigned installed=0;
+    snprintf(name,sizeof name,"%s/new.cube",packed);write_text(name,"plain cube only");installed=0;
     assert(film_lut_install_missing("unknown",packed,sd,&installed)==FILM_STATE);
     assert(film_lut_install_missing("film-lut-install/v1",packed,sd,&installed)==FILM_OK&&installed==1);
     assert(film_lut_install_missing("film-lut-install/v1",packed,sd,&installed)==FILM_OK&&!installed);
     snprintf(name,sizeof name,"%s/000.CUBE",sd);FILE *f=fopen(name,"rb");assert(f&&fgetc(f)=='L');fclose(f);
     for(unsigned k=0;k<2;++k){const char *folder=k?sd:packed;DIR *dir=opendir(folder);assert(dir);struct dirent *e;while((e=readdir(dir)))if(e->d_name[0]!='.'){snprintf(name,sizeof name,"%s/%s",folder,e->d_name);assert(!unlink(name));}closedir(dir);assert(!rmdir(folder));}assert(!rmdir(root));
-    puts("PASS standalone CUBE catalog, case-insensitive extension, >64 files, long names, missing-only installation, no private profiles");
+    puts("PASS standalone CUBE catalog, no-ROMFS preservation, case-insensitive extension, >64 files, long names, missing-only installation, no private profiles");
 }
 static void generic_cube(void)
 {

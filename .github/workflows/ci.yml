@@ -20,6 +20,44 @@ jobs:
       - name: Run AddressSanitizer and UndefinedBehaviorSanitizer
         run: PATH=/usr/bin:/bin make sanitize
 
+  contracts:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Python sources and runtime contracts
+        run: |
+          python3 -m compileall -q tools tests
+          python3 tools/camera_runtime_contract.py --check
+      - name: Verify camera research catalog when present
+        run: |
+          if [ -f tools/camera_reference.py ]; then
+            python3 tools/camera_reference.py --verify
+          fi
+      - name: Enforce external-only CUBE packaging
+        run: |
+          if find romfs -type f -iname '*.cube' -print -quit | grep -q .; then
+            echo "::error::Bundled .cube files must not be shipped by default; keep existing SD LUTs external."
+            exit 1
+          fi
+
+  raw-darkroom:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install RAW and darkroom test dependencies
+        run: sudo apt-get update && sudo apt-get install -y libjpeg-dev python3-pil python3-numpy
+      - name: Verify RAW capture, Roll, darkroom and GPU pipeline
+        run: PATH=/usr/bin:/bin make -j2 test-raw-darkroom
+
+  native-interop:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install native-media integration dependencies
+        run: sudo apt-get update && sudo apt-get install -y libjpeg-dev python3-pil python3-capstone
+      - name: Verify native media and gallery integration
+        run: PATH=/usr/bin:/bin make test-native-integration
+
   arm11:
     runs-on: ubuntu-24.04
     container:
@@ -40,7 +78,9 @@ jobs:
           sh tools/verify_arm11.sh Film3DS.elf "$arm"
           python3 tools/verify_3dsx.py Film3DS.3dsx
           "${DEVKITPRO}/tools/bin/3dsxdump" Film3DS.3dsx build-3ds/executable.dump
+          test -s Film3DS.3dsx
           sha256sum Film3DS.3dsx > Film3DS.3dsx.sha256
+          sha256sum --check Film3DS.3dsx.sha256
           mkdir -p build-3ds/notices
           cp build-3ds/jpeg-arm11/source/LICENSE.md build-3ds/notices/libjpeg-turbo-LICENSE.md
           cp build-3ds/jpeg-arm11/source/README.ijg build-3ds/notices/libjpeg-turbo-README.ijg
