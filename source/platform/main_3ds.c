@@ -586,7 +586,17 @@ static void decode_roll_step(void)
     if(app.photos[app.ui.selection]==id)app.roll_preview_id=0;
     for(unsigned i=0;i<ROLL_VISIBLE_TEXTURES;++i)if(app.thumbnails[i].id==id)app.thumbnails[i].id=0;
     roll_show_selection();
-    if(status!=FILM_OK)update_status("Decode failed; original kept",status,0);
+    if(status!=FILM_OK){
+        const char *stage=film_roll_decode_last_stage();
+        int e=film_roll_decode_last_errno();
+        if(app.log){
+            fprintf(app.log,"ROLL #%04u decode failed stage=%s status=%s errno=%d; DNG unchanged\n",
+                id,stage,film_status_name(status),e);
+            fflush(app.log);
+        }
+        snprintf(app.status,sizeof app.status,"Decode %s: %s (errno %d)",
+            stage,film_status_name(status),e);
+    }
     else if(!batch->decode_active)update_status("Decoded; A: darkroom",FILM_OK,0);
 }
 
