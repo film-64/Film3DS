@@ -53,6 +53,7 @@ static void release_preview(FilmCamera *cam,bool safe)
 
 void film_camera_close(FilmCamera *cam)
 {
+    cam->ae_window_applied=false;
     film_camera_raw_invalidate(cam);
     if (!cam->initialized) return;
     film_camera_stop_port(cam->port,cam->runtime_log,&cam->dma_safe);
@@ -78,6 +79,7 @@ FilmStatus film_camera_open(FilmCamera *cam, FilmPixelFormat format, FilmSensor 
     cam->exposure_transport = (FilmRegisterTransport){0};
     cam->exposure_trace = NULL;
     cam->exposure_requested = false;
+    cam->ae_window_applied=false;
     cam->dma_safe=true;
     cam->last_result = 0;
     Result rc = camInit();
@@ -138,6 +140,26 @@ FilmStatus film_camera_yuv_matrix(FilmCamera *cam, FilmYuv *matrix)
         }
     }
     return FILM_UNSUPPORTED;
+}
+
+FilmStatus film_camera_set_ae_window(FilmCamera *cam,FilmAeRegion region)
+{
+    if(!film_runtime_source_valid("film-camera-ae-window/v1"))return FILM_STATE;
+    if(!cam||!film_ae_region_valid(region))return FILM_INVALID;
+    if(!cam->initialized||cam->exposure_mode!=FILM_EXPOSURE_NATIVE_AE||
+       cam->streaming||cam->preview_event||!cam->dma_safe)return FILM_STATE;
+    const u32 select=selectors[cam->sensor-FILM_CAMERA_REAR1];
+    Result rc=CAMU_SetAutoExposureWindow(select,(s16)region.x,(s16)region.y,
+                                          (s16)region.width,(s16)region.height);
+    cam->last_result=rc;
+    cam->ae_window_applied=R_SUCCEEDED(rc);
+    if(cam->ae_window_applied)cam->ae_window=region;
+    if(cam->runtime_log){
+        fprintf(cam->runtime_log,"source=film-camera-ae-window/v1 x=%u y=%u w=%u h=%u result=%08lx\n",
+            region.x,region.y,region.width,region.height,(unsigned long)rc);
+        fflush(cam->runtime_log);
+    }
+    return R_SUCCEEDED(rc)?FILM_OK:FILM_DEVICE;
 }
 
 FilmStatus film_camera_set_control(FilmCamera *cam, FilmCameraControl control, int value)

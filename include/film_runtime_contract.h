@@ -107,6 +107,7 @@ static inline bool film_runtime_source_valid(const char *source)
     if (!strcmp(source, "film-native-recovery-archive/v1")) return true;
     if (!strcmp(source, "film-native-media-inspect/v1")) return true;
     if (!strcmp(source, "film-camera-native-preview/v1")) return true;
+    if (!strcmp(source, "film-camera-ae-window/v1")) return true;
     if (!strcmp(source, "film-camera-native-exposure/v1")) return true;
     if (!strcmp(source, "film-camera-manual-setup/v1")) return true;
     if (!strcmp(source, "film-camera-native-capture/v1")) return true;

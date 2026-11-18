@@ -24,21 +24,36 @@ HEADER=64
 
 def read_f3y(path):
     content=Path(path).read_bytes()
-    if len(content)!=HEADER+FRAME or content[:4]!=b"F3YG":
-        raise ValueError("F3Y: invalid exact length or magic")
-    hdr=content[:HEADER]
+    if len(content)<HEADER or content[:4]!=b"F3YG":
+        raise ValueError("F3Y: invalid length or magic")
+    version=struct.unpack_from("<I",content,4)[0]
+    header_bytes={1:64,2:80}.get(version)
+    if header_bytes is None or len(content)!=header_bytes+FRAME:
+        raise ValueError("F3Y: invalid version or exact length")
+    hdr=content[:header_bytes]
     meta=struct.unpack_from("<14I",hdr,4)
     ver,id_,raw_crc,width,height,yuv,level,mode,ae,awb,time_low,time_high,length,payload_crc=meta
-    if (ver!=1 or width!=W or height!=H or yuv>3 or mode>1 or
+    if (ver not in (1,2) or width!=W or height!=H or yuv>3 or mode>1 or
         (level if level<0x80000000 else level-0x100000000) not in range(-3,4) or
         ae>1 or awb>1 or (time_low==0 and time_high==0) or length!=FRAME):
         raise ValueError("F3Y: invalid metadata")
-    if zlib.crc32(hdr[:60])!=struct.unpack_from("<I",hdr,60)[0]:
+    if version==2:
+        region=struct.unpack_from("<4I",hdr,60)
+        x,y,width,height=region
+        if (width<80 or height<60 or width>W or height>H or
+            width*3!=height*4 or x%2 or y%2 or x+width>W or y+height>H):
+            raise ValueError("F3Y: invalid AE window")
+        crc_offset=76
+    else:
+        region=None # v1 never recorded the physical AE window.
+        crc_offset=60
+    if zlib.crc32(hdr[:crc_offset])!=struct.unpack_from("<I",hdr,crc_offset)[0]:
         raise ValueError("F3Y: header CRC mismatch")
-    pixels=content[HEADER:]
+    pixels=content[header_bytes:]
     if zlib.crc32(pixels)!=payload_crc:
         raise ValueError("F3Y: preview payload CRC mismatch")
-    return dict(id=id_,source_crc=raw_crc,native_level=struct.unpack_from("<i",hdr,28)[0],
+    return dict(id=id_,source_crc=raw_crc,version=version,ae_window=region,
+                native_level=struct.unpack_from("<i",hdr,28)[0],
                 mode=mode,auto_exposure=bool(ae),auto_white_balance=bool(awb),
                 yuv=yuv,preview_time_ms=time_low+(time_high<<32)),pixels
 

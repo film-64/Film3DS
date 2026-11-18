@@ -38,6 +38,10 @@ FilmStatus film_roll_pair_publish(const char *,const FilmFrame *,const FilmRawSc
  * not an original or a JPEG-derived darkroom input. No background repair. */
 /* Optional outputs take ownership of the just-decoded scene and its recipe.
  * With NULL outputs, batch items are freed after publication. */
+/* Last explicit synchronous decode's stage and errno, for IO diagnosis. */
+const char *film_roll_decode_last_stage(void);
+int film_roll_decode_last_errno(void);
+const char *film_roll_pair_publish_last_stage(void);
 FilmStatus film_roll_decode(const char *,const char *,const char *,unsigned,FilmRawScene *,FilmRecipe *);
 FilmStatus film_roll_decode_load(const char *,const char *,const char *,unsigned,FilmRawScene *);
 FilmStatus film_roll_pair_index(const char *,const char *,unsigned,FilmRollPair *);

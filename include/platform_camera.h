@@ -1,6 +1,7 @@
 #ifndef FILM_PLATFORM_CAMERA_H
 #define FILM_PLATFORM_CAMERA_H
 #include "film.h"
+#include "ae_region.h"
 #include <stdatomic.h>
 #include "film_runtime_contract.h"
 #include "hardware_exposure.h"
@@ -40,6 +41,8 @@ typedef struct {
     FILE *runtime_log;
     bool exposure_requested;
     FilmExposureMode exposure_mode;
+    FilmAeRegion ae_window;
+    bool ae_window_applied;
     atomic_bool debug_mode;
     atomic_uint capture_phase;
     FilmRawPreparation raw_preparation;
@@ -102,6 +105,7 @@ FilmStatus film_camera_request_15fps(FilmCamera *camera);
 FilmStatus film_camera_enable_manual_exposure(FilmCamera *camera, FILE *local_trace);
 FilmStatus film_camera_select_exposure_mode(FilmCamera *,FilmExposureMode,int,FILE *);
 FilmStatus film_camera_set_ae_compensation(FilmCamera *,int);
+FilmStatus film_camera_set_ae_window(FilmCamera *,FilmAeRegion);
 FilmStatus film_camera_progress_manual_exposure(FilmCamera *camera);
 FilmStatus film_camera_verify_manual_capture(FilmCamera *camera);
 void film_camera_close_manual_exposure(FilmCamera *camera);

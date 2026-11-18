@@ -332,6 +332,26 @@ class UiPackageTests(unittest.TestCase):
         self.assertLess(send,copy)
         self.assertLess(copy,text.index('if(log){fprintf(log,"CAM bool cmd=%02x header='))
 
+    def test_hardware_ae_window_and_absolute_level_reinit(self):
+        main=(ROOT/"source/platform/main_3ds.c").read_text()
+        native=(ROOT/"source/platform/camera_3ds.c").read_text()
+        mode=(ROOT/"source/platform/manual_exposure_3ds.c").read_text()
+        gray=(ROOT/"source/storage/gray_capture.c").read_text()
+        roll=(ROOT/"source/storage/roll_decode.c").read_text()
+        self.assertIn('CAMU_SetAutoExposureWindow(select',native)
+        self.assertIn('cam->ae_window_applied=R_SUCCEEDED(rc)',native)
+        self.assertIn('FilmStatus s=reopen_native_ae',main)
+        self.assertIn('film_camera_open(&app.camera,FILM_YUYV,sensor)',main)
+        self.assertIn('film_camera_set_ae_window(&app.camera,requested)',main)
+        self.assertIn('cam->ae_window_applied=false',mode)
+        self.assertIn('change_meter_region(region)',main)
+        self.assertIn('app.camera.ae_window_applied',main)
+        self.assertIn('put(b+60,p->meter_region.x)',gray)
+        self.assertIn('film_roll_decode_last_stage',roll)
+        self.assertIn('last_stage="F3C scene cache write"',roll)
+        self.assertFalse(CONTRACT_MATRIX["film-camera-ae-window/v1"]["queues"])
+        self.assertEqual(CONTRACT_MATRIX["film-camera-ae-window/v1"]["retries"],0)
+
     def test_gray_pair_capture_and_source_contract(self):
         main=(ROOT/"source/platform/main_3ds.c").read_text()
         storage=(ROOT/"source/storage/gray_capture.c").read_text()

@@ -78,6 +78,7 @@ typedef struct {
     float capture_strength;
     FilmCamera camera;
     FilmCameraAutoState camera_auto;
+    FilmAeRegion ae_region; /* requested native VGA metering rectangle */
     FilmYuv camera_yuv;
     C3D_Tex texture;
     RollThumbnail thumbnails[ROLL_VISIBLE_TEXTURES];
@@ -180,6 +181,52 @@ static FilmStatus apply_exposure(int step)
     return status;
 }
 
+/* Recreate Native AE from a known CAMU_SetExposure(0) baseline. Changing
+ * compensation while the old YUV DMA is active has failed on real hardware.
+ * A failed transition is visible and leaves the camera closed; it never
+ * silently promotes an unverified native level to a valid exposure reference. */
+static FilmStatus reopen_native_ae(int level,FilmAeRegion requested)
+{
+    FilmSensor sensor=app.camera.sensor;
+    film_camera_close(&app.camera);
+    reset_preview_tracking();
+    app.live=false;
+    FilmStatus s=film_camera_open(&app.camera,FILM_YUYV,sensor);
+    if(s==FILM_OK)s=film_camera_request_15fps(&app.camera);
+    if(s==FILM_OK)s=film_camera_select_exposure_mode(&app.camera,
+        FILM_EXPOSURE_NATIVE_AE,level,app.log);
+    if(s==FILM_OK)s=film_camera_set_ae_window(&app.camera,requested);
+    if(s==FILM_OK){
+        app.camera_yuv=FILM_601_FULL;
+        FilmYuv actual=app.camera_yuv;
+        FilmStatus color=film_camera_yuv_matrix(&app.camera,&actual);
+        if(color==FILM_OK)app.camera_yuv=actual;
+        film_log(app.log,"Native AE reset baseline=0, compensation absolute",s,(uint32_t)level);
+        app.camera_auto=film_camera_auto_state(&app.camera);
+        app.ae_region=requested;
+        app.applied_exposure=0;
+        app.live=true;app.preview_failed=false;
+    }else{
+        film_log(app.log,"Native AE reset/reopen FAILED",s,app.camera.last_result);
+        film_camera_close(&app.camera);
+        app.live=false;app.preview_failed=true;
+    }
+    return s;
+}
+static void change_meter_region(FilmAeRegion region)
+{
+    if(!film_ae_region_valid(region))return;
+    if(app.camera_values[FILM_CAM_EXPOSURE_MODE]!=FILM_EXPOSURE_NATIVE_AE||
+       !app.live||app.camera.zoom!=1||app.save.thread){
+        update_status("AE window requires Native AE, 1x, ready",FILM_STATE,0);return;
+    }
+    if(app.camera.ae_window_applied&&
+       !memcmp(&region,&app.camera.ae_window,sizeof region))return;
+    FilmStatus s=reopen_native_ae(app.camera_values[FILM_CAM_EV_COMP],region);
+    update_status(s==FILM_OK?"Hardware AE window set":"AE window reset failed; L to reopen",
+        s,app.camera.last_result);
+}
+
 static void adjust_camera(int change)
 {
     if(app.control>FILM_CAM_EV_COMP)return;
@@ -194,10 +241,13 @@ static void adjust_camera(int change)
     if(app.live) {
         if(app.control==FILM_CAM_EXPOSURE_MODE) {
             status=film_camera_select_exposure_mode(&app.camera,(FilmExposureMode)value,app.camera_values[FILM_CAM_EV_COMP],app.log);
+            if(status==FILM_OK&&value==FILM_EXPOSURE_NATIVE_AE)
+                status=film_camera_set_ae_window(&app.camera,app.ae_region);
             if(status==FILM_OK)app.applied_exposure=0;
         } else if(app.control==FILM_CAM_EV_COMP) {
-            status=film_camera_preview_stop(&app.camera);
-            if(status==FILM_OK)status=film_camera_set_ae_compensation(&app.camera,value);
+            /* A fresh camera init resets the native exposure baseline to 0
+             * before the requested absolute level is applied once. */
+            status=reopen_native_ae(value,app.ae_region);
         } else if(app.camera.exposure.ready)status=apply_exposure(value);
     }
     if(status!=FILM_OK){app.live=app.camera.initialized;if(!app.live)app.preview_failed=true;update_status(control_names[app.control],status,app.camera.last_result);return;}
@@ -536,7 +586,17 @@ static void decode_roll_step(void)
     if(app.photos[app.ui.selection]==id)app.roll_preview_id=0;
     for(unsigned i=0;i<ROLL_VISIBLE_TEXTURES;++i)if(app.thumbnails[i].id==id)app.thumbnails[i].id=0;
     roll_show_selection();
-    if(status!=FILM_OK)update_status("Decode failed; original kept",status,0);
+    if(status!=FILM_OK){
+        const char *stage=film_roll_decode_last_stage();
+        int e=film_roll_decode_last_errno();
+        if(app.log){
+            fprintf(app.log,"ROLL #%04u decode failed stage=%s status=%s errno=%d; DNG unchanged\n",
+                id,stage,film_status_name(status),e);
+            fflush(app.log);
+        }
+        snprintf(app.status,sizeof app.status,"Decode %s: %s (errno %d)",
+            stage,film_status_name(status),e);
+    }
     else if(!batch->decode_active)update_status("Decoded; A: darkroom",FILM_OK,0);
 }
 
@@ -772,7 +832,18 @@ static bool finish_capture(bool wait)
         if (joined != 0) return false;
         threadFree(save->thread);
     }
-    app.live=app.camera.initialized;app.preview_failed=!app.live;reset_preview_tracking();
+    app.live=app.camera.initialized;app.preview_failed=!app.live;
+    if(app.live&&app.camera.exposure_mode==FILM_EXPOSURE_NATIVE_AE){
+        /* Raw transaction temporarily switches AE off; reassert the
+         * explicitly programmed window before restarting any preview. */
+        FilmStatus roi=film_camera_set_ae_window(&app.camera,app.ae_region);
+        if(roi!=FILM_OK){
+            film_log(app.log,"Post-RAW AE window restore",roi,app.camera.last_result);
+            film_camera_close(&app.camera);
+            app.live=false;app.preview_failed=true;
+        }
+    }
+    reset_preview_tracking();
     if(save->capture_status!=FILM_OK)update_status("RAW capture/restore; L reopens",save->capture_status,app.camera.last_result);
     if(!save->frame.source.pixels){free(save->gray_pair.preview.pixels);*save=(CaptureSave){0};return false;}
     if (save->profile_status != FILM_OK)
@@ -818,7 +889,11 @@ static bool capture_photo(bool gray_pair)
     save->matrix.exposure_mode=(unsigned)app.camera_values[FILM_CAM_EXPOSURE_MODE];
     save->matrix.native_level=save->matrix.exposure_mode==FILM_EXPOSURE_NATIVE_AE?
         app.camera_values[FILM_CAM_EV_COMP]:0;
-    save->matrix.preview_valid=app.stability.preview_valid;
+    /* Legacy F3E fit samples the whole RAW scene. Do not fit a partial
+     * metering ROI against full-scene RAW quantiles; new F3YG v2 carries the
+     * precise hardware ROI for later paired Display-gray calibration. */
+    save->matrix.preview_valid=app.stability.preview_valid&&
+        app.camera.ae_window_applied&&film_ae_region_is_full(app.camera.ae_window);
     if(save->matrix.preview_valid)memcpy(save->matrix.preview_linear,app.stability.preview_linear,
         sizeof save->matrix.preview_linear);
     if(gray_pair){
@@ -830,6 +905,7 @@ static bool capture_photo(bool gray_pair)
            app.camera.format!=FILM_YUYV||!app.camera.preview_ready||
            !app.last_native_frame_ms||now<app.last_native_frame_ms||
            now-app.last_native_frame_ms>2500||!app.stability.preview_valid||
+           !app.camera.ae_window_applied||
            !app.camera.preview_dma[app.camera.preview_pending^1]){
             update_status("Gray pair: need fresh Native AE VGA preview",FILM_STATE,0);
             *save=(CaptureSave){0};return false;
@@ -845,6 +921,7 @@ static bool capture_photo(bool gray_pair)
         save->gray_requested=true;
         save->gray_pair=(FilmGrayPair){
             .preview={640,480,FILM_YUYV,pixels},.yuv=app.camera_yuv,
+            .meter_region=app.camera.ae_window,
             .preview_time_ms=app.last_native_frame_ms,
             .native_level=app.camera_values[FILM_CAM_EV_COMP],
             .exposure_mode=FILM_EXPOSURE_NATIVE_AE,
@@ -1631,6 +1708,18 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         C2D_DrawRectSolid(40 + right - 1, crop.y, 0.2f, 1, crop.height, gold);
     }
 
+    if(view&&app.live&&app.camera.exposure_mode==FILM_EXPOSURE_NATIVE_AE&&
+       app.camera.ae_window_applied){
+        /* Overlay only the successfully programmed CAMU AE window. Full
+         * native VGA is scaled 1/2 to the displayed 320x240 viewport. */
+        FilmAeRegion r=app.camera.ae_window;
+        float left=40+r.x*.5f,top=r.y*.5f,w=r.width*.5f,h=r.height*.5f;
+        u32 color=C2D_Color32(105,250,120,255);
+        C2D_DrawRectSolid(left,top,.41f,w,2,color);
+        C2D_DrawRectSolid(left,top+h-2,.41f,w,2,color);
+        C2D_DrawRectSolid(left,top,.41f,2,h,color);
+        C2D_DrawRectSolid(left+w-2,top,.41f,2,h,color);
+    }
     if(app.debug.debug_mode)text_at(350,222,.45f,gold,"debug");
     C2D_TargetClear(bottom, bg);
     C2D_SceneBegin(bottom);
@@ -1656,7 +1745,9 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         text_at(148, 12, 0.59f, gold, line);
         if (app.live) {
             if(app.camera_values[FILM_CAM_EXPOSURE_MODE]==FILM_EXPOSURE_NATIVE_AE)
-                snprintf(line,sizeof line,"Native AE  comp %+d",app.camera_values[FILM_CAM_EV_COMP]);
+                snprintf(line,sizeof line,"Native %+d  ROI %ux%u%s",
+                    app.camera_values[FILM_CAM_EV_COMP],app.ae_region.width,app.ae_region.height,
+                    app.camera.ae_window_applied?"":" !");
             else snprintf(line,sizeof line,"Manual %+d %s",app.camera_values[FILM_CAM_EXPOSURE],
                 app.camera.exposure.ready?"READY":app.camera.exposure.failed?"ERROR":"SETTLING");
             text_at(195, 45, 0.44f, gold, line);
@@ -1688,13 +1779,13 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         else snprintf(line, sizeof line, "<   %+d   >", value);
         text_at(20, 116, 0.62f, fg, line);
         text_at(20, 163, 0.53f, gold, "Up/Down: setting   Left/Right: value");
-        text_at(20, 183, 0.48f, fg, "Y: back   R: capture");
+        text_at(20, 183, 0.43f, fg, "SEL+Y Full/Ctr; +Dpad size/X; +CPad Y");
     } else if (app.ui.page == FILM_VIEW) {
         text_at(20, 68, 0.62f, fg, "Capture RAW DNG");
         text_at(20, 116, 0.62f, fg, "Output settings: Darkroom");
         snprintf(line, sizeof line, "A/R: Capture   Zoom %ux (Circle Pad)", zoom);
         text_at(20, 163, 0.54f, gold, line);
-        text_at(20, 183, 0.48f, fg, "L: lens   Y: camera controls");
+        text_at(20, 183, 0.45f, fg, "L lens  Y controls  SEL+Y AE area");
     } else if (app.ui.page == FILM_ROLL) {
         draw_roll(bg,fg,gold,dim);
     } else draw_darkroom(bg, fg, gold, dim);
@@ -1850,6 +1941,7 @@ int main(int argc, char **argv)
     scan_looks(LUTS);
     load_roll();
     app.grain = FILM_GRAIN_MEDIUM;
+    app.ae_region=film_ae_region_default();
     app.control=FILM_CAM_EXPOSURE_MODE;
     app.raw_shoulder=.75f;
     app.grain_size=1;app.grain_shadow=.8f;app.grain_mid=1.1f;app.grain_highlight=.7f;
@@ -1913,6 +2005,26 @@ int main(int argc, char **argv)
         /* ROLL_MODAL_INPUT_END */
         /* DARKROOM_PREVIEW_INPUT_BEGIN */
         u32 held=hidKeysHeld(),repeated=hidKeysDownRepeat();
+        if(app.ui.page==FILM_VIEW && (held&KEY_SELECT) && app.live){
+            FilmAeRegion region=app.ae_region;
+            u32 meter_keys=keys&(KEY_Y|KEY_UP|KEY_DOWN|KEY_LEFT|KEY_RIGHT|
+                                KEY_CPAD_UP|KEY_CPAD_DOWN);
+            if(meter_keys){
+                if(meter_keys&KEY_Y)
+                    region=film_ae_region_is_full(region)?
+                        film_ae_region_resize(film_ae_region_default(),2):
+                        film_ae_region_default();
+                else{
+                    if(meter_keys&KEY_UP)region=film_ae_region_resize(region,1);
+                    if(meter_keys&KEY_DOWN)region=film_ae_region_resize(region,-1);
+                    int dx=(!!(meter_keys&KEY_RIGHT))-(!!(meter_keys&KEY_LEFT));
+                    int dy=(!!(meter_keys&KEY_CPAD_DOWN))-(!!(meter_keys&KEY_CPAD_UP));
+                    region=film_ae_region_move(region,dx,dy);
+                }
+                change_meter_region(region);
+                keys &= ~meter_keys;
+            }
+        }
         if (app.ui.page==FILM_DARKROOM && app.room.wb_editor) {
             white_balance_input(keys,repeated);draw(top,bottom);continue;
         }
@@ -1996,7 +2108,9 @@ int main(int argc, char **argv)
                     }
                     FilmStatus exposure = film_camera_select_exposure_mode(&app.camera,
                         (FilmExposureMode)app.camera_values[FILM_CAM_EXPOSURE_MODE],app.camera_values[FILM_CAM_EV_COMP],app.log);
-                    if(exposure!=FILM_OK){update_status("Exposure mode",exposure,app.camera.last_result);film_camera_close(&app.camera);}
+                    if(exposure==FILM_OK&&app.camera.exposure_mode==FILM_EXPOSURE_NATIVE_AE)
+                        exposure=film_camera_set_ae_window(&app.camera,app.ae_region);
+                    if(exposure!=FILM_OK){update_status("Exposure mode/AE window",exposure,app.camera.last_result);film_camera_close(&app.camera);}
                     else app.camera_auto=film_camera_auto_state(&app.camera);
                     if (!app.camera.initialized) {
                         app.live = false;
