@@ -45,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install RAW and darkroom test dependencies
-        run: sudo apt-get update && sudo apt-get install -y libjpeg-dev python3-pil
+        run: sudo apt-get update && sudo apt-get install -y libjpeg-dev python3-pil python3-numpy
       - name: Verify RAW capture, Roll, darkroom and GPU pipeline
         run: PATH=/usr/bin:/bin make -j2 test-raw-darkroom
 
