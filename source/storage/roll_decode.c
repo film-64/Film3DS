@@ -4,6 +4,7 @@
 #include "exposure_matrix.h"
 #include "gray_capture.h"
 #include <float.h>
+#include <errno.h>
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,6 +13,11 @@
 /* Local, versioned, IEEE float32 little-endian scene cache. No recipe,
  * grading, clipping or display transfer is baked into the cached pixels. */
 enum {CACHE_HEADER=64, CACHE_BLOCK=4092};
+static const char *last_stage="not started";
+static int last_errno;
+const char *film_roll_decode_last_stage(void){return last_stage;}
+int film_roll_decode_last_errno(void){return last_errno;}
+
 _Static_assert(sizeof(float)==4&&FLT_RADIX==2&&FLT_MANT_DIG==24,"scene cache requires binary32");
 static bool source_is(const char *source,const char *expected)
 {return source&&!strcmp(source,expected)&&film_runtime_source_valid(source);}
@@ -70,13 +76,15 @@ FilmStatus film_roll_decode(const char *source,const char *originals,const char 
 {
     if(!source_is(source,"film-roll-decode/v1"))return FILM_STATE;
     if((out&&out->pixels)||(recipe&&!out))return FILM_INVALID;
+    last_stage="DNG original path";last_errno=0;
     char name[512];struct stat before,after;
     FilmStatus s=original_stat(originals,id,&before,name);
     FilmFrame frame={0};FilmRawScene scene={0};
-    if(s==FILM_OK)s=film_frame_read(name,&frame); /* DNG digest / legacy CRC before decode. */
+    if(s==FILM_OK){last_stage="DNG read / digest";s=film_frame_read(name,&frame);}
     if(s==FILM_OK&&frame.source.format==FILM_RAW10_RGGB){
+        last_stage="RAW linear scene decode";
         s=film_raw_frame_scene(&frame,NULL,&scene);
-        if(s==FILM_OK)s=original_stat(originals,id,&after,name);
+        if(s==FILM_OK){last_stage="DNG recheck";s=original_stat(originals,id,&after,name);}
         if(s==FILM_OK&&!same_original(&before,&after))s=FILM_CORRUPT;
         /* Fit only at explicit Roll decode, never in the shutter worker.
          * F3EM is optional derived metadata; older RAWs stay decodable.
@@ -95,13 +103,21 @@ FilmStatus film_roll_decode(const char *source,const char *originals,const char 
                film_exposure_matrix_fit("film-exposure-matrix-fit/v1",&matrix,&scene)==FILM_OK)
                 (void)film_exposure_matrix_write("film-exposure-matrix-write/v1",previews,&matrix);
         }
-        if(s==FILM_OK)s=write_cache(&frame,&scene,&before,previews,id);
-        if(s==FILM_OK)s=film_roll_pair_publish(source,&frame,&scene,previews,id);
+        if(s==FILM_OK){last_stage="F3C scene cache write";s=write_cache(&frame,&scene,&before,previews,id);}
+        if(s==FILM_OK){
+            last_stage="JPG/F3I preview publish";
+            s=film_roll_pair_publish(source,&frame,&scene,previews,id);
+            if(s!=FILM_OK)last_stage=film_roll_pair_publish_last_stage();
+        }
     }else if(s==FILM_OK){
         /* Legacy native originals retain their established decode path. */
+        last_stage="JPG/F3I legacy publish";
         s=film_roll_pair_publish("film-roll-decode/v1",&frame,NULL,previews,id);
+        if(s!=FILM_OK)last_stage=film_roll_pair_publish_last_stage();
     }
     if(s==FILM_OK&&out){*out=scene;scene=(FilmRawScene){0};if(recipe)*recipe=frame.recipe;}
+    if(s!=FILM_OK)last_errno=errno; /* Capture before cleanup can replace errno. */
+    else{last_stage="complete";last_errno=0;}
     film_raw_scene_free(&scene);film_frame_free(&frame);return s;
 }
 
