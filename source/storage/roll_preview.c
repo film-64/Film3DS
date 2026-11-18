@@ -10,6 +10,8 @@
 #include <string.h>
 
 enum {INDEX_BYTES=44,JPEG_LIMIT=256*1024};
+static const char *publish_stage="not started";
+const char *film_roll_pair_publish_last_stage(void){return publish_stage;}
 static bool source_is(const char *s,const char *expected)
 {return s&&!strcmp(s,expected)&&film_runtime_source_valid(s);}
 static uint32_t update(uint32_t crc,const uint8_t *data,size_t n)
@@ -72,13 +74,14 @@ FilmStatus film_roll_pair_publish(const char *source,const FilmFrame *frame,cons
     if(!source||(strcmp(source,"film-roll-pair-publish/v1")&&strcmp(source,"film-roll-decode/v1"))||!film_runtime_source_valid(source))return FILM_STATE;
     if(!frame||!frame->source.pixels||!shape(frame->source.width,frame->source.height,frame->source.format))return FILM_INVALID;
     if(scene&&(!scene->pixels||frame->source.format!=FILM_RAW10_RGGB||scene->width!=frame->source.width||scene->height!=frame->source.height))return FILM_INVALID;
+    publish_stage="JPG path";
     char jpeg[512],index[512];FilmStatus s=path(jpeg,sizeof jpeg,directory,id,"JPG");
     if(s==FILM_OK)s=path(index,sizeof index,directory,id,"F3I");
     if(s!=FILM_OK)return s;
     FilmRawScene decoded={0};
     if(frame->source.format==FILM_RAW10_RGGB&&!scene){s=film_raw_frame_scene(frame,NULL,&decoded);scene=&decoded;}
     FilmImage small={0};
-    if(s==FILM_OK)s=film_image_alloc(&small,320,240,FILM_RGB24);
+    if(s==FILM_OK){publish_stage="JPG RGB allocation";s=film_image_alloc(&small,320,240,FILM_RGB24);}
     for(unsigned y=0;s==FILM_OK&&y<240;++y)for(unsigned x=0;x<320;++x){
         unsigned sx=x*frame->source.width/320,sy=y*frame->source.height/240;
         FilmRgb rgb=scene?scene->pixels[(size_t)sy*scene->width+sx]:film_decode_pixel(&frame->source,sx,sy,frame->recipe.yuv);
@@ -90,16 +93,20 @@ FilmStatus film_roll_pair_publish(const char *source,const FilmFrame *frame,cons
         }
     }
     film_raw_scene_free(&decoded);
-    if(s==FILM_OK)s=film_jpeg_write(jpeg,&small,70);
+    if(s==FILM_OK){publish_stage="JPG encode/write";s=film_jpeg_write(jpeg,&small,70);}
     film_image_free(&small);if(s!=FILM_OK)return s;
-    uint8_t *data=NULL;size_t bytes=0;s=encoded(jpeg,&data,&bytes);if(s!=FILM_OK)return s;
+    publish_stage="JPG readback";uint8_t *data=NULL;size_t bytes=0;
+    s=encoded(jpeg,&data,&bytes);if(s!=FILM_OK)return s;
     uint32_t jpeg_crc=~update(UINT32_MAX,data,bytes);free(data);
     uint8_t b[INDEX_BYTES]={'F','3','R','I'};put(b+4,1);put(b+8,id);put(b+12,frame->source.format);
     put(b+16,frame->source.width);put(b+20,frame->source.height);put(b+24,film_roll_source_crc(&frame->source));
     put(b+28,jpeg_crc);put(b+32,320);put(b+36,240);put(b+40,~update(UINT32_MAX,b,40));
+    publish_stage="F3I index write";
     FilmWrite write;s=film_write_begin(&write,index);if(s!=FILM_OK)return s;
     if(fwrite(b,1,sizeof b,write.file)!=sizeof b)s=FILM_IO;
-    return film_write_end(&write,s);
+    s=film_write_end(&write,s);
+    if(s==FILM_OK)publish_stage="complete";
+    return s;
 }
 FilmStatus film_roll_pair_verify(const char *source,const FilmFrame *frame,const FilmRollPair *pair)
 {
