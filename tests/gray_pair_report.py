@@ -45,7 +45,22 @@ class GrayPairReportTest(unittest.TestCase):
             self.assertTrue(result["record"]["auto_exposure"])
             tampered=bytearray(f3y.read_bytes());tampered[-1]^=0xff;f3y.write_bytes(tampered)
             with self.assertRaisesRegex(ValueError,"payload CRC"):m.read_f3y(f3y)
-            f3y.write_bytes(hdr+yuv)
+            # The new sidecar records the actual camera ROI; v1 remains readable.
+            h2=bytearray(80)
+            h2[:60]=hdr[:60]
+            struct.pack_into("<I",h2,4,2)
+            struct.pack_into("<4I",h2,60,160,120,320,240)
+            struct.pack_into("<I",h2,76,zlib.crc32(h2[:76]))
+            f3y.write_bytes(h2+yuv)
+            meta,_=m.read_f3y(f3y)
+            self.assertEqual(meta["version"],2)
+            self.assertEqual(tuple(meta["ae_window"]),(160,120,320,240))
+            corrupt=bytearray(h2+yuv)
+            struct.pack_into("<I",corrupt,68,319)
+            struct.pack_into("<I",corrupt,76,zlib.crc32(corrupt[:76]))
+            f3y.write_bytes(corrupt)
+            with self.assertRaisesRegex(ValueError,"AE window"):m.read_f3y(f3y)
+            f3y.write_bytes(h2+yuv)
             bad=bytearray(dng.read_bytes());bad[-1]^=1;dng.write_bytes(bad)
             with self.assertRaisesRegex(ValueError,"digest"):m.read_dng(dng)
 if __name__=="__main__":
