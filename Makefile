@@ -24,12 +24,16 @@ build/raw-darkroom-test: $(CORE) $(HEADERS) tests/raw_darkroom.c
 build/raw-app-test: $(CORE) $(HEADERS) tests/raw_app.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/raw_app.c $(LDFLAGS) $(LDLIBS) -o $@
+build/gray-capture-test: $(CORE) $(HEADERS) tests/gray_capture.c
+	@mkdir -p build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/gray_capture.c $(LDFLAGS) $(LDLIBS) -o $@
 build/exposure-matrix-test: $(CORE) $(HEADERS) tests/exposure_matrix.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/exposure_matrix.c $(LDFLAGS) $(LDLIBS) -o $@
-test-raw-darkroom: build/filmscene build/filmraw build/raw-darkroom-test build/raw-app-test build/roll-preview-test build/gpu-pipeline-test build/exposure-matrix-test
+test-raw-darkroom: build/filmscene build/filmraw build/raw-darkroom-test build/raw-app-test build/roll-preview-test build/gpu-pipeline-test build/exposure-matrix-test build/gray-capture-test
 	python3 tools/camera_runtime_contract.py --check
 	./build/exposure-matrix-test
+	./build/gray-capture-test
 	./build/raw-darkroom-test
 	./build/raw-app-test
 	./build/roll-preview-test
