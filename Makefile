@@ -34,6 +34,7 @@ test-raw-darkroom: build/filmscene build/filmraw build/raw-darkroom-test build/r
 	python3 tools/camera_runtime_contract.py --check
 	./build/exposure-matrix-test
 	./build/gray-capture-test
+	python3 tests/gray_pair_report.py
 	./build/raw-darkroom-test
 	./build/raw-app-test
 	./build/roll-preview-test
