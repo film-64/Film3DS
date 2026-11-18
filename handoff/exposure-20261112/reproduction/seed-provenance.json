@@ -1,0 +1,9 @@
+{
+  "source": "/Users/a64/Documents/Codex/Film3DS/build/hardware/exposure-deep/calibration/hardware-auto-04",
+  "reference": "user A ISO100 f2.8 approx 1/3 second; original interval 1/4..1/2",
+  "reference_precision": "approximate; not absolute ISO calibration",
+  "period": 0.19995652173913045,
+  "sensor_integration_estimate": 0.050012945641743946,
+  "dose": 0.3067200181935078,
+  "gain_normalization": "Gr analog register /8 and ISP Gr /128; provisional test hypothesis"
+}
