@@ -82,11 +82,11 @@ FilmStatus film_roll_decode(const char *source,const char *originals,const char 
          * No image data or original DNG is written by this operation. */
         if(s==FILM_OK){
             FilmExposureMatrix matrix={0};
-            FilmStatus metadata=film_exposure_matrix_read(previews,id,
+            FilmStatus metadata=film_exposure_matrix_read("film-exposure-matrix-read/v1",previews,id,
                 film_roll_source_crc(&frame.source),&matrix);
             if(metadata==FILM_OK && matrix.preview_valid && !matrix.fitted &&
-               film_exposure_matrix_fit(&matrix,&scene)==FILM_OK)
-                (void)film_exposure_matrix_write(previews,&matrix);
+               film_exposure_matrix_fit("film-exposure-matrix-fit/v1",&matrix,&scene)==FILM_OK)
+                (void)film_exposure_matrix_write("film-exposure-matrix-write/v1",previews,&matrix);
         }
         if(s==FILM_OK)s=write_cache(&frame,&scene,&before,previews,id);
         if(s==FILM_OK)s=film_roll_pair_publish(source,&frame,&scene,previews,id);
