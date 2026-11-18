@@ -1,5 +1,6 @@
 #include "exposure_matrix.h"
 #include "storage_internal.h"
+#include "film_runtime_contract.h"
 #include <errno.h>
 #include <math.h>
 #include <stdio.h>
@@ -47,8 +48,9 @@ static void put_curve(uint8_t *p,FilmExposureCurve c)
 static FilmExposureCurve get_curve(const uint8_t *p)
 {return (FilmExposureCurve){get_float(p),get_float(p+4),get_float(p+8),
                             get_float(p+12),get_float(p+16)};}
-FilmStatus film_exposure_matrix_write(const char *directory,const FilmExposureMatrix *m)
+FilmStatus film_exposure_matrix_write(const char *source,const char *directory,const FilmExposureMatrix *m)
 {
+    if(!source||strcmp(source,"film-exposure-matrix-write/v1")||!film_runtime_source_valid(source))return FILM_STATE;
     char path[512];FilmStatus s=matrix_path(path,sizeof path,directory,m?m->id:0);
     if(s!=FILM_OK||!valid(m))return FILM_INVALID;
     uint8_t b[MATRIX_BYTES]={'F','3','E','M'};
@@ -63,9 +65,10 @@ FilmStatus film_exposure_matrix_write(const char *directory,const FilmExposureMa
     if(fwrite(b,1,sizeof b,w.file)!=sizeof b)s=FILM_IO;
     return film_write_end(&w,s);
 }
-FilmStatus film_exposure_matrix_read(const char *directory,unsigned id,
+FilmStatus film_exposure_matrix_read(const char *source,const char *directory,unsigned id,
                                     uint32_t source_crc,FilmExposureMatrix *out)
 {
+    if(!source||strcmp(source,"film-exposure-matrix-read/v1")||!film_runtime_source_valid(source))return FILM_STATE;
     char path[512];FilmStatus s=matrix_path(path,sizeof path,directory,id);
     if(s!=FILM_OK||!out)return FILM_INVALID;
     FILE *f=fopen(path,"rb");if(!f)return errno==ENOENT?FILM_IO:FILM_IO;
