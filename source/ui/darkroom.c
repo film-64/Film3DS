@@ -12,7 +12,7 @@ const char *film_darkroom_label(FilmDarkroomRow row)
         "Aspect ratio", "Composition", "Image size", "White balance", "WB shift", "Film sim", "Exposure", "Highlights",
         "Midtones", "Shadows", "Grain effect", "Grain type", "Color",
         "Sharpness", "LUT strength", "Resampling", "Halation",
-        "Grain size","Grain shadows","Grain midtones","Grain highlights","Grain backend","Chroma denoise","RAW calibration","RAW shadows","RAW midtones","RAW highlights","RAW shoulder","RAW local exposure"
+        "Grain size","Grain shadows","Grain midtones","Grain highlights","Grain backend","Chroma denoise","RAW calibration","RAW curve","RAW shadows","RAW midtones","RAW highlights","RAW shoulder","RAW local exposure"
     };
     return (unsigned)row < DARKROOM_ROW_COUNT ? labels[row] : "";
 }

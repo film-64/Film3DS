@@ -60,6 +60,8 @@ typedef struct { unsigned median; double cb, cr; float metered_luma; } FilmCamer
 typedef struct {
     FilmCameraColorStats samples[FILM_STABILITY_WINDOW];
     unsigned count, next;
+    float preview_linear[3]; /* p10/p50/p90 native preview, linear luminance */
+    bool preview_valid;
 } FilmCameraStability;
 typedef struct {
     unsigned y_span;

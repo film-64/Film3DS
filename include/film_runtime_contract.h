@@ -66,6 +66,9 @@ static inline bool film_runtime_source_valid(const char *source)
     if (!strcmp(source, "film-raw-capture-automation-deploy/v1")) return true;
     if (!strcmp(source, "film-preview-catalog-prepare/v1")) return true;
     if (!strcmp(source, "film-camera-exposure-mode/v1")) return true;
+    if (!strcmp(source, "film-exposure-matrix-fit/v1")) return true;
+    if (!strcmp(source, "film-exposure-matrix-write/v1")) return true;
+    if (!strcmp(source, "film-exposure-matrix-read/v1")) return true;
     if (!strcmp(source, "film-darkroom-denoise/v1")) return true;
     if (!strcmp(source, "film-roll-pair-publish/v1")) return true;
     if (!strcmp(source, "film-roll-decode/v1")) return true;

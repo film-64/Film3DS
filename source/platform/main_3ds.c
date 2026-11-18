@@ -7,6 +7,7 @@
 #include "roll.h"
 #include "raw_darkroom.h"
 #include "raw_capture.h"
+#include "exposure_matrix.h"
 #include "layered_grain.h"
 #include "lut_catalog.h"
 #include "debug_mode.h"
@@ -49,6 +50,8 @@ typedef struct {
     uint64_t capture_ms, save_ms;
     FilmStatus status, profile_status;
     FilmRollSaveResult result;
+    FilmExposureMatrix matrix;
+    FilmStatus matrix_status;
     atomic_uint phase;
     unsigned capture_zoom;
     int expected_step;
@@ -98,6 +101,8 @@ typedef struct {
     FilmRawScene decoded_scene;
     unsigned decoded_id,decoded_calibration;
     FilmRecipe decoded_recipe;
+    FilmExposureMatrix shot_matrix;
+    unsigned shot_curve_mode; /* 0 neutral, 1 capture-reference approximation */
     unsigned source_width, source_height;
     bool halation;
     FilmGrain grain;
@@ -529,6 +534,19 @@ static void decode_roll_step(void)
     else if(!batch->decode_active)update_status("Decoded; A: darkroom",FILM_OK,0);
 }
 
+static void apply_raw_curve_preset(unsigned selected)
+{
+    const FilmExposureCurve *curve=selected?&app.shot_matrix.shot:&app.shot_matrix.neutral;
+    FilmDevelopOptions options={0};
+    if(film_exposure_curve_apply(curve,&app.darkroom,&options)!=FILM_OK)return;
+    app.raw_shadows=options.raw_shadows;
+    app.raw_midtones=options.raw_midtones;
+    app.raw_highlights=options.raw_highlights;
+    app.raw_shoulder=options.raw_shoulder;
+    app.raw_local=0;
+    app.shot_curve_mode=selected;
+}
+
 static void sync_darkroom(void)
 {
     if (app.ui.page != FILM_DARKROOM) return;
@@ -573,6 +591,28 @@ static void sync_darkroom(void)
     app.darkroom_id = id;
     app.darkroom_ready = status == FILM_OK;
     app.darkroom = app.saved_recipe = frame.recipe;
+    app.shot_matrix=film_exposure_matrix_default();
+    app.shot_curve_mode=0;
+    /* The DNG has no private recipe. The CRC-bound F3EM sidecar records
+     * both identity and an explicitly approximate native-preview match.
+     * Missing/invalid metadata never prevents opening the original RAW. */
+    if(status==FILM_OK && app.roll_preview_format==FILM_RAW10_RGGB){
+        char original[64];roll_path(original,id);
+        size_t n=strlen(original);
+        if(n>=4&&!strcasecmp(original+n-4,".DNG")){
+            FilmRollPair pair={0};
+            FilmStatus ps=film_roll_pair_index("film-roll-pair-index/v1",PREVIEWS,id,&pair);
+            if(ps==FILM_OK&&pair.format==FILM_RAW10_RGGB){
+                FilmStatus ms=film_exposure_matrix_read("film-exposure-matrix-read/v1",PREVIEWS,id,pair.source_crc,&app.shot_matrix);
+                if(ms!=FILM_OK){
+                    app.shot_matrix=film_exposure_matrix_default();
+                    if(ms==FILM_CORRUPT)update_status("Curve metadata invalid; Neutral",ms,0);
+                }
+            }
+            apply_raw_curve_preset(app.shot_matrix.fitted?1u:0u);
+            app.saved_recipe=app.darkroom;
+        }
+    }
     app.saved_aspect = frame.recipe.aspect;
     app.ui.look = find_look(frame.recipe.lut_id);
     if (status != FILM_OK){
@@ -615,6 +655,13 @@ static void adjust_darkroom(int direction)
     else if(app.room.row==DARKROOM_GRAIN_MID)app.grain_mid=fminf(2,fmaxf(0,app.grain_mid+direction*.1f));
     else if(app.room.row==DARKROOM_GRAIN_HIGH)app.grain_highlight=fminf(2,fmaxf(0,app.grain_highlight+direction*.1f));
     else if(app.room.row==DARKROOM_RAW_CALIBRATION)app.raw_calibration=(app.raw_calibration+3+direction)%3;
+    else if(app.room.row==DARKROOM_RAW_CURVE){
+        if(app.roll_preview_format==FILM_RAW10_RGGB){
+            unsigned target=app.shot_curve_mode==2?(direction>0?1u:0u):1u-app.shot_curve_mode;
+            if(target&&!app.shot_matrix.fitted)update_status("Shot reference unavailable; Neutral",FILM_STATE,0);
+            else apply_raw_curve_preset(target);
+        }
+    }
     else if(app.room.row==DARKROOM_RAW_SHADOWS)app.raw_shadows=fminf(2.5f,fmaxf(-2.5f,app.raw_shadows+.5f*direction));
     else if(app.room.row==DARKROOM_RAW_MIDTONES)app.raw_midtones=fminf(2.5f,fmaxf(-2.5f,app.raw_midtones+.5f*direction));
     else if(app.room.row==DARKROOM_RAW_HIGHLIGHTS)app.raw_highlights=fminf(2.5f,fmaxf(-2.5f,app.raw_highlights+.5f*direction));
@@ -623,6 +670,11 @@ static void adjust_darkroom(int direction)
     else if(app.room.row==DARKROOM_DENOISE)app.chroma_denoise=fminf(1,fmaxf(0,app.chroma_denoise+direction*.1f));
     else if (app.room.row == DARKROOM_HALATION) app.halation = !app.halation;
     else film_darkroom_adjust(&app.darkroom, app.room.row, direction);
+    if(app.roll_preview_format==FILM_RAW10_RGGB &&
+       (app.room.row==DARKROOM_EXPOSURE||app.room.row==DARKROOM_RAW_SHADOWS||
+        app.room.row==DARKROOM_RAW_MIDTONES||app.room.row==DARKROOM_RAW_HIGHLIGHTS||
+        app.room.row==DARKROOM_RAW_SHOULDER||app.room.row==DARKROOM_RAW_LOCAL))
+        app.shot_curve_mode=2; /* Edits are independent of saved presets. */
     if (geometry) film_darkroom_update_geometry(&app.room,&app.darkroom);
 }
 
@@ -684,6 +736,12 @@ static void save_capture(void *argument)
     save->status=film_roll_capture_save("film-roll-capture-save/v1",&save->frame,path,PREVIEWS,save->id,&save->result);
     if(app.log){fprintf(app.log,"SAVE result written=%u write=%s verify=%s preview=%s\n",save->result.written,film_status_name(save->result.write_status),film_status_name(save->result.verification_status),film_status_name(save->result.preview_status));fflush(app.log);}
     film_log(app.log,"Shutter original SD CRC",save->result.verification_status,save->id);
+    if(save->status==FILM_OK&&save->capture_status==FILM_OK){
+        save->matrix.id=save->id;
+        save->matrix.source_crc=film_roll_source_crc(&save->frame.source);
+        save->matrix_status=film_exposure_matrix_write("film-exposure-matrix-write/v1",PREVIEWS,&save->matrix);
+        film_log(app.log,"Capture native-preview curve reference",save->matrix_status,save->id);
+    }
     save->save_ms=(ticks(NULL)-started)/1000;atomic_store(&save->phase,CAPTURE_DONE);
 }
 
@@ -714,6 +772,7 @@ static bool finish_capture(bool wait)
                  save->capture_mode, save->save_ms, save->result.verification_status==FILM_OK?"OK":"FAILED");
         film_log(app.log, app.status, FILM_OK, 0);
         if(save->status!=FILM_OK)update_status("Original kept; SD verify failed",save->status,0);
+        else if(save->matrix_status!=FILM_OK)update_status("Original saved; look reference missing",save->matrix_status,0);
         else update_status("Original saved; Roll SELECT decodes",FILM_OK,0);
 
     } else update_status(save->result.written ? "Capture SD verify" : "Capture SD write", save->status, 0);
@@ -735,6 +794,13 @@ static bool capture_photo(void)
     save->capture_status=FILM_STATE;save->capture_zoom=app.camera.zoom;
     save->expected_step=app.camera_values[FILM_CAM_EXPOSURE];
     save->id=app.next_number;save->frame.recipe=film_ui_capture_recipe(&app.ui);
+    save->matrix=film_exposure_matrix_default();
+    save->matrix.exposure_mode=(unsigned)app.camera_values[FILM_CAM_EXPOSURE_MODE];
+    save->matrix.native_level=save->matrix.exposure_mode==FILM_EXPOSURE_NATIVE_AE?
+        app.camera_values[FILM_CAM_EV_COMP]:0;
+    save->matrix.preview_valid=app.stability.preview_valid;
+    if(save->matrix.preview_valid)memcpy(save->matrix.preview_linear,app.stability.preview_linear,
+        sizeof save->matrix.preview_linear);
     save->capture_mode="RAW DNG";
     atomic_store(&app.camera.capture_phase,FILM_CAPTURE_VERIFY);atomic_store(&save->phase,CAPTURE_ACQUIRING);
     snprintf(app.status,sizeof app.status,"Capturing RAW #%04u",save->id);
@@ -1351,6 +1417,9 @@ static void darkroom_value(FilmDarkroomRow row, char *value, size_t size)
     case DARKROOM_GRAIN_AMOUNT: snprintf(value, size, "%.0f%%", r->grain_amount * 100); break;
     case DARKROOM_GRAIN_BACKEND:snprintf(value,size,"%s",app.grain_gpu?"GPU mix":"CPU");break;
     case DARKROOM_RAW_CALIBRATION:snprintf(value,size,"%s",app.raw_calibration==1?"Display color":app.raw_calibration==2?"Display gray":"Off");break;
+    case DARKROOM_RAW_CURVE:snprintf(value,size,"%s",
+        app.roll_preview_format!=FILM_RAW10_RGGB?"RAW only":
+        app.shot_curve_mode==2?"Custom":app.shot_curve_mode?"Shot (approx)":"Neutral");break;
     case DARKROOM_RAW_SHADOWS:snprintf(value,size,"%+.1f EV",app.raw_shadows);break;
     case DARKROOM_RAW_MIDTONES:snprintf(value,size,"%+.1f EV",app.raw_midtones);break;
     case DARKROOM_RAW_HIGHLIGHTS:snprintf(value,size,"%+.1f EV",app.raw_highlights);break;

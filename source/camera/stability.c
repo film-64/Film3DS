@@ -57,6 +57,23 @@ FilmMeterReading film_camera_sample_preview(FilmCameraStability *window, const F
             highlights += weight * ((p[0] >= near_white) + (p[2] >= near_white));
         }
     }
+    /* Reuse the existing low-cost sampled Y histogram. Record a linear
+     * pre-shutter reference, not a screen RGB or hardware exposure estimate. */
+    if(window && count){
+        const unsigned total=count*2;
+        const unsigned rank_points[]={total/10,total/2,9*total/10};
+        unsigned accumulated=0,part=0;
+        float u=cb/(float)count-128.f,v=cr/(float)count-128.f;
+        for(unsigned code=0;code<256 && part<3;++code){
+            accumulated+=hist[code];
+            while(part<3&&accumulated>rank_points[part]){
+                float lum=sample_luma(&transform,code,(int)lroundf(u),(int)lroundf(v));
+                window->preview_linear[part]=fminf(fmaxf(lum,.001f),1.f);
+                ++part;
+            }
+        }
+        window->preview_valid=part==3;
+    }
     unsigned median = 0, rank = count;
     while (hist[median] < rank) rank -= hist[median++];
     FilmMeterReading reading = {weighted_y / weights, highlights / (float)weights};

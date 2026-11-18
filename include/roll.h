@@ -41,6 +41,8 @@ FilmStatus film_roll_pair_publish(const char *,const FilmFrame *,const FilmRawSc
 FilmStatus film_roll_decode(const char *,const char *,const char *,unsigned,FilmRawScene *,FilmRecipe *);
 FilmStatus film_roll_decode_load(const char *,const char *,const char *,unsigned,FilmRawScene *);
 FilmStatus film_roll_pair_index(const char *,const char *,unsigned,FilmRollPair *);
+/* Stable source binding used by F3I and the optional F3EM RAW look record. */
+uint32_t film_roll_source_crc(const FilmImage *);
 FilmStatus film_roll_jpeg_preview(const char *,const char *,unsigned,FilmRollPair *,FilmImage *);
 FilmStatus film_roll_pair_verify(const char *,const FilmFrame *,const FilmRollPair *);
 FilmStatus film_roll_prepare_catalog(const char *,const char *,const char *,const uint16_t *,unsigned,
