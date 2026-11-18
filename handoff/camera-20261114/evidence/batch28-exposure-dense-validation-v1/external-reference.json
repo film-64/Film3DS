@@ -1,0 +1,46 @@
+{
+  "schema": "camera-exposure-reference-evidence/v1",
+  "before": {
+    "schema": "camera-exposure-reference-input/v1",
+    "target_id": "screen-gray-01",
+    "metering_mode": "central",
+    "metering_mode_basis": "user_central_only_protocol",
+    "raw_user_input": "\u6211\u8abf\u6574\u4e86\u5c4f\u5e55\u4eae\u5ea6 \u4f9d\u820a\u7dad\u6301\u57281/60 \u5de6\u53f3\uff0c\u9019\u6b21\u4e0d\u8db31/60 \u5dee\u4e00\u9ede\u9ede\u3002 \u5df2\u5c31\u7dd2",
+    "inherited_settings": {
+      "iso": 100,
+      "f_number": 2.8
+    },
+    "center_meter": {
+      "raw_shutter": "1/60 \u5de6\u53f3\uff0c\u4e0d\u8db31/60 \u5dee\u4e00\u9ede\u9ede",
+      "nominal_shutter_seconds": 0.016666666666666666,
+      "nominal_computed_ev100": 8.877744249949002,
+      "precision": "approximate_not_quantified",
+      "fractional_offset_not_inferred": true
+    },
+    "screen_brightness_adjusted": true,
+    "geometry": "fixed_against_screen_as_user_protocol",
+    "global_meter": null,
+    "recorded_unix": 1794643781.754915,
+    "calibration_validated": false
+  },
+  "after": {
+    "schema": "camera-exposure-reference-input/v1",
+    "metering_mode": "central",
+    "raw_user_input": "\u57fa\u672c\u6c92\u8b8a",
+    "inherited_settings": {
+      "iso": 100,
+      "f_number": 2.8
+    },
+    "same_as_before_qualitative": true,
+    "nominal_shutter_seconds": 0.016666666666666666,
+    "precision": "approximate_not_quantified",
+    "reference_to_before": "reference-before.json",
+    "recorded_unix": 1794643999.8911412,
+    "calibration_validated": false
+  },
+  "endpoints_qualitatively_unchanged": true,
+  "continuous_illumination_stability_proven": false,
+  "instrument_accuracy_verified": false,
+  "used_for_residual_correction": false,
+  "calibration_validated": false
+}

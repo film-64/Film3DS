@@ -1,0 +1,466 @@
+FILMPROBE schema=1 revision=5a1e62d-ccm-boot-v3 new3ds=1 model_result=00000000 kernel=023a0000 settle_frames=8 measured_frames=12
+OPTIONS direct=0 raw=1 acquisition=continuous deterministic_ipc=1 transfer=ram_http
+RAM_EVIDENCE contract=3 bytes=29360128 sd_writes=1 freeze_after_camera=1 no_compression=1 retry=none
+REQUEST only_sensor=1 first_phase=3 last_phase=7
+CALIBRATION contract=2 expected_stages=5 target=stable_scene lock_scope=per_capture units=raw_codes scope=camera-ccm-normalization-v3
+LOG_POLICY frame_boundary buffers=32768 all_streams=1 retry=none
+IPC_DUMP disabled_by_sweep_contract proof=reads_frames_calls
+CRASH_COLLECTION skipped_existing_dump_already_recovered ram_mode=1
+SERVICE sensor=1 name=cam:u open=00000000
+SERVICE_ID sensor=1 name=cam:u result=d8a053ea id=0000
+GETTER sensor=1 service=cam:u poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:u poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:c open=00000000
+SERVICE_ID sensor=1 name=cam:c result=00000000 id=2280
+GETTER sensor=1 service=cam:c poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:c poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:s open=00000000
+SERVICE_ID sensor=1 name=cam:s result=d8a053ea id=0000
+GETTER sensor=1 service=cam:s poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:s poison=1 result=00000000 ae_low8=1
+INIT_STEP stage=calibration_queries_begin
+CALIBRATION_REPLY command=0032 result=d8a053ea header=003201c0 valid=0 payload=000300000011d3740fffffa4001012a10fffffb40000a50c00000000000000000000000000000000000000000000000000000000000000000000000000000000
+CALIBRATION_REPLY command=002b result=00000000 header=002b0440 valid=1 payload=000000003f7fe7f33deaf0bfc2b50282bfe71a4c0000000000000000428281254282775e437a0000420c000001e0028000000000000000000000000000000000
+INIT_STEP stage=calibration_queries_end
+INIT_STEP stage=initial_snapshot_begin
+INIT_STEP stage=initial_snapshot_end
+ACQUISITION sensor=1 mode=continuous complete=0
+ACQUISITION_SELECTED sensor=1 mode=single_frame_restart reason=register_brackets_or_stream_failure
+ACQUISITION sensor=1 mode=single_frame_restart complete=1 lock_scope=per_capture_only
+HG_CONTRACT source=camera-ccm-normalization/v3 arms=3 trials=4 fps=5 observer=none retry=none
+CAL_STAGE sensor=1 phase=3 kind=seed controls_verified=1 restoring=0
+CAL_STAGE sensor=1 phase=4 kind=code_baseline controls_verified=1 restoring=0
+AUTO_ISP_PIN phase=4 frame=8 established=1 red=166 gr=163 gb=163 blue=133
+SWEEP_RAW phase=4 bytes=24576 crc32=5e63a854
+CAL_BURST sensor=1 rate=5 frames=24 expected=24 complete=1 evidence=dma_event_cadence
+CCM_MODE index=0 phase=5 disabled=0 target=34 actual=34 verified=1
+SEQ_REFRESH restoring=0 command=5 writes=1 polls=15 state=3 verified=1
+POST_REFRESH_MANUAL seq=10 preview_awb=0 awb_r=128 awb_g=128 awb_b=128 command=0 state=3 verified=1
+HG_ARM index=0 phase=5 label=ccm_0_normalized enabled=0 target=2 gate_verified=1
+CCM_WORD phase=5 when=before_stream addr=2332 msb=1 lsb=176 value=432
+CCM_ALIAS_CHECK phase=5 when=before_stream addr=2332 native=432 combined=432 verified=1
+CCM_WORD phase=5 when=before_stream addr=2334 msb=255 lsb=176 value=65456
+CCM_WORD phase=5 when=before_stream addr=2336 msb=255 lsb=176 value=65456
+CCM_WORD phase=5 when=before_stream addr=2338 msb=255 lsb=172 value=65452
+CCM_WORD phase=5 when=before_stream addr=233a msb=1 lsb=136 value=392
+CCM_WORD phase=5 when=before_stream addr=233c msb=255 lsb=226 value=65506
+CCM_WORD phase=5 when=before_stream addr=233e msb=255 lsb=249 value=65529
+CCM_WORD phase=5 when=before_stream addr=2340 msb=255 lsb=147 value=65427
+CCM_WORD phase=5 when=before_stream addr=2342 msb=1 lsb=129 value=385
+CCM_WORD phase=5 when=before_stream addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=5 when=before_stream addr=2346 msb=0 lsb=61 value=61
+NO_RECEIVE_TIMING observation=0 when=baseline raw=1885895395584 result=00000000
+NO_RECEIVE_TIMING observation=0 when=latest raw=1886095346839 result=00000000
+HG_VSYNC phase=5 trial=0 baseline=1885895395584 latest=1886095346839 returned_ms=4003646112887 verified=1
+CCM_TRIAL_TARGET phase=5 trial=0 target=96
+HG_POLL phase=5 trial=0 index=0 begin_ms=4003646112917 end_ms=4003646112918 value=96 verified=1
+HG_POLL phase=5 trial=0 index=1 begin_ms=4003646112922 end_ms=4003646112922 value=96 verified=1
+HG_POLL phase=5 trial=0 index=2 begin_ms=4003646112926 end_ms=4003646112927 value=96 verified=1
+HG_POLL phase=5 trial=0 index=3 begin_ms=4003646112931 end_ms=4003646112932 value=96 verified=1
+HG_POLL phase=5 trial=0 index=4 begin_ms=4003646112936 end_ms=4003646112937 value=96 verified=1
+HG_POLL phase=5 trial=0 index=5 begin_ms=4003646112941 end_ms=4003646112941 value=96 verified=1
+HG_POLL phase=5 trial=0 index=6 begin_ms=4003646112946 end_ms=4003646112946 value=96 verified=1
+HG_POLL phase=5 trial=0 index=7 begin_ms=4003646112950 end_ms=4003646112951 value=96 verified=1
+HG_POLL phase=5 trial=0 index=8 begin_ms=4003646112955 end_ms=4003646112956 value=96 verified=1
+HG_POLL phase=5 trial=0 index=9 begin_ms=4003646112960 end_ms=4003646112960 value=96 verified=1
+HG_POLL phase=5 trial=0 index=10 begin_ms=4003646112965 end_ms=4003646112965 value=96 verified=1
+HG_POLL phase=5 trial=0 index=11 begin_ms=4003646112969 end_ms=4003646112970 value=96 verified=1
+HG_POLL phase=5 trial=0 index=12 begin_ms=4003646112974 end_ms=4003646112975 value=96 verified=1
+HG_POLL phase=5 trial=0 index=13 begin_ms=4003646112979 end_ms=4003646112979 value=96 verified=1
+HG_POLL phase=5 trial=0 index=14 begin_ms=4003646112984 end_ms=4003646112984 value=96 verified=1
+HG_POLL phase=5 trial=0 index=15 begin_ms=4003646112988 end_ms=4003646112989 value=96 verified=1
+HG_POLL phase=5 trial=0 index=16 begin_ms=4003646112993 end_ms=4003646112994 value=96 verified=1
+HG_POLL phase=5 trial=0 index=17 begin_ms=4003646112998 end_ms=4003646112998 value=96 verified=1
+HG_POLL phase=5 trial=0 index=18 begin_ms=4003646113003 end_ms=4003646113003 value=96 verified=1
+HG_POLL phase=5 trial=0 index=19 begin_ms=4003646113008 end_ms=4003646113008 value=96 verified=1
+HG_POLL phase=5 trial=0 index=20 begin_ms=4003646113012 end_ms=4003646113013 value=96 verified=1
+HG_POLL phase=5 trial=0 index=21 begin_ms=4003646113017 end_ms=4003646113018 value=96 verified=1
+HG_POLL phase=5 trial=0 index=22 begin_ms=4003646113022 end_ms=4003646113022 value=96 verified=1
+HG_POLL phase=5 trial=0 index=23 begin_ms=4003646113026 end_ms=4003646113027 value=96 verified=1
+HG_POLL phase=5 trial=0 index=24 begin_ms=4003646113031 end_ms=4003646113032 value=96 verified=1
+HG_POLL phase=5 trial=0 index=25 begin_ms=4003646113036 end_ms=4003646113036 value=96 verified=1
+HG_POLL phase=5 trial=0 index=26 begin_ms=4003646113041 end_ms=4003646113041 value=96 verified=1
+HG_POLL phase=5 trial=0 index=27 begin_ms=4003646113045 end_ms=4003646113046 value=96 verified=1
+HG_POLL phase=5 trial=0 index=28 begin_ms=4003646113050 end_ms=4003646113051 value=96 verified=1
+HG_POLL phase=5 trial=0 index=29 begin_ms=4003646113055 end_ms=4003646113056 value=96 verified=1
+HG_POLL phase=5 trial=0 index=30 begin_ms=4003646113060 end_ms=4003646113060 value=96 verified=1
+HG_POLL phase=5 trial=0 index=31 begin_ms=4003646113064 end_ms=4003646113065 value=96 verified=1
+HG_POLL phase=5 trial=0 index=32 begin_ms=4003646113069 end_ms=4003646113070 value=96 verified=1
+HG_POLL phase=5 trial=0 index=33 begin_ms=4003646113074 end_ms=4003646113075 value=96 verified=1
+HG_POLL phase=5 trial=0 index=34 begin_ms=4003646113079 end_ms=4003646113079 value=96 verified=1
+HG_POLL phase=5 trial=0 index=35 begin_ms=4003646113083 end_ms=4003646113084 value=96 verified=1
+HG_POLL phase=5 trial=0 index=36 begin_ms=4003646113088 end_ms=4003646113089 value=133 verified=1
+NO_RECEIVE_TIMING observation=0 when=after_poll raw=1886295302420 result=00000000
+HG_TRIAL phase=5 trial=0 delay_ms=25 write_begin_ms=4003646112912 write_end_ms=4003646112917 polls=37 last=133 after_raw=1886295302420 complete=1
+NO_RECEIVE_TIMING observation=1 when=baseline raw=1886295302420 result=00000000
+NO_RECEIVE_TIMING observation=1 when=latest raw=1886495243283 result=00000000
+HG_VSYNC phase=5 trial=1 baseline=1886295302420 latest=1886495243283 returned_ms=4003646113287 verified=1
+CCM_TRIAL_TARGET phase=5 trial=1 target=128
+HG_POLL phase=5 trial=1 index=0 begin_ms=4003646113367 end_ms=4003646113367 value=128 verified=1
+HG_POLL phase=5 trial=1 index=1 begin_ms=4003646113372 end_ms=4003646113372 value=128 verified=1
+HG_POLL phase=5 trial=1 index=2 begin_ms=4003646113376 end_ms=4003646113377 value=128 verified=1
+HG_POLL phase=5 trial=1 index=3 begin_ms=4003646113381 end_ms=4003646113382 value=128 verified=1
+HG_POLL phase=5 trial=1 index=4 begin_ms=4003646113386 end_ms=4003646113386 value=128 verified=1
+HG_POLL phase=5 trial=1 index=5 begin_ms=4003646113390 end_ms=4003646113391 value=128 verified=1
+HG_POLL phase=5 trial=1 index=6 begin_ms=4003646113395 end_ms=4003646113396 value=128 verified=1
+HG_POLL phase=5 trial=1 index=7 begin_ms=4003646113400 end_ms=4003646113401 value=128 verified=1
+HG_POLL phase=5 trial=1 index=8 begin_ms=4003646113405 end_ms=4003646113405 value=128 verified=1
+HG_POLL phase=5 trial=1 index=9 begin_ms=4003646113409 end_ms=4003646113410 value=128 verified=1
+HG_POLL phase=5 trial=1 index=10 begin_ms=4003646113414 end_ms=4003646113415 value=128 verified=1
+HG_POLL phase=5 trial=1 index=11 begin_ms=4003646113419 end_ms=4003646113420 value=128 verified=1
+HG_POLL phase=5 trial=1 index=12 begin_ms=4003646113424 end_ms=4003646113424 value=128 verified=1
+HG_POLL phase=5 trial=1 index=13 begin_ms=4003646113428 end_ms=4003646113429 value=128 verified=1
+HG_POLL phase=5 trial=1 index=14 begin_ms=4003646113433 end_ms=4003646113434 value=128 verified=1
+HG_POLL phase=5 trial=1 index=15 begin_ms=4003646113438 end_ms=4003646113439 value=128 verified=1
+HG_POLL phase=5 trial=1 index=16 begin_ms=4003646113443 end_ms=4003646113444 value=128 verified=1
+HG_POLL phase=5 trial=1 index=17 begin_ms=4003646113448 end_ms=4003646113448 value=128 verified=1
+HG_POLL phase=5 trial=1 index=18 begin_ms=4003646113452 end_ms=4003646113453 value=128 verified=1
+HG_POLL phase=5 trial=1 index=19 begin_ms=4003646113457 end_ms=4003646113458 value=128 verified=1
+HG_POLL phase=5 trial=1 index=20 begin_ms=4003646113462 end_ms=4003646113463 value=128 verified=1
+HG_POLL phase=5 trial=1 index=21 begin_ms=4003646113467 end_ms=4003646113467 value=128 verified=1
+HG_POLL phase=5 trial=1 index=22 begin_ms=4003646113471 end_ms=4003646113472 value=128 verified=1
+HG_POLL phase=5 trial=1 index=23 begin_ms=4003646113476 end_ms=4003646113477 value=128 verified=1
+HG_POLL phase=5 trial=1 index=24 begin_ms=4003646113481 end_ms=4003646113481 value=128 verified=1
+HG_POLL phase=5 trial=1 index=25 begin_ms=4003646113486 end_ms=4003646113486 value=128 verified=1
+HG_POLL phase=5 trial=1 index=26 begin_ms=4003646113490 end_ms=4003646113491 value=133 verified=1
+NO_RECEIVE_TIMING observation=1 when=after_poll raw=1886695195993 result=00000000
+HG_TRIAL phase=5 trial=1 delay_ms=75 write_begin_ms=4003646113362 write_end_ms=4003646113367 polls=27 last=133 after_raw=1886695195993 complete=1
+NO_RECEIVE_TIMING observation=2 when=baseline raw=1886695195993 result=00000000
+NO_RECEIVE_TIMING observation=2 when=latest raw=1886895146725 result=00000000
+HG_VSYNC phase=5 trial=2 baseline=1886695195993 latest=1886895146725 returned_ms=4003646113687 verified=1
+CCM_TRIAL_TARGET phase=5 trial=2 target=160
+HG_POLL phase=5 trial=2 index=0 begin_ms=4003646113817 end_ms=4003646113817 value=160 verified=1
+HG_POLL phase=5 trial=2 index=1 begin_ms=4003646113821 end_ms=4003646113822 value=160 verified=1
+HG_POLL phase=5 trial=2 index=2 begin_ms=4003646113826 end_ms=4003646113827 value=160 verified=1
+HG_POLL phase=5 trial=2 index=3 begin_ms=4003646113831 end_ms=4003646113832 value=160 verified=1
+HG_POLL phase=5 trial=2 index=4 begin_ms=4003646113836 end_ms=4003646113836 value=160 verified=1
+HG_POLL phase=5 trial=2 index=5 begin_ms=4003646113840 end_ms=4003646113841 value=160 verified=1
+HG_POLL phase=5 trial=2 index=6 begin_ms=4003646113845 end_ms=4003646113846 value=160 verified=1
+HG_POLL phase=5 trial=2 index=7 begin_ms=4003646113850 end_ms=4003646113851 value=160 verified=1
+HG_POLL phase=5 trial=2 index=8 begin_ms=4003646113855 end_ms=4003646113855 value=160 verified=1
+HG_POLL phase=5 trial=2 index=9 begin_ms=4003646113859 end_ms=4003646113860 value=160 verified=1
+HG_POLL phase=5 trial=2 index=10 begin_ms=4003646113864 end_ms=4003646113865 value=160 verified=1
+HG_POLL phase=5 trial=2 index=11 begin_ms=4003646113869 end_ms=4003646113869 value=160 verified=1
+HG_POLL phase=5 trial=2 index=12 begin_ms=4003646113874 end_ms=4003646113874 value=160 verified=1
+HG_POLL phase=5 trial=2 index=13 begin_ms=4003646113878 end_ms=4003646113879 value=160 verified=1
+HG_POLL phase=5 trial=2 index=14 begin_ms=4003646113883 end_ms=4003646113884 value=160 verified=1
+HG_POLL phase=5 trial=2 index=15 begin_ms=4003646113888 end_ms=4003646113889 value=133 verified=1
+NO_RECEIVE_TIMING observation=2 when=after_poll raw=1887095096070 result=00000000
+HG_TRIAL phase=5 trial=2 delay_ms=125 write_begin_ms=4003646113812 write_end_ms=4003646113817 polls=16 last=133 after_raw=1887095096070 complete=1
+NO_RECEIVE_TIMING observation=3 when=baseline raw=1887095096070 result=00000000
+NO_RECEIVE_TIMING observation=3 when=latest raw=1887295046974 result=00000000
+HG_VSYNC phase=5 trial=3 baseline=1887095096070 latest=1887295046974 returned_ms=4003646114087 verified=1
+CCM_TRIAL_TARGET phase=5 trial=3 target=128
+HG_POLL phase=5 trial=3 index=0 begin_ms=4003646114267 end_ms=4003646114267 value=128 verified=1
+HG_POLL phase=5 trial=3 index=1 begin_ms=4003646114271 end_ms=4003646114272 value=128 verified=1
+HG_POLL phase=5 trial=3 index=2 begin_ms=4003646114276 end_ms=4003646114277 value=128 verified=1
+HG_POLL phase=5 trial=3 index=3 begin_ms=4003646114281 end_ms=4003646114282 value=128 verified=1
+HG_POLL phase=5 trial=3 index=4 begin_ms=4003646114286 end_ms=4003646114286 value=128 verified=1
+HG_POLL phase=5 trial=3 index=5 begin_ms=4003646114290 end_ms=4003646114291 value=133 verified=1
+NO_RECEIVE_TIMING observation=3 when=after_poll raw=1887494994887 result=00000000
+HG_TRIAL phase=5 trial=3 delay_ms=175 write_begin_ms=4003646114262 write_end_ms=4003646114267 polls=6 last=133 after_raw=1887494994887 complete=1
+CCM_WORD phase=5 when=after_stop addr=2332 msb=1 lsb=174 value=430
+CCM_ALIAS_CHECK phase=5 when=after_stop addr=2332 native=430 combined=430 verified=1
+CCM_WORD phase=5 when=after_stop addr=2334 msb=255 lsb=176 value=65456
+CCM_WORD phase=5 when=after_stop addr=2336 msb=255 lsb=176 value=65456
+CCM_WORD phase=5 when=after_stop addr=2338 msb=255 lsb=172 value=65452
+CCM_WORD phase=5 when=after_stop addr=233a msb=1 lsb=136 value=392
+CCM_WORD phase=5 when=after_stop addr=233c msb=255 lsb=226 value=65506
+CCM_WORD phase=5 when=after_stop addr=233e msb=255 lsb=249 value=65529
+CCM_WORD phase=5 when=after_stop addr=2340 msb=255 lsb=147 value=65427
+CCM_WORD phase=5 when=after_stop addr=2342 msb=1 lsb=129 value=385
+CCM_WORD phase=5 when=after_stop addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=5 when=after_stop addr=2346 msb=0 lsb=61 value=61
+SWEEP_RAW phase=5 bytes=24576 crc32=3d4e0703
+HG_WINDOW phase=5 complete=1 trials=4 raw_provenance=first_DMA_only
+HG_ARM_END index=0 phase=5 complete=1
+CCM_MODE index=1 phase=6 disabled=1 target=98 actual=98 verified=1
+SEQ_REFRESH restoring=0 command=5 writes=2 polls=11 state=3 verified=1
+POST_REFRESH_MANUAL seq=10 preview_awb=0 awb_r=128 awb_g=128 awb_b=128 command=0 state=3 verified=1
+HG_ARM index=1 phase=6 label=ccm_1_disabled enabled=0 target=2 gate_verified=1
+CCM_WORD phase=6 when=before_stream addr=2332 msb=1 lsb=156 value=412
+CCM_ALIAS_CHECK phase=6 when=before_stream addr=2332 native=412 combined=412 verified=1
+CCM_WORD phase=6 when=before_stream addr=2334 msb=255 lsb=178 value=65458
+CCM_WORD phase=6 when=before_stream addr=2336 msb=255 lsb=178 value=65458
+CCM_WORD phase=6 when=before_stream addr=2338 msb=255 lsb=177 value=65457
+CCM_WORD phase=6 when=before_stream addr=233a msb=1 lsb=107 value=363
+CCM_WORD phase=6 when=before_stream addr=233c msb=255 lsb=227 value=65507
+CCM_WORD phase=6 when=before_stream addr=233e msb=255 lsb=249 value=65529
+CCM_WORD phase=6 when=before_stream addr=2340 msb=255 lsb=152 value=65432
+CCM_WORD phase=6 when=before_stream addr=2342 msb=1 lsb=111 value=367
+CCM_WORD phase=6 when=before_stream addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=6 when=before_stream addr=2346 msb=0 lsb=61 value=61
+NO_RECEIVE_TIMING observation=0 when=baseline raw=1888694701706 result=00000000
+NO_RECEIVE_TIMING observation=0 when=latest raw=1888894649813 result=00000000
+HG_VSYNC phase=6 trial=0 baseline=1888694701706 latest=1888894649813 returned_ms=4003646115686 verified=1
+CCM_TRIAL_TARGET phase=6 trial=0 target=96
+HG_POLL phase=6 trial=0 index=0 begin_ms=4003646115716 end_ms=4003646115717 value=96 verified=1
+HG_POLL phase=6 trial=0 index=1 begin_ms=4003646115721 end_ms=4003646115722 value=96 verified=1
+HG_POLL phase=6 trial=0 index=2 begin_ms=4003646115726 end_ms=4003646115726 value=96 verified=1
+HG_POLL phase=6 trial=0 index=3 begin_ms=4003646115731 end_ms=4003646115731 value=96 verified=1
+HG_POLL phase=6 trial=0 index=4 begin_ms=4003646115735 end_ms=4003646115736 value=96 verified=1
+HG_POLL phase=6 trial=0 index=5 begin_ms=4003646115740 end_ms=4003646115741 value=96 verified=1
+HG_POLL phase=6 trial=0 index=6 begin_ms=4003646115745 end_ms=4003646115745 value=96 verified=1
+HG_POLL phase=6 trial=0 index=7 begin_ms=4003646115750 end_ms=4003646115750 value=96 verified=1
+HG_POLL phase=6 trial=0 index=8 begin_ms=4003646115754 end_ms=4003646115755 value=96 verified=1
+HG_POLL phase=6 trial=0 index=9 begin_ms=4003646115759 end_ms=4003646115760 value=96 verified=1
+HG_POLL phase=6 trial=0 index=10 begin_ms=4003646115764 end_ms=4003646115765 value=96 verified=1
+HG_POLL phase=6 trial=0 index=11 begin_ms=4003646115769 end_ms=4003646115769 value=96 verified=1
+HG_POLL phase=6 trial=0 index=12 begin_ms=4003646115773 end_ms=4003646115774 value=96 verified=1
+HG_POLL phase=6 trial=0 index=13 begin_ms=4003646115778 end_ms=4003646115779 value=96 verified=1
+HG_POLL phase=6 trial=0 index=14 begin_ms=4003646115783 end_ms=4003646115783 value=96 verified=1
+HG_POLL phase=6 trial=0 index=15 begin_ms=4003646115788 end_ms=4003646115788 value=96 verified=1
+HG_POLL phase=6 trial=0 index=16 begin_ms=4003646115792 end_ms=4003646115793 value=96 verified=1
+HG_POLL phase=6 trial=0 index=17 begin_ms=4003646115797 end_ms=4003646115798 value=96 verified=1
+HG_POLL phase=6 trial=0 index=18 begin_ms=4003646115802 end_ms=4003646115803 value=96 verified=1
+HG_POLL phase=6 trial=0 index=19 begin_ms=4003646115807 end_ms=4003646115807 value=96 verified=1
+HG_POLL phase=6 trial=0 index=20 begin_ms=4003646115812 end_ms=4003646115812 value=96 verified=1
+HG_POLL phase=6 trial=0 index=21 begin_ms=4003646115816 end_ms=4003646115817 value=96 verified=1
+HG_POLL phase=6 trial=0 index=22 begin_ms=4003646115821 end_ms=4003646115822 value=96 verified=1
+HG_POLL phase=6 trial=0 index=23 begin_ms=4003646115826 end_ms=4003646115826 value=96 verified=1
+HG_POLL phase=6 trial=0 index=24 begin_ms=4003646115830 end_ms=4003646115831 value=96 verified=1
+HG_POLL phase=6 trial=0 index=25 begin_ms=4003646115835 end_ms=4003646115836 value=96 verified=1
+HG_POLL phase=6 trial=0 index=26 begin_ms=4003646115840 end_ms=4003646115841 value=96 verified=1
+HG_POLL phase=6 trial=0 index=27 begin_ms=4003646115845 end_ms=4003646115845 value=96 verified=1
+HG_POLL phase=6 trial=0 index=28 begin_ms=4003646115849 end_ms=4003646115850 value=96 verified=1
+HG_POLL phase=6 trial=0 index=29 begin_ms=4003646115854 end_ms=4003646115855 value=96 verified=1
+HG_POLL phase=6 trial=0 index=30 begin_ms=4003646115859 end_ms=4003646115860 value=96 verified=1
+HG_POLL phase=6 trial=0 index=31 begin_ms=4003646115864 end_ms=4003646115864 value=96 verified=1
+HG_POLL phase=6 trial=0 index=32 begin_ms=4003646115869 end_ms=4003646115869 value=96 verified=1
+HG_POLL phase=6 trial=0 index=33 begin_ms=4003646115873 end_ms=4003646115874 value=96 verified=1
+HG_POLL phase=6 trial=0 index=34 begin_ms=4003646115878 end_ms=4003646115879 value=96 verified=1
+HG_POLL phase=6 trial=0 index=35 begin_ms=4003646115883 end_ms=4003646115884 value=96 verified=1
+HG_POLL phase=6 trial=0 index=36 begin_ms=4003646115888 end_ms=4003646115888 value=133 verified=1
+NO_RECEIVE_TIMING observation=0 when=after_poll raw=1889094601761 result=00000000
+HG_TRIAL phase=6 trial=0 delay_ms=25 write_begin_ms=4003646115712 write_end_ms=4003646115716 polls=37 last=133 after_raw=1889094601761 complete=1
+NO_RECEIVE_TIMING observation=1 when=baseline raw=1889094601761 result=00000000
+NO_RECEIVE_TIMING observation=1 when=latest raw=1889294550002 result=00000000
+HG_VSYNC phase=6 trial=1 baseline=1889094601761 latest=1889294550002 returned_ms=4003646116086 verified=1
+CCM_TRIAL_TARGET phase=6 trial=1 target=128
+HG_POLL phase=6 trial=1 index=0 begin_ms=4003646116166 end_ms=4003646116167 value=128 verified=1
+HG_POLL phase=6 trial=1 index=1 begin_ms=4003646116171 end_ms=4003646116171 value=128 verified=1
+HG_POLL phase=6 trial=1 index=2 begin_ms=4003646116176 end_ms=4003646116176 value=128 verified=1
+HG_POLL phase=6 trial=1 index=3 begin_ms=4003646116180 end_ms=4003646116181 value=128 verified=1
+HG_POLL phase=6 trial=1 index=4 begin_ms=4003646116185 end_ms=4003646116186 value=128 verified=1
+HG_POLL phase=6 trial=1 index=5 begin_ms=4003646116190 end_ms=4003646116190 value=128 verified=1
+HG_POLL phase=6 trial=1 index=6 begin_ms=4003646116195 end_ms=4003646116195 value=128 verified=1
+HG_POLL phase=6 trial=1 index=7 begin_ms=4003646116199 end_ms=4003646116200 value=128 verified=1
+HG_POLL phase=6 trial=1 index=8 begin_ms=4003646116204 end_ms=4003646116205 value=128 verified=1
+HG_POLL phase=6 trial=1 index=9 begin_ms=4003646116209 end_ms=4003646116209 value=128 verified=1
+HG_POLL phase=6 trial=1 index=10 begin_ms=4003646116214 end_ms=4003646116214 value=128 verified=1
+HG_POLL phase=6 trial=1 index=11 begin_ms=4003646116218 end_ms=4003646116219 value=128 verified=1
+HG_POLL phase=6 trial=1 index=12 begin_ms=4003646116223 end_ms=4003646116224 value=128 verified=1
+HG_POLL phase=6 trial=1 index=13 begin_ms=4003646116228 end_ms=4003646116228 value=128 verified=1
+HG_POLL phase=6 trial=1 index=14 begin_ms=4003646116232 end_ms=4003646116233 value=128 verified=1
+HG_POLL phase=6 trial=1 index=15 begin_ms=4003646116237 end_ms=4003646116238 value=128 verified=1
+HG_POLL phase=6 trial=1 index=16 begin_ms=4003646116242 end_ms=4003646116243 value=128 verified=1
+HG_POLL phase=6 trial=1 index=17 begin_ms=4003646116247 end_ms=4003646116247 value=128 verified=1
+HG_POLL phase=6 trial=1 index=18 begin_ms=4003646116252 end_ms=4003646116252 value=128 verified=1
+HG_POLL phase=6 trial=1 index=19 begin_ms=4003646116256 end_ms=4003646116257 value=128 verified=1
+HG_POLL phase=6 trial=1 index=20 begin_ms=4003646116261 end_ms=4003646116262 value=128 verified=1
+HG_POLL phase=6 trial=1 index=21 begin_ms=4003646116266 end_ms=4003646116266 value=128 verified=1
+HG_POLL phase=6 trial=1 index=22 begin_ms=4003646116270 end_ms=4003646116271 value=128 verified=1
+HG_POLL phase=6 trial=1 index=23 begin_ms=4003646116275 end_ms=4003646116276 value=128 verified=1
+HG_POLL phase=6 trial=1 index=24 begin_ms=4003646116280 end_ms=4003646116280 value=128 verified=1
+HG_POLL phase=6 trial=1 index=25 begin_ms=4003646116285 end_ms=4003646116285 value=128 verified=1
+HG_POLL phase=6 trial=1 index=26 begin_ms=4003646116289 end_ms=4003646116290 value=133 verified=1
+NO_RECEIVE_TIMING observation=1 when=after_poll raw=1889494500728 result=00000000
+HG_TRIAL phase=6 trial=1 delay_ms=75 write_begin_ms=4003646116162 write_end_ms=4003646116166 polls=27 last=133 after_raw=1889494500728 complete=1
+NO_RECEIVE_TIMING observation=2 when=baseline raw=1889494500728 result=00000000
+NO_RECEIVE_TIMING observation=2 when=latest raw=1889694452273 result=00000000
+HG_VSYNC phase=6 trial=2 baseline=1889494500728 latest=1889694452273 returned_ms=4003646116486 verified=1
+CCM_TRIAL_TARGET phase=6 trial=2 target=160
+HG_POLL phase=6 trial=2 index=0 begin_ms=4003646116616 end_ms=4003646116617 value=160 verified=1
+HG_POLL phase=6 trial=2 index=1 begin_ms=4003646116621 end_ms=4003646116621 value=160 verified=1
+HG_POLL phase=6 trial=2 index=2 begin_ms=4003646116625 end_ms=4003646116626 value=160 verified=1
+HG_POLL phase=6 trial=2 index=3 begin_ms=4003646116630 end_ms=4003646116631 value=160 verified=1
+HG_POLL phase=6 trial=2 index=4 begin_ms=4003646116635 end_ms=4003646116636 value=160 verified=1
+HG_POLL phase=6 trial=2 index=5 begin_ms=4003646116640 end_ms=4003646116640 value=160 verified=1
+HG_POLL phase=6 trial=2 index=6 begin_ms=4003646116645 end_ms=4003646116645 value=160 verified=1
+HG_POLL phase=6 trial=2 index=7 begin_ms=4003646116649 end_ms=4003646116650 value=160 verified=1
+HG_POLL phase=6 trial=2 index=8 begin_ms=4003646116654 end_ms=4003646116655 value=160 verified=1
+HG_POLL phase=6 trial=2 index=9 begin_ms=4003646116659 end_ms=4003646116659 value=160 verified=1
+HG_POLL phase=6 trial=2 index=10 begin_ms=4003646116664 end_ms=4003646116664 value=160 verified=1
+HG_POLL phase=6 trial=2 index=11 begin_ms=4003646116668 end_ms=4003646116669 value=160 verified=1
+HG_POLL phase=6 trial=2 index=12 begin_ms=4003646116673 end_ms=4003646116674 value=160 verified=1
+HG_POLL phase=6 trial=2 index=13 begin_ms=4003646116678 end_ms=4003646116678 value=160 verified=1
+HG_POLL phase=6 trial=2 index=14 begin_ms=4003646116683 end_ms=4003646116683 value=160 verified=1
+HG_POLL phase=6 trial=2 index=15 begin_ms=4003646116688 end_ms=4003646116688 value=133 verified=1
+NO_RECEIVE_TIMING observation=2 when=after_poll raw=1889894400417 result=00000000
+HG_TRIAL phase=6 trial=2 delay_ms=125 write_begin_ms=4003646116612 write_end_ms=4003646116616 polls=16 last=133 after_raw=1889894400417 complete=1
+NO_RECEIVE_TIMING observation=3 when=baseline raw=1889894400417 result=00000000
+NO_RECEIVE_TIMING observation=3 when=latest raw=1890094354790 result=00000000
+HG_VSYNC phase=6 trial=3 baseline=1889894400417 latest=1890094354790 returned_ms=4003646116886 verified=1
+CCM_TRIAL_TARGET phase=6 trial=3 target=128
+HG_POLL phase=6 trial=3 index=0 begin_ms=4003646117066 end_ms=4003646117066 value=128 verified=1
+HG_POLL phase=6 trial=3 index=1 begin_ms=4003646117071 end_ms=4003646117071 value=128 verified=1
+HG_POLL phase=6 trial=3 index=2 begin_ms=4003646117075 end_ms=4003646117076 value=128 verified=1
+HG_POLL phase=6 trial=3 index=3 begin_ms=4003646117080 end_ms=4003646117081 value=128 verified=1
+HG_POLL phase=6 trial=3 index=4 begin_ms=4003646117085 end_ms=4003646117085 value=128 verified=1
+HG_POLL phase=6 trial=3 index=5 begin_ms=4003646117089 end_ms=4003646117090 value=133 verified=1
+NO_RECEIVE_TIMING observation=3 when=after_poll raw=1890294301554 result=00000000
+HG_TRIAL phase=6 trial=3 delay_ms=175 write_begin_ms=4003646117061 write_end_ms=4003646117066 polls=6 last=133 after_raw=1890294301554 complete=1
+CCM_WORD phase=6 when=after_stop addr=2332 msb=1 lsb=156 value=412
+CCM_ALIAS_CHECK phase=6 when=after_stop addr=2332 native=412 combined=412 verified=1
+CCM_WORD phase=6 when=after_stop addr=2334 msb=255 lsb=178 value=65458
+CCM_WORD phase=6 when=after_stop addr=2336 msb=255 lsb=178 value=65458
+CCM_WORD phase=6 when=after_stop addr=2338 msb=255 lsb=177 value=65457
+CCM_WORD phase=6 when=after_stop addr=233a msb=1 lsb=107 value=363
+CCM_WORD phase=6 when=after_stop addr=233c msb=255 lsb=227 value=65507
+CCM_WORD phase=6 when=after_stop addr=233e msb=255 lsb=249 value=65529
+CCM_WORD phase=6 when=after_stop addr=2340 msb=255 lsb=152 value=65432
+CCM_WORD phase=6 when=after_stop addr=2342 msb=1 lsb=111 value=367
+CCM_WORD phase=6 when=after_stop addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=6 when=after_stop addr=2346 msb=0 lsb=61 value=61
+SWEEP_RAW phase=6 bytes=24576 crc32=042a60ea
+HG_WINDOW phase=6 complete=1 trials=4 raw_provenance=first_DMA_only
+HG_ARM_END index=1 phase=6 complete=1
+CCM_MODE index=2 phase=7 disabled=0 target=34 actual=34 verified=1
+SEQ_REFRESH restoring=0 command=5 writes=3 polls=12 state=3 verified=1
+POST_REFRESH_MANUAL seq=10 preview_awb=0 awb_r=128 awb_g=128 awb_b=128 command=0 state=3 verified=1
+HG_ARM index=2 phase=7 label=ccm_2_normalized enabled=0 target=2 gate_verified=1
+CCM_WORD phase=7 when=before_stream addr=2332 msb=1 lsb=175 value=431
+CCM_ALIAS_CHECK phase=7 when=before_stream addr=2332 native=431 combined=431 verified=1
+CCM_WORD phase=7 when=before_stream addr=2334 msb=255 lsb=176 value=65456
+CCM_WORD phase=7 when=before_stream addr=2336 msb=255 lsb=176 value=65456
+CCM_WORD phase=7 when=before_stream addr=2338 msb=255 lsb=171 value=65451
+CCM_WORD phase=7 when=before_stream addr=233a msb=1 lsb=136 value=392
+CCM_WORD phase=7 when=before_stream addr=233c msb=255 lsb=225 value=65505
+CCM_WORD phase=7 when=before_stream addr=233e msb=255 lsb=250 value=65530
+CCM_WORD phase=7 when=before_stream addr=2340 msb=255 lsb=149 value=65429
+CCM_WORD phase=7 when=before_stream addr=2342 msb=1 lsb=126 value=382
+CCM_WORD phase=7 when=before_stream addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=7 when=before_stream addr=2346 msb=0 lsb=61 value=61
+NO_RECEIVE_TIMING observation=0 when=baseline raw=1891494005270 result=00000000
+NO_RECEIVE_TIMING observation=0 when=latest raw=1891693953660 result=00000000
+HG_VSYNC phase=7 trial=0 baseline=1891494005270 latest=1891693953660 returned_ms=4003646118486 verified=1
+CCM_TRIAL_TARGET phase=7 trial=0 target=96
+HG_POLL phase=7 trial=0 index=0 begin_ms=4003646118516 end_ms=4003646118516 value=96 verified=1
+HG_POLL phase=7 trial=0 index=1 begin_ms=4003646118520 end_ms=4003646118521 value=96 verified=1
+HG_POLL phase=7 trial=0 index=2 begin_ms=4003646118525 end_ms=4003646118526 value=96 verified=1
+HG_POLL phase=7 trial=0 index=3 begin_ms=4003646118530 end_ms=4003646118530 value=96 verified=1
+HG_POLL phase=7 trial=0 index=4 begin_ms=4003646118534 end_ms=4003646118535 value=96 verified=1
+HG_POLL phase=7 trial=0 index=5 begin_ms=4003646118539 end_ms=4003646118540 value=96 verified=1
+HG_POLL phase=7 trial=0 index=6 begin_ms=4003646118544 end_ms=4003646118544 value=96 verified=1
+HG_POLL phase=7 trial=0 index=7 begin_ms=4003646118549 end_ms=4003646118549 value=96 verified=1
+HG_POLL phase=7 trial=0 index=8 begin_ms=4003646118553 end_ms=4003646118554 value=96 verified=1
+HG_POLL phase=7 trial=0 index=9 begin_ms=4003646118558 end_ms=4003646118559 value=96 verified=1
+HG_POLL phase=7 trial=0 index=10 begin_ms=4003646118563 end_ms=4003646118563 value=96 verified=1
+HG_POLL phase=7 trial=0 index=11 begin_ms=4003646118567 end_ms=4003646118568 value=96 verified=1
+HG_POLL phase=7 trial=0 index=12 begin_ms=4003646118572 end_ms=4003646118573 value=96 verified=1
+HG_POLL phase=7 trial=0 index=13 begin_ms=4003646118577 end_ms=4003646118578 value=96 verified=1
+HG_POLL phase=7 trial=0 index=14 begin_ms=4003646118582 end_ms=4003646118582 value=96 verified=1
+HG_POLL phase=7 trial=0 index=15 begin_ms=4003646118587 end_ms=4003646118587 value=96 verified=1
+HG_POLL phase=7 trial=0 index=16 begin_ms=4003646118591 end_ms=4003646118592 value=96 verified=1
+HG_POLL phase=7 trial=0 index=17 begin_ms=4003646118596 end_ms=4003646118597 value=96 verified=1
+HG_POLL phase=7 trial=0 index=18 begin_ms=4003646118601 end_ms=4003646118602 value=96 verified=1
+HG_POLL phase=7 trial=0 index=19 begin_ms=4003646118606 end_ms=4003646118606 value=96 verified=1
+HG_POLL phase=7 trial=0 index=20 begin_ms=4003646118610 end_ms=4003646118611 value=96 verified=1
+HG_POLL phase=7 trial=0 index=21 begin_ms=4003646118615 end_ms=4003646118616 value=96 verified=1
+HG_POLL phase=7 trial=0 index=22 begin_ms=4003646118620 end_ms=4003646118620 value=96 verified=1
+HG_POLL phase=7 trial=0 index=23 begin_ms=4003646118625 end_ms=4003646118625 value=96 verified=1
+HG_POLL phase=7 trial=0 index=24 begin_ms=4003646118629 end_ms=4003646118630 value=96 verified=1
+HG_POLL phase=7 trial=0 index=25 begin_ms=4003646118634 end_ms=4003646118635 value=96 verified=1
+HG_POLL phase=7 trial=0 index=26 begin_ms=4003646118639 end_ms=4003646118640 value=96 verified=1
+HG_POLL phase=7 trial=0 index=27 begin_ms=4003646118644 end_ms=4003646118644 value=96 verified=1
+HG_POLL phase=7 trial=0 index=28 begin_ms=4003646118648 end_ms=4003646118649 value=96 verified=1
+HG_POLL phase=7 trial=0 index=29 begin_ms=4003646118653 end_ms=4003646118654 value=96 verified=1
+HG_POLL phase=7 trial=0 index=30 begin_ms=4003646118658 end_ms=4003646118658 value=96 verified=1
+HG_POLL phase=7 trial=0 index=31 begin_ms=4003646118663 end_ms=4003646118663 value=96 verified=1
+HG_POLL phase=7 trial=0 index=32 begin_ms=4003646118667 end_ms=4003646118668 value=96 verified=1
+HG_POLL phase=7 trial=0 index=33 begin_ms=4003646118672 end_ms=4003646118673 value=96 verified=1
+HG_POLL phase=7 trial=0 index=34 begin_ms=4003646118677 end_ms=4003646118678 value=96 verified=1
+HG_POLL phase=7 trial=0 index=35 begin_ms=4003646118682 end_ms=4003646118682 value=96 verified=1
+HG_POLL phase=7 trial=0 index=36 begin_ms=4003646118687 end_ms=4003646118687 value=133 verified=1
+NO_RECEIVE_TIMING observation=0 when=after_poll raw=1891893904952 result=00000000
+HG_TRIAL phase=7 trial=0 delay_ms=25 write_begin_ms=4003646118511 write_end_ms=4003646118516 polls=37 last=133 after_raw=1891893904952 complete=1
+NO_RECEIVE_TIMING observation=1 when=baseline raw=1891893904952 result=00000000
+NO_RECEIVE_TIMING observation=1 when=latest raw=1892093855185 result=00000000
+HG_VSYNC phase=7 trial=1 baseline=1891893904952 latest=1892093855185 returned_ms=4003646118885 verified=1
+CCM_TRIAL_TARGET phase=7 trial=1 target=128
+HG_POLL phase=7 trial=1 index=0 begin_ms=4003646118966 end_ms=4003646118966 value=128 verified=1
+HG_POLL phase=7 trial=1 index=1 begin_ms=4003646118970 end_ms=4003646118971 value=128 verified=1
+HG_POLL phase=7 trial=1 index=2 begin_ms=4003646118975 end_ms=4003646118976 value=128 verified=1
+HG_POLL phase=7 trial=1 index=3 begin_ms=4003646118980 end_ms=4003646118980 value=128 verified=1
+HG_POLL phase=7 trial=1 index=4 begin_ms=4003646118984 end_ms=4003646118985 value=128 verified=1
+HG_POLL phase=7 trial=1 index=5 begin_ms=4003646118989 end_ms=4003646118990 value=128 verified=1
+HG_POLL phase=7 trial=1 index=6 begin_ms=4003646118994 end_ms=4003646118994 value=128 verified=1
+HG_POLL phase=7 trial=1 index=7 begin_ms=4003646118999 end_ms=4003646118999 value=128 verified=1
+HG_POLL phase=7 trial=1 index=8 begin_ms=4003646119003 end_ms=4003646119004 value=128 verified=1
+HG_POLL phase=7 trial=1 index=9 begin_ms=4003646119008 end_ms=4003646119009 value=128 verified=1
+HG_POLL phase=7 trial=1 index=10 begin_ms=4003646119013 end_ms=4003646119014 value=128 verified=1
+HG_POLL phase=7 trial=1 index=11 begin_ms=4003646119018 end_ms=4003646119018 value=128 verified=1
+HG_POLL phase=7 trial=1 index=12 begin_ms=4003646119022 end_ms=4003646119023 value=128 verified=1
+HG_POLL phase=7 trial=1 index=13 begin_ms=4003646119027 end_ms=4003646119028 value=128 verified=1
+HG_POLL phase=7 trial=1 index=14 begin_ms=4003646119032 end_ms=4003646119033 value=128 verified=1
+HG_POLL phase=7 trial=1 index=15 begin_ms=4003646119037 end_ms=4003646119037 value=128 verified=1
+HG_POLL phase=7 trial=1 index=16 begin_ms=4003646119041 end_ms=4003646119042 value=128 verified=1
+HG_POLL phase=7 trial=1 index=17 begin_ms=4003646119046 end_ms=4003646119047 value=128 verified=1
+HG_POLL phase=7 trial=1 index=18 begin_ms=4003646119051 end_ms=4003646119052 value=128 verified=1
+HG_POLL phase=7 trial=1 index=19 begin_ms=4003646119056 end_ms=4003646119056 value=128 verified=1
+HG_POLL phase=7 trial=1 index=20 begin_ms=4003646119060 end_ms=4003646119061 value=128 verified=1
+HG_POLL phase=7 trial=1 index=21 begin_ms=4003646119065 end_ms=4003646119066 value=128 verified=1
+HG_POLL phase=7 trial=1 index=22 begin_ms=4003646119070 end_ms=4003646119071 value=128 verified=1
+HG_POLL phase=7 trial=1 index=23 begin_ms=4003646119075 end_ms=4003646119075 value=128 verified=1
+HG_POLL phase=7 trial=1 index=24 begin_ms=4003646119080 end_ms=4003646119080 value=128 verified=1
+HG_POLL phase=7 trial=1 index=25 begin_ms=4003646119084 end_ms=4003646119085 value=128 verified=1
+HG_POLL phase=7 trial=1 index=26 begin_ms=4003646119089 end_ms=4003646119090 value=133 verified=1
+NO_RECEIVE_TIMING observation=1 when=after_poll raw=1892293802277 result=00000000
+HG_TRIAL phase=7 trial=1 delay_ms=75 write_begin_ms=4003646118961 write_end_ms=4003646118966 polls=27 last=133 after_raw=1892293802277 complete=1
+NO_RECEIVE_TIMING observation=2 when=baseline raw=1892293802277 result=00000000
+NO_RECEIVE_TIMING observation=2 when=latest raw=1892493755173 result=00000000
+HG_VSYNC phase=7 trial=2 baseline=1892293802277 latest=1892493755173 returned_ms=4003646119285 verified=1
+CCM_TRIAL_TARGET phase=7 trial=2 target=160
+HG_POLL phase=7 trial=2 index=0 begin_ms=4003646119415 end_ms=4003646119416 value=160 verified=1
+HG_POLL phase=7 trial=2 index=1 begin_ms=4003646119420 end_ms=4003646119421 value=160 verified=1
+HG_POLL phase=7 trial=2 index=2 begin_ms=4003646119425 end_ms=4003646119425 value=160 verified=1
+HG_POLL phase=7 trial=2 index=3 begin_ms=4003646119430 end_ms=4003646119430 value=160 verified=1
+HG_POLL phase=7 trial=2 index=4 begin_ms=4003646119434 end_ms=4003646119435 value=160 verified=1
+HG_POLL phase=7 trial=2 index=5 begin_ms=4003646119439 end_ms=4003646119440 value=160 verified=1
+HG_POLL phase=7 trial=2 index=6 begin_ms=4003646119444 end_ms=4003646119444 value=160 verified=1
+HG_POLL phase=7 trial=2 index=7 begin_ms=4003646119449 end_ms=4003646119449 value=160 verified=1
+HG_POLL phase=7 trial=2 index=8 begin_ms=4003646119453 end_ms=4003646119454 value=160 verified=1
+HG_POLL phase=7 trial=2 index=9 begin_ms=4003646119458 end_ms=4003646119459 value=160 verified=1
+HG_POLL phase=7 trial=2 index=10 begin_ms=4003646119463 end_ms=4003646119463 value=160 verified=1
+HG_POLL phase=7 trial=2 index=11 begin_ms=4003646119468 end_ms=4003646119468 value=160 verified=1
+HG_POLL phase=7 trial=2 index=12 begin_ms=4003646119472 end_ms=4003646119473 value=160 verified=1
+HG_POLL phase=7 trial=2 index=13 begin_ms=4003646119477 end_ms=4003646119478 value=160 verified=1
+HG_POLL phase=7 trial=2 index=14 begin_ms=4003646119482 end_ms=4003646119482 value=160 verified=1
+HG_POLL phase=7 trial=2 index=15 begin_ms=4003646119487 end_ms=4003646119487 value=133 verified=1
+NO_RECEIVE_TIMING observation=2 when=after_poll raw=1892693705838 result=00000000
+HG_TRIAL phase=7 trial=2 delay_ms=125 write_begin_ms=4003646119411 write_end_ms=4003646119415 polls=16 last=133 after_raw=1892693705838 complete=1
+NO_RECEIVE_TIMING observation=3 when=baseline raw=1892693705838 result=00000000
+NO_RECEIVE_TIMING observation=3 when=latest raw=1892893656384 result=00000000
+HG_VSYNC phase=7 trial=3 baseline=1892693705838 latest=1892893656384 returned_ms=4003646119685 verified=1
+CCM_TRIAL_TARGET phase=7 trial=3 target=128
+HG_POLL phase=7 trial=3 index=0 begin_ms=4003646119865 end_ms=4003646119866 value=128 verified=1
+HG_POLL phase=7 trial=3 index=1 begin_ms=4003646119870 end_ms=4003646119871 value=128 verified=1
+HG_POLL phase=7 trial=3 index=2 begin_ms=4003646119875 end_ms=4003646119875 value=128 verified=1
+HG_POLL phase=7 trial=3 index=3 begin_ms=4003646119880 end_ms=4003646119880 value=128 verified=1
+HG_POLL phase=7 trial=3 index=4 begin_ms=4003646119884 end_ms=4003646119885 value=128 verified=1
+HG_POLL phase=7 trial=3 index=5 begin_ms=4003646119889 end_ms=4003646119890 value=133 verified=1
+NO_RECEIVE_TIMING observation=3 when=after_poll raw=1893093611503 result=00000000
+HG_TRIAL phase=7 trial=3 delay_ms=175 write_begin_ms=4003646119861 write_end_ms=4003646119865 polls=6 last=133 after_raw=1893093611503 complete=1
+CCM_WORD phase=7 when=after_stop addr=2332 msb=1 lsb=173 value=429
+CCM_ALIAS_CHECK phase=7 when=after_stop addr=2332 native=429 combined=429 verified=1
+CCM_WORD phase=7 when=after_stop addr=2334 msb=255 lsb=176 value=65456
+CCM_WORD phase=7 when=after_stop addr=2336 msb=255 lsb=176 value=65456
+CCM_WORD phase=7 when=after_stop addr=2338 msb=255 lsb=171 value=65451
+CCM_WORD phase=7 when=after_stop addr=233a msb=1 lsb=136 value=392
+CCM_WORD phase=7 when=after_stop addr=233c msb=255 lsb=225 value=65505
+CCM_WORD phase=7 when=after_stop addr=233e msb=255 lsb=250 value=65530
+CCM_WORD phase=7 when=after_stop addr=2340 msb=255 lsb=149 value=65429
+CCM_WORD phase=7 when=after_stop addr=2342 msb=1 lsb=126 value=382
+CCM_WORD phase=7 when=after_stop addr=2344 msb=0 lsb=37 value=37
+CCM_WORD phase=7 when=after_stop addr=2346 msb=0 lsb=61 value=61
+SWEEP_RAW phase=7 bytes=24576 crc32=042a60ea
+HG_WINDOW phase=7 complete=1 trials=4 raw_provenance=first_DMA_only
+HG_ARM_END index=2 phase=7 complete=1
+PREVIEW_AWB_RESTORE saved=0 actual=0 verified=1
+AWB_RESTORE saved=2 actual=2 verified=1
+SEQ_RESTORE saved=10 actual=10 verified=1
+SEQ_REFRESH restoring=1 command=5 writes=4 polls=13 state=3 verified=1
+HG_END complete=1 arms=3 restored=1
+SENSOR_END sensor=1 complete=1
+MEASUREMENTS expected=5 complete=5 all_complete=1
+END complete=1 aborted=0 io_error=0 captures=32 failures=1

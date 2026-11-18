@@ -1,0 +1,6 @@
+{
+  "original_log_sha256": "145313ad0990d42e459488c017f9e808edd94ed7acc18d5b35b20182006ad333",
+  "public_log_normalization": "strip_ANSI_control_sequences_and_trailing_horizontal_whitespace",
+  "returncode": 0,
+  "kind": "native"
+}

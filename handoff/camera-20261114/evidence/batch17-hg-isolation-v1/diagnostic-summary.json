@@ -1,0 +1,244 @@
+{
+  "source": "camera-hg-isolation/v1",
+  "passed": true,
+  "calibration_validated": false,
+  "files": 16,
+  "bytes": 998291,
+  "binary_sha256": "b552938cf9689b4c734ba6635466dc5edc658aab73314d97e1ab6d1cc8ce8200",
+  "restored": true,
+  "conclusion": "HG_gate_not_sufficient_to_stop_update",
+  "timing_inference": "strong_frame_period_association_not_identification_of_MCU_or_latch",
+  "trials": [
+    {
+      "arm": 0,
+      "HG_enabled": 1,
+      "delay_ms": 25,
+      "write_begin_after_vsync_ms": 25,
+      "write_end_after_vsync_ms": 29,
+      "last_unity_read_begin_after_vsync_ms": 196,
+      "first_changed_read_end_after_vsync_ms": 202,
+      "first_changed_after_write_end_upper_ms": 173,
+      "polls": 37,
+      "raw_vsync_latest": 32502067133299,
+      "raw_vsync_after": 32502267084740,
+      "IFP_after_poll": [
+        133,
+        133,
+        133,
+        133
+      ]
+    },
+    {
+      "arm": 0,
+      "HG_enabled": 1,
+      "delay_ms": 75,
+      "write_begin_after_vsync_ms": 76,
+      "write_end_after_vsync_ms": 80,
+      "last_unity_read_begin_after_vsync_ms": 200,
+      "first_changed_read_end_after_vsync_ms": 205,
+      "first_changed_after_write_end_upper_ms": 125,
+      "polls": 27,
+      "raw_vsync_latest": 32502467036249,
+      "raw_vsync_after": 32502666983371,
+      "IFP_after_poll": [
+        133,
+        133,
+        133,
+        133
+      ]
+    },
+    {
+      "arm": 0,
+      "HG_enabled": 1,
+      "delay_ms": 125,
+      "write_begin_after_vsync_ms": 126,
+      "write_end_after_vsync_ms": 130,
+      "last_unity_read_begin_after_vsync_ms": 197,
+      "first_changed_read_end_after_vsync_ms": 203,
+      "first_changed_after_write_end_upper_ms": 73,
+      "polls": 16,
+      "raw_vsync_latest": 32502866936058,
+      "raw_vsync_after": 32503066883769,
+      "IFP_after_poll": [
+        133,
+        133,
+        133,
+        133
+      ]
+    },
+    {
+      "arm": 0,
+      "HG_enabled": 1,
+      "delay_ms": 175,
+      "write_begin_after_vsync_ms": 176,
+      "write_end_after_vsync_ms": 180,
+      "last_unity_read_begin_after_vsync_ms": 199,
+      "first_changed_read_end_after_vsync_ms": 205,
+      "first_changed_after_write_end_upper_ms": 25,
+      "polls": 6,
+      "raw_vsync_latest": 32503266836911,
+      "raw_vsync_after": 32503466785159,
+      "IFP_after_poll": [
+        133,
+        133,
+        133,
+        133
+      ]
+    },
+    {
+      "arm": 1,
+      "HG_enabled": 0,
+      "delay_ms": 25,
+      "write_begin_after_vsync_ms": 26,
+      "write_end_after_vsync_ms": 30,
+      "last_unity_read_begin_after_vsync_ms": 196,
+      "first_changed_read_end_after_vsync_ms": 202,
+      "first_changed_after_write_end_upper_ms": 172,
+      "polls": 37,
+      "raw_vsync_latest": 32504266587015,
+      "raw_vsync_after": 32504466536763,
+      "IFP_after_poll": [
+        133,
+        133,
+        133,
+        133
+      ]
+    },
+    {
+      "arm": 1,
+      "HG_enabled": 0,
+      "delay_ms": 75,
+      "write_begin_after_vsync_ms": 76,
+      "write_end_after_vsync_ms": 80,
+      "last_unity_read_begin_after_vsync_ms": 199,
+      "first_changed_read_end_after_vsync_ms": 204,
+      "first_changed_after_write_end_upper_ms": 124,
+      "polls": 27,
+      "raw_vsync_latest": 32504666488570,
+      "raw_vsync_after": 32504866436758,
+      "IFP_after_poll": [
+        133,
+        133,
+        133,
+        133
+      ]
+    },
+    {
+      "arm": 1,
+      "HG_enabled": 0,
+      "delay_ms": 125,
+      "write_begin_after_vsync_ms": 126,
+      "write_end_after_vsync_ms": 130,
+      "last_unity_read_begin_after_vsync_ms": 196,
+      "first_changed_read_end_after_vsync_ms": 202,
+      "first_changed_after_write_end_upper_ms": 72,
+      "polls": 16,
+      "raw_vsync_latest": 32505066390422,
+      "raw_vsync_after": 32505266338574,
+      "IFP_after_poll": [
+        133,
+        133,
+        133,
+        133
+      ]
+    },
+    {
+      "arm": 1,
+      "HG_enabled": 0,
+      "delay_ms": 175,
+      "write_begin_after_vsync_ms": 175,
+      "write_end_after_vsync_ms": 180,
+      "last_unity_read_begin_after_vsync_ms": 199,
+      "first_changed_read_end_after_vsync_ms": 204,
+      "first_changed_after_write_end_upper_ms": 24,
+      "polls": 6,
+      "raw_vsync_latest": 32505466289747,
+      "raw_vsync_after": 32505666238286,
+      "IFP_after_poll": [
+        133,
+        133,
+        133,
+        133
+      ]
+    },
+    {
+      "arm": 2,
+      "HG_enabled": 1,
+      "delay_ms": 25,
+      "write_begin_after_vsync_ms": 25,
+      "write_end_after_vsync_ms": 30,
+      "last_unity_read_begin_after_vsync_ms": 196,
+      "first_changed_read_end_after_vsync_ms": 201,
+      "first_changed_after_write_end_upper_ms": 171,
+      "polls": 37,
+      "raw_vsync_latest": 32506466041477,
+      "raw_vsync_after": 32506665990442,
+      "IFP_after_poll": [
+        133,
+        133,
+        133,
+        133
+      ]
+    },
+    {
+      "arm": 2,
+      "HG_enabled": 1,
+      "delay_ms": 75,
+      "write_begin_after_vsync_ms": 75,
+      "write_end_after_vsync_ms": 79,
+      "last_unity_read_begin_after_vsync_ms": 198,
+      "first_changed_read_end_after_vsync_ms": 204,
+      "first_changed_after_write_end_upper_ms": 125,
+      "polls": 27,
+      "raw_vsync_latest": 32506865942099,
+      "raw_vsync_after": 32507065889191,
+      "IFP_after_poll": [
+        133,
+        133,
+        133,
+        133
+      ]
+    },
+    {
+      "arm": 2,
+      "HG_enabled": 1,
+      "delay_ms": 125,
+      "write_begin_after_vsync_ms": 125,
+      "write_end_after_vsync_ms": 129,
+      "last_unity_read_begin_after_vsync_ms": 196,
+      "first_changed_read_end_after_vsync_ms": 201,
+      "first_changed_after_write_end_upper_ms": 72,
+      "polls": 16,
+      "raw_vsync_latest": 32507265842982,
+      "raw_vsync_after": 32507465792103,
+      "IFP_after_poll": [
+        133,
+        133,
+        133,
+        133
+      ]
+    },
+    {
+      "arm": 2,
+      "HG_enabled": 1,
+      "delay_ms": 175,
+      "write_begin_after_vsync_ms": 175,
+      "write_end_after_vsync_ms": 179,
+      "last_unity_read_begin_after_vsync_ms": 198,
+      "first_changed_read_end_after_vsync_ms": 204,
+      "first_changed_after_write_end_upper_ms": 25,
+      "polls": 6,
+      "raw_vsync_latest": 32507665742657,
+      "raw_vsync_after": 32507865689928,
+      "IFP_after_poll": [
+        133,
+        133,
+        133,
+        133
+      ]
+    }
+  ],
+  "source_HG_effect": "first_arm_Gamma_CCM_saturation_change_then_off_and_second_on_snapshots_stable",
+  "next_unknown": "origin_of_common_133_and_exact_writer",
+  "all_external_writers_excluded": false
+}

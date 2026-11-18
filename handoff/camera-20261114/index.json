@@ -1,0 +1,633 @@
+{
+  "schema": "camera-hardware-handoff/v1",
+  "as_of": "2026-11-14",
+  "batches": [
+    {
+      "batch": "batch01-capture",
+      "text_recovery_files": 11,
+      "omitted_pixel_files": 60,
+      "reports": []
+    },
+    {
+      "batch": "batch02-ram",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 146,
+      "reports": []
+    },
+    {
+      "batch": "batch03-isp-check",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 3,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": null,
+          "passed": null,
+          "calibration_validated": null
+        }
+      ]
+    },
+    {
+      "batch": "batch04-isp-transition",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 3,
+      "reports": []
+    },
+    {
+      "batch": "batch05-live-seq-gate",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 3,
+      "reports": []
+    },
+    {
+      "batch": "batch06-awb-force-state",
+      "text_recovery_files": 0,
+      "omitted_pixel_files": 0,
+      "reports": []
+    },
+    {
+      "batch": "batch07-awb-force-state",
+      "text_recovery_files": 0,
+      "omitted_pixel_files": 0,
+      "reports": []
+    },
+    {
+      "batch": "batch08-latest-mcu-state",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 3,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "exposure-sweep-check/v4",
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "isp-report.json",
+          "schema": "exposure-isp-diagnostic-report/v1",
+          "source": "exposure-sweep-check/v4",
+          "passed": false,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch09-v5-awb-off",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 3,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "exposure-sweep-check/v5",
+          "passed": false,
+          "calibration_validated": false
+        },
+        {
+          "file": "isp-report.json",
+          "schema": "exposure-isp-diagnostic-report/v2",
+          "source": "exposure-sweep-check/v5",
+          "passed": false,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch10-awb-on-refresh",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 3,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "exposure-sweep-awb-refresh/v1",
+          "passed": false,
+          "calibration_validated": false
+        },
+        {
+          "file": "isp-report.json",
+          "schema": "exposure-isp-diagnostic-report/v2",
+          "source": "exposure-sweep-awb-refresh/v1",
+          "passed": false,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch11-awb-on-refresh-v2",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 3,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "exposure-sweep-awb-refresh/v2",
+          "passed": false,
+          "calibration_validated": false
+        },
+        {
+          "file": "isp-report.json",
+          "schema": "exposure-isp-diagnostic-report/v2",
+          "source": "exposure-sweep-awb-refresh/v2",
+          "passed": false,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch12-post-refresh-manual",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 3,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "exposure-sweep-post-refresh-manual/v1",
+          "passed": false,
+          "calibration_validated": false
+        },
+        {
+          "file": "isp-report.json",
+          "schema": "exposure-isp-diagnostic-report/v3",
+          "source": "exposure-sweep-post-refresh-manual/v1",
+          "passed": false,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch13-isp-update",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 7,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "exposure-isp-update/v1",
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "isp-update-report.json",
+          "schema": "exposure-isp-update-report/v1",
+          "source": "exposure-isp-update/v1",
+          "passed": false,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch14-no-receive-frame-update",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 5,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "no-receive-frame-update/v1",
+          "passed": true,
+          "calibration_validated": false
+        },
+        {
+          "file": "no-receive-report.json",
+          "schema": "no-receive-frame-update-report/v1",
+          "source": "no-receive-frame-update/v1",
+          "passed": true,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch15-camera-writer-trace",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 3,
+      "reports": []
+    },
+    {
+      "batch": "batch16-camera-writer-observe-v2",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 4,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "camera-writer-window/v2",
+          "passed": true,
+          "calibration_validated": false
+        },
+        {
+          "file": "writer-report.json",
+          "schema": "camera-writer-report/v2",
+          "source": "camera-writer-window/v2",
+          "passed": true,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch17-hg-isolation-v1",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 6,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "camera-hg-isolation/v1",
+          "passed": true,
+          "calibration_validated": false
+        },
+        {
+          "file": "hg-report.json",
+          "schema": "camera-hg-isolation-report/v1",
+          "source": "camera-hg-isolation/v1",
+          "passed": true,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch18-ccm-normalization-v1",
+      "text_recovery_files": 12,
+      "omitted_pixel_files": 4,
+      "reports": [
+        {
+          "file": "ccm-report.json",
+          "schema": "camera-ccm-normalization-report/v1",
+          "source": "camera-ccm-normalization/v1",
+          "passed": false,
+          "calibration_validated": false
+        },
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "camera-ccm-normalization/v1",
+          "passed": false,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch19-ccm-bytes-v2",
+      "text_recovery_files": 0,
+      "omitted_pixel_files": 0,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "camera-ccm-normalization/v2",
+          "passed": false,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch20-ccm-boot-v3",
+      "text_recovery_files": 13,
+      "omitted_pixel_files": 6,
+      "reports": [
+        {
+          "file": "ccm-report.json",
+          "schema": "camera-ccm-normalization-report/v3",
+          "source": "camera-ccm-normalization/v3",
+          "passed": true,
+          "calibration_validated": false
+        },
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "camera-ccm-normalization/v3",
+          "passed": true,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch21-gain-matrix-v1",
+      "text_recovery_files": 15,
+      "omitted_pixel_files": 3,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "camera-gain-matrix/v1",
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "matrix-report.json",
+          "schema": "camera-gain-matrix-report/v1",
+          "source": "camera-gain-matrix/v1",
+          "passed": false,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch22-gain-matrix-v2",
+      "text_recovery_files": 15,
+      "omitted_pixel_files": 4,
+      "reports": [
+        {
+          "file": "matrix-report.json",
+          "schema": "camera-gain-matrix-report/v2",
+          "source": "camera-gain-matrix/v2",
+          "passed": false,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch23-gain-matrix-v3",
+      "text_recovery_files": 15,
+      "omitted_pixel_files": 8,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "matrix-report.json",
+          "schema": "camera-gain-matrix-report/v3",
+          "source": "camera-gain-matrix/v3",
+          "passed": false,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch24-gain-matrix-v4",
+      "text_recovery_files": 15,
+      "omitted_pixel_files": 11,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "camera-gain-matrix/v4",
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "matrix-report.json",
+          "schema": "camera-gain-matrix-report/v4",
+          "source": "camera-gain-matrix/v4",
+          "passed": true,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch25-exposure-rebuild-v1",
+      "text_recovery_files": 16,
+      "omitted_pixel_files": 147,
+      "reports": [
+        {
+          "file": "external-reference.json",
+          "schema": "camera-exposure-reference-evidence/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "rebuild-report.json",
+          "schema": "camera-exposure-rebuild-report/v1",
+          "source": "camera-exposure-rebuild/v1",
+          "passed": false,
+          "calibration_validated": false
+        },
+        {
+          "file": "reference-after.json",
+          "schema": "camera-exposure-reference-input/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "reference-before.json",
+          "schema": "camera-exposure-reference-input/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch26-exposure-rebuild-v2",
+      "text_recovery_files": 16,
+      "omitted_pixel_files": 299,
+      "reports": [
+        {
+          "file": "diagnostic-summary.json",
+          "schema": null,
+          "source": "camera-exposure-rebuild/v2",
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "external-reference.json",
+          "schema": "camera-exposure-reference-evidence/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "observation-summary.json",
+          "schema": null,
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "rebuild-report.json",
+          "schema": "camera-exposure-rebuild-report/v2",
+          "source": "camera-exposure-rebuild/v2",
+          "passed": true,
+          "calibration_validated": false
+        },
+        {
+          "file": "reference-after.json",
+          "schema": "camera-exposure-reference-input/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "reference-before.json",
+          "schema": "camera-exposure-reference-input/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch26-response-fit-v1",
+      "text_recovery_files": 0,
+      "omitted_pixel_files": 0,
+      "reports": [
+        {
+          "file": "fit.json",
+          "schema": "camera-exposure-response-fit/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": null
+        }
+      ]
+    },
+    {
+      "batch": "batch27-exposure-dense-v1",
+      "text_recovery_files": 17,
+      "omitted_pixel_files": 299,
+      "reports": [
+        {
+          "file": "dense-report.json",
+          "schema": "camera-exposure-dense-report/v1",
+          "source": "camera-exposure-dense/v1",
+          "passed": true,
+          "calibration_validated": false
+        },
+        {
+          "file": "external-reference.json",
+          "schema": "camera-exposure-reference-evidence/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "observation-summary.json",
+          "schema": null,
+          "source": null,
+          "passed": null,
+          "calibration_validated": null
+        },
+        {
+          "file": "recovery-summary.json",
+          "schema": null,
+          "source": null,
+          "passed": null,
+          "calibration_validated": null
+        },
+        {
+          "file": "reference-after.json",
+          "schema": "camera-exposure-reference-input/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "reference-before.json",
+          "schema": "camera-exposure-reference-input/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        }
+      ]
+    },
+    {
+      "batch": "batch27-luma-transfer-v1",
+      "text_recovery_files": 0,
+      "omitted_pixel_files": 0,
+      "reports": [
+        {
+          "file": "analysis-final.json",
+          "schema": "camera-exposure-luma-transfer/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": null
+        },
+        {
+          "file": "analysis.json",
+          "schema": "camera-exposure-luma-transfer/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": null
+        }
+      ]
+    },
+    {
+      "batch": "batch27-response-fit-v2",
+      "text_recovery_files": 0,
+      "omitted_pixel_files": 0,
+      "reports": [
+        {
+          "file": "fit.json",
+          "schema": "camera-exposure-response-fit/v2",
+          "source": null,
+          "passed": null,
+          "calibration_validated": null
+        }
+      ]
+    },
+    {
+      "batch": "batch28-exposure-dense-validation-v1",
+      "text_recovery_files": 17,
+      "omitted_pixel_files": 299,
+      "reports": [
+        {
+          "file": "dense-report.json",
+          "schema": "camera-exposure-dense-report/v1",
+          "source": "camera-exposure-dense/v1",
+          "passed": true,
+          "calibration_validated": false
+        },
+        {
+          "file": "external-reference.json",
+          "schema": "camera-exposure-reference-evidence/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "fixed-model-validation-final.json",
+          "schema": "camera-exposure-luma-transfer-check/v1",
+          "source": null,
+          "passed": false,
+          "calibration_validated": null
+        },
+        {
+          "file": "fixed-model-validation.json",
+          "schema": "camera-exposure-luma-transfer-check/v1",
+          "source": null,
+          "passed": false,
+          "calibration_validated": null
+        },
+        {
+          "file": "observation-summary.json",
+          "schema": null,
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "recovery-summary.json",
+          "schema": null,
+          "source": null,
+          "passed": null,
+          "calibration_validated": null
+        },
+        {
+          "file": "reference-after.json",
+          "schema": "camera-exposure-reference-input/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        },
+        {
+          "file": "reference-before.json",
+          "schema": "camera-exposure-reference-input/v1",
+          "source": null,
+          "passed": null,
+          "calibration_validated": false
+        }
+      ]
+    }
+  ],
+  "images_included": false,
+  "capture_reverified": false,
+  "calibration_validated": false,
+  "note": "Historical report outcomes copied unchanged; public subset cannot rerun image-complete verifiers."
+}

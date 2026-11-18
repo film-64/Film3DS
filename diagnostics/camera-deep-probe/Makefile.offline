@@ -1,0 +1,4 @@
+PROBE_NAME := FilmCalibration
+PROBE_BUILD := build-calibration-offline
+PROBE_EXTRA_FLAGS := -DPROBE_OFFLINE_DEFAULT
+include Makefile.probe

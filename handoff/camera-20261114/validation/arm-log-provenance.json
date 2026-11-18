@@ -1,0 +1,6 @@
+{
+  "original_log_sha256": "33771a2fbb6e97f4782023f3bd0fddfd0b3f12b8f0713de78ad924123c8ebd42",
+  "public_log_normalization": "strip_ANSI_control_sequences_and_trailing_horizontal_whitespace",
+  "returncode": 0,
+  "kind": "arm"
+}

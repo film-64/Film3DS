@@ -1,0 +1,460 @@
+FILMPROBE schema=1 revision=exposure-sweep-v2 new3ds=1 model_result=00000000 kernel=023a0000 settle_frames=8 measured_frames=12
+OPTIONS direct=0 raw=1 acquisition=continuous deterministic_ipc=1 transfer=ram_http
+RAM_EVIDENCE contract=3 bytes=29360128 sd_writes=0 freeze_after_camera=1 no_compression=1 retry=none
+REQUEST only_sensor=1 first_phase=3 last_phase=280
+CALIBRATION contract=2 expected_stages=278 target=stable_scene lock_scope=per_capture units=raw_codes scope=exposure-sweep
+LOG_POLICY frame_boundary buffers=32768 all_streams=1 retry=none
+IPC_DUMP disabled_by_sweep_contract proof=reads_frames_calls
+CRASH_COLLECTION skipped_existing_dump_already_recovered ram_mode=1
+SERVICE sensor=1 name=cam:u open=00000000
+SERVICE_ID sensor=1 name=cam:u result=d8a053ea id=0000
+GETTER sensor=1 service=cam:u poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:u poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:c open=00000000
+SERVICE_ID sensor=1 name=cam:c result=00000000 id=2280
+GETTER sensor=1 service=cam:c poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:c poison=1 result=00000000 ae_low8=1
+SERVICE sensor=1 name=cam:s open=00000000
+SERVICE_ID sensor=1 name=cam:s result=d8a053ea id=0000
+GETTER sensor=1 service=cam:s poison=0 result=00000000 ae_low8=1
+GETTER sensor=1 service=cam:s poison=1 result=00000000 ae_low8=1
+INIT_STEP stage=calibration_queries_begin
+CALIBRATION_REPLY command=0032 result=d8a053ea header=003201c0 valid=0 payload=0011d624000000010011fc40001013dd001156740000567a00000000000000000000000000000000000000000000000000000000000000000000000000000000
+CALIBRATION_REPLY command=002b result=00000000 header=002b0440 valid=1 payload=000000003f7fe7f33deaf0bfc2b50282bfe71a4c0000000000000000428281254282775e437a0000420c000001e0028000000000000000000000000000000000
+INIT_STEP stage=calibration_queries_end
+INIT_STEP stage=initial_snapshot_begin
+INIT_STEP stage=initial_snapshot_end
+ACQUISITION sensor=1 mode=continuous complete=0
+ACQUISITION_SELECTED sensor=1 mode=single_frame_restart reason=register_brackets_or_stream_failure
+ACQUISITION sensor=1 mode=single_frame_restart complete=1 lock_scope=per_capture_only
+SWEEP_CONTRACT source=exposure-sweep/v2 states=25 points=10 stages=278 sensor=1 fps=5 settle=8 measured=4 retry=none ipc_dump=0 raw_x=256 raw_y=192 raw_w=128 raw_h=96
+SWEEP_MATRIX value=1
+CAL_STAGE sensor=1 phase=3 kind=seed controls_verified=1 restoring=0
+CAL_STAGE sensor=1 phase=4 kind=code_baseline controls_verified=1 restoring=0
+AUTO_ISP_PIN phase=4 frame=8 established=1 red=164 gr=159 gb=159 blue=133
+SWEEP_RAW phase=4 bytes=24576 crc32=5bb5d695
+CAL_BURST sensor=1 rate=5 frames=24 expected=24 complete=1 evidence=dma_event_cadence
+SWEEP_POINT state=0 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=5 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=5 bytes=24576 crc32=042a60ea
+SWEEP_POINT state=0 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=6 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=6 bytes=24576 crc32=662c2a46
+SWEEP_POINT state=0 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=7 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=7 bytes=24576 crc32=5f540f31
+SWEEP_POINT state=0 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=8 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=8 bytes=24576 crc32=5e869256
+SWEEP_POINT state=0 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=9 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=9 bytes=24576 crc32=d0a96015
+SWEEP_POINT state=0 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=10 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=10 bytes=24576 crc32=e838c73d
+SWEEP_POINT state=0 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=11 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=11 bytes=24576 crc32=06c829fe
+SWEEP_POINT state=0 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=12 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=12 bytes=24576 crc32=927f780b
+SWEEP_POINT state=0 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=13 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=13 bytes=24576 crc32=c902abc7
+SWEEP_POINT state=0 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=14 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=14 bytes=24576 crc32=c902abc7
+CAL_STAGE sensor=1 phase=15 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=15 bytes=24576 crc32=925c1d9e
+SWEEP_POINT state=1 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=16 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=16 bytes=24576 crc32=042a60ea
+SWEEP_POINT state=1 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=17 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=17 bytes=24576 crc32=78e255b0
+SWEEP_POINT state=1 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=18 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=18 bytes=24576 crc32=2be31b17
+SWEEP_POINT state=1 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=19 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=19 bytes=24576 crc32=05709c66
+SWEEP_POINT state=1 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=20 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=20 bytes=24576 crc32=43b2375e
+SWEEP_POINT state=1 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=21 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=21 bytes=24576 crc32=45767dbb
+SWEEP_POINT state=1 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=22 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=22 bytes=24576 crc32=88321114
+SWEEP_POINT state=1 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=23 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=23 bytes=24576 crc32=fd749df9
+SWEEP_POINT state=1 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=24 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=24 bytes=24576 crc32=7851a8b4
+SWEEP_POINT state=1 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=25 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=25 bytes=24576 crc32=0eaac194
+CAL_STAGE sensor=1 phase=26 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=26 bytes=24576 crc32=403e85fc
+SWEEP_POINT state=2 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=27 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=27 bytes=24576 crc32=042a60ea
+SWEEP_POINT state=2 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=28 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=28 bytes=24576 crc32=1624ac63
+SWEEP_POINT state=2 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=29 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=29 bytes=24576 crc32=5a124ceb
+SWEEP_POINT state=2 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=30 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=30 bytes=24576 crc32=cdab8782
+SWEEP_POINT state=2 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=31 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=31 bytes=24576 crc32=a2a75d98
+SWEEP_POINT state=2 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=32 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=32 bytes=24576 crc32=01f8b058
+SWEEP_POINT state=2 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=33 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=33 bytes=24576 crc32=d08b5dc8
+SWEEP_POINT state=2 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=34 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=34 bytes=24576 crc32=c861ee82
+SWEEP_POINT state=2 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=35 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=35 bytes=24576 crc32=dd9f89b9
+SWEEP_POINT state=2 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=36 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=36 bytes=24576 crc32=6d234ea8
+CAL_STAGE sensor=1 phase=37 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=37 bytes=24576 crc32=dea9b2f9
+SWEEP_POINT state=3 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=38 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=38 bytes=24576 crc32=042a60ea
+SWEEP_POINT state=3 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=39 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=39 bytes=24576 crc32=d759e34c
+SWEEP_POINT state=3 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=40 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=40 bytes=24576 crc32=38095a3a
+SWEEP_POINT state=3 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=41 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=41 bytes=24576 crc32=287cb865
+SWEEP_POINT state=3 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=42 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=42 bytes=24576 crc32=4bf4102b
+SWEEP_POINT state=3 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=43 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=43 bytes=24576 crc32=703a377a
+SWEEP_POINT state=3 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=44 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=44 bytes=24576 crc32=eaf8a77b
+SWEEP_POINT state=3 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=45 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=45 bytes=24576 crc32=57f18cbb
+SWEEP_POINT state=3 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=46 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=46 bytes=24576 crc32=07a1f2ec
+SWEEP_POINT state=3 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=47 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=47 bytes=24576 crc32=c902abc7
+CAL_STAGE sensor=1 phase=48 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=48 bytes=24576 crc32=b59351a5
+SWEEP_POINT state=4 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=49 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=49 bytes=24576 crc32=042a60ea
+SWEEP_POINT state=4 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=50 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=50 bytes=24576 crc32=b6211ed3
+SWEEP_POINT state=4 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=51 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=51 bytes=24576 crc32=4fa6a7f1
+SWEEP_POINT state=4 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=52 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=52 bytes=24576 crc32=d5c8d0b5
+SWEEP_POINT state=4 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=53 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=53 bytes=24576 crc32=e79220d0
+SWEEP_POINT state=4 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=54 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=54 bytes=24576 crc32=be6672f8
+SWEEP_POINT state=4 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=55 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=55 bytes=24576 crc32=ac02ce07
+SWEEP_POINT state=4 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=56 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=56 bytes=24576 crc32=ce6b93d2
+SWEEP_POINT state=4 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=57 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=57 bytes=24576 crc32=5397d331
+SWEEP_POINT state=4 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=58 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=58 bytes=24576 crc32=c902abc7
+CAL_STAGE sensor=1 phase=59 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=59 bytes=24576 crc32=812d9868
+SWEEP_POINT state=5 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=60 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=60 bytes=24576 crc32=042a60ea
+SWEEP_POINT state=5 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=61 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=61 bytes=24576 crc32=c65a67b9
+SWEEP_POINT state=5 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=62 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=62 bytes=24576 crc32=17729fff
+SWEEP_POINT state=5 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=63 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=63 bytes=24576 crc32=5dfeca58
+SWEEP_POINT state=5 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=64 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=64 bytes=24576 crc32=fd3ed0c1
+SWEEP_POINT state=5 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=65 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=65 bytes=24576 crc32=84ced6e4
+SWEEP_POINT state=5 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=66 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=66 bytes=24576 crc32=8e92af4d
+SWEEP_POINT state=5 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=67 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=67 bytes=24576 crc32=8bcb757f
+SWEEP_POINT state=5 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=68 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=68 bytes=24576 crc32=c902abc7
+SWEEP_POINT state=5 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=69 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=69 bytes=24576 crc32=c902abc7
+CAL_STAGE sensor=1 phase=70 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=70 bytes=24576 crc32=3cf882c0
+SWEEP_POINT state=6 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=71 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=71 bytes=24576 crc32=2a8c392a
+SWEEP_POINT state=6 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=72 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=72 bytes=24576 crc32=99cf30b0
+SWEEP_POINT state=6 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=73 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=73 bytes=24576 crc32=6641c20f
+SWEEP_POINT state=6 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=74 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=74 bytes=24576 crc32=10665133
+SWEEP_POINT state=6 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=75 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=75 bytes=24576 crc32=b0fc65f9
+SWEEP_POINT state=6 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=76 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=76 bytes=24576 crc32=b95a59b8
+SWEEP_POINT state=6 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=77 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=77 bytes=24576 crc32=75d17b08
+SWEEP_POINT state=6 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=78 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=78 bytes=24576 crc32=5253d7e2
+SWEEP_POINT state=6 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=79 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=79 bytes=24576 crc32=c902abc7
+SWEEP_POINT state=6 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=80 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=80 bytes=24576 crc32=c902abc7
+CAL_STAGE sensor=1 phase=81 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=81 bytes=24576 crc32=314523d0
+SWEEP_POINT state=7 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=82 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=82 bytes=24576 crc32=042a60ea
+SWEEP_POINT state=7 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=83 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=83 bytes=24576 crc32=03fce154
+SWEEP_POINT state=7 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=84 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=84 bytes=24576 crc32=4c2c48fb
+SWEEP_POINT state=7 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=85 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=85 bytes=24576 crc32=db93f956
+SWEEP_POINT state=7 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=86 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=86 bytes=24576 crc32=1631dbaf
+SWEEP_POINT state=7 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=87 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=87 bytes=24576 crc32=464b6e23
+SWEEP_POINT state=7 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=88 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=88 bytes=24576 crc32=a3d4e968
+SWEEP_POINT state=7 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=89 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=89 bytes=24576 crc32=66996852
+SWEEP_POINT state=7 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=90 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=90 bytes=24576 crc32=5a0a601f
+SWEEP_POINT state=7 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=91 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=91 bytes=24576 crc32=c902abc7
+CAL_STAGE sensor=1 phase=92 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=92 bytes=24576 crc32=0f2f4e98
+SWEEP_POINT state=8 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=93 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=93 bytes=24576 crc32=042a60ea
+SWEEP_POINT state=8 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=94 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=94 bytes=24576 crc32=206d0ff0
+SWEEP_POINT state=8 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=95 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=95 bytes=24576 crc32=79ca10c3
+SWEEP_POINT state=8 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=96 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=96 bytes=24576 crc32=1e2a5166
+SWEEP_POINT state=8 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=97 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=97 bytes=24576 crc32=6c7cb3da
+SWEEP_POINT state=8 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=98 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=98 bytes=24576 crc32=ac5b6d7a
+SWEEP_POINT state=8 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=99 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=99 bytes=24576 crc32=fb4b5a41
+SWEEP_POINT state=8 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=100 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=100 bytes=24576 crc32=6f2c764b
+SWEEP_POINT state=8 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=101 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=101 bytes=24576 crc32=c902abc7
+SWEEP_POINT state=8 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=102 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=102 bytes=24576 crc32=c902abc7
+CAL_STAGE sensor=1 phase=103 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=103 bytes=24576 crc32=dd002635
+SWEEP_POINT state=9 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=104 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=104 bytes=24576 crc32=71ce3b96
+SWEEP_POINT state=9 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=105 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=105 bytes=24576 crc32=b8218ad7
+SWEEP_POINT state=9 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=106 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=106 bytes=24576 crc32=f830da12
+SWEEP_POINT state=9 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=107 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=107 bytes=24576 crc32=bb657f4a
+SWEEP_POINT state=9 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=108 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=108 bytes=24576 crc32=bb075647
+SWEEP_POINT state=9 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=109 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=109 bytes=24576 crc32=755efebf
+SWEEP_POINT state=9 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=110 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=110 bytes=24576 crc32=1f8339c2
+SWEEP_POINT state=9 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=111 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=111 bytes=24576 crc32=27a2ffe2
+SWEEP_POINT state=9 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=112 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=112 bytes=24576 crc32=c902abc7
+SWEEP_POINT state=9 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=113 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=113 bytes=24576 crc32=c902abc7
+CAL_STAGE sensor=1 phase=114 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=114 bytes=24576 crc32=8a6e376c
+SWEEP_POINT state=10 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=115 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=115 bytes=24576 crc32=fb431cb3
+SWEEP_POINT state=10 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=116 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=116 bytes=24576 crc32=585787b2
+SWEEP_POINT state=10 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=117 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=117 bytes=24576 crc32=3dfd089e
+SWEEP_POINT state=10 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=118 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=118 bytes=24576 crc32=f11c70f6
+SWEEP_POINT state=10 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=119 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=119 bytes=24576 crc32=d49e7a4a
+SWEEP_POINT state=10 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=120 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=120 bytes=24576 crc32=e558cb26
+SWEEP_POINT state=10 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=121 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=121 bytes=24576 crc32=c2c89bf1
+SWEEP_POINT state=10 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=122 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=122 bytes=24576 crc32=249e1a3d
+SWEEP_POINT state=10 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=123 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=123 bytes=24576 crc32=c902abc7
+SWEEP_POINT state=10 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=124 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=124 bytes=24576 crc32=c902abc7
+CAL_STAGE sensor=1 phase=125 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=125 bytes=24576 crc32=9ebf4d5a
+SWEEP_POINT state=11 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=126 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=126 bytes=24576 crc32=fea0cfd6
+SWEEP_POINT state=11 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=127 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=127 bytes=24576 crc32=28564447
+SWEEP_POINT state=11 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=128 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=128 bytes=24576 crc32=57b799d5
+SWEEP_POINT state=11 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=129 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=129 bytes=24576 crc32=8a004c2b
+SWEEP_POINT state=11 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=130 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=130 bytes=24576 crc32=ed4184f4
+SWEEP_POINT state=11 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=131 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=131 bytes=24576 crc32=d272d505
+SWEEP_POINT state=11 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=132 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=132 bytes=24576 crc32=5ae8121b
+SWEEP_POINT state=11 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=133 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=133 bytes=24576 crc32=c902abc7
+SWEEP_POINT state=11 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=134 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=134 bytes=24576 crc32=c902abc7
+SWEEP_POINT state=11 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=135 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=135 bytes=24576 crc32=c902abc7
+CAL_STAGE sensor=1 phase=136 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=136 bytes=24576 crc32=97d5520d
+SWEEP_POINT state=12 point=0 coarse=4 isp=native
+CAL_STAGE sensor=1 phase=137 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=137 bytes=24576 crc32=5cb18f01
+SWEEP_POINT state=12 point=1 coarse=8 isp=native
+CAL_STAGE sensor=1 phase=138 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=138 bytes=24576 crc32=2c87b845
+SWEEP_POINT state=12 point=2 coarse=16 isp=native
+CAL_STAGE sensor=1 phase=139 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=139 bytes=24576 crc32=e590b722
+SWEEP_POINT state=12 point=3 coarse=32 isp=native
+CAL_STAGE sensor=1 phase=140 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=140 bytes=24576 crc32=d1213a19
+SWEEP_POINT state=12 point=4 coarse=64 isp=native
+CAL_STAGE sensor=1 phase=141 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=141 bytes=24576 crc32=45ee3510
+SWEEP_POINT state=12 point=5 coarse=128 isp=native
+CAL_STAGE sensor=1 phase=142 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=142 bytes=24576 crc32=ab54c95e
+SWEEP_POINT state=12 point=6 coarse=256 isp=native
+CAL_STAGE sensor=1 phase=143 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=143 bytes=24576 crc32=93960161
+SWEEP_POINT state=12 point=7 coarse=528 isp=native
+CAL_STAGE sensor=1 phase=144 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=144 bytes=24576 crc32=c902abc7
+SWEEP_POINT state=12 point=8 coarse=1024 isp=native
+CAL_STAGE sensor=1 phase=145 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=145 bytes=24576 crc32=c902abc7
+SWEEP_POINT state=12 point=9 coarse=1585 isp=native
+CAL_STAGE sensor=1 phase=146 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=146 bytes=24576 crc32=c902abc7
+CAL_STAGE sensor=1 phase=147 kind=code_baseline controls_verified=1 restoring=0
+SWEEP_RAW phase=147 bytes=24576 crc32=213376fb
+SWEEP_POINT state=13 point=0 coarse=4 isp=unity
+CAL_STAGE sensor=1 phase=148 kind=code_baseline controls_verified=1 restoring=0
+CONTROL_DRIFT phase=148 when=before frame=8 addr=32d4 expected=128 actual=164 result=00000000
+SAMPLE_FAILED sensor=1 phase=148 label=sweep_s13_c0004
+SWEEP_END complete=0 stages=145 restored=1
+SENSOR_END sensor=1 complete=0
+MEASUREMENTS expected=146 complete=145 all_complete=0
+END complete=0 aborted=0 io_error=0 captures=1753 failures=1
