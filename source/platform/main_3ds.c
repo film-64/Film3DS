@@ -603,7 +603,7 @@ static void sync_darkroom(void)
             FilmRollPair pair={0};
             FilmStatus ps=film_roll_pair_index("film-roll-pair-index/v1",PREVIEWS,id,&pair);
             if(ps==FILM_OK&&pair.format==FILM_RAW10_RGGB){
-                FilmStatus ms=film_exposure_matrix_read(PREVIEWS,id,pair.source_crc,&app.shot_matrix);
+                FilmStatus ms=film_exposure_matrix_read("film-exposure-matrix-read/v1",PREVIEWS,id,pair.source_crc,&app.shot_matrix);
                 if(ms!=FILM_OK){
                     app.shot_matrix=film_exposure_matrix_default();
                     if(ms==FILM_CORRUPT)update_status("Curve metadata invalid; Neutral",ms,0);
@@ -736,7 +736,7 @@ static void save_capture(void *argument)
     if(save->status==FILM_OK){
         save->matrix.id=save->id;
         save->matrix.source_crc=film_roll_source_crc(&save->frame.source);
-        save->matrix_status=film_exposure_matrix_write(PREVIEWS,&save->matrix);
+        save->matrix_status=film_exposure_matrix_write("film-exposure-matrix-write/v1",PREVIEWS,&save->matrix);
         film_log(app.log,"Capture native-preview curve reference",save->matrix_status,save->id);
     }
     save->save_ms=(ticks(NULL)-started)/1000;atomic_store(&save->phase,CAPTURE_DONE);
