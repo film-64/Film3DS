@@ -8,6 +8,7 @@
 #include "raw_darkroom.h"
 #include "raw_capture.h"
 #include "exposure_matrix.h"
+#include "gray_capture.h"
 #include "layered_grain.h"
 #include "lut_catalog.h"
 #include "debug_mode.h"
@@ -52,6 +53,9 @@ typedef struct {
     FilmRollSaveResult result;
     FilmExposureMatrix matrix;
     FilmStatus matrix_status;
+    FilmGrayPair gray_pair;
+    FilmStatus gray_status;
+    bool gray_requested;
     atomic_uint phase;
     unsigned capture_zoom;
     int expected_step;
@@ -119,6 +123,7 @@ typedef struct {
     int applied_exposure;
     uint64_t preview_period;
     unsigned preview_frames, preview_fps;
+    uint64_t last_native_frame_ms;
 } App;
 
 static App app;
@@ -146,6 +151,7 @@ static void reset_preview_tracking(void)
 {
     app.preview_period = 0;
     app.preview_frames = app.preview_fps = 0;
+    app.last_native_frame_ms = 0;
     reset_exposure_tracking();
 }
 
@@ -689,6 +695,7 @@ static FilmStatus update_preview(void)
     if (status == FILM_OK && image.pixels) {
         FilmExposureMode mode=(FilmExposureMode)app.camera_values[FILM_CAM_EXPOSURE_MODE];
         film_camera_sample_preview(&app.stability,&image,app.camera_yuv,app.ui.recipe.aspect,FILM_METER_MANUAL);
+        app.last_native_frame_ms=osGetTime();
         show_camera_image(&image, app.camera_yuv, 0);
         /* Native preview has already rearmed DMA. Exposure transitions are a
          * separate boundary; a failed setup cannot turn a valid frame into a
@@ -741,6 +748,15 @@ static void save_capture(void *argument)
         save->matrix.source_crc=film_roll_source_crc(&save->frame.source);
         save->matrix_status=film_exposure_matrix_write("film-exposure-matrix-write/v1",PREVIEWS,&save->matrix);
         film_log(app.log,"Capture native-preview curve reference",save->matrix_status,save->id);
+        if(save->gray_requested){
+            save->gray_pair.id=save->id;
+            save->gray_pair.raw_source_crc=save->matrix.source_crc;
+            save->gray_status=film_gray_pair_write("film-gray-pair-write/v1",PREVIEWS,&save->gray_pair);
+            if(save->gray_status==FILM_OK)
+                save->gray_status=film_gray_pair_verify("film-gray-pair-verify/v1",PREVIEWS,
+                    save->id,save->gray_pair.raw_source_crc);
+            film_log(app.log,"Gray preview YUV / DNG paired evidence",save->gray_status,save->id);
+        }
     }
     save->save_ms=(ticks(NULL)-started)/1000;atomic_store(&save->phase,CAPTURE_DONE);
 }
@@ -758,7 +774,7 @@ static bool finish_capture(bool wait)
     }
     app.live=app.camera.initialized;app.preview_failed=!app.live;reset_preview_tracking();
     if(save->capture_status!=FILM_OK)update_status("RAW capture/restore; L reopens",save->capture_status,app.camera.last_result);
-    if(!save->frame.source.pixels){*save=(CaptureSave){0};return false;}
+    if(!save->frame.source.pixels){free(save->gray_pair.preview.pixels);*save=(CaptureSave){0};return false;}
     if (save->profile_status != FILM_OK)
         film_log(app.log, "Capture profile", save->profile_status, 0);
     if (save->result.written) ++app.next_number;
@@ -772,16 +788,19 @@ static bool finish_capture(bool wait)
                  save->capture_mode, save->save_ms, save->result.verification_status==FILM_OK?"OK":"FAILED");
         film_log(app.log, app.status, FILM_OK, 0);
         if(save->status!=FILM_OK)update_status("Original kept; SD verify failed",save->status,0);
+        else if(save->gray_requested&&save->gray_status!=FILM_OK)
+            update_status("Original kept; gray evidence incomplete",save->gray_status,0);
         else if(save->matrix_status!=FILM_OK)update_status("Original saved; look reference missing",save->matrix_status,0);
         else update_status("Original saved; Roll SELECT decodes",FILM_OK,0);
 
     } else update_status(save->result.written ? "Capture SD verify" : "Capture SD write", save->status, 0);
     film_frame_free(&save->frame);
+    free(save->gray_pair.preview.pixels);
     *save = (CaptureSave){0};
     return saved;
 }
 
-static bool capture_photo(void)
+static bool capture_photo(bool gray_pair)
 {
     CaptureSave *save=&app.save;
     if(save->thread){update_status("RAW capture/save busy",FILM_STATE,0);return false;}
@@ -801,13 +820,43 @@ static bool capture_photo(void)
     save->matrix.preview_valid=app.stability.preview_valid;
     if(save->matrix.preview_valid)memcpy(save->matrix.preview_linear,app.stability.preview_linear,
         sizeof save->matrix.preview_linear);
-    save->capture_mode="RAW DNG";
+    if(gray_pair){
+        /* The last finished DMA slot is idle while the next slot is armed.
+         * Copy it on the UI thread BEFORE the RAW shutter worker stops CAM.
+         * No camera register writes, reshoots or background acquisition. */
+        uint64_t now=osGetTime();
+        if(app.camera.exposure_mode!=FILM_EXPOSURE_NATIVE_AE||app.camera.zoom!=1||
+           app.camera.format!=FILM_YUYV||!app.camera.preview_ready||
+           !app.last_native_frame_ms||now<app.last_native_frame_ms||
+           now-app.last_native_frame_ms>2500||!app.stability.preview_valid||
+           !app.camera.preview_dma[app.camera.preview_pending^1]){
+            update_status("Gray pair: need fresh Native AE VGA preview",FILM_STATE,0);
+            *save=(CaptureSave){0};return false;
+        }
+        FilmCameraAutoState state=film_camera_auto_state(&app.camera);
+        if(R_FAILED(state.exposure_result)||R_FAILED(state.white_balance_result)||!state.exposure){
+            update_status("Gray pair: AE readback failed",FILM_STATE,state.exposure_result);
+            *save=(CaptureSave){0};return false;
+        }
+        uint8_t *pixels=malloc(640u*480u*2u);
+        if(!pixels){update_status("Gray pair: memory",FILM_NOMEM,0);*save=(CaptureSave){0};return false;}
+        memcpy(pixels,app.camera.preview_dma[app.camera.preview_pending^1],640u*480u*2u);
+        save->gray_requested=true;
+        save->gray_pair=(FilmGrayPair){
+            .preview={640,480,FILM_YUYV,pixels},.yuv=app.camera_yuv,
+            .preview_time_ms=app.last_native_frame_ms,
+            .native_level=app.camera_values[FILM_CAM_EV_COMP],
+            .exposure_mode=FILM_EXPOSURE_NATIVE_AE,
+            .native_ae=state.exposure,.native_awb=state.white_balance};
+    }
+    save->capture_mode=gray_pair?"RAW+GRAY":"RAW DNG";
     atomic_store(&app.camera.capture_phase,FILM_CAPTURE_VERIFY);atomic_store(&save->phase,CAPTURE_ACQUIRING);
     snprintf(app.status,sizeof app.status,"Capturing RAW #%04u",save->id);
     s32 priority=0x30;svcGetThreadPriority(&priority,CUR_THREAD_HANDLE);
     save->thread=threadCreate(save_capture,save,16*1024,priority<0x3f?priority+1:priority,0,false);
     if(save->thread){save->completion=threadGetHandle(save->thread);return false;}
-    update_status("RAW worker allocation",FILM_NOMEM,0);*save=(CaptureSave){0};return false;
+    update_status("RAW worker allocation",FILM_NOMEM,0);
+    free(save->gray_pair.preview.pixels);*save=(CaptureSave){0};return false;
 }
 
 static void draw(C3D_RenderTarget *top,C3D_RenderTarget *bottom);
@@ -1808,7 +1857,7 @@ int main(int argc, char **argv)
     if (!qa_token) run_commands();
     bool calibration_logged=false;
     show_camera_closed();
-    update_status("L: camera  R: RAW rear1  X: pages", FILM_OK, 0);
+    update_status("L: camera R: RAW SELECT+R: gray pair X: pages", FILM_OK, 0);
     if (qa_token) run_hardware_qa(qa_token, qa_frames, top, bottom);
 
     while (aptMainLoop()) {
@@ -2070,7 +2119,8 @@ int main(int argc, char **argv)
                 camera_failed = true;
             }
         }
-        if (!camera_failed && capture_requested) saved = capture_photo() || saved;
+        if (!camera_failed && capture_requested)
+            saved = capture_photo((keys&KEY_R)&&(held&KEY_SELECT)) || saved;
         else if (action == UI_EXPORT && !app.save.thread) {
             snprintf(app.status, sizeof app.status, "%s",
                      app.darkroom.lut_id[0] && app.darkroom.profile.strength > 0 ? "Applying LUT..." : "Developing...");
