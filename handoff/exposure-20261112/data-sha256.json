@@ -1,0 +1,4152 @@
+[
+  {
+    "path": "CALIBRATION_PLAN.md",
+    "bytes": 7286,
+    "sha256": "1baaa80016d3408649aeb4070acc2832ee2534888bd854a7483f24d5e84a6cb1"
+  },
+  {
+    "path": "RESUME_FINDINGS.md",
+    "bytes": 3565,
+    "sha256": "ebe82b261695ee2ae203c7057cdb5a81aaac1f03f81b1167b480c475e6ee71cb"
+  },
+  {
+    "path": "SECOND_COLLECTION_ANALYSIS.json",
+    "bytes": 8618,
+    "sha256": "cfbf48661440a5c25ae963627421565e12f47acadd0ffa31a8ffe8f776fcd83d"
+  },
+  {
+    "path": "SECOND_COLLECTION_ANALYSIS.md",
+    "bytes": 8374,
+    "sha256": "8560bb78aabb4b69027580038494c3b369f315b7fba085acf1d09b9cd9eb0e45"
+  },
+  {
+    "path": "SECOND_COLLECTION_PROGRESS.md",
+    "bytes": 2382,
+    "sha256": "68d4c5269a04152fed2252aa563f54c9568a508845a2a8a872145f607ea8c8e5"
+  },
+  {
+    "path": "card-prior-data-verification.json",
+    "bytes": 218,
+    "sha256": "adcdeea39d7416c5aa462fd791e2ba6c1e060f12e83807b3b1708d361f263e1e"
+  },
+  {
+    "path": "card-recovered/run-1794398995-000/calls.csv",
+    "bytes": 848,
+    "sha256": "61838a9378ecdf7d53b7c9ca0cae09e05ef5186cb916c745e128095f102a8af7"
+  },
+  {
+    "path": "card-recovered/run-1794398995-000/frames.csv",
+    "bytes": 115,
+    "sha256": "7e356d6eaa2d28b3bcdd653dacea1387da461f82cf917133446d67d97a15d5af"
+  },
+  {
+    "path": "card-recovered/run-1794398995-000/ipc.csv",
+    "bytes": 7258,
+    "sha256": "a3c73d3bc03893ae391666cb7604037a88e0b9858da2ab6d6244eec9cc5f66b7"
+  },
+  {
+    "path": "card-recovered/run-1794398995-000/manifest.txt",
+    "bytes": 1166,
+    "sha256": "f28642f0ace133dad4a38067c4dfa9d43370ebd9586d2ce481937f690b326617"
+  },
+  {
+    "path": "card-recovered/run-1794398995-000/reads.csv",
+    "bytes": 136,
+    "sha256": "162a8707a3ffe6dff8d8bc714684d8d96c477cc8fbeb4c1a48897ec332de90ff"
+  },
+  {
+    "path": "card-recovered/run-1794399442-000/calibration_plan.csv",
+    "bytes": 147,
+    "sha256": "e44d29797cdecd0cb3bf104f078559341bdbbbc96e3d56e1858612846d0a641c"
+  },
+  {
+    "path": "card-recovered/run-1794399442-000/calls.csv",
+    "bytes": 14411,
+    "sha256": "7d53dcb659028c0427e0be3d4efc769ec6c35c112892d20e0352972499114efd"
+  },
+  {
+    "path": "card-recovered/run-1794399442-000/frame_burst.csv",
+    "bytes": 75,
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "path": "card-recovered/run-1794399442-000/frames.csv",
+    "bytes": 1604,
+    "sha256": "f3bf9e8043704e5910f1504177cf168b0c53e764881cc60e8bf32898dbfee0f0"
+  },
+  {
+    "path": "card-recovered/run-1794399442-000/ipc.csv",
+    "bytes": 244826,
+    "sha256": "6b05bff5976e5abb0ccd73f74d10c73864148e929db5fe22e572bf32f241fae8"
+  },
+  {
+    "path": "card-recovered/run-1794399442-000/manifest.txt",
+    "bytes": 2042,
+    "sha256": "17b321d3420e917c718e0c68e34fffa30a699d4af4d633524f5a6c655a05daa3"
+  },
+  {
+    "path": "card-recovered/run-1794399442-000/noise.csv",
+    "bytes": 77,
+    "sha256": "6b6ba2a7db0d23fb4734ad922b66ff4640ab4c28d0f7e4213b0c46933776cff4"
+  },
+  {
+    "path": "card-recovered/run-1794399442-000/reads.csv",
+    "bytes": 23561,
+    "sha256": "ed4d00be1cfdde0d9c7b6114874484c39983fbc107539eb5ecaa7314e0124e44"
+  },
+  {
+    "path": "card-recovered/run-1794399442-000/roi.csv",
+    "bytes": 1367,
+    "sha256": "38b23b30ea8ccef7fb2138fda04bce635a2a9dd4f6e50c46b28653c8a2a39649"
+  },
+  {
+    "path": "card-recovered/run-1794399442-000/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "f6ec7d686f3c58bbcb7e68865ed422b7f962d1702cfff1feec1f3cb95d522401"
+  },
+  {
+    "path": "card-recovered/run-1794400145-000/calibration_plan.csv",
+    "bytes": 147,
+    "sha256": "e44d29797cdecd0cb3bf104f078559341bdbbbc96e3d56e1858612846d0a641c"
+  },
+  {
+    "path": "card-recovered/run-1794400145-000/calls.csv",
+    "bytes": 14411,
+    "sha256": "e162de26ff56a9e2a0f9d2c30c968b90738d789b6c0ffce346d6b7a08f992c3f"
+  },
+  {
+    "path": "card-recovered/run-1794400145-000/execution.csv",
+    "bytes": 382,
+    "sha256": "cff98845b1b4e6e3b1b3f899dc3b81a135a65fcedf43c55d37ed35ee058c4db7"
+  },
+  {
+    "path": "card-recovered/run-1794400145-000/frame_burst.csv",
+    "bytes": 75,
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "path": "card-recovered/run-1794400145-000/frames.csv",
+    "bytes": 1618,
+    "sha256": "cc5d364968cf3bed92cdcf280951133140227ee1a14c379d4187d3af1f2e503a"
+  },
+  {
+    "path": "card-recovered/run-1794400145-000/ipc.csv",
+    "bytes": 243802,
+    "sha256": "4e2332ea288651bfe07c60ebb1cd72a2371a8383fb9e38292d4a3f54d7d29691"
+  },
+  {
+    "path": "card-recovered/run-1794400145-000/manifest.txt",
+    "bytes": 2042,
+    "sha256": "17b321d3420e917c718e0c68e34fffa30a699d4af4d633524f5a6c655a05daa3"
+  },
+  {
+    "path": "card-recovered/run-1794400145-000/noise.csv",
+    "bytes": 77,
+    "sha256": "6b6ba2a7db0d23fb4734ad922b66ff4640ab4c28d0f7e4213b0c46933776cff4"
+  },
+  {
+    "path": "card-recovered/run-1794400145-000/reads.csv",
+    "bytes": 23562,
+    "sha256": "5e60601d8873c1c4bcfce7da7ece4e9dee9028be08e5efacfbc292f1caca5892"
+  },
+  {
+    "path": "card-recovered/run-1794400145-000/roi.csv",
+    "bytes": 1390,
+    "sha256": "818096d5a81d4b83828c0d823491360b2b4dcce2ab9ea420bc724a48c9c11719"
+  },
+  {
+    "path": "card-recovered/run-1794400145-000/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "cda5849166ccd9402b59b024bc372e95fd6bda7240c9bd3b78bc0168d234c534"
+  },
+  {
+    "path": "card-recovered/run-1794400970-000/calibration_plan.csv",
+    "bytes": 147,
+    "sha256": "e44d29797cdecd0cb3bf104f078559341bdbbbc96e3d56e1858612846d0a641c"
+  },
+  {
+    "path": "card-recovered/run-1794400970-000/calls.csv",
+    "bytes": 14411,
+    "sha256": "d4233cdbfd37a15af0fc025ac54fbc21511c20560e3ac96dc6239c1ac18b748f"
+  },
+  {
+    "path": "card-recovered/run-1794400970-000/execution.csv",
+    "bytes": 382,
+    "sha256": "cff98845b1b4e6e3b1b3f899dc3b81a135a65fcedf43c55d37ed35ee058c4db7"
+  },
+  {
+    "path": "card-recovered/run-1794400970-000/frame_burst.csv",
+    "bytes": 75,
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "path": "card-recovered/run-1794400970-000/frames.csv",
+    "bytes": 1573,
+    "sha256": "9329aedc78b8fe895540a8480ed1b15b3ecf52ad7852a555978f503eff847d72"
+  },
+  {
+    "path": "card-recovered/run-1794400970-000/ipc.csv",
+    "bytes": 240218,
+    "sha256": "b35df1eefee27b2c9ad3b97bb6a473405d50b025804e55d3a3704adad2f9a1ec"
+  },
+  {
+    "path": "card-recovered/run-1794400970-000/manifest.txt",
+    "bytes": 2123,
+    "sha256": "9f980f827bfb9f7a62ea82eb5d768c6cc30bea45969e6bb12a8d765f89e21a5a"
+  },
+  {
+    "path": "card-recovered/run-1794400970-000/noise.csv",
+    "bytes": 77,
+    "sha256": "6b6ba2a7db0d23fb4734ad922b66ff4640ab4c28d0f7e4213b0c46933776cff4"
+  },
+  {
+    "path": "card-recovered/run-1794400970-000/reads.csv",
+    "bytes": 23559,
+    "sha256": "565f6ef2cdebc89307bbf7f10b3c6cff4f6687327d142cfdb5535af2697ae019"
+  },
+  {
+    "path": "card-recovered/run-1794400970-000/roi.csv",
+    "bytes": 1364,
+    "sha256": "21aaf027223b80b83c7110b65966260155a5bb438d44192c6214328fabad1b4c"
+  },
+  {
+    "path": "card-recovered/run-1794400970-000/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "5172daf78c79a6c909ed133105a99145604894d572e3e35203e14b112f177070"
+  },
+  {
+    "path": "card-recovered/source-sha256.json",
+    "bytes": 11255,
+    "sha256": "fab20740c5542de90fecf7e8bd7539c575c2fb6b17c386b308481c910bc678f7"
+  },
+  {
+    "path": "collection-01/FilmProbe.3dsx",
+    "bytes": 291728,
+    "sha256": "997ab3098a59bfe2d609f9c2a52c2704e9909f4bac079b615991ccbb449193af"
+  },
+  {
+    "path": "collection-01/deployed-source/Makefile.probe",
+    "bytes": 1346,
+    "sha256": "9ac9c907f929bf2c1da5bdaf16cb401fbb805c077ad8446d1b1dc6df8fa12bbe"
+  },
+  {
+    "path": "collection-01/deployed-source/probes/exposure/calibration.h",
+    "bytes": 10855,
+    "sha256": "59ea9d1e8d10c9c541a2edc88b6d4e002b8bd1fc1d9ab2b6e2eee2967cf25355"
+  },
+  {
+    "path": "collection-01/deployed-source/probes/exposure/calibration_contract.h",
+    "bytes": 1631,
+    "sha256": "7277b32a9436137fbcfc02dd64a30bb449ac682e39873fdeddc08b84bb0a8fd0"
+  },
+  {
+    "path": "collection-01/deployed-source/probes/exposure/calibration_image.h",
+    "bytes": 2044,
+    "sha256": "159d55b71ecd9a596fe2e50f6a8ff38ca0ab4002baab22079a3ddbeef0e574e2"
+  },
+  {
+    "path": "collection-01/deployed-source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "collection-01/deployed-source/probes/exposure/deep_ipc.h",
+    "bytes": 5367,
+    "sha256": "1f611cd240bc6e2489af745f69509d4e269027ea7a373c716daf3dc74789f08e"
+  },
+  {
+    "path": "collection-01/deployed-source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "collection-01/deployed-source/probes/exposure/main.c",
+    "bytes": 29785,
+    "sha256": "1cdb37570b1ec73e209d1e080d2aaac2ab272c85373d6a04a33d2c88f3a0fe31"
+  },
+  {
+    "path": "collection-01/deployed-source/probes/exposure/probe_plan.h",
+    "bytes": 1535,
+    "sha256": "0229edaed86d73faff3d5eb3bc83760928aa6e2b8db212c4b48cc11a34fe643c"
+  },
+  {
+    "path": "collection-01/deployed-source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "collection-01/deployed-source/probes/recovery/main.c",
+    "bytes": 10408,
+    "sha256": "89d346861ac92340eb7c76e775339948bf96ad563742e8e394f2d6ac077ccccb"
+  },
+  {
+    "path": "collection-01/deployment.json",
+    "bytes": 1574,
+    "sha256": "7c7aa96c93c0bea6652c725dedfb2592213645049b4555c0b22d61ab31aac298"
+  },
+  {
+    "path": "collection-01/exit-investigation/run-1794398995-000/calibration_plan.csv",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "collection-01/exit-investigation/run-1794398995-000/calls.csv",
+    "bytes": 848,
+    "sha256": "61838a9378ecdf7d53b7c9ca0cae09e05ef5186cb916c745e128095f102a8af7"
+  },
+  {
+    "path": "collection-01/exit-investigation/run-1794398995-000/frames.csv",
+    "bytes": 115,
+    "sha256": "7e356d6eaa2d28b3bcdd653dacea1387da461f82cf917133446d67d97a15d5af"
+  },
+  {
+    "path": "collection-01/exit-investigation/run-1794398995-000/manifest.txt",
+    "bytes": 1166,
+    "sha256": "f28642f0ace133dad4a38067c4dfa9d43370ebd9586d2ce481937f690b326617"
+  },
+  {
+    "path": "collection-01/exit-investigation/run-1794398995-000/reads.csv",
+    "bytes": 136,
+    "sha256": "162a8707a3ffe6dff8d8bc714684d8d96c477cc8fbeb4c1a48897ec332de90ff"
+  },
+  {
+    "path": "collection-02/FilmProbe.3dsx",
+    "bytes": 291660,
+    "sha256": "d44a0d56570aa50b9233334ea647bed8127af5c063f251d1368e3dbf29ac9255"
+  },
+  {
+    "path": "collection-02/deployed-source/Makefile.probe",
+    "bytes": 1346,
+    "sha256": "9ac9c907f929bf2c1da5bdaf16cb401fbb805c077ad8446d1b1dc6df8fa12bbe"
+  },
+  {
+    "path": "collection-02/deployed-source/probes/exposure/calibration.h",
+    "bytes": 10855,
+    "sha256": "59ea9d1e8d10c9c541a2edc88b6d4e002b8bd1fc1d9ab2b6e2eee2967cf25355"
+  },
+  {
+    "path": "collection-02/deployed-source/probes/exposure/calibration_contract.h",
+    "bytes": 1631,
+    "sha256": "7277b32a9436137fbcfc02dd64a30bb449ac682e39873fdeddc08b84bb0a8fd0"
+  },
+  {
+    "path": "collection-02/deployed-source/probes/exposure/calibration_image.h",
+    "bytes": 2044,
+    "sha256": "159d55b71ecd9a596fe2e50f6a8ff38ca0ab4002baab22079a3ddbeef0e574e2"
+  },
+  {
+    "path": "collection-02/deployed-source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "collection-02/deployed-source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "collection-02/deployed-source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "collection-02/deployed-source/probes/exposure/main.c",
+    "bytes": 30257,
+    "sha256": "41fbf1932c3b4b8422e7174a01a92179aa56844a13b1170b358ac7ce16c78c53"
+  },
+  {
+    "path": "collection-02/deployed-source/probes/exposure/probe_plan.h",
+    "bytes": 1535,
+    "sha256": "0229edaed86d73faff3d5eb3bc83760928aa6e2b8db212c4b48cc11a34fe643c"
+  },
+  {
+    "path": "collection-02/deployed-source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "collection-02/deployed-source/probes/recovery/main.c",
+    "bytes": 10408,
+    "sha256": "89d346861ac92340eb7c76e775339948bf96ad563742e8e394f2d6ac077ccccb"
+  },
+  {
+    "path": "collection-02/deployment.json",
+    "bytes": 1574,
+    "sha256": "b36b3ae22fd01da7b7d138b5682a01272ead73cb3b5ee795ad130b0e35e274c6"
+  },
+  {
+    "path": "collection-02/exit-investigation/calibration_plan.csv",
+    "bytes": 147,
+    "sha256": "e44d29797cdecd0cb3bf104f078559341bdbbbc96e3d56e1858612846d0a641c"
+  },
+  {
+    "path": "collection-02/exit-investigation/calls.csv",
+    "bytes": 14411,
+    "sha256": "7d53dcb659028c0427e0be3d4efc769ec6c35c112892d20e0352972499114efd"
+  },
+  {
+    "path": "collection-02/exit-investigation/frames.csv",
+    "bytes": 1604,
+    "sha256": "f3bf9e8043704e5910f1504177cf168b0c53e764881cc60e8bf32898dbfee0f0"
+  },
+  {
+    "path": "collection-02/exit-investigation/ipc.csv",
+    "bytes": 244826,
+    "sha256": "6b05bff5976e5abb0ccd73f74d10c73864148e929db5fe22e572bf32f241fae8"
+  },
+  {
+    "path": "collection-02/exit-investigation/manifest.txt",
+    "bytes": 2042,
+    "sha256": "17b321d3420e917c718e0c68e34fffa30a699d4af4d633524f5a6c655a05daa3"
+  },
+  {
+    "path": "collection-02/exit-investigation/noise.csv",
+    "bytes": 77,
+    "sha256": "6b6ba2a7db0d23fb4734ad922b66ff4640ab4c28d0f7e4213b0c46933776cff4"
+  },
+  {
+    "path": "collection-02/exit-investigation/reads.csv",
+    "bytes": 23561,
+    "sha256": "ed4d00be1cfdde0d9c7b6114874484c39983fbc107539eb5ecaa7314e0124e44"
+  },
+  {
+    "path": "collection-02/exit-investigation/roi.csv",
+    "bytes": 1367,
+    "sha256": "38b23b30ea8ccef7fb2138fda04bce635a2a9dd4f6e50c46b28653c8a2a39649"
+  },
+  {
+    "path": "collection-03/FilmProbe.3dsx",
+    "bytes": 292788,
+    "sha256": "709ab3e1e78f1d4e4609b85971eea88755fc0c3a9035c88556301f8391cb5afc"
+  },
+  {
+    "path": "collection-03/deployed-source/Makefile.probe",
+    "bytes": 1346,
+    "sha256": "9ac9c907f929bf2c1da5bdaf16cb401fbb805c077ad8446d1b1dc6df8fa12bbe"
+  },
+  {
+    "path": "collection-03/deployed-source/probes/exposure/calibration.h",
+    "bytes": 10944,
+    "sha256": "2bfe2f3db134fdda1c09928fdb59c10ba9d909ec01190af8d375ecfca3a6a8e7"
+  },
+  {
+    "path": "collection-03/deployed-source/probes/exposure/calibration_contract.h",
+    "bytes": 1631,
+    "sha256": "7277b32a9436137fbcfc02dd64a30bb449ac682e39873fdeddc08b84bb0a8fd0"
+  },
+  {
+    "path": "collection-03/deployed-source/probes/exposure/calibration_image.h",
+    "bytes": 2752,
+    "sha256": "6cbfc2b87ee5b4ba6ed592031e051b04b0d78eb60c4790dcbb6c44678c9f7cd7"
+  },
+  {
+    "path": "collection-03/deployed-source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "collection-03/deployed-source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "collection-03/deployed-source/probes/exposure/fault_capture.h",
+    "bytes": 1193,
+    "sha256": "a021e025414c3df5fcc967d4cc7e4fc3ae4ba677858abf443c027c33ae88bf74"
+  },
+  {
+    "path": "collection-03/deployed-source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "collection-03/deployed-source/probes/exposure/main.c",
+    "bytes": 30481,
+    "sha256": "ad3c7f7b3b803ff08fa187147351dd818a4f5614aca520d3004ebc9ec19a30e8"
+  },
+  {
+    "path": "collection-03/deployed-source/probes/exposure/probe_plan.h",
+    "bytes": 1535,
+    "sha256": "0229edaed86d73faff3d5eb3bc83760928aa6e2b8db212c4b48cc11a34fe643c"
+  },
+  {
+    "path": "collection-03/deployed-source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "collection-03/deployed-source/probes/recovery/main.c",
+    "bytes": 10408,
+    "sha256": "89d346861ac92340eb7c76e775339948bf96ad563742e8e394f2d6ac077ccccb"
+  },
+  {
+    "path": "collection-03/deployment.json",
+    "bytes": 1682,
+    "sha256": "42da451f6a709172482b32da888992ea412712992191be2b581dfb5a20d37938"
+  },
+  {
+    "path": "collection-03/exit-investigation/calls.csv",
+    "bytes": 14411,
+    "sha256": "e162de26ff56a9e2a0f9d2c30c968b90738d789b6c0ffce346d6b7a08f992c3f"
+  },
+  {
+    "path": "collection-03/exit-investigation/execution.csv",
+    "bytes": 382,
+    "sha256": "cff98845b1b4e6e3b1b3f899dc3b81a135a65fcedf43c55d37ed35ee058c4db7"
+  },
+  {
+    "path": "collection-03/exit-investigation/frames.csv",
+    "bytes": 1618,
+    "sha256": "cc5d364968cf3bed92cdcf280951133140227ee1a14c379d4187d3af1f2e503a"
+  },
+  {
+    "path": "collection-03/exit-investigation/manifest.txt",
+    "bytes": 2042,
+    "sha256": "17b321d3420e917c718e0c68e34fffa30a699d4af4d633524f5a6c655a05daa3"
+  },
+  {
+    "path": "control-table/CONDITIONAL_EI_ESTIMATE.json",
+    "bytes": 2203,
+    "sha256": "9b1df31878228a46fb850f5137dee63d4a7b96921428e5fbf3bf4a01e3889256"
+  },
+  {
+    "path": "control-table/CONDITIONAL_EI_ESTIMATE.md",
+    "bytes": 1955,
+    "sha256": "8c132440341220772cf7ec14a9586ee388ca21182a72e7b34c88e7ac490e77ac"
+  },
+  {
+    "path": "control-table/CONTROL_TABLE.md",
+    "bytes": 4996,
+    "sha256": "636dd49de7297787c19d03b36b8fa749a101e81691e9b2a1a18ee7cd945cde24"
+  },
+  {
+    "path": "control-table/verified-controls.csv",
+    "bytes": 8154,
+    "sha256": "b937a96f4848f165293eb2602a94a097616d981592ff40800d2b06240002c8cf"
+  },
+  {
+    "path": "control-table/verified-controls.json",
+    "bytes": 31219,
+    "sha256": "2f80334c9fb0f3a387636cab7f5d8c84a6bbb77300c6c4b395e420f2b0841696"
+  },
+  {
+    "path": "decoded-exposure-state/integration16.csv",
+    "bytes": 243,
+    "sha256": "033f7e289e0fc3f155d3e10f28c0a1bd19c0159a570e3647b5d32c9db6b21c97"
+  },
+  {
+    "path": "decoded-exposure-state/integration16.json",
+    "bytes": 5930,
+    "sha256": "431657a9ce8e87a64831ace3043baa668c1e667de29451d815786eee70e79308"
+  },
+  {
+    "path": "decoded-exposure-state/integration16.md",
+    "bytes": 687,
+    "sha256": "eeb9ec3c61014a82b72817f781944af21acd0118b63ee6ac6c8863aa592e56c5"
+  },
+  {
+    "path": "derived-ei-review/RESULTS.md",
+    "bytes": 2083,
+    "sha256": "04217cc77f71007f30880f861620e547813c71c260b97bd7923f33a02c7b33a5"
+  },
+  {
+    "path": "derived-ei-review/calculate.py",
+    "bytes": 7138,
+    "sha256": "7187ab7c91616f319a9bc01da81c97d2246a91f8098628c7a6b5b9963c9679aa"
+  },
+  {
+    "path": "derived-ei-review/conditional-ei.csv",
+    "bytes": 766,
+    "sha256": "f40630ee278e745e7b85c520541c9274da2942cbf30677893045cbd59f8d1a81"
+  },
+  {
+    "path": "derived-ei-review/conditional-ei.json",
+    "bytes": 4722,
+    "sha256": "497e9d6fff40936ba1e6751b9352a3548a798ee127ce9bc2e7d3d50bfe682b6f"
+  },
+  {
+    "path": "digital-part-01/RESULTS.md",
+    "bytes": 1225,
+    "sha256": "a7cb8e99ac0e7051c50530ef20512d3e7493d0464003a50e7ef09aae32e2ce3a"
+  },
+  {
+    "path": "digital-part-01/deployment.json",
+    "bytes": 406,
+    "sha256": "e569b8518dc955899d673e9d26bfa90fc80b5378db1b72238514cd7906cdd5c1"
+  },
+  {
+    "path": "digital-part-01/final-verification.json",
+    "bytes": 751,
+    "sha256": "47c1892cf464c5ef4065df251e21792a1d26f66356aa82ab9d9ec14da2f48fb5"
+  },
+  {
+    "path": "digital-part-01/image-highlight-check.json",
+    "bytes": 2679,
+    "sha256": "13dbe5938650a4e46651346ecfddc6cad5d6f5b3c2bb844f6882cd4c702aa3d8"
+  },
+  {
+    "path": "digital-part-01/recovered/calibration-analysis.json",
+    "bytes": 59548,
+    "sha256": "29935fb05433146cef5981cafa4be5d7c2ee2150a22cbc7357223406e04ad1af"
+  },
+  {
+    "path": "digital-part-01/recovered/calibration_plan.csv",
+    "bytes": 445,
+    "sha256": "46935c235e213dbe02dfa02c4b4f4458d3859d6c9db6c8a94d2befeeeb21732e"
+  },
+  {
+    "path": "digital-part-01/recovered/calls.csv",
+    "bytes": 111143,
+    "sha256": "c7c571800685b59157b23ff910ccc25f9a708da76fbde3ac2a1be61abb9dee3f"
+  },
+  {
+    "path": "digital-part-01/recovered/execution.csv",
+    "bytes": 9006,
+    "sha256": "e045bb3c68942ebce0b0da6aa769b57c4bf9c2957c76076b7712297d2a6848bd"
+  },
+  {
+    "path": "digital-part-01/recovered/frame_burst.csv",
+    "bytes": 1097,
+    "sha256": "e14c87b21bd055956f0bea9781e4483a7d1f6afe44ccdcba14847dee3ea03225"
+  },
+  {
+    "path": "digital-part-01/recovered/frames.csv",
+    "bytes": 12019,
+    "sha256": "556d7c46193fd2a07a0bbeb7ab34dba8eebd205aba37ec64d37324a55d03fe6a"
+  },
+  {
+    "path": "digital-part-01/recovered/ipc.csv",
+    "bytes": 4728037,
+    "sha256": "71dce7ff4714c28f29720bd3eeaa50c62363ddc4e5e79cb60affda0f24e833c8"
+  },
+  {
+    "path": "digital-part-01/recovered/manifest.txt",
+    "bytes": 2936,
+    "sha256": "37e42ccc6f7681aa161b3ab1b68d457a3bd11c77662a42f824c9bdd795c3f0f0"
+  },
+  {
+    "path": "digital-part-01/recovered/noise.csv",
+    "bytes": 452,
+    "sha256": "45bd9603ac818f77f116cec888778b4bb45e0bf0b1e929b595bcb89216fdea7f"
+  },
+  {
+    "path": "digital-part-01/recovered/reads.csv",
+    "bytes": 520292,
+    "sha256": "cae20a4c52e474071a04b535669e1d3ae8d10c002cacd533b8e08302dc5d9152"
+  },
+  {
+    "path": "digital-part-01/recovered/received-sha256.json",
+    "bytes": 2582,
+    "sha256": "ccc188cf2c2138ef5e7d12950f094690fdbb12f6b1df4ef4d19e5888b1c490e4"
+  },
+  {
+    "path": "digital-part-01/recovered/recovery-source.json",
+    "bytes": 205,
+    "sha256": "fab74845350c1786eed7c2d7305a67d3d523c9f79297cd81685fd4f331e2abd6"
+  },
+  {
+    "path": "digital-part-01/recovered/roi.csv",
+    "bytes": 49062,
+    "sha256": "fd7cf1209cc73422eee2f65db31974e3099105675630ee03b2683f04f122594c"
+  },
+  {
+    "path": "digital-part-01/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "1bb4fd943dba22b66101dff3d914b51d25afc4414f1ffd8e6e1c5292410458fe"
+  },
+  {
+    "path": "digital-part-01/recovered/s1-p003-cal_r0_auto.pgm",
+    "bytes": 307215,
+    "sha256": "4cde3331d2ab452e4bd8c1d7c2c129e3bfa94ee03a4586aa63f1a2b1420a366b"
+  },
+  {
+    "path": "digital-part-01/recovered/s1-p004-cal_r0_baseline.pgm",
+    "bytes": 307215,
+    "sha256": "e2b77b96d04ad497a68d387ba266c32f01f3f942ecb4e9b618fcb976f3603eee"
+  },
+  {
+    "path": "digital-part-01/recovered/s1-p005-cal_digital_2.pgm",
+    "bytes": 307215,
+    "sha256": "e5074b06f3e879981aac967aa6f45fce18b37730de7bfe2a8e230c4bfe668dfa"
+  },
+  {
+    "path": "digital-part-01/recovered/s1-p006-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "cfc5971cfe4ecfdbba2c84eaee3f6b1c5c71c6d9d21d12dc36e9f671ba41ba9f"
+  },
+  {
+    "path": "digital-part-01/recovered/s1-p007-cal_digital_4.pgm",
+    "bytes": 307215,
+    "sha256": "9929ead15f03fe652428acc32b5105e52d4d48a231198ec1e87e87b3730bc410"
+  },
+  {
+    "path": "digital-part-01/recovered/s1-p008-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "73128da3bc36ddff6f3000d4afc97b4683172366445c06ee5f527731444dc76e"
+  },
+  {
+    "path": "digital-part-01/remote-manifest.txt",
+    "bytes": 2936,
+    "sha256": "37e42ccc6f7681aa161b3ab1b68d457a3bd11c77662a42f824c9bdd795c3f0f0"
+  },
+  {
+    "path": "digital-part-01/remote-run.txt",
+    "bytes": 19,
+    "sha256": "e28c92a467c2dc1255dfc7a4efeaccb59310ce8676e44a73608ca7979d4bab3f"
+  },
+  {
+    "path": "digital-part-01/source/FilmProbe.3dsx",
+    "bytes": 298276,
+    "sha256": "15fbff96a8148de1646e3acaee2b40b0bf3a5c1de9c696046d46b5c55faf4f52"
+  },
+  {
+    "path": "digital-part-01/source/Makefile.probe",
+    "bytes": 1507,
+    "sha256": "5142270aba8bc1d5e04779317bb588608be384fe3aa4c7005c6d0658fa2bdcd5"
+  },
+  {
+    "path": "digital-part-01/source/probes/exposure/calibration.h",
+    "bytes": 12933,
+    "sha256": "654b8d3deed39a12fad2592a2a6fff8c5d32d778a3bded070a748ae15062b7ed"
+  },
+  {
+    "path": "digital-part-01/source/probes/exposure/calibration_contract.h",
+    "bytes": 1631,
+    "sha256": "7277b32a9436137fbcfc02dd64a30bb449ac682e39873fdeddc08b84bb0a8fd0"
+  },
+  {
+    "path": "digital-part-01/source/probes/exposure/calibration_image.h",
+    "bytes": 2775,
+    "sha256": "55ad4f0baedbd3823fdb1222aa55445e51b77755d39324911ff3534c6b5aa1ac"
+  },
+  {
+    "path": "digital-part-01/source/probes/exposure/calibration_scope.h",
+    "bytes": 890,
+    "sha256": "6932afe43fcb6f8271d51464aea772dcdc3357bf4946a127571a852ec3cddbf4"
+  },
+  {
+    "path": "digital-part-01/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "digital-part-01/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "digital-part-01/source/probes/exposure/fault_capture.h",
+    "bytes": 1795,
+    "sha256": "ebf503f46c05ba33405a959decae95058b711b35d7f1d479740d3263f447cb47"
+  },
+  {
+    "path": "digital-part-01/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "digital-part-01/source/probes/exposure/main.c",
+    "bytes": 33684,
+    "sha256": "27e98cf8167268307d56a19a95526ff2cbc7aa1587770763064e9514ad1c67c0"
+  },
+  {
+    "path": "digital-part-01/source/probes/exposure/probe_plan.h",
+    "bytes": 2315,
+    "sha256": "3e48ff8de998fd18c425cdb4dbb17643bdb8c684fd7b19fe0b6c2d43cdae0704"
+  },
+  {
+    "path": "digital-part-01/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "exit-evidence-sha256.json",
+    "bytes": 2949,
+    "sha256": "b7a308fca6b568cff7155bad8943f433000a326068e5b670d2be7c5bc69e50a3"
+  },
+  {
+    "path": "exposure-model-v1/RESULTS.md",
+    "bytes": 3640,
+    "sha256": "ad0d34e6df6ad0db7c2725e3f3c4a412373931fe378dddd109f2e0b1001df719"
+  },
+  {
+    "path": "exposure-model-v1/VALIDATION.md",
+    "bytes": 4188,
+    "sha256": "69495d6cdbb8a60412947ea21b184eb2bafa4506de09b44c39d070268d6d647d"
+  },
+  {
+    "path": "exposure-model-v1/exposure_model.py",
+    "bytes": 26278,
+    "sha256": "46f0c933151d0bd42bdbf2fa62c091eb98271e4879a22bb8a14f5a1dcd069b40"
+  },
+  {
+    "path": "exposure-model-v1/model.json",
+    "bytes": 29710,
+    "sha256": "fd9cde1342aab4db41c835c76d0eb855f3a9e1c5bf29b21fab7fcc7bccd28cf9"
+  },
+  {
+    "path": "exposure-model-v1/reference-ei.csv",
+    "bytes": 828,
+    "sha256": "0b9151587e6a2857b4edaa31944d940c4dccf82240bc5fd34ee537f5c152bb71"
+  },
+  {
+    "path": "exposure-model-v1/test_model.py",
+    "bytes": 6141,
+    "sha256": "c69797d29f348d088fdf276a25182e0494b68104a32016062ff49bad9d8b3baf"
+  },
+  {
+    "path": "external-meter-reference-01.json",
+    "bytes": 1158,
+    "sha256": "d83aac5d277f3422965a41e858db1002caa1bfa011eddf604f0b2c7e303c7a85"
+  },
+  {
+    "path": "external-meter-reference-02.json",
+    "bytes": 498,
+    "sha256": "f37479c9a9858ee7ccccfc5642061d4f3016f35520a4671d3bd08720e46e0207"
+  },
+  {
+    "path": "field-install-01/deployment.json",
+    "bytes": 2291,
+    "sha256": "e0857cd2a99f5c6187c011aa93f8002ffaf3494134cfb4bd54921d69a79833a3"
+  },
+  {
+    "path": "field-install-01/installation-verified.json",
+    "bytes": 165,
+    "sha256": "c3ca503806e6b80c953e71e236bef32670e030b2e0b90d2f4e0db8289d6019bd"
+  },
+  {
+    "path": "field-install-01/startup/receipt.txt",
+    "bytes": 192,
+    "sha256": "9b267d3600b5bc630d3da34b8197f1dd17f6fd2c939d3e578775b76e7aa06b2b"
+  },
+  {
+    "path": "field-install-01/startup/received-sha256.json",
+    "bytes": 138,
+    "sha256": "1747de38f49e57773296581c1f8e85ce7c2bd1bcf24aadcc6a887ef098a1e336"
+  },
+  {
+    "path": "gain-part-01/RESULTS.md",
+    "bytes": 1633,
+    "sha256": "461c6f0ec943fdb2b1f8c4d609a55066899debeb6aa0aa565432671139bdd3c5"
+  },
+  {
+    "path": "gain-part-01/deployment.json",
+    "bytes": 442,
+    "sha256": "235023b8f4e42545d83df8c3771704cb2cd5d254676091d7c43912c18f7fb62d"
+  },
+  {
+    "path": "gain-part-01/final-verification.json",
+    "bytes": 597,
+    "sha256": "50157169ff8f7250e242b1343dd93f18b255d62527579750220b1f36afb6609e"
+  },
+  {
+    "path": "gain-part-01/recovered/calibration-analysis.json",
+    "bytes": 92218,
+    "sha256": "55add745284248e1d8ec076ed3457decbe68ce824009f34a15ab415fc1081918"
+  },
+  {
+    "path": "gain-part-01/recovered/calibration_plan.csv",
+    "bytes": 662,
+    "sha256": "490e5f5c331f2312a986f9de8bd91717c3a089307ccc283b4806e69f7f7d3b90"
+  },
+  {
+    "path": "gain-part-01/recovered/calls.csv",
+    "bytes": 163076,
+    "sha256": "acb3dd18e7070302ac36a895a0935992db71cce3aca54c04b478c4ee6c1248cd"
+  },
+  {
+    "path": "gain-part-01/recovered/execution.csv",
+    "bytes": 13350,
+    "sha256": "f7228765c279291309800a42bd0d2663ac6cd443f568395659ee506614ae2a7a"
+  },
+  {
+    "path": "gain-part-01/recovered/frame_burst.csv",
+    "bytes": 1097,
+    "sha256": "b9beba5396a068be1f2f0de0186e078c26beef0f97475a9c6c5c3e956a8d8ff6"
+  },
+  {
+    "path": "gain-part-01/recovered/frames.csv",
+    "bytes": 17133,
+    "sha256": "1f889dfe6d3c3783e81dc98248f859695f7b0ab4c0c46f7502fe3471da31728a"
+  },
+  {
+    "path": "gain-part-01/recovered/ipc.csv",
+    "bytes": 7073009,
+    "sha256": "0a15268ebed661a033b2d6f04845c99a45323e0d2f257bfd9d3ffd5fd88cdb6d"
+  },
+  {
+    "path": "gain-part-01/recovered/manifest.txt",
+    "bytes": 3320,
+    "sha256": "98d602c092d8084550ba882c32e64d8a16fd4095b39228327089938030b568b9"
+  },
+  {
+    "path": "gain-part-01/recovered/noise.csv",
+    "bytes": 639,
+    "sha256": "add674250db048a9b7a25e51cd992fab09cd335b32bb9144fd6d35a8d72aa60d"
+  },
+  {
+    "path": "gain-part-01/recovered/reads.csv",
+    "bytes": 775101,
+    "sha256": "088566d033db38687bef53aed84e5694f70c1b22d9100a7ddd6f3b4c0e2452b0"
+  },
+  {
+    "path": "gain-part-01/recovered/received-sha256.json",
+    "bytes": 3032,
+    "sha256": "f85addd7684b267b374092e8a5fc752c17b5c94a988830f26ed616fc8f612d4e"
+  },
+  {
+    "path": "gain-part-01/recovered/recovery-source.json",
+    "bytes": 205,
+    "sha256": "1ace83e36e6730770e4f854f5bd2fcfeb629a6aaa4327381d0d905c95f94e1e1"
+  },
+  {
+    "path": "gain-part-01/recovered/roi.csv",
+    "bytes": 71804,
+    "sha256": "2a1d5b8d9908ff138fc2fac33936cc3a103cf3e1aa86b8c7e9d1eaf96a76ae48"
+  },
+  {
+    "path": "gain-part-01/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "0ae7dd99b870bc0830738b880738c324abd8cd98aee70840769f3b70b4102015"
+  },
+  {
+    "path": "gain-part-01/recovered/s1-p003-cal_r0_auto.pgm",
+    "bytes": 307215,
+    "sha256": "bab773a05a6beb460d10b26ab976cc561341dcff439384165098e3b34cdc9ff7"
+  },
+  {
+    "path": "gain-part-01/recovered/s1-p004-cal_r0_baseline.pgm",
+    "bytes": 307215,
+    "sha256": "7a085134b4ba65cda4d75e9b5f61a7fe8a0b6f5936b0d046824bec407a923b9a"
+  },
+  {
+    "path": "gain-part-01/recovered/s1-p005-cal_analog_0.pgm",
+    "bytes": 307215,
+    "sha256": "68f6fa2f8845c39fe9d045275f6a72a195a1207989b9c8751a50f582e8df92b1"
+  },
+  {
+    "path": "gain-part-01/recovered/s1-p006-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "9d078f6c8fa7a6938c9d9e8ebf432558ee99a81be501dfe427ab2831ba619d68"
+  },
+  {
+    "path": "gain-part-01/recovered/s1-p007-cal_analog_1.pgm",
+    "bytes": 307215,
+    "sha256": "19b8783c901b3679e1fe7c23c8649a262fd3b592d04d277fa77d2c8735887d10"
+  },
+  {
+    "path": "gain-part-01/recovered/s1-p008-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "3a1cf89023ab8a50145a3cebb9d280444285dc1475ac5306ff74b9b3fd62f4ec"
+  },
+  {
+    "path": "gain-part-01/recovered/s1-p009-cal_analog_2.pgm",
+    "bytes": 307215,
+    "sha256": "29ca9dc983a2307fb0ccd3a006609dec339ad85f3d1fd7a0a8e5ca9692fc9c88"
+  },
+  {
+    "path": "gain-part-01/recovered/s1-p010-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "c1d13d7946e1e9ea6616df8add6e193ac52490fc6f5674e4660313700e0c9cb5"
+  },
+  {
+    "path": "gain-part-01/recovered/s1-p012-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "9541ae906881bc1486df869831407ad603768468decf0a2d5648ffa1d176b25d"
+  },
+  {
+    "path": "gain-part-01/screen-progress.json",
+    "bytes": 448,
+    "sha256": "9f4600a43bb06d046861e90f1d4cf6f9702296ef8e7a0de30298707653558d5b"
+  },
+  {
+    "path": "gain-part-01/source/FilmProbe.3dsx",
+    "bytes": 297880,
+    "sha256": "76e3b36bbe2dc64e72d2faa9c02d64e05233085330b82204e9d243085c58d79e"
+  },
+  {
+    "path": "gain-part-01/source/Makefile.probe",
+    "bytes": 1507,
+    "sha256": "93f86265cd3d45411998726008e3b8fb840052a55992eb1c227abe99ecf831c8"
+  },
+  {
+    "path": "gain-part-01/source/probes/exposure/calibration.h",
+    "bytes": 12787,
+    "sha256": "4f553964adc5591872ccdfe189bac95024dc43e0d30cc8172779f2277e7a5ad4"
+  },
+  {
+    "path": "gain-part-01/source/probes/exposure/calibration_contract.h",
+    "bytes": 1631,
+    "sha256": "7277b32a9436137fbcfc02dd64a30bb449ac682e39873fdeddc08b84bb0a8fd0"
+  },
+  {
+    "path": "gain-part-01/source/probes/exposure/calibration_image.h",
+    "bytes": 2775,
+    "sha256": "55ad4f0baedbd3823fdb1222aa55445e51b77755d39324911ff3534c6b5aa1ac"
+  },
+  {
+    "path": "gain-part-01/source/probes/exposure/calibration_scope.h",
+    "bytes": 865,
+    "sha256": "89f9e50a1f251186b2597aeb259d19f46ce06cfd902893807ca28f19cc49e7b9"
+  },
+  {
+    "path": "gain-part-01/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "gain-part-01/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "gain-part-01/source/probes/exposure/fault_capture.h",
+    "bytes": 1795,
+    "sha256": "ebf503f46c05ba33405a959decae95058b711b35d7f1d479740d3263f447cb47"
+  },
+  {
+    "path": "gain-part-01/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "gain-part-01/source/probes/exposure/main.c",
+    "bytes": 33300,
+    "sha256": "0b01aaeedf77f1d7d3e18ad9b0e9c867ce3cf003f9507df3c93ecca2df9f3a48"
+  },
+  {
+    "path": "gain-part-01/source/probes/exposure/probe_plan.h",
+    "bytes": 2315,
+    "sha256": "3e48ff8de998fd18c425cdb4dbb17643bdb8c684fd7b19fe0b6c2d43cdae0704"
+  },
+  {
+    "path": "gain-part-01/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "hardware-auto-01/FilmExposureAuto.3dsx",
+    "bytes": 327220,
+    "sha256": "765b9c06bcb0bab4eb2b192b9c16abea0621ba92ac1b2d5a9edd53d07bc260cb"
+  },
+  {
+    "path": "hardware-auto-01/analysis/RESULTS.md",
+    "bytes": 2338,
+    "sha256": "64a7228a9d1263b133527ecab17d550219aa53ab30ff2bf244dc2c4b26093ca0"
+  },
+  {
+    "path": "hardware-auto-01/analysis/controls.csv",
+    "bytes": 1402,
+    "sha256": "37b414e32b59322a502c6513b7ff50b569ed86ee1d05c27ddbc8236cbac42606"
+  },
+  {
+    "path": "hardware-auto-01/analysis/controls.json",
+    "bytes": 38273,
+    "sha256": "0e8a4fb45e1b9a9a241f687745138082109f3fd3bf3776289c247dbe7bc3673a"
+  },
+  {
+    "path": "hardware-auto-01/analysis/controls.md",
+    "bytes": 1774,
+    "sha256": "bd9dd41ad79826427939283b586ae86d93a961c77cd3096910ba3da3446b4197"
+  },
+  {
+    "path": "hardware-auto-01/analysis/opencv-crosscheck/RESULTS.md",
+    "bytes": 464,
+    "sha256": "bdd1efa35108a5701766a3cbba8dc176893ceabe2eee364bf47949b788eb0aaf"
+  },
+  {
+    "path": "hardware-auto-01/analysis/opencv-crosscheck/opencv-crosscheck.json",
+    "bytes": 5606,
+    "sha256": "bafdf1f6742665695fa67534e67c904eb4a57cb73fa28fc5be7b5d62d00265c2"
+  },
+  {
+    "path": "hardware-auto-01/analysis/opencv-crosscheck/opencv-response.npy",
+    "bytes": 3200,
+    "sha256": "a1828f58675fff6862132d7f396649eb87a906097094001b491e5cf1942b4198"
+  },
+  {
+    "path": "hardware-auto-01/analysis/opencv-debevec-response.npy",
+    "bytes": 3200,
+    "sha256": "8860b0d6c4b5b84be4e7ef66a827cc90e3a9b6465395f6b674753b039d21f124"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p004-auto_normal_base.jpg",
+    "bytes": 88944,
+    "sha256": "d4240dad92f0a50a9e5a6c75b1aeff930537b1712b61ae3a941d651a38bf642c"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p005-auto_normal_0.jpg",
+    "bytes": 92035,
+    "sha256": "ee1ebae97cdfe106251f83d9aabbd1bd43ca9f84e3827d2c49dde957e6f45dcf"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p006-auto_normal_1.jpg",
+    "bytes": 94600,
+    "sha256": "9651a420b8d64c4d6901623df703cf6275dcb3bd05ec820aa830c57da7ee98b0"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p007-auto_normal_2.jpg",
+    "bytes": 95929,
+    "sha256": "9bd99f2505963faa8cc675ba05f08152c4a3331d88c2042ed0553703f408a842"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p008-auto_gain_base.jpg",
+    "bytes": 82662,
+    "sha256": "db4897eff5fab8f5a7d403e6bdaaf6dab2016a00bbee8e9fc87b7a8be68553ff"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p009-auto_gain_0210.jpg",
+    "bytes": 51325,
+    "sha256": "3cc6943c4e5831aa9b1c41069d38a07bffffb050f422be84e2b5602147f591c3"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p010-auto_gain_0218.jpg",
+    "bytes": 65293,
+    "sha256": "aabc95623b28e29d5e6a86759b114d7f536e91132dd7fdb63ebc30e864ca05d3"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p011-auto_gain_0220.jpg",
+    "bytes": 82252,
+    "sha256": "be4f103a88aed302fe326e61a32a2a340794b059ce605087166f3a90b37688fd"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p012-auto_gain_0228.jpg",
+    "bytes": 92583,
+    "sha256": "93850e21d7082f432bf0c8c4f686a0c3c63305ed409b477efef90fce94729db9"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p013-auto_gain_0230.jpg",
+    "bytes": 99300,
+    "sha256": "4a96667cb3dce5bb0cdd441bb763b495fd27f114048b3f64bafe1929f5cc1616"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p014-auto_gain_023c.jpg",
+    "bytes": 103852,
+    "sha256": "00fbed362e17f1710bd90bc4ef302e0c9ba575fb4a83017664dc57cc7627095c"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p015-auto_digital_2.jpg",
+    "bytes": 107914,
+    "sha256": "182327817bb8357fc6f8f62383f8b2d423ed73305d7e0fb44a693313053380f4"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p016-auto_digital_4.jpg",
+    "bytes": 137259,
+    "sha256": "765e9b04d0357cd27d323890eeb9623daf44328ce0fa4fbdb5d89923f2348f0d"
+  },
+  {
+    "path": "hardware-auto-01/analysis/s1-p017-auto_restore.jpg",
+    "bytes": 94629,
+    "sha256": "1df9a45695107d75b00f69ec8feea6039c7d18653f5e36ad9c693fedcc4e23cc"
+  },
+  {
+    "path": "hardware-auto-01/analysis/session-analysis.json",
+    "bytes": 59632,
+    "sha256": "b4f8687b642b7ad2fb463444167bfc0a4cb22e071cf9e95ef018883072d550c4"
+  },
+  {
+    "path": "hardware-auto-01/deployment.json",
+    "bytes": 1858,
+    "sha256": "a1c12d2d1d3f1003fc17ca046dd8ed5710237fb641fe1f1cc66a0c7ab6c59edb"
+  },
+  {
+    "path": "hardware-auto-01/normal-exposure-preview.jpg",
+    "bytes": 95929,
+    "sha256": "9bd99f2505963faa8cc675ba05f08152c4a3331d88c2042ed0553703f408a842"
+  },
+  {
+    "path": "hardware-auto-01/recovered/calibration_plan.csv",
+    "bytes": 978,
+    "sha256": "7f2dfef8f242983993a2ad875af261faaafe1c92231b844c3859655625874de4"
+  },
+  {
+    "path": "hardware-auto-01/recovered/calls.csv",
+    "bytes": 275137,
+    "sha256": "1e451c1140ac956bdcf9276a90c3b1e3e992b87eb3c2562f75b29aa2214cd6a2"
+  },
+  {
+    "path": "hardware-auto-01/recovered/execution.csv",
+    "bytes": 23670,
+    "sha256": "d24b7a895ab9f05a6fe7cdede02a1d60c11022ca2a51eefdde4a0a96d4ae018d"
+  },
+  {
+    "path": "hardware-auto-01/recovered/frame_burst.csv",
+    "bytes": 1097,
+    "sha256": "2b40c4f152272966a3d1fe574c0bcd205367ae1c5a8d494ccd35c83e0070f1d2"
+  },
+  {
+    "path": "hardware-auto-01/recovered/frames.csv",
+    "bytes": 29378,
+    "sha256": "753bf4e04c75ae889bcffea94d2037898c5866e35d75d9713573825be6b2982a"
+  },
+  {
+    "path": "hardware-auto-01/recovered/ipc.csv",
+    "bytes": 11739902,
+    "sha256": "7d11d57dc1b504b76f734b06fc610303d85232ce148b232a0a23f9c6d68fe0e0"
+  },
+  {
+    "path": "hardware-auto-01/recovered/lifecycle.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "hardware-auto-01/recovered/manifest.txt",
+    "bytes": 5830,
+    "sha256": "86fe94f1583647a7a90811ce8f61707e6b435094faa193c6340a343b117b497c"
+  },
+  {
+    "path": "hardware-auto-01/recovered/noise.csv",
+    "bytes": 1025,
+    "sha256": "96b2a4d3bc6df5e1d957e26138a9758cf9d569e61a3b54ea0815b4d94e9b8493"
+  },
+  {
+    "path": "hardware-auto-01/recovered/ram-index.txt",
+    "bytes": 1128,
+    "sha256": "33543720f2ccf92525659d77bebf2794b5026ca308805381b63626e6b8b66426"
+  },
+  {
+    "path": "hardware-auto-01/recovered/ram-source.json",
+    "bytes": 260,
+    "sha256": "1aec9efd692df89cd8dd9faff7cc765cd1d7628701613640ae8aac58b6575af4"
+  },
+  {
+    "path": "hardware-auto-01/recovered/reads.csv",
+    "bytes": 1323550,
+    "sha256": "1b32064e0d3469b2afb988c49f2fa5799b83bca9b87a71e8f3eb1ddf88711336"
+  },
+  {
+    "path": "hardware-auto-01/recovered/received-ram-sha256.json",
+    "bytes": 5010,
+    "sha256": "ca13fd20dcfa623727111801a32c6eb04a77356f9bff69b3c4e6a011d6560a6c"
+  },
+  {
+    "path": "hardware-auto-01/recovered/received-ram-sha256.partial.json",
+    "bytes": 5010,
+    "sha256": "ca13fd20dcfa623727111801a32c6eb04a77356f9bff69b3c4e6a011d6560a6c"
+  },
+  {
+    "path": "hardware-auto-01/recovered/roi.csv",
+    "bytes": 125929,
+    "sha256": "6d9f53403b819e67d7de0bf06073b8df0617415cb0743188e099b8424acd7a93"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "f4413bd25ee05de11930061065cdaf4b03b484fc7acd905be0a1001373b46b29"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p003-auto_seed.pgm",
+    "bytes": 307215,
+    "sha256": "4722fe2d555e155d2828e56321b3fe0de9825b9904af6ab6bf3e898dfc758d29"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p004-auto_normal_base.yuyv",
+    "bytes": 614400,
+    "sha256": "f3c9e37f1b51185753d785de72b23b4479f5f845033045658e410cd92c3269c3"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p005-auto_normal_0.yuyv",
+    "bytes": 614400,
+    "sha256": "ebdf7d666d4d7be9c1b0df299fb14a74bc1646f7a4fa2010ec6047a505de0930"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p006-auto_normal_1.yuyv",
+    "bytes": 614400,
+    "sha256": "0529a66a32f62ee428838bf37645f1ef286201f48b0bcadce6967addbc2647fd"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p007-auto_normal_2.yuyv",
+    "bytes": 614400,
+    "sha256": "7e507e881dc5c9d383341f5cb2e4c96a7b88c9aa034528dba67a7b523c49b777"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p008-auto_gain_base.yuyv",
+    "bytes": 614400,
+    "sha256": "f1f43f57b6c19499e1dcd6ae3dcbce3e9b0ee3674decc20e5e8d9f7e2548cbd3"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p009-auto_gain_0210.yuyv",
+    "bytes": 614400,
+    "sha256": "0c115aaf5d6f6124c592adf8e3541c071f5ae9d39e2af7d196b92cb196fbd73f"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p010-auto_gain_0218.yuyv",
+    "bytes": 614400,
+    "sha256": "7c01a985908d5503ac2609838ac55289df0771f57a2c06a301511706ff1fcc19"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p011-auto_gain_0220.yuyv",
+    "bytes": 614400,
+    "sha256": "7f4788f531aeb7d4c3ec6f5dff30b6ff605353074231e950ef5fe2d0cd3a4d61"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p012-auto_gain_0228.yuyv",
+    "bytes": 614400,
+    "sha256": "03a52312af9b37393598ac3a033b9116281fccdf1d538560d767e8e3292d1659"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p013-auto_gain_0230.yuyv",
+    "bytes": 614400,
+    "sha256": "db1def2cfa0ef4895d4536e65b1295ea6877413d180be5333d72f788d4889108"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p014-auto_gain_023c.yuyv",
+    "bytes": 614400,
+    "sha256": "8b149a3a66d97e3be519e3fff8da075a6b6e8fef395fc90f0d6108ccb67c9be6"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p015-auto_digital_2.yuyv",
+    "bytes": 614400,
+    "sha256": "4b54125a928a0abff7ae0a3dd6e47f5f2981f396aac3bf49261aa23530523ea8"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p016-auto_digital_4.yuyv",
+    "bytes": 614400,
+    "sha256": "ccc5fde36f60c77d2319c847b32d3f3fec2f5e0adc349031e0310017b5dbceac"
+  },
+  {
+    "path": "hardware-auto-01/recovered/s1-p017-auto_restore.yuyv",
+    "bytes": 614400,
+    "sha256": "39fde210730a35519bea30d0aaf9452b5650992bb7e05ae0d9b6d7dcb658ebe8"
+  },
+  {
+    "path": "hardware-auto-01/recovered/transport-events.jsonl",
+    "bytes": 6768,
+    "sha256": "e6f03e7bbcc0ad39c9410c3a60d98329bcb6aa4a944b1f2c4f3a48e3e7635815"
+  },
+  {
+    "path": "hardware-auto-01/recovery-attempt-1794472466469831000.json",
+    "bytes": 165,
+    "sha256": "84758986910e49198d916ea9df95947996913885cd82787ef91f386db4e192cd"
+  },
+  {
+    "path": "hardware-auto-01/recovery-attempt-1794472677961175000.json",
+    "bytes": 226,
+    "sha256": "690fb760258d4101e1e91feb7de4a1a1e46d132c14b5ce3552d296946b0dedd6"
+  },
+  {
+    "path": "hardware-auto-01/recovery-attempt-1794473190474382000.json",
+    "bytes": 226,
+    "sha256": "09e0be5ffc7c799bc871054be8f98ca11be28c4a80bc7b7b318293852cd3b826"
+  },
+  {
+    "path": "hardware-auto-01/recovery-attempt-1794473412381435000.json",
+    "bytes": 227,
+    "sha256": "242b8f17d5dda5585ad21023cd7bca22bdebe0cf04ce36573389070975cffa9e"
+  },
+  {
+    "path": "hardware-auto-01/recovery-attempt-1794473592453751000.json",
+    "bytes": 226,
+    "sha256": "5e695409ae6e01d2369a9aa686d1d520226ff0e3d8825d54f3e49a6421100c6f"
+  },
+  {
+    "path": "hardware-auto-01/reference.json",
+    "bytes": 310,
+    "sha256": "1266a4b9f59233478267cc8df4da1bcac521f8adafbff27f86423890ba1bd497"
+  },
+  {
+    "path": "hardware-auto-01/source/automation.h",
+    "bytes": 4386,
+    "sha256": "dca36c747fbfbee9aab8b3adf45f8173de42327e33ff49c391bee6d1137cd4fe"
+  },
+  {
+    "path": "hardware-auto-01/source/automation_contract.h",
+    "bytes": 2211,
+    "sha256": "58017911601d6a9ea0c02ec9dcb317cad7f8dba2df280aab34e0b5d076965b7f"
+  },
+  {
+    "path": "hardware-auto-01/source/calibration.h",
+    "bytes": 15385,
+    "sha256": "ffc599cd004aef73d7db0893cf15baf123c6d4dda7fef807edd2d88643a605be"
+  },
+  {
+    "path": "hardware-auto-01/source/calibration_contract.h",
+    "bytes": 2793,
+    "sha256": "034eeec83e6c305e4bbdc16352908ac4c33c3e46347c6bceb89e306171bf64ec"
+  },
+  {
+    "path": "hardware-auto-01/source/calibration_image.h",
+    "bytes": 3211,
+    "sha256": "47291651ec5fc64a43a37d611d6f1cfbc32522cb3f787bec75fea0b92d77217e"
+  },
+  {
+    "path": "hardware-auto-01/source/calibration_scope.h",
+    "bytes": 1073,
+    "sha256": "1181d1d0a713a4cdf5ca52024552254b5beaf3a39b9f25177adb4eedf626e58c"
+  },
+  {
+    "path": "hardware-auto-01/source/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "hardware-auto-01/source/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "hardware-auto-01/source/fault_capture.h",
+    "bytes": 1948,
+    "sha256": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683"
+  },
+  {
+    "path": "hardware-auto-01/source/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "hardware-auto-01/source/main.c",
+    "bytes": 37890,
+    "sha256": "79e6abdb7974aa26632426d7fcc20357c289d19f873152e0da291ef502c774f1"
+  },
+  {
+    "path": "hardware-auto-01/source/probe_plan.h",
+    "bytes": 2951,
+    "sha256": "b21ffb57ee49567c9b8672b81df344da6b7b7e1a829785d501adf4d7feda84d6"
+  },
+  {
+    "path": "hardware-auto-01/source/ram_http.h",
+    "bytes": 4883,
+    "sha256": "0bc7a1912b97b8795cecad5e0ee9cd0851f91d9de43967b68fb6f11d2b56cd13"
+  },
+  {
+    "path": "hardware-auto-01/source/ram_log.h",
+    "bytes": 4208,
+    "sha256": "ff6aa498edf109f905f799e1269ca785340c64ed1a3c1bb040efca752be1373f"
+  },
+  {
+    "path": "hardware-auto-01/source/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "hardware-auto-02/FilmExposureAuto.3dsx",
+    "bytes": 328412,
+    "sha256": "8effd2f923612b7a21521c5c1161854c1fe73c699ac7f01b7b90854c68ed3d66"
+  },
+  {
+    "path": "hardware-auto-02/analysis/RESULTS.md",
+    "bytes": 518,
+    "sha256": "aad4a3e4a6d6e4405dc21624fdcd9cd4d338ff3f88fd67613707e813fa9eccd5"
+  },
+  {
+    "path": "hardware-auto-02/analysis/controls.csv",
+    "bytes": 10039,
+    "sha256": "a8c435796af515316b495b8f86610413fd09cbd8b1eaea86014999dc197bedef"
+  },
+  {
+    "path": "hardware-auto-02/analysis/controls.json",
+    "bytes": 18243,
+    "sha256": "ddef679b13db4a2a56baf83c2e9ee299c7f7a5f63034c86e1e78986f2365378a"
+  },
+  {
+    "path": "hardware-auto-02/analysis/controls.md",
+    "bytes": 661,
+    "sha256": "29db371e8c19c522d37304c270a4c8487e49c869bda39409aa06b418aa88af02"
+  },
+  {
+    "path": "hardware-auto-02/analysis/session-analysis.json",
+    "bytes": 20227,
+    "sha256": "707bb7a7a2fe768507217680d06bc6134aec731fef9d45d309360c7dc412f130"
+  },
+  {
+    "path": "hardware-auto-02/capture-ready.json",
+    "bytes": 122,
+    "sha256": "7fee42d09bbc857dc49a161003eae5f54b07aeca104f0a928f33dee24b235a61"
+  },
+  {
+    "path": "hardware-auto-02/deployment.json",
+    "bytes": 1985,
+    "sha256": "d870463c08baab1659846060cc9ecb7747e0816447e7d6a9a692dc7388d1ea9c"
+  },
+  {
+    "path": "hardware-auto-02/quick/calibration_plan.csv",
+    "bytes": 210,
+    "sha256": "ae2f4a7fadcf7f0118410b20c91bd421ed8632dd8bab01f7c199a6867bcccabe"
+  },
+  {
+    "path": "hardware-auto-02/quick/frame_burst.csv",
+    "bytes": 75,
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "path": "hardware-auto-02/quick/manifest.txt",
+    "bytes": 3207,
+    "sha256": "33ac0fabfc8c76859bc7976b7ea2dc862117c7207c945abf88e0f4fe1b9d1c88"
+  },
+  {
+    "path": "hardware-auto-02/recovered/calibration_plan.csv",
+    "bytes": 210,
+    "sha256": "ae2f4a7fadcf7f0118410b20c91bd421ed8632dd8bab01f7c199a6867bcccabe"
+  },
+  {
+    "path": "hardware-auto-02/recovered/calls.csv",
+    "bytes": 13302,
+    "sha256": "a603af3be736d48c32fdb2484e96e4de00ffb8183a0d6bf53894e02202751871"
+  },
+  {
+    "path": "hardware-auto-02/recovered/execution.csv",
+    "bytes": 462,
+    "sha256": "d8e3abf715790ca60a0c1313dd1667dc77d476565842dd6edc95d0299e1987ab"
+  },
+  {
+    "path": "hardware-auto-02/recovered/frame_burst.csv",
+    "bytes": 75,
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "path": "hardware-auto-02/recovered/frames.csv",
+    "bytes": 1407,
+    "sha256": "17216c74753270e5f8854213411bb9c4150d247374ef26904725948ac71fc27e"
+  },
+  {
+    "path": "hardware-auto-02/recovered/ipc.csv",
+    "bytes": 405663,
+    "sha256": "ec95fa1dd722f363cfc09a54aeb2480e56272ad5ad6a4fb922d2995c9b3e461a"
+  },
+  {
+    "path": "hardware-auto-02/recovered/lifecycle.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "hardware-auto-02/recovered/manifest.txt",
+    "bytes": 3207,
+    "sha256": "33ac0fabfc8c76859bc7976b7ea2dc862117c7207c945abf88e0f4fe1b9d1c88"
+  },
+  {
+    "path": "hardware-auto-02/recovered/noise.csv",
+    "bytes": 135,
+    "sha256": "202d3386dac9ac6f11a3f79159518fc10bd7fc1dac07d64611031cb0a4d6697d"
+  },
+  {
+    "path": "hardware-auto-02/recovered/ram-index.txt",
+    "bytes": 460,
+    "sha256": "da41b8c06edbf1ca6890812fdd22e3378a69b43df8b39e6d236aad964f3036b1"
+  },
+  {
+    "path": "hardware-auto-02/recovered/ram-source.json",
+    "bytes": 260,
+    "sha256": "cb287ff52f2b4f78168ffec7d90aef4592c916d9bfdfd3f94a6f870468618391"
+  },
+  {
+    "path": "hardware-auto-02/recovered/reads.csv",
+    "bytes": 41818,
+    "sha256": "d11de2a15f8b2dcfce5619423cec503632cc4c1c8c190f71fa7a52c33403aeb4"
+  },
+  {
+    "path": "hardware-auto-02/recovered/received-ram-sha256.json",
+    "bytes": 2298,
+    "sha256": "643780bac083f3a215d7d57e2d7addfcaa44e588aa6b1b7e13f22c3c314c2857"
+  },
+  {
+    "path": "hardware-auto-02/recovered/received-ram-sha256.partial.json",
+    "bytes": 2298,
+    "sha256": "643780bac083f3a215d7d57e2d7addfcaa44e588aa6b1b7e13f22c3c314c2857"
+  },
+  {
+    "path": "hardware-auto-02/recovered/roi.csv",
+    "bytes": 2608,
+    "sha256": "5fdb171627c07a048e717985a17fccf28bb58df75b25ecebb915cfcfd6bca393"
+  },
+  {
+    "path": "hardware-auto-02/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "121c9431f41f9656a1bb3a3beea7ddca39885141c0e45eaabdda0703af5ddb23"
+  },
+  {
+    "path": "hardware-auto-02/recovered/s1-p003-auto_seed.pgm",
+    "bytes": 307215,
+    "sha256": "a8d12ab22d0f681a3b7219f33917985995a1ef32c93309d38851f62ee925a174"
+  },
+  {
+    "path": "hardware-auto-02/reference-after.json",
+    "bytes": 301,
+    "sha256": "1789f77c18ab1ed9fd2cd065058a66dd5b7de8fbade04b5d42f2a03a0a9e15c0"
+  },
+  {
+    "path": "hardware-auto-02/source/automation.h",
+    "bytes": 5620,
+    "sha256": "5848167b6ca409df1b66b69a872a9c4b01dafb70300cd45afa2018308d343f6e"
+  },
+  {
+    "path": "hardware-auto-02/source/automation_contract.h",
+    "bytes": 3015,
+    "sha256": "ba3725c3033ef1bde2be3576b94e7389e4d5500eb4179bb4f478134089a1ad88"
+  },
+  {
+    "path": "hardware-auto-02/source/calibration.h",
+    "bytes": 15633,
+    "sha256": "4f29172c30247cd15ba227a36945dfc4b6d720cf37c383d0e59c405e888e3948"
+  },
+  {
+    "path": "hardware-auto-02/source/calibration_contract.h",
+    "bytes": 2875,
+    "sha256": "037c2ffc322e4403f7121304c7349209028a969f6f4dd1340bd87b8c3b3e2aac"
+  },
+  {
+    "path": "hardware-auto-02/source/calibration_image.h",
+    "bytes": 3345,
+    "sha256": "71c916621549af81d581833bb12f6c0b6a3360b79bb21a25d85fa14012461fde"
+  },
+  {
+    "path": "hardware-auto-02/source/calibration_scope.h",
+    "bytes": 1073,
+    "sha256": "5f89bbdcd2ab39850ad213ad92705f514277639686a6d6ab030d2cce16d5480e"
+  },
+  {
+    "path": "hardware-auto-02/source/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "hardware-auto-02/source/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "hardware-auto-02/source/fault_capture.h",
+    "bytes": 1948,
+    "sha256": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683"
+  },
+  {
+    "path": "hardware-auto-02/source/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "hardware-auto-02/source/main.c",
+    "bytes": 38162,
+    "sha256": "4fcfdc19c716510909ac81563f7920f43d80af38b09d81d48b2895d4a7e0d0c5"
+  },
+  {
+    "path": "hardware-auto-02/source/probe_plan.h",
+    "bytes": 3315,
+    "sha256": "c3eaba9265bdaa1b168eb1aae0bc0dfa0be7aae54097da5261550de24bbeeb17"
+  },
+  {
+    "path": "hardware-auto-02/source/ram_http.h",
+    "bytes": 5295,
+    "sha256": "72a8934168ec156f9139485ae01891a9377dab65a0ba4331345422711aaeb43c"
+  },
+  {
+    "path": "hardware-auto-02/source/ram_log.h",
+    "bytes": 4235,
+    "sha256": "65ddf5ffc690d21722b5bb8759dcbcbed882b93325950c364a8df99704c0c461"
+  },
+  {
+    "path": "hardware-auto-02/source/ram_transport_contract.h",
+    "bytes": 471,
+    "sha256": "0416792162065c9f671c3f2f13d05b0c805b8c95bd38865e024ca83e18db1036"
+  },
+  {
+    "path": "hardware-auto-02/source/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "hardware-auto-03/FilmExposureAuto.3dsx",
+    "bytes": 329400,
+    "sha256": "41d7fc1ec97e6cfb4ea2b3c301dee65de17ee3daeba3676fe10a65bae11f1305"
+  },
+  {
+    "path": "hardware-auto-03/capture-ready.json",
+    "bytes": 121,
+    "sha256": "cc1f47066c50e95a1e1b5fae28b74910696052ea1f28a060732e126df3030c24"
+  },
+  {
+    "path": "hardware-auto-03/deployment.json",
+    "bytes": 1986,
+    "sha256": "ecf1c15e31bfbd187c09202a34c0db8baf34344c46105ba5ef6e3fea9d4898dc"
+  },
+  {
+    "path": "hardware-auto-03/quick/calibration_plan.csv",
+    "bytes": 339,
+    "sha256": "25fdc8cf5f520cf6c3e18f75bf92569875212ed9ca90f8b463f90b5b7f760393"
+  },
+  {
+    "path": "hardware-auto-03/quick/frame_burst.csv",
+    "bytes": 1097,
+    "sha256": "6f900459759425e38233af5bd45e9cc6a065b70110a5a7dad35eb17c8042a93a"
+  },
+  {
+    "path": "hardware-auto-03/quick/manifest.txt",
+    "bytes": 3812,
+    "sha256": "4ab47c60f5fac0ba8ca7022c785fb3e2fee03a628da83792a7d9c6036cb60de5"
+  },
+  {
+    "path": "hardware-auto-03/recovered/calibration_plan.csv",
+    "bytes": 339,
+    "sha256": "25fdc8cf5f520cf6c3e18f75bf92569875212ed9ca90f8b463f90b5b7f760393"
+  },
+  {
+    "path": "hardware-auto-03/recovered/calls.csv",
+    "bytes": 29370,
+    "sha256": "264094d824e9c527c84a763783e7c5a9ed716cd7aa647f4df28d684d33afc5a7"
+  },
+  {
+    "path": "hardware-auto-03/recovered/execution.csv",
+    "bytes": 2094,
+    "sha256": "07f1e4e2e6004ed4a1971ed0677400501383099f7f6742e8a5b0fdae497707e2"
+  },
+  {
+    "path": "hardware-auto-03/recovered/frame_burst.csv",
+    "bytes": 1097,
+    "sha256": "6f900459759425e38233af5bd45e9cc6a065b70110a5a7dad35eb17c8042a93a"
+  },
+  {
+    "path": "hardware-auto-03/recovered/frames.csv",
+    "bytes": 2929,
+    "sha256": "f9a179b64b6b7d608ede718d28b7a4022c64027c39cef99c6293ab5b828655da"
+  },
+  {
+    "path": "hardware-auto-03/recovered/ipc.csv",
+    "bytes": 1190020,
+    "sha256": "207a253f1097c3acdb4a04c4c1da49a295fd5c48b023bdd3856be6dada355101"
+  },
+  {
+    "path": "hardware-auto-03/recovered/lifecycle.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "hardware-auto-03/recovered/manifest.txt",
+    "bytes": 3812,
+    "sha256": "4ab47c60f5fac0ba8ca7022c785fb3e2fee03a628da83792a7d9c6036cb60de5"
+  },
+  {
+    "path": "hardware-auto-03/recovered/noise.csv",
+    "bytes": 328,
+    "sha256": "2921bc73110ac5d6d7a6cf1c319f83f2326f0946053c3219fc977c9f20c32c74"
+  },
+  {
+    "path": "hardware-auto-03/recovered/ram-index.txt",
+    "bytes": 613,
+    "sha256": "8c314a773ce57d44932d5fcb3f5c5a76f6aabe259ae9114cb3c74a3f8fbb0049"
+  },
+  {
+    "path": "hardware-auto-03/recovered/ram-source.json",
+    "bytes": 260,
+    "sha256": "de6c2a1073c57cd0424bb6cd49f470e4cc8cc043f6d56ed2a808f1226445f272"
+  },
+  {
+    "path": "hardware-auto-03/recovered/reads.csv",
+    "bytes": 132449,
+    "sha256": "a233ca5441dc864f211c1668a3230943cc806ad093a28fad9384070d2ab0bf9c"
+  },
+  {
+    "path": "hardware-auto-03/recovered/received-ram-sha256.json",
+    "bytes": 2889,
+    "sha256": "909ffc1c4d1e7b5bd79ed226702d0502cb83b77668c6f56a84046f0ad444119c"
+  },
+  {
+    "path": "hardware-auto-03/recovered/received-ram-sha256.partial.json",
+    "bytes": 2889,
+    "sha256": "909ffc1c4d1e7b5bd79ed226702d0502cb83b77668c6f56a84046f0ad444119c"
+  },
+  {
+    "path": "hardware-auto-03/recovered/roi.csv",
+    "bytes": 11090,
+    "sha256": "7451c9ee7cac6b61c45c65a490efa35118f3a230b605187e1be11fe761e4f082"
+  },
+  {
+    "path": "hardware-auto-03/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "d1b9f4f608fa347f640a0560158fc755a4514feffc0243910bb32d303f0b8779"
+  },
+  {
+    "path": "hardware-auto-03/recovered/s1-p003-auto_seed.pgm",
+    "bytes": 307215,
+    "sha256": "44df6e076a31db71661b77a6a4d6b563055c159d211430f165870a68d8f0bcd4"
+  },
+  {
+    "path": "hardware-auto-03/recovered/s1-p004-auto_normal_base.yuyv",
+    "bytes": 614400,
+    "sha256": "20d3f39220b6d85760b7b8468b882410204137c894d919b7f00a17f791c2f75b"
+  },
+  {
+    "path": "hardware-auto-03/recovered/s1-p005-auto_normal_0.yuyv",
+    "bytes": 614400,
+    "sha256": "4532dcd220fdd5db8764a3d68adad0278bc4885673542040954156cf71366374"
+  },
+  {
+    "path": "hardware-auto-03/recovered/s1-p006-auto_response_short.yuyv",
+    "bytes": 614400,
+    "sha256": "6f483eaf76ed1cdc35413f0dee60afea08959528783e0959d830befd058453bf"
+  },
+  {
+    "path": "hardware-auto-03/recovered/transport-events.jsonl",
+    "bytes": 3175,
+    "sha256": "f68348053feeea635e274952a2110db201c6a478b7ef709295c9c804b291d55c"
+  },
+  {
+    "path": "hardware-auto-03/recovery-attempt-1794475909827844000.json",
+    "bytes": 227,
+    "sha256": "f92ee8e6388b7fb89d7182655cb2136a3a832c48c41a04f5d5e60c6716a479b1"
+  },
+  {
+    "path": "hardware-auto-03/source/automation.h",
+    "bytes": 6144,
+    "sha256": "367e84f14d01ac0f8f36afa2b628aefa08b7e52739268c97a7b830387cecdd09"
+  },
+  {
+    "path": "hardware-auto-03/source/automation_contract.h",
+    "bytes": 3319,
+    "sha256": "c6db261a2ba343baf469d3246bb7df6693d1fbdb802585ef853923643e443963"
+  },
+  {
+    "path": "hardware-auto-03/source/calibration.h",
+    "bytes": 15633,
+    "sha256": "4f29172c30247cd15ba227a36945dfc4b6d720cf37c383d0e59c405e888e3948"
+  },
+  {
+    "path": "hardware-auto-03/source/calibration_contract.h",
+    "bytes": 2875,
+    "sha256": "037c2ffc322e4403f7121304c7349209028a969f6f4dd1340bd87b8c3b3e2aac"
+  },
+  {
+    "path": "hardware-auto-03/source/calibration_image.h",
+    "bytes": 3345,
+    "sha256": "71c916621549af81d581833bb12f6c0b6a3360b79bb21a25d85fa14012461fde"
+  },
+  {
+    "path": "hardware-auto-03/source/calibration_scope.h",
+    "bytes": 1073,
+    "sha256": "5f89bbdcd2ab39850ad213ad92705f514277639686a6d6ab030d2cce16d5480e"
+  },
+  {
+    "path": "hardware-auto-03/source/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "hardware-auto-03/source/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "hardware-auto-03/source/fault_capture.h",
+    "bytes": 1948,
+    "sha256": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683"
+  },
+  {
+    "path": "hardware-auto-03/source/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "hardware-auto-03/source/main.c",
+    "bytes": 38764,
+    "sha256": "1dfbe2944f76a2c228f774f9937dfb0855f7b8c08322836aff5319296b4cccfa"
+  },
+  {
+    "path": "hardware-auto-03/source/probe_plan.h",
+    "bytes": 3315,
+    "sha256": "c3eaba9265bdaa1b168eb1aae0bc0dfa0be7aae54097da5261550de24bbeeb17"
+  },
+  {
+    "path": "hardware-auto-03/source/ram_http.h",
+    "bytes": 5295,
+    "sha256": "72a8934168ec156f9139485ae01891a9377dab65a0ba4331345422711aaeb43c"
+  },
+  {
+    "path": "hardware-auto-03/source/ram_log.h",
+    "bytes": 4235,
+    "sha256": "65ddf5ffc690d21722b5bb8759dcbcbed882b93325950c364a8df99704c0c461"
+  },
+  {
+    "path": "hardware-auto-03/source/ram_transport_contract.h",
+    "bytes": 471,
+    "sha256": "0416792162065c9f671c3f2f13d05b0c805b8c95bd38865e024ca83e18db1036"
+  },
+  {
+    "path": "hardware-auto-03/source/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "hardware-auto-04/FilmExposureAuto.3dsx",
+    "bytes": 329984,
+    "sha256": "f04e36bfe1923e044dc01bb8297fa70c299f3919b319508afc6b254febb9a0cf"
+  },
+  {
+    "path": "hardware-auto-04/analysis/RESULTS.md",
+    "bytes": 1043,
+    "sha256": "2539330134f992905e8bda06836e2d164796f483251a8c3d26002d1b4454ccd4"
+  },
+  {
+    "path": "hardware-auto-04/analysis/controls.csv",
+    "bytes": 365,
+    "sha256": "cfdbab8af2461619340fbdc2f83bc118b6a609d1f0648b22e9f46679367116b6"
+  },
+  {
+    "path": "hardware-auto-04/analysis/controls.json",
+    "bytes": 8486,
+    "sha256": "4c85f026dc687ca86544c631ab1bef3f49ad7db2262417550830d10b9e405ef4"
+  },
+  {
+    "path": "hardware-auto-04/analysis/controls.md",
+    "bytes": 761,
+    "sha256": "48a47698be9537940efe537692d71492b3925b543bd8736f7ed1efe3d6ccafd7"
+  },
+  {
+    "path": "hardware-auto-04/analysis/s1-p004-auto_normal_base.jpg",
+    "bytes": 154676,
+    "sha256": "666817d8d3e0a17912ad95418dbab50ba7cf48628ccea73f5cea2b6f8be9b696"
+  },
+  {
+    "path": "hardware-auto-04/analysis/session-analysis.json",
+    "bytes": 12451,
+    "sha256": "84593e762e932f385129e26fae346a47fbc237d4a80d042ec3c70d9c9c869055"
+  },
+  {
+    "path": "hardware-auto-04/capture-ready.json",
+    "bytes": 121,
+    "sha256": "db6776eba188e58f2652580b8b7bf71b7942a97597b90774df20f5afdf4a2653"
+  },
+  {
+    "path": "hardware-auto-04/deployment.json",
+    "bytes": 1985,
+    "sha256": "89ae9da27789c1723bf8b531592eed432ae2994ee32b4073874a414541d8f566"
+  },
+  {
+    "path": "hardware-auto-04/quick/calibration_plan.csv",
+    "bytes": 279,
+    "sha256": "739308fc50175c4577766e709733b577f5270f3280f03441ac05fadf8cceb14d"
+  },
+  {
+    "path": "hardware-auto-04/quick/frame_burst.csv",
+    "bytes": 1097,
+    "sha256": "0c07be04391d77c97b03f3c2cfd58c66bff32483ef24dd9e875ba205115f1928"
+  },
+  {
+    "path": "hardware-auto-04/quick/manifest.txt",
+    "bytes": 3559,
+    "sha256": "7c0025c7c73d972c44b858f6159fee121af008bbcfa4e2f2939b851a0a1a70ba"
+  },
+  {
+    "path": "hardware-auto-04/recovered/calibration_plan.csv",
+    "bytes": 279,
+    "sha256": "739308fc50175c4577766e709733b577f5270f3280f03441ac05fadf8cceb14d"
+  },
+  {
+    "path": "hardware-auto-04/recovered/calls.csv",
+    "bytes": 23885,
+    "sha256": "eeeb8a8ad6faa596adb5e035f305e73f3b770619002eefb00decd2e408a6c34a"
+  },
+  {
+    "path": "hardware-auto-04/recovered/execution.csv",
+    "bytes": 1054,
+    "sha256": "d12e1d10996d8f7c162a08098d1eef0b62276b0d663459cccf51095a19d91fe9"
+  },
+  {
+    "path": "hardware-auto-04/recovered/frame_burst.csv",
+    "bytes": 1097,
+    "sha256": "0c07be04391d77c97b03f3c2cfd58c66bff32483ef24dd9e875ba205115f1928"
+  },
+  {
+    "path": "hardware-auto-04/recovered/frames.csv",
+    "bytes": 2392,
+    "sha256": "6e1fc7a3eca2b2c3495e5871b78cf00a26a9150fbc027a3719d6c2d3857f0683"
+  },
+  {
+    "path": "hardware-auto-04/recovered/ipc.csv",
+    "bytes": 908424,
+    "sha256": "88ce79a0ba0f3d5e3948727481a77897ad62f2ce78e6e494aa77c5b9b733bf0f"
+  },
+  {
+    "path": "hardware-auto-04/recovered/lifecycle.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "hardware-auto-04/recovered/manifest.txt",
+    "bytes": 3559,
+    "sha256": "7c0025c7c73d972c44b858f6159fee121af008bbcfa4e2f2939b851a0a1a70ba"
+  },
+  {
+    "path": "hardware-auto-04/recovered/noise.csv",
+    "bytes": 269,
+    "sha256": "adffea5deaf345797975cd1940a74d8e96266039a280b4baeb64dc8a8f011a2a"
+  },
+  {
+    "path": "hardware-auto-04/recovered/ram-index.txt",
+    "bytes": 565,
+    "sha256": "5bee6480b67f8415d7388eb3885856fd9ca98c2f2b256c6cbb71831bed2f7bab"
+  },
+  {
+    "path": "hardware-auto-04/recovered/ram-source.json",
+    "bytes": 260,
+    "sha256": "f21185637485e1518202352c352d1b04329f21b03836501c442b658643dd053a"
+  },
+  {
+    "path": "hardware-auto-04/recovered/reads.csv",
+    "bytes": 100975,
+    "sha256": "075cdb62dfeb79aa778462647c61cac3b6dc0259b34dc63866a9297585979701"
+  },
+  {
+    "path": "hardware-auto-04/recovered/received-ram-sha256.json",
+    "bytes": 2695,
+    "sha256": "0b93a305a8f9173cbaa21d73c8a0e350253767f72b590136ecc88526a33489b1"
+  },
+  {
+    "path": "hardware-auto-04/recovered/received-ram-sha256.partial.json",
+    "bytes": 2695,
+    "sha256": "0b93a305a8f9173cbaa21d73c8a0e350253767f72b590136ecc88526a33489b1"
+  },
+  {
+    "path": "hardware-auto-04/recovered/roi.csv",
+    "bytes": 8391,
+    "sha256": "4d6d0397bc658104e7de7aa97ba0bf6d6831e045a10e838e831747f93a3a8df3"
+  },
+  {
+    "path": "hardware-auto-04/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "f75b40ef47e262270b2bce2024f094b9348bd9788d1364b33f4e93bc06f98de2"
+  },
+  {
+    "path": "hardware-auto-04/recovered/s1-p003-auto_seed.pgm",
+    "bytes": 307215,
+    "sha256": "2e224679e2efd995b909e85863141d91302c401e6ee2bf5c4999f02741b8b823"
+  },
+  {
+    "path": "hardware-auto-04/recovered/s1-p004-auto_normal_base.yuyv",
+    "bytes": 614400,
+    "sha256": "0324a9e271c5c1485928472755d398fdb142b8771536f20bff8b7caf122b75eb"
+  },
+  {
+    "path": "hardware-auto-04/recovered/s1-p005-auto_response_short.yuyv",
+    "bytes": 614400,
+    "sha256": "3d6fdff1b9b685539c3fd324d2e343ca1f160402bce7811d993326d0fdfd389a"
+  },
+  {
+    "path": "hardware-auto-04/reference.json",
+    "bytes": 1002,
+    "sha256": "786b79ad813cd5aed740dabe90725d3ab2919451fd912d1700fb4c0d64a81336"
+  },
+  {
+    "path": "hardware-auto-04/source/automation.h",
+    "bytes": 6431,
+    "sha256": "c8783524092947fbd76435c6226204218b72dd073fbd0dfb28a6baeb404acc6e"
+  },
+  {
+    "path": "hardware-auto-04/source/automation_contract.h",
+    "bytes": 3726,
+    "sha256": "16ddc7c576a569cdc7cad14dba40ef50da30b7b35a40f17a05346534cad87c41"
+  },
+  {
+    "path": "hardware-auto-04/source/calibration.h",
+    "bytes": 15633,
+    "sha256": "4f29172c30247cd15ba227a36945dfc4b6d720cf37c383d0e59c405e888e3948"
+  },
+  {
+    "path": "hardware-auto-04/source/calibration_contract.h",
+    "bytes": 2875,
+    "sha256": "037c2ffc322e4403f7121304c7349209028a969f6f4dd1340bd87b8c3b3e2aac"
+  },
+  {
+    "path": "hardware-auto-04/source/calibration_image.h",
+    "bytes": 3430,
+    "sha256": "6570dede9310be1773ee18ad138267944a0ee31be1263f8acfc8d65e072bfbd9"
+  },
+  {
+    "path": "hardware-auto-04/source/calibration_scope.h",
+    "bytes": 1073,
+    "sha256": "5f89bbdcd2ab39850ad213ad92705f514277639686a6d6ab030d2cce16d5480e"
+  },
+  {
+    "path": "hardware-auto-04/source/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "hardware-auto-04/source/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "hardware-auto-04/source/fault_capture.h",
+    "bytes": 1948,
+    "sha256": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683"
+  },
+  {
+    "path": "hardware-auto-04/source/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "hardware-auto-04/source/main.c",
+    "bytes": 38764,
+    "sha256": "1dfbe2944f76a2c228f774f9937dfb0855f7b8c08322836aff5319296b4cccfa"
+  },
+  {
+    "path": "hardware-auto-04/source/probe_plan.h",
+    "bytes": 3315,
+    "sha256": "c3eaba9265bdaa1b168eb1aae0bc0dfa0be7aae54097da5261550de24bbeeb17"
+  },
+  {
+    "path": "hardware-auto-04/source/ram_http.h",
+    "bytes": 5421,
+    "sha256": "ff12449a9909d86150f77b24a3fd914ab181f4204366b2b7548db1d76a9d672a"
+  },
+  {
+    "path": "hardware-auto-04/source/ram_log.h",
+    "bytes": 4235,
+    "sha256": "65ddf5ffc690d21722b5bb8759dcbcbed882b93325950c364a8df99704c0c461"
+  },
+  {
+    "path": "hardware-auto-04/source/ram_transport_contract.h",
+    "bytes": 471,
+    "sha256": "0416792162065c9f671c3f2f13d05b0c805b8c95bd38865e024ca83e18db1036"
+  },
+  {
+    "path": "hardware-auto-04/source/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "limits-part-01/RESULTS.md",
+    "bytes": 883,
+    "sha256": "5a3430832b149dd11ad8c336b3f78da84b8126d511167b0bca870a83ab557115"
+  },
+  {
+    "path": "limits-part-01/deployment.json",
+    "bytes": 449,
+    "sha256": "1f57c3683320f9cc8e4e776510654ea3f83c5bf289b240f1efaa5154427dc1dd"
+  },
+  {
+    "path": "limits-part-01/final-verification.json",
+    "bytes": 453,
+    "sha256": "2d8bd7a63a56c7e0598ad1867e3079bb306223a61e947332d3c8d8b953bee711"
+  },
+  {
+    "path": "limits-part-01/recovered/calls.csv",
+    "bytes": 4117,
+    "sha256": "b975c153959747bc19678d34861be4e3e1bce7b902989aa5d7c97a72ac550218"
+  },
+  {
+    "path": "limits-part-01/recovered/frames.csv",
+    "bytes": 601,
+    "sha256": "29bc4e5d2d87ea1f41e0adb826348f40e5302363309a457655f692483badee43"
+  },
+  {
+    "path": "limits-part-01/recovered/ipc.csv",
+    "bytes": 42454,
+    "sha256": "4f687b6241e20c880cec188286bdbb719b472181b4f31b94c547f9ad340bd226"
+  },
+  {
+    "path": "limits-part-01/recovered/manifest.txt",
+    "bytes": 2032,
+    "sha256": "56ce0a93a2ce012c891c1239e410eea03aaaa640e58098b19ac11053a2f91c82"
+  },
+  {
+    "path": "limits-part-01/recovered/reads.csv",
+    "bytes": 3380,
+    "sha256": "d4ece1a62b7233b099c9607b378d92a3db077bdad5b78564ac534a1be6016bf9"
+  },
+  {
+    "path": "limits-part-01/recovered/received-sha256.json",
+    "bytes": 977,
+    "sha256": "90e147326c394cb88fc6922b99c2f74060f2ef6e43d0d359338a92c8e63548b1"
+  },
+  {
+    "path": "limits-part-01/recovered/recovery-source.json",
+    "bytes": 205,
+    "sha256": "a3c69a514ce127c4a4e6bd6b93a901b10f47b66e00dcdcce2c472ab63d7ae9df"
+  },
+  {
+    "path": "limits-part-01/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 47104,
+    "sha256": "21ec384b0f6cff457beba6c180d120140fb50f44b2ed859126945e927e7b3e68"
+  },
+  {
+    "path": "limits-part-01/source/FilmProbe.3dsx",
+    "bytes": 299904,
+    "sha256": "9640fa8d0b20543c706c89b9c4e45bdbf55cb1ac2e5853c9b64c43d04b3c7aa8"
+  },
+  {
+    "path": "limits-part-01/source/Makefile.probe",
+    "bytes": 1507,
+    "sha256": "85402b7245f154c7d47b5a3a221166a5edbf8464fc83095a1c2f3418488e98d5"
+  },
+  {
+    "path": "limits-part-01/source/probes/exposure/calibration.h",
+    "bytes": 14995,
+    "sha256": "00a721d1642f543fe67b4b68dfe977e91e0b0f5f749479a44e8d99e8ef986e5f"
+  },
+  {
+    "path": "limits-part-01/source/probes/exposure/calibration_contract.h",
+    "bytes": 2270,
+    "sha256": "33532fb95077002071f5f76646ee4c74349abe3d4407b46ee2ab8eb7a68b4202"
+  },
+  {
+    "path": "limits-part-01/source/probes/exposure/calibration_image.h",
+    "bytes": 2775,
+    "sha256": "55ad4f0baedbd3823fdb1222aa55445e51b77755d39324911ff3534c6b5aa1ac"
+  },
+  {
+    "path": "limits-part-01/source/probes/exposure/calibration_scope.h",
+    "bytes": 999,
+    "sha256": "f18fadb95a5a210b394f78fb28a63b7a6d9d8bd4b16fff5e28df016fd49491b5"
+  },
+  {
+    "path": "limits-part-01/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "limits-part-01/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "limits-part-01/source/probes/exposure/fault_capture.h",
+    "bytes": 1795,
+    "sha256": "ebf503f46c05ba33405a959decae95058b711b35d7f1d479740d3263f447cb47"
+  },
+  {
+    "path": "limits-part-01/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "limits-part-01/source/probes/exposure/main.c",
+    "bytes": 33684,
+    "sha256": "27e98cf8167268307d56a19a95526ff2cbc7aa1587770763064e9514ad1c67c0"
+  },
+  {
+    "path": "limits-part-01/source/probes/exposure/probe_plan.h",
+    "bytes": 2315,
+    "sha256": "3e48ff8de998fd18c425cdb4dbb17643bdb8c684fd7b19fe0b6c2d43cdae0704"
+  },
+  {
+    "path": "limits-part-01/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "observed-register-inventory.json",
+    "bytes": 25957,
+    "sha256": "4c7f5037e608bee7615f17b3fe51c0917bcb7c90332e36a2c9bd5144b85e2270"
+  },
+  {
+    "path": "offline-app-install.json",
+    "bytes": 581,
+    "sha256": "3078e35684a30d21ec060407ab56fded7d100716afd6487363224725e3aa65d6"
+  },
+  {
+    "path": "offline-full-01/RESULTS.md",
+    "bytes": 3870,
+    "sha256": "c1d0bd1b94b8ba1a0d81e70d4d8477b68da76fea597e1b11dc97a26603fe40c7"
+  },
+  {
+    "path": "offline-full-01/analysis-prefix/calibration-analysis.json",
+    "bytes": 296317,
+    "sha256": "d45923e5f007db61508e493a9aa86e2e4ebc945d088d4c75d9f10c537f77860e"
+  },
+  {
+    "path": "offline-full-01/analysis-prefix/calibration_plan.csv",
+    "bytes": 1865,
+    "sha256": "7df3f1c1cb73dcffa03bdc95d6f73b434f42d10a3ede3cd430cbafcc58370e6d"
+  },
+  {
+    "path": "offline-full-01/analysis-prefix/excluded-tail.json",
+    "bytes": 323,
+    "sha256": "06ea5a708568b0ff3b61be8f4cac54b87759a46c97611e791221d3c35db431f2"
+  },
+  {
+    "path": "offline-full-01/analysis-prefix/frame_burst.csv",
+    "bytes": 2119,
+    "sha256": "651e4293bb97d741f46856b8616f2399f14044acb5a6fa811bbed7355a88121e"
+  },
+  {
+    "path": "offline-full-01/analysis-prefix/frames.csv",
+    "bytes": 54916,
+    "sha256": "e0ea33719a1168c846fe1a78a2c420f8293eb80c0a125010df7b61b828fc10e0"
+  },
+  {
+    "path": "offline-full-01/analysis-prefix/manifest.txt",
+    "bytes": 5223,
+    "sha256": "7a4f86dab9aaae9de8deb03f2b8d55787dc382921e8ab7ec981e99e2d0bd8bbe"
+  },
+  {
+    "path": "offline-full-01/analysis-prefix/noise.csv",
+    "bytes": 1916,
+    "sha256": "e4da2e849e13c3e96f3058fd025fe7c0d87eb9a8cefcd0bd6eba363cb035babe"
+  },
+  {
+    "path": "offline-full-01/analysis-prefix/reads.csv",
+    "bytes": 2563144,
+    "sha256": "b2fea720711f653325bac1a6ac43b0863c2284cb548a81aa455d9ffc272f3496"
+  },
+  {
+    "path": "offline-full-01/analysis-prefix/roi.csv",
+    "bytes": 237409,
+    "sha256": "99c7d518569e09d350e6399b5879ec21ad59b00e8547191f69b552c0a93e5bc4"
+  },
+  {
+    "path": "offline-full-01/crash-dump-comparison.json",
+    "bytes": 250,
+    "sha256": "e03b0b987b2869a24f2f1bb0aae4e624631b676e7b071c87e157c6fd9920dcbb"
+  },
+  {
+    "path": "offline-full-01/final-verification.json",
+    "bytes": 1389,
+    "sha256": "d0bdde6751223be687acfc6da01fb0d561bd494e01f21909f3ab9eb5f9382758"
+  },
+  {
+    "path": "offline-full-01/image-verification.json",
+    "bytes": 8591,
+    "sha256": "ba4aebb21eef0a7c45d4ce347bca5b9fb2f5054896534bf27a7a367708dbd584"
+  },
+  {
+    "path": "offline-full-01/provenance.json",
+    "bytes": 2421,
+    "sha256": "608ac4c39f0e23137131913bf54959f9b54018e68f0c31a07a47bb86a892d8c6"
+  },
+  {
+    "path": "offline-full-01/recovered/calibration_plan.csv",
+    "bytes": 1865,
+    "sha256": "7df3f1c1cb73dcffa03bdc95d6f73b434f42d10a3ede3cd430cbafcc58370e6d"
+  },
+  {
+    "path": "offline-full-01/recovered/calls.csv",
+    "bytes": 558318,
+    "sha256": "dc222cba558195802f97585ed0a0474d833bd3aacbe4dddfb864d3c79aa2d463"
+  },
+  {
+    "path": "offline-full-01/recovered/execution.csv",
+    "bytes": 43950,
+    "sha256": "45d8a8f288de61b3caf19022c0329a79b396f35ac40eb3c59f752ecbdde1300e"
+  },
+  {
+    "path": "offline-full-01/recovered/frame_burst.csv",
+    "bytes": 2119,
+    "sha256": "651e4293bb97d741f46856b8616f2399f14044acb5a6fa811bbed7355a88121e"
+  },
+  {
+    "path": "offline-full-01/recovered/frames.csv",
+    "bytes": 54916,
+    "sha256": "e0ea33719a1168c846fe1a78a2c420f8293eb80c0a125010df7b61b828fc10e0"
+  },
+  {
+    "path": "offline-full-01/recovered/ipc.csv",
+    "bytes": 23415898,
+    "sha256": "e919931ed3790baeaf62fca6cefe3a29524a6e3c247c6974d4180bff21810350"
+  },
+  {
+    "path": "offline-full-01/recovered/manifest.txt",
+    "bytes": 5223,
+    "sha256": "7a4f86dab9aaae9de8deb03f2b8d55787dc382921e8ab7ec981e99e2d0bd8bbe"
+  },
+  {
+    "path": "offline-full-01/recovered/noise.csv",
+    "bytes": 1916,
+    "sha256": "e4da2e849e13c3e96f3058fd025fe7c0d87eb9a8cefcd0bd6eba363cb035babe"
+  },
+  {
+    "path": "offline-full-01/recovered/reads.csv",
+    "bytes": 2563169,
+    "sha256": "a26db5f5358a6215b4f7b7d02e72defc7591d408f73d243b8262e731cb653748"
+  },
+  {
+    "path": "offline-full-01/recovered/received-sha256.json",
+    "bytes": 6177,
+    "sha256": "07968252ce5007bf04bc5ea74a1777803dbe3264637e93188d4d53ab1379d3df"
+  },
+  {
+    "path": "offline-full-01/recovered/recovery-source.json",
+    "bytes": 206,
+    "sha256": "79221050e721e9d2f939ad9249ff4fe989c1be2f692a59214aded936cfc4bc1b"
+  },
+  {
+    "path": "offline-full-01/recovered/roi.csv",
+    "bytes": 237409,
+    "sha256": "99c7d518569e09d350e6399b5879ec21ad59b00e8547191f69b552c0a93e5bc4"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "0273b6221386f9cf0276b6ebf5e86d5e1be15a22e654ad2888944e2cf2448f5b"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p003-cal_r8_auto.pgm",
+    "bytes": 307215,
+    "sha256": "05b311066d12d124dfb29e5f8c454190cd6f488e0fb5bd6aa0e9d944b29e8f72"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p004-cal_r8_baseline.pgm",
+    "bytes": 307215,
+    "sha256": "92e318dd7723a641d258e444d55a0602b2130fd84c1b4f5e195de0f68e6122a2"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p005-cal_r8_t1.pgm",
+    "bytes": 307215,
+    "sha256": "a5b07ff3c3ed1012b8d0ccb113e33be1631f7d0da0758f582a84357b26fdd11e"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p006-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "4f69d01290b7c92634e582c2681356b84acda936e399ef585511a3c3a941bf98"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p007-cal_r8_t4.pgm",
+    "bytes": 307215,
+    "sha256": "f397004f5ba53de49e63802e67eef2dacf26218ee6dbf667c61e98425f0ee53d"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p008-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "d669150fdb07a4c4723aed53fde07a1e7e75c00b885d60f2586511e49a0486e8"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p009-cal_r8_t16.pgm",
+    "bytes": 307215,
+    "sha256": "b5e0004d611e0b9a4131341f7c7d31e21d76153f61a11b1eac480cf44affbdca"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p010-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "56196e34efc353b6f4b654ae38b5150836b43ef9c8c138deb162a1ad1a95b506"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p011-cal_r8_t64.pgm",
+    "bytes": 307215,
+    "sha256": "b96cbe6ff28612642ebccbdc216c811b511c7fe3cb5d500029eeb992fc379667"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p012-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "a710811caec163c7eb5216c3eacb58dc04a5cf9fe539518c0d12a847d999e183"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p013-cal_r8_t129.pgm",
+    "bytes": 307215,
+    "sha256": "8d301c1cecfbc5810b15360b5bd409ccf50ea75c654452375b4312775a6b3327"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p014-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "3f30fea4631c9564253fb0dc042f8ffd3c668f788de9f27ff4b1a3a9d8c0bd7e"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p015-cal_r8_t388.pgm",
+    "bytes": 307215,
+    "sha256": "0f103f08e0d303897392d1b04b55f36269755ddda04e6bc0eff0b2b78c3647fe"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p016-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "de4c65095a70782b3dff9a305f102cb4b4204df6964ffcd126ebde385d139908"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p017-cal_r0_auto.pgm",
+    "bytes": 307215,
+    "sha256": "a262bb6bf5ea09c81fcc18261c4cee5687dad2934fa7982db1ff7c728870c4e9"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p018-cal_r0_baseline.pgm",
+    "bytes": 307215,
+    "sha256": "d9b9a50d6c04a149fc814929b5167947636195690ddf33de77bdb139b51c8de7"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p019-cal_r0_t1.pgm",
+    "bytes": 307215,
+    "sha256": "866e5b48e9118ba110653c01ef01408666eab9b0c6c444655c5a6f0a06ba486a"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p020-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "1d4b485b5e417f3a81bba537211c060a8bdf99c067795740b971132093e8ee25"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p021-cal_r0_t4.pgm",
+    "bytes": 307215,
+    "sha256": "bfec52f663fd99c845e5e3fd12a9bb4f68030adb7d45befe02bd312aa39e43ee"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p022-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "ea4e6afe2ad38220aa727771fd6c012c8f088e0c93ef46ae3caafc0cffcc62f8"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p023-cal_r0_t16.pgm",
+    "bytes": 307215,
+    "sha256": "506700567e5a340123177a1fca381f5582d71f3539358fe9722b11a07dc15eb1"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p024-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "a61369477c4f79c21fc1c0db184c663fa9b9f92ce8445b2ca657b576a0e46866"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p025-cal_r0_t64.pgm",
+    "bytes": 307215,
+    "sha256": "567e228e072db670c1f0e90396677ba5f33c7e62001eabe79a995d0982600d7e"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p026-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "5d34d629f0226b5e5baaf8f87629437fb249a91c9ad9d97055b2c259fefb0b1f"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p027-cal_r0_t176.pgm",
+    "bytes": 307215,
+    "sha256": "3ab3d8440e166af05523a08b2bf6fd3de3cea040ca3adb730082e8b75ce07b47"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p028-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "50ba019c67d05a99f5b4c64769f4a5051616ac0c3dca78376ee540584286fa9a"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p029-cal_r0_t528.pgm",
+    "bytes": 307215,
+    "sha256": "cdd24eaae3d8332852e87a21baee08248708943453c6b7c63f3887da67db90e8"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p030-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "7640b08c26105f4073c331c758f7dac467235422efe506d72a115391fe0c87db"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p031-cal_analog_0.pgm",
+    "bytes": 307215,
+    "sha256": "2d975c9fc2446a64412d9f2ae932030b60cf25b9742dc685a95e013ccbc0b2ee"
+  },
+  {
+    "path": "offline-full-01/recovered/s1-p032-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "e5ea960da769a86be5c5b9bcfca0276f8e28b3a6646413b1f1c3ca8dc3fafaa5"
+  },
+  {
+    "path": "offline-full-01/screen-error.json",
+    "bytes": 566,
+    "sha256": "9a81b5e71c28f789c8733ae3d01218b4f7a0c7461a0f3c98c02bd70fb15c18c7"
+  },
+  {
+    "path": "offline-full-01/source/FilmCalibration.3dsx",
+    "bytes": 294952,
+    "sha256": "879d5ad4c122d109f29318a4905182b5d98a293e504b75346250d073674f1f43"
+  },
+  {
+    "path": "offline-full-01/source/Makefile.offline",
+    "bytes": 139,
+    "sha256": "4c3ca40ac066ee180d3e232b996054be6a82c35f4a58dce5cb4578d8234fcd16"
+  },
+  {
+    "path": "offline-full-01/source/Makefile.probe",
+    "bytes": 1507,
+    "sha256": "e7bcce29b7d451cc3ca813f80d0548140a4713460b8fb959cf72b39a06d261b3"
+  },
+  {
+    "path": "offline-full-01/source/probes/exposure/calibration.h",
+    "bytes": 11019,
+    "sha256": "64e8f7d8ef326121c8ba97800c83662e3f4190e9369bcb5f699c190f8312cfb9"
+  },
+  {
+    "path": "offline-full-01/source/probes/exposure/calibration_contract.h",
+    "bytes": 1631,
+    "sha256": "7277b32a9436137fbcfc02dd64a30bb449ac682e39873fdeddc08b84bb0a8fd0"
+  },
+  {
+    "path": "offline-full-01/source/probes/exposure/calibration_image.h",
+    "bytes": 2752,
+    "sha256": "6cbfc2b87ee5b4ba6ed592031e051b04b0d78eb60c4790dcbb6c44678c9f7cd7"
+  },
+  {
+    "path": "offline-full-01/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "offline-full-01/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "offline-full-01/source/probes/exposure/fault_capture.h",
+    "bytes": 1795,
+    "sha256": "ebf503f46c05ba33405a959decae95058b711b35d7f1d479740d3263f447cb47"
+  },
+  {
+    "path": "offline-full-01/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "offline-full-01/source/probes/exposure/main.c",
+    "bytes": 32337,
+    "sha256": "c94f14f8406db84c761950eabc8a89f2461f1c09097be47edb4d213d85b0aebe"
+  },
+  {
+    "path": "offline-full-01/source/probes/exposure/probe_plan.h",
+    "bytes": 1970,
+    "sha256": "350efee42ec63c7d90cdb90323029e3177708df2c41e99aaed8c8f39c53916c5"
+  },
+  {
+    "path": "offline-full-01/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "offline-smoke-01/deployment.json",
+    "bytes": 2182,
+    "sha256": "b4622f2cb8508da5ba71507fa023ce227ef6f86d2fc246cf6ebea10d4a60eee8"
+  },
+  {
+    "path": "offline-smoke-01/recovered/calibration-analysis.json",
+    "bytes": 10456,
+    "sha256": "25ec565902d0508e98edf753b46e9188d4eb5f2dcdcb263aa2e5949e768b0ffb"
+  },
+  {
+    "path": "offline-smoke-01/recovered/calibration_plan.csv",
+    "bytes": 147,
+    "sha256": "e44d29797cdecd0cb3bf104f078559341bdbbbc96e3d56e1858612846d0a641c"
+  },
+  {
+    "path": "offline-smoke-01/recovered/calls.csv",
+    "bytes": 23812,
+    "sha256": "58fcb17bfabe2a397049a312997dff0382c2d16c0ddc341eb2395db4140c42dd"
+  },
+  {
+    "path": "offline-smoke-01/recovered/execution.csv",
+    "bytes": 1462,
+    "sha256": "663211cdac741a0602eb65b8929b839ce5d10435a9c992353dbce4c77bc52780"
+  },
+  {
+    "path": "offline-smoke-01/recovered/final-verification.json",
+    "bytes": 280,
+    "sha256": "410c686ab81274da3bb19038931dd29758466c53800b1a936a8141cd83b97ece"
+  },
+  {
+    "path": "offline-smoke-01/recovered/frame_burst.csv",
+    "bytes": 75,
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "path": "offline-smoke-01/recovered/frames.csv",
+    "bytes": 2473,
+    "sha256": "bca5685ff2f6afca244c37b6c4f01702f4ce534ee9bfc97c7288ab1d691e4670"
+  },
+  {
+    "path": "offline-smoke-01/recovered/ipc.csv",
+    "bytes": 817466,
+    "sha256": "30ea0c432484fd0f20fecb56fa6e0f5fe273930846f3bec65be21155aa2c1d0f"
+  },
+  {
+    "path": "offline-smoke-01/recovered/manifest.txt",
+    "bytes": 2260,
+    "sha256": "1bdb01fe6639cdeca10a3535e696d2bf0bad3b4bbb1e521a9ed24adfbf72d094"
+  },
+  {
+    "path": "offline-smoke-01/recovered/noise.csv",
+    "bytes": 138,
+    "sha256": "0813c429fc64d47203fe10b4e008a49552115df8a56c8a0cd3f5d73a2508b5d1"
+  },
+  {
+    "path": "offline-smoke-01/recovered/reads.csv",
+    "bytes": 87357,
+    "sha256": "f7f3e86b8fa072f43062d3091afb2610aa5450ae342888e5210febabb2e9947e"
+  },
+  {
+    "path": "offline-smoke-01/recovered/received-sha256.json",
+    "bytes": 1817,
+    "sha256": "e4c662bf356c0ffab9de3a9cdc6d0200b301dff07519a1e7827aa2537eb13bf5"
+  },
+  {
+    "path": "offline-smoke-01/recovered/recovery-source.json",
+    "bytes": 205,
+    "sha256": "bd1b4853795bedde8417f0248053d1277cb979602b1521e75cf9c485b542e85a"
+  },
+  {
+    "path": "offline-smoke-01/recovered/roi.csv",
+    "bytes": 7918,
+    "sha256": "bdb5198e73b6a24e7f99ea7a52eb47a0eb4381091660537f94fc47bfdd1fef3d"
+  },
+  {
+    "path": "offline-smoke-01/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "80a27d6622393e760fd28487d013503ea391129ee1584ba5d86def499d9f88fe"
+  },
+  {
+    "path": "offline-smoke-01/recovered/s1-p003-cal_r8_auto.pgm",
+    "bytes": 307215,
+    "sha256": "50b9227042eca71b89186be8dafeb57eac9c85c2ba2df6dbb6ff2a3b102a03c6"
+  },
+  {
+    "path": "offline-smoke-01/recovered/target-preview.png",
+    "bytes": 128534,
+    "sha256": "27d7e3c5827950ece5c4fb539d702dda8a438bc35683afa83910bb4a43bc6f45"
+  },
+  {
+    "path": "offline-smoke-01/remote-manifest.txt",
+    "bytes": 2260,
+    "sha256": "1bdb01fe6639cdeca10a3535e696d2bf0bad3b4bbb1e521a9ed24adfbf72d094"
+  },
+  {
+    "path": "offline-smoke-01/remote-run.txt",
+    "bytes": 19,
+    "sha256": "bcfbb2487bf23c0fb497e7c23b06c72c48510d30f86802402d5a039e7fc1824f"
+  },
+  {
+    "path": "offline-smoke-01/source/FilmProbe.3dsx",
+    "bytes": 294488,
+    "sha256": "03ce0e0bb553526146794b9e94693105f5e225e7d5792fcd77c977a62678e06f"
+  },
+  {
+    "path": "offline-smoke-01/source/Makefile.probe",
+    "bytes": 1346,
+    "sha256": "b02b8fce37fc94957db98638360d308e21b48a473b4a9322593d31fc1df57e28"
+  },
+  {
+    "path": "offline-smoke-01/source/probes/exposure/calibration.h",
+    "bytes": 11019,
+    "sha256": "64e8f7d8ef326121c8ba97800c83662e3f4190e9369bcb5f699c190f8312cfb9"
+  },
+  {
+    "path": "offline-smoke-01/source/probes/exposure/calibration_contract.h",
+    "bytes": 1631,
+    "sha256": "7277b32a9436137fbcfc02dd64a30bb449ac682e39873fdeddc08b84bb0a8fd0"
+  },
+  {
+    "path": "offline-smoke-01/source/probes/exposure/calibration_image.h",
+    "bytes": 2752,
+    "sha256": "6cbfc2b87ee5b4ba6ed592031e051b04b0d78eb60c4790dcbb6c44678c9f7cd7"
+  },
+  {
+    "path": "offline-smoke-01/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "offline-smoke-01/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "offline-smoke-01/source/probes/exposure/fault_capture.h",
+    "bytes": 1795,
+    "sha256": "ebf503f46c05ba33405a959decae95058b711b35d7f1d479740d3263f447cb47"
+  },
+  {
+    "path": "offline-smoke-01/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "offline-smoke-01/source/probes/exposure/main.c",
+    "bytes": 31683,
+    "sha256": "41f79ec30a9cbbc752a25151fb597141d8d337273568839b792c8a9671542ff1"
+  },
+  {
+    "path": "offline-smoke-01/source/probes/exposure/probe_plan.h",
+    "bytes": 1801,
+    "sha256": "5058b4035331bfdc3b670ce4b707f23a28fce3fb01b4efaddd28fe26002d1ac1"
+  },
+  {
+    "path": "offline-smoke-01/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "offline-smoke-01/source/probes/recovery/main.c",
+    "bytes": 10408,
+    "sha256": "89d346861ac92340eb7c76e775339948bf96ad563742e8e394f2d6ac077ccccb"
+  },
+  {
+    "path": "optics-reference-01.json",
+    "bytes": 846,
+    "sha256": "03afccbddc223c7d75b8e10b7759f4b59719a90d39390d71fdd0021a8492f0b0"
+  },
+  {
+    "path": "ram-codes-boost-01/deployment.json",
+    "bytes": 441,
+    "sha256": "bde7cc2b1cd86092fc520921a5e814aecfbaad5bffe379926b272e86b4865d47"
+  },
+  {
+    "path": "ram-codes-boost-01/source/FilmProbe.3dsx",
+    "bytes": 307508,
+    "sha256": "64d0d99d8ff145c13dca4d92121738cb5192cbfb90df8791f5c004021efa457e"
+  },
+  {
+    "path": "ram-codes-boost-01/source/Makefile.probe",
+    "bytes": 1513,
+    "sha256": "5403d5f9e303a7586edb135837c2570fddfb7e37421cd7810ac0f570a18353d4"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/calibration.h",
+    "bytes": 15284,
+    "sha256": "8c4e957f0dec689ae8f17bd3b153fc67492f0e96bcaf44e29b3a484f95c5874c"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/calibration_contract.h",
+    "bytes": 2793,
+    "sha256": "034eeec83e6c305e4bbdc16352908ac4c33c3e46347c6bceb89e306171bf64ec"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/calibration_image.h",
+    "bytes": 2775,
+    "sha256": "55ad4f0baedbd3823fdb1222aa55445e51b77755d39324911ff3534c6b5aa1ac"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/calibration_scope.h",
+    "bytes": 1032,
+    "sha256": "e3afadfe4f8dd4d83c10551349ee2d0060323afc10438af3543c534a0b60eb3c"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/fault_capture.h",
+    "bytes": 1948,
+    "sha256": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/main.c",
+    "bytes": 36520,
+    "sha256": "c800fed30e96967cb9456da0db17417963dfdab1c005b26d9f1cbf1a9da565ef"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/probe_plan.h",
+    "bytes": 2777,
+    "sha256": "597500eb0575142fde9c42787ba29d880354b6364a3a684bd1d298ff0223da41"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/ram_http.h",
+    "bytes": 4856,
+    "sha256": "7a6dfa577839248a284a5090b9dbaf7aef28faff383a324bb931675a4764fac0"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/ram_log.h",
+    "bytes": 3758,
+    "sha256": "808ec5bd622eb3b3a3b5dfb8b51811e949c5601f74cbb2487af13256b90e977d"
+  },
+  {
+    "path": "ram-codes-boost-01/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "ram-codes-fine-01/deployment.json",
+    "bytes": 729,
+    "sha256": "cd1d73da188624bbb4d3f0d3536347729b645974f1643b8f11aa1b868f3d4412"
+  },
+  {
+    "path": "ram-codes-fine-01/final-verification.json",
+    "bytes": 580,
+    "sha256": "40c25dbd82c6c3049cf62ca0a1c095964b136d5d9fad433abf05e8c6afa67158"
+  },
+  {
+    "path": "ram-codes-fine-01/image-verification.json",
+    "bytes": 1572,
+    "sha256": "0aaa42602b9b06d21d58946607c67941948266afe773864da5e9aa08839898d8"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/calibration-analysis.json",
+    "bytes": 136176,
+    "sha256": "d35dd4812abd4266d42e0bad3b799c5bd3882207e3cdc8ed30d114ec9e5045ed"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/calibration_plan.csv",
+    "bytes": 872,
+    "sha256": "eea25650f5733d058c2bebba7152199f16f3342f27c427862e47fec7b9da37ba"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/calls.csv",
+    "bytes": 253672,
+    "sha256": "29d6e5a51678e54ecc7c2fe01ceeb601a25907103b0c7a1807750b4a8195f312"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/execution.csv",
+    "bytes": 21470,
+    "sha256": "91f4b496869f593efaf4de1a1fa17a673984f77cf57deece63bfab82964d0d0d"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/frame_burst.csv",
+    "bytes": 75,
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/frames.csv",
+    "bytes": 26701,
+    "sha256": "af1c6401dd323c93c0cac195b63a419c0789accc6aa774da94a325c2f826494e"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/ipc.csv",
+    "bytes": 10961775,
+    "sha256": "025f2eec550d2e7639d480e549c00b991c1f3822747bc21987772dfc3e4a3443"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/lifecycle.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/manifest.txt",
+    "bytes": 3928,
+    "sha256": "51bb283c5577aa682d2be059121c7cff92f206b72bd3d55eb7b1ae4cac422eec"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/noise.csv",
+    "bytes": 947,
+    "sha256": "d6a599b517452461963a9a66489a32def6ede445a97a44af8db6977fca28dd22"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/ram-index.txt",
+    "bytes": 1053,
+    "sha256": "eb87917ca1ee69a3f6774641837dc1e7c52651553f1dd84cafa496311a48f9a1"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/ram-source.json",
+    "bytes": 260,
+    "sha256": "b0c3b8e62aaf9c60abac1b47ea69723d2744a73b566dcf012b619e5174c551bf"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/reads.csv",
+    "bytes": 1219027,
+    "sha256": "79d54d243249ab79b001cace2f96791ab534f5e5b572a6e145c7b9f622facd75"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/received-ram-sha256.json",
+    "bytes": 4789,
+    "sha256": "4566e055930e60df2cfde9f5bf954b6ce6c36d0c1f5f069b67978815e1a5ff5a"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/received-ram-sha256.partial.json",
+    "bytes": 4789,
+    "sha256": "4566e055930e60df2cfde9f5bf954b6ce6c36d0c1f5f069b67978815e1a5ff5a"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/recovery-reconnects.jsonl",
+    "bytes": 1918,
+    "sha256": "159de82bbfa8f4b1468b297ca3749248b9d79a708692767e18d37fe18cb17f86"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/roi.csv",
+    "bytes": 114197,
+    "sha256": "a477042b99e2fd1f2c173cda46d138a880cc01c3b03d67cd34c1897f2867da39"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "57616f967a94ad378744461cf0f7d3c01d3324e3efbd84e1f866e54a7f2b1ec4"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p003-cal_codes_auto.pgm",
+    "bytes": 307215,
+    "sha256": "fc1fade9fd0f9b190c8fb68e52155a62e3739bece75598caeee4d9794b77f563"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p004-cal_codes_baseline.pgm",
+    "bytes": 307215,
+    "sha256": "d433a62a471d334922e0b5f8117141d44c9780e3b5bef178561626520dc7e762"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p005-cal_code_0210.pgm",
+    "bytes": 307215,
+    "sha256": "d71ab63d7f4156b43477e75d5fbe06ac6cdcf420f83a1feda77fd5d65fc44440"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p006-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "359941e379e94f588be22cb0932dca13307be175759e35c347a8aeb25687dd6e"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p007-cal_code_0218.pgm",
+    "bytes": 307215,
+    "sha256": "5c535e9c64574b3cf88c66c2cb66945deda8301e6319a7f6a3e23476ae2c50fe"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p008-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "5cac6528d4910a0d44613bcf909c2f2a1492c6f84087c114915f2b61a0e6b851"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p009-cal_code_0220.pgm",
+    "bytes": 307215,
+    "sha256": "8ee227add612e1e6d44f550e516287966c9f1f49b2083b462b1d4ca6305295e2"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p010-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "36a9335a50ae14e371c1d8da96682ae70c0510db74901c60eb074eb6c570c384"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p011-cal_code_0228.pgm",
+    "bytes": 307215,
+    "sha256": "a7fec549ae6218a46f17fddceae356303d5b4fa0df0f42ed4f18045d99619c62"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p012-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "5409f10b9423d2b7ba0573d6453b1d22130964f64f193a7b5f4b87abcd774554"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p013-cal_code_0230.pgm",
+    "bytes": 307215,
+    "sha256": "dbb2ac319b6714a1d33206bc022ddce163bbbcd5f2176098d139c6bb645b5270"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p014-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "dcae7b369354d3461603268142d9f16ef499ad71307a001cd97635aa513ce841"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p015-cal_code_023c.pgm",
+    "bytes": 307215,
+    "sha256": "0bdd88417a8b0041e4fde026f3af4e1d6c9c4a42377ffe9b872dd74c799e67ee"
+  },
+  {
+    "path": "ram-codes-fine-01/recovered/s1-p016-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "f354c580f7cb1a2fd13acb78773da6f1e251dc68cbfeaeb824c95d85b1c5599c"
+  },
+  {
+    "path": "ram-codes-fine-01/source/FilmProbe.3dsx",
+    "bytes": 307508,
+    "sha256": "64d0d99d8ff145c13dca4d92121738cb5192cbfb90df8791f5c004021efa457e"
+  },
+  {
+    "path": "ram-codes-fine-01/source/Makefile.probe",
+    "bytes": 1513,
+    "sha256": "5403d5f9e303a7586edb135837c2570fddfb7e37421cd7810ac0f570a18353d4"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/calibration.h",
+    "bytes": 15284,
+    "sha256": "8c4e957f0dec689ae8f17bd3b153fc67492f0e96bcaf44e29b3a484f95c5874c"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/calibration_contract.h",
+    "bytes": 2793,
+    "sha256": "034eeec83e6c305e4bbdc16352908ac4c33c3e46347c6bceb89e306171bf64ec"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/calibration_image.h",
+    "bytes": 2775,
+    "sha256": "55ad4f0baedbd3823fdb1222aa55445e51b77755d39324911ff3534c6b5aa1ac"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/calibration_scope.h",
+    "bytes": 1032,
+    "sha256": "e3afadfe4f8dd4d83c10551349ee2d0060323afc10438af3543c534a0b60eb3c"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/fault_capture.h",
+    "bytes": 1948,
+    "sha256": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/main.c",
+    "bytes": 36520,
+    "sha256": "c800fed30e96967cb9456da0db17417963dfdab1c005b26d9f1cbf1a9da565ef"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/probe_plan.h",
+    "bytes": 2777,
+    "sha256": "597500eb0575142fde9c42787ba29d880354b6364a3a684bd1d298ff0223da41"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/ram_http.h",
+    "bytes": 4856,
+    "sha256": "7a6dfa577839248a284a5090b9dbaf7aef28faff383a324bb931675a4764fac0"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/ram_log.h",
+    "bytes": 3758,
+    "sha256": "808ec5bd622eb3b3a3b5dfb8b51811e949c5601f74cbb2487af13256b90e977d"
+  },
+  {
+    "path": "ram-codes-fine-01/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "ram-codes-fine-01/transport-verification.json",
+    "bytes": 352,
+    "sha256": "22f5260510435be7926096ed6e63edafda132616074528a045758557acda1cbe"
+  },
+  {
+    "path": "ram-digital-headroom-01/deployment.json",
+    "bytes": 446,
+    "sha256": "92c337e69cf4c53290a64e287d84dd8c481585a3af6f7a98365287ed36e9d6c4"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/FilmProbe.3dsx",
+    "bytes": 307508,
+    "sha256": "64d0d99d8ff145c13dca4d92121738cb5192cbfb90df8791f5c004021efa457e"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/Makefile.probe",
+    "bytes": 1513,
+    "sha256": "5403d5f9e303a7586edb135837c2570fddfb7e37421cd7810ac0f570a18353d4"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/calibration.h",
+    "bytes": 15284,
+    "sha256": "8c4e957f0dec689ae8f17bd3b153fc67492f0e96bcaf44e29b3a484f95c5874c"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/calibration_contract.h",
+    "bytes": 2793,
+    "sha256": "034eeec83e6c305e4bbdc16352908ac4c33c3e46347c6bceb89e306171bf64ec"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/calibration_image.h",
+    "bytes": 2775,
+    "sha256": "55ad4f0baedbd3823fdb1222aa55445e51b77755d39324911ff3534c6b5aa1ac"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/calibration_scope.h",
+    "bytes": 1032,
+    "sha256": "e3afadfe4f8dd4d83c10551349ee2d0060323afc10438af3543c534a0b60eb3c"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/fault_capture.h",
+    "bytes": 1948,
+    "sha256": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/main.c",
+    "bytes": 36520,
+    "sha256": "c800fed30e96967cb9456da0db17417963dfdab1c005b26d9f1cbf1a9da565ef"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/probe_plan.h",
+    "bytes": 2777,
+    "sha256": "597500eb0575142fde9c42787ba29d880354b6364a3a684bd1d298ff0223da41"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/ram_http.h",
+    "bytes": 4856,
+    "sha256": "7a6dfa577839248a284a5090b9dbaf7aef28faff383a324bb931675a4764fac0"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/ram_log.h",
+    "bytes": 3758,
+    "sha256": "808ec5bd622eb3b3a3b5dfb8b51811e949c5601f74cbb2487af13256b90e977d"
+  },
+  {
+    "path": "ram-digital-headroom-01/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "ram-limits-01/RESULTS.md",
+    "bytes": 1449,
+    "sha256": "924c3ce446f2ff4ac8435968a279ab43420359254faaf4218c0ce46c004822d2"
+  },
+  {
+    "path": "ram-limits-01/deployment.json",
+    "bytes": 476,
+    "sha256": "2659e0c2bf356cf894a87395a82653a0121c9f3c0666f9b63e51c5210c05b5b8"
+  },
+  {
+    "path": "ram-limits-01/final-verification.json",
+    "bytes": 2419,
+    "sha256": "35645066ecee1b455b4b02bbdb2d7b06ba86bcd5a7916049224766a09afc6afa"
+  },
+  {
+    "path": "ram-limits-01/recovered/calibration-analysis.json",
+    "bytes": 66574,
+    "sha256": "816ed1f971db3b9f52551b979d1bce0d1c33e7cdf436ef3f465349942b5c727c"
+  },
+  {
+    "path": "ram-limits-01/recovered/calibration_plan.csv",
+    "bytes": 585,
+    "sha256": "e7ffecbe1492ed1d7b2b42ce9ad19fb82ac8e0e5aa23d210716c9e9a53b32428"
+  },
+  {
+    "path": "ram-limits-01/recovered/calls.csv",
+    "bytes": 118980,
+    "sha256": "8f6128db475c41124de87a0bfdba5b1f1b1979902f9bec4616563997f93e431d"
+  },
+  {
+    "path": "ram-limits-01/recovered/execution.csv",
+    "bytes": 10206,
+    "sha256": "bf3291c3ddb951636246985dfd8f8e3ef79e73619682f6e0864c8ff6772b83b5"
+  },
+  {
+    "path": "ram-limits-01/recovered/frame_burst.csv",
+    "bytes": 75,
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "path": "ram-limits-01/recovered/frames.csv",
+    "bytes": 12083,
+    "sha256": "b48a8f90311718dec0d9e63a7e784ed5a201522d628ef2519d59a07530a80f32"
+  },
+  {
+    "path": "ram-limits-01/recovered/ipc.csv",
+    "bytes": 4749219,
+    "sha256": "8e608aaa7e2d5ea9999a7cb12f5fdb7a7ce2b9208d6fe8e5d319e7fbd4e6b4e6"
+  },
+  {
+    "path": "ram-limits-01/recovered/lifecycle.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "ram-limits-01/recovered/manifest.txt",
+    "bytes": 3107,
+    "sha256": "a2bbdecbe8b533029bf1156259dbccb0a42ba5ef4870d0b5ab69ffab17fdbde6"
+  },
+  {
+    "path": "ram-limits-01/recovered/noise.csv",
+    "bytes": 476,
+    "sha256": "5f61bddb94ca09f1a6f7c6d82c5b5223cefff63bff6bfc51081dd2f1943fe06c"
+  },
+  {
+    "path": "ram-limits-01/recovered/ram-index.txt",
+    "bytes": 716,
+    "sha256": "307ac5649c1492c65658722a62071a5b19d72e601667bc635f31362885fdbf53"
+  },
+  {
+    "path": "ram-limits-01/recovered/ram-source.json",
+    "bytes": 260,
+    "sha256": "08f35c50569729f0f1cab550eaed821fdaca647a767f81844520128930e57821"
+  },
+  {
+    "path": "ram-limits-01/recovered/reads.csv",
+    "bytes": 552123,
+    "sha256": "9451ef67958d5b199abcd4d24326f45abb7f3502068e2d8afddf5fd28eda9a20"
+  },
+  {
+    "path": "ram-limits-01/recovered/received-ram-sha256.json",
+    "bytes": 3284,
+    "sha256": "3f787d151643481787ee79afedbfaa062c945a8bd4cd37c30655ba0603be18e4"
+  },
+  {
+    "path": "ram-limits-01/recovered/received-ram-sha256.partial.json",
+    "bytes": 3284,
+    "sha256": "3f787d151643481787ee79afedbfaa062c945a8bd4cd37c30655ba0603be18e4"
+  },
+  {
+    "path": "ram-limits-01/recovered/roi.csv",
+    "bytes": 50946,
+    "sha256": "464e5a02d4c8ada154392c52e0de8d5ba07b35b86577c2352943601b70cf1cc1"
+  },
+  {
+    "path": "ram-limits-01/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "2773171ef996196513e42f610e772f82af7db4ac08ffd2b1295354b9bbdd3371"
+  },
+  {
+    "path": "ram-limits-01/recovered/s1-p003-cal_r8_limit_auto.pgm",
+    "bytes": 307215,
+    "sha256": "2da850d2442ea41d93d3b91ea9d6e5a5f411e535ec3d1bf1de7e4bfeceea13b8"
+  },
+  {
+    "path": "ram-limits-01/recovered/s1-p004-cal_r8_limit_baseline.pgm",
+    "bytes": 307215,
+    "sha256": "d9c42b18f81a1f8e3534f4fc565636d99ff9b76e93eb96d7703a57ec5d724f08"
+  },
+  {
+    "path": "ram-limits-01/recovered/s1-p006-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "c41b45aec5893837673c384d5bb84da3e17c0f05407a2b636466a1f41974578e"
+  },
+  {
+    "path": "ram-limits-01/recovered/s1-p007-cal_r5_limit_auto.pgm",
+    "bytes": 307215,
+    "sha256": "e940114e06b007b6edf35dc796c793b09a894a5ce5f61f2bc52d524059a8e38f"
+  },
+  {
+    "path": "ram-limits-01/recovered/s1-p008-cal_r5_limit_baseline.pgm",
+    "bytes": 307215,
+    "sha256": "409950452e3d34ffcebf6151d4faa6dbbd965855592042230f3b878c0d55cc0a"
+  },
+  {
+    "path": "ram-limits-01/recovered/s1-p010-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "bb6c53fa4f9d9fd88e162d09514f76e764ea22e023eac6736f7d5c4395212341"
+  },
+  {
+    "path": "ram-limits-01/source/FilmProbe.3dsx",
+    "bytes": 307044,
+    "sha256": "2a59e79dbf29477ab36892623918f34628753fda7dc5769ab060cb9c63919ce7"
+  },
+  {
+    "path": "ram-limits-01/source/Makefile.probe",
+    "bytes": 1513,
+    "sha256": "00ba49ad520f777497ce9470d0fe23433aa17fec12f65e54899eb3872be33004"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/calibration.h",
+    "bytes": 15001,
+    "sha256": "b16c17ab28a6a65e227958dafd1d30a60839bc85c90e290c446c1f7f6f4a28a6"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/calibration_contract.h",
+    "bytes": 2270,
+    "sha256": "33532fb95077002071f5f76646ee4c74349abe3d4407b46ee2ab8eb7a68b4202"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/calibration_image.h",
+    "bytes": 2775,
+    "sha256": "55ad4f0baedbd3823fdb1222aa55445e51b77755d39324911ff3534c6b5aa1ac"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/calibration_scope.h",
+    "bytes": 999,
+    "sha256": "f18fadb95a5a210b394f78fb28a63b7a6d9d8bd4b16fff5e28df016fd49491b5"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/fault_capture.h",
+    "bytes": 1948,
+    "sha256": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/main.c",
+    "bytes": 35620,
+    "sha256": "6d16f26d1cc86fc92c424ef47f5fc76717ce3349a3667d03a15f613d453bde38"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/probe_plan.h",
+    "bytes": 2777,
+    "sha256": "597500eb0575142fde9c42787ba29d880354b6364a3a684bd1d298ff0223da41"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/ram_http.h",
+    "bytes": 4856,
+    "sha256": "7a6dfa577839248a284a5090b9dbaf7aef28faff383a324bb931675a4764fac0"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/ram_log.h",
+    "bytes": 3758,
+    "sha256": "808ec5bd622eb3b3a3b5dfb8b51811e949c5601f74cbb2487af13256b90e977d"
+  },
+  {
+    "path": "ram-limits-01/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "ram-limits-fffe-01/RESULTS.md",
+    "bytes": 878,
+    "sha256": "5c4d60588a1905fb1f931a187364319f90c49ffce5d987d6b6a64d5231638079"
+  },
+  {
+    "path": "ram-limits-fffe-01/deployment.json",
+    "bytes": 497,
+    "sha256": "7c04627ed4b85a11cf4f75e2e6b9211f051ef8313d637aaf94074f5ff9f95103"
+  },
+  {
+    "path": "ram-limits-fffe-01/final-verification.json",
+    "bytes": 576,
+    "sha256": "6dc429b743e1af7966b9abd4db92027e94666a239e889d73c055178f71beb299"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/calibration-analysis.json",
+    "bytes": 27670,
+    "sha256": "9ff4cb333615ba554ca581dafb3b0fd37ab80b47cc7ba9db3b02318fb769de99"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/calibration_plan.csv",
+    "bytes": 347,
+    "sha256": "312e47dbad77e843afca9373117a885d0d6f8c07049111e6992e468af3b8b8e9"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/calls.csv",
+    "bytes": 45353,
+    "sha256": "e4758f87fd6d00f3c04cfde903323fa30e76c38af9395ab8744cb40a67e45aab"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/execution.csv",
+    "bytes": 3662,
+    "sha256": "6a6cb7a8a2f76478e0204b6f3418018667a25962be2e8fbd963a441707ee1f31"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/frame_burst.csv",
+    "bytes": 75,
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/frames.csv",
+    "bytes": 4674,
+    "sha256": "5260dc5d45cf0deb2726aee3f8cb10bfeeeecddc37ab281914c1b8cd756f57a6"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/ipc.csv",
+    "bytes": 1652286,
+    "sha256": "78e43915ef72686f965d9b9585b8b23df45f17309a82c79254aa45adf19129c8"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/lifecycle.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/manifest.txt",
+    "bytes": 2735,
+    "sha256": "e00ae5ff7ede3a089b2ff9fa89cfc15849da5360664b4cc586f52a93c31b3714"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/noise.csv",
+    "bytes": 215,
+    "sha256": "8cf364645dc736da518b6ad7eaef0f820931b8fb8eaa5d4546dce1bb38b10846"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/ram-index.txt",
+    "bytes": 525,
+    "sha256": "ddb488996e5577271932994ab9c72ab7ba17f22662573952a3dbf3d1a250efc1"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/ram-source.json",
+    "bytes": 260,
+    "sha256": "883b706bcb66fed0591c3795c592eb3dd3b0e4eb2639c191787046f20c8d9d9c"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/reads.csv",
+    "bytes": 196787,
+    "sha256": "862325129d400d88667e8de31ef8ba4dba0ab9a758d4b24860a577222ebfbd92"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/received-ram-sha256.json",
+    "bytes": 2509,
+    "sha256": "1794c8b219a743a889a9c4dacbbc1987cea38db152032b0db7924f4fc2e357c5"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/received-ram-sha256.partial.json",
+    "bytes": 2509,
+    "sha256": "1794c8b219a743a889a9c4dacbbc1987cea38db152032b0db7924f4fc2e357c5"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/roi.csv",
+    "bytes": 17678,
+    "sha256": "7bd5b4ee41e226dfc355e639ccf555972f0b89a857a22dd071dd207dc64f6917"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "2db39fca54e8a3fbe693aaaa22bdb9dcec983d02125f3397b85cf7dfd51fed2c"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/s1-p003-cal_r8_limit_auto.pgm",
+    "bytes": 307215,
+    "sha256": "a5f9e78f6bf857c1ab96035c1587d28a6ff1e29aed2886f0460f7b550275e715"
+  },
+  {
+    "path": "ram-limits-fffe-01/recovered/s1-p004-cal_r8_limit_baseline.pgm",
+    "bytes": 307215,
+    "sha256": "c7382edb20ec6f9a44079b1f8d95c68fb17e7da0e5da0279f83ea4a6fac78ce0"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/FilmProbe.3dsx",
+    "bytes": 307508,
+    "sha256": "64d0d99d8ff145c13dca4d92121738cb5192cbfb90df8791f5c004021efa457e"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/Makefile.probe",
+    "bytes": 1513,
+    "sha256": "5403d5f9e303a7586edb135837c2570fddfb7e37421cd7810ac0f570a18353d4"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/calibration.h",
+    "bytes": 15284,
+    "sha256": "8c4e957f0dec689ae8f17bd3b153fc67492f0e96bcaf44e29b3a484f95c5874c"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/calibration_contract.h",
+    "bytes": 2793,
+    "sha256": "034eeec83e6c305e4bbdc16352908ac4c33c3e46347c6bceb89e306171bf64ec"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/calibration_image.h",
+    "bytes": 2775,
+    "sha256": "55ad4f0baedbd3823fdb1222aa55445e51b77755d39324911ff3534c6b5aa1ac"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/calibration_scope.h",
+    "bytes": 1032,
+    "sha256": "e3afadfe4f8dd4d83c10551349ee2d0060323afc10438af3543c534a0b60eb3c"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/fault_capture.h",
+    "bytes": 1948,
+    "sha256": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/main.c",
+    "bytes": 36520,
+    "sha256": "c800fed30e96967cb9456da0db17417963dfdab1c005b26d9f1cbf1a9da565ef"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/probe_plan.h",
+    "bytes": 2777,
+    "sha256": "597500eb0575142fde9c42787ba29d880354b6364a3a684bd1d298ff0223da41"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/ram_http.h",
+    "bytes": 4856,
+    "sha256": "7a6dfa577839248a284a5090b9dbaf7aef28faff383a324bb931675a4764fac0"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/ram_log.h",
+    "bytes": 3758,
+    "sha256": "808ec5bd622eb3b3a3b5dfb8b51811e949c5601f74cbb2487af13256b90e977d"
+  },
+  {
+    "path": "ram-limits-fffe-01/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "ram-smoke-01/deployment.json",
+    "bytes": 448,
+    "sha256": "5028ebcc9e1a102990aa857cec1577da9f435fb52a8561020cd2168cf1a9ea95"
+  },
+  {
+    "path": "ram-smoke-01/source/FilmProbe.3dsx",
+    "bytes": 306380,
+    "sha256": "9624d531be9ef9a998fb6718ffb53a2d5292b242f133d327d4fc40d0971d8833"
+  },
+  {
+    "path": "ram-smoke-01/source/Makefile.probe",
+    "bytes": 1512,
+    "sha256": "ea6560ebf038d33e3274bc9c3427a9623f6258c77a45810506445947dfcda5c9"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/calibration.h",
+    "bytes": 15001,
+    "sha256": "b16c17ab28a6a65e227958dafd1d30a60839bc85c90e290c446c1f7f6f4a28a6"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/calibration_contract.h",
+    "bytes": 2270,
+    "sha256": "33532fb95077002071f5f76646ee4c74349abe3d4407b46ee2ab8eb7a68b4202"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/calibration_image.h",
+    "bytes": 2775,
+    "sha256": "55ad4f0baedbd3823fdb1222aa55445e51b77755d39324911ff3534c6b5aa1ac"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/calibration_scope.h",
+    "bytes": 999,
+    "sha256": "f18fadb95a5a210b394f78fb28a63b7a6d9d8bd4b16fff5e28df016fd49491b5"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/fault_capture.h",
+    "bytes": 1948,
+    "sha256": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/main.c",
+    "bytes": 35366,
+    "sha256": "1d2282cbf9157e0cf01cad6e80d5636ef09496b94d6f040413a98e01385e5e04"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/probe_plan.h",
+    "bytes": 2526,
+    "sha256": "cf381a555526fec3362093eadde2e756f9d51968ae5c625e3aa7a6459eedadc1"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/ram_http.h",
+    "bytes": 4253,
+    "sha256": "4aa4107255e4229b13464d3aec0ac28b8c3d98e7ffdbcbe3d6328cf1aa2afc5a"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/ram_log.h",
+    "bytes": 3758,
+    "sha256": "808ec5bd622eb3b3a3b5dfb8b51811e949c5601f74cbb2487af13256b90e977d"
+  },
+  {
+    "path": "ram-smoke-01/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "ram-smoke-01/transport-error.json",
+    "bytes": 679,
+    "sha256": "3b5703d53c0cf8ddd3354655c8bf82d2495e3220e9cc8d7a4ea37521359ecec3"
+  },
+  {
+    "path": "ram-smoke-02/deployment.json",
+    "bytes": 427,
+    "sha256": "71a6327d6dc4aba194658050c85c6ddb0b536bdde0534fa2852cef36e6372569"
+  },
+  {
+    "path": "ram-smoke-02/final-verification.json",
+    "bytes": 253,
+    "sha256": "ddd33f4a420ecb57e103f7f2bbef08054c608df995b9d70ab032d68a02491111"
+  },
+  {
+    "path": "ram-smoke-02/recovered/calibration-analysis.json",
+    "bytes": 10457,
+    "sha256": "6bbaf50cdbb215abc7ee12c88d7f787a14a5e1f3884b4573507348a82e14e56a"
+  },
+  {
+    "path": "ram-smoke-02/recovered/calibration_plan.csv",
+    "bytes": 147,
+    "sha256": "e44d29797cdecd0cb3bf104f078559341bdbbbc96e3d56e1858612846d0a641c"
+  },
+  {
+    "path": "ram-smoke-02/recovered/calls.csv",
+    "bytes": 22306,
+    "sha256": "f4b1ac19c878c6c77f1514b5c5fe8207570663fe3a8a7b69c874d78f403aef53"
+  },
+  {
+    "path": "ram-smoke-02/recovered/execution.csv",
+    "bytes": 1462,
+    "sha256": "663211cdac741a0602eb65b8929b839ce5d10435a9c992353dbce4c77bc52780"
+  },
+  {
+    "path": "ram-smoke-02/recovered/frame_burst.csv",
+    "bytes": 75,
+    "sha256": "96ef5f54bc572875e4556618d49f4b322ae24ceec5d63e87f19fc53b7eaa61fe"
+  },
+  {
+    "path": "ram-smoke-02/recovered/frames.csv",
+    "bytes": 2477,
+    "sha256": "2b3a8e83f7497439a6dda6462239fcda4403225b3b07198446d5809c38648f4a"
+  },
+  {
+    "path": "ram-smoke-02/recovered/ipc.csv",
+    "bytes": 817466,
+    "sha256": "290ee31bbae2bbcffc2581ff6a4bbd09454bc183bd4233e11191fba3651ffcfc"
+  },
+  {
+    "path": "ram-smoke-02/recovered/lifecycle.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "ram-smoke-02/recovered/manifest.txt",
+    "bytes": 2313,
+    "sha256": "dd2920322d3610a9d6a9234029a8fe753f93d92a6f03df4c503139d370d4f6d8"
+  },
+  {
+    "path": "ram-smoke-02/recovered/noise.csv",
+    "bytes": 139,
+    "sha256": "9fe207eed1a02e56649e12c6cf497d695e8b001aa03d32b55faa95742ab55acb"
+  },
+  {
+    "path": "ram-smoke-02/recovered/ram-index.txt",
+    "bytes": 463,
+    "sha256": "beac545016af25a39660aca71af828716db0a216838d03cedc682b5ed6cc92a4"
+  },
+  {
+    "path": "ram-smoke-02/recovered/ram-source.json",
+    "bytes": 260,
+    "sha256": "37521fbc67256ec360b1d4447de905723544b9ea6fb9442b8e88b2bab51883b7"
+  },
+  {
+    "path": "ram-smoke-02/recovered/reads.csv",
+    "bytes": 87357,
+    "sha256": "6772e75a737cf10b6ace9419fed3b65674568f948a45c51254bdac51c355e8c3"
+  },
+  {
+    "path": "ram-smoke-02/recovered/received-ram-sha256.json",
+    "bytes": 2301,
+    "sha256": "3f8ac031059da6b8f0c9b895e5c3379e904653125107267595ddec4dba217533"
+  },
+  {
+    "path": "ram-smoke-02/recovered/received-ram-sha256.partial.json",
+    "bytes": 2301,
+    "sha256": "3f8ac031059da6b8f0c9b895e5c3379e904653125107267595ddec4dba217533"
+  },
+  {
+    "path": "ram-smoke-02/recovered/roi.csv",
+    "bytes": 7914,
+    "sha256": "97496afc81ba3c94b8c51f000e697db8fadb1fc6032b9e2e70630b989827635e"
+  },
+  {
+    "path": "ram-smoke-02/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "87de28a83f2cd7ca2c1f11e8b0520df731f4514b33928f0906a76e08d4ca0f19"
+  },
+  {
+    "path": "ram-smoke-02/recovered/s1-p003-cal_r8_auto.pgm",
+    "bytes": 307215,
+    "sha256": "6f10cccd9f1373d449495198c817495abedd6c84fc0c92f5f61ca9f24c29fb58"
+  },
+  {
+    "path": "ram-smoke-02/source/FilmProbe.3dsx",
+    "bytes": 307044,
+    "sha256": "2a59e79dbf29477ab36892623918f34628753fda7dc5769ab060cb9c63919ce7"
+  },
+  {
+    "path": "ram-smoke-02/source/Makefile.probe",
+    "bytes": 1513,
+    "sha256": "00ba49ad520f777497ce9470d0fe23433aa17fec12f65e54899eb3872be33004"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/calibration.h",
+    "bytes": 15001,
+    "sha256": "b16c17ab28a6a65e227958dafd1d30a60839bc85c90e290c446c1f7f6f4a28a6"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/calibration_contract.h",
+    "bytes": 2270,
+    "sha256": "33532fb95077002071f5f76646ee4c74349abe3d4407b46ee2ab8eb7a68b4202"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/calibration_image.h",
+    "bytes": 2775,
+    "sha256": "55ad4f0baedbd3823fdb1222aa55445e51b77755d39324911ff3534c6b5aa1ac"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/calibration_scope.h",
+    "bytes": 999,
+    "sha256": "f18fadb95a5a210b394f78fb28a63b7a6d9d8bd4b16fff5e28df016fd49491b5"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/fault_capture.h",
+    "bytes": 1948,
+    "sha256": "1dfcbc1cdb6e2c6ae2aa217849d5804b86a5dc1ffdb9792fe37d429b1a9bb683"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/main.c",
+    "bytes": 35620,
+    "sha256": "6d16f26d1cc86fc92c424ef47f5fc76717ce3349a3667d03a15f613d453bde38"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/probe_plan.h",
+    "bytes": 2777,
+    "sha256": "597500eb0575142fde9c42787ba29d880354b6364a3a684bd1d298ff0223da41"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/ram_http.h",
+    "bytes": 4856,
+    "sha256": "7a6dfa577839248a284a5090b9dbaf7aef28faff383a324bb931675a4764fac0"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/ram_log.h",
+    "bytes": 3758,
+    "sha256": "808ec5bd622eb3b3a3b5dfb8b51811e949c5601f74cbb2487af13256b90e977d"
+  },
+  {
+    "path": "ram-smoke-02/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "slow-part-01/RESULTS.md",
+    "bytes": 787,
+    "sha256": "37149de6a60076dc308b9ef3272d91759337d1a28ecc049a6bbafee32b407d6c"
+  },
+  {
+    "path": "slow-part-01/deployment.json",
+    "bytes": 401,
+    "sha256": "e33b7ef9f409810e8bb4716389ed259775e4756189c2ad20f0bc4383d1396dc1"
+  },
+  {
+    "path": "slow-part-01/final-verification.json",
+    "bytes": 299,
+    "sha256": "dc86e91478e57f3201318ae262859b8d7e8ae7d6d38f12475fa369077198c341"
+  },
+  {
+    "path": "slow-part-01/recovered/calibration-analysis.json",
+    "bytes": 137103,
+    "sha256": "7fe1373436cc5ed751bc9a0463433c8c5c5a5bed53a0f742c3d7b7e2cb91f9ae"
+  },
+  {
+    "path": "slow-part-01/recovered/calibration_plan.csv",
+    "bytes": 896,
+    "sha256": "d2e91f24821e47f486d1d36747d73f6c33e217d546e5effb2dbd44c9c30fdb59"
+  },
+  {
+    "path": "slow-part-01/recovered/calls.csv",
+    "bytes": 245350,
+    "sha256": "3859b091c7daad221230b067ee91036ec963ba0a5b287fdb37a8f6cde07354b3"
+  },
+  {
+    "path": "slow-part-01/recovered/execution.csv",
+    "bytes": 20366,
+    "sha256": "adae5df97866030449689d52183802a6a40b814d2207b3c6f17c5f18bc418b7f"
+  },
+  {
+    "path": "slow-part-01/recovered/frame_burst.csv",
+    "bytes": 1097,
+    "sha256": "ec9fff61447cdf0c7590bae6ffc3ed30aee0702b21d10bbccf806a01ceeb4092"
+  },
+  {
+    "path": "slow-part-01/recovered/frames.csv",
+    "bytes": 26181,
+    "sha256": "026364191617142cfa460bf999a57e55f1554d6d232a1c46efcd0708fc37695b"
+  },
+  {
+    "path": "slow-part-01/recovered/ipc.csv",
+    "bytes": 10940593,
+    "sha256": "31db14988188b3685cb579c5399d35dddf6b75bad224a621ff0199f1a5ddde41"
+  },
+  {
+    "path": "slow-part-01/recovered/manifest.txt",
+    "bytes": 3740,
+    "sha256": "d9280653d7d3dddbc8da1e2253b517665e8d9853a83ed8e25270e7fbb13cf525"
+  },
+  {
+    "path": "slow-part-01/recovered/noise.csv",
+    "bytes": 933,
+    "sha256": "8f44d61551317b1c808aa59cc240f051153a65ce9a9bcff87715ff3b2778969c"
+  },
+  {
+    "path": "slow-part-01/recovered/reads.csv",
+    "bytes": 1193980,
+    "sha256": "9d266362c22410133cd95feadbf6295d7e72306cfdfc64df52701cac1354ceab"
+  },
+  {
+    "path": "slow-part-01/recovered/received-sha256.json",
+    "bytes": 3777,
+    "sha256": "0e8c9e6d1890e9594aa9468a7359c1438a65da09d879ce8c0167416eaa8c8fe6"
+  },
+  {
+    "path": "slow-part-01/recovered/recovery-source.json",
+    "bytes": 206,
+    "sha256": "c487659bcf82ed6aad2447fc00e7dfcf48f2876db60da39dca4c86ea4e443e13"
+  },
+  {
+    "path": "slow-part-01/recovered/roi.csv",
+    "bytes": 110997,
+    "sha256": "3871d5c944fa21606f7ea636dfa30bdfaa0a02f7039154295845c0d56a47c7af"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p002-preflight_single.pgm",
+    "bytes": 307215,
+    "sha256": "3787fdd146ab1e39d913ab8972070a4892c4c9b207507544a9f622b8976b5579"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p003-cal_r5_auto.pgm",
+    "bytes": 307215,
+    "sha256": "7be12a6d8789ca407a90580b992e9bb69881451ec10bb5fdce9271fb63f9e234"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p004-cal_r5_baseline.pgm",
+    "bytes": 307215,
+    "sha256": "b0e86baf8ef0867904e590213d7666eb3fa1c71f37cbd61d3060f6be358246b6"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p005-cal_r5_t1.pgm",
+    "bytes": 307215,
+    "sha256": "53b2d8c45b42ba384167567ef9c3a9451b27a5527975520f05e45fe5bbb2009c"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p006-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "d578601a2a0437a2d00295cf4a6bf34e1663dea21a572a4cd63547cb2786ddf9"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p007-cal_r5_t4.pgm",
+    "bytes": 307215,
+    "sha256": "d58476618d5a45e0acea3291ff7929984daeb7336b39ec3d317235069521f994"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p008-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "c8236767d3bfb5a1b888cd1d691d25cdb58433d197f176ee2334714dc0fc7814"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p009-cal_r5_t16.pgm",
+    "bytes": 307215,
+    "sha256": "5deb3a3f2a41def19a06cd8497d10f924cbabcfaf2ff881cc0f4c3c45f42bb84"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p010-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "98961c93755d4d5a42701c04bfddb5546a82905258e17c6f99563c8aa3e362b0"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p011-cal_r5_t64.pgm",
+    "bytes": 307215,
+    "sha256": "83243ce039ecadcb1b218630d183e16ede402a917577e8b825986e17f3345393"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p012-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "52a4dd220f76a8c6736808f9e3f6fd192afb60891382844becf0b7e716e64f26"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p013-cal_r5_t528.pgm",
+    "bytes": 307215,
+    "sha256": "6b4d022d929f84ce9e136cbb4adcb0e1e13cc427275925d8268e356736e2b245"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p014-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "5a28c2c31f9694451f577f4de3e705719fdf3ad785d4b061965a9fa75aeec21d"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p015-cal_r5_t1585.pgm",
+    "bytes": 307215,
+    "sha256": "ba4fa967a7f8d8b0413acc001f542a5056f6618c483ff73291e89dba7273dae5"
+  },
+  {
+    "path": "slow-part-01/recovered/s1-p016-cal_restore.pgm",
+    "bytes": 307215,
+    "sha256": "156fc24360475a70ae82a88f802f0fcd64be2649b0d13268ac25e215f1114be8"
+  },
+  {
+    "path": "slow-part-01/source/FilmProbe.3dsx",
+    "bytes": 299840,
+    "sha256": "326d8ea2b5ba8e0a866322435e09fbeeed79d9ce4e3fcfe1950385f6a3663c1f"
+  },
+  {
+    "path": "slow-part-01/source/Makefile.probe",
+    "bytes": 1507,
+    "sha256": "870a83ac2cafdc13bd73f10080a1c4ffe2290c9a41f049ea3dc4e0fd681d74cf"
+  },
+  {
+    "path": "slow-part-01/source/probes/exposure/calibration.h",
+    "bytes": 14915,
+    "sha256": "9dfde1d60a8b0cbb8f1acb40bba391704ec192e2e89b8d074776943feb8225d9"
+  },
+  {
+    "path": "slow-part-01/source/probes/exposure/calibration_contract.h",
+    "bytes": 2053,
+    "sha256": "30cfcb88f0022b38b20852c5302747f29fa14a18175e5bb003e0e9f27dfc1752"
+  },
+  {
+    "path": "slow-part-01/source/probes/exposure/calibration_image.h",
+    "bytes": 2775,
+    "sha256": "55ad4f0baedbd3823fdb1222aa55445e51b77755d39324911ff3534c6b5aa1ac"
+  },
+  {
+    "path": "slow-part-01/source/probes/exposure/calibration_scope.h",
+    "bytes": 956,
+    "sha256": "ab2f1f61c28c624de424b7804aae8be3463ecabcdfa57df1437ce8eec481b0a6"
+  },
+  {
+    "path": "slow-part-01/source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "slow-part-01/source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "slow-part-01/source/probes/exposure/fault_capture.h",
+    "bytes": 1795,
+    "sha256": "ebf503f46c05ba33405a959decae95058b711b35d7f1d479740d3263f447cb47"
+  },
+  {
+    "path": "slow-part-01/source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "slow-part-01/source/probes/exposure/main.c",
+    "bytes": 33684,
+    "sha256": "27e98cf8167268307d56a19a95526ff2cbc7aa1587770763064e9514ad1c67c0"
+  },
+  {
+    "path": "slow-part-01/source/probes/exposure/probe_plan.h",
+    "bytes": 2315,
+    "sha256": "3e48ff8de998fd18c425cdb4dbb17643bdb8c684fd7b19fe0b6c2d43cdae0704"
+  },
+  {
+    "path": "slow-part-01/source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "smoke-01/FilmProbe.3dsx",
+    "bytes": 294600,
+    "sha256": "4d170a84273228bba6a9a3a602a7ea2c6cf3ff2543d6c38f6fdec344ed159845"
+  },
+  {
+    "path": "smoke-01/deployed-source/Makefile.probe",
+    "bytes": 1346,
+    "sha256": "b02b8fce37fc94957db98638360d308e21b48a473b4a9322593d31fc1df57e28"
+  },
+  {
+    "path": "smoke-01/deployed-source/probes/exposure/calibration.h",
+    "bytes": 11019,
+    "sha256": "64e8f7d8ef326121c8ba97800c83662e3f4190e9369bcb5f699c190f8312cfb9"
+  },
+  {
+    "path": "smoke-01/deployed-source/probes/exposure/calibration_contract.h",
+    "bytes": 1631,
+    "sha256": "7277b32a9436137fbcfc02dd64a30bb449ac682e39873fdeddc08b84bb0a8fd0"
+  },
+  {
+    "path": "smoke-01/deployed-source/probes/exposure/calibration_image.h",
+    "bytes": 2752,
+    "sha256": "6cbfc2b87ee5b4ba6ed592031e051b04b0d78eb60c4790dcbb6c44678c9f7cd7"
+  },
+  {
+    "path": "smoke-01/deployed-source/probes/exposure/crash_collect.h",
+    "bytes": 1270,
+    "sha256": "0c08767511617463e5e30c4c6e354a4f02412c671e85bab30f42b0205819d018"
+  },
+  {
+    "path": "smoke-01/deployed-source/probes/exposure/deep_ipc.h",
+    "bytes": 6030,
+    "sha256": "6ab69330892638fa41b6e1bbad52e4f94288428642226c77aa39e3f42c5e39ec"
+  },
+  {
+    "path": "smoke-01/deployed-source/probes/exposure/fault_capture.h",
+    "bytes": 1795,
+    "sha256": "ebf503f46c05ba33405a959decae95058b711b35d7f1d479740d3263f447cb47"
+  },
+  {
+    "path": "smoke-01/deployed-source/probes/exposure/ipc_decode.h",
+    "bytes": 525,
+    "sha256": "20dc1e315c091fb4aa6e70143f9f88a901a01e7b782609fb1609a77381386a73"
+  },
+  {
+    "path": "smoke-01/deployed-source/probes/exposure/main.c",
+    "bytes": 31569,
+    "sha256": "ebbf0715c3fb907058a167e3cb99364eba8d38ea36dc6b89abc209f15366b065"
+  },
+  {
+    "path": "smoke-01/deployed-source/probes/exposure/probe_plan.h",
+    "bytes": 1664,
+    "sha256": "7d0ccf97e639c22210b50648c8c1909842113131c5a12dd2accfe7e7f1ce27b0"
+  },
+  {
+    "path": "smoke-01/deployed-source/probes/exposure/remote_upload.h",
+    "bytes": 2789,
+    "sha256": "29fc56bb91d41a78eb6ae3b7e3dfc08d71385b5c9d699c39d93aae46dc6aee15"
+  },
+  {
+    "path": "smoke-01/deployed-source/probes/recovery/main.c",
+    "bytes": 10408,
+    "sha256": "89d346861ac92340eb7c76e775339948bf96ad563742e8e394f2d6ac077ccccb"
+  },
+  {
+    "path": "smoke-01/deployment.json",
+    "bytes": 1695,
+    "sha256": "189dcaa5d372bc50a2ce2a847a09799183b3b6ff57598ea24541674f7e843d2c"
+  },
+  {
+    "path": "storage-check-01/deployment.json",
+    "bytes": 887,
+    "sha256": "5b4e0b379b1244a9c8ebbd958ca3457fe2de68fe1cd267325c1fbf5bef303478"
+  },
+  {
+    "path": "storage-check-01/recovered/run-1293845800-000-result.csv",
+    "bytes": 3879,
+    "sha256": "776abe7b3615aa68c3e5e0cdaf81b22ebabbccfc4a9082d635cc99f0052b1415"
+  },
+  {
+    "path": "storage-check-01/recovered/verification.json",
+    "bytes": 363,
+    "sha256": "7592fe026bb57c81307f14fc5ec7dbb5cc51c1d159d794059bc81efcd512783c"
+  },
+  {
+    "path": "storage-check-01/source/FilmStorageCheck.3dsx",
+    "bytes": 149368,
+    "sha256": "2a6cedd53b5cf8224e2cbf3a9ae65c196cf3223621f4e8a46c59e5a1268ead03"
+  },
+  {
+    "path": "storage-check-01/source/Makefile.storage",
+    "bytes": 1224,
+    "sha256": "83bd58d693030e6e623b0a98787ce2e234e09f4ce342c40d1e6876924ed00790"
+  },
+  {
+    "path": "storage-check-01/source/probes/storage/main.c",
+    "bytes": 6192,
+    "sha256": "91c6d750dcb1a07230227d4483e62b565d28a27ea4f0b4dcb7b0ac87ff80cdbd"
+  },
+  {
+    "path": "storage-check-01/source/tests/storage_check.py",
+    "bytes": 1854,
+    "sha256": "67119ee855b02c758ecb5c075d76e69c58b24bc51f80be1b195e81b6a596dc43"
+  }
+]

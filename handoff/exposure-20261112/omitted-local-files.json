@@ -1,0 +1,65 @@
+{
+  "reason": "CPU crash dumps and OS/cache files excluded; originals preserved locally. Received manifests may therefore list these omitted files.",
+  "files": [
+    {
+      "path": ".DS_Store",
+      "bytes": 6148,
+      "sha256": "b7699ac2077d38583001b530913249249863832f7aeb09754e136232b46985f8"
+    },
+    {
+      "path": "card-recovered/run-1794398995-000/crash_dump_00000008.dmp",
+      "bytes": 3144,
+      "sha256": "7660df5ba72468627eee7185a0a21a5aaefb7b76113f8342df18d4cb8a94e464"
+    },
+    {
+      "path": "card-recovered/run-1794399442-000/crash_dump_00000008.dmp",
+      "bytes": 3144,
+      "sha256": "7660df5ba72468627eee7185a0a21a5aaefb7b76113f8342df18d4cb8a94e464"
+    },
+    {
+      "path": "card-recovered/run-1794400145-000/crash_dump_00000008.dmp",
+      "bytes": 3144,
+      "sha256": "7660df5ba72468627eee7185a0a21a5aaefb7b76113f8342df18d4cb8a94e464"
+    },
+    {
+      "path": "card-recovered/run-1794400970-000/crash_dump_00000008.dmp",
+      "bytes": 3144,
+      "sha256": "7660df5ba72468627eee7185a0a21a5aaefb7b76113f8342df18d4cb8a94e464"
+    },
+    {
+      "path": "digital-part-01/recovered/crash_dump_00000008.dmp",
+      "bytes": 3144,
+      "sha256": "7660df5ba72468627eee7185a0a21a5aaefb7b76113f8342df18d4cb8a94e464"
+    },
+    {
+      "path": "exposure-model-v1/__pycache__/exposure_model.cpython-310.pyc",
+      "bytes": 21963,
+      "sha256": "006751060340bc6742fee8043d7ff0a9b6a8bc605e75de795f161a1cfbf1665b"
+    },
+    {
+      "path": "gain-part-01/recovered/crash_dump_00000008.dmp",
+      "bytes": 3144,
+      "sha256": "7660df5ba72468627eee7185a0a21a5aaefb7b76113f8342df18d4cb8a94e464"
+    },
+    {
+      "path": "limits-part-01/recovered/crash_dump_00000008.dmp",
+      "bytes": 3144,
+      "sha256": "7660df5ba72468627eee7185a0a21a5aaefb7b76113f8342df18d4cb8a94e464"
+    },
+    {
+      "path": "offline-full-01/recovered/crash_dump_00000008.dmp",
+      "bytes": 3144,
+      "sha256": "7660df5ba72468627eee7185a0a21a5aaefb7b76113f8342df18d4cb8a94e464"
+    },
+    {
+      "path": "offline-smoke-01/recovered/crash_dump_00000008.dmp",
+      "bytes": 3144,
+      "sha256": "7660df5ba72468627eee7185a0a21a5aaefb7b76113f8342df18d4cb8a94e464"
+    },
+    {
+      "path": "slow-part-01/recovered/crash_dump_00000008.dmp",
+      "bytes": 3144,
+      "sha256": "7660df5ba72468627eee7185a0a21a5aaefb7b76113f8342df18d4cb8a94e464"
+    }
+  ]
+}

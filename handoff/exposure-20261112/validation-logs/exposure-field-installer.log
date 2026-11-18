@@ -1,0 +1,6 @@
+Packaged verified field app and measured reference seed
+make --no-print-directory -C build-exposure-field-install -f /src/Makefile.probe
+main.c
+linking FilmFieldInstall.elf
+built ... FilmFieldInstall.3dsx
+PASS 3DSX/SMDH 701708 bytes sha256=ab114907f4240d62473661e5a2e767fb4df79756b8594f5c745eac2928690e70

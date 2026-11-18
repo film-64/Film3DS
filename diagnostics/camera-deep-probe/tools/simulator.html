@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Film3DS 双屏模拟器</title>
+<style>
+:root{color-scheme:dark;--bg:#121617;--card:#283130;--gold:#f8c16b;--cream:#f1ebd8}
+*{box-sizing:border-box}
+body{background:#0b0e0e;color:var(--cream);font:15px system-ui,sans-serif;margin:0;padding:20px 0 32px;text-align:center}
+h1{font-size:19px;letter-spacing:.08em;font-weight:650;margin:0 0 15px}
+.screen{position:relative;margin:8px auto;background:var(--bg);max-width:100%;overflow:hidden;box-shadow:0 0 0 1px #3d4141}
+#top{width:400px;aspect-ratio:5/3}
+#bottom{width:320px;aspect-ratio:4/3;text-align:left;touch-action:manipulation}
+#top img{position:absolute;left:10%;width:80%;height:100%}
+#guide{position:absolute;border:1px solid var(--gold);pointer-events:none}
+#hud{position:absolute;left:12%;top:4%;width:76%;padding:5px 8px;background:var(--bg);text-align:left;font:13px ui-monospace,monospace}
+#heading{position:absolute;left:4%;top:3%;font-size:20px;font-weight:bold;color:var(--gold)}
+#status{position:absolute;left:4%;top:15%;font-size:13px}
+.row{position:absolute;left:3%;width:94%;height:18%;display:flex}
+.row:nth-of-type(3){top:24%}.row:nth-of-type(4){top:44%}.row:nth-of-type(5){top:64%}
+button{border:0;background:var(--card);color:var(--cream);font:inherit;min-width:0;flex:1;cursor:pointer}
+button:hover,button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+nav{position:absolute;bottom:0;height:15%;width:100%;display:flex;gap:2px}
+nav button.active{background:var(--gold);color:var(--bg)}
+a{color:var(--gold)}
+footer{font-size:13px;color:#bcbdb5;margin:18px 8px}
+</style>
+<h1>Film3DS 双屏模拟器</h1>
+<section class="screen" id="top" aria-label="400×240 模拟取景">
+  <img src="/preview.jpg" alt="模拟 YUV422 色彩图">
+  <div id="guide"></div><div id="hud"></div>
+</section>
+<section class="screen" id="bottom" aria-label="320×240 模拟触屏">
+  <div id="heading"></div><div id="status" role="status"></div>
+  <div class="row"><button data-point="80 77" aria-label="上一项">‹</button><button id="one" data-point="240 77"></button><button data-point="240 77" aria-label="下一项">›</button></div>
+  <div class="row"><button data-point="80 124" aria-label="减少">−</button><button id="two" data-point="240 124"></button><button data-point="240 124" aria-label="增加">+</button></div>
+  <div class="row"><button id="action" data-point="160 171"></button></div>
+  <nav><button data-point="53 220">取景</button><button data-point="160 220">胶卷</button><button data-point="267 220">暗房</button></nav>
+</section>
+<footer>方向键调节 · Enter 确认 · Tab 键可聚焦控件 · Esc 回取景
+  <p><a id="output" href="/export.jpg" download="Film3DS.jpg" hidden>下载最近导出的 JPEG</a></p>
+</footer>
+<script>
+const id = name => document.getElementById(name);
+const aspects = [[4,3],[3,2],[1,1],[16,9]];
+const labels = ["取景", "胶卷", "暗房"];
+let pending = Promise.resolve();
+function update(event) {
+  pending = pending.catch(() => {}).then(async () => {
+    const response = await fetch("/state", event ? {method:"POST", body:JSON.stringify(event)} : {});
+    if (!response.ok) throw new Error("模拟器请求失败");
+    const s = await response.json(), [a,b] = aspects[s.aspect];
+    const crop = (w,h) => Math.floor(Math.min(w/a,h/b));
+    const g = crop(320,240), factor = [1,1.5,2][s.scale], n = crop(640*factor,480*factor);
+    Object.assign(id("guide").style, {left:`${(400-g*a)/8}%`, top:`${(240-g*b)/4.8}%`,
+      width:`${g*a/4}%`, height:`${g*b/2.4}%`});
+    id("hud").textContent = `SIM   ${a}:${b}   ${n*a} × ${n*b}`;
+    id("heading").textContent = labels[s.page];
+    id("status").textContent = s.status;
+    id("one").textContent = [`画幅 ${a}:${b}`, `胶卷 ${s.selected+1} / ${s.count}`, ["中性","黑白","暖调","SD LUT"][s.look]][s.page];
+    id("two").textContent = [`输出 ${["Native","1.5×","2×"][s.scale]}`, "选择照片", `强度 ${s.strength}%`][s.page];
+    id("action").textContent = ["拍摄","进入暗房","导出 JPEG"][s.page];
+    document.querySelectorAll("nav button").forEach((button,index) => button.classList.toggle("active",index===s.page));
+    id("output").hidden = !s.revision;
+    id("output").href = `/export.jpg?v=${s.revision}`;
+  }).catch(error => {id("status").textContent = error.message;});
+}
+document.querySelectorAll("[data-point]").forEach(button =>
+  button.onclick = () => update(button.dataset.point.split(" ").map(Number)));
+document.addEventListener("keydown", e => {
+  const key = {Escape:1,ArrowLeft:2,ArrowRight:3,ArrowUp:4,ArrowDown:5,Enter:6}[e.key];
+  if (key !== undefined && !(e.key === "Enter" && e.target.tagName === "BUTTON")) {
+    e.preventDefault(); update([key]);
+  }
+});
+update();
+</script>
+</html>
