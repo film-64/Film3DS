@@ -736,7 +736,7 @@ static void save_capture(void *argument)
     save->status=film_roll_capture_save("film-roll-capture-save/v1",&save->frame,path,PREVIEWS,save->id,&save->result);
     if(app.log){fprintf(app.log,"SAVE result written=%u write=%s verify=%s preview=%s\n",save->result.written,film_status_name(save->result.write_status),film_status_name(save->result.verification_status),film_status_name(save->result.preview_status));fflush(app.log);}
     film_log(app.log,"Shutter original SD CRC",save->result.verification_status,save->id);
-    if(save->status==FILM_OK){
+    if(save->status==FILM_OK&&save->capture_status==FILM_OK){
         save->matrix.id=save->id;
         save->matrix.source_crc=film_roll_source_crc(&save->frame.source);
         save->matrix_status=film_exposure_matrix_write("film-exposure-matrix-write/v1",PREVIEWS,&save->matrix);
