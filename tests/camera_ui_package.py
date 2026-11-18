@@ -332,6 +332,30 @@ class UiPackageTests(unittest.TestCase):
         self.assertLess(send,copy)
         self.assertLess(copy,text.index('if(log){fprintf(log,"CAM bool cmd=%02x header='))
 
+    def test_exposure_matrix_has_separate_neutral_and_shot_presets(self):
+        root = ROOT
+        main = (root/"source/platform/main_3ds.c").read_text()
+        decode = (root/"source/storage/roll_decode.c").read_text()
+        raw = (root/"source/image/raw_darkroom.c").read_text()
+        dng = (root/"source/storage/dng.c").read_text()
+        roll = (root/"source/ui/roll.c").read_text()
+        self.assertIn('film_exposure_matrix_write("film-exposure-matrix-write/v1"',main)
+        self.assertIn('film_exposure_matrix_fit("film-exposure-matrix-fit/v1"',decode)
+        self.assertIn('film_exposure_matrix_read("film-exposure-matrix-read/v1"',main)
+        self.assertIn('Shot (approx)',main)
+        self.assertIn('Neutral',main)
+        self.assertIn('app.shot_curve_mode=2',main)
+        self.assertIn('app.darkroom = app.saved_recipe = frame.recipe;',main)
+        self.assertIn('exp2f(recipe->input_tone.value[FILM_TONE_EV])',raw)
+        self.assertIn('scene_gain(y,o)',raw)
+        self.assertIn('FILM_RAW10_RGGB',dng)
+        self.assertNotIn('film_exposure_matrix_',dng)
+        self.assertIn('"F3E"',roll)
+        for name in ("film-exposure-matrix-fit/v1",
+                     "film-exposure-matrix-read/v1",
+                     "film-exposure-matrix-write/v1"):
+            self.assertIn(name, CONTRACT_MATRIX)
+
     def test_frozen_package(self):
         with tempfile.TemporaryDirectory(dir=ROOT / "build") as tmp:
             directory = Path(tmp)
