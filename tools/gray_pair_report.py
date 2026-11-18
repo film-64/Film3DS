@@ -125,7 +125,7 @@ def region_stats(preview,raw,roi_p,roi_r,profile):
         pl,pt,pr,pb=area(rp);rl,rt,rr_,rb=area(rr)
         # Even RGGB alignment: four phase samples must be present.
         rl+=(rl&1);rt+=(rt&1);rr_-=(rr_&1);rb-=(rb&1)
-        if rr_-<=rl or rb<=rt:raise ValueError("RAW chart bars too narrow")
+        if rr_<=rl or rb<=rt:raise ValueError("RAW chart bars too narrow")
         p=np.median(preview[pt:pb,pl:pr])
         a=raw[rt:rb,rl:rr_]
         phase=np.array([np.median(a[0::2,0::2]),np.median(a[0::2,1::2]),
