@@ -1,4 +1,5 @@
 #include "exposure_matrix.h"
+#include "film_runtime_contract.h"
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
@@ -45,8 +46,9 @@ static int ascending(const void *a,const void *b)
 /* Bounded fixed-grid estimator: one deterministic sample per 16x16 cell.
  * Fit median exposure globally, then low/high residuals in scene EV.
  * Never interpolate hardware controls, copy an ISP register or alter RAW. */
-FilmStatus film_exposure_matrix_fit(FilmExposureMatrix *matrix,const FilmRawScene *scene)
+FilmStatus film_exposure_matrix_fit(const char *source,FilmExposureMatrix *matrix,const FilmRawScene *scene)
 {
+    if(!source||strcmp(source,"film-exposure-matrix-fit/v1")||!film_runtime_source_valid(source))return FILM_STATE;
     if(!matrix||!scene||!scene->pixels||scene->width<16||scene->height<16||
        !matrix->preview_valid||matrix->fitted)return FILM_INVALID;
     float *ref=matrix->preview_linear;
