@@ -791,6 +791,7 @@ static bool finish_capture(bool wait)
         else if(save->gray_requested&&save->gray_status!=FILM_OK)
             update_status("Original kept; gray evidence incomplete",save->gray_status,0);
         else if(save->matrix_status!=FILM_OK)update_status("Original saved; look reference missing",save->matrix_status,0);
+        else if(save->gray_requested)update_status("Gray pair saved: DNG+F3Y+F3E",FILM_OK,0);
         else update_status("Original saved; Roll SELECT decodes",FILM_OK,0);
 
     } else update_status(save->result.written ? "Capture SD verify" : "Capture SD write", save->status, 0);
