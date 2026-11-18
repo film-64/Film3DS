@@ -656,8 +656,11 @@ static void adjust_darkroom(int direction)
     else if(app.room.row==DARKROOM_GRAIN_HIGH)app.grain_highlight=fminf(2,fmaxf(0,app.grain_highlight+direction*.1f));
     else if(app.room.row==DARKROOM_RAW_CALIBRATION)app.raw_calibration=(app.raw_calibration+3+direction)%3;
     else if(app.room.row==DARKROOM_RAW_CURVE){
-        if(app.roll_preview_format==FILM_RAW10_RGGB)
-            apply_raw_curve_preset(app.shot_curve_mode==2?(direction>0?1u:0u):1u-app.shot_curve_mode);
+        if(app.roll_preview_format==FILM_RAW10_RGGB){
+            unsigned target=app.shot_curve_mode==2?(direction>0?1u:0u):1u-app.shot_curve_mode;
+            if(target&&!app.shot_matrix.fitted)update_status("Shot reference unavailable; Neutral",FILM_STATE,0);
+            else apply_raw_curve_preset(target);
+        }
     }
     else if(app.room.row==DARKROOM_RAW_SHADOWS)app.raw_shadows=fminf(2.5f,fmaxf(-2.5f,app.raw_shadows+.5f*direction));
     else if(app.room.row==DARKROOM_RAW_MIDTONES)app.raw_midtones=fminf(2.5f,fmaxf(-2.5f,app.raw_midtones+.5f*direction));
