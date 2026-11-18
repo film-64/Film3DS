@@ -78,6 +78,7 @@ typedef struct {
     float capture_strength;
     FilmCamera camera;
     FilmCameraAutoState camera_auto;
+    FilmAeRegion ae_region; /* requested native VGA metering rectangle */
     FilmYuv camera_yuv;
     C3D_Tex texture;
     RollThumbnail thumbnails[ROLL_VISIBLE_TEXTURES];
@@ -180,6 +181,52 @@ static FilmStatus apply_exposure(int step)
     return status;
 }
 
+/* Recreate Native AE from a known CAMU_SetExposure(0) baseline. Changing
+ * compensation while the old YUV DMA is active has failed on real hardware.
+ * A failed transition is visible and leaves the camera closed; it never
+ * silently promotes an unverified native level to a valid exposure reference. */
+static FilmStatus reopen_native_ae(int level,FilmAeRegion requested)
+{
+    FilmSensor sensor=app.camera.sensor;
+    film_camera_close(&app.camera);
+    reset_preview_tracking();
+    app.live=false;
+    FilmStatus s=film_camera_open(&app.camera,FILM_YUYV,sensor);
+    if(s==FILM_OK)s=film_camera_request_15fps(&app.camera);
+    if(s==FILM_OK)s=film_camera_select_exposure_mode(&app.camera,
+        FILM_EXPOSURE_NATIVE_AE,level,app.log);
+    if(s==FILM_OK)s=film_camera_set_ae_window(&app.camera,requested);
+    if(s==FILM_OK){
+        app.camera_yuv=FILM_601_FULL;
+        FilmYuv actual=app.camera_yuv;
+        FilmStatus color=film_camera_yuv_matrix(&app.camera,&actual);
+        if(color==FILM_OK)app.camera_yuv=actual;
+        film_log(app.log,"Native AE reset baseline=0, compensation absolute",s,(uint32_t)level);
+        app.camera_auto=film_camera_auto_state(&app.camera);
+        app.ae_region=requested;
+        app.applied_exposure=0;
+        app.live=true;app.preview_failed=false;
+    }else{
+        film_log(app.log,"Native AE reset/reopen FAILED",s,app.camera.last_result);
+        film_camera_close(&app.camera);
+        app.live=false;app.preview_failed=true;
+    }
+    return s;
+}
+static void change_meter_region(FilmAeRegion region)
+{
+    if(!film_ae_region_valid(region))return;
+    if(app.camera_values[FILM_CAM_EXPOSURE_MODE]!=FILM_EXPOSURE_NATIVE_AE||
+       !app.live||app.camera.zoom!=1||app.save.thread){
+        update_status("AE window requires Native AE, 1x, ready",FILM_STATE,0);return;
+    }
+    if(app.camera.ae_window_applied&&
+       !memcmp(&region,&app.camera.ae_window,sizeof region))return;
+    FilmStatus s=reopen_native_ae(app.camera_values[FILM_CAM_EV_COMP],region);
+    update_status(s==FILM_OK?"Hardware AE window set":"AE window reset failed; L to reopen",
+        s,app.camera.last_result);
+}
+
 static void adjust_camera(int change)
 {
     if(app.control>FILM_CAM_EV_COMP)return;
@@ -194,10 +241,13 @@ static void adjust_camera(int change)
     if(app.live) {
         if(app.control==FILM_CAM_EXPOSURE_MODE) {
             status=film_camera_select_exposure_mode(&app.camera,(FilmExposureMode)value,app.camera_values[FILM_CAM_EV_COMP],app.log);
+            if(status==FILM_OK&&value==FILM_EXPOSURE_NATIVE_AE)
+                status=film_camera_set_ae_window(&app.camera,app.ae_region);
             if(status==FILM_OK)app.applied_exposure=0;
         } else if(app.control==FILM_CAM_EV_COMP) {
-            status=film_camera_preview_stop(&app.camera);
-            if(status==FILM_OK)status=film_camera_set_ae_compensation(&app.camera,value);
+            /* A fresh camera init resets the native exposure baseline to 0
+             * before the requested absolute level is applied once. */
+            status=reopen_native_ae(value,app.ae_region);
         } else if(app.camera.exposure.ready)status=apply_exposure(value);
     }
     if(status!=FILM_OK){app.live=app.camera.initialized;if(!app.live)app.preview_failed=true;update_status(control_names[app.control],status,app.camera.last_result);return;}
