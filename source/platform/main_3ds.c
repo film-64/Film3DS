@@ -534,6 +534,19 @@ static void decode_roll_step(void)
     else if(!batch->decode_active)update_status("Decoded; A: darkroom",FILM_OK,0);
 }
 
+static void apply_raw_curve_preset(unsigned selected)
+{
+    const FilmExposureCurve *curve=selected?&app.shot_matrix.shot:&app.shot_matrix.neutral;
+    FilmDevelopOptions options={0};
+    if(film_exposure_curve_apply(curve,&app.darkroom,&options)!=FILM_OK)return;
+    app.raw_shadows=options.raw_shadows;
+    app.raw_midtones=options.raw_midtones;
+    app.raw_highlights=options.raw_highlights;
+    app.raw_shoulder=options.raw_shoulder;
+    app.raw_local=0;
+    app.shot_curve_mode=selected;
+}
+
 static void sync_darkroom(void)
 {
     if (app.ui.page != FILM_DARKROOM) return;
@@ -578,6 +591,28 @@ static void sync_darkroom(void)
     app.darkroom_id = id;
     app.darkroom_ready = status == FILM_OK;
     app.darkroom = app.saved_recipe = frame.recipe;
+    app.shot_matrix=film_exposure_matrix_default();
+    app.shot_curve_mode=0;
+    /* The DNG has no private recipe. The CRC-bound F3EM sidecar records
+     * both identity and an explicitly approximate native-preview match.
+     * Missing/invalid metadata never prevents opening the original RAW. */
+    if(status==FILM_OK && app.roll_preview_format==FILM_RAW10_RGGB){
+        char original[64];roll_path(original,id);
+        size_t n=strlen(original);
+        if(n>=4&&!strcasecmp(original+n-4,".DNG")){
+            FilmRollPair pair={0};
+            FilmStatus ps=film_roll_pair_index("film-roll-pair-index/v1",PREVIEWS,id,&pair);
+            if(ps==FILM_OK&&pair.format==FILM_RAW10_RGGB){
+                FilmStatus ms=film_exposure_matrix_read(PREVIEWS,id,pair.source_crc,&app.shot_matrix);
+                if(ms!=FILM_OK){
+                    app.shot_matrix=film_exposure_matrix_default();
+                    if(ms==FILM_CORRUPT)update_status("Curve metadata invalid; Neutral",ms,0);
+                }
+            }
+            apply_raw_curve_preset(app.shot_matrix.fitted?1u:0u);
+            app.saved_recipe=app.darkroom;
+        }
+    }
     app.saved_aspect = frame.recipe.aspect;
     app.ui.look = find_look(frame.recipe.lut_id);
     if (status != FILM_OK){
@@ -620,6 +655,10 @@ static void adjust_darkroom(int direction)
     else if(app.room.row==DARKROOM_GRAIN_MID)app.grain_mid=fminf(2,fmaxf(0,app.grain_mid+direction*.1f));
     else if(app.room.row==DARKROOM_GRAIN_HIGH)app.grain_highlight=fminf(2,fmaxf(0,app.grain_highlight+direction*.1f));
     else if(app.room.row==DARKROOM_RAW_CALIBRATION)app.raw_calibration=(app.raw_calibration+3+direction)%3;
+    else if(app.room.row==DARKROOM_RAW_CURVE){
+        if(app.roll_preview_format==FILM_RAW10_RGGB)
+            apply_raw_curve_preset(app.shot_curve_mode==2?(direction>0?1u:0u):1u-app.shot_curve_mode);
+    }
     else if(app.room.row==DARKROOM_RAW_SHADOWS)app.raw_shadows=fminf(2.5f,fmaxf(-2.5f,app.raw_shadows+.5f*direction));
     else if(app.room.row==DARKROOM_RAW_MIDTONES)app.raw_midtones=fminf(2.5f,fmaxf(-2.5f,app.raw_midtones+.5f*direction));
     else if(app.room.row==DARKROOM_RAW_HIGHLIGHTS)app.raw_highlights=fminf(2.5f,fmaxf(-2.5f,app.raw_highlights+.5f*direction));
@@ -628,6 +667,11 @@ static void adjust_darkroom(int direction)
     else if(app.room.row==DARKROOM_DENOISE)app.chroma_denoise=fminf(1,fmaxf(0,app.chroma_denoise+direction*.1f));
     else if (app.room.row == DARKROOM_HALATION) app.halation = !app.halation;
     else film_darkroom_adjust(&app.darkroom, app.room.row, direction);
+    if(app.roll_preview_format==FILM_RAW10_RGGB &&
+       (app.room.row==DARKROOM_EXPOSURE||app.room.row==DARKROOM_RAW_SHADOWS||
+        app.room.row==DARKROOM_RAW_MIDTONES||app.room.row==DARKROOM_RAW_HIGHLIGHTS||
+        app.room.row==DARKROOM_RAW_SHOULDER||app.room.row==DARKROOM_RAW_LOCAL))
+        app.shot_curve_mode=2; /* Edits are independent of saved presets. */
     if (geometry) film_darkroom_update_geometry(&app.room,&app.darkroom);
 }
 
@@ -1370,6 +1414,9 @@ static void darkroom_value(FilmDarkroomRow row, char *value, size_t size)
     case DARKROOM_GRAIN_AMOUNT: snprintf(value, size, "%.0f%%", r->grain_amount * 100); break;
     case DARKROOM_GRAIN_BACKEND:snprintf(value,size,"%s",app.grain_gpu?"GPU mix":"CPU");break;
     case DARKROOM_RAW_CALIBRATION:snprintf(value,size,"%s",app.raw_calibration==1?"Display color":app.raw_calibration==2?"Display gray":"Off");break;
+    case DARKROOM_RAW_CURVE:snprintf(value,size,"%s",
+        app.roll_preview_format!=FILM_RAW10_RGGB?"RAW only":
+        app.shot_curve_mode==2?"Custom":app.shot_curve_mode?"Shot (approx)":"Neutral");break;
     case DARKROOM_RAW_SHADOWS:snprintf(value,size,"%+.1f EV",app.raw_shadows);break;
     case DARKROOM_RAW_MIDTONES:snprintf(value,size,"%+.1f EV",app.raw_midtones);break;
     case DARKROOM_RAW_HIGHLIGHTS:snprintf(value,size,"%+.1f EV",app.raw_highlights);break;
