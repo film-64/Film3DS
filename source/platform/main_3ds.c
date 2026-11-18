@@ -1698,6 +1698,18 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         C2D_DrawRectSolid(40 + right - 1, crop.y, 0.2f, 1, crop.height, gold);
     }
 
+    if(view&&app.live&&app.camera.exposure_mode==FILM_EXPOSURE_NATIVE_AE&&
+       app.camera.ae_window_applied){
+        /* Overlay only the successfully programmed CAMU AE window. Full
+         * native VGA is scaled 1/2 to the displayed 320x240 viewport. */
+        FilmAeRegion r=app.camera.ae_window;
+        float left=40+r.x*.5f,top=r.y*.5f,w=r.width*.5f,h=r.height*.5f;
+        u32 color=C2D_Color32(105,250,120,255);
+        C2D_DrawRectSolid(left,top,.41f,w,2,color);
+        C2D_DrawRectSolid(left,top+h-2,.41f,w,2,color);
+        C2D_DrawRectSolid(left,top,.41f,2,h,color);
+        C2D_DrawRectSolid(left+w-2,top,.41f,2,h,color);
+    }
     if(app.debug.debug_mode)text_at(350,222,.45f,gold,"debug");
     C2D_TargetClear(bottom, bg);
     C2D_SceneBegin(bottom);
@@ -1723,7 +1735,9 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         text_at(148, 12, 0.59f, gold, line);
         if (app.live) {
             if(app.camera_values[FILM_CAM_EXPOSURE_MODE]==FILM_EXPOSURE_NATIVE_AE)
-                snprintf(line,sizeof line,"Native AE  comp %+d",app.camera_values[FILM_CAM_EV_COMP]);
+                snprintf(line,sizeof line,"Native %+d  ROI %ux%u%s",
+                    app.camera_values[FILM_CAM_EV_COMP],app.ae_region.width,app.ae_region.height,
+                    app.camera.ae_window_applied?"":" !");
             else snprintf(line,sizeof line,"Manual %+d %s",app.camera_values[FILM_CAM_EXPOSURE],
                 app.camera.exposure.ready?"READY":app.camera.exposure.failed?"ERROR":"SETTLING");
             text_at(195, 45, 0.44f, gold, line);
@@ -1755,13 +1769,13 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         else snprintf(line, sizeof line, "<   %+d   >", value);
         text_at(20, 116, 0.62f, fg, line);
         text_at(20, 163, 0.53f, gold, "Up/Down: setting   Left/Right: value");
-        text_at(20, 183, 0.48f, fg, "Y: back   R: capture");
+        text_at(20, 183, 0.43f, fg, "SEL+Y Full/Ctr; +Dpad size/X; +CPad Y");
     } else if (app.ui.page == FILM_VIEW) {
         text_at(20, 68, 0.62f, fg, "Capture RAW DNG");
         text_at(20, 116, 0.62f, fg, "Output settings: Darkroom");
         snprintf(line, sizeof line, "A/R: Capture   Zoom %ux (Circle Pad)", zoom);
         text_at(20, 163, 0.54f, gold, line);
-        text_at(20, 183, 0.48f, fg, "L: lens   Y: camera controls");
+        text_at(20, 183, 0.45f, fg, "L lens  Y controls  SEL+Y AE area");
     } else if (app.ui.page == FILM_ROLL) {
         draw_roll(bg,fg,gold,dim);
     } else draw_darkroom(bg, fg, gold, dim);
@@ -1981,6 +1995,26 @@ int main(int argc, char **argv)
         /* ROLL_MODAL_INPUT_END */
         /* DARKROOM_PREVIEW_INPUT_BEGIN */
         u32 held=hidKeysHeld(),repeated=hidKeysDownRepeat();
+        if(app.ui.page==FILM_VIEW && (held&KEY_SELECT) && app.live){
+            FilmAeRegion region=app.ae_region;
+            u32 meter_keys=keys&(KEY_Y|KEY_UP|KEY_DOWN|KEY_LEFT|KEY_RIGHT|
+                                KEY_CPAD_UP|KEY_CPAD_DOWN);
+            if(meter_keys){
+                if(meter_keys&KEY_Y)
+                    region=film_ae_region_is_full(region)?
+                        film_ae_region_resize(film_ae_region_default(),2):
+                        film_ae_region_default();
+                else{
+                    if(meter_keys&KEY_UP)region=film_ae_region_resize(region,1);
+                    if(meter_keys&KEY_DOWN)region=film_ae_region_resize(region,-1);
+                    int dx=(!!(meter_keys&KEY_RIGHT))-(!!(meter_keys&KEY_LEFT));
+                    int dy=(!!(meter_keys&KEY_CPAD_DOWN))-(!!(meter_keys&KEY_CPAD_UP));
+                    region=film_ae_region_move(region,dx,dy);
+                }
+                change_meter_region(region);
+                keys &= ~meter_keys;
+            }
+        }
         if (app.ui.page==FILM_DARKROOM && app.room.wb_editor) {
             white_balance_input(keys,repeated);draw(top,bottom);continue;
         }
