@@ -186,6 +186,7 @@ FilmStatus film_camera_select_exposure_mode(FilmCamera *cam,FilmExposureMode mod
        compensation<FILM_EXPOSURE_MIN||compensation>FILM_EXPOSURE_MAX)return FILM_INVALID;
     if(mode==FILM_EXPOSURE_MANUAL&&cam->sensor!=FILM_CAMERA_REAR1)return FILM_UNSUPPORTED;
     film_camera_raw_invalidate(cam);
+    cam->ae_window_applied=false;
     FilmStatus status=film_camera_preview_stop(cam);
     if(status!=FILM_OK)return status;
     if(cam->exposure_requested){
