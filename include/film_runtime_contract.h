@@ -69,6 +69,8 @@ static inline bool film_runtime_source_valid(const char *source)
     if (!strcmp(source, "film-exposure-matrix-fit/v1")) return true;
     if (!strcmp(source, "film-exposure-matrix-write/v1")) return true;
     if (!strcmp(source, "film-exposure-matrix-read/v1")) return true;
+    if (!strcmp(source, "film-gray-pair-write/v1")) return true;
+    if (!strcmp(source, "film-gray-pair-verify/v1")) return true;
     if (!strcmp(source, "film-darkroom-denoise/v1")) return true;
     if (!strcmp(source, "film-roll-pair-publish/v1")) return true;
     if (!strcmp(source, "film-roll-decode/v1")) return true;
