@@ -2,6 +2,7 @@
 #include "film_runtime_contract.h"
 #include "storage_internal.h"
 #include "exposure_matrix.h"
+#include "gray_capture.h"
 #include <float.h>
 #include <math.h>
 #include <stdlib.h>
@@ -84,7 +85,13 @@ FilmStatus film_roll_decode(const char *source,const char *originals,const char 
             FilmExposureMatrix matrix={0};
             FilmStatus metadata=film_exposure_matrix_read("film-exposure-matrix-read/v1",previews,id,
                 film_roll_source_crc(&frame.source),&matrix);
-            if(metadata==FILM_OK && matrix.preview_valid && !matrix.fitted &&
+            /* A gray diagnostic is deliberately unfit until its Display-gray
+             * calibration and paired YUV have been measured together.
+             * Never fill its F3E with an uncalibrated neutral-scene guess. */
+            FilmStatus gray=film_gray_pair_verify("film-gray-pair-verify/v1",
+                previews,id,film_roll_source_crc(&frame.source));
+            if(metadata==FILM_OK && gray==FILM_IO &&
+               matrix.preview_valid && !matrix.fitted &&
                film_exposure_matrix_fit("film-exposure-matrix-fit/v1",&matrix,&scene)==FILM_OK)
                 (void)film_exposure_matrix_write("film-exposure-matrix-write/v1",previews,&matrix);
         }
