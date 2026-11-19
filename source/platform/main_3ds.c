@@ -10,6 +10,7 @@
 #include "exposure_matrix.h"
 #include "gray_capture.h"
 #include "layered_grain.h"
+#include "preview_texture.h"
 #include "lut_catalog.h"
 #include "debug_mode.h"
 
@@ -417,12 +418,14 @@ static void show_image(const FilmImage *image, FilmYuv matrix)
         show_camera_image(image, matrix, 0);
         return;
     }
+    unsigned tex_w,tex_h;
+    film_preview_texture_dims(image->width,image->height,&tex_w,&tex_h);
     C3D_FrameSync();
     uint8_t *tex = app.texture.data;
-    for (unsigned y = 0; y < PREVIEW_TEX_ROWS; ++y) {
-        for (unsigned x = 0; x < PREVIEW_TEX_SIDE; ++x) {
-            FilmRgb c = film_decode_pixel(image, x * image->width / PREVIEW_TEX_SIDE,
-                                         y * image->height / PREVIEW_TEX_ROWS, matrix);
+    for (unsigned y = 0; y < tex_h; ++y) {
+        for (unsigned x = 0; x < tex_w; ++x) {
+            FilmRgb c = film_decode_pixel(image, x * image->width / tex_w,
+                                         y * image->height / tex_h, matrix);
             unsigned i = swizzle(x, y, PREVIEW_TEX_SIDE) * 3;
             tex[i] = (uint8_t)(c.b * 255 + 0.5f);
             tex[i + 1] = (uint8_t)(c.g * 255 + 0.5f);
@@ -1711,6 +1714,10 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         float scale = fminf(320.0f / app.image_width, 240.0f / app.image_height);
         sub.width = app.image_width * scale + .5f;
         sub.height = app.image_height * scale + .5f;
+        unsigned tw,th;
+        film_preview_texture_dims(app.image_width,app.image_height,&tw,&th);
+        sub.right=tw/(float)PREVIEW_TEX_SIDE;
+        sub.bottom=1-th/(float)PREVIEW_TEX_SIDE;
         x = (400 - sub.width) * .5f;
         y = (240 - sub.height) * .5f;
     }
