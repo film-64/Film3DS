@@ -20,6 +20,9 @@ typedef struct {
     bool preview_valid, fitted;
 } FilmExposureMatrix;
 
+/* Candidate scene-referred gray v2 curve. Independent of per-shot F3E and
+ * original display-gray.f3isp sensor calibration. Fail-closed parser. */
+FilmStatus film_gray_curve_read(FILE *,FilmExposureCurve *);
 FilmExposureMatrix film_exposure_matrix_default(void);
 bool film_exposure_curve_valid(const FilmExposureCurve *curve);
 FilmStatus film_exposure_matrix_fit(const char *source, FilmExposureMatrix *matrix, const FilmRawScene *scene);
