@@ -6,8 +6,28 @@
 #include <string.h>
 #include <unistd.h>
 
+static void gray_candidate(void)
+{
+    FilmExposureCurve curve={.ev=1.f};
+    FILE *f=fopen("romfs/calibration/display-gray-v2.f3curve","rb");
+    assert(f);
+    assert(film_gray_curve_read(f,&curve)==FILM_OK);
+    assert(fclose(f)==0);
+    assert(fabsf(curve.ev+.95f)<1e-5f);
+    assert(fabsf(curve.shadows+.30f)<1e-5f);
+    assert(fabsf(curve.highlights+.20f)<1e-5f);
+    assert(curve.shoulder==0);
+    FilmExposureCurve before=curve;
+    f=tmpfile();assert(f);
+    fputs("F3GRAYCURVE1\nev nan\nshadows 0\nmidtones 0\nhighlights 0\nshoulder 0\n",f);
+    rewind(f);
+    assert(film_gray_curve_read(f,&curve)==FILM_CORRUPT);
+    assert(!memcmp(&curve,&before,sizeof curve));
+    fclose(f);
+}
 static void exercise(void)
 {
+    gray_candidate();
     FilmExposureMatrix m=film_exposure_matrix_default();
     m.id=12;m.source_crc=UINT32_C(0x1234abcd);
     m.exposure_mode=0;m.native_level=2;
