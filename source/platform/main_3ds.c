@@ -986,7 +986,10 @@ static void preview_darkroom(void)
              * once; later A renders reuse the same linear pixels. */
             status=open_selected_original(&frame);
             if(status==FILM_OK&&app.raw_calibration){
-                const char *path=app.raw_calibration==1?"romfs:/calibration/display-color.f3isp":"romfs:/calibration/display-gray.f3isp";
+                /* Color chart calibration is temporarily disabled in the UI.
+                 * Both gray choices retain the original measured ISP matrix;
+                 * v2 adds an independent, reversible scene-tone candidate. */
+                const char *path="romfs:/calibration/display-gray.f3isp";
                 FILE *file=fopen(path,"rb");status=file?film_raw_profile_load("film-raw-profile-load/v1",file,&raw_isp):FILM_IO;
                 if(file)fclose(file);if(status==FILM_OK)options.raw_isp=&raw_isp;
             }
@@ -1004,7 +1007,27 @@ static void preview_darkroom(void)
     if (status == FILM_OK) {
         frame.recipe = app.darkroom;
         frame.recipe.grain_seed ^= UINT32_C(0x9e3779b9) * app.darkroom_id;
-        if (look && frame.recipe.profile.strength > 0) status = load_look_lut(look, &lut);
+        if(app.raw_calibration==2&&app.roll_preview_format==FILM_RAW10_RGGB){
+            FILE *curve_file=fopen("romfs:/calibration/display-gray-v2.f3curve","rb");
+            FilmExposureCurve curve={0};
+            if(!curve_file)status=FILM_IO;
+            else {
+                status=film_gray_curve_read(curve_file,&curve);
+                if(fclose(curve_file))status=FILM_IO;
+            }
+            if(status==FILM_OK){
+                /* Candidate adjusts rendering only; keep user controls and
+                 * per-capture Neutral/Shot intact, never modify source DNG. */
+                frame.recipe.input_tone.value[FILM_TONE_EV]=film_tone_limit(
+                    FILM_TONE_EV,frame.recipe.input_tone.value[FILM_TONE_EV]+curve.ev);
+                options.raw_shadows=fmaxf(-2.5f,fminf(2.5f,options.raw_shadows+curve.shadows));
+                options.raw_midtones=fmaxf(-2.5f,fminf(2.5f,options.raw_midtones+curve.midtones));
+                options.raw_highlights=fmaxf(-2.5f,fminf(2.5f,options.raw_highlights+curve.highlights));
+                options.raw_shoulder=fmaxf(options.raw_shoulder,curve.shoulder);
+            }
+        }
+        if (status==FILM_OK&&look&&frame.recipe.profile.strength>0)
+            status=load_look_lut(look,&lut);
     }
     if (status == FILM_OK)
         status = load_camera_color(frame.camera, &camera_color, &options.camera_color);
@@ -1545,7 +1568,8 @@ static void darkroom_value(FilmDarkroomRow row, char *value, size_t size)
     case DARKROOM_SHADOWS: snprintf(value, size, "%+.0f", r->output_tone.value[FILM_TONE_SHADOWS] * 5); break;
     case DARKROOM_GRAIN_AMOUNT: snprintf(value, size, "%.0f%%", r->grain_amount * 100); break;
     case DARKROOM_GRAIN_BACKEND:snprintf(value,size,"%s",app.grain_gpu?"GPU mix":"CPU");break;
-    case DARKROOM_RAW_CALIBRATION:snprintf(value,size,"%s",app.raw_calibration==1?"Display color":app.raw_calibration==2?"Display gray":"Off");break;
+    case DARKROOM_RAW_CALIBRATION:snprintf(value,size,"%s",
+        app.raw_calibration==1?"Gray original":app.raw_calibration==2?"Gray v2 (trial)":"Off");break;
     case DARKROOM_RAW_CURVE:snprintf(value,size,"%s",
         app.roll_preview_format!=FILM_RAW10_RGGB?"RAW only":
         app.shot_curve_mode==2?"Custom":app.shot_curve_mode?"Shot (approx)":"Neutral");break;
