@@ -10,6 +10,7 @@
 #include "exposure_matrix.h"
 #include "gray_capture.h"
 #include "layered_grain.h"
+#include "preview_texture.h"
 #include "lut_catalog.h"
 #include "debug_mode.h"
 
@@ -417,12 +418,14 @@ static void show_image(const FilmImage *image, FilmYuv matrix)
         show_camera_image(image, matrix, 0);
         return;
     }
+    unsigned tex_w,tex_h;
+    film_preview_texture_dims(image->width,image->height,&tex_w,&tex_h);
     C3D_FrameSync();
     uint8_t *tex = app.texture.data;
-    for (unsigned y = 0; y < PREVIEW_TEX_ROWS; ++y) {
-        for (unsigned x = 0; x < PREVIEW_TEX_SIDE; ++x) {
-            FilmRgb c = film_decode_pixel(image, x * image->width / PREVIEW_TEX_SIDE,
-                                         y * image->height / PREVIEW_TEX_ROWS, matrix);
+    for (unsigned y = 0; y < tex_h; ++y) {
+        for (unsigned x = 0; x < tex_w; ++x) {
+            FilmRgb c = film_decode_pixel(image, x * image->width / tex_w,
+                                         y * image->height / tex_h, matrix);
             unsigned i = swizzle(x, y, PREVIEW_TEX_SIDE) * 3;
             tex[i] = (uint8_t)(c.b * 255 + 0.5f);
             tex[i + 1] = (uint8_t)(c.g * 255 + 0.5f);
@@ -986,7 +989,10 @@ static void preview_darkroom(void)
              * once; later A renders reuse the same linear pixels. */
             status=open_selected_original(&frame);
             if(status==FILM_OK&&app.raw_calibration){
-                const char *path=app.raw_calibration==1?"romfs:/calibration/display-color.f3isp":"romfs:/calibration/display-gray.f3isp";
+                /* Color chart calibration is temporarily disabled in the UI.
+                 * Both gray choices retain the original measured ISP matrix;
+                 * v2 adds an independent, reversible scene-tone candidate. */
+                const char *path="romfs:/calibration/display-gray.f3isp";
                 FILE *file=fopen(path,"rb");status=file?film_raw_profile_load("film-raw-profile-load/v1",file,&raw_isp):FILM_IO;
                 if(file)fclose(file);if(status==FILM_OK)options.raw_isp=&raw_isp;
             }
@@ -1004,7 +1010,27 @@ static void preview_darkroom(void)
     if (status == FILM_OK) {
         frame.recipe = app.darkroom;
         frame.recipe.grain_seed ^= UINT32_C(0x9e3779b9) * app.darkroom_id;
-        if (look && frame.recipe.profile.strength > 0) status = load_look_lut(look, &lut);
+        if(app.raw_calibration==2&&app.roll_preview_format==FILM_RAW10_RGGB){
+            FILE *curve_file=fopen("romfs:/calibration/display-gray-v2.f3curve","rb");
+            FilmExposureCurve curve={0};
+            if(!curve_file)status=FILM_IO;
+            else {
+                status=film_gray_curve_read(curve_file,&curve);
+                if(fclose(curve_file))status=FILM_IO;
+            }
+            if(status==FILM_OK){
+                /* Candidate adjusts rendering only; keep user controls and
+                 * per-capture Neutral/Shot intact, never modify source DNG. */
+                frame.recipe.input_tone.value[FILM_TONE_EV]=film_tone_limit(
+                    FILM_TONE_EV,frame.recipe.input_tone.value[FILM_TONE_EV]+curve.ev);
+                options.raw_shadows=fmaxf(-2.5f,fminf(2.5f,options.raw_shadows+curve.shadows));
+                options.raw_midtones=fmaxf(-2.5f,fminf(2.5f,options.raw_midtones+curve.midtones));
+                options.raw_highlights=fmaxf(-2.5f,fminf(2.5f,options.raw_highlights+curve.highlights));
+                options.raw_shoulder=fmaxf(options.raw_shoulder,curve.shoulder);
+            }
+        }
+        if (status==FILM_OK&&look&&frame.recipe.profile.strength>0)
+            status=load_look_lut(look,&lut);
     }
     if (status == FILM_OK)
         status = load_camera_color(frame.camera, &camera_color, &options.camera_color);
@@ -1545,7 +1571,8 @@ static void darkroom_value(FilmDarkroomRow row, char *value, size_t size)
     case DARKROOM_SHADOWS: snprintf(value, size, "%+.0f", r->output_tone.value[FILM_TONE_SHADOWS] * 5); break;
     case DARKROOM_GRAIN_AMOUNT: snprintf(value, size, "%.0f%%", r->grain_amount * 100); break;
     case DARKROOM_GRAIN_BACKEND:snprintf(value,size,"%s",app.grain_gpu?"GPU mix":"CPU");break;
-    case DARKROOM_RAW_CALIBRATION:snprintf(value,size,"%s",app.raw_calibration==1?"Display color":app.raw_calibration==2?"Display gray":"Off");break;
+    case DARKROOM_RAW_CALIBRATION:snprintf(value,size,"%s",
+        app.raw_calibration==1?"Gray original":app.raw_calibration==2?"Gray v2 (trial)":"Off");break;
     case DARKROOM_RAW_CURVE:snprintf(value,size,"%s",
         app.roll_preview_format!=FILM_RAW10_RGGB?"RAW only":
         app.shot_curve_mode==2?"Custom":app.shot_curve_mode?"Shot (approx)":"Neutral");break;
@@ -1687,6 +1714,10 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         float scale = fminf(320.0f / app.image_width, 240.0f / app.image_height);
         sub.width = app.image_width * scale + .5f;
         sub.height = app.image_height * scale + .5f;
+        unsigned tw,th;
+        film_preview_texture_dims(app.image_width,app.image_height,&tw,&th);
+        sub.right=tw/(float)PREVIEW_TEX_SIDE;
+        sub.bottom=1-th/(float)PREVIEW_TEX_SIDE;
         x = (400 - sub.width) * .5f;
         y = (240 - sub.height) * .5f;
     }

@@ -139,10 +139,11 @@ static FilmStatus render_tile(FilmImage *out,unsigned x0,unsigned y0,unsigned tw
     blend(GPU_BLEND_REVERSE_SUBTRACT,GPU_ONE,GPU_ONE);ok=draw_texture(gpu_workspace.maps+5)&&ok;
     }
     blend(GPU_BLEND_ADD,GPU_ONE,GPU_ZERO);
-    /* Explicit orientation markers live outside the 254px output core. They
-     * replace the previous full-image expected-noise orientation scans. */
+    /* Three non-collinear markers outside the 254x254 output core test BOTH
+     * directions. Never infer image axes from the user-selected LUT/grain. */
     ok=C2D_DrawRectSolid(255,0,0,1,1,C2D_Color32(255,0,0,255))&&ok;
-    ok=C2D_DrawRectSolid(255,255,0,1,1,C2D_Color32(0,255,0,255))&&ok;C2D_Flush();
+    ok=C2D_DrawRectSolid(0,255,0,1,1,C2D_Color32(0,255,0,255))&&ok;
+    ok=C2D_DrawRectSolid(255,255,0,1,1,C2D_Color32(0,0,255,255))&&ok;C2D_Flush();
     C3D_SyncDisplayTransfer(gpu_workspace.output_target->frameBuf.colorBuf,GX_BUFFER_DIM(SIDE,SIDE),
         (u32 *)gpu_workspace.readback,GX_BUFFER_DIM(SIDE,SIDE),
         GX_TRANSFER_IN_FORMAT(GX_TRANSFER_FMT_RGBA8)|GX_TRANSFER_OUT_FORMAT(GX_TRANSFER_FMT_RGBA8));
@@ -150,11 +151,10 @@ static FilmStatus render_tile(FilmImage *out,unsigned x0,unsigned y0,unsigned tw
     if(!C3D_FrameBegin(0))return FILM_DEVICE;
     C3D_FrameEnd(GX_CMDLIST_FLUSH);
     if(!ok||R_FAILED(GSPGPU_InvalidateDataCache(gpu_workspace.readback,SIDE*SIDE*4)))return FILM_DEVICE;
-    const uint8_t *top=gpu_workspace.readback+255*4,*bottom=gpu_workspace.readback+(255*SIDE+255)*4;
-    bool flip=top[2]>240&&top[3]<8&&bottom[3]>240&&bottom[2]<8;
-    if(!flip&&!(top[3]>240&&top[2]<8&&bottom[2]>240&&bottom[3]<8))return FILM_DEVICE;
+    FilmGpuReadbackAxes axes={0};
+    if(!film_gpu_readback_axes(gpu_workspace.readback,SIDE,&axes))return FILM_DEVICE;
     for(unsigned y=0;y<th;++y)for(unsigned x=0;x<tw;++x){
-        const uint8_t *src=gpu_workspace.readback+((flip?SIDE-1-y:y)*SIDE+x)*4;
+        const uint8_t *src=film_gpu_readback_pixel(gpu_workspace.readback,SIDE,x,y,axes);
         uint8_t *dst=out->pixels+((size_t)(y0+y)*out->width+x0+x)*3;
         dst[0]=src[3];dst[1]=src[2];dst[2]=src[1]; /* Layout copy only; no CPU blend. */
     }
