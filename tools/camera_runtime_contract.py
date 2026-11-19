@@ -354,7 +354,7 @@ CONTRACT_MATRIX = {
         fallback="failure_closes_camera_no_false_applied_overlay",
         retries=0,queues=False,automatic_capture=False),
     "film-camera-native-exposure/v1": dict(compute=True, lane_admission=False, override=None,
-        proof="local_trace", backend="existing_CAMU_SetExposure", minimum=-3, maximum=3,
+        proof="local_trace", backend="existing_CAMU_SetExposure", minimum=-5, maximum=5,
         software_ae=False, independent_register_gain=False,
         calibrated_ev=False, writes="fresh_camera_reinit_zero_baseline_then_once_absolute_native_level"),
     "film-camera-manual-setup/v1": dict(compute=True, lane_admission=False, override=None,
