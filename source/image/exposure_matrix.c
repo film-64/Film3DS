@@ -7,6 +7,26 @@
 static float clampf(float value,float lo,float hi)
 {return fminf(fmaxf(value,lo),hi);}
 
+FilmStatus film_gray_curve_read(FILE *file,FilmExposureCurve *out)
+{
+    if(!file||!out)return FILM_INVALID;
+    char line[96],tail;
+    if(!fgets(line,sizeof line,file)||strcmp(line,"F3GRAYCURVE1\n"))return FILM_CORRUPT;
+    static const char *const names[]={"ev","shadows","midtones","highlights","shoulder"};
+    float *value[5];
+    FilmExposureCurve curve={0};
+    value[0]=&curve.ev;value[1]=&curve.shadows;value[2]=&curve.midtones;
+    value[3]=&curve.highlights;value[4]=&curve.shoulder;
+    for(unsigned i=0;i<5;++i){
+        char key[32];
+        if(!fgets(line,sizeof line,file)||sscanf(line,"%31s %f %c",key,value[i],&tail)!=2||
+           strcmp(key,names[i]))return FILM_CORRUPT;
+    }
+    if(fgetc(file)!=EOF||ferror(file)||!film_exposure_curve_valid(&curve))
+        return FILM_CORRUPT;
+    *out=curve;return FILM_OK;
+}
+
 FilmExposureMatrix film_exposure_matrix_default(void)
 {return (FilmExposureMatrix){0};}
 
