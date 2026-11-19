@@ -24,6 +24,9 @@ build/raw-darkroom-test: $(CORE) $(HEADERS) tests/raw_darkroom.c
 build/raw-app-test: $(CORE) $(HEADERS) tests/raw_app.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/raw_app.c $(LDFLAGS) $(LDLIBS) -o $@
+build/gpu-readback-axes-test: tests/gpu_readback_axes.c include/gpu_layout.h
+	@mkdir -p build
+	$(CC) $(CPPFLAGS) $(CFLAGS) tests/gpu_readback_axes.c $(LDFLAGS) $(LDLIBS) -o $@
 build/ae-region-test: $(CORE) $(HEADERS) tests/ae_region.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/ae_region.c $(LDFLAGS) $(LDLIBS) -o $@
@@ -33,11 +36,12 @@ build/gray-capture-test: $(CORE) $(HEADERS) tests/gray_capture.c
 build/exposure-matrix-test: $(CORE) $(HEADERS) tests/exposure_matrix.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/exposure_matrix.c $(LDFLAGS) $(LDLIBS) -o $@
-test-raw-darkroom: build/filmscene build/filmraw build/raw-darkroom-test build/raw-app-test build/roll-preview-test build/gpu-pipeline-test build/exposure-matrix-test build/gray-capture-test build/ae-region-test
+test-raw-darkroom: build/filmscene build/filmraw build/raw-darkroom-test build/raw-app-test build/roll-preview-test build/gpu-pipeline-test build/exposure-matrix-test build/gray-capture-test build/ae-region-test build/gpu-readback-axes-test
 	python3 tools/camera_runtime_contract.py --check
 	./build/exposure-matrix-test
 	./build/gray-capture-test
 	./build/ae-region-test
+	./build/gpu-readback-axes-test
 	python3 tests/gray_pair_report.py
 	./build/raw-darkroom-test
 	./build/raw-app-test
