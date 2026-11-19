@@ -38,7 +38,7 @@ class UiPackageTests(unittest.TestCase):
         self.assertFalse(preview["register_gate"] or preview["startup_seed_capture"])
         self.assertEqual(preview["register_reads_per_frame"], 0)
         self.assertEqual(exposure["backend"], "existing_CAMU_SetExposure")
-        self.assertEqual((exposure["minimum"], exposure["maximum"]), (-3, 3))
+        self.assertEqual((exposure["minimum"], exposure["maximum"]), (-5, 5))
         self.assertFalse(exposure["independent_register_gain"] or exposure["calibrated_ev"])
         self.assertFalse(capture["development_effects"])
         manual = CONTRACT_MATRIX["film-camera-manual-setup/v1"]
