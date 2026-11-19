@@ -34,7 +34,7 @@ def read_f3y(path):
     meta=struct.unpack_from("<14I",hdr,4)
     ver,id_,raw_crc,width,height,yuv,level,mode,ae,awb,time_low,time_high,length,payload_crc=meta
     if (ver not in (1,2) or width!=W or height!=H or yuv>3 or mode>1 or
-        (level if level<0x80000000 else level-0x100000000) not in range(-3,4) or
+        (level if level<0x80000000 else level-0x100000000) not in range(-5,6) or
         ae>1 or awb>1 or (time_low==0 and time_high==0) or length!=FRAME):
         raise ValueError("F3Y: invalid metadata")
     if version==2:
