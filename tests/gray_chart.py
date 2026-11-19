@@ -24,8 +24,8 @@ class GrayFullFrameChartTests(unittest.TestCase):
                     self.assertEqual(chart.getpixel((x,y)),(code,code,code))
         landscape=module.generate("landscape-full")
         self.assertEqual(landscape.size,(1260,945))
-        self.assertEqual(landscape.getpixel((0,0)),(255,255,255))
-        self.assertEqual(landscape.getpixel((1259,0)),(0,0,0))
+        self.assertEqual(landscape.getpixel((0,0)),(0,0,0))
+        self.assertEqual(landscape.getpixel((1259,0)),(255,255,255))
         # The rotated landscape chart has the same multiset of pixels.
         self.assertEqual(landscape.getpixel((630,472)),chart.getpixel((472,629)))
 
