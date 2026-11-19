@@ -30,7 +30,7 @@ FilmStatus film_gray_pair_write(const char *source,const char *directory,const F
     if(!p||name(path,directory,p->id)!=FILM_OK||!p->preview.pixels||
        p->preview.width!=WIDTH||p->preview.height!=HEIGHT||p->preview.format!=FILM_YUYV||
        (unsigned)p->yuv>FILM_709_LIMITED||p->exposure_mode>1||
-       p->native_level< -3||p->native_level>3||!p->preview_time_ms||
+       p->native_level< -5||p->native_level>5||!p->preview_time_ms||
        !film_ae_region_valid(p->meter_region))return FILM_INVALID;
     struct stat old;
     if(!stat(path,&old))return FILM_STATE; /* Never replace acquired evidence. */
@@ -63,7 +63,7 @@ FilmStatus film_gray_pair_verify(const char *source,const char *directory,unsign
     if(valid&&version==2)valid=fread(b+LEGACY_HEADER,1,HEADER-LEGACY_HEADER,f)==HEADER-LEGACY_HEADER;
     if(valid)valid=!memcmp(b,"F3YG",4)&&(version==1||version==2)&&get(b+8)==id&&
         get(b+12)==raw_crc&&get(b+16)==WIDTH&&get(b+20)==HEIGHT&&
-        get(b+24)<=FILM_709_LIMITED&&(int32_t)get(b+28)>=-3&&(int32_t)get(b+28)<=3&&
+        get(b+24)<=FILM_709_LIMITED&&(int32_t)get(b+28)>=-5&&(int32_t)get(b+28)<=5&&
         get(b+32)<=1&&get(b+36)<=1&&get(b+40)<=1&&
         (get(b+44)||get(b+48))&&get(b+52)==FRAME;
     if(valid&&version==2)
