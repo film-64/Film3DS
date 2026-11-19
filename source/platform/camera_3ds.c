@@ -170,7 +170,10 @@ FilmStatus film_camera_set_control(FilmCamera *cam, FilmCameraControl control, i
     switch (control) {
     case FILM_CAM_EXPOSURE:
         if (!film_runtime_source_valid("film-camera-native-exposure/v1")) return FILM_STATE;
-        if (value < FILM_EXPOSURE_MIN || value > FILM_EXPOSURE_MAX) return FILM_INVALID;
+        if (value < (cam->exposure_mode==FILM_EXPOSURE_MANUAL?
+                     FILM_MANUAL_EXPOSURE_MIN:FILM_EXPOSURE_MIN) ||
+            value > (cam->exposure_mode==FILM_EXPOSURE_MANUAL?
+                     FILM_MANUAL_EXPOSURE_MAX:FILM_EXPOSURE_MAX)) return FILM_INVALID;
         if(cam->exposure_mode==FILM_EXPOSURE_MANUAL&&!cam->exposure_requested)return FILM_STATE;
         film_camera_raw_invalidate(cam);
         if (cam->exposure_requested) {
