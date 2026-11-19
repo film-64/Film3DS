@@ -234,8 +234,10 @@ static void adjust_camera(int change)
     if((app.control==FILM_CAM_EXPOSURE&&mode!=FILM_EXPOSURE_MANUAL)||
        (app.control==FILM_CAM_EV_COMP&&mode!=FILM_EXPOSURE_NATIVE_AE))return;
     int value=app.camera_values[app.control]+change;
-    int low=app.control==FILM_CAM_EXPOSURE_MODE?0:FILM_EXPOSURE_MIN;
-    int high=app.control==FILM_CAM_EXPOSURE_MODE?FILM_EXPOSURE_MANUAL:FILM_EXPOSURE_MAX;
+    int low=app.control==FILM_CAM_EXPOSURE_MODE?0:
+        app.control==FILM_CAM_EXPOSURE?FILM_MANUAL_EXPOSURE_MIN:FILM_EXPOSURE_MIN;
+    int high=app.control==FILM_CAM_EXPOSURE_MODE?FILM_EXPOSURE_MANUAL:
+        app.control==FILM_CAM_EXPOSURE?FILM_MANUAL_EXPOSURE_MAX:FILM_EXPOSURE_MAX;
     if(value<low||value>high)return;
     FilmStatus status=FILM_OK;
     if(app.live) {
@@ -1780,7 +1782,7 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         text_at(19,65,.54f,fg,native?"NATIVE AE LEVEL":"MANUAL EXPOSURE");
         snprintf(line,sizeof line,"%+d",app.camera_values[native?FILM_CAM_EV_COMP:FILM_CAM_EXPOSURE]);
         text_at(22,88,.94f,gold,line);
-        text_at(97,104,.50f,fg,native?"LEFT/RIGHT   -5 .. +5":"LEFT/RIGHT   MANUAL");
+        text_at(97,104,.50f,fg,native?"LEFT/RIGHT   -5 .. +5":"LEFT/RIGHT   -3 .. +3");
         snprintf(line,sizeof line,"METER  %ux%u  %s",app.ae_region.width,app.ae_region.height,
                  film_ae_region_is_full(app.ae_region)?"FULL":"REGION");
         text_at(18,147,.59f,gold,line);
