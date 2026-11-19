@@ -15,7 +15,7 @@ static void gray_capture(void)
         .preview={640,480,FILM_YUYV,pixels},.meter_region={160,120,320,240},
         .yuv=FILM_601_FULL,.preview_time_ms=UINT64_C(1700000000123),
         .id=27,.raw_source_crc=UINT32_C(0x1f2f3f4f),
-        .native_level=-3,.exposure_mode=0,.native_ae=true,.native_awb=true
+        .native_level=-5,.exposure_mode=0,.native_ae=true,.native_awb=true
     };
     assert(film_gray_pair_write("film-gray-pair-write/unknown",directory,&sample)==FILM_STATE);
     assert(film_gray_pair_write("film-gray-pair-write/v1",directory,&sample)==FILM_OK);
@@ -29,6 +29,15 @@ static void gray_capture(void)
     assert(fputc(0xff,f)!=EOF);assert(fclose(f)==0);
     assert(film_gray_pair_verify("film-gray-pair-verify/v1",directory,27,sample.raw_source_crc)==FILM_CORRUPT);
     assert(unlink(filename)==0);
+    sample.native_level=5;
+    assert(film_gray_pair_write("film-gray-pair-write/v1",directory,&sample)==FILM_OK);
+    assert(film_gray_pair_verify("film-gray-pair-verify/v1",directory,27,sample.raw_source_crc)==FILM_OK);
+    assert(unlink(filename)==0);
+    sample.native_level=6;
+    assert(film_gray_pair_write("film-gray-pair-write/v1",directory,&sample)==FILM_INVALID);
+    sample.native_level=-6;
+    assert(film_gray_pair_write("film-gray-pair-write/v1",directory,&sample)==FILM_INVALID);
+    sample.native_level=5;
     sample.exposure_mode=2;
     assert(film_gray_pair_write("film-gray-pair-write/v1",directory,&sample)==FILM_INVALID);
     sample.exposure_mode=0;sample.preview_time_ms=0;

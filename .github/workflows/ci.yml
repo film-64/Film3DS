@@ -19,12 +19,19 @@ jobs:
         run: PATH=/usr/bin:/bin make -j2 test
       - name: Run AddressSanitizer and UndefinedBehaviorSanitizer
         run: PATH=/usr/bin:/bin make sanitize
-      - name: Generate unaltered 21-step sRGB gray chart
-        run: python3 tools/gray_chart.py --out Film3DS-gray21.png
+      - name: Check exact full-frame 21-step 3:4 and 4:3 charts
+        run: |
+          python3 tests/gray_chart.py
+          python3 tools/gray_chart.py --out Film3DS-gray21.png
+          python3 tools/gray_chart.py --out Film3DS-gray21-portrait-3x4.png --format portrait-full
+          python3 tools/gray_chart.py --out Film3DS-gray21-landscape-4x3.png --format landscape-full
       - uses: actions/upload-artifact@v4
         with:
           name: FilmGrayCal-21step-chart
-          path: Film3DS-gray21.png
+          path: |
+            Film3DS-gray21.png
+            Film3DS-gray21-portrait-3x4.png
+            Film3DS-gray21-landscape-4x3.png
           if-no-files-found: error
 
   contracts:

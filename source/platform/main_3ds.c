@@ -234,8 +234,10 @@ static void adjust_camera(int change)
     if((app.control==FILM_CAM_EXPOSURE&&mode!=FILM_EXPOSURE_MANUAL)||
        (app.control==FILM_CAM_EV_COMP&&mode!=FILM_EXPOSURE_NATIVE_AE))return;
     int value=app.camera_values[app.control]+change;
-    int low=app.control==FILM_CAM_EXPOSURE_MODE?0:FILM_EXPOSURE_MIN;
-    int high=app.control==FILM_CAM_EXPOSURE_MODE?FILM_EXPOSURE_MANUAL:FILM_EXPOSURE_MAX;
+    int low=app.control==FILM_CAM_EXPOSURE_MODE?0:
+        app.control==FILM_CAM_EXPOSURE?FILM_MANUAL_EXPOSURE_MIN:FILM_EXPOSURE_MIN;
+    int high=app.control==FILM_CAM_EXPOSURE_MODE?FILM_EXPOSURE_MANUAL:
+        app.control==FILM_CAM_EXPOSURE?FILM_MANUAL_EXPOSURE_MAX:FILM_EXPOSURE_MAX;
     if(value<low||value>high)return;
     FilmStatus status=FILM_OK;
     if(app.live) {
@@ -1754,38 +1756,39 @@ static void draw(C3D_RenderTarget *top, C3D_RenderTarget *bottom)
         }
     }
     text_at(12, 34, 0.53f, fg, app.status);
-    if (app.ui.page == FILM_VIEW)
-        for (unsigned i = 0; i < 3; ++i) C2D_DrawRectSolid(10, 57 + i * 48, 0.1f, 300, 43, dim);
     if (app.ui.page == FILM_VIEW && app.camera_controls) {
-        static const char *const wb[] = {"Auto", "3200K", "4150K", "5200K", "6000K", "7000K"};
-        static const char *const contrast[] = {"Low", "Normal", "High"};
-        static const char *const exposure_modes[] = {"Native AE", "Manual"};
-        int value = app.camera_values[app.control];
-        text_at(20, 68, 0.62f, fg, control_names[app.control]);
-        if (app.control == FILM_CAM_WB) {
-            const char *awb = !app.live || R_FAILED((Result)app.camera_auto.white_balance_result)
-                ? "?" : app.camera_auto.white_balance ? "ON" : "OFF";
-            snprintf(line, sizeof line, "<   %s   >    AWB %s", wb[value], awb);
+        /* Three compact options, while the capture-first home screen gives
+         * the D-pad direct ownership of Native AE and the physical ROI. */
+        static const unsigned rows[]={FILM_CAM_EXPOSURE_MODE,FILM_CAM_EV_COMP,FILM_CAM_EXPOSURE};
+        C2D_DrawRectSolid(10,57,.1f,300,112,dim);
+        text_at(18,61,.57f,gold,"CAMERA OPTIONS  /  D-PAD");
+        for(unsigned i=0;i<3;++i){
+            unsigned item=rows[i];int value=app.camera_values[item];
+            float y=85+i*26;bool selected=app.control==item;
+            if(selected)C2D_DrawRectSolid(13,y-2,.2f,294,24,C2D_Color32(75,82,64,255));
+            text_at(19,y,.52f,selected?gold:fg,
+                item==FILM_CAM_EXPOSURE_MODE?"Exposure mode":
+                item==FILM_CAM_EV_COMP?"Native level":"Manual step");
+            if(item==FILM_CAM_EXPOSURE_MODE)
+                snprintf(line,sizeof line,"%s",value==FILM_EXPOSURE_NATIVE_AE?"Native AE":"Manual");
+            else snprintf(line,sizeof line,"%+d",value);
+            text_at(236,y,.56f,selected?gold:fg,line);
         }
-        else if (app.control == FILM_CAM_CONTRAST) snprintf(line, sizeof line, "<   %s   >", contrast[value + 1]);
-        else if (app.control == FILM_CAM_EXPOSURE_MODE)
-            snprintf(line, sizeof line, "<   %s   >", exposure_modes[value]);
-        else if (app.control == FILM_CAM_EV_COMP)
-            snprintf(line,sizeof line,"Native %+d%s",value,
-                     app.camera_values[FILM_CAM_EXPOSURE_MODE]==FILM_EXPOSURE_MANUAL?" (AE only)":"");
-        else if (app.control == FILM_CAM_EXPOSURE && app.camera_values[FILM_CAM_EXPOSURE_MODE] != FILM_EXPOSURE_MANUAL)
-            snprintf(line,sizeof line,"%+d (Manual only)",value);
-        else if (app.control == FILM_CAM_SATURATION) snprintf(line, sizeof line, "<   %d%%   >", 100 + value * 10);
-        else snprintf(line, sizeof line, "<   %+d   >", value);
-        text_at(20, 116, 0.62f, fg, line);
-        text_at(20, 163, 0.53f, gold, "Up/Down: setting   Left/Right: value");
-        text_at(20, 183, 0.43f, fg, "SEL+Y Full/Ctr; +Dpad size/X; +CPad Y");
+        text_at(17,176,.45f,gold,"^v SETTING    <> CHANGE");
+        text_at(17,192,.43f,fg,"Y CLOSE   A/R CAPTURE");
     } else if (app.ui.page == FILM_VIEW) {
-        text_at(20, 68, 0.62f, fg, "Capture RAW DNG");
-        text_at(20, 116, 0.62f, fg, "Output settings: Darkroom");
-        snprintf(line, sizeof line, "A/R: Capture   Zoom %ux (Circle Pad)", zoom);
-        text_at(20, 163, 0.54f, gold, line);
-        text_at(20, 183, 0.45f, fg, "L lens  Y controls  SEL+Y AE area");
+        C2D_DrawRectSolid(10,57,.1f,300,85,dim);
+        bool native=app.camera_values[FILM_CAM_EXPOSURE_MODE]==FILM_EXPOSURE_NATIVE_AE;
+        text_at(19,65,.54f,fg,native?"NATIVE AE LEVEL":"MANUAL EXPOSURE");
+        snprintf(line,sizeof line,"%+d",app.camera_values[native?FILM_CAM_EV_COMP:FILM_CAM_EXPOSURE]);
+        text_at(22,88,.94f,gold,line);
+        text_at(97,104,.50f,fg,native?"LEFT/RIGHT   -5 .. +5":"LEFT/RIGHT   -3 .. +3");
+        snprintf(line,sizeof line,"METER  %ux%u  %s",app.ae_region.width,app.ae_region.height,
+                 film_ae_region_is_full(app.ae_region)?"FULL":"REGION");
+        text_at(18,147,.59f,gold,line);
+        text_at(18,170,.46f,fg,native?"UP/DOWN AREA  SEL+D-PAD MOVE":"Y OPTIONS  /  Manual mode");
+        snprintf(line,sizeof line,"A/R RAW  SEL+R PAIR  Y MENU  %ux",zoom);
+        text_at(15,190,.44f,fg,line);
     } else if (app.ui.page == FILM_ROLL) {
         draw_roll(bg,fg,gold,dim);
     } else draw_darkroom(bg, fg, gold, dim);
@@ -2007,21 +2010,19 @@ int main(int argc, char **argv)
         u32 held=hidKeysHeld(),repeated=hidKeysDownRepeat();
         if(app.ui.page==FILM_VIEW && (held&KEY_SELECT) && app.live){
             FilmAeRegion region=app.ae_region;
-            u32 meter_keys=keys&(KEY_Y|KEY_UP|KEY_DOWN|KEY_LEFT|KEY_RIGHT|
-                                KEY_CPAD_UP|KEY_CPAD_DOWN);
+            u32 meter_keys=keys&(KEY_Y|KEY_UP|KEY_DOWN|KEY_LEFT|KEY_RIGHT);
             if(meter_keys){
                 if(meter_keys&KEY_Y)
                     region=film_ae_region_is_full(region)?
                         film_ae_region_resize(film_ae_region_default(),2):
                         film_ae_region_default();
                 else{
-                    if(meter_keys&KEY_UP)region=film_ae_region_resize(region,1);
-                    if(meter_keys&KEY_DOWN)region=film_ae_region_resize(region,-1);
                     int dx=(!!(meter_keys&KEY_RIGHT))-(!!(meter_keys&KEY_LEFT));
-                    int dy=(!!(meter_keys&KEY_CPAD_DOWN))-(!!(meter_keys&KEY_CPAD_UP));
+                    int dy=(!!(meter_keys&KEY_DOWN))-(!!(meter_keys&KEY_UP));
                     region=film_ae_region_move(region,dx,dy);
                 }
                 change_meter_region(region);
+                /* Do not let the held Select+direction combination change EV. */
                 keys &= ~meter_keys;
             }
         }
@@ -2132,6 +2133,19 @@ int main(int argc, char **argv)
             if (keys & KEY_DOWN) app.control = (app.control + 1) % 3;
             if (keys & KEY_LEFT) adjust_camera(-1);
             if (keys & KEY_RIGHT) adjust_camera(1);
+        } else if(app.ui.page==FILM_VIEW && !(held&KEY_SELECT)){
+            /* Most-used controls are editable without entering camera menu. */
+            if(keys&(KEY_LEFT|KEY_RIGHT)){
+                app.control=app.camera_values[FILM_CAM_EXPOSURE_MODE]==FILM_EXPOSURE_NATIVE_AE?
+                    FILM_CAM_EV_COMP:FILM_CAM_EXPOSURE;
+                adjust_camera((!!(keys&KEY_RIGHT))-(!!(keys&KEY_LEFT)));
+            }
+            if(app.camera_values[FILM_CAM_EXPOSURE_MODE]==FILM_EXPOSURE_NATIVE_AE&&
+               app.live&&(keys&(KEY_UP|KEY_DOWN))){
+                FilmAeRegion region=film_ae_region_resize(app.ae_region,
+                    (keys&KEY_UP)?1:-1);
+                change_meter_region(region);
+            }
         } else if (app.ui.page == FILM_DARKROOM) {
             /* DARKROOM_CONTROLS_BEGIN */
             if (held&KEY_B) {

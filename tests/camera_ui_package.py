@@ -38,7 +38,7 @@ class UiPackageTests(unittest.TestCase):
         self.assertFalse(preview["register_gate"] or preview["startup_seed_capture"])
         self.assertEqual(preview["register_reads_per_frame"], 0)
         self.assertEqual(exposure["backend"], "existing_CAMU_SetExposure")
-        self.assertEqual((exposure["minimum"], exposure["maximum"]), (-3, 3))
+        self.assertEqual((exposure["minimum"], exposure["maximum"]), (-5, 5))
         self.assertFalse(exposure["independent_register_gain"] or exposure["calibrated_ev"])
         self.assertFalse(capture["development_effects"])
         manual = CONTRACT_MATRIX["film-camera-manual-setup/v1"]
@@ -351,6 +351,28 @@ class UiPackageTests(unittest.TestCase):
         self.assertIn('last_stage="F3C scene cache write"',roll)
         self.assertFalse(CONTRACT_MATRIX["film-camera-ae-window/v1"]["queues"])
         self.assertEqual(CONTRACT_MATRIX["film-camera-ae-window/v1"]["retries"],0)
+
+    def test_11_step_native_and_quick_meter_ui_contract(self):
+        camera=(ROOT/"include/platform_camera.h").read_text()
+        source=(ROOT/"source/platform/main_3ds.c").read_text()
+        controls=(ROOT/"source/platform/camera_3ds.c").read_text()
+        gray=(ROOT/"source/storage/gray_capture.c").read_text()
+        self.assertEqual(
+            (CONTRACT_MATRIX["film-camera-native-exposure/v1"]["minimum"],
+             CONTRACT_MATRIX["film-camera-native-exposure/v1"]["maximum"]),(-5,5))
+        self.assertIn("FILM_MANUAL_EXPOSURE_MIN = FILM_HW_MIN",camera)
+        self.assertIn("FILM_MANUAL_EXPOSURE_MAX = FILM_HW_MAX",camera)
+        self.assertIn("FILM_MANUAL_EXPOSURE_MIN:FILM_EXPOSURE_MIN",controls)
+        self.assertIn("FILM_MANUAL_EXPOSURE_MAX:FILM_EXPOSURE_MAX",controls)
+        self.assertIn('p->native_level< -5||p->native_level>5',gray)
+        self.assertIn('app.ui.page==FILM_VIEW && !(held&KEY_SELECT)',source)
+        self.assertIn('adjust_camera((!!(keys&KEY_RIGHT))-(!!(keys&KEY_LEFT)))',source)
+        self.assertIn('film_ae_region_resize(app.ae_region,',source)
+        self.assertIn('film_ae_region_move(region,dx,dy)',source)
+        self.assertIn("SEL+R PAIR",source)
+        self.assertIn("A/R RAW",source)
+        self.assertIn("NATIVE AE LEVEL",source)
+        self.assertNotIn("for (unsigned i = 0; i < 3; ++i) C2D_DrawRectSolid(10, 57",source)
 
     def test_gray_pair_capture_and_source_contract(self):
         main=(ROOT/"source/platform/main_3ds.c").read_text()
