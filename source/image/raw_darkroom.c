@@ -216,6 +216,26 @@ FilmStatus film_raw_scene_prepare(const char *source,const FilmRaw10View *raw,co
 }
 void film_raw_scene_free(FilmRawScene *p)
 {if(p){free(p->pixels);*p=(FilmRawScene){0};}}
+FilmStatus film_raw_scene_preview_half(const FilmRawScene *src,FilmRawScene *out)
+{
+    if(!src||!out||src==(const FilmRawScene *)out||out->pixels||!src->pixels||
+       !shape(src->width,src->height))return FILM_INVALID;
+    unsigned w=(src->width+1)/2,h=(src->height+1)/2;
+    FilmRgb *pixels=malloc((size_t)w*h*sizeof *pixels);
+    if(!pixels)return FILM_NOMEM;
+    for(unsigned y=0;y<h;++y)for(unsigned x=0;x<w;++x){
+        FilmRgb sum={0};unsigned count=0;
+        for(unsigned dy=0;dy<2;++dy)for(unsigned dx=0;dx<2;++dx){
+            unsigned xx=x*2+dx,yy=y*2+dy;
+            if(xx>=src->width||yy>=src->height)continue;
+            FilmRgb v=src->pixels[(size_t)yy*src->width+xx];
+            sum.r+=v.r;sum.g+=v.g;sum.b+=v.b;++count;
+        }
+        pixels[(size_t)y*w+x]=(FilmRgb){sum.r/count,sum.g/count,sum.b/count};
+    }
+    *out=(FilmRawScene){w,h,pixels};
+    return FILM_OK;
+}
 
 /* Scene curve in stops relative to 18% gray. Positive segment slopes for all
  * legal controls: knots six stops apart, offsets at most +/-2.5 EV. */
