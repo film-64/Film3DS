@@ -67,6 +67,27 @@ FilmRgb film_white_balance_apply(FilmRgb rgb, const float matrix[3][3])
     return (FilmRgb){out[0],out[1],out[2]};
 }
 
+FilmStatus film_white_balance_swatch_grid(unsigned kelvin,FilmRgb out[361])
+{
+    if(!out)return FILM_INVALID;
+    float base[3][3];
+    FilmStatus status=film_white_balance_matrix((FilmWhiteBalance){kelvin,0,0},base);
+    if(status!=FILM_OK)return status;
+    const float gray=linear(.5f);
+    float neutral[3];
+    for(unsigned c=0;c<3;++c)
+        neutral[c]=gray*(base[c][0]+base[c][1]+base[c][2]);
+    for(int y=0;y<19;++y)for(int x=0;x<19;++x){
+        int red=x-9,blue=9-y;
+        double r=exp2(red/12.),b=exp2(blue/12.);
+        double norm=.2126*r+.7152+.0722*b;
+        out[y*19+x]=(FilmRgb){
+            code((float)(neutral[0]*r/norm)),
+            code((float)(neutral[1]/norm)),
+            code((float)(neutral[2]*b/norm))};
+    }
+    return FILM_OK;
+}
 FilmRgb film_white_balance_swatch(int red, int blue)
 {
     float matrix[3][3];
