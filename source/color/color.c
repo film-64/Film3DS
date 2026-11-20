@@ -61,6 +61,14 @@ FilmStatus film_camera_color_load(FILE *file, FilmCameraColor *out)
     return FILM_OK;
 }
 
+static bool film_lut_transfer_name(const char *name,FilmTransfer *out,bool input)
+{
+    if(!strcmp(name,"SRGB")){*out=FILM_SRGB;return true;}
+    if(!strcmp(name,"LINEAR_SRGB")){*out=FILM_LINEAR_SRGB;return true;}
+    if(!strcmp(name,"REC709")){*out=FILM_REC709;return true;}
+    if(input&&!strcmp(name,"FLOG2C")){*out=FILM_FLOG2C;return true;}
+    return false; /* Vendor log output has no implemented inverse. */
+}
 FilmStatus film_lut_load(FILE *file, FilmLut *out, unsigned *error_line)
 {
     if (error_line) *error_line = 0;
@@ -69,6 +77,7 @@ FilmStatus film_lut_load(FILE *file, FilmLut *out, unsigned *error_line)
     unsigned line_number = 0;
     size_t count = 0, expected = 0;
     bool have_title = false, have_min = false, have_max = false, have_range = false;
+    bool have_input_transfer=false,have_output_transfer=false;
     FilmStatus status = FILM_CORRUPT;
     char buffer[1024];
     for (;;) {
@@ -84,6 +93,20 @@ FilmStatus film_lut_load(FILE *file, FilmLut *out, unsigned *error_line)
         char *line = skip_space(buffer);
         if (!count && !strcmp(line, "# FILM3DS_TRILINEAR")) lut.trilinear = true;
         if (!count && !strcmp(line, "# FILM3DS_SHAPER_DARK_1_5")) lut.shadow_shaper = true;
+        /* An ordinary .cube file contains no reliable color-space metadata.
+         * Apply explicit Film3DS metadata only when BOTH tags are present. */
+        const char *input_key="# FILM3DS_INPUT ";
+        const char *output_key="# FILM3DS_OUTPUT ";
+        if (!strncmp(line,input_key,strlen(input_key))) {
+            if(count||have_input_transfer||!film_lut_transfer_name(
+                skip_space(line+strlen(input_key)),&lut.input,true))goto fail;
+            have_input_transfer=true;
+        } else if (!strncmp(line,output_key,strlen(output_key))) {
+            if(count||have_output_transfer||!film_lut_transfer_name(
+                skip_space(line+strlen(output_key)),&lut.output,false))goto fail;
+            have_output_transfer=true;
+        } else if (!strncmp(line,"# FILM3DS_INPUT",16)||
+                   !strncmp(line,"# FILM3DS_OUTPUT",17))goto fail;
         bool quoted = false;
         for (char *c = line; *c; ++c) {
             if (*c == '"') quoted = !quoted;
@@ -140,6 +163,8 @@ FilmStatus film_lut_load(FILE *file, FilmLut *out, unsigned *error_line)
         }
     }
     if (ferror(file)) { status = FILM_IO; goto fail; }
+    if (have_input_transfer!=have_output_transfer)goto fail;
+    lut.has_transfer=have_input_transfer;
     if (!expected || count != expected || lut.min.r >= lut.max.r ||
         lut.min.g >= lut.max.g || lut.min.b >= lut.max.b ||
         !isfinite(lut.max.r - lut.min.r) || !isfinite(lut.max.g - lut.min.g) ||
