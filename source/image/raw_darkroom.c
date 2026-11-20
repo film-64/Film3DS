@@ -219,7 +219,8 @@ void film_raw_scene_free(FilmRawScene *p)
 FilmStatus film_raw_scene_preview_half(const FilmRawScene *src,FilmRawScene *out)
 {
     if(!src||!out||src==(const FilmRawScene *)out||out->pixels||!src->pixels||
-       !shape(src->width,src->height))return FILM_INVALID;
+       !src->width||!src->height||
+       (size_t)src->width>FILM_RAW_MAX_PIXELS/src->height)return FILM_INVALID;
     unsigned w=(src->width+1)/2,h=(src->height+1)/2;
     FilmRgb *pixels=malloc((size_t)w*h*sizeof *pixels);
     if(!pixels)return FILM_NOMEM;
