@@ -1106,6 +1106,7 @@ static void preview_darkroom(bool full_quality,const FilmRecipe *temporary_recip
 static void white_balance_input(u32 keys, u32 repeated)
 {
     int red=app.room.pending_wb.red,blue=app.room.pending_wb.blue;
+    const int before_red=red,before_blue=blue;
     if (repeated&KEY_LEFT) --red;
     if (repeated&KEY_RIGHT) ++red;
     if (repeated&KEY_UP) ++blue;
@@ -1124,11 +1125,18 @@ static void white_balance_input(u32 keys, u32 repeated)
     app.room.pending_wb.red=red;app.room.pending_wb.blue=blue;
     if (keys&KEY_X) {
         app.room.wb_editor=false;
-        if (app.room.composition_view.pixels) show_image(&app.room.composition_view,FILM_601_FULL);
+        /* The previous top image may contain a trial WB shift. Revert it. */
+        preview_darkroom(false,NULL);
     } else if (keys&KEY_A) {
         app.darkroom.white_balance=app.room.pending_wb;
         app.room.wb_editor=false;
         preview_darkroom(false,NULL);
+    } else if(red!=before_red||blue!=before_blue){
+        /* Edit a temporary recipe, not the saved one. The top screen shows
+         * the actual RAW grade, while the bottom grid remains a guide. */
+        FilmRecipe trial=app.darkroom;
+        trial.white_balance=app.room.pending_wb;
+        preview_darkroom(false,&trial);
     }
 }
 
@@ -1654,22 +1662,33 @@ static void draw_darkroom(u32 bg, u32 fg, u32 gold, u32 dim)
 
 static void draw_white_balance(u32 bg,u32 fg,u32 gold)
 {
+    static u32 swatches[361];
+    static unsigned cached_kelvin=UINT32_MAX;
+    if(cached_kelvin!=app.room.pending_wb.kelvin){
+        FilmRgb colors[361];
+        if(film_white_balance_swatch_grid(app.room.pending_wb.kelvin,colors)==FILM_OK){
+            for(unsigned i=0;i<361;++i){
+                float r=fminf(1,fmaxf(0,colors[i].r));
+                float g=fminf(1,fmaxf(0,colors[i].g));
+                float b=fminf(1,fmaxf(0,colors[i].b));
+                swatches[i]=C2D_Color32((u8)(r*255+.5f),(u8)(g*255+.5f),(u8)(b*255+.5f),255);
+            }
+            cached_kelvin=app.room.pending_wb.kelvin;
+        }
+    }
     char line[80];
     text_at(12,8,.7f,gold,"WHITE BALANCE SHIFT");
     snprintf(line,sizeof line,"R:%+d  B:%+d",app.room.pending_wb.red,app.room.pending_wb.blue);
     text_at(100,25,.53f,fg,line);
-    for (int y=0;y<19;++y) for (int x=0;x<19;++x) {
-        FilmRgb c=film_white_balance_swatch(x-9,9-y);
-        u32 color=C2D_Color32((u8)(c.r*255+.5f),(u8)(c.g*255+.5f),(u8)(c.b*255+.5f),255);
-        C2D_DrawRectSolid(84+x*8,44+y*8,.1f,8,8,color);
-    }
+    for (int y=0;y<19;++y) for (int x=0;x<19;++x)
+        C2D_DrawRectSolid(84+x*8,44+y*8,.1f,8,8,swatches[y*19+x]);
     int x=84+(app.room.pending_wb.red+9)*8,y=44+(9-app.room.pending_wb.blue)*8;
     C2D_DrawRectSolid(x-1,y-1,.2f,10,1,fg);C2D_DrawRectSolid(x-1,y+8,.2f,10,1,fg);
     C2D_DrawRectSolid(x-1,y-1,.2f,1,10,fg);C2D_DrawRectSolid(x+8,y-1,.2f,1,10,fg);
     C2D_DrawRectSolid(x+2,y+2,.3f,4,4,bg);
     text_at(20,110,.53f,fg,"R-");text_at(254,110,.53f,fg,"R+");
     text_at(241,48,.53f,fg,"B+");text_at(241,179,.53f,fg,"B-");
-    text_at(12,197,.42f,fg,"Arrows: move   Y: reset");
+    text_at(12,197,.42f,fg,"Top: photo preview  Arrows: shift");
     text_at(12,213,.53f,gold,"A: preview               X: cancel");
 }
 
