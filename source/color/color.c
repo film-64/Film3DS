@@ -544,6 +544,29 @@ FilmRgb film_fit_chroma(FilmRgb rgb, float y, float chroma)
                      target + chroma * (rgb.b - y)};
 }
 
+/* Positive Color preserves sRGB HSL lightness/hue. The old linear-Y gamut
+ * limiter often reduced +100% to nearly zero for bright colors. Negative
+ * values deliberately retain the established linear-light desaturation. */
+static FilmRgb color_saturation(FilmRgb linear,float saturation)
+{
+    if(saturation<=0)
+        return encode_rgb(film_fit_chroma(linear,linear_luma(linear),1+saturation));
+    FilmRgb code=encode_rgb(linear);
+    if(!in_gamut(code))
+        return encode_rgb(film_fit_chroma(linear,linear_luma(linear),1+saturation));
+    float hi=fmaxf(code.r,fmaxf(code.g,code.b));
+    float lo=fminf(code.r,fminf(code.g,code.b));
+    float delta=hi-lo,light=(hi+lo)*.5f;
+    float available=1-fabsf(2*light-1);
+    if(delta<1e-7f||available<1e-7f)return code;
+    float original=delta/available;
+    float target=clamp01(original*(1+saturation));
+    float ratio=target/original;
+    return (FilmRgb){
+        clamp01(light+(code.r-light)*ratio),
+        clamp01(light+(code.g-light)*ratio),
+        clamp01(light+(code.b-light)*ratio)};
+}
 static FilmRgb apply_input_tone(FilmRgb color, const FilmDevelopGrade *grade)
 {
     FilmRgb rgb = decode_rgb(color);
@@ -616,10 +639,10 @@ FilmRgb film_develop_grade_pixel(FilmRgb color, const FilmDevelopGrade *grade)
         }
         if (grade->output_active) rgb = apply_output_curve(rgb, grade);
         float saturation = grade->tone.value[FILM_TONE_SATURATION];
-        if (!grade->grade.has_hsl) return encode_rgb(film_fit_chroma(rgb, linear_luma(rgb), 1 + saturation));
+        if (!grade->grade.has_hsl) return color_saturation(rgb,saturation);
         color = extended_hsl(encode_rgb(rgb), grade->grade.profile);
         rgb = decode_rgb(color);
-        return encode_rgb(film_fit_chroma(rgb, linear_luma(rgb), 1 + saturation));
+        return color_saturation(rgb,saturation);
     }
     if (grade->grade.has_hsl) {
         color = extended_hsl(color, grade->grade.profile);
