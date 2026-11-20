@@ -93,6 +93,9 @@ typedef struct {
     CaptureSave save;
     Look *luts;
     unsigned lut_count;
+    FilmLut preview_lut; /* reusable parsed LUT; no reload for every WB/Color edit */
+    char preview_lut_key[64];
+    bool darkroom_preview_fast;
     char status[96];
     char y2r_status[64];
     const char *probe_title;
@@ -984,7 +987,10 @@ static void preview_darkroom(void)
     bool cached_scene=app.decoded_id==app.darkroom_id&&app.decoded_scene.pixels;
     if(cached_scene){
         frame.recipe=app.darkroom;status=FILM_OK;
-        if(app.decoded_calibration!=app.raw_calibration){
+        /* Original and v2 use the SAME measured sensor ISP. v2 is only
+         * a later tone adjustment and must not trigger another DNG decode. */
+        unsigned isp_key=app.raw_calibration?1u:0u;
+        if(app.decoded_calibration!=isp_key){
             /* A changed sensor calibration is a different decode. Cache it
              * once; later A renders reuse the same linear pixels. */
             status=open_selected_original(&frame);
@@ -999,7 +1005,7 @@ static void preview_darkroom(void)
             if(status==FILM_OK){
                 film_raw_scene_free(&app.decoded_scene);
                 status=film_raw_frame_scene(&frame,&options,&app.decoded_scene);
-                if(status==FILM_OK)app.decoded_calibration=app.raw_calibration;
+                if(status==FILM_OK)app.decoded_calibration=isp_key;
                 else{app.decoded_id=0;app.darkroom_ready=false;}
             }
             options.raw_isp=NULL; /* Sensor calibration is baked into the scene. */
@@ -1032,7 +1038,9 @@ static void preview_darkroom(void)
         if (status==FILM_OK&&look&&frame.recipe.profile.strength>0)
             status=load_look_lut(look,&lut);
     }
-    if (status == FILM_OK)
+    /* The camera's native YUV color file only applies to legacy YUV/RGB
+     * development. RAW has its own explicit ISP/CCM pipeline. */
+    if (status == FILM_OK && app.roll_preview_format!=FILM_RAW10_RGGB)
         status = load_camera_color(frame.camera, &camera_color, &options.camera_color);
     if (status == FILM_OK && app.grain_reference[app.grain]) {
         FILE *file = fopen(grain_paths[app.grain], "r");
@@ -2303,6 +2311,7 @@ int main(int argc, char **argv)
     film_darkroom_discard(&app.room);
     finish_capture(true);
     film_camera_close(&app.camera);
+    film_lut_free(&app.preview_lut);
     free(app.luts);app.luts=NULL;
     film_grain_texture_free(&app.grain_texture);
     if (romfs_mounted) romfsExit();
