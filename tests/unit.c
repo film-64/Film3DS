@@ -307,9 +307,19 @@ static void source_saturation(void)
         reopened.recipe.base_saturation = saturation;
         assert(film_develop(&reopened, NULL, &out) == FILM_OK);
         FilmRgb pixel = film_decode_pixel(&out, 0, 0, FILM_601_FULL);
-        close_to(film_srgb_linear_luma(pixel), luma, .004f);
-        if (saturation < 0) assert(pixel.r == pixel.g && pixel.g == pixel.b);
-        else assert(pixel.r > baseline.r && pixel.b < baseline.b);
+        if(saturation<0){
+            close_to(film_srgb_linear_luma(pixel), luma, .004f);
+            assert(pixel.r == pixel.g && pixel.g == pixel.b);
+        }else{
+            /* Positive Color preserves HSL lightness, allowing linear Y to
+             * move for vivid highlights while staying in display gamut. */
+            float original=(fmaxf(baseline.r,fmaxf(baseline.g,baseline.b))+
+                            fminf(baseline.r,fminf(baseline.g,baseline.b)))*.5f;
+            float revised=(fmaxf(pixel.r,fmaxf(pixel.g,pixel.b))+
+                           fminf(pixel.r,fminf(pixel.g,pixel.b)))*.5f;
+            close_to(revised,original,.004f);
+            assert(pixel.r > baseline.r && pixel.b < baseline.b);
+        }
         film_image_free(&out);
     }
     film_image_free(&neutral);
