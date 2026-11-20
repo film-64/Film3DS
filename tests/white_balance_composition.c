@@ -44,6 +44,20 @@ static void white_balance(void)
         assert(red>0 ? out.r>out.g : red<0 ? out.r<out.g : fabsf(out.r-out.g)<1e-6f);
         assert(blue>0 ? out.b>out.g : blue<0 ? out.b<out.g : fabsf(out.b-out.g)<1e-6f);
     }
+    FilmRgb grid[361]={0};
+    for(unsigned kelvin=0;kelvin<=7000;kelvin+=3500){
+        assert(film_white_balance_swatch_grid(kelvin,grid)==FILM_OK);
+        for(int red=-9;red<=9;red+=9)for(int blue=-9;blue<=9;blue+=9){
+            assert(film_white_balance_matrix((FilmWhiteBalance){kelvin,red,blue},matrix)==FILM_OK);
+            FilmRgb actual=film_white_balance_apply((FilmRgb){.5f,.5f,.5f},matrix);
+            FilmRgb quick=grid[(9-blue)*19+red+9];
+            assert(fabsf(quick.r-actual.r)<1e-5f);
+            assert(fabsf(quick.g-actual.g)<1e-5f);
+            assert(fabsf(quick.b-actual.b)<1e-5f);
+        }
+    }
+    assert(film_white_balance_swatch_grid(10001,grid)==FILM_INVALID);
+    assert(film_white_balance_swatch_grid(6500,NULL)==FILM_INVALID);
     assert(film_white_balance_matrix((FilmWhiteBalance){999,0,0},matrix)==FILM_INVALID);
     assert(film_white_balance_matrix((FilmWhiteBalance){10001,0,0},matrix)==FILM_INVALID);
     assert(film_white_balance_matrix((FilmWhiteBalance){6500,10,0},matrix)==FILM_INVALID);

@@ -22,6 +22,9 @@ FilmRawIsp film_raw_isp_default(void);
 FilmStatus film_raw_profile_load(const char *,FILE *,FilmRawIsp *);
 FilmStatus film_raw_scene_prepare(const char *,const FilmRaw10View *,const FilmRawIsp *,FilmRawScene *);
 void film_raw_scene_free(FilmRawScene *);
+/* Reversible half-resolution linear RGB view for interactive darkroom only.
+ * Never modifies the cached source scene or replaces final export pixels. */
+FilmStatus film_raw_scene_preview_half(const FilmRawScene *,FilmRawScene *);
 FilmStatus film_raw_frame_scene(const FilmFrame *,const FilmDevelopOptions *,FilmRawScene *);
 FilmStatus film_raw_scene_grade(const char *,const FilmRawScene *,const FilmRecipe *,const FilmLut *,const FilmDevelopOptions *,FilmDevelopCanvas *);
 FilmStatus film_raw_scene_probe(const char *,const char *,const char *,const char *,const FilmRecipe *,const FilmDevelopOptions *);
