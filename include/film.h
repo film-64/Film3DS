@@ -156,6 +156,9 @@ FilmRgb film_srgb_add_halation(FilmRgb code, float energy);
 FilmStatus film_white_balance_matrix(FilmWhiteBalance balance, float out[3][3]);
 FilmRgb film_white_balance_apply(FilmRgb code, const float matrix[3][3]);
 FilmRgb film_white_balance_swatch(int red, int blue);
+/* 361 WB shift guide swatches at the current Kelvin, computed using only one
+ * Kelvin adaptation matrix rather than 361 Planck/CIE integrations. */
+FilmStatus film_white_balance_swatch_grid(unsigned kelvin,FilmRgb out[361]);
 FilmStatus film_blackbody_white(unsigned kelvin, float xyz[3]);
 FilmStatus film_profile_write(const char *path, const FilmProfile *profile);
 FilmStatus film_profile_read(const char *path, FilmProfile *profile);
