@@ -131,12 +131,15 @@ class UiPackageTests(unittest.TestCase):
     def test_on_device_darkroom_and_save_dispatch(self):
         text=(ROOT/"source/platform/main_3ds.c").read_text()
         wb=text.split("static void white_balance_input",1)[1].split("static void save_darkroom_preview",1)[0]
-        self.assertEqual(wb.count("preview_darkroom();"),1)
+        self.assertIn("preview_darkroom(false,&trial)",wb)
+        self.assertIn("preview_darkroom(false,NULL)",wb)
         self.assertIn("else if (keys&KEY_A)",wb)
-        self.assertNotIn("else if (changed)",wb)
+        self.assertIn("FilmRecipe trial=app.darkroom",wb)
         save=text.split("static void save_darkroom_preview",1)[1].split("static void y2r_check",1)[0]
         self.assertNotIn("open_selected_original",save)
         self.assertNotIn("film_raw_export_pair",save)
+        self.assertIn("if(app.darkroom_preview_fast)",save)
+        self.assertIn("preview_darkroom(true,NULL)",save)
         finish=text.split("static bool finish_capture",1)[1].split("static bool capture_photo",1)[0]
         self.assertIn("bool saved = save->result.written;",finish)
         storage=CONTRACT_MATRIX["film-roll-capture-save/v1"]
@@ -201,7 +204,11 @@ class UiPackageTests(unittest.TestCase):
         self.assertNotIn("film_develop",save)
         preview=text.split("static void preview_darkroom",1)[1].split("static void white_balance_input",1)[0]
         self.assertIn("film_darkroom_scene_preview",preview)
-        self.assertIn("app.decoded_calibration!=app.raw_calibration",preview)
+        self.assertIn("app.decoded_calibration!=isp_key",preview)
+        self.assertIn("unsigned isp_key=app.raw_calibration?1u:0u;",preview)
+        self.assertIn("film_raw_scene_preview_half",preview)
+        self.assertIn("if(lut->has_transfer)",preview)
+        self.assertNotIn("film_lut_free(&lut);",preview)
         grid=text.split("static void roll_prepare_grid",1)[1].split("static void roll_show_selection",1)[0]
         self.assertIn("break;",grid)
         for name in ("film-roll-decode/v1","film-roll-decode-load/v1","film-darkroom-scene-preview/v1"):
@@ -343,7 +350,11 @@ class UiPackageTests(unittest.TestCase):
         refresh=text.split("/* ROLL_REFRESH_BEGIN */",1)[1].split("/* ROLL_REFRESH_END */",1)[0]
         self.assertNotIn("app.roll_preview_id=0",refresh)
         preview=text.split("static void preview_darkroom",1)[1].split("static void white_balance_input",1)[0]
-        self.assertIn("app.decoded_calibration!=app.raw_calibration",preview)
+        self.assertIn("app.decoded_calibration!=isp_key",preview)
+        self.assertIn("unsigned isp_key=app.raw_calibration?1u:0u;",preview)
+        self.assertIn("film_raw_scene_preview_half",preview)
+        self.assertIn("if(lut->has_transfer)",preview)
+        self.assertNotIn("film_lut_free(&lut);",preview)
         self.assertIn("else if(app.roll_preview_format==FILM_RAW10_RGGB)status=FILM_STATE",preview)
 
     def test_debug_logging_never_clobbers_camera_ipc_buffer(self):
