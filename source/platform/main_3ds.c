@@ -1143,6 +1143,12 @@ static void white_balance_input(u32 keys, u32 repeated)
 static void save_darkroom_preview(void)
 {
     if (!app.room.preview.pixels) return;
+    if(app.darkroom_preview_fast){
+        /* Only SELECT pays for a full-resolution export. Never save the
+         * half-resolution working view as a final JPEG. */
+        preview_darkroom(true,NULL);
+        if(!app.room.preview.pixels||app.darkroom_preview_fast)return;
+    }
     char filename[24] = {0}, path[96] = {0};
     struct stat existing;
     FilmStatus status = FILM_STATE;
