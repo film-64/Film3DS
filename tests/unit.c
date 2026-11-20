@@ -80,6 +80,33 @@ static FilmLut create_lut(unsigned n, unsigned kind)
     return lut;
 }
 
+static void lut_transfer_metadata(void)
+{
+    const char *headers[]={
+        "# FILM3DS_INPUT FLOG2C\n# FILM3DS_OUTPUT SRGB\n",
+        "# FILM3DS_INPUT FLOG2C\n",
+        "# FILM3DS_INPUT UNKNOWN\n# FILM3DS_OUTPUT SRGB\n",
+        "# FILM3DS_INPUT SRGB\n# FILM3DS_OUTPUT FLOG2C\n",
+        "# FILM3DS_INPUT LINEAR_SRGB\n# FILM3DS_OUTPUT REC709\n",
+        ""};
+    for(unsigned kind=0;kind<6;++kind){
+        FILE *file=fixture_file();
+        fputs(headers[kind],file);
+        fputs("LUT_3D_SIZE 2\n",file);
+        for(unsigned i=0;i<8;++i)fputs("0 0 0\n",file);
+        rewind(file);
+        FilmLut lut={0};
+        FilmStatus status=film_lut_load(file,&lut,NULL);
+        if(kind==0||kind==4||kind==5){
+            assert(status==FILM_OK);
+            assert(lut.has_transfer==(kind!=5));
+            if(kind==0)assert(lut.input==FILM_FLOG2C&&lut.output==FILM_SRGB);
+            if(kind==4)assert(lut.input==FILM_LINEAR_SRGB&&lut.output==FILM_REC709);
+            film_lut_free(&lut);
+        }else assert(status==FILM_CORRUPT&&!lut.samples);
+        fclose(file);
+    }
+}
 static float product(float base_a, float a, float base_b, float b, float step)
 {
     return base_a * base_b + step * (base_a * b + base_b * a) + step * step * fminf(a, b);
@@ -371,10 +398,28 @@ static void darkroom_tone(void)
         recipe.tone.value[FILM_TONE_SATURATION] = i;
         grade = film_develop_grade_prepare(NULL, &recipe);
         FilmRgb out = film_develop_grade_pixel(color, &grade);
-        close_to(film_srgb_linear_luma(out), y, 2e-6f);
+        if(i<=0)close_to(film_srgb_linear_luma(out), y, 2e-6f);
         if (i == -1) { close_to(out.r, out.g, 1e-6f); close_to(out.g, out.b, 1e-6f); }
-        if (i == 1) assert(out.r > color.r && out.b >= -1e-6f && out.b < color.b);
+        if (i == 1) {
+            assert(out.r > color.r && out.b >= -1e-6f && out.b < color.b);
+            float original_light=(fmaxf(color.r,fmaxf(color.g,color.b))+
+                                  fminf(color.r,fminf(color.g,color.b)))*.5f;
+            float new_light=(fmaxf(out.r,fmaxf(out.g,out.b))+
+                             fminf(out.r,fminf(out.g,out.b)))*.5f;
+            close_to(new_light,original_light,1e-6f); /* Positive Color preserves HSL lightness. */
+        }
     }
+    /* Existing desaturated pastels must become vivid at +100% without
+     * clipping or introducing color into a neutral gray. */
+    recipe=film_default_recipe();
+    recipe.tone.value[FILM_TONE_SATURATION]=1;
+    grade=film_develop_grade_prepare(NULL,&recipe);
+    FilmRgb pastel={.9f,.8f,.7f};
+    FilmRgb vivid=film_develop_grade_pixel(pastel,&grade);
+    assert(vivid.r>pastel.r&&vivid.b<pastel.b&&vivid.r<=1&&vivid.b>=0);
+    FilmRgb neutral=film_develop_grade_pixel((FilmRgb){.6f,.6f,.6f},&grade);
+    close_to(neutral.r,neutral.g,1e-6f);
+    close_to(neutral.g,neutral.b,1e-6f);
     for (unsigned i = 0; i < 8; ++i) samples[i] = (FilmRgb){FLT_MAX, -FLT_MAX, .5f};
     grade = film_develop_grade_prepare(&lut, &recipe);
     FilmRgb out = film_develop_grade_pixel(color, &grade);
@@ -591,7 +636,7 @@ static void ui(void)
 
 int main(void)
 {
-    parser_errors(); puts("PASS CUBE parser errors");
+    parser_errors(); lut_transfer_metadata(); puts("PASS CUBE parser errors and explicit transfer annotations");
     lut_math(); puts("PASS CUBE 17/33/65 and tetrahedra");
     hsl(); puts("PASS global HSL and wrapped hue zones");
     yuv(); puts("PASS YUYV matrices and RGB565");
@@ -599,7 +644,7 @@ int main(void)
     pipeline(); puts("PASS pixel-level grain order and final crop");
     source_saturation(); puts("PASS v2 source saturation, unchanged YUYV and neutral development");
     camera_metering(); puts("PASS camera metering weights, EV compensation, hysteresis and stability");
-    darkroom_tone(); puts("PASS post-LUT EV, monotonic tone, shoulder and luminance-preserving saturation");
+    darkroom_tone(); puts("PASS post-LUT EV, monotonic tone, shoulder and vivid positive Color");
     darkroom_recipe(); puts("PASS v3 recipe round trip and independent film-simulation switching");
     adaptive_grain(); puts("PASS grain density follows luminance, seed is repeatable, zero is exact");
     camera_color(); puts("PASS camera input matrix and high-precision export");
