@@ -6,6 +6,30 @@
 #include <stdlib.h>
 #include <string.h>
 
+static void half_scene_preview(void)
+{
+    FilmRgb input[7*5];
+    for(unsigned y=0;y<5;++y)for(unsigned x=0;x<7;++x)
+        input[y*7+x]=(FilmRgb){x+10.f*y,x-y/10.f,(float)(x+y)};
+    FilmRgb unchanged[35];memcpy(unchanged,input,sizeof input);
+    FilmRawScene src={7,5,input},half={0};
+    assert(film_raw_scene_preview_half(&src,&half)==FILM_OK);
+    assert(half.width==4&&half.height==3);
+    for(unsigned y=0;y<half.height;++y)for(unsigned x=0;x<half.width;++x){
+        float r=0,g=0,b=0;unsigned n=0;
+        for(unsigned dy=0;dy<2;++dy)for(unsigned dx=0;dx<2;++dx){
+            unsigned xx=x*2+dx,yy=y*2+dy;
+            if(xx>=7||yy>=5)continue;
+            FilmRgb v=input[yy*7+xx];r+=v.r;g+=v.g;b+=v.b;++n;
+        }
+        FilmRgb v=half.pixels[y*half.width+x];
+        assert(fabsf(v.r-r/n)<1e-6f&&fabsf(v.g-g/n)<1e-6f&&fabsf(v.b-b/n)<1e-6f);
+    }
+    assert(!memcmp(unchanged,input,sizeof input));
+    assert(film_raw_scene_preview_half(&src,&half)==FILM_INVALID);
+    assert(film_raw_scene_preview_half(&src,&src)==FILM_INVALID);
+    film_raw_scene_free(&half);
+}
 static float encoded(float x) {return x<=.0031308f?12.92f*x:1.055f*powf(x,1/2.4f)-.055f;}
 static unsigned cfa_color(unsigned cfa,unsigned phase)
 { static const unsigned table[4][4]={{0,1,1,2},{2,1,1,0},{1,0,2,1},{1,2,0,1}};return table[cfa][phase]; }
@@ -197,4 +221,4 @@ static void grain(void)
     printf("PASS layered grain deterministic density response: mean delta %.3f RMS %.3f\n",mean,square);
     film_image_free(&a);film_image_free(&b);
 }
-int main(void){unpack();isp();local_and_offset();calibration_contract();scene_headroom();grade();grain();puts("PASS RAW10 exact unpack, immutable ISP, four CFA patterns, exposure/WB, explicit repair, shared LUT/neutral canvas");return 0;}
+int main(void){half_scene_preview();unpack();isp();local_and_offset();calibration_contract();scene_headroom();grade();grain();puts("PASS RAW10 exact unpack, immutable ISP, four CFA patterns, exposure/WB, explicit repair, shared LUT/neutral canvas");return 0;}
