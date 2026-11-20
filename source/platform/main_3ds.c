@@ -965,10 +965,13 @@ static void serve_selected_evidence(C3D_RenderTarget *top,C3D_RenderTarget *bott
     app.probe_title=NULL;update_status(served?"Recovery ended; L: reopen camera":"Recovery snapshot failed",served?FILM_OK:FILM_IO,0);
 }
 
-static void preview_darkroom(void)
+static void preview_darkroom(bool full_quality,const FilmRecipe *temporary_recipe)
 {
     FilmFrame frame = {0};
-    FilmLut lut = {0};
+    FilmRawScene half = {0};
+    FilmRecipe preview_recipe = {0};
+    bool use_half=false;
+    const FilmLut *lut=NULL;
     if (!app.darkroom_ready) { update_status("Develop recipe", FILM_STATE, 0); return; }
     unsigned look_index = find_look(app.darkroom.lut_id);
     const Look *look = look_index ? &app.luts[look_index - 1] : NULL;
@@ -1014,7 +1017,7 @@ static void preview_darkroom(void)
     else if(app.count&&app.roll_preview_format)status=open_selected_original(&frame);
     else status=FILM_STATE;
     if (status == FILM_OK) {
-        frame.recipe = app.darkroom;
+        frame.recipe = temporary_recipe?*temporary_recipe:app.darkroom;
         frame.recipe.grain_seed ^= UINT32_C(0x9e3779b9) * app.darkroom_id;
         if(app.raw_calibration==2&&app.roll_preview_format==FILM_RAW10_RGGB){
             FILE *curve_file=fopen("romfs:/calibration/display-gray-v2.f3curve","rb");
@@ -1035,8 +1038,20 @@ static void preview_darkroom(void)
                 options.raw_shoulder=fmaxf(options.raw_shoulder,curve.shoulder);
             }
         }
-        if (status==FILM_OK&&look&&frame.recipe.profile.strength>0)
-            status=load_look_lut(look,&lut);
+        if(status==FILM_OK && look && frame.recipe.profile.strength>0){
+            if(strcmp(app.preview_lut_key,look->key)||!app.preview_lut.samples){
+                film_lut_free(&app.preview_lut);app.preview_lut_key[0]=0;
+                status=load_look_lut(look,&app.preview_lut);
+                if(status==FILM_OK)snprintf(app.preview_lut_key,sizeof app.preview_lut_key,"%s",look->key);
+            }
+            if(status==FILM_OK){
+                lut=&app.preview_lut;
+                if(lut->has_transfer){
+                    frame.recipe.profile.input=lut->input;
+                    frame.recipe.profile.output=lut->output;
+                }
+            }
+        }
     }
     /* The camera's native YUV color file only applies to legacy YUV/RGB
      * development. RAW has its own explicit ISP/CCM pipeline. */
@@ -1048,13 +1063,25 @@ static void preview_darkroom(void)
         if (file) fclose(file);
         if (status == FILM_OK) options.grain_profile = &grain_profile;
     }
+    if(status==FILM_OK && cached_scene && !full_quality){
+        status=film_raw_scene_preview_half(&app.decoded_scene,&half);
+        if(status==FILM_OK){
+            preview_recipe=frame.recipe;
+            if(preview_recipe.crop_positioned){
+                preview_recipe.crop_x/=2;preview_recipe.crop_y/=2;
+            }
+            use_half=true;
+        }
+    }
     if (status == FILM_OK) {
-        status = cached_scene ? film_darkroom_scene_preview(&app.room,&app.decoded_scene,&frame.recipe,lut.samples?&lut:NULL,&options) :
-            film_darkroom_preview(&app.room, &frame, lut.samples ? &lut : NULL, &options);
+        status = cached_scene ? film_darkroom_scene_preview(&app.room,
+            use_half?&half:&app.decoded_scene,use_half?&preview_recipe:&frame.recipe,lut,&options) :
+            film_darkroom_preview(&app.room, &frame, lut, &options);
         if (status==FILM_OK) {
+        app.darkroom_preview_fast=use_half;
         show_image(&app.room.composition_view, FILM_601_FULL);
-        snprintf(app.status, sizeof app.status, "Preview %ux%u - not saved",
-                 app.room.preview.width, app.room.preview.height);
+        snprintf(app.status, sizeof app.status, "%s %ux%u - not saved",
+                 use_half?"Fast preview":"Preview",app.room.preview.width,app.room.preview.height);
         if (app.log) {
             fprintf(app.log, "Darkroom preview LUT=%s strength=%.0f%% input_EV=%.2f H/M/S=%+.0f/%+.0f/%+.0f sharpness=%+d\n",
                     frame.recipe.lut_id[0] ? frame.recipe.lut_id : "Neutral",
@@ -1072,7 +1099,7 @@ static void preview_darkroom(void)
             film_log(app.log,app.status,status,0);
         }
     } else update_status("Darkroom preview", status, 0);
-    film_lut_free(&lut);
+    film_raw_scene_free(&half);
     film_frame_free(&frame);
 }
 
@@ -1101,7 +1128,7 @@ static void white_balance_input(u32 keys, u32 repeated)
     } else if (keys&KEY_A) {
         app.darkroom.white_balance=app.room.pending_wb;
         app.room.wb_editor=false;
-        preview_darkroom();
+        preview_darkroom(false,NULL);
     }
 }
 
@@ -2293,7 +2320,7 @@ int main(int argc, char **argv)
             snprintf(app.status, sizeof app.status, "%s",
                      app.darkroom.lut_id[0] && app.darkroom.profile.strength > 0 ? "Applying LUT..." : "Developing...");
             draw(top, bottom);
-            preview_darkroom();
+            preview_darkroom(false,NULL);
         }
         /* ROLL_REFRESH_BEGIN */
         if ((saved || app.ui.page!=previous_page || app.ui.selection!=previous_photo) && app.ui.page!=FILM_VIEW) {
