@@ -36,6 +36,10 @@ typedef struct {
     FilmRgb *samples;
     bool trilinear;
     bool shadow_shaper;
+    /* Optional explicit color encodings from paired FILM3DS .cube comments.
+     * Unannotated LUTs retain the selected recipe's legacy color space. */
+    bool has_transfer;
+    FilmTransfer input,output;
 } FilmLut;
 
 typedef struct {
