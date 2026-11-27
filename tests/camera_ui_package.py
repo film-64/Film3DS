@@ -209,7 +209,7 @@ class UiPackageTests(unittest.TestCase):
         self.assertIn("film_raw_scene_preview_half",preview)
         self.assertIn("if(lut->has_transfer)",preview)
         self.assertNotIn("film_lut_free(&lut);",preview)
-        grid=text.split("static void roll_prepare_grid",1)[1].split("static void roll_show_selection",1)[0]
+        grid=text.split("static bool roll_prepare_grid",1)[1].split("static void roll_show_selection",1)[0]
         self.assertIn("break;",grid)
         for name in ("film-roll-decode/v1","film-roll-decode-load/v1","film-darkroom-scene-preview/v1"):
             rule=CONTRACT_MATRIX[name]

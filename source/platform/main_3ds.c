@@ -451,27 +451,34 @@ static void roll_path(char path[64], unsigned id)
 }
 
 /* ROLL_PREVIEW_BEGIN */
-static void roll_prepare_grid(void)
+static void roll_upload_thumbnail(RollThumbnail *thumb,unsigned id,const FilmImage *image)
 {
-    if(app.ui.page!=FILM_ROLL)return;
-    C3D_FrameSync();
+    thumb->id=id;thumb->ready=false;
+    memset(thumb->texture.data,0,ROLL_TEX_SIDE*ROLL_TEX_SIDE*3);
+    for(unsigned y=0;y<ROLL_TEX_ROWS;++y)for(unsigned x=0;x<ROLL_TEX_SIDE;++x){
+        const uint8_t *src=image->pixels+((size_t)(y*image->height/ROLL_TEX_ROWS)*image->width+x*image->width/ROLL_TEX_SIDE)*3;
+        uint8_t *dst=(uint8_t *)thumb->texture.data+swizzle(x,y,ROLL_TEX_SIDE)*3;
+        dst[0]=src[2];dst[1]=src[1];dst[2]=src[0];
+    }
+    C3D_TexFlush(&thumb->texture);thumb->ready=true;
+}
+static bool roll_prepare_grid(void)
+{
+    if(app.ui.page!=FILM_ROLL)return false;
+    bool changed=false;
     for(unsigned slot=0;slot<ROLL_VISIBLE_TEXTURES;++slot){
         unsigned index=app.roll.first+slot,id=index<app.count?app.photos[index]:0;
         RollThumbnail *thumb=&app.thumbnails[slot];if(thumb->id==id)continue;
-        thumb->id=id;thumb->ready=false;if(!id||!thumb->allocated)continue;
+        changed=true;thumb->id=id;thumb->ready=false;if(!id||!thumb->allocated)continue;
         FilmImage image={0};FilmStatus status=film_roll_jpeg_preview("film-roll-jpeg-preview/v1",PREVIEWS,id,NULL,&image);
         if(status==FILM_OK){
-            memset(thumb->texture.data,0,ROLL_TEX_SIDE*ROLL_TEX_SIDE*3);
-            for(unsigned y=0;y<ROLL_TEX_ROWS;++y)for(unsigned x=0;x<ROLL_TEX_SIDE;++x){
-                const uint8_t *src=image.pixels+((size_t)(y*image.height/ROLL_TEX_ROWS)*image.width+x*image.width/ROLL_TEX_SIDE)*3;
-                uint8_t *dst=(uint8_t *)thumb->texture.data+swizzle(x,y,ROLL_TEX_SIDE)*3;
-                dst[0]=src[2];dst[1]=src[1];dst[2]=src[0];
-            }
-            C3D_TexFlush(&thumb->texture);thumb->ready=true;
+            C3D_FrameSync();
+            roll_upload_thumbnail(thumb,id,&image);
         }
         film_image_free(&image);
         break; /* At most one visible thumbnail decode per UI iteration. */
     }
+    return changed;
 }
 static void roll_show_selection(void)
 {
@@ -484,7 +491,15 @@ static void roll_show_selection(void)
     FilmImage image={0};FilmRollPair pair={0};
     FilmStatus status=film_roll_jpeg_preview("film-roll-jpeg-preview/v1",PREVIEWS,id,&pair,&image);
     app.roll_preview_format=status==FILM_OK?pair.format:0;
-    if(status==FILM_OK)show_image(&image,FILM_601_FULL);
+    if(status==FILM_OK){
+        show_image(&image,FILM_601_FULL);
+        unsigned index=app.ui.selection;
+        if(index>=app.roll.first&&index-app.roll.first<ROLL_VISIBLE_TEXTURES){
+            RollThumbnail *thumb=&app.thumbnails[index-app.roll.first];
+            if(thumb->allocated&&thumb->id!=id)
+                roll_upload_thumbnail(thumb,id,&image);
+        }
+    }
     else{app.image_width=app.image_height=0;update_status("Not decoded; SELECT in Roll",status,0);}
     app.roll_preview_id=id;film_image_free(&image);
 }
@@ -976,7 +991,6 @@ static void preview_darkroom(bool full_quality,const FilmRecipe *temporary_recip
     unsigned look_index = find_look(app.darkroom.lut_id);
     const Look *look = look_index ? &app.luts[look_index - 1] : NULL;
     FilmCameraColor camera_color;
-    FilmGrainProfile grain_profile;
     FilmRawIsp raw_isp;
     FilmDevelopOptions options = {.adaptive_grain = true, .grain = app.grain, .halation = app.halation,
         .raw_shadows=app.raw_shadows,.raw_midtones=app.raw_midtones,.raw_highlights=app.raw_highlights,
@@ -1020,12 +1034,16 @@ static void preview_darkroom(bool full_quality,const FilmRecipe *temporary_recip
         frame.recipe = temporary_recipe?*temporary_recipe:app.darkroom;
         frame.recipe.grain_seed ^= UINT32_C(0x9e3779b9) * app.darkroom_id;
         if(app.raw_calibration==2&&app.roll_preview_format==FILM_RAW10_RGGB){
-            FILE *curve_file=fopen("romfs:/calibration/display-gray-v2.f3curve","rb");
-            FilmExposureCurve curve={0};
-            if(!curve_file)status=FILM_IO;
-            else {
-                status=film_gray_curve_read(curve_file,&curve);
-                if(fclose(curve_file))status=FILM_IO;
+            static FilmExposureCurve curve;
+            static bool curve_loaded;
+            if(!curve_loaded){
+                FILE *curve_file=fopen("romfs:/calibration/display-gray-v2.f3curve","rb");
+                if(!curve_file)status=FILM_IO;
+                else {
+                    status=film_gray_curve_read(curve_file,&curve);
+                    if(fclose(curve_file))status=FILM_IO;
+                }
+                if(status==FILM_OK)curve_loaded=true;
             }
             if(status==FILM_OK){
                 /* Candidate adjusts rendering only; keep user controls and
@@ -1058,10 +1076,15 @@ static void preview_darkroom(bool full_quality,const FilmRecipe *temporary_recip
     if (status == FILM_OK && app.roll_preview_format!=FILM_RAW10_RGGB)
         status = load_camera_color(frame.camera, &camera_color, &options.camera_color);
     if (status == FILM_OK && app.grain_reference[app.grain]) {
-        FILE *file = fopen(grain_paths[app.grain], "r");
-        status = file ? film_grain_profile_load(file, &grain_profile) : FILM_IO;
-        if (file) fclose(file);
-        if (status == FILM_OK) options.grain_profile = &grain_profile;
+        static FilmGrainProfile profiles[FILM_GRAIN_COUNT];
+        static bool profile_loaded[FILM_GRAIN_COUNT];
+        if(!profile_loaded[app.grain]){
+            FILE *file = fopen(grain_paths[app.grain], "r");
+            status = file ? film_grain_profile_load(file, &profiles[app.grain]) : FILM_IO;
+            if (file && fclose(file)) status = FILM_IO;
+            if(status==FILM_OK)profile_loaded[app.grain]=true;
+        }
+        if (status == FILM_OK) options.grain_profile = &profiles[app.grain];
     }
     if(status==FILM_OK && cached_scene && !full_quality){
         status=film_raw_scene_preview_half(&app.decoded_scene,&half);
@@ -2356,7 +2379,10 @@ int main(int argc, char **argv)
         }
         /* ROLL_REFRESH_END */
         sync_darkroom();
-        roll_prepare_grid();
+        bool grid_changed=roll_prepare_grid();
+        if(app.ui.page!=FILM_VIEW&&!keys&&!repeated&&!saved&&!app.save.thread&&
+           !grid_changed&&app.ui.page==previous_page&&app.ui.selection==previous_photo)
+            continue;
         draw(top, bottom);
     }
     film_raw_scene_free(&app.decoded_scene);

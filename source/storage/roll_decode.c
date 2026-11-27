@@ -45,15 +45,15 @@ static FilmStatus original_stat(const char *directory,unsigned id,struct stat *s
 static bool same_original(const struct stat *a,const struct stat *b)
 {return a->st_size==b->st_size&&a->st_mtime==b->st_mtime;}
 
-static FilmStatus write_cache(const FilmFrame *frame,const FilmRawScene *scene,
-    const struct stat *original,const char *directory,unsigned id)
+static FilmStatus write_cache(const FilmRawScene *scene,
+    const struct stat *original,const char *directory,unsigned id,uint32_t source_crc)
 {
     char name[512];FilmStatus s=cache_path(name,sizeof name,directory,id);
     if(s!=FILM_OK)return s;
     FilmWrite write;s=film_write_begin(&write,name);if(s!=FILM_OK)return s;
     uint8_t header[CACHE_HEADER]={'F','3','S','C'},block[CACHE_BLOCK];
     put(header+4,FILM_RAW_SCENE_CACHE_VERSION);put(header+8,id);put(header+12,scene->width);put(header+16,scene->height);
-    put(header+20,film_roll_source_crc(&frame->source));
+    put(header+20,source_crc);
     put64(header+24,(uint64_t)original->st_size);put64(header+32,(uint64_t)original->st_mtime);
     if(fwrite(header,1,sizeof header,write.file)!=sizeof header)s=FILM_IO;
     uint32_t sum=UINT32_MAX;size_t count=(size_t)scene->width*scene->height;
@@ -82,6 +82,7 @@ FilmStatus film_roll_decode(const char *source,const char *originals,const char 
     FilmFrame frame={0};FilmRawScene scene={0};
     if(s==FILM_OK){last_stage="DNG read / digest";s=film_frame_read(name,&frame);}
     if(s==FILM_OK&&frame.source.format==FILM_RAW10_RGGB){
+        const uint32_t source_crc=film_roll_source_crc(&frame.source);
         last_stage="RAW linear scene decode";
         s=film_raw_frame_scene(&frame,NULL,&scene);
         if(s==FILM_OK){last_stage="DNG recheck";s=original_stat(originals,id,&after,name);}
@@ -92,21 +93,21 @@ FilmStatus film_roll_decode(const char *source,const char *originals,const char 
         if(s==FILM_OK){
             FilmExposureMatrix matrix={0};
             FilmStatus metadata=film_exposure_matrix_read("film-exposure-matrix-read/v1",previews,id,
-                film_roll_source_crc(&frame.source),&matrix);
+                source_crc,&matrix);
             /* A gray diagnostic is deliberately unfit until its Display-gray
              * calibration and paired YUV have been measured together.
              * Never fill its F3E with an uncalibrated neutral-scene guess. */
             FilmStatus gray=film_gray_pair_verify("film-gray-pair-verify/v1",
-                previews,id,film_roll_source_crc(&frame.source));
+                previews,id,source_crc);
             if(metadata==FILM_OK && gray==FILM_IO &&
                matrix.preview_valid && !matrix.fitted &&
                film_exposure_matrix_fit("film-exposure-matrix-fit/v1",&matrix,&scene)==FILM_OK)
                 (void)film_exposure_matrix_write("film-exposure-matrix-write/v1",previews,&matrix);
         }
-        if(s==FILM_OK){last_stage="F3C scene cache write";s=write_cache(&frame,&scene,&before,previews,id);}
+        if(s==FILM_OK){last_stage="F3C scene cache write";s=write_cache(&scene,&before,previews,id,source_crc);}
         if(s==FILM_OK){
             last_stage="JPG/F3I preview publish";
-            s=film_roll_pair_publish(source,&frame,&scene,previews,id);
+            s=film_roll_pair_publish_with_crc(source,&frame,&scene,previews,id,source_crc);
             if(s!=FILM_OK)last_stage=film_roll_pair_publish_last_stage();
         }
     }else if(s==FILM_OK){

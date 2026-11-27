@@ -69,7 +69,8 @@ FilmStatus film_roll_jpeg_preview(const char *source,const char *directory,unsig
     if(s==FILM_OK){if(pair_out)*pair_out=pair;}else film_image_free(out);
     return s;
 }
-FilmStatus film_roll_pair_publish(const char *source,const FilmFrame *frame,const FilmRawScene *scene,const char *directory,unsigned id)
+FilmStatus film_roll_pair_publish_with_crc(const char *source,const FilmFrame *frame,const FilmRawScene *scene,
+    const char *directory,unsigned id,uint32_t source_crc)
 {
     if(!source||(strcmp(source,"film-roll-pair-publish/v1")&&strcmp(source,"film-roll-decode/v1"))||!film_runtime_source_valid(source))return FILM_STATE;
     if(!frame||!frame->source.pixels||!shape(frame->source.width,frame->source.height,frame->source.format))return FILM_INVALID;
@@ -99,7 +100,7 @@ FilmStatus film_roll_pair_publish(const char *source,const FilmFrame *frame,cons
     s=encoded(jpeg,&data,&bytes);if(s!=FILM_OK)return s;
     uint32_t jpeg_crc=~update(UINT32_MAX,data,bytes);free(data);
     uint8_t b[INDEX_BYTES]={'F','3','R','I'};put(b+4,1);put(b+8,id);put(b+12,frame->source.format);
-    put(b+16,frame->source.width);put(b+20,frame->source.height);put(b+24,film_roll_source_crc(&frame->source));
+    put(b+16,frame->source.width);put(b+20,frame->source.height);put(b+24,source_crc);
     put(b+28,jpeg_crc);put(b+32,320);put(b+36,240);put(b+40,~update(UINT32_MAX,b,40));
     publish_stage="F3I index write";
     FilmWrite write;s=film_write_begin(&write,index);if(s!=FILM_OK)return s;
@@ -107,6 +108,12 @@ FilmStatus film_roll_pair_publish(const char *source,const FilmFrame *frame,cons
     s=film_write_end(&write,s);
     if(s==FILM_OK)publish_stage="complete";
     return s;
+}
+FilmStatus film_roll_pair_publish(const char *source,const FilmFrame *frame,const FilmRawScene *scene,const char *directory,unsigned id)
+{
+    if(!source||(strcmp(source,"film-roll-pair-publish/v1")&&strcmp(source,"film-roll-decode/v1"))||!film_runtime_source_valid(source))return FILM_STATE;
+    if(!frame||!frame->source.pixels||!shape(frame->source.width,frame->source.height,frame->source.format))return FILM_INVALID;
+    return film_roll_pair_publish_with_crc(source,frame,scene,directory,id,film_roll_source_crc(&frame->source));
 }
 FilmStatus film_roll_pair_verify(const char *source,const FilmFrame *frame,const FilmRollPair *pair)
 {
