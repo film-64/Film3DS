@@ -45,6 +45,8 @@ typedef struct {
     uint64_t source_bytes;
     uint32_t source_crc32;
     bool has_adapter, bypass_raw_shoulder;
+    /* F3LUT2 only: explicit scene/display intent, no inference from encoding. */
+    bool has_output_intent, scene_output, map_output_peak;
 } FilmLut;
 
 typedef struct {

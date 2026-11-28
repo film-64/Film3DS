@@ -386,6 +386,20 @@ static FilmRgb sample_lut_extended(const FilmLut *lut, FilmRgb color)
     return result;
 }
 
+/* Opt-in output mapping in linear working RGB, after LUT decoding and the
+ * legacy strength blend, before creative post curves and final quantization.
+ * One positive scale preserves RGB ratios; negative channels are left for the
+ * existing final gamut handling. This is not a gamut-compression operator. */
+static FilmRgb output_peak_shoulder(FilmRgb color)
+{
+    FilmRgb linear={decode_srgb(color.r),decode_srgb(color.g),decode_srgb(color.b)};
+    float peak=fmaxf(linear.r,fmaxf(linear.g,linear.b));
+    const float knee=.75f;
+    if (peak<=knee) return color;
+    float gain=(knee+(1-knee)*(-expm1f(-(peak-knee)/(1-knee))))/peak;
+    return (FilmRgb){encode_srgb(linear.r*gain),encode_srgb(linear.g*gain),encode_srgb(linear.b*gain)};
+}
+
 static FilmRgb apply_lut(FilmRgb color, const FilmGrade *grade, bool extended)
 {
     const FilmProfile *p = grade->profile;
@@ -409,6 +423,9 @@ static FilmRgb apply_lut(FilmRgb color, const FilmGrade *grade, bool extended)
         color = (FilmRgb){color.r * (1 - p->strength) + mapped.r * p->strength,
                           color.g * (1 - p->strength) + mapped.g * p->strength,
                           color.b * (1 - p->strength) + mapped.b * p->strength};
+        if (p->strength>0 && lut->has_adapter && lut->has_output_intent &&
+            lut->scene_output && lut->map_output_peak)
+            color=output_peak_shoulder(color);
     }
     return color;
 }
