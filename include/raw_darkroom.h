@@ -18,6 +18,22 @@ typedef struct FilmRawIsp {
  * only when the caller supplies an appropriate sensor-to-working-space CCM. */
 typedef struct { unsigned width,height; FilmRgb *pixels; } FilmRawPrepared;
 typedef struct { unsigned width,height; FilmRgb *pixels; } FilmRawScene;
+/* Explicit neutral patch in the ungraded, calibrated scene; coordinates are
+ * full-frame pixels. Bounds are linear working RGB, not sensor clipping flags. */
+typedef struct {
+    unsigned x,y,width,height;
+    float minimum,maximum;
+} FilmNeutralPatch;
+typedef struct {
+    FilmWhiteBalance balance;
+    unsigned accepted,rejected;
+    float residual_stops,spread_stops;
+} FilmNeutralBalance;
+/* Replaces recipe.white_balance (never adds to it). Fits existing controls:
+ * kelvin=0 or 1000..10000 in 100 K steps, red/blue=-9..9. Failure leaves out
+ * unchanged. Requires >=9 valid pixels, >=75% coverage, chromatic spread <=.15
+ * stop and fitted channel residual <=.08 stop. Inputs remain immutable. */
+FilmStatus film_raw_scene_neutral(const FilmRawScene *,const FilmNeutralPatch *,FilmNeutralBalance *);
 FilmRawIsp film_raw_isp_default(void);
 FilmStatus film_raw_profile_load(const char *,FILE *,FilmRawIsp *);
 FilmStatus film_raw_scene_prepare(const char *,const FilmRaw10View *,const FilmRawIsp *,FilmRawScene *);

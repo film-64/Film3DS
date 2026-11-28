@@ -3,6 +3,13 @@ from pathlib import Path
 import argparse
 
 CONTRACT_MATRIX = {
+    "film-neutral-balance/v1": dict(compute=True,lane_admission=False,override=None,proof="none",
+        entry="explicit_neutral_patch_in_ungraded_linear_calibrated_scene",
+        sampling="bounded_ROI_finite_positive_RGB_configured_bounds_9_pixels_75_percent_coverage",
+        fit="existing_kelvin_0_or_1000_to_10000_step100_red_blue_minus9_to9",
+        quality="chromatic_spread_max_0_15_stop_residual_max_0_08_stop",
+        output="replacement_white_balance_and_quality_report_failure_unchanged",
+        originals_immutable=True,writes=False,camera_calls=False,queues=False,retries=0),
     "film-lut-adapter/v1": dict(compute=True,lane_admission=False,override=None,proof="none",
         entry="path_loader_after_successful_CUBE_parse",
         input="optional_exact_cube_path_plus_dot_f3a_F3LUT1_fixed_fields",
