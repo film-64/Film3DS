@@ -1102,7 +1102,7 @@ static void preview_darkroom(bool full_quality,const FilmRecipe *temporary_recip
         show_image(&app.room.composition_view, FILM_601_FULL);
         snprintf(app.status, sizeof app.status, "%s %ux%u - not saved%s",
                  use_half?"Fast preview":"Preview",app.room.preview.width,app.room.preview.height,
-                 !lut?"":lut->has_adapter?" / adapter":lut->has_transfer?" / CUBE tags":" / assumed profile");
+                 !lut?"":lut->has_output_intent?(lut->scene_output?(frame.recipe.profile.strength>0?" / scene mapped":" / scene LUT off"):" / display"):lut->has_adapter?" / adapter":lut->has_transfer?" / CUBE tags":" / assumed profile");
         if (app.log) {
             fprintf(app.log, "Darkroom preview LUT=%s strength=%.0f%% input_EV=%.2f H/M/S=%+.0f/%+.0f/%+.0f sharpness=%+d\n",
                     frame.recipe.lut_id[0] ? frame.recipe.lut_id : "Neutral",

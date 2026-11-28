@@ -22,7 +22,7 @@ from camera_runtime_contract import CONTRACT_MATRIX,RUNTIME_INTERNAL_FIELDS,head
 class ExportTests(unittest.TestCase):
     def test_sidecar_cannot_silently_undo_legacy_baked_knee(self):
         original_lut=self.lut.read_bytes()
-        create_adapter(self.lut,"SRGB","SRGB","bypass")
+        create_adapter(self.lut,"SRGB","SRGB","bypass","scene","peak-shoulder")
         self.run_export('sidecar-zero-knee','grain_amount 0\n')
         self.params.write_text('F3RAW1\nwidth 16\nheight 12\nshoulder 0.75\n')
         out=self.dir/'baked-knee'

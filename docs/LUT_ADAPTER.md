@@ -36,7 +36,7 @@ pre_lut_shoulder bypass
 换行方式和末尾换行；不重新读取另一份文件计算身份。任何内容变化都需要重新生成适配文件。
 CRC32 是意外改动检测，不是抗恶意碰撞的认证；未来可复现编辑资产存档须采用强内容摘要。
 
-- 旁车必须包含版本及五个有序字段，拒绝重复、额外、超长、NUL、非法数字和未知编码。
+- F3LUT1 旁车必须包含版本及五个有序字段，拒绝重复、额外、超长、NUL、非法数字和未知编码。
 - 没有旁车且原 CUBE 无声明时，保持原配方假设；预览提示 `assumed profile`。
 - 原 CUBE 已有成对 FILM3DS_INPUT/OUTPUT 时继续使用，并提示 `CUBE tags`。
 - 有旁车时提示 `adapter`。若与 CUBE 内声明冲突则拒绝，不悄悄覆盖任何一方。
@@ -53,7 +53,7 @@ CRC32 是意外改动检测，不是抗恶意碰撞的认证；未来可复现�
 
 仍按线性场景白平衡／曝光、RAW 自定义明暗、局部曝光、可选 shoulder、LUT 编码／采样／解码、
 后置曲线顺序处理。用户主动设置的前置／后置创作调整不会被旁车清零。
-本轮不额外添加输出显示映射；Log-to-Log 风格表的最终高光映射仍需后续阶段设计。
+F3LUT1 不额外添加输出显示映射；需要对场景输出进行映射时，使用下述 F3LUT2 显式策略。
 旁车也不能撤销已写入 JPEG/YUV 的原生 ISP 高光压缩。
 
 历史 `filmraw` 工具在 LUT 分支前已经生成一份供 plain/look 共用的 ISP 图像：
@@ -70,3 +70,55 @@ CRC32 是意外改动检测，不是抗恶意碰撞的认证；未来可复现�
 - 打包：拒绝静默丢失旁车；历史 RAW CLI 拒绝不可能执行的逆高光操作。
 
 这些是显影核心与宿主测试。完整编辑会话恢复、持久队列、相机挂接和实机画面／速度仍未完成。
+
+## F3LUT2：显式输出意图与显示映射
+
+新版保留 F3LUT1 的五个字段，在末尾增加 `output_intent` 和 `display_mapping`。
+旧 F3LUT1 仍按原行为加载，不自动升级、不推断 Log 输出是否需要映射。
+
+```sh
+# 已完成显示处理的 LUT，明确不再映射：
+python3 tools/lut_adapter.py display.cube --input FLOG2C --output SRGB \
+  --pre-lut-shoulder bypass --output-intent display --display-mapping none
+# 保留场景亮度的风格 LUT，解码后补上一次映射：
+python3 tools/lut_adapter.py scene.cube --input FLOG2C --output FLOG2C \
+  --pre-lut-shoulder bypass --output-intent scene --display-mapping peak-shoulder
+```
+
+两项新参数必须同时指定。省略两项继续生成 v1。两项允许的组合只有
+`display/none` 和 `scene/peak-shoulder`；后者要求前置 shoulder 为 `bypass`。
+损坏、缺项、未知策略和矛盾组合在加载时拒绝；旧程序会拒绝 F3LUT2 而非误读。
+格式末尾如下（前面的文件身份与编码字段保持相同）：
+
+```text
+pre_lut_shoulder bypass
+output_intent scene
+display_mapping peak-shoulder
+```
+
+文件首行须为 `F3LUT2`。编码与意图独立：Log 可以承载已处理的显示数据，sRGB 曲线
+也可以编码未映射的浮点场景值，不能根据编码名自动决定映射。
+设备状态会显示 `scene mapped` 或 `display`；v1 仍显示 `adapter`。
+
+### 本版映射定义与边界
+
+在 LUT 解码到工作空间、完成既有编码空间强度混合之后，将 RGB 解码为线性值。
+设最大通道为 p，固定拐点 k=0.75；p≤k 时不变，p>k 时将目标最大值设为
+`k + (1-k) × (1-exp(-(p-k)/(1-k)))`，所有通道乘以 `目标最大值/p`，然后编码回
+现有显示处理链。后置创作曲线继续生效。这里采用内部、固定版本的高光肩部算子，
+不声称符合某个电影／HDR 显示标准，也不替代准确的传感器校准。
+
+峰值缩放保留线性 RGB 比例；它不是色域压缩，负通道仍由原有最终输出规则处理。
+不额外改变中灰、黑位、曝光或 LUT 本身。强亮部渐近白点，在有限精度 JPEG 中仍可能
+合并层次；它不能恢复已被传感器、原生 ISP 或 LUT 自身裁掉的信息。
+
+- 场景映射要求绕过前置 RAW knee，避免两次技术性高光压缩。
+- 用户显式设置的前／后置创作肩部、曲线和其他调整不会被清零，仍可能进一步压缩高光。
+- 保持历史 LUT 强度的编码空间混合。强度大于零时，映射作为管线策略完整应用一次；
+  强度为零时完全关闭并恢复原 RAW shoulder，所以零点附近不保证连续过渡。
+- 主机与设备共用核心处理。无 LUT、v1 配置、未描述 LUT 不启用本算子。
+- 只作用于当前 LUT 显影分支；原生预览、原生 JPEG、DNG 原件均不改写。
+- 旧 `filmraw` 已烘焙 ISP shoulder 非零时仍拒绝 bypass，不能撤销先前的处理。
+
+本轮补齐 LUT 输出分支的显式映射。无 LUT 的独立输出策略、完整版本化编辑配方、
+色域压缩及可持久恢复的渲染任务仍在后续阶段。

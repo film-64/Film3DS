@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* Strict, bounded metadata. One header and five ordered key/value lines.
+/* Strict, bounded metadata. Versioned header and ordered key/value lines.
  * Missing metadata is compatible; malformed/stale metadata never falls back. */
 static bool read_line(FILE *file, char line[128])
 {
@@ -31,7 +31,9 @@ static bool field(FILE *file, const char *key, char value[64])
 static FilmStatus apply_adapter(FILE *file, FilmLut *lut)
 {
     char line[128], value[64];
-    if (!read_line(file,line) || strcmp(line,"F3LUT1")) return FILM_CORRUPT;
+    if (!read_line(file,line)) return FILM_CORRUPT;
+    bool version2=!strcmp(line,"F3LUT2");
+    if (!version2 && strcmp(line,"F3LUT1")) return FILM_CORRUPT;
     if (!field(file,"cube_bytes",value) || !*value || strspn(value,"0123456789") != strlen(value))
         return FILM_CORRUPT;
     errno=0; char *end;
@@ -49,12 +51,25 @@ static FilmStatus apply_adapter(FILE *file, FilmLut *lut)
     if (!field(file,"pre_lut_shoulder",value)) return FILM_CORRUPT;
     bool bypass=!strcmp(value,"bypass");
     if (!bypass && strcmp(value,"preserve")) return FILM_UNSUPPORTED;
+    bool scene=false,map=false;
+    if (version2) {
+        if (!field(file,"output_intent",value)) return FILM_CORRUPT;
+        scene=!strcmp(value,"scene");
+        if (!scene && strcmp(value,"display")) return FILM_UNSUPPORTED;
+        if (!field(file,"display_mapping",value)) return FILM_CORRUPT;
+        map=!strcmp(value,"peak-shoulder");
+        if (!map && strcmp(value,"none")) return FILM_UNSUPPORTED;
+        /* v2 admits only completed display output, or an explicitly mapped
+         * scene output. Reject double knees and ambiguous unmapped scenes. */
+        if (scene!=map || (map && !bypass)) return FILM_UNSUPPORTED;
+    }
     int ch;
     while ((ch=fgetc(file))!=EOF) if (!isspace((unsigned char)ch)) return FILM_CORRUPT;
     if (ferror(file)) return FILM_IO;
     if (lut->has_transfer && (lut->input!=input || lut->output!=output)) return FILM_CORRUPT;
     lut->input=input; lut->output=output; lut->has_transfer=true;
     lut->has_adapter=true; lut->bypass_raw_shoulder=bypass;
+    lut->has_output_intent=version2; lut->scene_output=scene; lut->map_output_peak=map;
     return FILM_OK;
 }
 
