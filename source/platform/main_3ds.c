@@ -312,11 +312,8 @@ static FilmStatus load_look_lut(const Look *look, FilmLut *lut)
 {
     char path[768];
     snprintf(path, sizeof path, "%s%s", look->directory, look->name);
-    FILE *file = fopen(path, "rb");
-    if (!file) return FILM_IO;
     unsigned line = 0;
-    FilmStatus status = film_lut_load(file, lut, &line);
-    fclose(file);
+    FilmStatus status = film_lut_load_path(path, lut, &line);
     if (status != FILM_OK && app.log) fprintf(app.log, "%s line %u\n", look->name, line);
     return status;
 }
@@ -1103,8 +1100,9 @@ static void preview_darkroom(bool full_quality,const FilmRecipe *temporary_recip
         if (status==FILM_OK) {
         app.darkroom_preview_fast=use_half;
         show_image(&app.room.composition_view, FILM_601_FULL);
-        snprintf(app.status, sizeof app.status, "%s %ux%u - not saved",
-                 use_half?"Fast preview":"Preview",app.room.preview.width,app.room.preview.height);
+        snprintf(app.status, sizeof app.status, "%s %ux%u - not saved%s",
+                 use_half?"Fast preview":"Preview",app.room.preview.width,app.room.preview.height,
+                 !lut?"":lut->has_adapter?" / adapter":lut->has_transfer?" / CUBE tags":" / assumed profile");
         if (app.log) {
             fprintf(app.log, "Darkroom preview LUT=%s strength=%.0f%% input_EV=%.2f H/M/S=%+.0f/%+.0f/%+.0f sharpness=%+d\n",
                     frame.recipe.lut_id[0] ? frame.recipe.lut_id : "Neutral",
@@ -1651,7 +1649,11 @@ static void darkroom_value(FilmDarkroomRow row, char *value, size_t size)
     case DARKROOM_RAW_SHADOWS:snprintf(value,size,"%+.1f EV",app.raw_shadows);break;
     case DARKROOM_RAW_MIDTONES:snprintf(value,size,"%+.1f EV",app.raw_midtones);break;
     case DARKROOM_RAW_HIGHLIGHTS:snprintf(value,size,"%+.1f EV",app.raw_highlights);break;
-    case DARKROOM_RAW_SHOULDER:snprintf(value,size,"%s%.2f",app.raw_shoulder?"Knee ":"Off ",app.raw_shoulder);break;
+    case DARKROOM_RAW_SHOULDER:
+        if(app.roll_preview_format==FILM_RAW10_RGGB && !strcmp(app.preview_lut_key,r->lut_id) &&
+           film_lut_bypasses_raw_shoulder(&app.preview_lut,r))snprintf(value,size,"LUT bypass");
+        else snprintf(value,size,"%s%.2f",app.raw_shoulder?"Knee ":"Off ",app.raw_shoulder);
+        break;
     case DARKROOM_RAW_LOCAL:snprintf(value,size,"%.0f%%",app.raw_local*100);break;
     case DARKROOM_DENOISE:snprintf(value,size,"%.0f%%",app.chroma_denoise*100);break;
     case DARKROOM_GRAIN_SIZE:snprintf(value,size,"%.2fx",app.grain_size);break;

@@ -40,6 +40,11 @@ typedef struct {
      * Unannotated LUTs retain the selected recipe's legacy color space. */
     bool has_transfer;
     FilmTransfer input,output;
+    /* Exact parsed file identity (CRC is corruption detection, not security).
+     * Optional .cube.f3a metadata is bound to these bytes. Not recipe state. */
+    uint64_t source_bytes;
+    uint32_t source_crc32;
+    bool has_adapter, bypass_raw_shoulder;
 } FilmLut;
 
 typedef struct {
@@ -143,6 +148,8 @@ typedef struct {
 
 const char *film_status_name(FilmStatus status);
 FilmStatus film_lut_load(FILE *file, FilmLut *out, unsigned *error_line);
+FilmStatus film_lut_load_path(const char *path, FilmLut *out, unsigned *error_line);
+bool film_lut_bypasses_raw_shoulder(const FilmLut *lut, const FilmRecipe *recipe);
 void film_lut_free(FilmLut *lut);
 FilmRgb film_lut_sample(const FilmLut *lut, FilmRgb color);
 FilmStatus film_profile_validate(const FilmProfile *profile);
