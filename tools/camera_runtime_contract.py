@@ -3,6 +3,15 @@ from pathlib import Path
 import argparse
 
 CONTRACT_MATRIX = {
+    "film-color-encoding/v1": dict(compute=True,lane_admission=False,override=None,proof="none",
+        entry="validated_LUT_profile_input_and_output_conversion",
+        working="linear_BT709_D65_not_sensor_calibration",
+        encodings=("SRGB","LINEAR_SRGB","REC709","FLOG2C_FGAMUT_C"),
+        conversion="gamut_matrix_then_encode_inverse_decode_then_inverse_gamut",
+        numeric="float_no_clamp_preserve_negative_and_superwhite_formula_extension",
+        validation="unknown_and_generic_VENDOR_LOG_rejected_before_render",
+        legacy="stable_FilmTransfer_values_no_recipe_layout_change_SRGB_identity_bypass",
+        writes=False,camera_calls=False,queues=False,retries=0),
     "film-app-shutdown/v1": dict(compute=False,lane_admission=False,override=None,proof="none",
         entry="START_APT_close_or_graphics_initialization_failure",
         capture="finish_existing_worker_before_camera_close_and_shared_resource_release",

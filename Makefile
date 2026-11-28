@@ -1,3 +1,4 @@
+.DEFAULT_GOAL := all
 CC ?= cc
 CPPFLAGS += -Iinclude -D_POSIX_C_SOURCE=200809L
 CFLAGS ?= -O2 -g
@@ -5,6 +6,10 @@ CFLAGS += -std=c11 -Wall -Wextra -Wpedantic
 LDLIBS += -ljpeg -lm
 CORE := $(wildcard source/camera/*.c source/color/*.c source/image/*.c source/storage/*.c source/ui/*.c source/debug/*.c)
 HEADERS := $(wildcard include/*.h source/storage/*.h source/color/*.h)
+
+build/color-encoding-test: $(CORE) $(HEADERS) tests/color_encoding.c
+	@mkdir -p build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/color_encoding.c $(LDFLAGS) $(LDLIBS) -o $@
 
 .PHONY: all host test test-native-integration test-raw-darkroom test-standard-media sanitize bench 3ds clean
 all: host
@@ -78,7 +83,8 @@ build/roll-preview-test: $(CORE) $(HEADERS) tests/roll_preview.c
 build/gpu-pipeline-test: $(CORE) $(HEADERS) tests/gpu_pipeline.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/gpu_pipeline.c $(LDFLAGS) $(LDLIBS) -o $@
-test: build/standard-media-test host build/unit build/hardware-exposure-test build/hardware-transport-test build/darkroom-test build/wb-composition-test build/roll-test
+test: build/color-encoding-test build/standard-media-test host build/unit build/hardware-exposure-test build/hardware-transport-test build/darkroom-test build/wb-composition-test build/roll-test
+	./build/color-encoding-test
 	python3 tools/camera_runtime_contract.py --check
 	python3 tests/camera_ui_package.py
 	./build/hardware-exposure-test

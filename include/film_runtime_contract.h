@@ -45,6 +45,7 @@ static const unsigned short film_hw_core[] = {528,528,528,528,528,528,544};
 static inline bool film_runtime_source_valid(const char *source)
 {
     if (!source) return false;
+    if (!strcmp(source, "film-color-encoding/v1")) return true;
     if (!strcmp(source, "film-app-shutdown/v1")) return true;
     if (!strcmp(source, "film-display-chart-calibrate/v1")) return true;
     if (!strcmp(source, "film-camera-receive-complete/v1")) return true;
