@@ -97,10 +97,11 @@ static void lut_transfer_metadata(void)
         rewind(file);
         FilmLut lut={0};
         FilmStatus status=film_lut_load(file,&lut,NULL);
-        if(kind==0||kind==4||kind==5){
+        if(kind==0||kind==3||kind==4||kind==5){
             assert(status==FILM_OK);
             assert(lut.has_transfer==(kind!=5));
             if(kind==0)assert(lut.input==FILM_FLOG2C&&lut.output==FILM_SRGB);
+            if(kind==3)assert(lut.input==FILM_SRGB&&lut.output==FILM_FLOG2C);
             if(kind==4)assert(lut.input==FILM_LINEAR_SRGB&&lut.output==FILM_REC709);
             film_lut_free(&lut);
         }else assert(status==FILM_CORRUPT&&!lut.samples);

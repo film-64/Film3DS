@@ -7,8 +7,8 @@ from pathlib import Path
 import struct
 import zlib
 
-TRANSFERS = {"srgb": 0, "linear-srgb": 1, "rec709": 3}
-INPUT_TRANSFERS = {**TRANSFERS, "f-log2c": 4}
+TRANSFERS = {"srgb": 0, "linear-srgb": 1, "rec709": 3, "f-log2c": 4}
+INPUT_TRANSFERS = TRANSFERS
 
 
 def bounded(value, minimum, maximum):

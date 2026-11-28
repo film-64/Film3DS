@@ -118,6 +118,17 @@ def main():
         assert run("develop", root / "lut.f3s", root / "missing.jpg", expected=1).stderr.strip() == "bad_state"
         print("PASS 5 synthetic LUT looks, explicit LUT protocol, profile interop and source reuse")
 
+        log_profile = root / "log-identity.f3p"
+        log_profile.write_bytes(encode({"input": "f-log2c", "output": "f-log2c"}))
+        log_output = root / "log-identity.jpg"
+        run("develop", source, log_output, luts / "identity17.cube", log_profile)
+        log_image = verify_jpeg(log_output, (1278, 852))
+        # The actual Python profile -> C loader -> Log LUT -> JPEG path.
+        # Quantization/encoding can amplify sub-code float differences slightly.
+        assert max(abs(a-b) for a,b in zip(log_image.tobytes(), plain.tobytes())) <= 3
+        assert source.read_bytes() == packet
+        print("PASS Python/C Log profile interop, Log output JPEG and immutable source")
+
         profile.write_bytes(encode({"input": "rec709", "output": "rec709", "strength": .6,
                                     "global": [0, -.5, .125], "zones": [[0, 0, 0]] * 12}))
         run("develop", source, reproduced, luts / "identity17.cube", profile)

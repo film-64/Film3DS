@@ -1,5 +1,8 @@
 # Film3DS
 
+原生 Camera.app 高级模式的开发顺序与验收边界见 [闭环执行计划](docs/PRODUCT_EXECUTION_PLAN.md)。
+本批 Log 输入／输出适配及限制见 [色彩编码底座](docs/COLOR_ENCODING.md)。
+
 目前 3DS 工作流：标准 `.cube`、标准 `.DNG` RAW、完整原图上的二次构图，以及可切换 debug 日志。操作与验证记录见 [标准 RAW / LUT / debug 说明](docs/STANDARD_RAW_DEBUG_20261117.md)。历史实验记录不代表当前界面或已完成的实机验证。
 
 ## 快速开始

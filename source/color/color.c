@@ -1,4 +1,5 @@
 #include "film.h"
+#include "color_encoding.h"
 #include "film_runtime_contract.h"
 
 #include <ctype.h>
@@ -61,14 +62,6 @@ FilmStatus film_camera_color_load(FILE *file, FilmCameraColor *out)
     return FILM_OK;
 }
 
-static bool film_lut_transfer_name(const char *name,FilmTransfer *out,bool input)
-{
-    if(!strcmp(name,"SRGB")){*out=FILM_SRGB;return true;}
-    if(!strcmp(name,"LINEAR_SRGB")){*out=FILM_LINEAR_SRGB;return true;}
-    if(!strcmp(name,"REC709")){*out=FILM_REC709;return true;}
-    if(input&&!strcmp(name,"FLOG2C")){*out=FILM_FLOG2C;return true;}
-    return false; /* Vendor log output has no implemented inverse. */
-}
 FilmStatus film_lut_load(FILE *file, FilmLut *out, unsigned *error_line)
 {
     if (error_line) *error_line = 0;
@@ -98,12 +91,12 @@ FilmStatus film_lut_load(FILE *file, FilmLut *out, unsigned *error_line)
         const char *input_key="# FILM3DS_INPUT ";
         const char *output_key="# FILM3DS_OUTPUT ";
         if (!strncmp(line,input_key,strlen(input_key))) {
-            if(count||have_input_transfer||!film_lut_transfer_name(
-                skip_space(line+strlen(input_key)),&lut.input,true))goto fail;
+            if(count||have_input_transfer||!film_color_encoding_parse(
+                skip_space(line+strlen(input_key)),&lut.input))goto fail;
             have_input_transfer=true;
         } else if (!strncmp(line,output_key,strlen(output_key))) {
-            if(count||have_output_transfer||!film_lut_transfer_name(
-                skip_space(line+strlen(output_key)),&lut.output,false))goto fail;
+            if(count||have_output_transfer||!film_color_encoding_parse(
+                skip_space(line+strlen(output_key)),&lut.output))goto fail;
             have_output_transfer=true;
         } else if (!strncmp(line,"# FILM3DS_INPUT",16)||
                    !strncmp(line,"# FILM3DS_OUTPUT",17))goto fail;
@@ -262,39 +255,17 @@ FilmRgb film_srgb_add_halation(FilmRgb code, float energy)
                      encode_srgb(decode_srgb(code.b) + energy * .06f)};
 }
 
-static float to_lut(float value, FilmTransfer transfer)
-{
-    if (transfer == FILM_SRGB) return value;
-    float linear = decode_srgb(value);
-    if (transfer == FILM_REC709)
-        return linear < 0.018f ? 4.5f * linear : 1.099f * powf(linear, 0.45f) - 0.099f;
-    return linear;
-}
-
-static float encode_flog2c(float linear)
-{
-    if (linear < 0.000889f) return 8.799461f * linear + 0.092864f;
-    return 0.245281f * log10f(5.555556f * linear + 0.064829f) + 0.384316f;
-}
-
 static FilmRgb lut_input(FilmRgb color, FilmTransfer transfer)
 {
-    if (transfer != FILM_FLOG2C)
-        return (FilmRgb){to_lut(color.r, transfer), to_lut(color.g, transfer), to_lut(color.b, transfer)};
-
-    // Linear BT.709 to F-Gamut C, derived from Fujifilm's published D65 primaries.
-    float r = decode_srgb(color.r), g = decode_srgb(color.g), b = decode_srgb(color.b);
-    return (FilmRgb){encode_flog2c(.517069024f * r + .412934676f * g + .069996300f * b),
-                     encode_flog2c(.088617162f * r + .809263150f * g + .102119689f * b),
-                     encode_flog2c(.017750040f * r + .109447621f * g + .872802339f * b)};
+    /* Preserve the exact legacy sRGB bypass; profiles are validated upstream. */
+    if (transfer == FILM_SRGB) return color;
+    return film_color_encode_linear(film_color_decode_linear(color, FILM_SRGB), transfer);
 }
 
-static float from_lut(float value, FilmTransfer transfer)
+static FilmRgb lut_output(FilmRgb color, FilmTransfer transfer)
 {
-    if (transfer == FILM_SRGB) return value;
-    if (transfer == FILM_REC709)
-        value = value < 0.081f ? value / 4.5f : powf((value + 0.099f) / 1.099f, 1 / 0.45f);
-    return encode_srgb(value);
+    if (transfer == FILM_SRGB) return color;
+    return film_color_encode_linear(film_color_decode_linear(color, transfer), FILM_SRGB);
 }
 
 static bool valid_hsl(FilmHsl a)
@@ -306,7 +277,7 @@ static bool valid_hsl(FilmHsl a)
 
 FilmStatus film_profile_validate(const FilmProfile *p)
 {
-    if (!p || (unsigned)p->input > FILM_FLOG2C || (unsigned)p->output > FILM_REC709 ||
+    if (!p || (unsigned)p->input > FILM_FLOG2C || (unsigned)p->output > FILM_FLOG2C ||
         !isfinite(p->strength) || p->strength < 0 || p->strength > 1 ||
         !isfinite(p->exposure) || fabsf(p->exposure) > 8 || !valid_hsl(p->global)) return FILM_INVALID;
     for (unsigned i = 0; i < 12; ++i) if (!valid_hsl(p->zones[i])) return FILM_INVALID;
@@ -414,8 +385,7 @@ static FilmRgb apply_lut(FilmRgb color, const FilmGrade *grade, bool extended)
                        input.b < lut->min.b || input.b > lut->max.b;
         FilmRgb mapped = extended && outside && p->input == p->output && !lut->shadow_shaper
             ? sample_lut_extended(lut, input) : film_lut_sample(lut, input);
-        mapped = (FilmRgb){from_lut(mapped.r, p->output), from_lut(mapped.g, p->output),
-                          from_lut(mapped.b, p->output)};
+        mapped = lut_output(mapped, p->output);
         color = (FilmRgb){color.r * (1 - p->strength) + mapped.r * p->strength,
                           color.g * (1 - p->strength) + mapped.g * p->strength,
                           color.b * (1 - p->strength) + mapped.b * p->strength};
