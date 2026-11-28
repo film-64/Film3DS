@@ -13,6 +13,7 @@ from camera_runtime_contract import CONTRACT_MATRIX, header
 from camera_ui15_package import ROOT, checked_manifest, sha
 
 OVERLAYS = ("include/film.h", "source/color/color.c", "source/image/image.c",
+            "include/color_encoding.h", "source/color/color_encoding.c",
             "source/storage/storage.c", "source/ui/darkroom.c", "include/darkroom.h",
             "source/color/white_balance.c", "source/color/cie1931_5nm.h", "source/image/composition.c")
 
@@ -30,7 +31,7 @@ def stage_patch(base, out):
     if out.exists():
         raise FileExistsError(out)
     matrix = copy.deepcopy(manifest["runtime_contract"])
-    for source in ("film-darkroom/v1", "film-darkroom-save/v1", "film-darkroom-wb-preview/v1", "film-camera-ui-package/v1"):
+    for source in ("film-color-encoding/v1", "film-darkroom/v1", "film-darkroom-save/v1", "film-darkroom-wb-preview/v1", "film-camera-ui-package/v1"):
         matrix[source] = copy.deepcopy(CONTRACT_MATRIX[source])
     out.mkdir(parents=True)
     for directory in ("source", "include", "romfs", "tools"):
