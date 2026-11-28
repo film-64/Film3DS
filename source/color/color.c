@@ -62,11 +62,25 @@ FilmStatus film_camera_color_load(FILE *file, FilmCameraColor *out)
     return FILM_OK;
 }
 
+/* CRC32 of exactly the bytes consumed by the parser, including comments,
+ * CRLF and the last newline; no second file read or full-text allocation. */
+static uint32_t lut_crc_byte(uint32_t crc, unsigned byte)
+{
+    static const uint32_t table[16] = {
+        0,0x1db71064,0x3b6e20c8,0x26d930ac,0x76dc4190,0x6b6b51f4,0x4db26158,0x5005713c,
+        0xedb88320,0xf00f9344,0xd6d6a3e8,0xcb61b38c,0x9b64c2b0,0x86d3d2d4,0xa00ae278,0xbdbdf21c
+    };
+    crc ^= byte;
+    crc = (crc >> 4) ^ table[crc & 15];
+    return (crc >> 4) ^ table[crc & 15];
+}
+
 FilmStatus film_lut_load(FILE *file, FilmLut *out, unsigned *error_line)
 {
     if (error_line) *error_line = 0;
     if (!file || !out) return FILM_INVALID;
     FilmLut lut = { .max = {1, 1, 1} };
+    uint32_t file_crc = UINT32_MAX;
     unsigned line_number = 0;
     size_t count = 0, expected = 0;
     bool have_title = false, have_min = false, have_max = false, have_range = false;
@@ -76,7 +90,10 @@ FilmStatus film_lut_load(FILE *file, FilmLut *out, unsigned *error_line)
     for (;;) {
         size_t length = 0;
         int ch;
-        while ((ch = fgetc(file)) != EOF && ch != '\n') {
+        while ((ch = fgetc(file)) != EOF) {
+            file_crc = lut_crc_byte(file_crc, (unsigned)ch);
+            ++lut.source_bytes;
+            if (ch == '\n') break;
             if (!ch || length == sizeof buffer - 1) { ++line_number; goto fail; }
             buffer[length++] = (char)ch;
         }
@@ -162,6 +179,7 @@ FilmStatus film_lut_load(FILE *file, FilmLut *out, unsigned *error_line)
         lut.min.g >= lut.max.g || lut.min.b >= lut.max.b ||
         !isfinite(lut.max.r - lut.min.r) || !isfinite(lut.max.g - lut.min.g) ||
         !isfinite(lut.max.b - lut.min.b)) goto fail;
+    lut.source_crc32 = ~file_crc;
     *out = lut;
     return FILM_OK;
 fail:
@@ -378,14 +396,16 @@ static FilmRgb apply_lut(FilmRgb color, const FilmGrade *grade, bool extended)
                          encode_srgb(decode_srgb(color.b) * gain)};
     }
     if (grade->lut) {
-        FilmRgb input = lut_input(color, p->input);
         const FilmLut *lut = grade->lut;
+        FilmTransfer input_encoding = lut->has_transfer ? lut->input : p->input;
+        FilmTransfer output_encoding = lut->has_transfer ? lut->output : p->output;
+        FilmRgb input = lut_input(color, input_encoding);
         bool outside = input.r < lut->min.r || input.r > lut->max.r ||
                        input.g < lut->min.g || input.g > lut->max.g ||
                        input.b < lut->min.b || input.b > lut->max.b;
-        FilmRgb mapped = extended && outside && p->input == p->output && !lut->shadow_shaper
+        FilmRgb mapped = extended && outside && input_encoding == output_encoding && !lut->shadow_shaper
             ? sample_lut_extended(lut, input) : film_lut_sample(lut, input);
-        mapped = lut_output(mapped, p->output);
+        mapped = lut_output(mapped, output_encoding);
         color = (FilmRgb){color.r * (1 - p->strength) + mapped.r * p->strength,
                           color.g * (1 - p->strength) + mapped.g * p->strength,
                           color.b * (1 - p->strength) + mapped.b * p->strength};

@@ -26,11 +26,8 @@ static FilmStatus mock_capture(void *context, FilmFrame *frame)
 
 static FilmStatus load_lut(const char *path, FilmLut *lut)
 {
-    FILE *file = fopen(path, "rb");
-    if (!file) return FILM_IO;
     unsigned line;
-    FilmStatus status = film_lut_load(file, lut, &line);
-    fclose(file);
+    FilmStatus status = film_lut_load_path(path, lut, &line);
     if (status != FILM_OK) fprintf(stderr, "%s:%u %s\n", path, line, film_status_name(status));
     return status;
 }

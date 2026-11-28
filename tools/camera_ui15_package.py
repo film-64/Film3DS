@@ -23,6 +23,8 @@ def stage(out, luts, grain_texture=None):
     cubes = sorted(p for p in luts.iterdir() if p.is_file() and p.suffix.lower()==".cube")
     if not cubes:
         raise ValueError("require standalone .cube LUT files")
+    if any(Path(str(cube)+".f3a").exists() for cube in cubes):
+        raise ValueError("Sidecar adapters are SD-only: copy matching .cube + .cube.f3a to SD luts; bundling would omit the adapter")
     if out.exists():
         raise FileExistsError(out)
     out.mkdir(parents=True)

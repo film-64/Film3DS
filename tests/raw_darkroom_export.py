@@ -15,10 +15,24 @@ from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 from profile import encode
+from lut_adapter import create as create_adapter
 from camera_runtime_contract import CONTRACT_MATRIX,RUNTIME_INTERNAL_FIELDS,header
 
 
 class ExportTests(unittest.TestCase):
+    def test_sidecar_cannot_silently_undo_legacy_baked_knee(self):
+        original_lut=self.lut.read_bytes()
+        create_adapter(self.lut,"SRGB","SRGB","bypass")
+        self.run_export('sidecar-zero-knee','grain_amount 0\n')
+        self.params.write_text('F3RAW1\nwidth 16\nheight 12\nshoulder 0.75\n')
+        out=self.dir/'baked-knee'
+        result=subprocess.run([str(ROOT/'build/filmraw'),str(self.raw),str(self.params),str(out),
+            str(self.grain),str(self.lut),str(self.profile)],capture_output=True,text=True)
+        self.assertEqual(result.returncode,2,result.stderr)  # FILM_UNSUPPORTED
+        self.assertFalse(out.exists())
+        self.assertEqual(self.raw.read_bytes(),self.payload)
+        self.assertEqual(self.lut.read_bytes(),original_lut)
+
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.dir=Path(self.temp.name)
         values=[100*(1+((0,1,1,2)[(y&1)*2+(x&1)]))+((x*23+y*31)%80) for y in range(12) for x in range(16)]

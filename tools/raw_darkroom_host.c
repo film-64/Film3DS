@@ -108,8 +108,11 @@ int main(int argc,char **argv)
         float strength=c.recipe.profile.strength;
         s=film_profile_read(argv[6],&c.recipe.profile);if(s!=FILM_OK)goto done;
         c.recipe.profile.strength=strength;
-        f=fopen(argv[5],"rb");if(!f){s=FILM_IO;goto done;}unsigned line;
-        s=film_lut_load(f,&lut,&line);fclose(f);f=NULL;if(s!=FILM_OK)goto done;
+        unsigned line;
+        s=film_lut_load_path(argv[5],&lut,&line);if(s!=FILM_OK)goto done;
+        /* This legacy tool shares an already-prepared ISP image between plain
+         * and look output. It cannot undo a baked knee for only the LUT branch. */
+        if(film_lut_bypasses_raw_shoulder(&lut,&c.recipe)&&c.isp.shoulder>0){s=FILM_UNSUPPORTED;goto done;}
         strcpy(c.recipe.lut_id,"explicit-asset");
     }
     if(mkdir(argv[3],0700)){s=FILM_IO;goto done;}

@@ -278,7 +278,7 @@ FilmStatus film_raw_scene_grade(const char *source,const FilmRawScene *scene,con
     FilmRawIsp local=film_raw_isp_default();
     if(o){local.local_strength=o->raw_local;local.local_limit_ev=o->raw_local_limit;}
     if(status==FILM_OK)status=local_exposure(display.pixels,scene->width,scene->height,&local);
-    float knee=o?o->raw_shoulder:0;
+    float knee=film_lut_bypasses_raw_shoulder(lut,recipe)?0:(o?o->raw_shoulder:0);
     for(size_t i=0;status==FILM_OK&&i<n;++i){
         FilmRgb a=display.pixels[i];float peak=fmaxf(a.r,fmaxf(a.g,a.b)),gain=1;
         if(knee&&peak>knee)gain=(knee+(1-knee)*(1-expf(-(peak-knee)/(1-knee))))/peak;
