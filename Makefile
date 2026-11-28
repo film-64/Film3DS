@@ -15,6 +15,10 @@ build/lut-adapter-test: $(CORE) $(HEADERS) tests/lut_adapter.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/lut_adapter.c $(LDFLAGS) $(LDLIBS) -o $@
 
+build/neutral-balance-test: $(CORE) $(HEADERS) tests/neutral_balance.c
+	@mkdir -p build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/neutral_balance.c $(LDFLAGS) $(LDLIBS) -o $@
+
 .PHONY: all host test test-native-integration test-raw-darkroom test-standard-media sanitize bench 3ds clean
 all: host
 host: build/filmctl
@@ -87,7 +91,8 @@ build/roll-preview-test: $(CORE) $(HEADERS) tests/roll_preview.c
 build/gpu-pipeline-test: $(CORE) $(HEADERS) tests/gpu_pipeline.c
 	@mkdir -p build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CORE) tests/gpu_pipeline.c $(LDFLAGS) $(LDLIBS) -o $@
-test: build/lut-adapter-test build/color-encoding-test build/standard-media-test host build/unit build/hardware-exposure-test build/hardware-transport-test build/darkroom-test build/wb-composition-test build/roll-test
+test: build/neutral-balance-test build/lut-adapter-test build/color-encoding-test build/standard-media-test host build/unit build/hardware-exposure-test build/hardware-transport-test build/darkroom-test build/wb-composition-test build/roll-test
+	./build/neutral-balance-test
 	./build/lut-adapter-test
 	./build/color-encoding-test
 	python3 tools/camera_runtime_contract.py --check
@@ -102,6 +107,7 @@ test: build/lut-adapter-test build/color-encoding-test build/standard-media-test
 	python3 tests/dng_interop.py
 	python3 tests/integration.py
 	python3 tests/lut_adapter.py
+	python3 tests/neutral_balance.py
 	python3 tests/simulator_http.py
 	python3 tests/hardware_qa_report.py
 sanitize:

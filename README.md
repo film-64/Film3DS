@@ -72,3 +72,5 @@ This product includes DNG technology under license by Adobe.
 - [兼容性矩阵](docs/COMPATIBILITY.md)
 - [技术决策](docs/DECISIONS.md)
 - [调试协议](docs/DEBUG_PROTOCOL.md)
+
+线性 RAW 中性区域取样与主机命令： [NEUTRAL_WHITE_BALANCE.md](docs/NEUTRAL_WHITE_BALANCE.md)。

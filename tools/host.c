@@ -1,4 +1,8 @@
 #include "debug.h"
+#include "raw_darkroom.h"
+#include <errno.h>
+#include <limits.h>
+#include <stdlib.h>
 
 #include <inttypes.h>
 #include <string.h>
@@ -92,10 +96,39 @@ static FilmStatus calibration_rgb(const char *source, const char *target)
     return status;
 }
 
+static FilmStatus neutral_wb(char **argv)
+{
+    unsigned roi[4];
+    for(unsigned i=0;i<4;++i){
+        const char *word=argv[4+i];char *end;
+        if(!*word||strspn(word,"0123456789")!=strlen(word))return FILM_INVALID;
+        errno=0;unsigned long n=strtoul(word,&end,10);
+        if(errno||*end||n>UINT_MAX)return FILM_INVALID;
+        roi[i]=(unsigned)n;
+    }
+    FilmRawIsp isp={0};FILE *profile=fopen(argv[3],"rb");
+    if(!profile)return FILM_IO;
+    FilmStatus status=film_raw_profile_load("film-raw-profile-load/v1",profile,&isp);
+    if(fclose(profile)&&status==FILM_OK)status=FILM_IO;
+    FilmFrame frame={0};FilmRawScene scene={0};
+    FilmDevelopOptions options={.raw_isp=&isp};
+    if(status==FILM_OK)status=film_frame_read(argv[2],&frame);
+    if(status==FILM_OK)status=film_raw_frame_scene(&frame,&options,&scene);
+    FilmNeutralPatch patch={roi[0],roi[1],roi[2],roi[3],.01f,.95f};
+    FilmNeutralBalance result={0};
+    if(status==FILM_OK)status=film_raw_scene_neutral(&scene,&patch,&result);
+    if(status==FILM_OK)printf("{\"kelvin\":%u,\"red\":%d,\"blue\":%d,\"accepted\":%u,\"rejected\":%u,\"residual_stops\":%.8g,\"spread_stops\":%.8g}\n",
+        result.balance.kelvin,result.balance.red,result.balance.blue,result.accepted,result.rejected,
+        result.residual_stops,result.spread_stops);
+    film_raw_scene_free(&scene);film_frame_free(&frame);return status;
+}
+
 int main(int argc, char **argv)
 {
     FilmStatus status;
-    if ((argc == 4 || argc == 6) && !strcmp(argv[1], "develop")) {
+    if (argc == 8 && !strcmp(argv[1], "neutral-wb")) {
+        status = neutral_wb(argv);
+    } else if ((argc == 4 || argc == 6) && !strcmp(argv[1], "develop")) {
         status = develop(argc, argv);
     } else if (argc == 4 && !strcmp(argv[1], "calibration-rgb")) {
         status = calibration_rgb(argv[2], argv[3]);
@@ -125,6 +158,7 @@ int main(int argc, char **argv)
         fprintf(stderr, "filmctl mock out.jpg out.f3s [look.cube look.f3p]\n"
                         "filmctl develop input.f3s out.jpg [look.cube look.f3p]\n"
                         "filmctl calibration-rgb input.f3s out.ppm\n"
+                        "filmctl neutral-wb input.f3s calibration.f3isp x y width height\n"
                         "filmctl profile look.f3p\nfilmctl bench look.cube\n");
         return 2;
     }
